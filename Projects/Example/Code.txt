@@ -1,0 +1,106 @@
+Husky Robotics
+Electrical Team
+Devon Endsley 
+
+ I am going to have three separate files,
+ one for encoders, one for the CAN, and one 
+ for the PWM. 
+
+ Not sure how limit switches play into this project....
+ 
+void intializeEncoders(){
+	%% initialize the quadrature encoders,
+	%% setting up the respective GPIO
+}
+
+void resetEncoders(){
+	%% will reset the position, physically and software wise for the 
+	%% data, and timers relative to the encoders
+	%% while position not 0, go to 0 position (until limit switch trigger), then start normal   activity.
+}
+
+void readEncoders(){
+	%% Will read the data from the encoders
+	
+	%% Will report the speed of the motor by 
+	%% measuring the time between ticks (maybe?)
+	
+	%% Will report the state of the motor
+	%% ie. reverse, stopped, or forward depending
+%% on the edges during clock cycles
+
+	%% Data will be stored in file, accessible
+	%% to other functions for use in feedback control
+	%% and reporting to the beagle bone 
+}
+
+
+
+int getRotationalPos(){
+	%% Will calculate and report the rotational position 
+	%%of the motor using data from readEncoders()
+}
+
+
+int getSpeed(){
+	%% Will calculate and report the speed
+	%% of the motor using data from readEncoders()
+}
+
+void writeCan(){
+	%% Write message to send data to beagle bone
+	%% information will include PWM data, position of arm
+	%% possibly speed? 
+}
+
+
+void readCan(){
+	%% Read data from beagle bone (position, speed?) 
+}
+
+Void calculatePWM(){
+	% calculate PWM based on input information from Beagle Bone
+}
+
+void setPWM(timer, channel, period, pulse){
+	
+	%% sets the PWM of the motor unit, depending on
+	%% the frequency and duty cycle information sent
+	%% sent by the Beagle Bone
+	%% check the limit switch first, and do commands in accordance to the states
+}
+
+Void getPWM(){
+	%% read the PWM data directly from the motor controller 
+	%% to see if the motor is behaving/doing exactly as we want to
+	%% this is the target position (i need the arm to move to this position to pick up sth)
+}
+
+--------------------- END GAME  ---------------------------------------
+void masterControlLoop(){
+	% Ambitious end goal to create a feedback loop between
+	% the current speed/PWM of the motor vs. the beagle bone input 
+}
+-----------------------------------------------------------------------------
+
+void detectStall(max_current){
+	%% stall of the motor
+%% stop power supply until overridden
+}
+
+
+Double getCurrent(){
+%% get current information going to the motor
+}
+
+Double getVoltage(){
+%% get current information going to the motor
+}
+
+void readLimitSwitch(limit switch pin) {
+	%% read limit switch pin (either one or two)
+}
+
+
+
+
