@@ -13,6 +13,7 @@
 		void(*task)(void *taskDataPtr);
 		void *dataPtr;
 		
+		struct tcbStruct *prevTCBPtr;
 		struct tcbStruct *nextTCBPtr;
 		int index;
 		

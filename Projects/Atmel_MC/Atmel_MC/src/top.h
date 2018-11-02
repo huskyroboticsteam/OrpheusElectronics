@@ -11,4 +11,6 @@
 #include "TCB.h"
 #include "functions.h"
 
+#define NUM_TASKS 6
+
 #endif
