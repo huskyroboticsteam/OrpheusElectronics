@@ -26,7 +26,7 @@ struct readingInfo(){
     double current;   
 }
 
-double readVoltage(){
+double readVoltage(float voltage){
 
  /*
      Extract voltage reading. If 
@@ -48,34 +48,33 @@ double readVoltage(){
  */
  }
 
-double sendVoltage(int voltage){
-    readVoltage();
+double sendVoltage(){
+    double voltage = readVoltage();
+    return voltage; 
     // send voltage info to BBB  
 }
 
-  double readCurrent(){
+  double readCurrent(float current){
 /*
     Accepts information from battery management
 		
 	If(current < ?){
 		SoundBuzzer();
 	}else{
-		?.
-	}
-	Sends current info to BBB;
-	}
+		
 	
-} */
+	} */
   }
   
-  double sendCurrent(int current){
-      readCurrent()
+  double sendCurrent(){
+     double current = readCurrent();
+     return current;	  
       // send current info to BBB
   }
   
   double readPower(){
-      
-      // receive battery VIN
+      double power = current * voltage;
+	return power;     
   }
   
   
