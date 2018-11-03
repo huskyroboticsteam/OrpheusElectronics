@@ -63,6 +63,8 @@ struct 5VOut read5();
 struct 33VOut read33();
 //read info relevant to 3.3V power output and return it as a struct
 
+void emgCutOff();
+
 
 
 // TODO Insert appropriate #include <>

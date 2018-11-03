@@ -44,6 +44,11 @@ struct regInfo{
 //polling
 
 struct regInfo readVolReg();
+//read voltage regulators
+
+
+
+
 
 // TODO Insert appropriate #include <>
 

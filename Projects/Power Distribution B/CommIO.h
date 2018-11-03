@@ -42,17 +42,24 @@ double readBatVolt();
  */
 //returns battery voltage
 //polling
+//incoming I2C
 
 void sendBatVoltBBB(double batVolt);
 //double BatVolt = battery voltage from BMB
 // sends battery voltage info to the BBB
 // can also be placed in a struct if needed
 //polling
+//outgoing CAN
 
 void sendRegInfoBBB(struct regInfo);
 //communicates contents of struct regInfo to the BBB
 //polling
 //refer to struct in Input.h
+
+
+
+
+
 
 // TODO Insert appropriate #include <>
 
