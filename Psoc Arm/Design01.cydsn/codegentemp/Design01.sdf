@@ -1,6 +1,6 @@
 (DELAYFILE
  (SDFVERSION "IEEE 1497 4.0")
- (DATE "2018-10-26T01:35:15Z")
+ (DATE "2018-11-06T03:55:05Z")
  (DESIGN "Design01")
  (VENDOR "Cypress Semiconductor")
  (PROGRAM "PSoC Creator")
@@ -10,5 +10,19 @@
  (CELL
   (CELLTYPE "Design01")
   (INSTANCE *)
+  (DELAY
+   (ABSOLUTE
+    (INTERCONNECT ClockBlock.hfclk isr_Limit_1.clock (0.000:0.000:0.000))
+    (INTERCONNECT \\PWM_Motor\:cy_m0s8_tcpwm_1\\.line Pin_Motor\(0\).pin_input (1.000:1.000:1.000))
+    (INTERCONNECT ClockBlock.ff_div_18 \\PWM_Motor\:cy_m0s8_tcpwm_1\\.clock (0.000:0.000:0.000))
+    (INTERCONNECT Pin_Limit_1.interrupt isr_Limit_1.interrupt (1.000:1.000:1.000))
+    (INTERCONNECT Pin_Motor\(0\).pad_out Pin_Motor\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT Pin_Limit_1\(0\)_PAD Pin_Limit_1\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT Pin_Motor\(0\).pad_out Pin_Motor\(0\)_PAD (0.000:0.000:0.000))
+    (INTERCONNECT Pin_Motor\(0\)_PAD Pin_Motor\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT Pin_Direction\(0\)_PAD Pin_Direction\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT Pin_debug\(0\)_PAD Pin_debug\(0\).pad_in (0.000:0.000:0.000))
+   )
+  )
  )
 )

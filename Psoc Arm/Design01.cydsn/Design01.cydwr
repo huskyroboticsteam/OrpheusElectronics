@@ -10,7 +10,17 @@
     </Group>
   </Group>
   <Data key="DataVersionKey" value="2" />
-  <Group key="DWRInstGuidMapping" />
+  <Group key="DWRInstGuidMapping">
+    <Group key="Pin">
+      <Data key="6c935a40-edd8-47ad-81fc-14aeffd067c7" value="Pin_debug" />
+      <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="Pin_Limit_1" />
+      <Data key="28ebc34a-5878-4de6-9b93-e2c9ed344863" value="Pin_Direction" />
+      <Data key="068bddb1-817a-434f-8762-cd4b531b6db9" value="Pin_Limit_2" />
+      <Data key="77715107-f8d5-47e5-a629-0fb83101ac6b" value="Pin_Pot" />
+      <Data key="e8c16d68-dd50-4e55-902e-9c7904411a15" value="Pin_1" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="Pin_Motor" />
+    </Group>
+  </Group>
   <Group key="FlashSecurity">
     <Group key="RowsKey">
       <Group key="0">
@@ -3621,6 +3631,28 @@
         <Data key="src_clk_id" value="25052E45-97E1-4618-A621-47712D88CDFB" />
         <Data key="src_clk_name" value="PLL0_Sel" />
         <Data key="start_on_reset" value="True" />
+      </Group>
+    </Group>
+  </Group>
+  <Group key="Pin2">
+    <Group key="6c935a40-edd8-47ad-81fc-14aeffd067c7">
+      <Group key="0">
+        <Data key="Port Format" value="5,3" />
+      </Group>
+    </Group>
+    <Group key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba">
+      <Group key="0">
+        <Data key="Port Format" value="0,7" />
+      </Group>
+    </Group>
+    <Group key="28ebc34a-5878-4de6-9b93-e2c9ed344863">
+      <Group key="0">
+        <Data key="Port Format" value="1,4" />
+      </Group>
+    </Group>
+    <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
+      <Group key="0">
+        <Data key="Port Format" value="1,6" />
       </Group>
     </Group>
   </Group>

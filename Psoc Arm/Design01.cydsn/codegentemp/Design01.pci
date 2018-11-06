@@ -1,8 +1,12 @@
 # Design01
-# 2018-10-26 01:35:11Z
+# 2018-11-06 03:55:03Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
 # IO_3@[IOP=(3)][IoId=(3)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 3
 set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
+set_io "Pin_Limit_1(0)" iocell 0 7
+set_io "Pin_Motor(0)" iocell 1 6
+set_io "Pin_Direction(0)" iocell 1 4
+set_io "Pin_debug(0)" iocell 5 3

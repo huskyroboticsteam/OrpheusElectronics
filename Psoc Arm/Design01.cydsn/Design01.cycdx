@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
-  <block name="cy_lfclk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Em_EEPROM_Dynamic" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Pin_debug" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="GND_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="SW_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Em_EEPROM_Dynamic" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="cy_lfclk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="DMAC" BASE="0x0" SIZE="0x0" desc="DMAC Registers" visible="true" hidden="false">
     <register name="DMAC_CTL" address="0x40101000" bitWidth="32" desc="DMA controller control register" hidden="false">
       <field name="ENABLED" from="31" to="31" access="RW" resetVal="" desc="Global DMAC enable" hidden="false">
@@ -4310,4 +4313,25 @@
       <field name="CURR_DATA_NR" from="15" to="0" access="RW" resetVal="" desc="Specifies the index of the current data transfer. This value increases from 0 to CONTROL.DATA_NR. HW sets this field: &#xA; - When a descriptor is done (RESPONSE is DONE), the field is set to '0' when PING_CTL.INV_DESCR is '0' and the field is set to PING_CTL.DATA_NR when PING_CTL.INV_DESCR is '1'.                                                                 &#xA; - When a descriptor is not done (RESPONSE is NO_ERROR), the field reflects the progress of a data transfer.                                                                 &#xA; - In case of erroneous behavior (RESPONSE is neither DONE or NO_ERROR), the field is not updated, but keeps its value to ease debugging.                                                                 &#xA; HW only modifies this field for an active descriptor (STATUS.VALID to be '1'). At descriptor initialization, SW should set this field to '0'.                                                                 &#xA; This field allows software to read the progress of the data transfer. Note that SRC.ADDR and DST.ADDR represent base addresses and are not modified during data transfer. However, STATUS.CURR_DATA_NR is modified during data transfer and provides an offset wrt. the base addresses." hidden="false" />
     </register>
   </block>
+  <block name="GND_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="isr_Limit_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="PWM_Motor" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
+    <block name="VMux_count" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="VMux_reload" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="VMux_start" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="VMux_stop" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="VMux_capture" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="VMux_clock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="cy_m0s8_tcpwm_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <register name="COUNTER" address="0x402002C8" bitWidth="32" desc="Current counter value" hidden="false" />
+    <register name="CC" address="0x402002CC" bitWidth="32" desc="Compare / capture value" hidden="false" />
+    <register name="CC_BUF" address="0x402002D0" bitWidth="32" desc="Compare / capture buffer value" hidden="false" />
+    <register name="PERIOD" address="0x402002D4" bitWidth="32" desc="Period value" hidden="false" />
+    <register name="PERIOD_BUF" address="0x402002D8" bitWidth="32" desc="Period buffer value" hidden="false" />
+  </block>
+  <block name="Pin_Limit_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Pin_Motor" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="SW_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Pin_Direction" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Clock_PWM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
 </blockRegMap>

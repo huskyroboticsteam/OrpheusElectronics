@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 1
 
 
    1              		.syntax unified
@@ -19,14 +19,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.main,"ax",%progbits
+  19              		.section	.text.check_Pin,"ax",%progbits
   20              		.align	2
-  21              		.global	main
+  21              		.global	check_Pin
   22              		.code	16
   23              		.thumb_func
-  24              		.type	main, %function
-  25              	main:
-  26              	.LFB34:
+  24              		.type	check_Pin, %function
+  25              	check_Pin:
+  26              	.LFB36:
   27              		.file 1 "main.c"
    1:main.c        **** /* ========================================
    2:main.c        ****  *
@@ -40,318 +40,1389 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 1
   10:main.c        ****  * ========================================
   11:main.c        **** */
   12:main.c        **** #include "project.h"
-  13:main.c        **** 
-  14:main.c        **** int main(void)
-  15:main.c        **** {
-  28              		.loc 1 15 0
+  13:main.c        **** #include "cyapicallbacks.h"
+  14:main.c        **** 
+  15:main.c        **** int gear_ratio;
+  16:main.c        **** int CAN_TIMEOUT;
+  17:main.c        **** #define PWM_PERIOD = 1000;
+  18:main.c        **** uint8 limit_1_pressed = 0;
+  19:main.c        **** uint8 limit_2_pressed = 0;
+  20:main.c        **** uint8 emergency = 0;
+  21:main.c        **** 
+  22:main.c        **** CY_ISR(Pin_Limit_1_Handler){// void Pin_SW_Handler(void)
+  23:main.c        ****     set_PWM(0);
+  24:main.c        ****     limit_1_pressed = 1;
+  25:main.c        ****     Pin_Limit_1_ClearInterrupt();
+  26:main.c        **** }
+  27:main.c        **** /*
+  28:main.c        **** CY_ISR(Pin_Limit_2_Handler){// void Pin_SW_Handler(void)
+  29:main.c        ****     set_PWM(0);
+  30:main.c        ****     limit_2_pressed = 1;
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 2
+
+
+  31:main.c        ****     Pin_Limit_2_ClearInterrupt();
+  32:main.c        **** }
+  33:main.c        **** */
+  34:main.c        **** int main(void)
+  35:main.c        **** {
+  36:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  37:main.c        ****    // initialize();
+  38:main.c        ****     isr_Limit_1_StartEx(Pin_Limit_1_Handler);
+  39:main.c        ****   //  isr_Limit_2_StartEx(Pin_Limit_2_Handler);
+  40:main.c        ****     PWM_Motor_Start();
+  41:main.c        ****     int i = 0;
+  42:main.c        ****     int up = 1;
+  43:main.c        ****     
+  44:main.c        ****     for(;;)
+  45:main.c        ****     {
+  46:main.c        ****         if(!emergency) {
+  47:main.c        ****         Pin_debug_Write(limit_1_pressed);
+  48:main.c        ****         check_Pin();
+  49:main.c        ****         set_PWM(i);
+  50:main.c        ****         CyDelay(100);
+  51:main.c        ****         if(up){
+  52:main.c        ****             i += 10;
+  53:main.c        ****         } else {
+  54:main.c        ****             i -= 10;   
+  55:main.c        ****         }
+  56:main.c        ****         if(i > 1000) {
+  57:main.c        ****             up = 0;   
+  58:main.c        ****         } else if (i < -1000) {
+  59:main.c        ****             up = 1;
+  60:main.c        ****         }
+  61:main.c        ****         // inturupts limit switch, stops motor
+  62:main.c        ****         // intrupts second priority to read CAN
+  63:main.c        ****         // sets PWM
+  64:main.c        ****         // hardware encoder counter
+  65:main.c        ****         // read pot info
+  66:main.c        ****         // Sends to BB info over CAN
+  67:main.c        ****         // if no CAN data after ~100ms stop motors
+  68:main.c        ****         }
+  69:main.c        ****     }
+  70:main.c        **** }
+  71:main.c        **** 
+  72:main.c        **** void check_Pin(void) {
+  28              		.loc 1 72 0
   29              		.cfi_startproc
-  30              		@ Volatile: function does not return.
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33              		@ link register save eliminated.
-  16:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
-  34              		.loc 1 16 0
-  35              		.syntax divided
-  36              	@ 16 "main.c" 1
-  37 0000 62B6     		CPSIE   i
-  38              	@ 0 "" 2
-  39              		.thumb
-  40              		.syntax unified
-  41              	.L2:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 2
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  73:main.c        ****     if(Pin_Limit_1_Read() == 1) {
+  36              		.loc 1 73 0
+  37 0002 FFF7FEFF 		bl	Pin_Limit_1_Read
+  38              	.LVL0:
+  39 0006 0128     		cmp	r0, #1
+  40 0008 02D1     		bne	.L1
+  74:main.c        ****         limit_1_pressed = 0;
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 3
 
 
-  42 0002 FEE7     		b	.L2
-  43              		.cfi_endproc
-  44              	.LFE34:
-  45              		.size	main, .-main
-  46              		.text
-  47              	.Letext0:
-  48              		.section	.debug_info,"",%progbits
-  49              	.Ldebug_info0:
-  50 0000 A0000000 		.4byte	0xa0
-  51 0004 0400     		.2byte	0x4
-  52 0006 00000000 		.4byte	.Ldebug_abbrev0
-  53 000a 04       		.byte	0x4
-  54 000b 01       		.uleb128 0x1
-  55 000c C0000000 		.4byte	.LASF14
-  56 0010 0C       		.byte	0xc
-  57 0011 1B000000 		.4byte	.LASF15
-  58 0015 64000000 		.4byte	.LASF16
-  59 0019 00000000 		.4byte	.Ldebug_ranges0+0
-  60 001d 00000000 		.4byte	0
-  61 0021 00000000 		.4byte	.Ldebug_line0
-  62 0025 02       		.uleb128 0x2
-  63 0026 01       		.byte	0x1
-  64 0027 06       		.byte	0x6
-  65 0028 61010000 		.4byte	.LASF0
-  66 002c 02       		.uleb128 0x2
-  67 002d 01       		.byte	0x1
-  68 002e 08       		.byte	0x8
-  69 002f 56000000 		.4byte	.LASF1
-  70 0033 02       		.uleb128 0x2
-  71 0034 02       		.byte	0x2
-  72 0035 05       		.byte	0x5
-  73 0036 79010000 		.4byte	.LASF2
-  74 003a 02       		.uleb128 0x2
-  75 003b 02       		.byte	0x2
-  76 003c 07       		.byte	0x7
-  77 003d 4E010000 		.4byte	.LASF3
-  78 0041 02       		.uleb128 0x2
-  79 0042 04       		.byte	0x4
-  80 0043 05       		.byte	0x5
-  81 0044 B0000000 		.4byte	.LASF4
-  82 0048 02       		.uleb128 0x2
-  83 0049 04       		.byte	0x4
-  84 004a 07       		.byte	0x7
-  85 004b 27000000 		.4byte	.LASF5
-  86 004f 02       		.uleb128 0x2
-  87 0050 08       		.byte	0x8
-  88 0051 05       		.byte	0x5
-  89 0052 00000000 		.4byte	.LASF6
-  90 0056 02       		.uleb128 0x2
-  91 0057 08       		.byte	0x8
-  92 0058 07       		.byte	0x7
-  93 0059 39000000 		.4byte	.LASF7
-  94 005d 03       		.uleb128 0x3
-  95 005e 04       		.byte	0x4
-  96 005f 05       		.byte	0x5
-  97 0060 696E7400 		.ascii	"int\000"
-  98 0064 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 3
+  41              		.loc 1 74 0
+  42 000a 0022     		movs	r2, #0
+  43 000c 014B     		ldr	r3, .L3
+  44 000e 1A70     		strb	r2, [r3]
+  45              	.L1:
+  75:main.c        ****     }
+  76:main.c        ****    /* if(Pin_Limit_2_Read() == 1) {
+  77:main.c        ****         limit_2_pressed = 0;   
+  78:main.c        ****     }*/
+  79:main.c        **** }
+  46              		.loc 1 79 0
+  47              		@ sp needed
+  48 0010 10BD     		pop	{r4, pc}
+  49              	.L4:
+  50 0012 C046     		.align	2
+  51              	.L3:
+  52 0014 00000000 		.word	.LANCHOR0
+  53              		.cfi_endproc
+  54              	.LFE36:
+  55              		.size	check_Pin, .-check_Pin
+  56              		.section	.text.emergency_halt,"ax",%progbits
+  57              		.align	2
+  58              		.global	emergency_halt
+  59              		.code	16
+  60              		.thumb_func
+  61              		.type	emergency_halt, %function
+  62              	emergency_halt:
+  63              	.LFB37:
+  80:main.c        **** 
+  81:main.c        **** void emergency_halt(void) {
+  64              		.loc 1 81 0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 10B5     		push	{r4, lr}
+  69              		.cfi_def_cfa_offset 8
+  70              		.cfi_offset 4, -8
+  71              		.cfi_offset 14, -4
+  82:main.c        ****     PWM_Motor_Stop();
+  72              		.loc 1 82 0
+  73 0002 FFF7FEFF 		bl	PWM_Motor_Stop
+  74              	.LVL1:
+  83:main.c        ****     emergency = 1;
+  75              		.loc 1 83 0
+  76 0006 0122     		movs	r2, #1
+  77 0008 014B     		ldr	r3, .L6
+  78 000a 5A70     		strb	r2, [r3, #1]
+  84:main.c        ****     // stops all motors;
+  85:main.c        ****     // waits for restart CAN signal.
+  86:main.c        **** }
+  79              		.loc 1 86 0
+  80              		@ sp needed
+  81 000c 10BD     		pop	{r4, pc}
+  82              	.L7:
+  83 000e C046     		.align	2
+  84              	.L6:
+  85 0010 00000000 		.word	.LANCHOR0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 4
 
 
-  99 0065 04       		.byte	0x4
- 100 0066 07       		.byte	0x7
- 101 0067 0E000000 		.4byte	.LASF8
- 102 006b 02       		.uleb128 0x2
- 103 006c 04       		.byte	0x4
- 104 006d 04       		.byte	0x4
- 105 006e 50000000 		.4byte	.LASF9
- 106 0072 02       		.uleb128 0x2
- 107 0073 08       		.byte	0x8
- 108 0074 04       		.byte	0x4
- 109 0075 B9000000 		.4byte	.LASF10
- 110 0079 02       		.uleb128 0x2
- 111 007a 01       		.byte	0x1
- 112 007b 08       		.byte	0x8
- 113 007c AB000000 		.4byte	.LASF11
- 114 0080 02       		.uleb128 0x2
- 115 0081 04       		.byte	0x4
- 116 0082 07       		.byte	0x7
- 117 0083 83010000 		.4byte	.LASF12
- 118 0087 02       		.uleb128 0x2
- 119 0088 08       		.byte	0x8
- 120 0089 04       		.byte	0x4
- 121 008a 6D010000 		.4byte	.LASF13
- 122 008e 04       		.uleb128 0x4
- 123 008f 22000000 		.4byte	.LASF17
- 124 0093 01       		.byte	0x1
- 125 0094 0E       		.byte	0xe
- 126 0095 5D000000 		.4byte	0x5d
- 127 0099 00000000 		.4byte	.LFB34
- 128 009d 04000000 		.4byte	.LFE34-.LFB34
- 129 00a1 01       		.uleb128 0x1
- 130 00a2 9C       		.byte	0x9c
- 131 00a3 00       		.byte	0
- 132              		.section	.debug_abbrev,"",%progbits
- 133              	.Ldebug_abbrev0:
- 134 0000 01       		.uleb128 0x1
- 135 0001 11       		.uleb128 0x11
- 136 0002 01       		.byte	0x1
- 137 0003 25       		.uleb128 0x25
- 138 0004 0E       		.uleb128 0xe
- 139 0005 13       		.uleb128 0x13
- 140 0006 0B       		.uleb128 0xb
- 141 0007 03       		.uleb128 0x3
- 142 0008 0E       		.uleb128 0xe
- 143 0009 1B       		.uleb128 0x1b
- 144 000a 0E       		.uleb128 0xe
- 145 000b 55       		.uleb128 0x55
- 146 000c 17       		.uleb128 0x17
- 147 000d 11       		.uleb128 0x11
- 148 000e 01       		.uleb128 0x1
- 149 000f 10       		.uleb128 0x10
- 150 0010 17       		.uleb128 0x17
- 151 0011 00       		.byte	0
- 152 0012 00       		.byte	0
- 153 0013 02       		.uleb128 0x2
- 154 0014 24       		.uleb128 0x24
- 155 0015 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 4
+  86              		.cfi_endproc
+  87              	.LFE37:
+  88              		.size	emergency_halt, .-emergency_halt
+  89              		.section	.text.set_PWM,"ax",%progbits
+  90              		.align	2
+  91              		.global	set_PWM
+  92              		.code	16
+  93              		.thumb_func
+  94              		.type	set_PWM, %function
+  95              	set_PWM:
+  96              	.LFB38:
+  87:main.c        **** /*
+  88:main.c        **** void initialize(void) {
+  89:main.c        ****     // initialize all blocks
+  90:main.c        **** }
+  91:main.c        **** 
+  92:main.c        **** void CAN_Read(int *read) {
+  93:main.c        ****     // writes to the read array the data that was sent
+  94:main.c        **** }
+  95:main.c        **** 
+  96:main.c        **** void CAN_Send(int count, int8 switch1, int8 switch2 ) {
+  97:main.c        ****     // sends enconder count and switch state through can
+  98:main.c        **** }
+  99:main.c        **** 
+ 100:main.c        **** uint32 pot_Read(void) {
+ 101:main.c        ****     // returns a position of the pot
+ 102:main.c        **** }
+ 103:main.c        **** 
+ 104:main.c        **** int8 switch_State(int num) {
+ 105:main.c        ****     //returns the state of switch "num" as an int
+ 106:main.c        **** }
+ 107:main.c        **** 
+ 108:main.c        **** int8 encoder_Read(void) {
+ 109:main.c        ****     // returns the amount of counts it turned   
+ 110:main.c        **** }
+ 111:main.c        **** */
+ 112:main.c        **** 
+ 113:main.c        ****     // takes between -1000 and 1000
+ 114:main.c        **** void set_PWM(int compare) {
+  97              		.loc 1 114 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              	.LVL2:
+ 102 0000 10B5     		push	{r4, lr}
+ 103              		.cfi_def_cfa_offset 8
+ 104              		.cfi_offset 4, -8
+ 105              		.cfi_offset 14, -4
+ 106 0002 0400     		movs	r4, r0
+ 115:main.c        ****     if (compare < -1000 || compare > 1000) { return; }
+ 107              		.loc 1 115 0
+ 108 0004 FA23     		movs	r3, #250
+ 109 0006 9B00     		lsls	r3, r3, #2
+ 110 0008 C218     		adds	r2, r0, r3
+ 111 000a FA23     		movs	r3, #250
+ 112 000c DB00     		lsls	r3, r3, #3
+ 113 000e 9A42     		cmp	r2, r3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 5
 
 
- 156 0016 0B       		.uleb128 0xb
- 157 0017 0B       		.uleb128 0xb
- 158 0018 3E       		.uleb128 0x3e
- 159 0019 0B       		.uleb128 0xb
- 160 001a 03       		.uleb128 0x3
- 161 001b 0E       		.uleb128 0xe
- 162 001c 00       		.byte	0
- 163 001d 00       		.byte	0
- 164 001e 03       		.uleb128 0x3
- 165 001f 24       		.uleb128 0x24
- 166 0020 00       		.byte	0
- 167 0021 0B       		.uleb128 0xb
- 168 0022 0B       		.uleb128 0xb
- 169 0023 3E       		.uleb128 0x3e
- 170 0024 0B       		.uleb128 0xb
- 171 0025 03       		.uleb128 0x3
- 172 0026 08       		.uleb128 0x8
- 173 0027 00       		.byte	0
- 174 0028 00       		.byte	0
- 175 0029 04       		.uleb128 0x4
- 176 002a 2E       		.uleb128 0x2e
- 177 002b 00       		.byte	0
- 178 002c 3F       		.uleb128 0x3f
- 179 002d 19       		.uleb128 0x19
- 180 002e 03       		.uleb128 0x3
- 181 002f 0E       		.uleb128 0xe
- 182 0030 3A       		.uleb128 0x3a
- 183 0031 0B       		.uleb128 0xb
- 184 0032 3B       		.uleb128 0x3b
- 185 0033 0B       		.uleb128 0xb
- 186 0034 27       		.uleb128 0x27
- 187 0035 19       		.uleb128 0x19
- 188 0036 49       		.uleb128 0x49
- 189 0037 13       		.uleb128 0x13
- 190 0038 8701     		.uleb128 0x87
- 191 003a 19       		.uleb128 0x19
- 192 003b 11       		.uleb128 0x11
- 193 003c 01       		.uleb128 0x1
- 194 003d 12       		.uleb128 0x12
- 195 003e 06       		.uleb128 0x6
- 196 003f 40       		.uleb128 0x40
- 197 0040 18       		.uleb128 0x18
- 198 0041 9742     		.uleb128 0x2117
- 199 0043 19       		.uleb128 0x19
- 200 0044 00       		.byte	0
- 201 0045 00       		.byte	0
- 202 0046 00       		.byte	0
- 203              		.section	.debug_aranges,"",%progbits
- 204 0000 1C000000 		.4byte	0x1c
- 205 0004 0200     		.2byte	0x2
- 206 0006 00000000 		.4byte	.Ldebug_info0
- 207 000a 04       		.byte	0x4
- 208 000b 00       		.byte	0
- 209 000c 0000     		.2byte	0
- 210 000e 0000     		.2byte	0
- 211 0010 00000000 		.4byte	.LFB34
- 212 0014 04000000 		.4byte	.LFE34-.LFB34
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 5
+ 114 0010 1CD8     		bhi	.L8
+ 116:main.c        ****     if (compare < 0 && limit_1_pressed == 0) {
+ 115              		.loc 1 116 0
+ 116 0012 0028     		cmp	r0, #0
+ 117 0014 0ADA     		bge	.L10
+ 118              		.loc 1 116 0 is_stmt 0 discriminator 1
+ 119 0016 0E4B     		ldr	r3, .L12
+ 120 0018 1B78     		ldrb	r3, [r3]
+ 121 001a 002B     		cmp	r3, #0
+ 122 001c 06D1     		bne	.L10
+ 117:main.c        ****         Pin_Direction_Write(0);
+ 123              		.loc 1 117 0 is_stmt 1
+ 124 001e 0020     		movs	r0, #0
+ 125              	.LVL3:
+ 126 0020 FFF7FEFF 		bl	Pin_Direction_Write
+ 127              	.LVL4:
+ 118:main.c        ****         PWM_Motor_WriteCompare(-compare);
+ 128              		.loc 1 118 0
+ 129 0024 6042     		rsbs	r0, r4, #0
+ 130 0026 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 131              	.LVL5:
+ 132 002a 0FE0     		b	.L8
+ 133              	.LVL6:
+ 134              	.L10:
+ 119:main.c        ****     } else if (compare > 0 && limit_2_pressed == 0){
+ 135              		.loc 1 119 0
+ 136 002c 002C     		cmp	r4, #0
+ 137 002e 0ADD     		ble	.L11
+ 138              		.loc 1 119 0 is_stmt 0 discriminator 1
+ 139 0030 074B     		ldr	r3, .L12
+ 140 0032 9B78     		ldrb	r3, [r3, #2]
+ 141 0034 002B     		cmp	r3, #0
+ 142 0036 06D1     		bne	.L11
+ 120:main.c        ****         Pin_Direction_Write(1);
+ 143              		.loc 1 120 0 is_stmt 1
+ 144 0038 0120     		movs	r0, #1
+ 145              	.LVL7:
+ 146 003a FFF7FEFF 		bl	Pin_Direction_Write
+ 147              	.LVL8:
+ 121:main.c        ****         PWM_Motor_WriteCompare(compare);
+ 148              		.loc 1 121 0
+ 149 003e 2000     		movs	r0, r4
+ 150 0040 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 151              	.LVL9:
+ 152 0044 02E0     		b	.L8
+ 153              	.LVL10:
+ 154              	.L11:
+ 122:main.c        ****     } else {
+ 123:main.c        ****         PWM_Motor_WriteCompare(0);   
+ 155              		.loc 1 123 0
+ 156 0046 0020     		movs	r0, #0
+ 157              	.LVL11:
+ 158 0048 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 159              	.LVL12:
+ 160              	.L8:
+ 124:main.c        ****     }
+ 125:main.c        **** }
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 6
 
 
- 213 0018 00000000 		.4byte	0
- 214 001c 00000000 		.4byte	0
- 215              		.section	.debug_ranges,"",%progbits
- 216              	.Ldebug_ranges0:
- 217 0000 00000000 		.4byte	.LFB34
- 218 0004 04000000 		.4byte	.LFE34
- 219 0008 00000000 		.4byte	0
- 220 000c 00000000 		.4byte	0
- 221              		.section	.debug_line,"",%progbits
- 222              	.Ldebug_line0:
- 223 0000 33000000 		.section	.debug_str,"MS",%progbits,1
- 223      02001D00 
- 223      00000201 
- 223      FB0E0D00 
- 223      01010101 
- 224              	.LASF6:
- 225 0000 6C6F6E67 		.ascii	"long long int\000"
- 225      206C6F6E 
- 225      6720696E 
- 225      7400
- 226              	.LASF8:
- 227 000e 756E7369 		.ascii	"unsigned int\000"
- 227      676E6564 
- 227      20696E74 
- 227      00
- 228              	.LASF15:
- 229 001b 6D61696E 		.ascii	"main.c\000"
- 229      2E6300
- 230              	.LASF17:
- 231 0022 6D61696E 		.ascii	"main\000"
- 231      00
- 232              	.LASF5:
- 233 0027 6C6F6E67 		.ascii	"long unsigned int\000"
- 233      20756E73 
- 233      69676E65 
- 233      6420696E 
- 233      7400
- 234              	.LASF7:
- 235 0039 6C6F6E67 		.ascii	"long long unsigned int\000"
- 235      206C6F6E 
- 235      6720756E 
- 235      7369676E 
- 235      65642069 
- 236              	.LASF9:
- 237 0050 666C6F61 		.ascii	"float\000"
- 237      7400
- 238              	.LASF1:
- 239 0056 756E7369 		.ascii	"unsigned char\000"
- 239      676E6564 
- 239      20636861 
- 239      7200
- 240              	.LASF16:
- 241 0064 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\PSoC Creator"
- 241      73657273 
- 241      5C617573 
- 241      74635C4F 
- 241      6E654472 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccbEi4Mj.s 			page 6
+ 161              		.loc 1 125 0
+ 162              		@ sp needed
+ 163              	.LVL13:
+ 164 004c 10BD     		pop	{r4, pc}
+ 165              	.L13:
+ 166 004e C046     		.align	2
+ 167              	.L12:
+ 168 0050 00000000 		.word	.LANCHOR0
+ 169              		.cfi_endproc
+ 170              	.LFE38:
+ 171              		.size	set_PWM, .-set_PWM
+ 172              		.section	.text.Pin_Limit_1_Handler,"ax",%progbits
+ 173              		.align	2
+ 174              		.global	Pin_Limit_1_Handler
+ 175              		.code	16
+ 176              		.thumb_func
+ 177              		.type	Pin_Limit_1_Handler, %function
+ 178              	Pin_Limit_1_Handler:
+ 179              	.LFB34:
+  22:main.c        ****     set_PWM(0);
+ 180              		.loc 1 22 0
+ 181              		.cfi_startproc
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184 0000 10B5     		push	{r4, lr}
+ 185              		.cfi_def_cfa_offset 8
+ 186              		.cfi_offset 4, -8
+ 187              		.cfi_offset 14, -4
+  23:main.c        ****     limit_1_pressed = 1;
+ 188              		.loc 1 23 0
+ 189 0002 0020     		movs	r0, #0
+ 190 0004 FFF7FEFF 		bl	set_PWM
+ 191              	.LVL14:
+  24:main.c        ****     Pin_Limit_1_ClearInterrupt();
+ 192              		.loc 1 24 0
+ 193 0008 0122     		movs	r2, #1
+ 194 000a 024B     		ldr	r3, .L15
+ 195 000c 1A70     		strb	r2, [r3]
+  25:main.c        **** }
+ 196              		.loc 1 25 0
+ 197 000e FFF7FEFF 		bl	Pin_Limit_1_ClearInterrupt
+ 198              	.LVL15:
+  26:main.c        **** /*
+ 199              		.loc 1 26 0
+ 200              		@ sp needed
+ 201 0012 10BD     		pop	{r4, pc}
+ 202              	.L16:
+ 203              		.align	2
+ 204              	.L15:
+ 205 0014 00000000 		.word	.LANCHOR0
+ 206              		.cfi_endproc
+ 207              	.LFE34:
+ 208              		.size	Pin_Limit_1_Handler, .-Pin_Limit_1_Handler
+ 209              		.section	.text.main,"ax",%progbits
+ 210              		.align	2
+ 211              		.global	main
+ 212              		.code	16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 7
 
 
- 242 0092 5C50736F 		.ascii	"\\Psoc Arm\\Design01.cydsn\000"
- 242      63204172 
- 242      6D5C4465 
- 242      7369676E 
- 242      30312E63 
- 243              	.LASF11:
- 244 00ab 63686172 		.ascii	"char\000"
- 244      00
- 245              	.LASF4:
- 246 00b0 6C6F6E67 		.ascii	"long int\000"
- 246      20696E74 
- 246      00
- 247              	.LASF10:
- 248 00b9 646F7562 		.ascii	"double\000"
- 248      6C6500
- 249              	.LASF14:
- 250 00c0 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 250      43313120 
- 250      352E342E 
- 250      31203230 
- 250      31363036 
- 251 00f3 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 251      20726576 
- 251      6973696F 
- 251      6E203233 
- 251      37373135 
- 252 0126 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 252      66756E63 
- 252      74696F6E 
- 252      2D736563 
- 252      74696F6E 
- 253              	.LASF3:
- 254 014e 73686F72 		.ascii	"short unsigned int\000"
- 254      7420756E 
- 254      7369676E 
- 254      65642069 
- 254      6E7400
- 255              	.LASF0:
- 256 0161 7369676E 		.ascii	"signed char\000"
- 256      65642063 
- 256      68617200 
- 257              	.LASF13:
- 258 016d 6C6F6E67 		.ascii	"long double\000"
- 258      20646F75 
- 258      626C6500 
- 259              	.LASF2:
- 260 0179 73686F72 		.ascii	"short int\000"
- 260      7420696E 
- 260      7400
- 261              	.LASF12:
- 262 0183 73697A65 		.ascii	"sizetype\000"
- 262      74797065 
- 262      00
- 263              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 213              		.thumb_func
+ 214              		.type	main, %function
+ 215              	main:
+ 216              	.LFB35:
+  35:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 217              		.loc 1 35 0
+ 218              		.cfi_startproc
+ 219              		@ args = 0, pretend = 0, frame = 0
+ 220              		@ frame_needed = 0, uses_anonymous_args = 0
+ 221 0000 70B5     		push	{r4, r5, r6, lr}
+ 222              		.cfi_def_cfa_offset 16
+ 223              		.cfi_offset 4, -16
+ 224              		.cfi_offset 5, -12
+ 225              		.cfi_offset 6, -8
+ 226              		.cfi_offset 14, -4
+  36:main.c        ****    // initialize();
+ 227              		.loc 1 36 0
+ 228              		.syntax divided
+ 229              	@ 36 "main.c" 1
+ 230 0002 62B6     		CPSIE   i
+ 231              	@ 0 "" 2
+  38:main.c        ****   //  isr_Limit_2_StartEx(Pin_Limit_2_Handler);
+ 232              		.loc 1 38 0
+ 233              		.thumb
+ 234              		.syntax unified
+ 235 0004 1348     		ldr	r0, .L25
+ 236 0006 FFF7FEFF 		bl	isr_Limit_1_StartEx
+ 237              	.LVL16:
+  40:main.c        ****     int i = 0;
+ 238              		.loc 1 40 0
+ 239 000a FFF7FEFF 		bl	PWM_Motor_Start
+ 240              	.LVL17:
+  42:main.c        ****     
+ 241              		.loc 1 42 0
+ 242 000e 0125     		movs	r5, #1
+  41:main.c        ****     int up = 1;
+ 243              		.loc 1 41 0
+ 244 0010 0024     		movs	r4, #0
+ 245 0012 02E0     		b	.L19
+ 246              	.LVL18:
+ 247              	.L23:
+  57:main.c        ****         } else if (i < -1000) {
+ 248              		.loc 1 57 0
+ 249 0014 0025     		movs	r5, #0
+ 250              	.LVL19:
+ 251 0016 00E0     		b	.L19
+ 252              	.LVL20:
+ 253              	.L24:
+  59:main.c        ****         }
+ 254              		.loc 1 59 0
+ 255 0018 0125     		movs	r5, #1
+ 256              	.LVL21:
+ 257              	.L19:
+  46:main.c        ****         Pin_debug_Write(limit_1_pressed);
+ 258              		.loc 1 46 0
+ 259 001a 0F4B     		ldr	r3, .L25+4
+ 260 001c 5B78     		ldrb	r3, [r3, #1]
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 8
+
+
+ 261 001e 002B     		cmp	r3, #0
+ 262 0020 FBD1     		bne	.L19
+  47:main.c        ****         check_Pin();
+ 263              		.loc 1 47 0
+ 264 0022 0D4B     		ldr	r3, .L25+4
+ 265 0024 1878     		ldrb	r0, [r3]
+ 266 0026 FFF7FEFF 		bl	Pin_debug_Write
+ 267              	.LVL22:
+  48:main.c        ****         set_PWM(i);
+ 268              		.loc 1 48 0
+ 269 002a FFF7FEFF 		bl	check_Pin
+ 270              	.LVL23:
+  49:main.c        ****         CyDelay(100);
+ 271              		.loc 1 49 0
+ 272 002e 2000     		movs	r0, r4
+ 273 0030 FFF7FEFF 		bl	set_PWM
+ 274              	.LVL24:
+  50:main.c        ****         if(up){
+ 275              		.loc 1 50 0
+ 276 0034 6420     		movs	r0, #100
+ 277 0036 FFF7FEFF 		bl	CyDelay
+ 278              	.LVL25:
+  51:main.c        ****             i += 10;
+ 279              		.loc 1 51 0
+ 280 003a 002D     		cmp	r5, #0
+ 281 003c 01D0     		beq	.L20
+  52:main.c        ****         } else {
+ 282              		.loc 1 52 0
+ 283 003e 0A34     		adds	r4, r4, #10
+ 284              	.LVL26:
+ 285 0040 00E0     		b	.L21
+ 286              	.L20:
+  54:main.c        ****         }
+ 287              		.loc 1 54 0
+ 288 0042 0A3C     		subs	r4, r4, #10
+ 289              	.LVL27:
+ 290              	.L21:
+  56:main.c        ****             up = 0;   
+ 291              		.loc 1 56 0
+ 292 0044 FA23     		movs	r3, #250
+ 293 0046 9B00     		lsls	r3, r3, #2
+ 294 0048 9C42     		cmp	r4, r3
+ 295 004a E3DC     		bgt	.L23
+  58:main.c        ****             up = 1;
+ 296              		.loc 1 58 0
+ 297 004c 034B     		ldr	r3, .L25+8
+ 298 004e 9C42     		cmp	r4, r3
+ 299 0050 E2DB     		blt	.L24
+ 300 0052 E2E7     		b	.L19
+ 301              	.L26:
+ 302              		.align	2
+ 303              	.L25:
+ 304 0054 00000000 		.word	Pin_Limit_1_Handler
+ 305 0058 00000000 		.word	.LANCHOR0
+ 306 005c 18FCFFFF 		.word	-1000
+ 307              		.cfi_endproc
+ 308              	.LFE35:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 9
+
+
+ 309              		.size	main, .-main
+ 310              		.global	emergency
+ 311              		.global	limit_2_pressed
+ 312              		.global	limit_1_pressed
+ 313              		.comm	CAN_TIMEOUT,4,4
+ 314              		.comm	gear_ratio,4,4
+ 315              		.bss
+ 316              		.set	.LANCHOR0,. + 0
+ 317              		.type	limit_1_pressed, %object
+ 318              		.size	limit_1_pressed, 1
+ 319              	limit_1_pressed:
+ 320 0000 00       		.space	1
+ 321              		.type	emergency, %object
+ 322              		.size	emergency, 1
+ 323              	emergency:
+ 324 0001 00       		.space	1
+ 325              		.type	limit_2_pressed, %object
+ 326              		.size	limit_2_pressed, 1
+ 327              	limit_2_pressed:
+ 328 0002 00       		.space	1
+ 329              		.text
+ 330              	.Letext0:
+ 331              		.file 2 "Generated_Source\\PSoC4/Pin_Limit_1.h"
+ 332              		.file 3 "Generated_Source\\PSoC4/PWM_Motor.h"
+ 333              		.file 4 "Generated_Source\\PSoC4/Pin_Direction.h"
+ 334              		.file 5 "Generated_Source\\PSoC4/isr_Limit_1.h"
+ 335              		.file 6 "Generated_Source\\PSoC4/Pin_debug.h"
+ 336              		.file 7 "Generated_Source\\PSoC4/CyLib.h"
+ 337              		.file 8 "Generated_Source\\PSoC4/cytypes.h"
+ 338              		.section	.debug_info,"",%progbits
+ 339              	.Ldebug_info0:
+ 340 0000 D0020000 		.4byte	0x2d0
+ 341 0004 0400     		.2byte	0x4
+ 342 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 343 000a 04       		.byte	0x4
+ 344 000b 01       		.uleb128 0x1
+ 345 000c 1F010000 		.4byte	.LASF32
+ 346 0010 0C       		.byte	0xc
+ 347 0011 28020000 		.4byte	.LASF33
+ 348 0015 AD010000 		.4byte	.LASF34
+ 349 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 350 001d 00000000 		.4byte	0
+ 351 0021 00000000 		.4byte	.Ldebug_line0
+ 352 0025 02       		.uleb128 0x2
+ 353 0026 01       		.byte	0x1
+ 354 0027 06       		.byte	0x6
+ 355 0028 99020000 		.4byte	.LASF0
+ 356 002c 02       		.uleb128 0x2
+ 357 002d 01       		.byte	0x1
+ 358 002e 08       		.byte	0x8
+ 359 002f 81000000 		.4byte	.LASF1
+ 360 0033 02       		.uleb128 0x2
+ 361 0034 02       		.byte	0x2
+ 362 0035 05       		.byte	0x5
+ 363 0036 3F020000 		.4byte	.LASF2
+ 364 003a 02       		.uleb128 0x2
+ 365 003b 02       		.byte	0x2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 10
+
+
+ 366 003c 07       		.byte	0x7
+ 367 003d 38000000 		.4byte	.LASF3
+ 368 0041 02       		.uleb128 0x2
+ 369 0042 04       		.byte	0x4
+ 370 0043 05       		.byte	0x5
+ 371 0044 79020000 		.4byte	.LASF4
+ 372 0048 02       		.uleb128 0x2
+ 373 0049 04       		.byte	0x4
+ 374 004a 07       		.byte	0x7
+ 375 004b 8F000000 		.4byte	.LASF5
+ 376 004f 02       		.uleb128 0x2
+ 377 0050 08       		.byte	0x8
+ 378 0051 05       		.byte	0x5
+ 379 0052 0A020000 		.4byte	.LASF6
+ 380 0056 02       		.uleb128 0x2
+ 381 0057 08       		.byte	0x8
+ 382 0058 07       		.byte	0x7
+ 383 0059 03010000 		.4byte	.LASF7
+ 384 005d 03       		.uleb128 0x3
+ 385 005e 04       		.byte	0x4
+ 386 005f 05       		.byte	0x5
+ 387 0060 696E7400 		.ascii	"int\000"
+ 388 0064 02       		.uleb128 0x2
+ 389 0065 04       		.byte	0x4
+ 390 0066 07       		.byte	0x7
+ 391 0067 4B000000 		.4byte	.LASF8
+ 392 006b 04       		.uleb128 0x4
+ 393 006c A1000000 		.4byte	.LASF35
+ 394 0070 08       		.byte	0x8
+ 395 0071 E401     		.2byte	0x1e4
+ 396 0073 2C000000 		.4byte	0x2c
+ 397 0077 02       		.uleb128 0x2
+ 398 0078 04       		.byte	0x4
+ 399 0079 04       		.byte	0x4
+ 400 007a 6C000000 		.4byte	.LASF9
+ 401 007e 02       		.uleb128 0x2
+ 402 007f 08       		.byte	0x8
+ 403 0080 04       		.byte	0x4
+ 404 0081 BE000000 		.4byte	.LASF10
+ 405 0085 02       		.uleb128 0x2
+ 406 0086 01       		.byte	0x1
+ 407 0087 08       		.byte	0x8
+ 408 0088 00000000 		.4byte	.LASF11
+ 409 008c 02       		.uleb128 0x2
+ 410 008d 08       		.byte	0x8
+ 411 008e 04       		.byte	0x4
+ 412 008f 8D020000 		.4byte	.LASF12
+ 413 0093 02       		.uleb128 0x2
+ 414 0094 04       		.byte	0x4
+ 415 0095 07       		.byte	0x7
+ 416 0096 01020000 		.4byte	.LASF13
+ 417 009a 05       		.uleb128 0x5
+ 418 009b B5020000 		.4byte	.LASF14
+ 419 009f 01       		.byte	0x1
+ 420 00a0 48       		.byte	0x48
+ 421 00a1 00000000 		.4byte	.LFB36
+ 422 00a5 18000000 		.4byte	.LFE36-.LFB36
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 11
+
+
+ 423 00a9 01       		.uleb128 0x1
+ 424 00aa 9C       		.byte	0x9c
+ 425 00ab B9000000 		.4byte	0xb9
+ 426 00af 06       		.uleb128 0x6
+ 427 00b0 06000000 		.4byte	.LVL0
+ 428 00b4 6D020000 		.4byte	0x26d
+ 429 00b8 00       		.byte	0
+ 430 00b9 05       		.uleb128 0x5
+ 431 00ba C5000000 		.4byte	.LASF15
+ 432 00be 01       		.byte	0x1
+ 433 00bf 51       		.byte	0x51
+ 434 00c0 00000000 		.4byte	.LFB37
+ 435 00c4 14000000 		.4byte	.LFE37-.LFB37
+ 436 00c8 01       		.uleb128 0x1
+ 437 00c9 9C       		.byte	0x9c
+ 438 00ca D8000000 		.4byte	0xd8
+ 439 00ce 06       		.uleb128 0x6
+ 440 00cf 06000000 		.4byte	.LVL1
+ 441 00d3 78020000 		.4byte	0x278
+ 442 00d7 00       		.byte	0
+ 443 00d8 05       		.uleb128 0x5
+ 444 00d9 20000000 		.4byte	.LASF16
+ 445 00dd 01       		.byte	0x1
+ 446 00de 72       		.byte	0x72
+ 447 00df 00000000 		.4byte	.LFB38
+ 448 00e3 54000000 		.4byte	.LFE38-.LFB38
+ 449 00e7 01       		.uleb128 0x1
+ 450 00e8 9C       		.byte	0x9c
+ 451 00e9 5B010000 		.4byte	0x15b
+ 452 00ed 07       		.uleb128 0x7
+ 453 00ee A5020000 		.4byte	.LASF36
+ 454 00f2 01       		.byte	0x1
+ 455 00f3 72       		.byte	0x72
+ 456 00f4 5D000000 		.4byte	0x5d
+ 457 00f8 00000000 		.4byte	.LLST0
+ 458 00fc 08       		.uleb128 0x8
+ 459 00fd 24000000 		.4byte	.LVL4
+ 460 0101 84020000 		.4byte	0x284
+ 461 0105 0F010000 		.4byte	0x10f
+ 462 0109 09       		.uleb128 0x9
+ 463 010a 01       		.uleb128 0x1
+ 464 010b 50       		.byte	0x50
+ 465 010c 01       		.uleb128 0x1
+ 466 010d 30       		.byte	0x30
+ 467 010e 00       		.byte	0
+ 468 010f 08       		.uleb128 0x8
+ 469 0110 2A000000 		.4byte	.LVL5
+ 470 0114 8F020000 		.4byte	0x28f
+ 471 0118 24010000 		.4byte	0x124
+ 472 011c 09       		.uleb128 0x9
+ 473 011d 01       		.uleb128 0x1
+ 474 011e 50       		.byte	0x50
+ 475 011f 03       		.uleb128 0x3
+ 476 0120 74       		.byte	0x74
+ 477 0121 00       		.sleb128 0
+ 478 0122 1F       		.byte	0x1f
+ 479 0123 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 12
+
+
+ 480 0124 08       		.uleb128 0x8
+ 481 0125 3E000000 		.4byte	.LVL8
+ 482 0129 84020000 		.4byte	0x284
+ 483 012d 37010000 		.4byte	0x137
+ 484 0131 09       		.uleb128 0x9
+ 485 0132 01       		.uleb128 0x1
+ 486 0133 50       		.byte	0x50
+ 487 0134 01       		.uleb128 0x1
+ 488 0135 31       		.byte	0x31
+ 489 0136 00       		.byte	0
+ 490 0137 08       		.uleb128 0x8
+ 491 0138 44000000 		.4byte	.LVL9
+ 492 013c 8F020000 		.4byte	0x28f
+ 493 0140 4B010000 		.4byte	0x14b
+ 494 0144 09       		.uleb128 0x9
+ 495 0145 01       		.uleb128 0x1
+ 496 0146 50       		.byte	0x50
+ 497 0147 02       		.uleb128 0x2
+ 498 0148 74       		.byte	0x74
+ 499 0149 00       		.sleb128 0
+ 500 014a 00       		.byte	0
+ 501 014b 0A       		.uleb128 0xa
+ 502 014c 4C000000 		.4byte	.LVL12
+ 503 0150 8F020000 		.4byte	0x28f
+ 504 0154 09       		.uleb128 0x9
+ 505 0155 01       		.uleb128 0x1
+ 506 0156 50       		.byte	0x50
+ 507 0157 01       		.uleb128 0x1
+ 508 0158 30       		.byte	0x30
+ 509 0159 00       		.byte	0
+ 510 015a 00       		.byte	0
+ 511 015b 05       		.uleb128 0x5
+ 512 015c D4000000 		.4byte	.LASF17
+ 513 0160 01       		.byte	0x1
+ 514 0161 16       		.byte	0x16
+ 515 0162 00000000 		.4byte	.LFB34
+ 516 0166 18000000 		.4byte	.LFE34-.LFB34
+ 517 016a 01       		.uleb128 0x1
+ 518 016b 9C       		.byte	0x9c
+ 519 016c 8D010000 		.4byte	0x18d
+ 520 0170 08       		.uleb128 0x8
+ 521 0171 08000000 		.4byte	.LVL14
+ 522 0175 D8000000 		.4byte	0xd8
+ 523 0179 83010000 		.4byte	0x183
+ 524 017d 09       		.uleb128 0x9
+ 525 017e 01       		.uleb128 0x1
+ 526 017f 50       		.byte	0x50
+ 527 0180 01       		.uleb128 0x1
+ 528 0181 30       		.byte	0x30
+ 529 0182 00       		.byte	0
+ 530 0183 06       		.uleb128 0x6
+ 531 0184 12000000 		.4byte	.LVL15
+ 532 0188 9B020000 		.4byte	0x29b
+ 533 018c 00       		.byte	0
+ 534 018d 0B       		.uleb128 0xb
+ 535 018e 1A010000 		.4byte	.LASF37
+ 536 0192 01       		.byte	0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 13
+
+
+ 537 0193 22       		.byte	0x22
+ 538 0194 5D000000 		.4byte	0x5d
+ 539 0198 00000000 		.4byte	.LFB35
+ 540 019c 60000000 		.4byte	.LFE35-.LFB35
+ 541 01a0 01       		.uleb128 0x1
+ 542 01a1 9C       		.byte	0x9c
+ 543 01a2 18020000 		.4byte	0x218
+ 544 01a6 0C       		.uleb128 0xc
+ 545 01a7 6900     		.ascii	"i\000"
+ 546 01a9 01       		.byte	0x1
+ 547 01aa 29       		.byte	0x29
+ 548 01ab 5D000000 		.4byte	0x5d
+ 549 01af 58000000 		.4byte	.LLST1
+ 550 01b3 0C       		.uleb128 0xc
+ 551 01b4 757000   		.ascii	"up\000"
+ 552 01b7 01       		.byte	0x1
+ 553 01b8 2A       		.byte	0x2a
+ 554 01b9 5D000000 		.4byte	0x5d
+ 555 01bd 77000000 		.4byte	.LLST2
+ 556 01c1 08       		.uleb128 0x8
+ 557 01c2 0A000000 		.4byte	.LVL16
+ 558 01c6 A6020000 		.4byte	0x2a6
+ 559 01ca D8010000 		.4byte	0x1d8
+ 560 01ce 09       		.uleb128 0x9
+ 561 01cf 01       		.uleb128 0x1
+ 562 01d0 50       		.byte	0x50
+ 563 01d1 05       		.uleb128 0x5
+ 564 01d2 03       		.byte	0x3
+ 565 01d3 00000000 		.4byte	Pin_Limit_1_Handler
+ 566 01d7 00       		.byte	0
+ 567 01d8 06       		.uleb128 0x6
+ 568 01d9 0E000000 		.4byte	.LVL17
+ 569 01dd B1020000 		.4byte	0x2b1
+ 570 01e1 06       		.uleb128 0x6
+ 571 01e2 2A000000 		.4byte	.LVL22
+ 572 01e6 BD020000 		.4byte	0x2bd
+ 573 01ea 06       		.uleb128 0x6
+ 574 01eb 2E000000 		.4byte	.LVL23
+ 575 01ef 9A000000 		.4byte	0x9a
+ 576 01f3 08       		.uleb128 0x8
+ 577 01f4 34000000 		.4byte	.LVL24
+ 578 01f8 D8000000 		.4byte	0xd8
+ 579 01fc 07020000 		.4byte	0x207
+ 580 0200 09       		.uleb128 0x9
+ 581 0201 01       		.uleb128 0x1
+ 582 0202 50       		.byte	0x50
+ 583 0203 02       		.uleb128 0x2
+ 584 0204 74       		.byte	0x74
+ 585 0205 00       		.sleb128 0
+ 586 0206 00       		.byte	0
+ 587 0207 0A       		.uleb128 0xa
+ 588 0208 3A000000 		.4byte	.LVL25
+ 589 020c C8020000 		.4byte	0x2c8
+ 590 0210 09       		.uleb128 0x9
+ 591 0211 01       		.uleb128 0x1
+ 592 0212 50       		.byte	0x50
+ 593 0213 02       		.uleb128 0x2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 14
+
+
+ 594 0214 08       		.byte	0x8
+ 595 0215 64       		.byte	0x64
+ 596 0216 00       		.byte	0
+ 597 0217 00       		.byte	0
+ 598 0218 0D       		.uleb128 0xd
+ 599 0219 82020000 		.4byte	.LASF18
+ 600 021d 01       		.byte	0x1
+ 601 021e 0F       		.byte	0xf
+ 602 021f 5D000000 		.4byte	0x5d
+ 603 0223 05       		.uleb128 0x5
+ 604 0224 03       		.byte	0x3
+ 605 0225 00000000 		.4byte	gear_ratio
+ 606 0229 0D       		.uleb128 0xd
+ 607 022a 5D020000 		.4byte	.LASF19
+ 608 022e 01       		.byte	0x1
+ 609 022f 10       		.byte	0x10
+ 610 0230 5D000000 		.4byte	0x5d
+ 611 0234 05       		.uleb128 0x5
+ 612 0235 03       		.byte	0x3
+ 613 0236 00000000 		.4byte	CAN_TIMEOUT
+ 614 023a 0D       		.uleb128 0xd
+ 615 023b 18020000 		.4byte	.LASF20
+ 616 023f 01       		.byte	0x1
+ 617 0240 12       		.byte	0x12
+ 618 0241 6B000000 		.4byte	0x6b
+ 619 0245 05       		.uleb128 0x5
+ 620 0246 03       		.byte	0x3
+ 621 0247 00000000 		.4byte	limit_1_pressed
+ 622 024b 0D       		.uleb128 0xd
+ 623 024c 28000000 		.4byte	.LASF21
+ 624 0250 01       		.byte	0x1
+ 625 0251 13       		.byte	0x13
+ 626 0252 6B000000 		.4byte	0x6b
+ 627 0256 05       		.uleb128 0x5
+ 628 0257 03       		.byte	0x3
+ 629 0258 00000000 		.4byte	limit_2_pressed
+ 630 025c 0D       		.uleb128 0xd
+ 631 025d 16000000 		.4byte	.LASF22
+ 632 0261 01       		.byte	0x1
+ 633 0262 14       		.byte	0x14
+ 634 0263 6B000000 		.4byte	0x6b
+ 635 0267 05       		.uleb128 0x5
+ 636 0268 03       		.byte	0x3
+ 637 0269 00000000 		.4byte	emergency
+ 638 026d 0E       		.uleb128 0xe
+ 639 026e 05000000 		.4byte	.LASF23
+ 640 0272 05000000 		.4byte	.LASF23
+ 641 0276 02       		.byte	0x2
+ 642 0277 32       		.byte	0x32
+ 643 0278 0F       		.uleb128 0xf
+ 644 0279 72000000 		.4byte	.LASF24
+ 645 027d 72000000 		.4byte	.LASF24
+ 646 0281 03       		.byte	0x3
+ 647 0282 3301     		.2byte	0x133
+ 648 0284 0E       		.uleb128 0xe
+ 649 0285 49020000 		.4byte	.LASF25
+ 650 0289 49020000 		.4byte	.LASF25
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 15
+
+
+ 651 028d 04       		.byte	0x4
+ 652 028e 33       		.byte	0x33
+ 653 028f 0F       		.uleb128 0xf
+ 654 0290 A7000000 		.4byte	.LASF26
+ 655 0294 A7000000 		.4byte	.LASF26
+ 656 0298 03       		.byte	0x3
+ 657 0299 5501     		.2byte	0x155
+ 658 029b 0E       		.uleb128 0xe
+ 659 029c E8000000 		.4byte	.LASF27
+ 660 02a0 E8000000 		.4byte	.LASF27
+ 661 02a4 02       		.byte	0x2
+ 662 02a5 39       		.byte	0x39
+ 663 02a6 0E       		.uleb128 0xe
+ 664 02a7 58000000 		.4byte	.LASF28
+ 665 02ab 58000000 		.4byte	.LASF28
+ 666 02af 05       		.byte	0x5
+ 667 02b0 18       		.byte	0x18
+ 668 02b1 0F       		.uleb128 0xf
+ 669 02b2 2F020000 		.4byte	.LASF29
+ 670 02b6 2F020000 		.4byte	.LASF29
+ 671 02ba 03       		.byte	0x3
+ 672 02bb 3201     		.2byte	0x132
+ 673 02bd 0E       		.uleb128 0xe
+ 674 02be 69020000 		.4byte	.LASF30
+ 675 02c2 69020000 		.4byte	.LASF30
+ 676 02c6 06       		.byte	0x6
+ 677 02c7 33       		.byte	0x33
+ 678 02c8 0E       		.uleb128 0xe
+ 679 02c9 AD020000 		.4byte	.LASF31
+ 680 02cd AD020000 		.4byte	.LASF31
+ 681 02d1 07       		.byte	0x7
+ 682 02d2 D9       		.byte	0xd9
+ 683 02d3 00       		.byte	0
+ 684              		.section	.debug_abbrev,"",%progbits
+ 685              	.Ldebug_abbrev0:
+ 686 0000 01       		.uleb128 0x1
+ 687 0001 11       		.uleb128 0x11
+ 688 0002 01       		.byte	0x1
+ 689 0003 25       		.uleb128 0x25
+ 690 0004 0E       		.uleb128 0xe
+ 691 0005 13       		.uleb128 0x13
+ 692 0006 0B       		.uleb128 0xb
+ 693 0007 03       		.uleb128 0x3
+ 694 0008 0E       		.uleb128 0xe
+ 695 0009 1B       		.uleb128 0x1b
+ 696 000a 0E       		.uleb128 0xe
+ 697 000b 55       		.uleb128 0x55
+ 698 000c 17       		.uleb128 0x17
+ 699 000d 11       		.uleb128 0x11
+ 700 000e 01       		.uleb128 0x1
+ 701 000f 10       		.uleb128 0x10
+ 702 0010 17       		.uleb128 0x17
+ 703 0011 00       		.byte	0
+ 704 0012 00       		.byte	0
+ 705 0013 02       		.uleb128 0x2
+ 706 0014 24       		.uleb128 0x24
+ 707 0015 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 16
+
+
+ 708 0016 0B       		.uleb128 0xb
+ 709 0017 0B       		.uleb128 0xb
+ 710 0018 3E       		.uleb128 0x3e
+ 711 0019 0B       		.uleb128 0xb
+ 712 001a 03       		.uleb128 0x3
+ 713 001b 0E       		.uleb128 0xe
+ 714 001c 00       		.byte	0
+ 715 001d 00       		.byte	0
+ 716 001e 03       		.uleb128 0x3
+ 717 001f 24       		.uleb128 0x24
+ 718 0020 00       		.byte	0
+ 719 0021 0B       		.uleb128 0xb
+ 720 0022 0B       		.uleb128 0xb
+ 721 0023 3E       		.uleb128 0x3e
+ 722 0024 0B       		.uleb128 0xb
+ 723 0025 03       		.uleb128 0x3
+ 724 0026 08       		.uleb128 0x8
+ 725 0027 00       		.byte	0
+ 726 0028 00       		.byte	0
+ 727 0029 04       		.uleb128 0x4
+ 728 002a 16       		.uleb128 0x16
+ 729 002b 00       		.byte	0
+ 730 002c 03       		.uleb128 0x3
+ 731 002d 0E       		.uleb128 0xe
+ 732 002e 3A       		.uleb128 0x3a
+ 733 002f 0B       		.uleb128 0xb
+ 734 0030 3B       		.uleb128 0x3b
+ 735 0031 05       		.uleb128 0x5
+ 736 0032 49       		.uleb128 0x49
+ 737 0033 13       		.uleb128 0x13
+ 738 0034 00       		.byte	0
+ 739 0035 00       		.byte	0
+ 740 0036 05       		.uleb128 0x5
+ 741 0037 2E       		.uleb128 0x2e
+ 742 0038 01       		.byte	0x1
+ 743 0039 3F       		.uleb128 0x3f
+ 744 003a 19       		.uleb128 0x19
+ 745 003b 03       		.uleb128 0x3
+ 746 003c 0E       		.uleb128 0xe
+ 747 003d 3A       		.uleb128 0x3a
+ 748 003e 0B       		.uleb128 0xb
+ 749 003f 3B       		.uleb128 0x3b
+ 750 0040 0B       		.uleb128 0xb
+ 751 0041 27       		.uleb128 0x27
+ 752 0042 19       		.uleb128 0x19
+ 753 0043 11       		.uleb128 0x11
+ 754 0044 01       		.uleb128 0x1
+ 755 0045 12       		.uleb128 0x12
+ 756 0046 06       		.uleb128 0x6
+ 757 0047 40       		.uleb128 0x40
+ 758 0048 18       		.uleb128 0x18
+ 759 0049 9742     		.uleb128 0x2117
+ 760 004b 19       		.uleb128 0x19
+ 761 004c 01       		.uleb128 0x1
+ 762 004d 13       		.uleb128 0x13
+ 763 004e 00       		.byte	0
+ 764 004f 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 17
+
+
+ 765 0050 06       		.uleb128 0x6
+ 766 0051 898201   		.uleb128 0x4109
+ 767 0054 00       		.byte	0
+ 768 0055 11       		.uleb128 0x11
+ 769 0056 01       		.uleb128 0x1
+ 770 0057 31       		.uleb128 0x31
+ 771 0058 13       		.uleb128 0x13
+ 772 0059 00       		.byte	0
+ 773 005a 00       		.byte	0
+ 774 005b 07       		.uleb128 0x7
+ 775 005c 05       		.uleb128 0x5
+ 776 005d 00       		.byte	0
+ 777 005e 03       		.uleb128 0x3
+ 778 005f 0E       		.uleb128 0xe
+ 779 0060 3A       		.uleb128 0x3a
+ 780 0061 0B       		.uleb128 0xb
+ 781 0062 3B       		.uleb128 0x3b
+ 782 0063 0B       		.uleb128 0xb
+ 783 0064 49       		.uleb128 0x49
+ 784 0065 13       		.uleb128 0x13
+ 785 0066 02       		.uleb128 0x2
+ 786 0067 17       		.uleb128 0x17
+ 787 0068 00       		.byte	0
+ 788 0069 00       		.byte	0
+ 789 006a 08       		.uleb128 0x8
+ 790 006b 898201   		.uleb128 0x4109
+ 791 006e 01       		.byte	0x1
+ 792 006f 11       		.uleb128 0x11
+ 793 0070 01       		.uleb128 0x1
+ 794 0071 31       		.uleb128 0x31
+ 795 0072 13       		.uleb128 0x13
+ 796 0073 01       		.uleb128 0x1
+ 797 0074 13       		.uleb128 0x13
+ 798 0075 00       		.byte	0
+ 799 0076 00       		.byte	0
+ 800 0077 09       		.uleb128 0x9
+ 801 0078 8A8201   		.uleb128 0x410a
+ 802 007b 00       		.byte	0
+ 803 007c 02       		.uleb128 0x2
+ 804 007d 18       		.uleb128 0x18
+ 805 007e 9142     		.uleb128 0x2111
+ 806 0080 18       		.uleb128 0x18
+ 807 0081 00       		.byte	0
+ 808 0082 00       		.byte	0
+ 809 0083 0A       		.uleb128 0xa
+ 810 0084 898201   		.uleb128 0x4109
+ 811 0087 01       		.byte	0x1
+ 812 0088 11       		.uleb128 0x11
+ 813 0089 01       		.uleb128 0x1
+ 814 008a 31       		.uleb128 0x31
+ 815 008b 13       		.uleb128 0x13
+ 816 008c 00       		.byte	0
+ 817 008d 00       		.byte	0
+ 818 008e 0B       		.uleb128 0xb
+ 819 008f 2E       		.uleb128 0x2e
+ 820 0090 01       		.byte	0x1
+ 821 0091 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 18
+
+
+ 822 0092 19       		.uleb128 0x19
+ 823 0093 03       		.uleb128 0x3
+ 824 0094 0E       		.uleb128 0xe
+ 825 0095 3A       		.uleb128 0x3a
+ 826 0096 0B       		.uleb128 0xb
+ 827 0097 3B       		.uleb128 0x3b
+ 828 0098 0B       		.uleb128 0xb
+ 829 0099 27       		.uleb128 0x27
+ 830 009a 19       		.uleb128 0x19
+ 831 009b 49       		.uleb128 0x49
+ 832 009c 13       		.uleb128 0x13
+ 833 009d 8701     		.uleb128 0x87
+ 834 009f 19       		.uleb128 0x19
+ 835 00a0 11       		.uleb128 0x11
+ 836 00a1 01       		.uleb128 0x1
+ 837 00a2 12       		.uleb128 0x12
+ 838 00a3 06       		.uleb128 0x6
+ 839 00a4 40       		.uleb128 0x40
+ 840 00a5 18       		.uleb128 0x18
+ 841 00a6 9742     		.uleb128 0x2117
+ 842 00a8 19       		.uleb128 0x19
+ 843 00a9 01       		.uleb128 0x1
+ 844 00aa 13       		.uleb128 0x13
+ 845 00ab 00       		.byte	0
+ 846 00ac 00       		.byte	0
+ 847 00ad 0C       		.uleb128 0xc
+ 848 00ae 34       		.uleb128 0x34
+ 849 00af 00       		.byte	0
+ 850 00b0 03       		.uleb128 0x3
+ 851 00b1 08       		.uleb128 0x8
+ 852 00b2 3A       		.uleb128 0x3a
+ 853 00b3 0B       		.uleb128 0xb
+ 854 00b4 3B       		.uleb128 0x3b
+ 855 00b5 0B       		.uleb128 0xb
+ 856 00b6 49       		.uleb128 0x49
+ 857 00b7 13       		.uleb128 0x13
+ 858 00b8 02       		.uleb128 0x2
+ 859 00b9 17       		.uleb128 0x17
+ 860 00ba 00       		.byte	0
+ 861 00bb 00       		.byte	0
+ 862 00bc 0D       		.uleb128 0xd
+ 863 00bd 34       		.uleb128 0x34
+ 864 00be 00       		.byte	0
+ 865 00bf 03       		.uleb128 0x3
+ 866 00c0 0E       		.uleb128 0xe
+ 867 00c1 3A       		.uleb128 0x3a
+ 868 00c2 0B       		.uleb128 0xb
+ 869 00c3 3B       		.uleb128 0x3b
+ 870 00c4 0B       		.uleb128 0xb
+ 871 00c5 49       		.uleb128 0x49
+ 872 00c6 13       		.uleb128 0x13
+ 873 00c7 3F       		.uleb128 0x3f
+ 874 00c8 19       		.uleb128 0x19
+ 875 00c9 02       		.uleb128 0x2
+ 876 00ca 18       		.uleb128 0x18
+ 877 00cb 00       		.byte	0
+ 878 00cc 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 19
+
+
+ 879 00cd 0E       		.uleb128 0xe
+ 880 00ce 2E       		.uleb128 0x2e
+ 881 00cf 00       		.byte	0
+ 882 00d0 3F       		.uleb128 0x3f
+ 883 00d1 19       		.uleb128 0x19
+ 884 00d2 3C       		.uleb128 0x3c
+ 885 00d3 19       		.uleb128 0x19
+ 886 00d4 6E       		.uleb128 0x6e
+ 887 00d5 0E       		.uleb128 0xe
+ 888 00d6 03       		.uleb128 0x3
+ 889 00d7 0E       		.uleb128 0xe
+ 890 00d8 3A       		.uleb128 0x3a
+ 891 00d9 0B       		.uleb128 0xb
+ 892 00da 3B       		.uleb128 0x3b
+ 893 00db 0B       		.uleb128 0xb
+ 894 00dc 00       		.byte	0
+ 895 00dd 00       		.byte	0
+ 896 00de 0F       		.uleb128 0xf
+ 897 00df 2E       		.uleb128 0x2e
+ 898 00e0 00       		.byte	0
+ 899 00e1 3F       		.uleb128 0x3f
+ 900 00e2 19       		.uleb128 0x19
+ 901 00e3 3C       		.uleb128 0x3c
+ 902 00e4 19       		.uleb128 0x19
+ 903 00e5 6E       		.uleb128 0x6e
+ 904 00e6 0E       		.uleb128 0xe
+ 905 00e7 03       		.uleb128 0x3
+ 906 00e8 0E       		.uleb128 0xe
+ 907 00e9 3A       		.uleb128 0x3a
+ 908 00ea 0B       		.uleb128 0xb
+ 909 00eb 3B       		.uleb128 0x3b
+ 910 00ec 05       		.uleb128 0x5
+ 911 00ed 00       		.byte	0
+ 912 00ee 00       		.byte	0
+ 913 00ef 00       		.byte	0
+ 914              		.section	.debug_loc,"",%progbits
+ 915              	.Ldebug_loc0:
+ 916              	.LLST0:
+ 917 0000 00000000 		.4byte	.LVL2
+ 918 0004 20000000 		.4byte	.LVL3
+ 919 0008 0100     		.2byte	0x1
+ 920 000a 50       		.byte	0x50
+ 921 000b 20000000 		.4byte	.LVL3
+ 922 000f 2C000000 		.4byte	.LVL6
+ 923 0013 0100     		.2byte	0x1
+ 924 0015 54       		.byte	0x54
+ 925 0016 2C000000 		.4byte	.LVL6
+ 926 001a 3A000000 		.4byte	.LVL7
+ 927 001e 0100     		.2byte	0x1
+ 928 0020 50       		.byte	0x50
+ 929 0021 3A000000 		.4byte	.LVL7
+ 930 0025 46000000 		.4byte	.LVL10
+ 931 0029 0100     		.2byte	0x1
+ 932 002b 54       		.byte	0x54
+ 933 002c 46000000 		.4byte	.LVL10
+ 934 0030 48000000 		.4byte	.LVL11
+ 935 0034 0100     		.2byte	0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 20
+
+
+ 936 0036 50       		.byte	0x50
+ 937 0037 48000000 		.4byte	.LVL11
+ 938 003b 4C000000 		.4byte	.LVL13
+ 939 003f 0100     		.2byte	0x1
+ 940 0041 54       		.byte	0x54
+ 941 0042 4C000000 		.4byte	.LVL13
+ 942 0046 54000000 		.4byte	.LFE38
+ 943 004a 0400     		.2byte	0x4
+ 944 004c F3       		.byte	0xf3
+ 945 004d 01       		.uleb128 0x1
+ 946 004e 50       		.byte	0x50
+ 947 004f 9F       		.byte	0x9f
+ 948 0050 00000000 		.4byte	0
+ 949 0054 00000000 		.4byte	0
+ 950              	.LLST1:
+ 951 0058 0E000000 		.4byte	.LVL17
+ 952 005c 14000000 		.4byte	.LVL18
+ 953 0060 0200     		.2byte	0x2
+ 954 0062 30       		.byte	0x30
+ 955 0063 9F       		.byte	0x9f
+ 956 0064 14000000 		.4byte	.LVL18
+ 957 0068 60000000 		.4byte	.LFE35
+ 958 006c 0100     		.2byte	0x1
+ 959 006e 54       		.byte	0x54
+ 960 006f 00000000 		.4byte	0
+ 961 0073 00000000 		.4byte	0
+ 962              	.LLST2:
+ 963 0077 0E000000 		.4byte	.LVL17
+ 964 007b 14000000 		.4byte	.LVL18
+ 965 007f 0200     		.2byte	0x2
+ 966 0081 31       		.byte	0x31
+ 967 0082 9F       		.byte	0x9f
+ 968 0083 14000000 		.4byte	.LVL18
+ 969 0087 16000000 		.4byte	.LVL19
+ 970 008b 0100     		.2byte	0x1
+ 971 008d 55       		.byte	0x55
+ 972 008e 18000000 		.4byte	.LVL20
+ 973 0092 60000000 		.4byte	.LFE35
+ 974 0096 0100     		.2byte	0x1
+ 975 0098 55       		.byte	0x55
+ 976 0099 00000000 		.4byte	0
+ 977 009d 00000000 		.4byte	0
+ 978              		.section	.debug_aranges,"",%progbits
+ 979 0000 3C000000 		.4byte	0x3c
+ 980 0004 0200     		.2byte	0x2
+ 981 0006 00000000 		.4byte	.Ldebug_info0
+ 982 000a 04       		.byte	0x4
+ 983 000b 00       		.byte	0
+ 984 000c 0000     		.2byte	0
+ 985 000e 0000     		.2byte	0
+ 986 0010 00000000 		.4byte	.LFB36
+ 987 0014 18000000 		.4byte	.LFE36-.LFB36
+ 988 0018 00000000 		.4byte	.LFB37
+ 989 001c 14000000 		.4byte	.LFE37-.LFB37
+ 990 0020 00000000 		.4byte	.LFB38
+ 991 0024 54000000 		.4byte	.LFE38-.LFB38
+ 992 0028 00000000 		.4byte	.LFB34
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 21
+
+
+ 993 002c 18000000 		.4byte	.LFE34-.LFB34
+ 994 0030 00000000 		.4byte	.LFB35
+ 995 0034 60000000 		.4byte	.LFE35-.LFB35
+ 996 0038 00000000 		.4byte	0
+ 997 003c 00000000 		.4byte	0
+ 998              		.section	.debug_ranges,"",%progbits
+ 999              	.Ldebug_ranges0:
+ 1000 0000 00000000 		.4byte	.LFB36
+ 1001 0004 18000000 		.4byte	.LFE36
+ 1002 0008 00000000 		.4byte	.LFB37
+ 1003 000c 14000000 		.4byte	.LFE37
+ 1004 0010 00000000 		.4byte	.LFB38
+ 1005 0014 54000000 		.4byte	.LFE38
+ 1006 0018 00000000 		.4byte	.LFB34
+ 1007 001c 18000000 		.4byte	.LFE34
+ 1008 0020 00000000 		.4byte	.LFB35
+ 1009 0024 60000000 		.4byte	.LFE35
+ 1010 0028 00000000 		.4byte	0
+ 1011 002c 00000000 		.4byte	0
+ 1012              		.section	.debug_line,"",%progbits
+ 1013              	.Ldebug_line0:
+ 1014 0000 29010000 		.section	.debug_str,"MS",%progbits,1
+ 1014      02009F00 
+ 1014      00000201 
+ 1014      FB0E0D00 
+ 1014      01010101 
+ 1015              	.LASF11:
+ 1016 0000 63686172 		.ascii	"char\000"
+ 1016      00
+ 1017              	.LASF23:
+ 1018 0005 50696E5F 		.ascii	"Pin_Limit_1_Read\000"
+ 1018      4C696D69 
+ 1018      745F315F 
+ 1018      52656164 
+ 1018      00
+ 1019              	.LASF22:
+ 1020 0016 656D6572 		.ascii	"emergency\000"
+ 1020      67656E63 
+ 1020      7900
+ 1021              	.LASF16:
+ 1022 0020 7365745F 		.ascii	"set_PWM\000"
+ 1022      50574D00 
+ 1023              	.LASF21:
+ 1024 0028 6C696D69 		.ascii	"limit_2_pressed\000"
+ 1024      745F325F 
+ 1024      70726573 
+ 1024      73656400 
+ 1025              	.LASF3:
+ 1026 0038 73686F72 		.ascii	"short unsigned int\000"
+ 1026      7420756E 
+ 1026      7369676E 
+ 1026      65642069 
+ 1026      6E7400
+ 1027              	.LASF8:
+ 1028 004b 756E7369 		.ascii	"unsigned int\000"
+ 1028      676E6564 
+ 1028      20696E74 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 22
+
+
+ 1028      00
+ 1029              	.LASF28:
+ 1030 0058 6973725F 		.ascii	"isr_Limit_1_StartEx\000"
+ 1030      4C696D69 
+ 1030      745F315F 
+ 1030      53746172 
+ 1030      74457800 
+ 1031              	.LASF9:
+ 1032 006c 666C6F61 		.ascii	"float\000"
+ 1032      7400
+ 1033              	.LASF24:
+ 1034 0072 50574D5F 		.ascii	"PWM_Motor_Stop\000"
+ 1034      4D6F746F 
+ 1034      725F5374 
+ 1034      6F7000
+ 1035              	.LASF1:
+ 1036 0081 756E7369 		.ascii	"unsigned char\000"
+ 1036      676E6564 
+ 1036      20636861 
+ 1036      7200
+ 1037              	.LASF5:
+ 1038 008f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1038      20756E73 
+ 1038      69676E65 
+ 1038      6420696E 
+ 1038      7400
+ 1039              	.LASF35:
+ 1040 00a1 75696E74 		.ascii	"uint8\000"
+ 1040      3800
+ 1041              	.LASF26:
+ 1042 00a7 50574D5F 		.ascii	"PWM_Motor_WriteCompare\000"
+ 1042      4D6F746F 
+ 1042      725F5772 
+ 1042      69746543 
+ 1042      6F6D7061 
+ 1043              	.LASF10:
+ 1044 00be 646F7562 		.ascii	"double\000"
+ 1044      6C6500
+ 1045              	.LASF15:
+ 1046 00c5 656D6572 		.ascii	"emergency_halt\000"
+ 1046      67656E63 
+ 1046      795F6861 
+ 1046      6C7400
+ 1047              	.LASF17:
+ 1048 00d4 50696E5F 		.ascii	"Pin_Limit_1_Handler\000"
+ 1048      4C696D69 
+ 1048      745F315F 
+ 1048      48616E64 
+ 1048      6C657200 
+ 1049              	.LASF27:
+ 1050 00e8 50696E5F 		.ascii	"Pin_Limit_1_ClearInterrupt\000"
+ 1050      4C696D69 
+ 1050      745F315F 
+ 1050      436C6561 
+ 1050      72496E74 
+ 1051              	.LASF7:
+ 1052 0103 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 23
+
+
+ 1052      206C6F6E 
+ 1052      6720756E 
+ 1052      7369676E 
+ 1052      65642069 
+ 1053              	.LASF37:
+ 1054 011a 6D61696E 		.ascii	"main\000"
+ 1054      00
+ 1055              	.LASF32:
+ 1056 011f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1056      43313120 
+ 1056      352E342E 
+ 1056      31203230 
+ 1056      31363036 
+ 1057 0152 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1057      20726576 
+ 1057      6973696F 
+ 1057      6E203233 
+ 1057      37373135 
+ 1058 0185 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1058      66756E63 
+ 1058      74696F6E 
+ 1058      2D736563 
+ 1058      74696F6E 
+ 1059              	.LASF34:
+ 1060 01ad 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
+ 1060      73657273 
+ 1060      5C617573 
+ 1060      74635C4F 
+ 1060      6E654472 
+ 1061 01da 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\Design01.cydsn\000"
+ 1061      69637332 
+ 1061      3031382D 
+ 1061      31395C50 
+ 1061      736F6320 
+ 1062              	.LASF13:
+ 1063 0201 73697A65 		.ascii	"sizetype\000"
+ 1063      74797065 
+ 1063      00
+ 1064              	.LASF6:
+ 1065 020a 6C6F6E67 		.ascii	"long long int\000"
+ 1065      206C6F6E 
+ 1065      6720696E 
+ 1065      7400
+ 1066              	.LASF20:
+ 1067 0218 6C696D69 		.ascii	"limit_1_pressed\000"
+ 1067      745F315F 
+ 1067      70726573 
+ 1067      73656400 
+ 1068              	.LASF33:
+ 1069 0228 6D61696E 		.ascii	"main.c\000"
+ 1069      2E6300
+ 1070              	.LASF29:
+ 1071 022f 50574D5F 		.ascii	"PWM_Motor_Start\000"
+ 1071      4D6F746F 
+ 1071      725F5374 
+ 1071      61727400 
+ 1072              	.LASF2:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cc0Vy0DM.s 			page 24
+
+
+ 1073 023f 73686F72 		.ascii	"short int\000"
+ 1073      7420696E 
+ 1073      7400
+ 1074              	.LASF25:
+ 1075 0249 50696E5F 		.ascii	"Pin_Direction_Write\000"
+ 1075      44697265 
+ 1075      6374696F 
+ 1075      6E5F5772 
+ 1075      69746500 
+ 1076              	.LASF19:
+ 1077 025d 43414E5F 		.ascii	"CAN_TIMEOUT\000"
+ 1077      54494D45 
+ 1077      4F555400 
+ 1078              	.LASF30:
+ 1079 0269 50696E5F 		.ascii	"Pin_debug_Write\000"
+ 1079      64656275 
+ 1079      675F5772 
+ 1079      69746500 
+ 1080              	.LASF4:
+ 1081 0279 6C6F6E67 		.ascii	"long int\000"
+ 1081      20696E74 
+ 1081      00
+ 1082              	.LASF18:
+ 1083 0282 67656172 		.ascii	"gear_ratio\000"
+ 1083      5F726174 
+ 1083      696F00
+ 1084              	.LASF12:
+ 1085 028d 6C6F6E67 		.ascii	"long double\000"
+ 1085      20646F75 
+ 1085      626C6500 
+ 1086              	.LASF0:
+ 1087 0299 7369676E 		.ascii	"signed char\000"
+ 1087      65642063 
+ 1087      68617200 
+ 1088              	.LASF36:
+ 1089 02a5 636F6D70 		.ascii	"compare\000"
+ 1089      61726500 
+ 1090              	.LASF31:
+ 1091 02ad 43794465 		.ascii	"CyDelay\000"
+ 1091      6C617900 
+ 1092              	.LASF14:
+ 1093 02b5 63686563 		.ascii	"check_Pin\000"
+ 1093      6B5F5069 
+ 1093      6E00
+ 1094              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

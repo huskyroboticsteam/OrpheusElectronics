@@ -16,13 +16,16 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 6
-Clock: CyHFClk    | N/A  | Target: 48.00 MHz  | 
-Clock: CyILO      | N/A  | Target: 0.03 MHz   | 
-Clock: CyIMO      | N/A  | Target: 48.00 MHz  | 
-Clock: CyLFClk    | N/A  | Target: 0.03 MHz   | 
-Clock: CyRouted1  | N/A  | Target: 48.00 MHz  | 
-Clock: CySysClk   | N/A  | Target: 48.00 MHz  | 
+Number of clocks: 9
+Clock: ClockBlock/ff_div_18  | N/A  | Target: 100.00 MHz  | 
+Clock: Clock_PWM             | N/A  | Target: 24.00 MHz   | 
+Clock: Clock_PWM(FFB)        | N/A  | Target: 24.00 MHz   | 
+Clock: CyHFClk               | N/A  | Target: 48.00 MHz   | 
+Clock: CyILO                 | N/A  | Target: 0.03 MHz    | 
+Clock: CyIMO                 | N/A  | Target: 48.00 MHz   | 
+Clock: CyLFClk               | N/A  | Target: 0.03 MHz    | 
+Clock: CyRouted1             | N/A  | Target: 48.00 MHz   | 
+Clock: CySysClk              | N/A  | Target: 48.00 MHz   | 
 
  =====================================================================
                     End of Clock Frequency Summary
@@ -56,12 +59,13 @@ Port Name  Setup to Clk  Clock Name:Phase
 -----------------------3.2::Clock to Out
 ----------------------------------------
 
-Port Name  Clock to Out  Clock Name:Phase  
----------  ------------  ----------------  
+Port Name         Clock to Out  Clock Name:Phase        
+----------------  ------------  ----------------------  
+Pin_Motor(0)_PAD  14270         ClockBlock/ff_div_18:R  
 
 
--------------------------3.3::Pad to Pad
-----------------------------------------
+                         3.3::Pad to Pad
+                         ---------------
 
 Port Name (Source)  Port Name (Destination)  Delay  
 ------------------  -----------------------  -----  
