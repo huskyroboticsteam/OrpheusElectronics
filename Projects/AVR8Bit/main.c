@@ -3,7 +3,7 @@
 #include <util/delay.h>
 #include <avr/wdt.h>
 #include "pwm.h"
-#include "motors.h"
+#include "motor.h"
 #include "timers.h"
 #include "adc.h"
 #include "can.h"
@@ -14,7 +14,7 @@ int main(){
 	setup_timers();
 	init_motor();
 	init_ADC();
-	init_CAN(CAN_250_BAUD, 4);
+	init_CAN(CAN_250_BAUD, 4, 0);
 	
 	while(1){
 		motor_control_tick();

@@ -27,8 +27,8 @@ void init_motor(){
 	
 	motor_target_pos = motor_target_vel = 0;
 	init_encoder();
-	motor_last_post = 0;
-	motor_last_timestamp = getmS();
+	motor_last_pos = 0;
+	motor_last_timestamp = get_mS();
 }
 
 /*Sets the motor power
@@ -61,18 +61,13 @@ void set_motor_power(int16_t power){
 
 /*Returns the motor current in milliamps*/
 uint16_t get_motor_current(){
+	ADMUX |= 0xC0;
 	uint16_t val = read_ADC(MOTOR_CS);
-	#ifdef FIVE_VOLTS
-	/*4.883 mV/unit*/
-	if(val < 10) return 0;
-	val -= 10; //Remove 50mV offset
-	val = (val * 122) + (val/11); //Convert to mA
-	#else //3.3V
-	/*3.22 mV/unit*/
-	if(val < 16) return 0;
-	val -= 16; //Remove 50mV offset
-	val = (val << 6) + (val << 4) + (val >> 1); //Fast multiply by 80.5
-	#endif
+	ADMUX &= 0xC0;
+	//2.5 mV/unit. 8 Units/Amp
+	if(val < 20) return 0;
+	val -= 20; //Remove 50mV offset;
+	val <<= 8; //Multiply by 128
 	return val;
 }
 uint8_t check_motor_stall(){
@@ -81,7 +76,7 @@ uint8_t check_motor_stall(){
 	return 0;
 }
 void set_target_position(int32_t position){
-	if(position < 0 || position > motor_max_position) return;
+	if(position < 0 || position > motor_max_pos) return;
 	motor_target_pos = position;
 }
 void set_target_velocity(uint16_t velocity){
@@ -94,9 +89,9 @@ int32_t get_target_velocity(){
 	return motor_target_vel;
 }
 int16_t get_motor_velocity(){
-	int32_t enc = get_encoder_position();
+	int32_t enc = get_encoder_ticks();
 	int32_t mS = get_mS();
-	if(mS - last_motor_timestamp < 50){ //Has enough time passed?
+	if(mS - motor_last_timestamp < 50){ //Has enough time passed?
 		return motor_vel; //No. Return the old value
 	} else {
 		int16_t new_velocity = (1000*(enc - motor_last_pos))/(mS - motor_last_timestamp); //Calculate the new velocity
@@ -110,17 +105,18 @@ void motor_control_tick(){
 	if(motor_mode & MOTOR_MODE_VELOCITY){
 	}
 	if(motor_mode & MOTOR_MODE_POSITION){
-		int pos = get_motor_position();
+		//int pos = get_motor_position();
 	}
+	
 	uint8_t limit_sw = get_motor_limit_switch_state();
 	if(limit_sw & 1){
 		reset_encoder();
 		set_motor_power(0);
 	}
 	if(limit_sw & 2){
-		motor_max_position = get_encoder_ticks();
-		if(motor_target_pos > motor_max_position){
-			motor_target_pos = motor_max_position;
+		motor_max_pos = get_encoder_ticks();
+		if(motor_target_pos > motor_max_pos){
+			motor_target_pos = motor_max_pos;
 		}
 		set_motor_power(0);
 	}

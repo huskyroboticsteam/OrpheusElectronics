@@ -21,7 +21,7 @@ void init_ADC(){
 */
 uint16_t read_ADC(uint8_t pin){
 	uint8_t l,h;
-	ADMUX = (ADMUX & (1<<REFS0)) | pin & 7; //Setup ADC, preserve REFS0
+	ADMUX = (ADMUX & 0xC0) | pin & 7; //Setup ADC, preserve REFS0
 	ADCSRA |= (1<<ADSC); //Start the conversion
 	while(ADCSRA & (1<<ADSC)); //Wait for conversion
 	l = ADCL;  //Read and return 10 bit result

@@ -1,0 +1,1 @@
+del avr_mc.elf adc.o can.o encoder.o main.o motor.o pwm.o timers.o spi.o usart.o
