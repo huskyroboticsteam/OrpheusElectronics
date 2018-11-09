@@ -5,14 +5,20 @@
 
 volatile uint8_t msgs_av; //Number of messages unclaimed messages
 
+uint16_t RX_mask, RX_tag;
+
 ISR(CANIT_vect){
 	//uint8_t canpage, mob;
 	if((CANHPMOB & 0xF0) != 0xF0){ //Message received?
-		/*canpage = CANPAGE;
-		CANPAGE = CANHPMOB & 0xF0;
-		mob = CANHPMOB >> 4; //get highest priority MOb
-		*/
-		msgs_av++; //Increase count of messages
+	    if(CANSTMOB & (1 << TXOK)){ //TX
+			int mob = (CANHPMOB >> 4);
+			/*Reset the MOb*/
+			CANSTMOB &= 0;
+			CANCDMOB = 0;
+			enable_mob_interrupt(mob);
+		} else { //RX
+			msgs_av++; //Increase count of messages
+		}
 	} else {
 		CANGIT |= 0; //Error interrupt - Handle these?
 	}
@@ -28,13 +34,21 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	CANBT1 = (rate & 0xFF0000) >> 16;
 	CANBT2 = (rate & 0x00FF00) >> 8;
 	CANBT3 = (rate & 0x0000FF);
-	CANGIE = (1 << ENERR) | (1 <<ENERG) | (1 << ENRX); //Enable CAN RX interrupts
+	CANGIE = (1 << ENERR) | (1 <<ENERG) | (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
 	CANTCON = 255; //Set the can timer to run at 1/2048th of F_CPU
 	uint8_t i;
 	/*Initialize non-tx MOBs to receive*/
 	for(i = txmobs;i < 15;i++){
 		select_mob(i);
 		CANSTMOB &= 0;
+		CANIDM4 = 0;
+		CANIDM3 = 0;
+		CANIDM2 = 0;
+		CANIDM1 = 0;
+		CANIDT4 = 0;
+		CANIDT3 = 0;
+		CANIDT2 = 0;
+		CANIDT1 = 0;
 		CANCDMOB = (1 << CONMOB1);
 	}
 	msgs_av = 0;
@@ -65,6 +79,13 @@ void enable_mob_interrupt(uint8_t mob){
 	}
 }
 
+uint8_t mob_enabled(uint8_t mob){
+	if(mob < 8){
+		return !!(CANEN2 & (1 << mob));
+	} else {
+		return !!(CANEN1 & (1 << (mob - 8)));
+	}
+}
 
 /*Returns the number of CAN messages waiting*/
 uint8_t CAN_msg_available(){
@@ -97,6 +118,10 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 	cli();
 	msgs_av--;
 	sei();
+	CANIDT4 = 0;
+	CANIDT3 = 0;
+	CANIDT2 = (RX_mask & 0x03) << 5;
+	CANIDT1 = (RX_mask & 0x7F8) >> 3;
 	enable_mob_interrupt(mob);
 	CANCDMOB = (1<<CONMOB1); //Re-enable recieve
 	return 1;
@@ -126,9 +151,28 @@ uint8_t CAN_send_msg(struct CAN_msg *buf){
 	for(i = 0;i < buf->length;i++){
 		CANMSG = buf->data[i];
 	}
+	CANIDT4 = 0;
 	CANIDT3 = (buf->flags & CAN_RTR)? (1<<RTRTAG): 0;
 	CANIDT2 = ((buf->id & 3) << 5);
 	CANIDT1 = ((buf->id & 0x7F8) >> 3);
 	CANCDMOB |= (1<<CONMOB0);
 	return 1;
+}
+
+void CAN_set_RX_filter(uint16_t mask, uint16_t tag){
+	RX_mask = mask;
+	RX_tag = tag;
+	int i;
+	for(i = 0;i < 15;i++){
+		/*Only modify receive mobs which are enabled and not occupied*/
+		if(mob_enabled(i)){
+			select_mob(i);
+			if(CANCDMOB & (1<<CONMOB1)){
+				CANIDT2 = ((tag & 3) << 5);
+				CANIDT1 = ((tag & 0x7F8) >> 3);
+				CANIDM2 = ((mask & 3) << 5);
+				CANIDM1 = ((mask & 0x7F8) >> 3);
+			}
+		}
+	}
 }
