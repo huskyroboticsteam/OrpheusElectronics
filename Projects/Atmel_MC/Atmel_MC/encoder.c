@@ -8,6 +8,8 @@
 
 void readEncoders(void *myEncoderDataPtr) {
 	encoderData *encoderDataPtr = (encoderData*) myEncoderDataPtr;
-	// read encoders from pins
+	for (int i = 0; i < NUM_MOTORS; i++) {
+		encoderDataPtr->encoderRaw[i];
+	}
 }
 

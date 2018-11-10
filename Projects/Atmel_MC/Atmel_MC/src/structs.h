@@ -9,12 +9,14 @@
 #ifndef STRUCTS_H_
 #define STRUCTS_H_
 
+#define NUM_MOTORS 3 
+
 typedef struct {
-	
+	int pwmVal[NUM_MOTORS];
 } pwmData;
 
 typedef struct {
-	
+	int encoderRaw[NUM_MOTORS];
 } encoderData;
 
 typedef struct {
