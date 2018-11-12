@@ -7,7 +7,7 @@
 volatile uint32_t TOF_Cnt; //Timer1 overflow counter
 
 /*Will this eat too much CPU time? TBD*/
-ISR(TIMER1_COMPA_vect){ //This should fire every 10mS
+ISR(TIMER1_OVF_vect){ //This should fire every 10mS
 	TOF_Cnt++;
 }
 
@@ -16,16 +16,18 @@ void setup_timers(){
 	//Timer 0: Phase correct PWM, CLK/64
 	TCCR0A = (1<<CS01) | (1<<CS00) | (1<<WGM00);
 	
-	//Timer 1: Fast PWM, TOP=OCR1A, CLK/8
-	//This makes timer 1 increment every microsecond at 8 Mhz or every 500nS at 16MHz
-	TCCR1B = (1<<CS11) | (1<<WGM13) | (1<<WGM12) | (1<<WGM11) | (1<<WGM10);
+	//Timer 1: Fast PWM, TOP=OCR1A, CLK/64
+	//This makes timer 1 increment every 8 microseconds at 8 Mhz or every 4uS at 16MHz
+	TCCR1B = (1<<CS11) | (1<<CS10)  | (1<<WGM13) | (1<<WGM12);
+	TCCR1A = (1<<WGM11) | (1<<WGM10);
 	OCR1A = 10000; //Count to 10000 before resetting
 	TCNT1 = 0;
-	TIMSK1 = (1 << OCIE1A); //Enable interrupt on match
+	TIMSK1 = (1 << TOIE1); //Enable interrupt on match
 	
-	//Timer 3: 10-bit phase correct PWM, CLK/8
-	TCCR3B = (1<<CS21) | (1<<WGM21) | (1<<WGM20);
-	
+	//Timer 3: 10-bit phase correct PWM, CLK/64
+	TCCR3A = (1<<WGM31) | (1<<WGM30);
+	TCCR3B = (1<<CS30) | (1<<CS31);
+
 	TOF_Cnt = 0; //Clear the overflow counter
 }
 
@@ -33,9 +35,9 @@ void setup_timers(){
 uint32_t get_mS(){
 	uint16_t timer_ticks = TCNT1;
 	#if F_CPU == 8000000
-	return (TOF_Cnt * 10) + (timer_ticks/1000); //8 Mhz
+	return (TOF_Cnt * 80) + (timer_ticks/125L); //8 Mhz
 	#else
-	return (TOF_Cnt * 5) + (timer_ticks/2000); // 16 Mhz
+	return (TOF_Cnt * 40) + (timer_ticks/250L); // 16 Mhz
 	#endif
 }
 
@@ -43,9 +45,9 @@ uint32_t get_mS(){
 uint32_t get_uS(){
 	uint16_t timer_ticks = TCNT1;
 	#if F_CPU == 8000000
-	return (TOF_Cnt * 10000) + timer_ticks; //8 MHz
+	return (TOF_Cnt * 80000) + (timer_ticks << 2); //8 MHz
 	#else
-	return (TOF_Cnt * 5000) + (timer_ticks >> 1); //16 MHz
+	return (TOF_Cnt * 40000) + (timer_ticks << 3); //16 MHz
 	#endif
 }
 

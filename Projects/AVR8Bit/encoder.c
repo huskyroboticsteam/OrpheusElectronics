@@ -11,18 +11,19 @@ uint32_t get_encoder_ticks(){
 
 /*Initalizes the encoder with A on PE6 and B on PE7*/
 void init_encoder(){
-	EICRB &= 0x0F; //Disable pin change interrupts
+	EIMSK &= 0x3F; //Disable pin change interrupts
 	DDRE &= 0x3F; //Set PE6, PE7 as inputs
 	PORTE |= 0xC0; //Enable pullups on PE6, PE7
 	encoder_ticks = 0; //Reset count
 	EICRB |= 0x50; //Enable pin change interrupt on PE6, PE7
+	EIMSK |= 0xC0;
 }
 
 /*Resets the encoder count*/
 void reset_encoder(){
-	EICRB &= 0x0F; //Disable pin change interrupts
+	EIMSK &= 0x3F; //Disable pin change interrupts
 	encoder_ticks = 0; //Reset count
-	EICRB |= 0x50; //Enable pin change interrupt on PE6, PE7
+	EIMSK |= 0xC0; //Enable pin change interrupt on PE6, PE7
 }
 
 ISR(INT6_vect){ //PE6, A

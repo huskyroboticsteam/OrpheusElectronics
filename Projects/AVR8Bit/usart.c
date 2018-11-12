@@ -1,96 +1,178 @@
 #include "conf.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdarg.h>
 #include "usart.h"
 
-char tx_buf[TX_BUF_SZ];
-char rx_buf[RX_BUF_SZ];
+int16_t min(int16_t a, int16_t b){
+	return (a < b)? a:b;
+}
 
-uint8_t tx_buf_head, tx_buf_tail;
-uint8_t rx_buf_head, rx_buf_tail;
-uint8_t rx_av;
+volatile char usart_TX_buf[USART_TX_BUF_SZ], txbp, txend;
+volatile char usart_RX_buf[USART_RX_BUF_SZ], rxbp;
 
-/*Initialize the USART0
+ISR(USART1_RX_vect){
+	if(rxbp > USART_RX_BUF_SZ){
+		rxbp = USART_RX_BUF_SZ;
+		return;
+	}
+	usart_RX_buf[rxbp++] = UDR1;
+}
+ISR(USART1_UDRE_vect){
+	UDR1 = usart_TX_buf[txbp++];
+	if(txbp >= txend || txbp > USART_TX_BUF_SZ){
+		UCSR1B &= ~(1 << UDRIE1);
+		txbp = txend = 0;
+	}
+}
+
+/*Reads bytes from the USART into the specified buffer
+Parameters:
+char *buf: The buffer to receive the data
+uint8_t count: The number of bytes to read;
+Returns:
+Number of bytes recieved
+*/
+uint8_t usart_read(char *buf, uint8_t count){
+	uint8_t icfg = UCSR1B;
+	while(rxbp < 1);
+	UCSR1B &= ~(1 << RXCIE1); //Disable USART RX interrupt during operation
+	uint8_t c = min(rxbp, count);
+	memcpy((void*)buf, (void*)usart_RX_buf, c);
+	memmove((void*)usart_RX_buf, (void*)usart_RX_buf + c, USART_RX_BUF_SZ - c);
+	rxbp -= c;
+	UCSR1B = icfg;
+	return c;
+}
+/*Writes data out to the USART
+Parameters:
+char *buf: The data to write
+uint8_t count: How many bytes to write
+*/
+void usart_write(char *buf, uint8_t count){
+	volatile uint8_t c;
+	if(txend){UCSR1B |= (1 << UDRIE1);}
+	while(count){
+		while(txend >= USART_TX_BUF_SZ-1);
+		c = min(USART_TX_BUF_SZ - txend, count);
+		memcpy((void*)usart_TX_buf + txend, buf, c);
+		txend += c;
+		count -= c;
+		UCSR1B |= (1 << UDRIE1);
+	}
+}
+
+/*Initialize the USART1
 Parameters:
 uint16_t baud: The baud rate to use
 */
-void usart_init(uint16_t baud){
-	tx_buf_head = rx_buf_head = 0;
-	tx_buf_tail = rx_buf_tail = 0;
-	rx_av = 0;
-	UBRR0 = (uint16_t)((F_CPU/16L)/baud)-1;
-	UCSR0C = 0x04; //8-bit, 1 stop bit, no parity
-	UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0) | (1<<UDRIE0); //Enable recieve, transmit and interrupts
+void usart_init(uint32_t baud){
+	rxbp = 0;
+    txbp = txend = 0;
+	UCSR1A = 0;
+	UBRR1 = ((F_CPU/16L)/baud)-1;
+	UCSR1C = (1<<UCSZ11) | (1<<UCSZ10); //8-bit, 1 stop bit, no parity
+	UCSR1B = (1<<RXEN1) | (1<<TXEN1) | (1<<RXCIE1); //Enable recieve, transmit and interrupts
 }
 
 /*Disables USART*/
 void usart_end(){
-	UCSR0B = 0;
+	UCSR1B = 0;
 }
 
 /*Writes one character to the USART
 Parameters:
 char c: the character to write*/
 void usart_write_char(char c){
-	UCSR0B |= (1<<UDRIE0); //Make sure TX interrupt is enabled
-	/*if((tx_buf_tail+1)%TX_BUF_SZ == tx_buf_head){
-		return; //No more room
-	}*/
-	/*No more room. Block until we can put it in the buffer*/
-	while((tx_buf_tail+1)%TX_BUF_SZ == tx_buf_head);
-	
-	tx_buf[tx_buf_tail++] = c;
-	if(tx_buf_tail >= TX_BUF_SZ){
-		tx_buf_tail = 0;
+	if(c == '\n'){
+		usart_write_char('\r');
 	}
+	usart_write(&c, 1);
 }
 
 /*Writes a string to the USART
 Parameters:
 char *s: The string to write*/
 void usart_write_string(char *s){
-	int i;
-	for(i = 0;s[i];i++){
-		usart_write_char(s[i]);
-	}
+	usart_write(s, strlen(s));
 }
 
 /*Reads one character (byte) from the USART recieve buffer. If the buffer is empty, it returns 0*/
 char usart_read_char(){
-	if(!rx_av){
-		return 0; //Buffer empty
-	}
-	char c = rx_buf[rx_buf_head++];
-	if(rx_buf_head >= RX_BUF_SZ){
-		rx_buf_head = 0;
-	}
-	rx_av--;
+	char c;
+	usart_read(&c, 1);
 	return c;
 }
 
 /*Returns the number of bytes waiting in the USART receive buffer*/
 int usart_available(){
-	return rx_av;
+	return rxbp;
 }
 
-ISR(USART0_RX_vect){ //A byte received
-	if((rx_buf_tail+1)%RX_BUF_SZ == rx_buf_head){
-		return; //No more room
+/*Tiny implementation of prinf()*/
+void tprintf(const char *fmt, ...){
+	va_list va;
+	va_start(va, fmt);
+	int i = 0;
+	int32_t l;
+	char buf[9],c;
+	for(i = 0;c=fmt[i];i++){
+		if(c != '%'){
+			usart_write_char(c);
+		}
+	if(c == '\\'){
+		c = fmt[++i];
+		switch(c){
+			case '\\':
+				usart_write_char('\\');
+				break;
+			case '\n':
+				usart_write_char('\n');
+				break;
+		}
 	}
-	rx_buf[rx_buf_tail++] = UDR0;
-	rx_av++;
-	if(rx_buf_tail >= RX_BUF_SZ){
-		rx_buf_tail = 0;
-	}
-}
-
-ISR(USART0_UDRE_vect){ //AVR's transmit buffer is empty
-	if(tx_buf_head == tx_buf_tail){ //Buffer empty
-		UCSR0B &= ~(1<<UDRIE0); //Disable interrupt to avoid infinite loop
-		return;
-	}
-	UDR0 = tx_buf[tx_buf_head++];
-	if(tx_buf_head >= TX_BUF_SZ){
-		tx_buf_head = 0;
+	if(c == '%'){
+		c=fmt[++i];
+		switch(c){
+			case 'l':
+				l = va_arg(va, int32_t);
+				if(l > 32767){
+					itoa(l/10000, buf, 10);
+					usart_write_string(buf);
+					l %= 10000;
+					if(l < 1000){
+						usart_write_char('0');
+					}
+					if(l < 100){
+						usart_write_char('0');
+					}
+					if(l < 10){
+						usart_write_char('0');
+					}
+				}
+				itoa(l, buf, 10);
+				usart_write_string(buf);
+				break;
+			case 'X':
+				itoa(va_arg(va, int32_t), buf, 16);
+				usart_write_string(buf);
+				break;
+			case 'd':
+				itoa(va_arg(va, int), buf, 10);
+				usart_write_string(buf);
+				break;
+			case 's':
+				usart_write_string(va_arg(va, char*));
+				break;
+			case 'c':
+				usart_write_char(va_arg(va, int));
+				break;
+			default:
+				usart_write_char('?');
+				break;
+			}
+		}
 	}
 }

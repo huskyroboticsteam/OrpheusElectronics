@@ -3,10 +3,10 @@
 
 #define MOTOR_PWM_PORT PORTE
 #define MOTOR_PWM_DDR DDRE
-#define MOTOR_PWM PE3
+#define MOTOR_PWM PE4
 #define MOTOR_DIR_PORT PORTE
 #define MOTOR_DIR_DDR DDRE
-#define MOTOR_DIR PE4
+#define MOTOR_DIR PE3
 #define MOTOR_CS_DDR DDRF
 #define MOTOR_CS 0
 

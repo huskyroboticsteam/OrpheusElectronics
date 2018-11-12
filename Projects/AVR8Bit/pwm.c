@@ -1,5 +1,6 @@
 #include "conf.h"
 #include <avr/io.h>
+#include "usart.h"
 #include "pwm.h"
 
 /*Writes a PWM value to the specified pin. Currently only Timer3/PORTE supported
@@ -9,9 +10,10 @@
 */
 //void write_PWM(uint8_t port, uint8_t pin, uint16_t pwm){
 void write_PWM(uint8_t pin, uint16_t pwm){
+	pwm &= 1023;
 	switch(pin){
 		case PE3:
-			TCCR3A |= (1 << COM0A1);
+			TCCR3A |= (1 << COM3A1);
 			OCR3A = pwm;
 			break;
 		case PE4:
@@ -33,7 +35,7 @@ void write_PWM(uint8_t pin, uint16_t pwm){
 void disable_PWM(uint8_t pin){
 	switch(pin){
 		case PE3:
-			TCCR3A &= ~(1 << COM0A1);
+			TCCR3A &= ~(1 << COM3A1);
 			OCR3A = 0;
 			break;
 		case PE4:

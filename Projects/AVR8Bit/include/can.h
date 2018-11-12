@@ -23,6 +23,7 @@ int8_t find_free_mob();
 uint8_t CAN_msg_available();
 uint8_t CAN_get_msg(struct CAN_msg *buf);
 uint8_t CAN_send_msg(struct CAN_msg *buf);
+uint8_t CAN_msg_available();
 void enable_mob_interrupt(uint8_t mob);
 void disable_mob_interrupt(uint8_t mob);
 void CAN_set_RX_filter(uint16_t mask, uint16_t tag);

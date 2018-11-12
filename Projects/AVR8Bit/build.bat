@@ -1,3 +1,4 @@
+del avr_mc.elf avr_mc.hex
 avr-gcc -c timers.c -o timers.o -Iinclude -mmcu=at90can128 -Os 
 avr-gcc -c pwm.c -o pwm.o -Iinclude -mmcu=at90can128 -Os
 avr-gcc -c adc.c -o adc.o -Iinclude -mmcu=at90can128 -Os

@@ -1,8 +1,11 @@
 #include "conf.h"
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <util/delay.h>
 #include <avr/wdt.h>
+#include <string.h>
 #include "pwm.h"
+#include "encoder.h"
 #include "motor.h"
 #include "timers.h"
 #include "adc.h"
@@ -10,14 +13,14 @@
 #include "usart.h"
 
 int main(){
-	wdt_enable(WDTO_1S);
+	int i;
 	setup_timers();
-	init_motor();
-	init_ADC();
-	init_CAN(CAN_250_BAUD, 4, 0);
-	
+	usart_init(1200);
+	init_encoder();
+	sei();
 	while(1){
-		motor_control_tick();
-		wdt_reset();
+		uint16_t ec = get_encoder_ticks();
+		tprintf("%d\n", ec); 
+		delay_mS(100);
 	}
 }

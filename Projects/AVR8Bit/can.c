@@ -1,6 +1,7 @@
 #include "conf.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <usart.h>
 #include "can.h"
 
 volatile uint8_t msgs_av; //Number of messages unclaimed messages
@@ -9,6 +10,7 @@ uint16_t RX_mask, RX_tag;
 
 ISR(CANIT_vect){
 	//uint8_t canpage, mob;
+	msgs_av++;
 	if((CANHPMOB & 0xF0) != 0xF0){ //Message received?
 	    if(CANSTMOB & (1 << TXOK)){ //TX
 			int mob = (CANHPMOB >> 4);
@@ -31,14 +33,14 @@ uin8_t txmobs: how many MOBs to dedicate to transmission
 */
 void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	CANGCON |= (1<<SWRES);
-	CANBT1 = (rate & 0xFF0000) >> 16;
-	CANBT2 = (rate & 0x00FF00) >> 8;
-	CANBT3 = (rate & 0x0000FF);
+	CANBT1 = 0x26;//(rate & 0xFF0000) >> 16;
+	CANBT2 = 0x04;//(rate & 0x00FF00) >> 8;
+	CANBT3 = 0x13;//(rate & 0x0000FF);
 	CANGIE = (1 << ENERR) | (1 <<ENERG) | (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
 	CANTCON = 255; //Set the can timer to run at 1/2048th of F_CPU
 	uint8_t i;
-	/*Initialize non-tx MOBs to receive*/
-	for(i = txmobs;i < 15;i++){
+	/*Initialize MOBs*/
+	for(i = 0;i < 15;i++){
 		select_mob(i);
 		CANSTMOB &= 0;
 		CANIDM4 = 0;
@@ -49,13 +51,18 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 		CANIDT3 = 0;
 		CANIDT2 = 0;
 		CANIDT1 = 0;
-		CANCDMOB = (1 << CONMOB1);
+		if(i > txmobs){
+			CANCDMOB = (1 << CONMOB1); //Mark RX mobs
+		} else {
+			CANCDMOB = 0;
+		}
 	}
 	msgs_av = 0;
+	//Enable the CAN controller
+	CANGCON = (1 << ENASTB);
 	if(mode & CAN_LISTEN){
-		CANGCON |= (1<<CAN_LISTEN);
+		CANGCON |= (1<<LISTEN);
 	}
-	CANGCON = (1 << ENASTB); //Enable the CAN controller
 }
 
 /*Selects the MOB to operate on*/
@@ -95,7 +102,7 @@ uint8_t CAN_msg_available(){
 /*Copies a message received on the CAN bus to buf*/
 uint8_t CAN_get_msg(struct CAN_msg *buf){
 	uint8_t i, mob;
-	if(!CAN_msg_available()) return;
+	if(!CAN_msg_available()) return 0;
 	for(i = 0;i < 15;i++){
 		select_mob(i);
 		if(CANSTMOB & (1<<RXOK)){
@@ -129,10 +136,15 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 
 int8_t find_free_mob(){
 	uint8_t i;
+	uint8_t status;
 	for(i = 0;i < 15;i++){
 		select_mob(i);
-		if(!(CANCDMOB & ((1 << CONMOB1) | (1 << CONMOB0)))){
+		status = CANCDMOB;
+		//tprintf("mob %d: CONMOB1:%d, CONMOB0:%d\n", i, !!(status & (1 << CONMOB1)), !!(status & (1 << CONMOB0)));
+		if(!(status & ((1 << CONMOB1) | (1 << CONMOB0)))){
 			return i;
+		}
+		if(status & (1 << CONMOB0) && !mob_enabled(i)){
 		}
 	}
 	return -1;
@@ -140,8 +152,9 @@ int8_t find_free_mob(){
 
 /*Send a message over the can bus*/
 uint8_t CAN_send_msg(struct CAN_msg *buf){
-	int8_t mob = find_free_mob();
 	uint8_t i;
+	int8_t mob = find_free_mob();
+	tprintf("free mob=%d\n", mob);
 	if(mob == -1){
 		return 0;
 	}
