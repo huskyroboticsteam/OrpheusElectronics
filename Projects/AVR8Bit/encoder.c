@@ -1,8 +1,21 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "encoder.h"
+#include "timers.h"
 
 volatile uint32_t encoder_ticks;
+volatile int16_t vticks;
+volatile int16_t raw_velocity;
+int16_t old_velocity;
+volatile uint8_t gate_control, gate_control_top;
+
+ISR(TIMER0_OVF_vect){
+	gate_control++;
+	if(gate_control == gate_control_top){
+		raw_velocity = raw_velocity = vticks;
+		vticks = gate_control = 0;
+	}
+}
 
 /*Returns the total number of encoder ticks since the last reset*/
 uint32_t get_encoder_ticks(){
@@ -15,6 +28,7 @@ void init_encoder(){
 	DDRE &= 0x3F; //Set PE6, PE7 as inputs
 	PORTE |= 0xC0; //Enable pullups on PE6, PE7
 	encoder_ticks = 0; //Reset count
+	gate_control_top = 24;
 	EICRB |= 0x50; //Enable pin change interrupt on PE6, PE7
 	EIMSK |= 0xC0;
 }
@@ -23,7 +37,33 @@ void init_encoder(){
 void reset_encoder(){
 	EIMSK &= 0x3F; //Disable pin change interrupts
 	encoder_ticks = 0; //Reset count
+	vticks = 0;
+	raw_velocity = 0;
+	gate_control = 0;
 	EIMSK |= 0xC0; //Enable pin change interrupt on PE6, PE7
+}
+
+uint16_t get_encoder_velocity(){
+	int16_t rv = raw_velocity;
+	int16_t velocity;
+	if(gate_control_top == 24){
+		if(rv < 5 && rv > -5){
+			gate_control_top = 122;
+			tprintf("GCT=122\n");
+		}
+		velocity = (rv * 60)/4 + old_velocity/4;
+		old_velocity = velocity;
+		return velocity;
+	} else if(gate_control_top == 122){
+		if(rv > 80 || rv < -80){
+			gate_control_top = 24;
+			tprintf("GCT=24\n");
+		}
+		velocity = (rv * 12)/4 + old_velocity/4;
+		old_velocity = velocity;
+		return velocity;
+	}
+	return -1;
 }
 
 ISR(INT6_vect){ //PE6, A
@@ -31,14 +71,18 @@ ISR(INT6_vect){ //PE6, A
 	if(state & (1<<PE6)){ //A rising
 		if(state & (1<<PE7)){ //B high
 			encoder_ticks++;
+			vticks++;
 		} else { //B low
 			encoder_ticks--;
+			vticks--;
 		}
 	} else { //A falling
 		if(state & (1<<PE7)){ //B high
 			encoder_ticks--;
+			vticks--;
 		} else { //B low
 			encoder_ticks++;
+			vticks++;
 		}
 	}
 }
@@ -48,14 +92,18 @@ ISR(INT7_vect){ //PE7, B
 	if(state & (1<<PE7)){ //B rising
 		if(state & (1<<PE6)){ //A high
 			encoder_ticks--;
+			vticks--;
 		} else { //A low
 			encoder_ticks++;
+			vticks++;
 		}
 	} else { //B falling
 		if(state & (1<<PE6)){ //A high
 			encoder_ticks++;
+			vticks++;
 		} else { //A low
 			encoder_ticks--;
+			vticks--;
 		}
 	}
 }

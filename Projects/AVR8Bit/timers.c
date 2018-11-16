@@ -15,6 +15,7 @@ ISR(TIMER1_OVF_vect){ //This should fire every 10mS
 void setup_timers(){
 	//Timer 0: Phase correct PWM, CLK/64
 	TCCR0A = (1<<CS01) | (1<<CS00) | (1<<WGM00);
+	TIMSK0 = (1 << TOIE0); // For velocity calculation. Fires every 2.05mS
 	
 	//Timer 1: Fast PWM, TOP=OCR1A, CLK/64
 	//This makes timer 1 increment every 8 microseconds at 8 Mhz or every 4uS at 16MHz
@@ -45,9 +46,9 @@ uint32_t get_mS(){
 uint32_t get_uS(){
 	uint16_t timer_ticks = TCNT1;
 	#if F_CPU == 8000000
-	return (TOF_Cnt * 80000) + (timer_ticks << 2); //8 MHz
+	return (TOF_Cnt * 80000) + (timer_ticks << 3); //8 MHz
 	#else
-	return (TOF_Cnt * 40000) + (timer_ticks << 3); //16 MHz
+	return (TOF_Cnt * 40000) + (timer_ticks << 2); //16 MHz
 	#endif
 }
 

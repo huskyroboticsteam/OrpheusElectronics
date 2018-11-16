@@ -10,8 +10,7 @@ uint16_t RX_mask, RX_tag;
 
 ISR(CANIT_vect){
 	//uint8_t canpage, mob;
-	msgs_av++;
-	if((CANHPMOB & 0xF0) != 0xF0){ //Message received?
+	if((CANHPMOB & 0xF0) != 0xF0){ //Message io?
 	    if(CANSTMOB & (1 << TXOK)){ //TX
 			int mob = (CANHPMOB >> 4);
 			/*Reset the MOb*/
@@ -22,7 +21,7 @@ ISR(CANIT_vect){
 			msgs_av++; //Increase count of messages
 		}
 	} else {
-		CANGIT |= 0; //Error interrupt - Handle these?
+		CANGIT = 0xFF; //Error interrupt - Handle these?
 	}
 }
 
@@ -36,7 +35,7 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	CANBT1 = 0x26;//(rate & 0xFF0000) >> 16;
 	CANBT2 = 0x04;//(rate & 0x00FF00) >> 8;
 	CANBT3 = 0x13;//(rate & 0x0000FF);
-	CANGIE = (1 << ENERR) | (1 <<ENERG) | (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
+	CANGIE = (1 << CANIT) | (1 << ENERR) | (1 <<ENERG) | (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
 	CANTCON = 255; //Set the can timer to run at 1/2048th of F_CPU
 	uint8_t i;
 	/*Initialize MOBs*/
@@ -53,6 +52,7 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 		CANIDT1 = 0;
 		if(i > txmobs){
 			CANCDMOB = (1 << CONMOB1); //Mark RX mobs
+			enable_mob_interrupt(i);
 		} else {
 			CANCDMOB = 0;
 		}
@@ -85,7 +85,13 @@ void enable_mob_interrupt(uint8_t mob){
 		CANIE1 |= (1 << (mob - 8));
 	}
 }
-
+int mob_interrupt_enabled(uint8_t mob){
+	if(mob < 8){
+		return !!(CANIE2 & (1 << mob));
+	} else {
+		return !!(CANIE1 & (mob - 8));
+	}
+}
 uint8_t mob_enabled(uint8_t mob){
 	if(mob < 8){
 		return !!(CANEN2 & (1 << mob));
@@ -169,6 +175,7 @@ uint8_t CAN_send_msg(struct CAN_msg *buf){
 	CANIDT2 = ((buf->id & 3) << 5);
 	CANIDT1 = ((buf->id & 0x7F8) >> 3);
 	CANCDMOB |= (1<<CONMOB0);
+	enable_mob_interrupt(mob);
 	return 1;
 }
 
@@ -187,5 +194,14 @@ void CAN_set_RX_filter(uint16_t mask, uint16_t tag){
 				CANIDM1 = ((mask & 0x7F8) >> 3);
 			}
 		}
+	}
+}
+void CAN_dump_state(){
+	int i;
+	for(i = 0;i < 15;i++){
+		select_mob(i);
+		uint32_t canstmob = CANSTMOB;
+		uint32_t cancdmob = CANCDMOB; 
+		tprintf("mob %d: %s, if=%d, IDT=%d, CANSTMOB=0x%X, CANCDMOB=0x%X\n", i, mob_enabled(i)? "en": "dis", mob_interrupt_enabled(i), (CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3), canstmob, cancdmob);
 	}
 }
