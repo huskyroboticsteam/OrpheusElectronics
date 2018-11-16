@@ -5,15 +5,27 @@ Archive member included to satisfy reference by file (symbol)
 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
                               .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o) (CySysClkWcoEnabled)
 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
-                              .\CortexM0\ARM_GCC_541\Debug\main.o (Pin_Limit_1_Read)
+                              .\CortexM0\ARM_GCC_541\Debug\main.o (Pin_Limit_1_ClearInterrupt)
+.\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+                              .\CortexM0\ARM_GCC_541\Debug\main.o (Pin_Limit_2_ClearInterrupt)
 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
                               .\CortexM0\ARM_GCC_541\Debug\main.o (PWM_Motor_Stop)
+.\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+                              .\CortexM0\ARM_GCC_541\Debug\main.o (isr_Limit_2_StartEx)
 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
                               .\CortexM0\ARM_GCC_541\Debug\main.o (Pin_Direction_Write)
 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
                               .\CortexM0\ARM_GCC_541\Debug\main.o (isr_Limit_1_StartEx)
-.\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
-                              .\CortexM0\ARM_GCC_541\Debug\main.o (Pin_debug_Write)
+.\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+                              .\CortexM0\ARM_GCC_541\Debug\main.o (QuadDec_Start)
+.\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                              .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o) (QuadDec_Cnt16_Stop)
+.\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+                              .\CortexM0\ARM_GCC_541\Debug\main.o (Pin_count_10_Write)
+.\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+                              .\CortexM0\ARM_GCC_541\Debug\main.o (Pin_count_20_Write)
+.\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+                              .\CortexM0\ARM_GCC_541\Debug\main.o (Status_Reg_Switches_Read)
 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
                               .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o) (CyDelayCycles)
 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
@@ -282,10 +294,25 @@ Discarded input sections
                 0x00000000       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
  .text.Pin_Limit_1_Write
                 0x00000000       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .text.Pin_Limit_1_Read
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
  .text.Pin_Limit_1_ReadDataReg
                 0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
  .text.Pin_Limit_1_SetInterruptMode
                 0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .text.Pin_Limit_2_SetDriveMode
+                0x00000000       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .text.Pin_Limit_2_Write
+                0x00000000       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .text.Pin_Limit_2_Read
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .text.Pin_Limit_2_ReadDataReg
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .text.Pin_Limit_2_SetInterruptMode
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
  .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
  .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
  .text.PWM_Motor_Stop
@@ -352,6 +379,25 @@ Discarded input sections
                 0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
  .text.PWM_Motor_SetInterrupt
                 0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_Interrupt
+                0x00000000        0x4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_GetVector
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_GetPriority
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_GetState
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_Start
+                0x00000000       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_Stop
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_SetPending
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .text.isr_Limit_2_ClearPending
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
  .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
  .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
  .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
@@ -384,19 +430,69 @@ Discarded input sections
                 0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
  .text.isr_Limit_1_ClearPending
                 0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .text.Pin_debug_SetDriveMode
-                0x00000000       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .text.Pin_debug_Read
-                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .text.Pin_debug_ReadDataReg
-                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .text.Pin_debug_SetInterruptMode
-                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .text.Pin_debug_ClearInterrupt
-                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
+ .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .text.QuadDec_Init
+                0x00000000        0x4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .text.QuadDec_Stop
+                0x00000000       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .text.QuadDec_GetCounter
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .text.QuadDec_SetCounter
+                0x00000000       0x24 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .text.QuadDec_GetInterruptMask
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .text.QuadDec_Cnt16_Stop
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .text.QuadDec_Cnt16_ReadControlRegister
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .text.QuadDec_Cnt16_WriteControlRegister
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .text.QuadDec_Cnt16_ReadCounter
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .text.QuadDec_Cnt16_ReadPeriod
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .text.QuadDec_Cnt16_ReadCompare
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .text.Pin_count_10_SetDriveMode
+                0x00000000       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .text.Pin_count_10_Read
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .text.Pin_count_10_ReadDataReg
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .text.Pin_count_10_SetInterruptMode
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .text.Pin_count_10_ClearInterrupt
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .text.Pin_count_20_SetDriveMode
+                0x00000000       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .text.Pin_count_20_Read
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .text.Pin_count_20_ReadDataReg
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .text.Pin_count_20_SetInterruptMode
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .text.Pin_count_20_ClearInterrupt
+                0x00000000       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .text.Status_Reg_Switches_InterruptEnable
+                0x00000000       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .text.Status_Reg_Switches_InterruptDisable
+                0x00000000       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .text.Status_Reg_Switches_WriteMask
+                0x00000000       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .text.Status_Reg_Switches_ReadMask
+                0x00000000        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
  .data          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
  .bss           0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
  .text          0x00000000        0x0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
@@ -504,7 +600,7 @@ END GROUP
                 0x00000001                cy_project_type_bootloader = (appl_start == 0x0)?0x1:0x0
                 0x00000000                cy_project_type_app_for_stack_and_copier = (CY_APP_FOR_STACK_AND_COPIER == 0x1)?0x1:0x0
 
-.text           0x00000000      0xc5c
+.text           0x00000000      0xf0c
  CREATE_OBJECT_SYMBOLS
                 0x00000000                PROVIDE (__cy_interrupt_vector, RomVectors)
  *(.romvectors)
@@ -518,240 +614,307 @@ END GROUP
                 0x00000010                Reset
                 0x00000001                ASSERT ((. != __cy_reset), No reset code)
  *(.psocinit)
- .psocinit      0x00000018      0x15c .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x00000094                cyfitter_cfg
-                0x00000174                . = MAX (., 0x100)
+ .psocinit      0x00000018      0x1e4 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x000000d4                cyfitter_cfg
+                0x000001fc                . = MAX (., 0x100)
  *(.text .text.* .gnu.linkonce.t.*)
- .text          0x00000174       0x60 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
- .text.check_Pin
-                0x000001d4       0x18 .\CortexM0\ARM_GCC_541\Debug\main.o
-                0x000001d4                check_Pin
- .text.set_PWM  0x000001ec       0x54 .\CortexM0\ARM_GCC_541\Debug\main.o
-                0x000001ec                set_PWM
+ .text          0x000001fc       0x60 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+ .text.initialize
+                0x0000025c        0xc .\CortexM0\ARM_GCC_541\Debug\main.o
+                0x0000025c                initialize
+ .text.set_PWM  0x00000268       0x50 .\CortexM0\ARM_GCC_541\Debug\main.o
+                0x00000268                set_PWM
  .text.Pin_Limit_1_Handler
-                0x00000240       0x18 .\CortexM0\ARM_GCC_541\Debug\main.o
-                0x00000240                Pin_Limit_1_Handler
- .text.main     0x00000258       0x60 .\CortexM0\ARM_GCC_541\Debug\main.o
-                0x00000258                main
+                0x000002b8       0x10 .\CortexM0\ARM_GCC_541\Debug\main.o
+                0x000002b8                Pin_Limit_1_Handler
+ .text.Pin_Limit_2_Handler
+                0x000002c8       0x10 .\CortexM0\ARM_GCC_541\Debug\main.o
+                0x000002c8                Pin_Limit_2_Handler
+ .text.main     0x000002d8       0x7c .\CortexM0\ARM_GCC_541\Debug\main.o
+                0x000002d8                main
+ .text.cfg_write_bytes32
+                0x00000354       0x34 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.AnalogSetDefault
-                0x000002b8       0x20 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000388       0x20 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.CYMEMZERO
-                0x000002d8        0xc .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x000003a8        0xc .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.IntDefaultHandler
-                0x000002e4       0x10 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
-                0x000002e4                IntDefaultHandler
- .text.Start_c  0x000002f4       0x48 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
-                0x000002f4                Start_c
+                0x000003b4       0x10 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+                0x000003b4                IntDefaultHandler
+ .text.Start_c  0x000003c4       0x48 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+                0x000003c4                Start_c
  .text.initialize_psoc
-                0x0000033c       0x4c .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
-                0x0000033c                initialize_psoc
+                0x0000040c       0x4c .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+                0x0000040c                initialize_psoc
  .text.CySysClkImoDisableWcoLock
-                0x00000388       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x00000388                CySysClkImoDisableWcoLock
+                0x00000458       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000458                CySysClkImoDisableWcoLock
  .text.CySysClkImoGetWcoLock
-                0x0000039c       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x0000039c                CySysClkImoGetWcoLock
+                0x0000046c       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x0000046c                CySysClkImoGetWcoLock
  .text.CySysClkImoEnableUsbLock
-                0x000003b0       0xf4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x000003b0                CySysClkImoEnableUsbLock
+                0x00000480       0xf4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000480                CySysClkImoEnableUsbLock
  .text.CySysClkImoDisableUsbLock
-                0x000004a4       0x90 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x000004a4                CySysClkImoDisableUsbLock
+                0x00000574       0x90 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000574                CySysClkImoDisableUsbLock
  .text.CySysClkImoGetUsbLock
-                0x00000534       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x00000534                CySysClkImoGetUsbLock
+                0x00000604       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000604                CySysClkImoGetUsbLock
  .text.CyIntEnable
-                0x00000548       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x00000548                CyIntEnable
- .text.CyHalt   0x0000055c        0x4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x0000055c                CyHalt
+                0x00000618       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000618                CyIntEnable
+ .text.CyHalt   0x0000062c        0x4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x0000062c                CyHalt
  .text.CyIntSetVector
-                0x00000560       0x24 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x00000560                CyIntSetVector
- .text.CyDelay  0x00000584       0x30 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x00000584                CyDelay
+                0x00000630       0x24 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000630                CyIntSetVector
+ .text.CyDelay  0x00000654       0x30 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000654                CyDelay
  .text.CySysClkImoEnableWcoLock
-                0x000005b4       0xfc .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x000005b4                CySysClkImoEnableWcoLock
+                0x00000684       0xfc .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000684                CySysClkImoEnableWcoLock
  .text.CyDelayUs
-                0x000006b0       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x000006b0                CyDelayUs
+                0x00000780       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000780                CyDelayUs
  .text.CySysClkWriteImoFreq
-                0x000006c4      0x1bc .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x000006c4                CySysClkWriteImoFreq
+                0x00000794      0x1bc .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00000794                CySysClkWriteImoFreq
  .text.CySysWdtLocked
-                0x00000880       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+                0x00000950       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
  .text.CySysClkWcoEnabled
-                0x00000894       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
-                0x00000894                CySysClkWcoEnabled
+                0x00000964       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+                0x00000964                CySysClkWcoEnabled
  .text.CySysWdtLock
-                0x000008a8       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
-                0x000008a8                CySysWdtLock
+                0x00000978       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+                0x00000978                CySysWdtLock
  .text.CySysWdtUnlock
-                0x000008c4       0x30 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
-                0x000008c4                CySysWdtUnlock
+                0x00000994       0x30 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+                0x00000994                CySysWdtUnlock
  .text.CySysWdtClearInterrupt
-                0x000008f4       0x4c .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
-                0x000008f4                CySysWdtClearInterrupt
+                0x000009c4       0x4c .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+                0x000009c4                CySysWdtClearInterrupt
  .text.CySysWdtIsr
-                0x00000940       0xa4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
-                0x00000940                CySysWdtIsr
- .text.Pin_Limit_1_Read
-                0x000009e4       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
-                0x000009e4                Pin_Limit_1_Read
+                0x00000a10       0xa4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+                0x00000a10                CySysWdtIsr
  .text.Pin_Limit_1_ClearInterrupt
-                0x000009f4       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
-                0x000009f4                Pin_Limit_1_ClearInterrupt
+                0x00000ab4       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+                0x00000ab4                Pin_Limit_1_ClearInterrupt
+ .text.Pin_Limit_2_ClearInterrupt
+                0x00000ac8       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+                0x00000ac8                Pin_Limit_2_ClearInterrupt
  .text.PWM_Motor_WriteCounter
-                0x00000a08       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000a08                PWM_Motor_WriteCounter
+                0x00000adc       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000adc                PWM_Motor_WriteCounter
  .text.PWM_Motor_WritePeriod
-                0x00000a18       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000a18                PWM_Motor_WritePeriod
+                0x00000aec       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000aec                PWM_Motor_WritePeriod
  .text.PWM_Motor_WriteCompare
-                0x00000a28       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000a28                PWM_Motor_WriteCompare
+                0x00000afc       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000afc                PWM_Motor_WriteCompare
  .text.PWM_Motor_TriggerCommand
-                0x00000a38       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000a38                PWM_Motor_TriggerCommand
+                0x00000b0c       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000b0c                PWM_Motor_TriggerCommand
  .text.PWM_Motor_Enable
-                0x00000a54       0x24 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000a54                PWM_Motor_Enable
+                0x00000b28       0x24 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000b28                PWM_Motor_Enable
  .text.PWM_Motor_SetInterruptMode
-                0x00000a78        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000a78                PWM_Motor_SetInterruptMode
+                0x00000b4c        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000b4c                PWM_Motor_SetInterruptMode
  .text.PWM_Motor_Init
-                0x00000a84       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000a84                PWM_Motor_Init
+                0x00000b58       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000b58                PWM_Motor_Init
  .text.PWM_Motor_Start
-                0x00000acc       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
-                0x00000acc                PWM_Motor_Start
+                0x00000ba0       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000ba0                PWM_Motor_Start
+ .text.isr_Limit_2_SetVector
+                0x00000bc0        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+                0x00000bc0                isr_Limit_2_SetVector
+ .text.isr_Limit_2_SetPriority
+                0x00000bcc       0x24 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+                0x00000bcc                isr_Limit_2_SetPriority
+ .text.isr_Limit_2_Enable
+                0x00000bf0        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+                0x00000bf0                isr_Limit_2_Enable
+ .text.isr_Limit_2_Disable
+                0x00000bfc        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+                0x00000bfc                isr_Limit_2_Disable
+ .text.isr_Limit_2_StartEx
+                0x00000c08       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+                0x00000c08                isr_Limit_2_StartEx
  .text.Pin_Direction_Write
-                0x00000aec       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
-                0x00000aec                Pin_Direction_Write
+                0x00000c24       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+                0x00000c24                Pin_Direction_Write
  .text.isr_Limit_1_SetVector
-                0x00000b04        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
-                0x00000b04                isr_Limit_1_SetVector
+                0x00000c3c        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                0x00000c3c                isr_Limit_1_SetVector
  .text.isr_Limit_1_SetPriority
-                0x00000b10       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
-                0x00000b10                isr_Limit_1_SetPriority
+                0x00000c48       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                0x00000c48                isr_Limit_1_SetPriority
  .text.isr_Limit_1_Enable
-                0x00000b30        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
-                0x00000b30                isr_Limit_1_Enable
+                0x00000c68        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                0x00000c68                isr_Limit_1_Enable
  .text.isr_Limit_1_Disable
-                0x00000b3c        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
-                0x00000b3c                isr_Limit_1_Disable
+                0x00000c74        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                0x00000c74                isr_Limit_1_Disable
  .text.isr_Limit_1_StartEx
-                0x00000b48       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
-                0x00000b48                isr_Limit_1_StartEx
- .text.Pin_debug_Write
-                0x00000b64       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
-                0x00000b64                Pin_debug_Write
- *fill*         0x00000b7c        0x4 
- .text          0x00000b80       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
-                0x00000b80                CyDelayCycles
-                0x00000b92                CyEnterCriticalSection
-                0x00000b9a                CyExitCriticalSection
+                0x00000c80       0x1c .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                0x00000c80                isr_Limit_1_StartEx
+ .text.QuadDec_GetEvents
+                0x00000c9c       0x10 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+                0x00000c9c                QuadDec_GetEvents
+ .text.QuadDec_SetInterruptMask
+                0x00000cac        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+                0x00000cac                QuadDec_SetInterruptMask
+ .text.QuadDec_Enable
+                0x00000cb8       0x28 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+                0x00000cb8                QuadDec_Enable
+ .text.QuadDec_Start
+                0x00000ce0       0x28 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+                0x00000ce0                QuadDec_Start
+ .text.QuadDec_Cnt16_Enable
+                0x00000d08       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d08                QuadDec_Cnt16_Enable
+ .text.QuadDec_Cnt16_SetInterruptMode
+                0x00000d1c        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d1c                QuadDec_Cnt16_SetInterruptMode
+ .text.QuadDec_Cnt16_ReadStatusRegister
+                0x00000d28        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d28                QuadDec_Cnt16_ReadStatusRegister
+ .text.QuadDec_Cnt16_WriteCounter
+                0x00000d34        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d34                QuadDec_Cnt16_WriteCounter
+ .text.QuadDec_Cnt16_ReadCapture
+                0x00000d40        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d40                QuadDec_Cnt16_ReadCapture
+ .text.QuadDec_Cnt16_WritePeriod
+                0x00000d4c        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d4c                QuadDec_Cnt16_WritePeriod
+ .text.QuadDec_Cnt16_WriteCompare
+                0x00000d58        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d58                QuadDec_Cnt16_WriteCompare
+ .text.QuadDec_Cnt16_ClearFIFO
+                0x00000d64       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d64                QuadDec_Cnt16_ClearFIFO
+ .text.QuadDec_Cnt16_Init
+                0x00000d78       0x58 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000d78                QuadDec_Cnt16_Init
+ .text.QuadDec_Cnt16_Start
+                0x00000dd0       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x00000dd0                QuadDec_Cnt16_Start
+ .text.Pin_count_10_Write
+                0x00000df0       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+                0x00000df0                Pin_count_10_Write
+ .text.Pin_count_20_Write
+                0x00000e08       0x18 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+                0x00000e08                Pin_count_20_Write
+ .text.Status_Reg_Switches_Read
+                0x00000e20        0xc .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+                0x00000e20                Status_Reg_Switches_Read
+ *fill*         0x00000e2c        0x4 
+ .text          0x00000e30       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
+                0x00000e30                CyDelayCycles
+                0x00000e42                CyEnterCriticalSection
+                0x00000e4a                CyExitCriticalSection
  .text.CySysFlashSetWaitCycles
-                0x00000ba0       0x54 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
-                0x00000ba0                CySysFlashSetWaitCycles
- .text.__errno  0x00000bf4        0xc c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-errno.o)
-                0x00000bf4                __errno
+                0x00000e50       0x54 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+                0x00000e50                CySysFlashSetWaitCycles
+ .text.__errno  0x00000ea4        0xc c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-errno.o)
+                0x00000ea4                __errno
  .text.__libc_init_array
-                0x00000c00       0x4c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-init.o)
-                0x00000c00                __libc_init_array
- .text.memset   0x00000c4c       0x10 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memset.o)
-                0x00000c4c                memset
+                0x00000eb0       0x4c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-init.o)
+                0x00000eb0                __libc_init_array
+ .text.memset   0x00000efc       0x10 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memset.o)
+                0x00000efc                memset
  *(.plt)
  *(.gnu.warning)
  *(.glue_7t)
- .glue_7t       0x00000c5c        0x0 linker stubs
+ .glue_7t       0x00000f0c        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00000c5c        0x0 linker stubs
+ .glue_7        0x00000f0c        0x0 linker stubs
  *(.vfp11_veneer)
- .vfp11_veneer  0x00000c5c        0x0 linker stubs
+ .vfp11_veneer  0x00000f0c        0x0 linker stubs
  *(.bootloader)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
  *(.gcc_except_table)
 
-.v4_bx          0x00000c5c        0x0
- .v4_bx         0x00000c5c        0x0 linker stubs
+.v4_bx          0x00000f0c        0x0
+ .v4_bx         0x00000f0c        0x0 linker stubs
 
-.iplt           0x00000c5c        0x0
- .iplt          0x00000c5c        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+.iplt           0x00000f0c        0x0
+ .iplt          0x00000f0c        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
 
-.eh_frame       0x00000c5c        0x4
+.eh_frame       0x00000f0c        0x4
  *(.eh_frame)
- .eh_frame      0x00000c5c        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
- .eh_frame      0x00000c5c        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtend.o
+ .eh_frame      0x00000f0c        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+ .eh_frame      0x00000f0c        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtend.o
                 [!provide]                PROVIDE (__exidx_start, .)
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00000c60                __exidx_end = .
+                0x00000f10                __exidx_end = .
 
-.rodata         0x00000c60       0x90
+.rodata         0x00000f10      0x408
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00000c60        0xc .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
- .rodata        0x00000c6c       0x47 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
-                0x00000c6c                cyImoFreqMhz2Reg
-                0x00000c9c                cyImoFreqMhz2DpllOffset
+ .rodata        0x00000f10      0x388 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .rodata        0x00001298       0x47 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x00001298                cyImoFreqMhz2Reg
+                0x000012c8                cyImoFreqMhz2DpllOffset
  .rodata.str1.1
-                0x00000cb3        0x2 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-impure.o)
-                0x00000cb8                . = ALIGN (0x4)
- *fill*         0x00000cb5        0x3 
+                0x000012df        0x2 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-impure.o)
+                0x000012e4                . = ALIGN (0x4)
+ *fill*         0x000012e1        0x3 
  *(.init)
- .init          0x00000cb8        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
-                0x00000cb8                _init
- .init          0x00000cbc        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
-                0x00000cc4                . = ALIGN (0x4)
-                0x00000cc4                __preinit_array_start = .
+ .init          0x000012e4        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
+                0x000012e4                _init
+ .init          0x000012e8        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
+                0x000012f0                . = ALIGN (0x4)
+                0x000012f0                __preinit_array_start = .
  *(.preinit_array)
-                0x00000cc4                __preinit_array_end = .
-                0x00000cc4                . = ALIGN (0x4)
-                0x00000cc4                __init_array_start = .
+                0x000012f0                __preinit_array_end = .
+                0x000012f0                . = ALIGN (0x4)
+                0x000012f0                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00000cc4        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
- .init_array    0x00000cc8        0x4 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
-                0x00000ccc                __init_array_end = .
-                0x00000ccc                . = ALIGN (0x4)
+ .init_array    0x000012f0        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+ .init_array    0x000012f4        0x4 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+                0x000012f8                __init_array_end = .
+                0x000012f8                . = ALIGN (0x4)
  *(.fini)
- .fini          0x00000ccc        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
-                0x00000ccc                _fini
- .fini          0x00000cd0        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
-                0x00000cd8                . = ALIGN (0x4)
-                0x00000cd8                __fini_array_start = .
+ .fini          0x000012f8        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
+                0x000012f8                _fini
+ .fini          0x000012fc        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
+                0x00001304                . = ALIGN (0x4)
+                0x00001304                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x00000cd8        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+ .fini_array    0x00001304        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x00000cdc                __fini_array_end = .
-                0x00000cdc                . = ALIGN (0x4)
+                0x00001308                __fini_array_end = .
+                0x00001308                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x00000cdc                . = ALIGN (0x4)
+                0x00001308                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x00000cdc                . = ALIGN (0x4)
-                0x00000cdc                __cy_regions = .
-                0x00000cdc        0x4 LONG 0xcf0 __cy_region_init_ram
-                0x00000ce0        0x4 LONG 0x200000c0 __cy_region_start_data
-                0x00000ce4        0x4 LONG 0x88 __cy_region_init_size_ram
-                0x00000ce8        0x4 LONG 0x70 __cy_region_zero_size_ram
-                0x00000cec                __cy_regions_end = .
-                0x00000cf0                . = ALIGN (0x8)
- *fill*         0x00000cec        0x4 
-                0x00000cf0                _etext = .
+                0x00001308                . = ALIGN (0x4)
+                0x00001308                __cy_regions = .
+                0x00001308        0x4 LONG 0x1318 __cy_region_init_ram
+                0x0000130c        0x4 LONG 0x200000c0 __cy_region_start_data
+                0x00001310        0x4 LONG 0x88 __cy_region_init_size_ram
+                0x00001314        0x4 LONG 0x70 __cy_region_zero_size_ram
+                0x00001318                __cy_regions_end = .
+                0x00001318                . = ALIGN (0x8)
+                0x00001318                _etext = .
 
 .cy_checksum_exclude
-                0x00000cf0        0x0
+                0x00001318        0x0
  *(.cy_checksum_exclude)
 
 .ramvectors     0x20000000       0xc0
@@ -763,7 +926,7 @@ END GROUP
 .noinit
  *(.noinit)
 
-.data           0x200000c0       0x88 load address 0x00000cf0
+.data           0x200000c0       0x88 load address 0x00001318
                 0x200000c0                __cy_region_start_data = .
  *(.jcr)
  .jcr           0x200000c0        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
@@ -789,19 +952,17 @@ END GROUP
  *(.ram)
                 0x20000148                _edata = .
 
-.igot.plt       0x20000148        0x0 load address 0x00000d78
+.igot.plt       0x20000148        0x0 load address 0x000013a0
  .igot.plt      0x20000148        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
-.bss            0x20000148       0x70 load address 0x00000d78
+.bss            0x20000148       0x70 load address 0x000013a0
                 0x20000148                PROVIDE (__bss_start__, .)
  *(.shbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x20000148       0x1c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
- .bss           0x20000164        0x3 .\CortexM0\ARM_GCC_541\Debug\main.o
-                0x20000164                limit_1_pressed
-                0x20000165                emergency
-                0x20000166                limit_2_pressed
- *fill*         0x20000167        0x1 
+ .bss           0x20000164        0x1 .\CortexM0\ARM_GCC_541\Debug\main.o
+                0x20000164                emergency
+ *fill*         0x20000165        0x3 
  .bss           0x20000168       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
                 0x20000168                CySysClkImoTrim4
                 0x2000016c                CySysClkImoTrim5
@@ -809,19 +970,23 @@ END GROUP
  .bss           0x20000188       0x28 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
  .bss           0x200001b0        0x1 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
                 0x200001b0                PWM_Motor_initVar
+ .bss           0x200001b1        0x1 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+                0x200001b1                QuadDec_initVar
+ .bss           0x200001b2        0x1 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                0x200001b2                QuadDec_Cnt16_initVar
  *(COMMON)
                 0x200001b8                . = ALIGN (0x8)
- *fill*         0x200001b1        0x7 
+ *fill*         0x200001b3        0x5 
  *(.ram.b)
                 0x200001b8                _end = .
                 0x200001b8                __end = .
                 0x200001b8                PROVIDE (end, .)
                 0x200001b8                PROVIDE (__bss_end__, .)
-                0x00000cf0                __cy_region_init_ram = LOADADDR (.data)
+                0x00001318                __cy_region_init_ram = LOADADDR (.data)
                 0x00000088                __cy_region_init_size_ram = (_edata - ADDR (.data))
                 0x00000070                __cy_region_zero_size_ram = (_end - _edata)
 
-.heap           0x200001b8       0x80 load address 0x00000d78
+.heap           0x200001b8       0x80 load address 0x000013a0
                 0x200001b8                . = _end
                 0x20000238                . = (. + 0x80)
  *fill*         0x200001b8       0x80 
@@ -861,8 +1026,8 @@ END GROUP
                 0x90600000        0x1 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
                 0x90600000                cy_meta_chipprotect
 
-.rel.dyn        0x00000d78        0x0 load address 0x90600004
- .rel.iplt      0x00000d78        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
+.rel.dyn        0x000013a0        0x0 load address 0x90600004
+ .rel.iplt      0x000013a0        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 
 .stab
  *(.stab)
@@ -882,164 +1047,224 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x7d0
+.debug_aranges  0x00000000      0xa28
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x40 .\CortexM0\ARM_GCC_541\Debug\main.o
+                0x00000000       0x48 .\CortexM0\ARM_GCC_541\Debug\main.o
  .debug_aranges
-                0x00000040       0x38 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000048       0x40 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
  .debug_aranges
-                0x00000078       0x18 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
+                0x00000088       0x18 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
  .debug_aranges
-                0x00000090       0x48 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+                0x000000a0       0x48 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
  .debug_aranges
-                0x000000d8      0x260 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+                0x000000e8      0x260 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
  .debug_aranges
-                0x00000338      0x188 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+                0x00000348      0x188 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
  .debug_aranges
-                0x000004c0       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+                0x000004d0       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
  .debug_aranges
-                0x00000508      0x158 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x00000518       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
  .debug_aranges
-                0x00000660       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+                0x00000560      0x158 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
  .debug_aranges
-                0x000006a8       0x80 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                0x000006b8       0x80 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
  .debug_aranges
-                0x00000728       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
+                0x00000738       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
  .debug_aranges
-                0x00000770       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
+                0x00000780       0x80 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
  .debug_aranges
-                0x00000790       0x40 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+                0x00000800       0x60 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .debug_aranges
+                0x00000860       0x98 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .debug_aranges
+                0x000008f8       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .debug_aranges
+                0x00000940       0x48 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .debug_aranges
+                0x00000988       0x40 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .debug_aranges
+                0x000009c8       0x20 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
+ .debug_aranges
+                0x000009e8       0x40 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x46c4
+.debug_info     0x00000000     0x5643
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x2d4 .\CortexM0\ARM_GCC_541\Debug\main.o
- .debug_info    0x000002d4      0x295 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_info    0x00000569       0xf8 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
- .debug_info    0x00000661      0x3a2 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
- .debug_info    0x00000a03     0x178f .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
- .debug_info    0x00002192     0x1058 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
- .debug_info    0x000031ea      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
- .debug_info    0x00003387      0x90a .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
- .debug_info    0x00003c91      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
- .debug_info    0x00003e2e      0x305 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .debug_info    0x00004133      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .debug_info    0x000042d0       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
- .debug_info    0x00004372      0x352 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+ .debug_info    0x00000000      0x354 .\CortexM0\ARM_GCC_541\Debug\main.o
+ .debug_info    0x00000354      0x3bd .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_info    0x00000711       0xf8 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
+ .debug_info    0x00000809      0x3a2 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+ .debug_info    0x00000bab     0x178f .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+ .debug_info    0x0000233a     0x1058 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+ .debug_info    0x00003392      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .debug_info    0x0000352f      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .debug_info    0x000036cc      0x90a .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .debug_info    0x00003fd6      0x305 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .debug_info    0x000042db      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+ .debug_info    0x00004478      0x305 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+ .debug_info    0x0000477d      0x2d4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .debug_info    0x00004a51      0x345 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .debug_info    0x00004d96      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .debug_info    0x00004f33      0x19d .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .debug_info    0x000050d0      0x17f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .debug_info    0x0000524f       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
+ .debug_info    0x000052f1      0x352 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
 
-.debug_abbrev   0x00000000      0xffb
+.debug_abbrev   0x00000000     0x168b
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0xf0 .\CortexM0\ARM_GCC_541\Debug\main.o
- .debug_abbrev  0x000000f0      0x166 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_abbrev  0x00000256       0x5d .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
- .debug_abbrev  0x000002b3      0x1d7 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
- .debug_abbrev  0x0000048a      0x288 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
- .debug_abbrev  0x00000712      0x248 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
- .debug_abbrev  0x0000095a       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
- .debug_abbrev  0x00000a22      0x119 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
- .debug_abbrev  0x00000b3b       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
- .debug_abbrev  0x00000c03      0x19a .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .debug_abbrev  0x00000d9d       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .debug_abbrev  0x00000e65       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
- .debug_abbrev  0x00000e79      0x182 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+ .debug_abbrev  0x000000f0      0x1b8 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_abbrev  0x000002a8       0x5d .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
+ .debug_abbrev  0x00000305      0x1d7 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+ .debug_abbrev  0x000004dc      0x288 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+ .debug_abbrev  0x00000764      0x248 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+ .debug_abbrev  0x000009ac       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .debug_abbrev  0x00000a74       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .debug_abbrev  0x00000b3c      0x119 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .debug_abbrev  0x00000c55      0x19a .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .debug_abbrev  0x00000def       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+ .debug_abbrev  0x00000eb7      0x19a .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+ .debug_abbrev  0x00001051      0x151 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .debug_abbrev  0x000011a2      0x117 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .debug_abbrev  0x000012b9       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .debug_abbrev  0x00001381       0xc8 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .debug_abbrev  0x00001449       0xac .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .debug_abbrev  0x000014f5       0x14 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
+ .debug_abbrev  0x00001509      0x182 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
 
-.debug_line     0x00000000     0x1d86
+.debug_line     0x00000000     0x2489
  *(.debug_line)
- .debug_line    0x00000000      0x12d .\CortexM0\ARM_GCC_541\Debug\main.o
- .debug_line    0x0000012d      0x14d .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_line    0x0000027a      0x141 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
- .debug_line    0x000003bb      0x236 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
- .debug_line    0x000005f1      0x8cb .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
- .debug_line    0x00000ebc      0x5d1 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
- .debug_line    0x0000148d       0xc3 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
- .debug_line    0x00001550      0x382 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
- .debug_line    0x000018d2       0xc5 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
- .debug_line    0x00001997      0x153 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .debug_line    0x00001aea       0xc1 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .debug_line    0x00001bab       0x68 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
- .debug_line    0x00001c13      0x173 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+ .debug_line    0x00000000      0x19e .\CortexM0\ARM_GCC_541\Debug\main.o
+ .debug_line    0x0000019e      0x183 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_line    0x00000321      0x141 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
+ .debug_line    0x00000462      0x236 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+ .debug_line    0x00000698      0x8cb .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+ .debug_line    0x00000f63      0x5d1 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+ .debug_line    0x00001534       0xc3 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .debug_line    0x000015f7       0xc3 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .debug_line    0x000016ba      0x382 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .debug_line    0x00001a3c      0x157 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .debug_line    0x00001b93       0xc5 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+ .debug_line    0x00001c58      0x153 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+ .debug_line    0x00001dab      0x123 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .debug_line    0x00001ece      0x196 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .debug_line    0x00002064       0xc4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .debug_line    0x00002128       0xc4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .debug_line    0x000021ec       0xc2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .debug_line    0x000022ae       0x68 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
+ .debug_line    0x00002316      0x173 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
 
-.debug_frame    0x00000000     0x14f4
+.debug_frame    0x00000000     0x19ac
  *(.debug_frame)
- .debug_frame   0x00000000       0xa0 .\CortexM0\ARM_GCC_541\Debug\main.o
- .debug_frame   0x000000a0       0x74 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_frame   0x00000114       0xbc .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
- .debug_frame   0x000001d0      0x6f4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
- .debug_frame   0x000008c4      0x4a4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
- .debug_frame   0x00000d68       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
- .debug_frame   0x00000dd8      0x3a0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
- .debug_frame   0x00001178       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
- .debug_frame   0x000011e8      0x110 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .debug_frame   0x000012f8       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .debug_frame   0x00001368       0x90 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
- .debug_frame   0x000013f8       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
- .debug_frame   0x00001418       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
- .debug_frame   0x00001438       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-errno.o)
- .debug_frame   0x00001458       0x28 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-exit.o)
- .debug_frame   0x00001480       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-init.o)
- .debug_frame   0x000014ac       0x28 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x000014d4       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x00000000       0xbc .\CortexM0\ARM_GCC_541\Debug\main.o
+ .debug_frame   0x000000bc       0x98 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_frame   0x00000154       0xbc .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+ .debug_frame   0x00000210      0x6f4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+ .debug_frame   0x00000904      0x4a4 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+ .debug_frame   0x00000da8       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .debug_frame   0x00000e18       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .debug_frame   0x00000e88      0x3a0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .debug_frame   0x00001228      0x110 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .debug_frame   0x00001338       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+ .debug_frame   0x000013a8      0x110 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+ .debug_frame   0x000014b8       0xdc .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .debug_frame   0x00001594      0x134 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .debug_frame   0x000016c8       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .debug_frame   0x00001738       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .debug_frame   0x000017a8       0x78 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .debug_frame   0x00001820       0x90 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+ .debug_frame   0x000018b0       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
+ .debug_frame   0x000018d0       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
+ .debug_frame   0x000018f0       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-errno.o)
+ .debug_frame   0x00001910       0x28 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-exit.o)
+ .debug_frame   0x00001938       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-init.o)
+ .debug_frame   0x00001964       0x28 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000198c       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memset.o)
 
-.debug_str      0x00000000     0x1d72
+.debug_str      0x00000000     0x2433
  *(.debug_str)
- .debug_str     0x00000000      0x27f .\CortexM0\ARM_GCC_541\Debug\main.o
-                                0x2bf (size before relaxing)
- .debug_str     0x0000027f       0xcd .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
-                                0x26d (size before relaxing)
- .debug_str     0x0000034c       0xaa .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
+ .debug_str     0x00000000      0x2cf .\CortexM0\ARM_GCC_541\Debug\main.o
+                                0x30f (size before relaxing)
+ .debug_str     0x000002cf      0x132 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+                                0x2e8 (size before relaxing)
+ .debug_str     0x00000401       0xaa .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
                                 0x1cd (size before relaxing)
- .debug_str     0x000003f6      0x140 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+ .debug_str     0x000004ab      0x13a .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
                                 0x313 (size before relaxing)
- .debug_str     0x00000536      0x937 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+ .debug_str     0x000005e5      0x922 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
                                 0xb50 (size before relaxing)
- .debug_str     0x00000e6d      0x6e7 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+ .debug_str     0x00000f07      0x6e7 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
                                 0x92f (size before relaxing)
- .debug_str     0x00001554       0xa9 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .debug_str     0x000015ee       0xba .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
                                 0x272 (size before relaxing)
- .debug_str     0x000015fd      0x450 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .debug_str     0x000016a8       0x96 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+                                0x272 (size before relaxing)
+ .debug_str     0x0000173e      0x450 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
                                 0x66b (size before relaxing)
- .debug_str     0x00001a4d       0xab .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
-                                0x280 (size before relaxing)
- .debug_str     0x00001af8      0x135 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+ .debug_str     0x00001b8e      0x135 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
                                 0x350 (size before relaxing)
- .debug_str     0x00001c2d       0x93 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
-                                0x264 (size before relaxing)
- .debug_str     0x00001cc0       0xb2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+ .debug_str     0x00001cc3       0xab .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+                                0x280 (size before relaxing)
+ .debug_str     0x00001d6e      0x126 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                                0x350 (size before relaxing)
+ .debug_str     0x00001e94      0x127 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+                                0x32f (size before relaxing)
+ .debug_str     0x00001fbb      0x1cb .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+                                0x402 (size before relaxing)
+ .debug_str     0x00002186       0xa5 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+                                0x279 (size before relaxing)
+ .debug_str     0x0000222b       0xa5 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+                                0x279 (size before relaxing)
+ .debug_str     0x000022d0       0xb1 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+                                0x2a3 (size before relaxing)
+ .debug_str     0x00002381       0xb2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
                                 0x2c2 (size before relaxing)
 
-.debug_loc      0x00000000     0x318e
+.debug_loc      0x00000000     0x34b8
  *(.debug_loc)
- .debug_loc     0x00000000       0xa1 .\CortexM0\ARM_GCC_541\Debug\main.o
- .debug_loc     0x000000a1       0xa9 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_loc     0x0000014a      0x14f .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
- .debug_loc     0x00000299     0x182f .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
- .debug_loc     0x00001ac8      0xdb7 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
- .debug_loc     0x0000287f       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
- .debug_loc     0x00002921      0x547 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
- .debug_loc     0x00002e68       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
- .debug_loc     0x00002f0a       0x82 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .debug_loc     0x00002f8c       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .debug_loc     0x0000302e      0x160 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+ .debug_loc     0x00000000       0x75 .\CortexM0\ARM_GCC_541\Debug\main.o
+ .debug_loc     0x00000075      0x118 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_loc     0x0000018d      0x14f .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+ .debug_loc     0x000002dc     0x182f .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+ .debug_loc     0x00001b0b      0xdb7 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+ .debug_loc     0x000028c2       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .debug_loc     0x00002964       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .debug_loc     0x00002a06      0x547 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .debug_loc     0x00002f4d       0x82 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .debug_loc     0x00002fcf       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+ .debug_loc     0x00003071       0x82 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+ .debug_loc     0x000030f3       0xa0 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .debug_loc     0x00003193       0x3d .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .debug_loc     0x000031d0       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .debug_loc     0x00003272       0xa2 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .debug_loc     0x00003314       0x44 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .debug_loc     0x00003358      0x160 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
 
 .debug_macinfo
  *(.debug_macinfo)
 
-.debug_ranges   0x00000000      0x6e8
+.debug_ranges   0x00000000      0x8e0
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x30 .\CortexM0\ARM_GCC_541\Debug\main.o
- .debug_ranges  0x00000030       0x28 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_ranges  0x00000058       0x38 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
- .debug_ranges  0x00000090      0x250 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
- .debug_ranges  0x000002e0      0x178 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
- .debug_ranges  0x00000458       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
- .debug_ranges  0x00000490      0x148 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
- .debug_ranges  0x000005d8       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
- .debug_ranges  0x00000610       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .debug_ranges  0x00000680       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
- .debug_ranges  0x000006b8       0x30 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+ .debug_ranges  0x00000000       0x38 .\CortexM0\ARM_GCC_541\Debug\main.o
+ .debug_ranges  0x00000038       0x30 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_ranges  0x00000068       0x38 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+ .debug_ranges  0x000000a0      0x250 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
+ .debug_ranges  0x000002f0      0x178 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
+ .debug_ranges  0x00000468       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .debug_ranges  0x000004a0       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
+ .debug_ranges  0x000004d8      0x148 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .debug_ranges  0x00000620       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
+ .debug_ranges  0x00000690       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+ .debug_ranges  0x000006c8       0x70 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+ .debug_ranges  0x00000738       0x50 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .debug_ranges  0x00000788       0x88 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .debug_ranges  0x00000810       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .debug_ranges  0x00000848       0x38 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .debug_ranges  0x00000880       0x30 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
+ .debug_ranges  0x000008b0       0x30 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
 
 .comment        0x00000000       0x6e
  .comment       0x00000000       0x6e .\CortexM0\ARM_GCC_541\Debug\main.o
@@ -1050,10 +1275,16 @@ END GROUP
  .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLib.o)
  .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyLFClk.o)
  .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
+ .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
  .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+ .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
  .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
  .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
- .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
+ .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
+ .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
+ .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
+ .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
+ .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
  .comment       0x0000006e       0x6f .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
 
 .debug_weaknames
@@ -1095,39 +1326,51 @@ END GROUP
  .ARM.attributes
                 0x0000018b       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_1.o)
  .ARM.attributes
-                0x000001bc       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
+                0x000001bc       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Limit_2.o)
  .ARM.attributes
-                0x000001ed       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
+                0x000001ed       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(PWM_Motor.o)
  .ARM.attributes
-                0x0000021e       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
+                0x0000021e       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_2.o)
  .ARM.attributes
-                0x0000024f       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_debug.o)
+                0x0000024f       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_Direction.o)
  .ARM.attributes
-                0x00000280       0x21 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
+                0x00000280       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(isr_Limit_1.o)
  .ARM.attributes
-                0x000002a1       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
+                0x000002b1       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec.o)
  .ARM.attributes
-                0x000002d2       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
+                0x000002e2       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(QuadDec_Cnt16.o)
  .ARM.attributes
-                0x000002f0       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
+                0x00000313       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_10.o)
  .ARM.attributes
-                0x0000030e       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_dvmd_tls.o)
+                0x00000344       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Pin_count_20.o)
  .ARM.attributes
-                0x0000032c       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-errno.o)
+                0x00000375       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(Status_Reg_Switches.o)
  .ARM.attributes
-                0x00000358       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-exit.o)
+                0x000003a6       0x21 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyBootAsmGnu.o)
  .ARM.attributes
-                0x00000384       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-impure.o)
+                0x000003c7       0x31 .\CortexM0\ARM_GCC_541\Debug\Design01.a(CyFlash.o)
  .ARM.attributes
-                0x000003b0       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-init.o)
+                0x000003f8       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_udivsi3.o)
  .ARM.attributes
-                0x000003dc       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memcpy-stub.o)
+                0x00000416       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_divsi3.o)
  .ARM.attributes
-                0x00000408       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memset.o)
+                0x00000434       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m\libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x00000434       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtend.o
+                0x00000452       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-errno.o)
  .ARM.attributes
-                0x00000460       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
+                0x0000047e       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-exit.o)
+ .ARM.attributes
+                0x000004aa       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x000004d6       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000502       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x0000052e       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000055a       0x2c c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtend.o
+ .ARM.attributes
+                0x00000586       0x1e c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
 
 /DISCARD/
  *(.note.GNU-stack)

@@ -6,7 +6,7 @@
 
 #Build Date:         Dec  5 2017 15:35:27
 
-#File Generated:     Nov 5 2018 19:55:03
+#File Generated:     Nov 15 2018 20:15:38
 
 #Purpose:            
 
@@ -42,21 +42,20 @@ D2053: Starting placement of the design
 
 Phase 2
 Phase 3
-I2659: No Constrained paths were found. The placer will run in non-timing driven mode.
 
 Design Statistics after Packing
-    Number of Combinational MCs 	:	0
-    Number of Sequential MCs    	:	0
-    Number of DPs               	:	0
-    Number of Controls          	:	0
-    Number of Status            	:	0
+    Number of Combinational MCs 	:	8
+    Number of Sequential MCs    	:	21
+    Number of DPs               	:	2
+    Number of Controls          	:	1
+    Number of Status            	:	3
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
 
 Device Utilization Summary after Packing
-    Macrocells                  :	0/64
-    UDBS                        :	0/8
-    IOs                         :	4/99
+    Macrocells                  :	29/64
+    UDBS                        :	6/8
+    IOs                         :	11/99
 
 
 D2088: Phase 3, elapsed time : 0.0 (sec)
@@ -64,10 +63,106 @@ D2088: Phase 3, elapsed time : 0.0 (sec)
 Phase 4
 D2088: Phase 4, elapsed time : 0.0 (sec)
 
+Phase 6
+
+######################################################################
+Placement Timing Summary
+
+The timing summary is based on estimated routing delays after
+placement. For final timing report, please carry out the timing
+analysis after routing.
+======================================================================
+
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 10
+Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
+Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
+Clock: Clock_PWM            | Frequency: N/A       | Target:  24.0 MHz
+Clock: Clock_PWM(FFB)       | Frequency: N/A       | Target:  24.0 MHz
+Clock: CyHFClk              | Frequency: N/A       | Target:  48.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:  48.0 MHz
+Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
+Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+
+D2088: Phase 6, elapsed time : 0.0 (sec)
+
+Phase 7
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 10
+Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
+Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
+Clock: Clock_PWM            | Frequency: N/A       | Target:  24.0 MHz
+Clock: Clock_PWM(FFB)       | Frequency: N/A       | Target:  24.0 MHz
+Clock: CyHFClk              | Frequency: N/A       | Target:  48.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:  48.0 MHz
+Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
+Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+D2088: Phase 7, elapsed time : 0.4 (sec)
+
+Final Design Statistics
+    Number of Combinational MCs 	:	8
+    Number of Sequential MCs    	:	21
+    Number of DPs               	:	2
+    Number of Controls          	:	1
+    Number of Status            	:	3
+    Number of SyncCells         	:	0
+    Number of count7cells       	:	0
+    Number of IOs       	:	11
+
+Device Utilization Summary
+    Macrocells                  :	29/64
+    IOs                         :	11/99
+
+
+
+######################################################################
+Placement Timing Summary
+
+The timing summary is based on estimated routing delays after
+placement. For final timing report, please carry out the timing
+analysis after routing.
+======================================================================
+
+
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 10
+Clock: Clock_1              | Frequency:  33.2 MHz | Target:   0.0 MHz
+Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
+Clock: Clock_PWM            | Frequency: N/A       | Target:  24.0 MHz
+Clock: Clock_PWM(FFB)       | Frequency: N/A       | Target:  24.0 MHz
+Clock: CyHFClk              | Frequency: N/A       | Target:  48.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:  48.0 MHz
+Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
+Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+
 Phase 8
 D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 0.5 sec.
+I2076: Total run-time: 1.0 sec.
 

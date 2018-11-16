@@ -8,6 +8,7 @@
 <files />
 <projects>
 <v>.\Design01.cydsn\Design01.cyprj</v>
+<v>..\..\..\PSoC Creator\DebouncerExample01.cydsn\DebouncerExample01.cyprj</v>
 </projects>
 <workspace_id v="b047e3a0-d217-403c-b935-5cf79557afe5" />
 <WriteAppVersionLastSavedWith v="4.2.0.641" />

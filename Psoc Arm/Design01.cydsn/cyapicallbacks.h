@@ -15,7 +15,7 @@
 #include "project.h"
 
     
-void check_Pin(void);
+//void check_Pin(void);
 void initialize(void);
 int encoder(void);
 void emergency_Stop(void);
