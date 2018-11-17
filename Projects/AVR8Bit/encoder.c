@@ -3,11 +3,17 @@
 #include "encoder.h"
 #include "timers.h"
 
-volatile uint32_t encoder_ticks;
+#define DEBOUNCE
+
+volatile int32_t encoder_ticks;
 volatile int16_t vticks;
 volatile int16_t raw_velocity;
 int16_t old_velocity;
 volatile uint8_t gate_control, gate_control_top;
+
+#ifdef DEBOUNCE
+volatile uint16_t lastA, lastB;
+#endif
 
 ISR(TIMER0_OVF_vect){
 	gate_control++;
@@ -18,8 +24,12 @@ ISR(TIMER0_OVF_vect){
 }
 
 /*Returns the total number of encoder ticks since the last reset*/
-uint32_t get_encoder_ticks(){
+int32_t get_encoder_ticks(){
 	return encoder_ticks;
+}
+
+void set_encoder_ticks(int32_t ticks){
+	encoder_ticks = ticks;
 }
 
 /*Initalizes the encoder with A on PE6 and B on PE7*/
@@ -43,7 +53,7 @@ void reset_encoder(){
 	EIMSK |= 0xC0; //Enable pin change interrupt on PE6, PE7
 }
 
-uint16_t get_encoder_velocity(){
+int16_t get_encoder_velocity(){
 	int16_t rv = raw_velocity;
 	int16_t velocity;
 	if(gate_control_top == 24){
@@ -67,6 +77,11 @@ uint16_t get_encoder_velocity(){
 }
 
 ISR(INT6_vect){ //PE6, A
+	#ifdef DEBOUNCE
+	uint16_t tc = TCNT1;
+	if(tc > lastA && tc - lastA < 500) return;
+	lastA = tc;
+	#endif
 	uint8_t state = PINE;
 	if(state & (1<<PE6)){ //A rising
 		if(state & (1<<PE7)){ //B high
@@ -88,6 +103,11 @@ ISR(INT6_vect){ //PE6, A
 }
 
 ISR(INT7_vect){ //PE7, B
+	#ifdef DEBOUNCE
+	uint16_t tc = TCNT1;
+	if(tc > lastB && tc - lastB < 500) return;
+	lastB = tc;
+	#endif
 	uint8_t state = PINE;
 	if(state & (1<<PE7)){ //B rising
 		if(state & (1<<PE6)){ //A high

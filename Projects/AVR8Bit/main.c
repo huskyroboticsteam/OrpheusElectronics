@@ -32,31 +32,41 @@ void dump_message(struct CAN_msg m){
 }
 int main(){
 	int i;
+	DDRE = (1 << PE4);
 	setup_timers();
 	usart_init(1200);
+	init_encoder();
 	init_CAN(0, 3, 0);
 	DDRE = 1<<PE4;
+	PORTE = (1<<PE6) | (1<<PE7);
 	sei();
-	delay_mS(2000);
-	struct CAN_msg m, r;
-	m.id = 1;
-	m.flags = 0;
-	m.length = 2;
-	m.data[0] = 'H';
-	m.data[1] = 'i';
+	struct CAN_msg r, m;
+	delay_mS(1000);
+	int last_ticks;
 	while(1){
-		tprintf("Sending msg...\n");
-		int res = CAN_send_msg(&m);
-		if(!res){
-			tprintf("Queing message failed!\n");
+		/*if(CAN_msg_available()){
+			while(CAN_msg_available()){
+				CAN_get_msg(&r);
+			}
+			int i = *((uint16_t*)&r.data);
+			write_PWM(PE4, i);
+			tprintf("%d\n", i);
 		}
-		//CAN_dump_state(); 
-		while(res=CAN_msg_available()){
-		tprintf("%d RX messages available\n", res);
+		*/
+		if(CAN_msg_available()){
 			CAN_get_msg(&r);
 			dump_message(r);
 		}
-		delay_mS(250);
-		PORTE ^= 1<<PE4;
+		int i = get_encoder_ticks();
+		if(i < 0){reset_encoder(); i = 0;}
+		if(i > 1023){set_encoder_ticks(1023); i = 1023;}
+		*((int*)&m.data) = i;
+		m.id = 0;
+		m.length = 2;
+		m.flags = 0;
+		//dump_message(m);
+		CAN_send_msg(&m);
+		
+		delay_mS(100);
 	}
 }
