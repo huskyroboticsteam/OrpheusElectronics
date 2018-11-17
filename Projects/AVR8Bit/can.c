@@ -8,21 +8,29 @@ volatile uint8_t msgs_av; //Number of messages unclaimed messages
 
 uint16_t RX_mask, RX_tag;
 
+volatile uint8_t rxed_mobs[2];
+
 ISR(CANIT_vect){
-	//uint8_t canpage, mob;
+	uint8_t canpage = CANPAGE;
+	//PORTE ^= (1<<PE4);
 	if((CANHPMOB & 0xF0) != 0xF0){ //Message io?
+		int mob = (CANHPMOB >> 4);
+		select_mob(mob);
 	    if(CANSTMOB & (1 << TXOK)){ //TX
-			int mob = (CANHPMOB >> 4);
 			/*Reset the MOb*/
 			CANSTMOB &= 0;
 			CANCDMOB = 0;
 			enable_mob_interrupt(mob);
 		} else { //RX
 			msgs_av++; //Increase count of messages
+			rxed_mobs[!!(mob & 8)] |= (1 << (mob & 7));
+			CANSTMOB &= 0;
+			disable_mob_interrupt(mob);
 		}
 	} else {
-		CANGIT = 0xFF; //Error interrupt - Handle these?
+		CANGIT |= 0; //Error interrupt - Handle these?
 	}
+	CANPAGE = canpage;
 }
 
 /*Enables the CAN controller
@@ -35,8 +43,9 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	CANBT1 = 0x26;//(rate & 0xFF0000) >> 16;
 	CANBT2 = 0x04;//(rate & 0x00FF00) >> 8;
 	CANBT3 = 0x13;//(rate & 0x0000FF);
-	CANGIE = (1 << CANIT) | (1 << ENERR) | (1 <<ENERG) | (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
+	CANGIE = (1 << CANIT) | /*(1 << ENERR) | (1 <<ENERG) |*/ (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
 	CANTCON = 255; //Set the can timer to run at 1/2048th of F_CPU
+	rxed_mobs[0] = rxed_mobs[1] = 0;
 	uint8_t i;
 	/*Initialize MOBs*/
 	for(i = 0;i < 15;i++){
@@ -89,7 +98,7 @@ int mob_interrupt_enabled(uint8_t mob){
 	if(mob < 8){
 		return !!(CANIE2 & (1 << mob));
 	} else {
-		return !!(CANIE1 & (mob - 8));
+		return !!(CANIE1 & (1 << (mob - 8)));
 	}
 }
 uint8_t mob_enabled(uint8_t mob){
@@ -109,14 +118,13 @@ uint8_t CAN_msg_available(){
 uint8_t CAN_get_msg(struct CAN_msg *buf){
 	uint8_t i, mob;
 	if(!CAN_msg_available()) return 0;
-	for(i = 0;i < 15;i++){
+	for(i = 0;i < 16;i++){
+		if(i == 15) return 0;
 		select_mob(i);
-		if(CANSTMOB & (1<<RXOK)){
-			CANSTMOB &= 0;
+		if(rxed_mobs[!!(i & 8)] & (1 << (i & 7))){
 			break;
 		}
 	}
-	if(i == 15) return 0;
 	mob = i;
 	buf->length = CANCDMOB & 0x0F;
 	buf->id = (CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3);
@@ -136,6 +144,7 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 	CANIDT2 = (RX_mask & 0x03) << 5;
 	CANIDT1 = (RX_mask & 0x7F8) >> 3;
 	enable_mob_interrupt(mob);
+	rxed_mobs[!!(mob & 8)] &= ~(1 << (mob & 7));
 	CANCDMOB = (1<<CONMOB1); //Re-enable recieve
 	return 1;
 }
@@ -150,8 +159,8 @@ int8_t find_free_mob(){
 		if(!(status & ((1 << CONMOB1) | (1 << CONMOB0)))){
 			return i;
 		}
-		if(status & (1 << CONMOB0) && !mob_enabled(i)){
-		}
+		//if(status & (1 << CONMOB0) && !mob_enabled(i)){
+		//}
 	}
 	return -1;
 }
@@ -160,7 +169,7 @@ int8_t find_free_mob(){
 uint8_t CAN_send_msg(struct CAN_msg *buf){
 	uint8_t i;
 	int8_t mob = find_free_mob();
-	tprintf("free mob=%d\n", mob);
+	//tprintf("free mob=%d\n", mob);
 	if(mob == -1){
 		return 0;
 	}
@@ -196,12 +205,44 @@ void CAN_set_RX_filter(uint16_t mask, uint16_t tag){
 		}
 	}
 }
+const char *canstmob_names[] = {"ACK ERR", "FORM ERR", "CRC ERR", "STF ERR", "BIT ERR", "RXOK", "TXOK", "DLCW"}; 
 void CAN_dump_state(){
-	int i;
+	int i,j;
 	for(i = 0;i < 15;i++){
 		select_mob(i);
 		uint32_t canstmob = CANSTMOB;
 		uint32_t cancdmob = CANCDMOB; 
-		tprintf("mob %d: %s, if=%d, IDT=%d, CANSTMOB=0x%X, CANCDMOB=0x%X\n", i, mob_enabled(i)? "en": "dis", mob_interrupt_enabled(i), (CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3), canstmob, cancdmob);
+		tprintf("mob %d: (%c), I=%c, IDT=%d, DLC=%d, CANST=0x%X", i, mob_enabled(i)? 'E': 'D', mob_interrupt_enabled(i)? 'E': 'D', (uint16_t)((CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3)), (int)(cancdmob & 15), canstmob);
+		if(canstmob != 0){
+			tprintf("{");
+			for(j = 0;j < 8;j++){
+				if(canstmob & (1<<j)){
+					tprintf("%s ", canstmob_names[j]);
+				}
+			}
+			tprintf("}");
+		}
+		tprintf(", CANCD=0x%X {", (long)cancdmob);
+		if(cancdmob & (1<<5)){
+			tprintf("RPLV ");
+		}
+		if(cancdmob & (1<<4)){
+			tprintf("2.0B ");
+		}
+		switch((cancdmob & 0xC0)>>6){
+			case 0:
+				tprintf("DIS");
+				break;
+			case 1:
+				tprintf("ENTX");
+				break;
+			case 2:
+				tprintf("ENRX");
+				break;
+			case 3:
+				tprintf("FBRX");
+				break;
+		}
+		tprintf("}\n");
 	}
 }

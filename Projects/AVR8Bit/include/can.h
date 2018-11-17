@@ -27,5 +27,6 @@ uint8_t CAN_msg_available();
 void enable_mob_interrupt(uint8_t mob);
 void disable_mob_interrupt(uint8_t mob);
 void CAN_set_RX_filter(uint16_t mask, uint16_t tag);
+void CAN_dump_state();
 
 #endif

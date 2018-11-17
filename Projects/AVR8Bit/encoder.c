@@ -49,7 +49,7 @@ uint16_t get_encoder_velocity(){
 	if(gate_control_top == 24){
 		if(rv < 5 && rv > -5){
 			gate_control_top = 122;
-			tprintf("GCT=122\n");
+			//tprintf("GCT=122\n");
 		}
 		velocity = (rv * 60)/4 + old_velocity/4;
 		old_velocity = velocity;
@@ -57,7 +57,7 @@ uint16_t get_encoder_velocity(){
 	} else if(gate_control_top == 122){
 		if(rv > 80 || rv < -80){
 			gate_control_top = 24;
-			tprintf("GCT=24\n");
+			//tprintf("GCT=24\n");
 		}
 		velocity = (rv * 12)/4 + old_velocity/4;
 		old_velocity = velocity;
