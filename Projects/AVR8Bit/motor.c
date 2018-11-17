@@ -61,9 +61,10 @@ void set_motor_power(int16_t power){
 
 /*Returns the motor current in milliamps*/
 uint16_t get_motor_current(){
-	ADMUX |= 0xC0;
+	internalAREF();
 	uint16_t val = read_ADC(MOTOR_CS);
-	ADMUX &= 0xC0;
+	//ADMUX &= 0xC0;
+	//delay_mS(5);
 	//2.5 mV/unit. 8 Units/Amp
 	if(val < 20) return 0;
 	val -= 20; //Remove 50mV offset;
@@ -134,6 +135,7 @@ void set_motor_mode(uint8_t mode){
 uint8_t get_motor_mode(){
 	return motor_mode;
 }
+
 uint8_t get_motor_limit_switch_state(){
-	return 0; //Get GPIO data
+	return (PINE & 0xC0) >> 6; //Get GPIO data
 }

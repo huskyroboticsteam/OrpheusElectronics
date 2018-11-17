@@ -2,6 +2,8 @@
 #include "adc.h"
 #include "conf.h"
 
+#define VS_PIN 1
+
 /*Initialize the ADC and prepare it for reading*/
 void init_ADC(){
 	ADMUX = 0; //Clear the ADC MUX
@@ -27,4 +29,25 @@ uint16_t read_ADC(uint8_t pin){
 	l = ADCL;  //Read and return 10 bit result
 	h = ADCH;
 	return (h << 8)|l; 
+}
+
+void internalAREF(){
+	if(!(ADMUX & 0xC0)){
+		ADMUX |= 0xC0;
+		delay_mS(5);
+	}
+}
+
+void externalAREF(){
+	if(ADMUX & 0xC0){
+		ADMUX &= ~0xC0;
+		delay_mS(5);
+	}
+}
+
+uint16_t get_voltage(){
+	internalAREF();
+	uint16_t val = read_ADC(VS_PIN);
+	//2.5mV/unit, 16:1 resistor ratio
+	return (val << 5) + (val << 3); //fast multiply by 40
 }

@@ -18,6 +18,7 @@ struct CAN_msg {
 };
 
 void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode);
+uint8_t get_dip_switch();
 void select_mob(uint8_t mob);
 int8_t find_free_mob();
 uint8_t CAN_msg_available();

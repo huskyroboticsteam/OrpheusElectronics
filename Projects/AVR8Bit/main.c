@@ -17,15 +17,17 @@
 	uint8_t length;
 	uint8_t data[8];
 };*/
+
 void dump_message(struct CAN_msg m){
+	int i;
 	tprintf("\n-CAN MESSAGE-\n");
 	tprintf("id=%d, flags=0x%X, length=%d\n", m.id, (long)m.flags, m.length);
 	tprintf("HEX={");
-	for(int i = 0;i < m.length;i++){
+	for(i = 0;i < m.length;i++){
 		tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");
 	}
 	tprintf("}, ASCII={");
-	for(int i = 0;i < m.length;i++){
+	for(i = 0;i < m.length;i++){
 		tprintf("%c", (m.data[i] > 31 && m.data[i] < 128)?m.data[i]: '.');
 	}
 	tprintf("}\n-END CAN MESSAGE-\n\n");

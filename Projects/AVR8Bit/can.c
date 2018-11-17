@@ -74,6 +74,10 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	}
 }
 
+uint8_t get_dip_switch(){
+	return ~(PINA & 15);
+}
+
 /*Selects the MOB to operate on*/
 void select_mob(uint8_t mob){
 	CANPAGE = ((mob & 0x0F) << 4);
