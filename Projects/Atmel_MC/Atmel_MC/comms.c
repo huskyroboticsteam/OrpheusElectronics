@@ -8,6 +8,6 @@
 
 void comms(void *myCanDataPtr) {
 	canData *canDataPtr = (canData*) myCanDataPtr;
-	// look into Scarlet
+	
 }
 

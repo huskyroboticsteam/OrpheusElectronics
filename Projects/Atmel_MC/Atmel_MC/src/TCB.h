@@ -9,7 +9,8 @@
 #ifndef TCB_H_
 #define TCB_H_
 
-	typedef struct tcbStruct {
+	typedef struct tcbStruct 
+	{
 		void(*task)(void *taskDataPtr);
 		void *dataPtr;
 		

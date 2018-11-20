@@ -10,6 +10,7 @@
 #define STRUCTS_H_
 
 #define NUM_MOTORS 3 
+#define PWM_COMPARE 248000
 
 typedef struct {
 	int pwmVal[NUM_MOTORS];

@@ -11,12 +11,12 @@
 
 void initialize(void);
 void scheduler(void);
-void encoder(void *myEncoderDataPtr); // hardware?
-void pwmControl(void *myPwmDataPtr); 
+void readEncoders(void *myEncoderDataPtr);
+void pwmControl(void *myPwmDataPtr); // Compares the pwm values with the compare val
 void pwmCalculator(void *myPwmDataPtr); // control calculator
 void potRead(void *myPotDataPtr); // ??
 void comms(void *myCanDataPtr);
-void limit_switch(void); // Interrupt based?, warning system
+void limit_switch(void); // warning system
 void emergencyStop(void);
 
 #endif /* FUNCTIONS_H_ */

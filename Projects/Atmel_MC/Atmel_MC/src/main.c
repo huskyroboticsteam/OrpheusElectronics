@@ -30,7 +30,10 @@
 #include <asf.h>
 #include <top.h>
 
-#define NUM_TASKS 5
+pwmData myPWMData;
+encoderData myEncoderData;
+canData myCANData;
+potData myPotData;
 
 TCB commsTCB, emergencyStopTCB, encoderTCB, limit_switchTCB, pwmControlTCB;
 TCB *head, *tail;
@@ -41,8 +44,11 @@ int main (void)
 	system_init();
 	/* Insert application code here, after the board has been initialized. */
 	initialize();
-	while(1) {
+	while(1) 
+	{
 		scheduler();
 	}
 	
 }
+// https://www.digikey.com/eewiki/display/microcontroller/CAN+Example+-+ATmega32M1+-+STK600
+// https://github.com/arduino/ArduinoModule-CMSIS-Atmel/blob/master/CMSIS-Atmel/CMSIS/Device/ATMEL/samc21/include/samc21g17a.h
