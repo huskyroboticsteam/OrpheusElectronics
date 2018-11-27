@@ -46,6 +46,7 @@ uint8_t usart_read(char *buf, uint8_t count){
 	UCSR1B = icfg;
 	return c;
 }
+
 /*Writes data out to the USART
 Parameters:
 char *buf: The data to write

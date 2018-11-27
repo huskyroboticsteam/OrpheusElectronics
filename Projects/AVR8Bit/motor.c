@@ -8,11 +8,14 @@
 
 int32_t motor_target_pos; //Motor target position
 int16_t motor_target_vel; //Motor target velocity
-int32_t motor_max_pos;
-int32_t motor_last_pos;
-int16_t motor_vel;
-uint32_t motor_last_timestamp;
-uint8_t motor_mode;
+int32_t motor_max_pos; //The maximum position of the motor
+/*Do we need these???*/
+//int32_t motor_last_pos;
+//int16_t motor_vel;
+//uint32_t motor_last_timestamp;
+/********************/
+
+uint8_t motor_mode; //Traxcks the motor mode
 
 /*Initalizes the motor controller*/
 void init_motor(){
@@ -27,8 +30,8 @@ void init_motor(){
 	
 	motor_target_pos = motor_target_vel = 0;
 	init_encoder();
-	motor_last_pos = 0;
-	motor_last_timestamp = get_mS();
+//	motor_last_pos = 0;
+//	motor_last_timestamp = get_mS();
 }
 
 /*Sets the motor power
@@ -39,7 +42,7 @@ void init_motor(){
 void set_motor_power(int16_t power){
 	if(power > 1023) power = 1023;
 	if(power < -1023) power = -1023;
-	if(power == 0 || !(motor_mode & MOTOR_MODE_ENABLED)){
+	if(power == 0 || !(motor_mode & MOTOR_MODE_ENABLED)){ //Shut down the motor if it isn't enabled or power is 0
 		write_PWM(MOTOR_PWM, 0);
 		MOTOR_PWM_PORT &= (1<<MOTOR_PWM);
 		return;
@@ -71,26 +74,38 @@ uint16_t get_motor_current(){
 	val <<= 8; //Multiply by 128
 	return val;
 }
+
+/*Returns true if the motor is stalled*/
 uint8_t check_motor_stall(){
 	/*Check motor current*/
 	/*Check derrivative of encoder?*/
 	return 0;
 }
+
+/*Sets a target position for the motor*/
 void set_target_position(int32_t position){
 	if(position < 0 || position > motor_max_pos) return;
 	motor_target_pos = position;
 }
+
+/*Sets a target velocity for the motor*/
 void set_target_velocity(uint16_t velocity){
 	motor_target_vel = velocity;
 }
+
+/*Gets the target position for the motor*/
 int32_t get_target_position(){
 	return motor_target_pos;
 }
+
+/*Gets the target velocity for the motor*/
 int32_t get_target_velocity(){
 	return motor_target_vel;
 }
+
+/*Gets the current motor velocity*/
 int16_t get_motor_velocity(){
-	int32_t enc = get_encoder_ticks();
+/*	int32_t enc = get_encoder_ticks();
 	int32_t mS = get_mS();
 	if(mS - motor_last_timestamp < 50){ //Has enough time passed?
 		return motor_vel; //No. Return the old value
@@ -100,12 +115,13 @@ int16_t get_motor_velocity(){
 		motor_last_pos = enc; //Update values
 		motor_last_timestamp = mS;
 		return motor_vel;
-	}
+	}*/
+	return get_encoder_velocity();
 }
+
+/*Executes one tick of the motor control system. Call this in a loop!*/
 void motor_control_tick(){
-	if(motor_mode & MOTOR_MODE_VELOCITY){
-	}
-	if(motor_mode & MOTOR_MODE_POSITION){
+	if(motor_mode & MOTOR_MODE_PID){
 		//int pos = get_motor_position();
 	}
 	
@@ -122,20 +138,28 @@ void motor_control_tick(){
 		set_motor_power(0);
 	}
 }
+/*Enables the motor*/
 void enable_motor(){
 	motor_mode |= MOTOR_MODE_ENABLED;
 }
+
+/*Disables the motor*/
 void disable_motor(){
 	set_motor_power(0);
 	motor_mode &= ~MOTOR_MODE_ENABLED;
 }
+
+/*Sets the motor mode*/
 void set_motor_mode(uint8_t mode){
 	motor_mode = mode;
 }
+
+/*Gets the motor mode*/
 uint8_t get_motor_mode(){
 	return motor_mode;
 }
 
+/*Gets the state of the limit switches*/
 uint8_t get_motor_limit_switch_state(){
 	return (PINE & 0xC0) >> 6; //Get GPIO data
 }

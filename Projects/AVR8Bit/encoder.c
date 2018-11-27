@@ -3,13 +3,14 @@
 #include "encoder.h"
 #include "timers.h"
 
+//Define "DEBOUNCE" to use the software debouncer
 #define DEBOUNCE
 
-volatile int32_t encoder_ticks;
-volatile int16_t vticks;
-volatile int16_t raw_velocity;
-int16_t old_velocity;
-volatile uint8_t gate_control, gate_control_top;
+volatile int32_t encoder_ticks; //Raw encoder ticks
+volatile int16_t vticks; //Ticks for velocity computation
+volatile int16_t raw_velocity; //Raw velocity
+int16_t old_velocity; //The last velocity reading
+volatile uint8_t gate_control, gate_control_top; //For dynamically adjusted gate time for velocity computation
 
 #ifdef DEBOUNCE
 volatile uint16_t lastA, lastB;
@@ -28,6 +29,7 @@ int32_t get_encoder_ticks(){
 	return encoder_ticks;
 }
 
+/*Sets the encoder counter to the specified value*/
 void set_encoder_ticks(int32_t ticks){
 	encoder_ticks = ticks;
 }
@@ -38,7 +40,7 @@ void init_encoder(){
 	DDRE &= 0x3F; //Set PE6, PE7 as inputs
 	PORTE |= 0xC0; //Enable pullups on PE6, PE7
 	encoder_ticks = 0; //Reset count
-	gate_control_top = 24;
+	gate_control_top = 24; //Short gate time
 	EICRB |= 0x50; //Enable pin change interrupt on PE6, PE7
 	EIMSK |= 0xC0;
 }
@@ -53,23 +55,24 @@ void reset_encoder(){
 	EIMSK |= 0xC0; //Enable pin change interrupt on PE6, PE7
 }
 
+/*Returns the encoder velocity in ticks/second*/
 int16_t get_encoder_velocity(){
 	int16_t rv = raw_velocity;
 	int16_t velocity;
 	if(gate_control_top == 24){
-		if(rv < 5 && rv > -5){
+		if(rv < 5 && rv > -5){ //If it's slow, increase the gate time
 			gate_control_top = 122;
 			//tprintf("GCT=122\n");
 		}
-		velocity = (rv * 60)/4 + old_velocity/4;
+		velocity = (rv * 60)/4 + old_velocity/4; //Compute velocity and low pass filter
 		old_velocity = velocity;
 		return velocity;
-	} else if(gate_control_top == 122){
+	} else if(gate_control_top == 122){ //If it's fast, decrease gate time
 		if(rv > 80 || rv < -80){
 			gate_control_top = 24;
 			//tprintf("GCT=24\n");
 		}
-		velocity = (rv * 12)/4 + old_velocity/4;
+		velocity = (rv * 12)/4 + old_velocity/4; //Compute velocity and LPF
 		old_velocity = velocity;
 		return velocity;
 	}
@@ -79,7 +82,7 @@ int16_t get_encoder_velocity(){
 ISR(INT6_vect){ //PE6, A
 	#ifdef DEBOUNCE
 	uint16_t tc = TCNT1;
-	if(tc > lastA && tc - lastA < 500) return;
+	if(tc > lastA && tc - lastA < 400) return;
 	lastA = tc;
 	#endif
 	uint8_t state = PINE;
@@ -105,7 +108,7 @@ ISR(INT6_vect){ //PE6, A
 ISR(INT7_vect){ //PE7, B
 	#ifdef DEBOUNCE
 	uint16_t tc = TCNT1;
-	if(tc > lastB && tc - lastB < 500) return;
+	if(tc > lastB && tc - lastB < 400) return;
 	lastB = tc;
 	#endif
 	uint8_t state = PINE;

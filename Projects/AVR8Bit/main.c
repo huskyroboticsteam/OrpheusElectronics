@@ -38,12 +38,14 @@ int main(){
 	setup_timers();
 	usart_init(1200);
 	init_encoder();
-	init_CAN(0, 3, 0);
+	_delay_ms(666);
+	init_CAN(CAN_100_BAUD, 3, 0);
 	DDRE = 1<<PE4;
 	PORTE = (1<<PE6) | (1<<PE7);
 	sei();
 	struct CAN_msg r, m;
 	delay_mS(1000);
+	init_ADC();
 	int last_ticks;
 	while(1){
 		/*if(CAN_msg_available()){
@@ -59,9 +61,10 @@ int main(){
 			CAN_get_msg(&r);
 			dump_message(r);
 		}
-		int i = get_encoder_ticks();
-		if(i < 0){reset_encoder(); i = 0;}
-		if(i > 1023){set_encoder_ticks(1023); i = 1023;}
+		int i = read_ADC(0);//get_encoder_ticks();
+	//	if(i < 0){reset_encoder(); i = 0;}
+	//	if(i > 1023){set_encoder_ticks(1023); i = 1023;}
+		tprintf("%d\n", i);
 		*((int*)&m.data) = i;
 		m.id = 0;
 		m.length = 2;

@@ -6,7 +6,7 @@
 
 /*Initialize the ADC and prepare it for reading*/
 void init_ADC(){
-	ADMUX = 0; //Clear the ADC MUX
+	ADMUX = (1<<6); //5V VREF
 	#if F_CPU < 10000000
 	ADCSRA = (1<<ADPS2) | (1<<ADPS0); //Up to 10MHz, prescale by 32
 	#else
@@ -31,20 +31,26 @@ uint16_t read_ADC(uint8_t pin){
 	return (h << 8)|l; 
 }
 
+/*Switches to the internal (2.56V) Vref*/
 void internalAREF(){
 	if(!(ADMUX & 0xC0)){
 		ADMUX |= 0xC0;
 		delay_mS(5);
+		read_ADC(0);
 	}
 }
 
+/*Uses VIN for Vref (5 or 3.3V)*/
 void externalAREF(){
 	if(ADMUX & 0xC0){
 		ADMUX &= ~0xC0;
+		ADMUX = (1<<6);
 		delay_mS(5);
+		read_ADC(0);
 	}
 }
 
+/*Gets the voltage on the +24V line and returns the results in mV*/
 uint16_t get_voltage(){
 	internalAREF();
 	uint16_t val = read_ADC(VS_PIN);

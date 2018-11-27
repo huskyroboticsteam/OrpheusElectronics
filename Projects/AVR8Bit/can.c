@@ -6,13 +6,12 @@
 
 volatile uint8_t msgs_av; //Number of messages unclaimed messages
 
-uint16_t RX_mask, RX_tag;
+uint16_t RX_mask, RX_tag; //Recieve mask and tag bits
 
-volatile uint8_t rxed_mobs[2];
+volatile uint8_t rxed_mobs[2]; //Tracks which MObs have messages recieved
 
 ISR(CANIT_vect){
-	uint8_t canpage = CANPAGE;
-	//PORTE ^= (1<<PE4);
+	uint8_t canpage = CANPAGE; //Save CAN page
 	if((CANHPMOB & 0xF0) != 0xF0){ //Message io?
 		int mob = (CANHPMOB >> 4);
 		select_mob(mob);
@@ -23,26 +22,30 @@ ISR(CANIT_vect){
 			enable_mob_interrupt(mob);
 		} else { //RX
 			msgs_av++; //Increase count of messages
-			rxed_mobs[!!(mob & 8)] |= (1 << (mob & 7));
-			CANSTMOB &= 0;
+			rxed_mobs[!!(mob & 8)] |= (1 << (mob & 7)); // Mark which MOb has a message
+			CANSTMOB &= 0; //Reset the MOb
 			disable_mob_interrupt(mob);
 		}
 	} else {
 		CANGIT |= 0; //Error interrupt - Handle these?
 	}
-	CANPAGE = canpage;
+	CANPAGE = canpage; //restore CAN page
 }
 
-/*Enables the CAN controller
+/*Initalizes and enables the CAN controller
 Parameters:
 uint32_t rate: the baud rate selection
-uin8_t txmobs: how many MOBs to dedicate to transmission
+uint8_t txmobs: how many MOBs to dedicate to transmission
+uint8_t mode: The mode to operate the CAN controller in
 */
 void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	CANGCON |= (1<<SWRES);
-	CANBT1 = 0x26;//(rate & 0xFF0000) >> 16;
-	CANBT2 = 0x04;//(rate & 0x00FF00) >> 8;
-	CANBT3 = 0x13;//(rate & 0x0000FF);
+	delay_mS(100); //Needed for unknown reason?!
+	//tprintf("RATE=%X,%X,%X\n", (uint32_t)(rate & 0xFF0000L)>>16, (uint32_t)(rate & 0x00FF00L)>>8, (uint32_t)(rate & 0xFF));
+	CANBT1 = (uint32_t)(rate & 0xFF0000L) >> 16;
+	CANBT2 = (uint32_t)(rate & 0x00FF00L) >> 8;
+	CANBT3 = (uint32_t)(rate & 0x0000FFL);
+	//0x26, 0x04, 0x13
 	CANGIE = (1 << CANIT) | /*(1 << ENERR) | (1 <<ENERG) |*/ (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
 	CANTCON = 255; //Set the can timer to run at 1/2048th of F_CPU
 	rxed_mobs[0] = rxed_mobs[1] = 0;
@@ -74,6 +77,7 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	}
 }
 
+/*Returns the value of the binary representation of the dipswitch*/
 uint8_t get_dip_switch(){
 	return ~(PINA & 15);
 }
@@ -83,6 +87,7 @@ void select_mob(uint8_t mob){
 	CANPAGE = ((mob & 0x0F) << 4);
 }
 
+/*Disables the interrupt for the specified MOb*/
 void disable_mob_interrupt(uint8_t mob){
 	if(mob < 8){
 		CANIE2 &= ~(1 << mob);
@@ -91,6 +96,7 @@ void disable_mob_interrupt(uint8_t mob){
 	}
 }
 
+/*Enable the interrupt for the specified MOb*/
 void enable_mob_interrupt(uint8_t mob){
 	if(mob < 8){
 		CANIE2 |= (1 << mob);
@@ -98,6 +104,8 @@ void enable_mob_interrupt(uint8_t mob){
 		CANIE1 |= (1 << (mob - 8));
 	}
 }
+
+/*Returns whether the interrupt for the specified MOb is enabled*/
 int mob_interrupt_enabled(uint8_t mob){
 	if(mob < 8){
 		return !!(CANIE2 & (1 << mob));
@@ -105,6 +113,8 @@ int mob_interrupt_enabled(uint8_t mob){
 		return !!(CANIE1 & (1 << (mob - 8)));
 	}
 }
+
+/*Returns whether a specified MOb is marked as enabled*/
 uint8_t mob_enabled(uint8_t mob){
 	if(mob < 8){
 		return !!(CANEN2 & (1 << mob));
@@ -122,6 +132,7 @@ uint8_t CAN_msg_available(){
 uint8_t CAN_get_msg(struct CAN_msg *buf){
 	uint8_t i, mob;
 	if(!CAN_msg_available()) return 0;
+	/*Find a MOb with a message*/
 	for(i = 0;i < 16;i++){
 		if(i == 15) return 0;
 		select_mob(i);
@@ -130,29 +141,32 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 		}
 	}
 	mob = i;
-	buf->length = CANCDMOB & 0x0F;
+	buf->length = CANCDMOB & 0x0F; //Length in the lower 8 bits
 	buf->id = (CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3);
-	if(CANIDT4 & (1<<RTRTAG)){
+	if(CANIDT4 & (1<<RTRTAG)){ //Was this a Request To Transmit?
 		buf->flags |= CAN_RTR;
 	} else {
 		buf->flags &= CAN_RTR;
 	}
 	for(i = 0;i < buf->length;i++){
-		buf->data[i] = CANMSG;
+		buf->data[i] = CANMSG; //Get the data from the MOb and copy it into the buffer
 	}
+	//Atomically deincrement the number of messages available
 	cli();
 	msgs_av--;
 	sei();
+	/*Reset the MOb*/
 	CANIDT4 = 0;
 	CANIDT3 = 0;
 	CANIDT2 = (RX_mask & 0x03) << 5;
 	CANIDT1 = (RX_mask & 0x7F8) >> 3;
 	enable_mob_interrupt(mob);
-	rxed_mobs[!!(mob & 8)] &= ~(1 << (mob & 7));
+	rxed_mobs[!!(mob & 8)] &= ~(1 << (mob & 7)); //Mark that the message has been taken
 	CANCDMOB = (1<<CONMOB1); //Re-enable recieve
 	return 1;
 }
 
+/*Finds a free MOb or returns -1 if they're all used*/
 int8_t find_free_mob(){
 	uint8_t i;
 	uint8_t status;
@@ -175,23 +189,24 @@ uint8_t CAN_send_msg(struct CAN_msg *buf){
 	int8_t mob = find_free_mob();
 	//tprintf("free mob=%d\n", mob);
 	if(mob == -1){
-		return 0;
+		return 0; //No free MObs
 	}
 	select_mob(mob);
 	CANSTMOB &= 0;
 	CANCDMOB = buf->length & 0x0F;
-	for(i = 0;i < buf->length;i++){
+	for(i = 0;i < buf->length;i++){ //Copy the data into the MOb
 		CANMSG = buf->data[i];
 	}
-	CANIDT4 = 0;
-	CANIDT3 = (buf->flags & CAN_RTR)? (1<<RTRTAG): 0;
+	CANIDT4 = 0; //CAN v2.0 - we don't care
+	CANIDT3 = (buf->flags & CAN_RTR)? (1<<RTRTAG): 0; //Sending an RTR?
 	CANIDT2 = ((buf->id & 3) << 5);
 	CANIDT1 = ((buf->id & 0x7F8) >> 3);
 	CANCDMOB |= (1<<CONMOB0);
-	enable_mob_interrupt(mob);
+	enable_mob_interrupt(mob); //Enable MOb interrupt
 	return 1;
 }
 
+/*Set the RX filter mask and tag. Updates current RX mobs and future RX MObs*/
 void CAN_set_RX_filter(uint16_t mask, uint16_t tag){
 	RX_mask = mask;
 	RX_tag = tag;
@@ -209,7 +224,9 @@ void CAN_set_RX_filter(uint16_t mask, uint16_t tag){
 		}
 	}
 }
+/*List of CAN status code names*/
 const char *canstmob_names[] = {"ACK ERR", "FORM ERR", "CRC ERR", "STF ERR", "BIT ERR", "RXOK", "TXOK", "DLCW"}; 
+/*Dumps the state of the CAN controller (for debugging)*/
 void CAN_dump_state(){
 	int i,j;
 	for(i = 0;i < 15;i++){

@@ -10,10 +10,8 @@
 #define MOTOR_CS_DDR DDRF
 #define MOTOR_CS 0
 
-#define MOTOR_MODE_VELOCITY 1
-#define MOTOR_MODE_POSITION 2
-#define MOTOR_MODE_MANUAL 4
-#define MOTOR_MODE_ENABLED 8
+#define MOTOR_MODE_PID 2
+#define MOTOR_MODE_ENABLED 1
 
 void init_motor();
 void set_motor_power(int16_t power);
