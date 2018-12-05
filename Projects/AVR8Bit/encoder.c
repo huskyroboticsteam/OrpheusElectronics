@@ -4,13 +4,14 @@
 #include "timers.h"
 
 //Define "DEBOUNCE" to use the software debouncer
-#define DEBOUNCE
+//#define DEBOUNCE
 
 volatile int32_t encoder_ticks; //Raw encoder ticks
 volatile int16_t vticks; //Ticks for velocity computation
 volatile int16_t raw_velocity; //Raw velocity
 int16_t old_velocity; //The last velocity reading
 volatile uint8_t gate_control, gate_control_top; //For dynamically adjusted gate time for velocity computation
+//volatile uint8_t run_PID;
 
 #ifdef DEBOUNCE
 volatile uint16_t lastA, lastB;

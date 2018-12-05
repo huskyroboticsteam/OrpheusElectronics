@@ -1,0 +1,82 @@
+#include "conf.h"
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <avr/wdt.h>
+#include <string.h>
+#include "pwm.h"
+#include "encoder.h"
+#include "motor.h"
+#include "timers.h"
+#include "adc.h"
+#include "can.h"
+#include "usart.h"
+/*struct CAN_msg {
+	uint16_t id;
+	uint8_t flags;
+	uint8_t length;
+	uint8_t data[8];
+};*/
+
+void dump_message(struct CAN_msg m){
+	int i;
+	tprintf("\n-CAN MESSAGE-\n");
+	tprintf("id=%d, flags=0x%X, length=%d\n", m.id, (long)m.flags, m.length);
+	tprintf("HEX={");
+	for(i = 0;i < m.length;i++){
+		tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");
+	}
+	tprintf("}, ASCII={");
+	for(i = 0;i < m.length;i++){
+		tprintf("%c", (m.data[i] > 31 && m.data[i] < 128)?m.data[i]: '.');
+	}
+	tprintf("}\n-END CAN MESSAGE-\n\n");
+}
+int main(){
+	int i;
+	DDRE = (1 << PE4) | (1 << PE3);
+	setup_timers();
+	usart_init(1200);
+	_delay_ms(666);
+	sei();
+	init_encoder();
+	PORTE = 0;
+	int itg = 0;
+	uint32_t error;
+	int target = 0;
+	int lft = 0;
+	while(1){
+		uint32_t ticks = get_encoder_ticks();
+		error = target - ticks;
+		int pwm = error*3 + itg/8;
+		itg += error;
+		if(itg > 1024) itg = 1024;
+		if(itg < -1024) itg = -1024;
+		if(pwm > 1023) pwm = 1023;
+		if(pwm < -1023) pwm = -1023;
+		tprintf("%l %d\n", ticks, pwm);
+		if(pwm > 0){
+			write_PWM(PE3, 0);
+			write_PWM(PE4, pwm);
+		} else {
+			write_PWM(PE4, 0);
+			write_PWM(PE3, -pwm);
+		}
+		delay_mS(50);
+		//tprintf("%l\n", get_encoder_velocity());
+		//delay_mS(100);
+		if(error < 5){
+			lft++;
+			if(lft > 20){
+				if(target == 0){
+					target = 8192;
+				} else {
+					target = 0;
+				}
+				lft = 0;
+			}
+		} else {
+			lft = 0;
+		}
+	}
+}

@@ -27,7 +27,7 @@ void setup_timers(){
 	
 	//Timer 3: 10-bit phase correct PWM, CLK/64
 	TCCR3A = (1<<WGM31) | (1<<WGM30);
-	TCCR3B = (1<<CS30) | (1<<CS31);
+	TCCR3B = /*(1<<CS30) | */(1<<CS31);
 
 	TOF_Cnt = 0; //Clear the overflow counter
 }

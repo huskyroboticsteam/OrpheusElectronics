@@ -34,44 +34,68 @@ void dump_message(struct CAN_msg m){
 }
 int main(){
 	int i;
-	DDRE = (1 << PE4);
+	DDRE = (1 << PE4) | (1 << PE3);
 	setup_timers();
-	usart_init(1200);
-	init_encoder();
+	usart_init(19200);
 	_delay_ms(666);
-	init_CAN(CAN_100_BAUD, 3, 0);
-	DDRE = 1<<PE4;
-	PORTE = (1<<PE6) | (1<<PE7);
 	sei();
-	struct CAN_msg r, m;
-	delay_mS(1000);
-	init_ADC();
-	int last_ticks;
+	init_encoder();
+	PORTE = 0;
+	volatile int itg = 0;
+	volatile int error;
+	int target = 256;
+	int lft = 0;
+	int dt=0;
+	int last;
+	int last_d;
+	int vel;
+	int pwm;
+	int cnt = 0;
 	while(1){
-		/*if(CAN_msg_available()){
-			while(CAN_msg_available()){
-				CAN_get_msg(&r);
+		//vel = vel/2 + get_encoder_velocity()/2;
+		vel = get_encoder_ticks();
+		error = target - vel;
+		dt = error - last;
+		last = error;
+		//int pwm = error/4 + itg/16 + dt/8;
+		pwm = error*10 + itg/2 + dt*10;
+		if(error > 4 || error < -4){
+			itg += error;
+		}
+		if(itg > 2048) itg = 2048;
+		if(itg < -2048) itg = -2048;
+		if(pwm > 1023) pwm = 1023;
+		if(pwm < -1023) pwm = -1023;
+		tprintf("%d %d %d %d %d %d\n", target, vel, error, itg/10, dt*10, pwm);
+		//tprintf("%d\n", itg);
+		set_motor_power(pwm);
+		delay_mS(50);
+		//cnt++;
+		//if(cnt % 256 == 0){
+		if(!(PINE & (1<<PE5))){
+			target+=64;
+		} else {
+			//target-=64;
+			target -= 32;
+			if(target < 256){
+				target = 256;
 			}
-			int i = *((uint16_t*)&r.data);
-			write_PWM(PE4, i);
-			tprintf("%d\n", i);
 		}
-		*/
-		if(CAN_msg_available()){
-			CAN_get_msg(&r);
-			dump_message(r);
-		}
-		int i = read_ADC(0);//get_encoder_ticks();
-	//	if(i < 0){reset_encoder(); i = 0;}
-	//	if(i > 1023){set_encoder_ticks(1023); i = 1023;}
-		tprintf("%d\n", i);
-		*((int*)&m.data) = i;
-		m.id = 0;
-		m.length = 2;
-		m.flags = 0;
-		//dump_message(m);
-		CAN_send_msg(&m);
-		
-		delay_mS(100);
+		//}
+		//tprintf("%l\n", get_encoder_velocity());
+		//delay_mS(100);
+		/*if(error < 5){
+			lft++;
+			if(lft > 20){
+				if(target == 0){
+					target = 8192;
+				} else {
+					target = 0;
+				}
+				lft = 0;
+			}
+		} else {
+			lft = 0;
+		}*/
 	}
 }

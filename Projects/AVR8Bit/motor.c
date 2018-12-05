@@ -40,6 +40,7 @@ void init_motor(){
   Negative values reverse the motor
 */
 void set_motor_power(int16_t power){
+	#if 0
 	if(power > 1023) power = 1023;
 	if(power < -1023) power = -1023;
 	if(power == 0 || !(motor_mode & MOTOR_MODE_ENABLED)){ //Shut down the motor if it isn't enabled or power is 0
@@ -60,6 +61,16 @@ void set_motor_power(int16_t power){
 		}
 	}
 	write_PWM(MOTOR_PWM, power);
+	#endif
+	if(power > 1023) power = 1023;
+	if(power < -1023) power = -1023;
+	if(power > 0){
+		write_PWM(PE3, 0);
+		write_PWM(PE4, power);
+	} else {
+		write_PWM(PE4, 0);
+		write_PWM(PE3, -power);
+	}
 }
 
 /*Returns the motor current in milliamps*/
