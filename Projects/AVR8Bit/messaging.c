@@ -107,10 +107,10 @@ void send_int16_packet(uint8_t target, uint8_t pn, uint16_t n, uint8_t priority)
   uint8_t priority: the priority of the message. True for high priority
 */
 void send_int32_packet(uint8_t target, uint8_t pn, uint32_t n, uint8_t priority){
-	uint8_t buf[5];
+	uint8_t buf[4];
 	buf[0] = pn;
 	buf[1] = (n & 0xFF0000) >> 16;
-	buf[1] = (n & 0x00FF00) >> 8;
-	buf[0] = (n & 0x0000FF);
+	buf[2] = (n & 0x00FF00) >> 8;
+	buf[3] = (n & 0x0000FF);
 	send_CAN_message(target, 5, buf, priority);
 }

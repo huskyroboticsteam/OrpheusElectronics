@@ -36,7 +36,7 @@ void internalAREF(){
 	if(!(ADMUX & 0xC0)){
 		ADMUX |= 0xC0;
 		delay_mS(5);
-		read_ADC(0);
+		read_ADC(0); //As per the datasheet, discard the first reading after changing AREF
 	}
 }
 
