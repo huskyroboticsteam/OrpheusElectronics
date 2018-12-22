@@ -50,5 +50,5 @@ int main (void)
 	}
 	
 }
-// https://www.digikey.com/eewiki/display/microcontroller/CAN+Example+-+ATmega32M1+-+STK600
+// https://www.digikey.com/eewiki/display/microcontroller/CAN+Example+-+ATmega32M1+-+
 // https://github.com/arduino/ArduinoModule-CMSIS-Atmel/blob/master/CMSIS-Atmel/CMSIS/Device/ATMEL/samc21/include/samc21g17a.h

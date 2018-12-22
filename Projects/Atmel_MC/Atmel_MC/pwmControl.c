@@ -5,7 +5,9 @@
  */ 
 
 #include "top.h"
-
+/*
+pa8
+*/
 
 int SPEED_RES = 255; // input speed resolution
 int CLK_FREQ = 12000000; // input clock frequency to PWM block
@@ -17,7 +19,7 @@ void pwmControl(void *myPwmDataPtr) {
 	pwmData *pwmDataPtr = (pwmData*) myPwmDataPtr;
 	int i;
 	for (i = 0; i < NUM_MOTORS; i++) {
-		pwmDataPtr->pwmVal[i] = ;
+		PWMPIN = pwmDataPtr->pwmVal[i];
 	}
 }
 
