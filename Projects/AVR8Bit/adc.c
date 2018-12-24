@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include "adc.h"
 #include "conf.h"
+#include "timers.h"
 
 #define VS_PIN 1
 

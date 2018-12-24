@@ -18,20 +18,7 @@
 	uint8_t data[8];
 };*/
 
-void dump_message(struct CAN_msg m){
-	int i;
-	tprintf("\n-CAN MESSAGE-\n");
-	tprintf("id=%d, flags=0x%X, length=%d\n", m.id, (long)m.flags, m.length);
-	tprintf("HEX={");
-	for(i = 0;i < m.length;i++){
-		tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");
-	}
-	tprintf("}, ASCII={");
-	for(i = 0;i < m.length;i++){
-		tprintf("%c", (m.data[i] > 31 && m.data[i] < 128)?m.data[i]: '.');
-	}
-	tprintf("}\n-END CAN MESSAGE-\n\n");
-}
+
 int main(){
 	int i;
 	DDRE = (1 << PE4) | (1 << PE3);
@@ -58,7 +45,10 @@ int main(){
 		dt = error - last;
 		last = error;
 		//int pwm = error/4 + itg/16 + dt/8;
-		pwm = error*10 + itg/2 + dt*10;
+		if(error > 1024) error = 1024;
+		if(error < -1024) error = -1024;
+		pwm = error*11 + itg/3 + dt*6;
+		
 		if(error > 4 || error < -4){
 			itg += error;
 		}
@@ -69,7 +59,7 @@ int main(){
 		tprintf("%d %d %d %d %d %d\n", target, vel, error, itg/10, dt*10, pwm);
 		//tprintf("%d\n", itg);
 		set_motor_power(pwm);
-		delay_mS(50);
+		delay_mS(20);
 		//cnt++;
 		//if(cnt % 256 == 0){
 		if(!(PINE & (1<<PE5))){

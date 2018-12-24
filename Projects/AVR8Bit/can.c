@@ -3,6 +3,7 @@
 #include <avr/interrupt.h>
 #include <usart.h>
 #include "can.h"
+#include "timers.h"
 
 volatile uint8_t msgs_av; //Number of messages unclaimed messages
 
@@ -146,7 +147,7 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 	if(CANIDT4 & (1<<RTRTAG)){ //Was this a Request To Transmit?
 		buf->flags |= CAN_RTR;
 	} else {
-		buf->flags &= CAN_RTR;
+		buf->flags &= ~CAN_RTR;
 	}
 	for(i = 0;i < buf->length;i++){
 		buf->data[i] = CANMSG; //Get the data from the MOb and copy it into the buffer
@@ -266,4 +267,19 @@ void CAN_dump_state(){
 		}
 		tprintf("}\n");
 	}
+}
+
+void dump_CAN_message(struct CAN_msg m){
+	int i;
+	tprintf("\n-CAN MESSAGE-\n");
+	tprintf("id=%d, flags=0x%X, length=%d\n", m.id, (long)m.flags, m.length);
+	tprintf("HEX={");
+	for(i = 0;i < m.length;i++){
+		tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");
+	}
+	tprintf("}, ASCII={");
+	for(i = 0;i < m.length;i++){
+		tprintf("%c", (m.data[i] > 31 && m.data[i] < 128)?m.data[i]: '.');
+	}
+	tprintf("}\n-END CAN MESSAGE-\n\n");
 }
