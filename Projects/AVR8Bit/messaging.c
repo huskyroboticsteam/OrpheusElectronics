@@ -5,7 +5,7 @@
 #include "motor.h"
 #include "messaging.h"
 
-#define MODEL_NUMBER 0 //Change this to change the model number
+#define MODEL_NUMBER 0x02 //Change this to change the model number
 #define BEAGLEBONE_ADDRESS 0x08
 
 /*Handle a recieved CAN message*/

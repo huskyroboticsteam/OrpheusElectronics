@@ -14,6 +14,7 @@
 #define MOTOR_MODE_ENABLED 1
 
 void init_motor();
+uint8_t PID_due();
 void set_motor_power(int16_t power);
 uint16_t get_motor_current();
 uint8_t check_motor_stall();

@@ -9,11 +9,12 @@
 int32_t motor_target_pos; //Motor target position
 int16_t motor_target_vel; //Motor target velocity
 int32_t motor_max_pos; //The maximum position of the motor
-/*Do we need these???*/
-//int32_t motor_last_pos;
-//int16_t motor_vel;
-//uint32_t motor_last_timestamp;
-/********************/
+int32_t last_pos_err;
+int16_t last_vel_err;
+int32_t pos_i,vel_i;
+int16_t motor_power;
+
+uint32_t last_mS;
 
 uint8_t motor_mode; //Traxcks the motor mode
 
@@ -32,6 +33,14 @@ void init_motor(){
 	init_encoder();
 //	motor_last_pos = 0;
 //	motor_last_timestamp = get_mS();
+}
+
+/*Returns true if the PID loop is due to run*/
+uint8_t PID_due(){
+	if(get_mS() - last_mS > 49){
+		return 1;
+	}
+	return 0;
 }
 
 /*Sets the motor power
@@ -88,9 +97,10 @@ uint16_t get_motor_current(){
 
 /*Returns true if the motor is stalled*/
 uint8_t check_motor_stall(){
+	return get_motor_current() > 5000;
 	/*Check motor current*/
 	/*Check derrivative of encoder?*/
-	return 0;
+	//return 0;
 }
 
 /*Sets a target position for the motor*/
@@ -116,29 +126,20 @@ int32_t get_target_velocity(){
 
 /*Gets the current motor velocity*/
 int16_t get_motor_velocity(){
-/*	int32_t enc = get_encoder_ticks();
-	int32_t mS = get_mS();
-	if(mS - motor_last_timestamp < 50){ //Has enough time passed?
-		return motor_vel; //No. Return the old value
-	} else {
-		int16_t new_velocity = (1000*(enc - motor_last_pos))/(mS - motor_last_timestamp); //Calculate the new velocity
-		motor_vel = motor_vel/2 + new_velocity/2; //Low-pass filter
-		motor_last_pos = enc; //Update values
-		motor_last_timestamp = mS;
-		return motor_vel;
-	}*/
 	return get_encoder_velocity();
 }
 
 /*Executes one tick of the motor control system. Call this in a loop!*/
 void motor_control_tick(){
-	if(motor_mode & MOTOR_MODE_PID){
-		//int pos = get_motor_position();
+	if(check_motor_stall()){
+		motor_power = 0;
+		disable_motor();
+		/*Send CAN message*/
 	}
-	
 	uint8_t limit_sw = get_motor_limit_switch_state();
 	if(limit_sw & 1){
 		reset_encoder();
+		motor_power = 0;
 		set_motor_power(0);
 	}
 	if(limit_sw & 2){
@@ -146,9 +147,36 @@ void motor_control_tick(){
 		if(motor_target_pos > motor_max_pos){
 			motor_target_pos = motor_max_pos;
 		}
+		motor_power = 0;
 		set_motor_power(0);
 	}
+	if(motor_mode & MOTOR_MODE_PID && PID_due()){
+		int32_t pos = get_encoder_ticks();
+		int32_t errorp = pos - motor_target_pos;
+		int32_t dp = errorp - last_pos_err;
+		uint16_t mpp = errorp*1 + dp*1 + pos_i*1;
+		pos_i += errorp;
+		if(pos_i > 16384) pos_i = 16384;
+		if(pos_i < -16384) pos_i = -16384;
+		
+		int16_t vel = get_motor_velocity();
+		int16_t errorv = vel - motor_target_vel;
+		int16_t dv = errorv - last_vel_err;
+		uint16_t mvp = errorv*1 + dv*1 + vel_i*1;
+		vel_i += errorv;
+		if(vel_i > 16384) vel_i = 16384;
+		if(vel_i < -16384) vel_i = -16384;
+		
+		if(errorp > 1000){
+			motor_power = mvp;
+		} else {
+			motor_power = mpp;
+		}		
+		last_mS = get_mS();
+	}
+	set_motor_power(motor_power);		
 }
+
 /*Enables the motor*/
 void enable_motor(){
 	motor_mode |= MOTOR_MODE_ENABLED;
