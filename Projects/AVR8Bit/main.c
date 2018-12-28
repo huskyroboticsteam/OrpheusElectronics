@@ -1,91 +1,50 @@
-#include "conf.h"
+#include "config.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <avr/wdt.h>
 #include <string.h>
+#include <stdlib.h>
 #include "pwm.h"
 #include "encoder.h"
 #include "motor.h"
 #include "timers.h"
 #include "adc.h"
 #include "can.h"
+#include "messaging.h"
+#include "can.h"
+#include "util.h"
 #include "usart.h"
-/*struct CAN_msg {
-	uint16_t id;
-	uint8_t flags;
-	uint8_t length;
-	uint8_t data[8];
-};*/
-
 
 int main(){
-	int i;
-	DDRE = (1 << PE4) | (1 << PE3);
+	struct CAN_msg m;
+	uint32_t mS;
 	setup_timers();
-	usart_init(19200);
-	_delay_ms(666);
+	set_LED(0, 2);
+	usart_init(19200); //Debug serial
+	_delay_ms(666); //Delay so one can connect to debug serial
 	sei();
+	init_CAN(CAN_100_BAUD, 4, 0);
 	init_encoder();
+	init_motor();
+	set_motor_mode(MOTOR_MODE_PID);
+	enable_motor();
 	PORTE = 0;
-	volatile int itg = 0;
-	volatile int error;
-	int target = 256;
-	int lft = 0;
-	int dt=0;
-	int last;
-	int last_d;
-	int vel;
-	int pwm;
-	int cnt = 0;
+	set_LED(0, 3);
 	while(1){
-		//vel = vel/2 + get_encoder_velocity()/2;
-		vel = get_encoder_ticks();
-		error = target - vel;
-		dt = error - last;
-		last = error;
-		//int pwm = error/4 + itg/16 + dt/8;
-		if(error > 1024) error = 1024;
-		if(error < -1024) error = -1024;
-		pwm = error*11 + itg/3 + dt*6;
-		
-		if(error > 4 || error < -4){
-			itg += error;
-		}
-		if(itg > 2048) itg = 2048;
-		if(itg < -2048) itg = -2048;
-		if(pwm > 1023) pwm = 1023;
-		if(pwm < -1023) pwm = -1023;
-		tprintf("%d %d %d %d %d %d\n", target, vel, error, itg/10, dt*10, pwm);
-		//tprintf("%d\n", itg);
-		set_motor_power(pwm);
-		delay_mS(20);
-		//cnt++;
-		//if(cnt % 256 == 0){
-		if(!(PINE & (1<<PE5))){
-			target+=64;
-		} else {
-			//target-=64;
-			target -= 32;
-			if(target < 256){
-				target = 256;
+		mS = get_mS();
+		if(!PID_due){ //Don't busy the processor if the PID is due to run
+			if(CAN_msg_available()){
+				CAN_get_msg(&m);
+				handle_CAN_message(&m);
+			}
+			if(mS % 256 == 0){
+				send_encoder_count(); //Send encoder count 4 times per second
+			}
+			if(mS % 512 == 0){
+				send_telemetry(); //Send encoder count 2 times per second
 			}
 		}
-		//}
-		//tprintf("%l\n", get_encoder_velocity());
-		//delay_mS(100);
-		/*if(error < 5){
-			lft++;
-			if(lft > 20){
-				if(target == 0){
-					target = 8192;
-				} else {
-					target = 0;
-				}
-				lft = 0;
-			}
-		} else {
-			lft = 0;
-		}*/
+		motor_control_tick();
 	}
 }

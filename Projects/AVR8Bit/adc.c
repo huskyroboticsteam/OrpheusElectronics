@@ -1,9 +1,7 @@
+#include "config.h"
 #include <avr/io.h>
 #include "adc.h"
-#include "conf.h"
 #include "timers.h"
-
-#define VS_PIN 1
 
 /*Initialize the ADC and prepare it for reading*/
 void init_ADC(){

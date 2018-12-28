@@ -1,14 +1,11 @@
-#include "conf.h"
+#include "config.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include "usart.h"
-
-int16_t min(int16_t a, int16_t b){
-	return (a < b)? a:b;
-}
+#include "util.h"
 
 volatile char usart_TX_buf[USART_TX_BUF_SZ], txbp, txend;
 volatile char usart_RX_buf[USART_RX_BUF_SZ], rxbp;

@@ -1,14 +1,19 @@
-#include "conf.h"
+#include "config.h"
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "timers.h"
+#include "util.h"
 
 volatile uint32_t TOF_Cnt; //Timer1 overflow counter
+volatile uint8_t PID_due;
 
-/*Will this eat too much CPU time? TBD*/
-ISR(TIMER1_OVF_vect){ //This should fire every 10mS
+ISR(TIMER1_OVF_vect){ //This should fire every 40mS
 	TOF_Cnt++;
+	if(TOF_Cnt % 4 == 0){
+		update_LEDS((uint16_t)TOF_Cnt);
+	}
+	PID_due = 1;
 }
 
 /*Set up the AVR's timers for PWM and time information*/

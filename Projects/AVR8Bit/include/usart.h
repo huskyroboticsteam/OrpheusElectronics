@@ -1,8 +1,7 @@
 #ifndef USART_H
 #define USART_H
 
-#define USART_TX_BUF_SZ 16
-#define USART_RX_BUF_SZ 16
+#include "config.h"
 
 void usart_init(uint32_t baud);
 void usart_end();

@@ -3,10 +3,10 @@
 #include <string.h>
 #include "can.h"
 #include "motor.h"
+#include "encoder.h"
+#include "adc.h"
+#include "usart.h"
 #include "messaging.h"
-
-#define MODEL_NUMBER 0x02 //Change this to change the model number
-#define BEAGLEBONE_ADDRESS 0x08
 
 /*Handle a recieved CAN message*/
 void handle_CAN_message(struct CAN_msg *m){
@@ -32,19 +32,27 @@ void handle_CAN_message(struct CAN_msg *m){
 			}
 			break;
 		case 0x04: //Set angle
+			set_target_position(m->data[1]); /*Only 1 byte for position and no velocity in spec?!*/
 			break;
-		case 0x06: //Set velocity
+		case 0x06: //Index
+			index_motor();
 			break;
 		case 0x08: //Reset
 			break;
 		case 0x0A: //Set P
+			set_Kp(m->data[1] | m->data[2]<<8, m->data[3] | m->data[4]<<8);
 			break;
 		case 0x0C: //Set I
+			set_Ki(m->data[1] | m->data[2]<<8, m->data[3] | m->data[4]<<8);
 			break;
 		case 0x0E: //Set D
+			set_Kd(m->data[1] | m->data[2]<<8, m->data[3] | m->data[4]<<8);
 			break;
 		case 0x10: //Model request
 			send_model_number(sender);
+			break;
+		case 0xFF: /*error*/
+			tprintf("Error %d\n", m->data[1]);
 			break;
 	}
 }
@@ -58,7 +66,7 @@ void handle_CAN_message(struct CAN_msg *m){
 */
 int send_CAN_message(uint8_t target, uint8_t length, void *buffer, uint8_t priority){
 	struct CAN_msg m;
-	uint8_t my_adr = get_dip_switch();
+	uint8_t my_adr = 0x10 | get_dip_switch();
 	m.id = ((!priority)<<10) | (my_adr & 0x1F)<<5 | (target & 0x1F);
 	m.flags = 0;
 	m.length = length;
@@ -109,8 +117,31 @@ void send_int16_packet(uint8_t target, uint8_t pn, uint16_t n, uint8_t priority)
 void send_int32_packet(uint8_t target, uint8_t pn, uint32_t n, uint8_t priority){
 	uint8_t buf[4];
 	buf[0] = pn;
-	buf[1] = (n & 0xFF0000) >> 16;
-	buf[2] = (n & 0x00FF00) >> 8;
-	buf[3] = (n & 0x0000FF);
+	buf[1] = (n & 0xFF000000) >> 24;
+	buf[2] = (n & 0x00FF0000) >> 16;
+	buf[3] = (n & 0x0000FF00) >> 8;
+	buf[4] = (n & 0x000000FF);
 	send_CAN_message(target, 5, buf, priority);
+}
+
+/*Send an error packet with the specified code over the CAN bus to to the BBB*/
+void send_CAN_error(uint8_t error){
+	send_int8_packet(BEAGLEBONE_ADDRESS, 0xFF, error, 1);
+}
+
+/*Sends the encoder count over the CAN bus to the BBB*/
+void send_encoder_count(){
+	uint32_t count = get_encoder_ticks();
+	if(count < 65535){
+		send_int16_packet(BEAGLEBONE_ADDRESS, 0x14, count & 0xFFFF, 0);
+	} else {
+		send_int32_packet(BEAGLEBONE_ADDRESS, 0x14, count, 0);
+	}
+}
+
+/*Sends the voltage and current over the CAN bus to the BBB*/
+void send_telemetry(){
+	uint16_t voltage = get_voltage();
+	uint16_t current = get_motor_current();
+	send_int32_packet(BEAGLEBONE_ADDRESS, 0x18, ((uint32_t)voltage << 16) | current, 0);
 }

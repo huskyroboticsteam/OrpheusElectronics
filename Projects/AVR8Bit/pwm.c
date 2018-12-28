@@ -1,4 +1,4 @@
-#include "conf.h"
+#include "config.h"
 #include <avr/io.h>
 #include "usart.h"
 #include "pwm.h"
