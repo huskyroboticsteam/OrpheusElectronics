@@ -4,7 +4,7 @@
 #include <avr/include/stdio.h>
 #include "I2C_MASTER.h"
 
-void I2CInit (void){
+void I2CInit (){
 	TWBR = 0x01; // Set bit rate to 100 kHz
 	TWCR = (1<<TWEN);
 	TWSR = 0x00;
@@ -23,7 +23,7 @@ void I2CStart (uint8_t address){
 	I2CWait();
 }
 
-void I2CStop (void){
+void I2CStop (){
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 }
 
@@ -33,7 +33,7 @@ void I2CWrite (unsigned char data){
 	I2CWait();
 }
 
-uint8_t I2CRead(void)
+uint8_t I2CRead()
 {
 	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWEA);
 	I2CWait();
