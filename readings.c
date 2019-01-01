@@ -13,15 +13,20 @@ double moduleReadings () {
 	if(voltage > 24 || voltage < 16){
 		soundBuzzer(0x07h); 
 	}
+	I2CStop();
+	
+	I2CStart(1001110);
 	
 	I2CWrite(0x04h); // Current register
 	double current = (double) I2CRead();
 	printf("Current :"+ current);
+	I2CStop();
+	
+	I2CStart(1001110);
 	
 	I2CWrite(0x03h); // Power register 
 	double power = (double) I2CRead();
 	printf("Power :"+ power);
-	
 	I2CStop();
 }
 
