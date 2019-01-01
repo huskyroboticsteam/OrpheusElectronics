@@ -1,5 +1,5 @@
-#ifndef I2C_MASTER
-#define I2C_MASTER
+#ifndef READINGS
+#define READINGS
 
 double moduleReadings();
 void soundBuzzer(uint8_t address);
