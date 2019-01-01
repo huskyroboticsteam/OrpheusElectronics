@@ -19,7 +19,7 @@ void I2CStart (uint8_t address){
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
 	I2CWait();
 	TWDR = address;
-	TWCR = (1<<TWINT) | (1<<TWEN);
+	TWCR = (1<<TWEN) | (1<<TWINT);
 	I2CWait();
 }
 
@@ -29,7 +29,7 @@ void I2CStop (){
 
 void I2CWrite (unsigned char data){
 	TWDR = data;
-	TWCR = (1<<TWINT) | (1<<TWEN);
+	TWCR = (1<<TWEN) | (1<<TWINT);
 	I2CWait();
 }
 
