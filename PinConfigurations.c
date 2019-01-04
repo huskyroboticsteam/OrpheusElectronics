@@ -1,9 +1,4 @@
-/*
- * GccApplication1.c
- *
- * Created: 11/29/2018 7:12:25 PM
- * Author : User
- */ 
+
 
 #define CAN_TRANSMITTER_PORT          DDD5
 #define CAN_RECEIVER_PORT             DDD6
