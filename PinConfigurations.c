@@ -11,8 +11,6 @@
  
 #include <avr/io.h>
 #include <CAN.h>
-#include "Readings.h"
-#include "I2C_MASTER.h"
 
 void initializePorts(){
 	// To relay driver 
