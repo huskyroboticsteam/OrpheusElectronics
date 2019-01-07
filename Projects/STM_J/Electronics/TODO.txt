@@ -1,0 +1,13 @@
+[X] Voltage input
+[ ] Optional 3.3V bypass
+[ ] Voltage regulation
+[ ] Input protections
+[ ] Current sense
+[ ] STM32F334R8T6
+[ ] Clock source (25MHz)
+[ ] CAN Controller
+[ ] Peripheral JTAG/SWD
+[ ] 2x Encoders
+[ ] 2x Limit Switch
+[ ] 1x Analog input
+[ ] Test outputs
