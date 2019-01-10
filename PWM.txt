@@ -1,0 +1,105 @@
+#include "stm32f3xx.h"  
+#include  "stm32f3xx_hal_gpio.h"
+
+// Private Variables
+TIM_HandleTypeDef TIM_Handle
+TIM_OC_InitTypeDef OC_sConfig
+
+// ------------ MOTOR CONTROLLER VARIABLES ------------------
+// PID variables
+volatile uint_32 P_const;
+volatile uint_32 I_const;
+volatile uint_32 D_const;
+// PWM variables
+volatile unsigned char angle;
+volatile unsigned char PWM;
+volatile unsigned char DIR;
+
+void PWM_init(void)
+{
+	// ----------- Initialize the TIM low level resources ----------------
+	// Enable the TIM interface clock
+	__HAL_RCC_TIMx_CLK_ENABLE (); //x = 1, 4, 16
+
+	// ----------- Initialize Motor Controller GPIOs ----------------
+	// PWM GPIO
+	GPIO_InitTypeDef GPIO_PWM_InitStruct
+
+	GPIO_PWM_InitStruct.Pin = GPIO_PIN_12
+	GPIO_PWM_InitStruct.Mode = GPIO_MODE_AF_PP;
+	GPIO_PWM_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_PWM_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	GPIO_PWM_InitStruct.Alternate = GPIO_AFx_TIMx // specify x
+
+	HAL_GPIO_Init (&GPIOA, &GPIO_PWM_InitStruct);
+	
+	// Direction GPIOA
+	GPIO_InitTypeDef GPIO_DIR_InitStruct
+	GPIO_DIR_InitStruct.Pin = GPIO_PIN_13
+	GPIO_DIR_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_DIR_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_DIR_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	
+	HAL_GPIO_Init (&GPIOA, &GPIO_DIR_InitStruct);
+	
+	// ----------- Config TIM Handler ---------------
+	TIM_Handle.Instance = TIMx
+	// Value used to divide the TIM clock. Value between Min_Data = 0x0000 and 0xFFFFU
+	TIM_Handle.Init.Prescaler = 
+	TIM_Handle.Init.CounterMode = TIM_COUNTERMODE_UP;
+	TIM_Handle.Init.Period = 
+	TIM_Handle.Init.ClockDivision = TIM_CLOCKDIVISION_DIVx // x = 1,2,4
+	// Number of PWM periods
+	TIM_Handle.Init.RepetitionCounter = 
+	TIM_Handle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+
+	// Initialize PWM
+	HAL_TIM_PWM_Init(&TIM_Handle);
+
+	// ----- Config TIM OC -------------------
+	OC_sConfig.OCMode = TIM_OCMODE_PWM2;
+	OC_sConfig.Pulse = // // Parameter is a number between 0x0000 and 0xFFF
+	OC_sConfig.OCPolarity = TIM_OCNPOLARITY_HIGH;
+	OC_sConfig.OCFastMode = TIM_OCFAST_ENABLE;
+	OC_sConfig.OCIdleState = TIM_OCIDLESTATE_SET;
+
+	HAL_TIM_PWM_ConfigChannel(&TIM_Handle, &OC_sConfig, TIM_CHANNEL_x); // specify x
+}
+
+
+void set_Period(uint32_t newPeriod)
+{
+	TIM_Handle.Init.Period = newPeriod;
+}
+
+uint32_t get_Period(void){
+	return TIM_Handle.Init.Period;
+}
+
+void set_Dir(uint8_t direction)
+{
+	if (direction > 0){
+		if(HAL_GPIO_ReadPin(&GPIOA, GPIO_PIN_13) == 0){
+			HAL_GPIO_WritePin (&GPIOA, GPIO_PIN_13, GPIO_PIN_SET)
+		}
+	}
+	else if (direction == 0){
+		if(HAL_GPIO_ReadPin(&GPIOA, GPIO_PIN_13) == 1){
+			HAL_GPIO_WritePin (&GPIOA, GPIO_PIN_13, GPIO_PIN_RESET)
+		}
+	}
+}
+
+uint8_t get_Dir(void){
+	if	(HAL_GPIO_ReadPin (&GPIOA, GPIO_PIN_13) == GPIO_PIN_RESET){
+		return 0;
+	} 
+	else {
+		return 1;
+	}
+}
+
+
+
+
+

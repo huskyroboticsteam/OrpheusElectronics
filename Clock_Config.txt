@@ -1,0 +1,66 @@
+#include "stm32f3xx.h"  
+#include "stm32f3xx_hal.h"
+
+
+// Function Prototypes
+void Clock_Config(void);
+
+void Clock_Config(void)
+{
+	RCC_OscInitTypeDef RCC_Osc_Struct
+	RCC_ClkInitTypeDef RCC_Clk_Struct
+	RCC_PLLInitTypeDef PLL_Struct
+
+	// ------------ Configure PLL ------- 
+	// State of the PLL
+	PLL_Struct.State = RCC_PLL_ON;
+
+	// PPL Clock Source
+	PLL_Struct.Source = RCC_PLLSOURCE_HSE;
+
+	// PLL Multiplication factor x = [2:16]
+	PLL_Struct.PPLMUL = RCC_PLL_MULx
+
+	// ------------ Configure RCC_OSC------- 
+	// Oscillator Type
+	RCC_Osc_Struct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+
+	// HSE State (On/Off/Bypass)
+	RCC_Osc_Struct.HSEState = RCC_HSE_ON
+
+	// HSE Pre-Division Value where x = [1,16]
+	RCC_Osc_Struct.HSEPredivValue = RCC_HSE_PREDIV_DIVx 
+
+	// PLL structure parameter
+	RCC_Osc_Struct.PLL = PLL_Struct;
+
+	// Initialize the RCC Oscillator
+	HAL_RCC_OscConfig(&RCC_Osc_Struct)
+
+	// ------------ Configure RCC_Clk --------------- 
+	// The clock to be configured
+	RCC_Clk_Struct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+
+	// The clock source (SYSCLKS) used as system clock
+	RCC_Clk_Struct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+
+	// The AHB clock (HCLK) divider - clock is derived from the system clock (SYSCLK)
+	RCC_Clk_Struct.AHBCLKDivider = RCC_SYSCLK_DIVx; // x = [1, 16]
+
+	// The APB1 clock (PCLK1) divider - clock is derived from the AHB clock (HCLK)
+	RCC_Clk_Struct.APB1CLKDivider = RCC_HCLK_DIVx; //  x = [1,2,4,6,8,16]
+
+	// The APB2 clock (PCLK2) divider - clock is derived from the AHB clock (HCLK)
+	RCC_Clk_Struct.APB2CLKDivider = RCC_HCLK_DIVx; //  x = [1,2,4,6,8,16]
+
+	// Initialize the CPU, AHB and APB buses clocks
+	HAL_RCC_ClockConfig(&RCC_Clk_Struct, FLASH_LATENCY_x) // x = ????
+	
+	// Enable the clock for GPIOs
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	__HAL_RCC_GPIOC_CLK_ENABLE();
+	
+	// Enable clock for ADC 
+	__HAL_RCC_ADC2_CLK_ENABLE();
+}

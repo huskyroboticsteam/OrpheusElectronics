@@ -1,0 +1,66 @@
+// Function Prototypes
+void ADC_init(void);
+void ADC2_IRQHandler(void);
+
+
+// Private Variables
+ADC_HandleTypeDef    ADC_Handle
+
+
+void ADC_init(void)
+{
+	GPIO_InitTypeDef GPIO_InitStruct;
+	ADC_AnalogWDGConfTypeDef ADC_WDG_Config
+	
+	// Enable ADC GPIO clock 
+	ADC2_CHANNEL_GPIO_CLK_ENABLE();
+	// ADC Periph clock enable
+	ADC2_CLK_ENABLE();
+
+	/-------- Configure ADC GPIO ------------------
+	
+	GPIO_InitStruct.Pin = GPIO_PIN_4;
+	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	
+	// --------- Configure ADC ----------------------
+	
+	ADC_Handle.Instance = ADC2;
+	// ADC synchronous clock derived from AHB clockw ithout prescaler 
+	ADC_Handle.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV1 
+	// ADC 8-bit resolution
+	ADC_Handle.Init.Resolution = ADC_RESOLUTION_8B 
+	ADC_Handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+	ADC_Handle.Init.ScanConvMode = ADC_SCAN_DISABLE;
+	ADC_Handle.Init.ContinuousConvMode = ENABLE;
+	
+	HAL_ADC_Init (&ADC_Handle);
+	
+	// -------- Config Watchdog for ADC -----------
+	
+	ADC_WDG_Config.WatchdogNumber = ADC_ANALOGWATCHDOG_1;
+	ADC_WDG_Config.WatchdogMode = ADC_ANALOGWATCHDOG_SINGLE_REG;
+	ADC_WDG_Config.Channel = ADC_CHANNEL_2;
+	ADC_WDG_Config.ITMode = ENABLE;
+	
+	// Upper bound and lower bound thresholds, to be 
+	// determined/calculated based on respective motor stall current
+	ADC_WDG_Config.HighThreshold = 
+	ADC_WDG_Config.LowThreshold = // Dont think there needs to be one, cannot be negative?
+	
+	HAL_ADC_AnalogWDGConfig (&ADC_Handle, &ADC_WDG_Config);
+	
+	// ---------- Configure the ADC Interrupts ----------------------
+	// NVIC Settings
+	HAL_NVIC_SetPriority(ADC2_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(ADC2_IRQn);
+	// Enable ADC Analog watchdog 1 interrupt source
+	__HAL_ADC_ENABLE_T(&ADC_Handle, ADC_IT_AWD1);
+}
+
+
+void ADC2_IRQHandler(void)
+{
+	HAL_ADC_IRQHandler();
+}

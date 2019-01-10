@@ -1,0 +1,289 @@
+#include "stdlib.h" 
+#include "stdio.h"
+#include "stdbool.h"
+#include "stm32f3xx.h" 
+#include "stm32f3xx_hal.h"
+
+// Function Prototypes
+void CAN_Config(void);
+bool CAN_Read_Msg(bool);
+void CAN_Write_Msg(unsigned char);
+void HAL_CAN_IRQHandler(CAN_HandleTypeDef);
+
+// ------------ MOTOR CONTROLLER VARIABLES ------------------
+// PID variables
+extern volatile uint_32 P_const;
+extern volatile uint_32 I_const;
+extern volatile uint_32 D_const;
+// PWM variables
+extern volatile unsigned char angle;
+extern volatile unsigned char PWM;
+extern volatile unsigned char DIR;
+
+// Private Variables
+CAN_FilterConfTypeDef sFilterConfig;
+CAN_HandleTypeDef hcan;
+CanRxMsgTypeDef RX_message;
+CanTxMsgTypeDef TX_message;
+
+// BB Address (5-Bit):
+// MB Address (5-Bit): 
+
+void CAN_Config(void)
+{
+	// Enable the CAN controller interface clock
+	__HAL_RCC_CAN1_CLK_ENABLE();
+	
+	hcan.Instance = CAN;
+	// ---------- Configure the CAN GPIOs ---------------------------
+	GPIO_InitTypeDef GPIO_Init_Struct;
+	// Rx -> GPIO Pin 8	
+	GPIO_Init_Struct.Pin = GPIO_PIN_8;
+	GPIO_Init_Struct.Mode = GPIO_MODE_INPUT;
+	GPIO_Init_Struct.Alternate = GPIO_AF9_CAN;
+	GPIO_Init_Struct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(GPIOA, &GPIO_Init_Struct);
+	// Tx -> GPIO Pin 9
+	GPIO_Init_Struct.Pin = GPIO_PIN_9;
+	GPIO_Init_Struct.Mode = GPIO_MODE_AF_PP;
+	GPIO_Init_Struct.Alternate = GPIO_AF9_CAN;
+	GPIO_Init_Struct.Speed = GPIO_SPEED_FREQ_HIGH;
+	HAL_GPIO_Init(GPIOA, &GPIO_Init_Struct);
+	
+	// ---------- Configure the CAN peripheral ---------------------------
+  
+	/* Specifies the length of a time quantum. This parameter must 
+		 be a number between Min_Data = 1 and Max_Data = 1024. */
+	hcan.Init.Prescaler = 
+	/* Specifies operating mode: 
+		 normal, loopback, silent, or silent-loopback */
+	hcan.Init.Mode = CAN_MODE_NORMAL;
+	// Need to calculate!!
+	hcan.Init.SJW  = 
+	hcan.Init.BS1  = 
+	hcan.Init.BS2  = 
+	// Specify Time Triggered Communication Mode (E/D)
+	hcan.Init.TTCM = DISABLE;
+	// Specifty Automatic Bus-off Management (E/D)
+	hcan.Init.ABOM = 
+	// Specifiy the Automatic Wake-up Mode (E/D)
+	hcan.Init.AWUM = 
+	// Specify the non-automatic retransmission mode (E/D)
+	hcan.Init.NART = 
+	// Specify the Receive FIFO Locked mode (E/D)
+	hcan.Init.RFLM = 
+	// Specify the transmit FIFO priority (E/D)
+	hcan.Init.TXFP = 
+
+	hcan.pTxMsg = &TX_message;
+	hcan.pRxMsg = &RX_message;
+
+	if (HAL_CAN_Init(&hcan) != HAL_OK)
+	{
+		Error_Handler();
+	}
+	
+	// ---------- Configure the CAN Filter -----------
+	// Filter the ID of the Beagle Bone Only
+	sFilterConfig.FilterIdHigh = 0x08;
+	sFilterConfig.FilterIdLow = 0x08;
+	
+	// Reject if one of the bits didnt match the Beagle Bones ID
+	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
+	sFilterConfig.FilterMaskIdLow = 0xFFFF;
+	sFilterConfig.FilterFIFOAssignment = 0;
+	sFilterConfig.FilterNumber = 0;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
+	// Filter Bit Size
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterActivation = ENABLE;
+	// Meaningless Parameter
+	sFilterConfig.BankNumber = 14;
+	
+	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+		/* Filter configuration Error */
+		Error_Handler();
+	}
+	
+	// ---------- Enable CAN Interrupt ------------
+	
+	/* CAN_RX1_IRQn interrupt configuration */
+	HAL_NVIC_SetPriority(CAN_RX1_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(CAN_RX1_IRQn);
+	/* USB_LP_CAN_RX0_IRQn interrupt configuration */
+	HAL_NVIC_SetPriority(USB_LP_CAN_RX0_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(USB_LP_CAN_RX0_IRQn);
+	
+	// ---------- Configure CAN Interrupt ------------
+	
+	// FIFO 0 message pending Interrupt
+	__HAL_CAN_ENABLE_IT(&hcan, CAN_IT_FMP0);
+	// FIFO 1 message pending interrupt
+	__HAL_CAN_ENABLE_IT(&hcan, CAN_IT_FMP1);
+}
+
+
+bool CAN_Read_Msg(bool transmit){
+	
+	unsigned char byte_1 = RX_message.Data[0];
+	
+	// Mode Select:
+	if(byte_1 == 00000000)
+	{
+		transmit = false;
+	}
+	// Speed and Direction
+	else if (byte_1 == 00000010)
+	{
+		// PWM
+		
+		// Direction
+		set_Dir(RX_message.Data[2];)
+		
+		transmit = false;
+	}
+	// Angle and MAX Speed
+	else if (byte_1 == 00000100)
+	{
+		angle = RX_message.Data[1];
+		transmit = false;
+	}
+
+	// Index?
+	else if (byte_1 == 00000110)
+	{
+		transmit = false;
+	}
+		
+	// RESET - Why error???
+	else if (byte_1 == 00001000)
+	{
+		transmit = false;
+	}
+	
+	// Set_P
+	else if (byte_1 == 00001010)
+	{
+		P_const = 0;
+		P_const = (RX_message.Data[2] << 24) |
+				  (RX_message.Data[4] << 16) |
+                  (RX_message.Data[1] << 8)  | RX_message.Data[3];
+    
+		transmit = false;
+	}
+	
+	// Set_I
+	else if (byte_1 == 00001100)
+	{
+		I_const = 0;
+		I_const = (RX_message.Data[2] << 24) |
+				  (RX_message.Data[4] << 16) |
+                  (RX_message.Data[1] << 8)  | RX_message.Data[3];
+    
+		transmit = false;
+	}
+	
+	// Set_D
+	else if (byte_1 == 00001110)
+	{
+		D_const = 0;
+		D_const = (RX_message.Data[2] << 24) |
+				  (RX_message.Data[4] << 16) |
+                  (RX_message.Data[1] << 8)  | RX_message.Data[3];
+    
+		transmit = false;
+	}
+	
+	// Model Req
+	else if (byte_1 == 00010000)
+	{
+		// Prepare Can Message
+		CAN_Write_Msg(0x12);
+		transmit = true;
+	}
+	
+	else {
+	// Throw error?
+	}
+}
+
+void CAN_Write_Msg(unsigned char Packet_Type)
+{
+	// Model # Response
+	if (Packet_Type == 0x12){
+		TX_message.Data[0] = 0x12;
+			
+	}
+	// Encoder Count
+	else if (Packet_Type == 0x14){
+		TX_message.Data[0] = 0x14;
+		
+	}
+	// Status
+	else if (Packet_Type == 0x16){
+		TX_message.Data[0] = 0x16;
+	
+	}
+	// Telemetry
+	else if (Packet_Type == 0x18){
+		TX_message.Data[0] = 0x18;
+		
+	}
+	
+}
+
+
+
+/* 
+void USB_LP_CAN_RX0_IRQHandler(void)
+{
+  HAL_CAN_IRQHandler(&hcan);
+  
+}
+void CAN_RX1_IRQHandler(void)
+{
+  HAL_CAN_IRQHandler(&hcan);
+}
+*/
+
+
+
+// TODO: 
+// 1) Need to release FIFO number?
+// 2) Is this even necessary since it is written
+// 	under stm32f3xx_Hhal_can.c
+// 3) Can set NVIC IQR handler priority to fire this method
+// 	instead of HAL_CAN irq hanlder inside stm32f3xx_hal_can.c
+
+void HAL_CAN_IRQHandler(CAN_HandleTypeDef *canHandle){
+	// Transmit Flag
+	bool transmit;
+	//FIFO-0 pending message interrupt
+	if (__HAL_CAN_GET_FLAG(&hcan, CAN_IT_FMP0)){
+		// Recieve FIFO-0 message
+		HAL_CAN_Receive_IT(&hcan, CAN_FIFO0);
+		// Read FIFO-0 CAN message, transmit if necessary
+		if (CAN_Read_Msg(transmit)){
+			// Write Can Message 
+			
+			// Transmit CAN Message
+			HAL_CAN_Transmit_IT(&hcan);
+		}
+		// Clear interrupt flag
+		__HAL_CAN_CLEAR_FLAG(&hcan, CAN_IT_FMP0);
+	}
+	if (_HAL_CAN_GET_FLAG(&hcan, CAN_IT_FMP1)){
+		// Recieve FIFO-1 message
+		HAL_CAN_Receive_IT(&hcan, CAN_FIFO0);
+		// Read FIFO-1 CAN message, transmit if necessary
+		if (CAN_Read_Msg(transmit)){
+			// Write Can Message 
+			
+			// Transmit CAN Message
+			HAL_CAN_Transmit_IT(&hcan);
+		}
+		// Clear interrupt flag
+		__HAL_CAN_CLEAR_FLAG(&hcan, CAN_IT_FMP1);
+	}
+}
