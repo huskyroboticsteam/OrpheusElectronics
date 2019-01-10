@@ -6,11 +6,19 @@
 
 #include "top.h"
 
+volatile int32_t encoder_ticks; //Raw encoder ticks
+
 void readEncoders(void *myEncoderDataPtr) {
 	encoderData *encoderDataPtr = (encoderData*) myEncoderDataPtr;
 	for (int i = 0; i < NUM_MOTORS; i++) {
 		encoderDataPtr->encoderRaw[i] = ENCPIN[i];
 	}
-	
 }
 
+void set_encoder_ticks(int32_t ticks) {
+	encoder_ticks = ticks;
+}
+
+int32_t get_encoder_ticks() {
+	return encoder_ticks;
+}

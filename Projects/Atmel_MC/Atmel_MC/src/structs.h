@@ -13,7 +13,7 @@
 #define PWM_COMPARE 248000
 
 typedef struct {
-	int pwmVal[NUM_MOTORS];
+	uint16_t pwmVal[NUM_MOTORS];
 } pwmData;
 
 typedef struct {
@@ -21,7 +21,8 @@ typedef struct {
 } encoderData;
 
 typedef struct {
-	
+	int txdata[16];
+	int rxdata[16];
 } canData; // comms
 
 typedef struct {
