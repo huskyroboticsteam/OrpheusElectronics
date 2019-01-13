@@ -15,6 +15,14 @@ void readEncoders(void *myEncoderDataPtr) {
 	}
 }
 
+ISR(INT6_vect) {
+	encoder_ticks--;
+}
+
+ISR(INT7_vect) {
+	encoder_ticks++;
+}
+
 void set_encoder_ticks(int32_t ticks) {
 	encoder_ticks = ticks;
 }

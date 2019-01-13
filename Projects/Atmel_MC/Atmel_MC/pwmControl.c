@@ -15,21 +15,24 @@ int PWM_FREQ = 333; //Hz, 100kHz max
 int PWM_PERIOD = CLK_FREQ / PWM_FREQ; 
 
 // Compares the pwm values
+/*
 void pwmControl(void *myPwmDataPtr) {
-	pwmData *pwmDataPtr = (pwmData*) myPwmDataPtr;
+	pwmMotorData *pwmDataPtr = (pwmMotorData*) myPwmDataPtr;
 	int i;
 	for (i = 0; i < NUM_MOTORS; i++) {
 		PWMPIN = pwmDataPtr->pwmVal[i];
 	}
 }
+*/
 
+/*
 void pwmCalculator(void *myPwmDataPtr) {
-	pwmData *pwmDataPtr = (pwmData*) myPwmDataPtr;
+	pwmMotorData *pwmDataPtr = (pwmMotorData*) myPwmDataPtr;
 	// Pololu G2 High-Power Motor Driver 24v21
 	int i;
 	for (i = 0; i < NUM_MOTORS; i++) {
-		pwmDataPtr->pwmData[i] = (pwmDataPtr->pwmData[i])* PWM_PERIOD / SPEED_RES; // to be changed
+		pwmDataPtr->pwmMotorData[i] = (pwmDataPtr->pwmMotorData[i])* PWM_PERIOD / SPEED_RES; // to be changed
 	}
 }
-
+*/
 

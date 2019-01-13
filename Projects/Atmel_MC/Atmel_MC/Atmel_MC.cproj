@@ -481,7 +481,7 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="comms.c">
+    <Compile Include="can.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="emergencyStop.c">
@@ -494,6 +494,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="limit_switch.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="motorPID.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="pwmControl.c">

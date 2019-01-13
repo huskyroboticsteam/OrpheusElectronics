@@ -14,15 +14,19 @@
 
 typedef struct {
 	uint16_t pwmVal[NUM_MOTORS];
-} pwmData;
+} pwmMotorData;
 
 typedef struct {
 	int encoderRaw[NUM_MOTORS];
 } encoderData;
 
 typedef struct {
-	int txdata[16];
-	int rxdata[16];
+	int kp;
+	int ki;
+	int kd;
+	uint16_t canMsg;
+	// int txdata[16];
+	// int rxdata[16];
 } canData; // comms
 
 typedef struct {
