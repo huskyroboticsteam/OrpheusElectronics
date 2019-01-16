@@ -223,24 +223,27 @@ void index_motor(){
 	}
 	motor_target_pos = -262144; //Big negative number. We should hit the limit switch before this
 }
+#ifdef DEBUG
 int16_t av;
+#endif
 //int last;
 /*Executes one tick of the motor control system. Call this in a loop!*/
 void motor_control_tick(){
-	if(!motor_mode & MOTOR_MODE_PID){
+	if(!(motor_mode & MOTOR_MODE_PID)){ //If the PID is disabled, simply unset the PID due flag
 		PID_due = 0;
 	}
 	if(check_motor_stall() || PORTE & (1<<PE4)){ //Motor stall or fault pin asserted from motor driver
 		motor_power = 0;
 		disable_motor();
-		send_CAN_error(CAN_ERROR_OVERCURRENT);
+		send_CAN_error(CAN_ERROR_OVERCURRENT, get_motor_current()>>10);
 		set_LED(1, 1);
 	}
 	uint8_t limit_sw = get_motor_limit_switch_state();
 	if(limit_sw & 1){
 		reset_encoder();
 		if(motor_mode & MOTOR_MODE_INDEX) /*We're in index mode and hit the loewr limit*/
-			motor_target_pos = 262144; //Now try to find the upper limit
+			motor_mode &= ~MOTOR_MODE_INDEX; //we hit the limit switch. leave indexing mode
+			//motor_target_pos = 262144; //Now try to find the upper limit
 		if(motor_target_pos < 0)
 			motor_target_pos = 0;
 		motor_power = 0;
@@ -252,7 +255,7 @@ void motor_control_tick(){
 			motor_target_pos = motor_max_pos;
 		}
 		if(motor_mode & MOTOR_MODE_INDEX){ //Are we in index mode?
-			motor_mode &= ~MOTOR_MODE_INDEX; //Yes, and it is complete. Leave indexing mode
+			motor_mode &= ~MOTOR_MODE_INDEX; //Leave indexing mode
 		}
 		motor_power = 0;
 		set_motor_power(0);
@@ -284,7 +287,7 @@ void motor_control_tick(){
 			if(pid_runs % tgt_inc == 0){ //Are we supposed to increment this tick?
 				if(motor_target_pos > pid_target){ //The real target is bigger than the PID's current target
 					pid_target += min(5, motor_target_pos - pid_target); //Increment at most 5 ticks but don't go over the real target
-				} else if(motor_target_pos < pid_target){ //The read target is smaller than the PID's current target
+				} else if(motor_target_pos < pid_target){ //The real target is smaller than the PID's current target
 					pid_target -= min(5, pid_target - motor_target_pos); //Deincrement at most 5 ticks but don't go under the real target
 				}
 			}

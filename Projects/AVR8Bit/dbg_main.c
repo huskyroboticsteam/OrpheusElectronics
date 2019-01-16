@@ -19,17 +19,7 @@
 	uint8_t data[8];
 };*/
 
-
-void read_string(char *buffer, char until){
-	char c = -1;
-	int i = 0;
-	while(c != until){
-		c = usart_read_char();
-		tprintf("%c", c);
-		buffer[i++] = c;
-	}
-	buffer[i-1] = 0;
-}
+void read_string(char*,char);
 
 int main(){
 	int i;
@@ -38,13 +28,13 @@ int main(){
 	usart_init(19200);
 	_delay_ms(666);
 	sei();
+	tprintf("Hello, World!\n");
+	delay_mS(1000);
 	init_encoder();
 	init_motor();
 	set_motor_mode(MOTOR_MODE_PID);
 	enable_motor();
 	PORTE = 0;
-	set_target_velocity(1250);
-	set_target_position(256);
 	char target_string[8], vel_string[8];
 	while(1){
 		if(!PID_due && usart_available()){

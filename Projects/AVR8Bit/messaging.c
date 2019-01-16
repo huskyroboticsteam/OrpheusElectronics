@@ -32,7 +32,10 @@ void handle_CAN_message(struct CAN_msg *m){
 			}
 			break;
 		case 0x04: //Set angle
-			set_target_position(m->data[1]); /*Only 1 byte for position and no velocity in spec?!*/
+			param1 = m->data[1] | m->data[2]<<8;
+			param2 = m->data[3] | m->data[4]<<8;
+			set_target_position(param1);
+			set_target_velocity(param2);
 			break;
 		case 0x06: //Index
 			index_motor();
@@ -125,8 +128,8 @@ void send_int32_packet(uint8_t target, uint8_t pn, uint32_t n, uint8_t priority)
 }
 
 /*Send an error packet with the specified code over the CAN bus to to the BBB*/
-void send_CAN_error(uint8_t error){
-	send_int8_packet(BEAGLEBONE_ADDRESS, 0xFF, error, 1);
+void send_CAN_error(uint8_t error, uint8_t param){
+	send_int16_packet(BEAGLEBONE_ADDRESS, 0xFF, error << 8 | param, 1);
 }
 
 /*Sends the encoder count over the CAN bus to the BBB*/

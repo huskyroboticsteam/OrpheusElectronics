@@ -24,11 +24,13 @@ int main(){
 	usart_init(19200); //Debug serial
 	_delay_ms(666); //Delay so one can connect to debug serial
 	sei();
+	uint16_t my_address = 0x10 | get_dip_switch();
+	CAN_set_RX_filter(my_address, my_address);
 	init_CAN(CAN_100_BAUD, 4, 0);
 	init_encoder();
 	init_motor();
 	set_motor_mode(MOTOR_MODE_PID);
-	enable_motor();
+	enable_motor(0x10 | get_dip_switch());
 	PORTE = 0;
 	set_LED(0, 3);
 	while(1){
