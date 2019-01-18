@@ -21,9 +21,9 @@ typedef struct {
 } encoderData;
 
 typedef struct {
-	int kp;
-	int ki;
-	int kd;
+	uint16_t kp;
+	uint16_t ki;
+	uint16_t kd;
 	uint16_t canMsg;
 	// int txdata[16];
 	// int rxdata[16];

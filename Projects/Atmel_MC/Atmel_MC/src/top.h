@@ -10,21 +10,23 @@
 #include <can.h>
 #include <stdio.h>
 #include <interrupt.h>
+#include <asf.h>
+#include <string.h>
+#include <conf_can.h>
 
 #include "structs.h"
 #include "TCB.h"
 #include "functions.h"
+#include "comms.h"
+#include "can.h"
+#include "pins.h"
 
 #define NUM_TASKS 6
 
-#define ENCPIN[3] {PIN_PA00, PIN_PA01, PIN_PA02}
-#define LIMIT1PIN //?
-#define LIMIT2PIN //?
-
-#define PWMPIN1 PIN_PA08
-#define PWMPIN2 PIN_PA09
-#define CANRXPIN PIN_PB11
-#define CANTXPIN PIN_PB10
+// Default position PID values (will be fine tuned)
+#define DEFAULT_Kp 140 
+#define DEFAULT_Ki 20 
+#define DEFAULT_Kd 100 
 
 // for pwm
 int SPEED_RES = 255; // input speed resolution

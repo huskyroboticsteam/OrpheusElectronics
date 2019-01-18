@@ -4,8 +4,8 @@
  *  Author: Akhil Avula
  */ 
 // http://ww1.microchip.com/downloads/en/AppNotes/Atmel-42464-SAMC21-CAN-BUS-Firmware_ApplicationNote_AT6493.pdf
-#include "comms.h"
-#include "can.h"
+
+#include "top.h"
 
 #define CAN_MODULE CAN0#define CAN_TX_MUX_SETTING MUX_PA24G_CAN0_TX
 #define CAN_TX_PIN PIN_PA24G_CAN0_TX
