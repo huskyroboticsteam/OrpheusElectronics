@@ -1,0 +1,13 @@
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\Design01.cyprj|f680719e-468a-45f2-a752-7abae8611531
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|a006d898-1f00-4cbe-b56f-13e2440478d3
+C:\Users\austc\OneDrive\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|d9d36484-9422-402e-9a3d-ff4299b70d5f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|c9282c00-f433-438c-bbb4-647c5a027fde
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|eabf501f-def5-400c-8c02-63cf0658fde5
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|749ba114-fed3-4a3f-94f1-c45400dfbc1d
+C:\Users\austc\OneDrive\Documents\PSoC Creator\DebouncerExample01.cydsn\DebouncerExample01.cyprj|d58ae390-55b5-4f0b-b400-c58271cfc6c9
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|bfcce887-8450-4260-abe6-d59b70e87d52
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Basic_P4_Example01.cydsn\CAN_Basic_P4_Example01.cyprj|f6eb94a1-f87d-4697-a6ab-7cb49e614cb8
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj|5242dfce-e2ae-4c40-b399-f0cac90817a2
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Can Send test.cydsn\Can Send test.cyprj|eaf9e2a9-cb16-45fb-ae8d-ad97ea391ec5
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Basic_P4_unmodified.cydsn\CAN_Basic_P4_unmodified.cyprj|fad42693-b59f-4bf6-8b2b-c19ca591face
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Basic_P4_Original + uart debug.cydsn\CAN_Basic_P4_Original + uart debug.cyprj|85c2d685-813a-4265-93e4-861ab1c218e0

@@ -9,6 +9,11 @@
 <projects>
 <v>.\Design01.cydsn\Design01.cyprj</v>
 <v>..\..\..\PSoC Creator\DebouncerExample01.cydsn\DebouncerExample01.cyprj</v>
+<v>.\CAN_Basic_P4_Example01.cydsn\CAN_Basic_P4_Example01.cyprj</v>
+<v>.\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj</v>
+<v>.\Can Send test.cydsn\Can Send test.cyprj</v>
+<v>.\CAN_Basic_P4_unmodified.cydsn\CAN_Basic_P4_unmodified.cyprj</v>
+<v>.\working CAN_Basic_P4_Original + uart debug.cydsn\working CAN_Basic_P4_Original + uart debug.cyprj</v>
 </projects>
 <workspace_id v="b047e3a0-d217-403c-b935-5cf79557afe5" />
 <WriteAppVersionLastSavedWith v="4.2.0.641" />

@@ -1,0 +1,13 @@
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\Design01.cyprj|d5e423d7-b912-4066-a10b-79bfa7624d64
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|0c3cc775-ddee-4a79-b2d0-57101c086be8
+C:\Users\austc\OneDrive\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|d81df76a-26cb-498a-b0fd-b776135942c9
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|9121d136-bb23-4c07-aca5-70c01d9588a3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|a62391e6-893b-44e5-9619-c1a16457b516
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|982b407f-f169-43a4-a990-4683cba410a4
+C:\Users\austc\OneDrive\Documents\PSoC Creator\DebouncerExample01.cydsn\DebouncerExample01.cyprj|ed751abf-2050-4b54-b3a2-36fe1947c043
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|f2f0e843-3abe-4930-a648-538107f53e5f
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Basic_P4_Example01.cydsn\CAN_Basic_P4_Example01.cyprj|e69aa2eb-2812-4463-b542-114785da45bf
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj|65a77f43-0b93-4366-a78e-34e15d711783
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Can Send test.cydsn\Can Send test.cyprj|9e23ddb6-4934-4de9-ac06-208abd7e101a
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Basic_P4_unmodified.cydsn\CAN_Basic_P4_unmodified.cyprj|c98ef7ca-638e-4cfa-8083-24559ce54f0d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\dev\psoc4\PSoC4AnalogDevice\psoc4arch.cydsn\psoc4arch.cyprj|35aa6a2a-aa29-4070-96d2-5447ae682eeb

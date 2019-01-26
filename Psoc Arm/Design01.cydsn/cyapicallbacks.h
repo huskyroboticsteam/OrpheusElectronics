@@ -13,6 +13,7 @@
 #define CYAPICALLBACKS_H
 
 #include "project.h"
+    
 
     
 //void check_Pin(void);
@@ -24,6 +25,8 @@ void CAN_Read(int *read);
 void CAN_Send(int count, int8 switch1, int8 switch2 );
 uint32 pot_Read(void);
 void set_PWM(int period);
+int degrees_to_tick();
+int position_PID();
 void set_Position(int encoder);
 void set_Speed(int current_spd, int speed);
 

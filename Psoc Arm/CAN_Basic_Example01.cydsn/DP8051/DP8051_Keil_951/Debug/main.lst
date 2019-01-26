@@ -1,0 +1,775 @@
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\DP8051\DP8051_Keil_951\Debug\main.obj
+COMPILER INVOKED BY: C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\import\keil\pk51\9.51\C51\BIN\c51.exe 
+                    -main.c NOIV LARGE MODDP2 OMF2 VB(1) NOIP INCDIR(.,Generated_Source\PSoC3) FF(3) DB DF(DEBUG) WL(2) PR(.\DP8051\DP8051_Ke
+                    -il_951\Debug/main.lst) CD OT(2,SIZE) OJ(.\DP8051\DP8051_Keil_951\Debug\main.obj)
+
+line level    source
+
+   1          /*******************************************************************************
+   2          * File Name: main.c
+   3          *
+   4          * Version: 1.0
+   5          *
+   6          * Description:
+   7          *  In this project, the CAN component is configured to transmit two messages
+   8          *  over the CAN bus:
+   9          *   Message 1 - Status of Switch 1. Sent whenever there is a change in the
+  10          *               status.
+  11          *   Message 2 - ADC data. Sent every 100ms.
+  12          *
+  13          *  The component is also configured to receive data which is used to set the
+  14          *  pulse width of the PWM used in the project.
+  15          *  Both transmitted and received data are displayed on a 2x16 LCD.
+  16          *
+  17          *  This is only one part of the CAN example project. Use this example along
+  18          *  with CAN_FullCAN_Example for complete demonstration.
+  19          *
+  20          * Hardware Dependency:
+  21          *  CY8CKIT-001
+  22          *  CY8CKIT-017
+  23          *
+  24          ********************************************************************************
+  25          * Copyright 2015, Cypress Semiconductor Corporation. All rights reserved.
+  26          * This software is owned by Cypress Semiconductor Corporation and is protected
+  27          * by and subject to worldwide patent and copyright laws and treaties.
+  28          * Therefore, you may use this software only as provided in the license agreement
+  29          * accompanying the software package from which you obtained this software.
+  30          * CYPRESS AND ITS SUPPLIERS MAKE NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  31          * WITH REGARD TO THIS SOFTWARE, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT,
+  32          * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  33          *******************************************************************************/
+  34          #include <project.h>
+  35          #include <stdio.h>
+  36          
+  37          /* Switch debounce delay in milliseconds */
+  38          #define SWITCH_DEBOUNCE_UNIT   (1u)
+  39          
+  40          /* Number of debounce units to count delay, before consider that switch is pressed */
+  41          #define SWITCH_DEBOUNCE_PERIOD (10u)
+  42          
+  43          #define DATA_SIZE              (6u)
+  44          
+  45          /* Switch state defines */
+  46          #define SWITCH_PRESSED         (0u)
+  47          #define SWITCH_RELEASED        (1u)
+  48          
+  49          /* Function prototypes */
+  50          static uint32 ReadSwSwitch(void);
+  51          CY_ISR_PROTO(ISR_CAN);
+  52          
+  53          /* Global variable used to store switch state */
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 2   
+
+  54          uint8 switchState = SWITCH_RELEASED;
+  55          
+  56          /* Global variable used to store ISR flag */
+  57          volatile uint8 isrFlag = 0u;
+  58          
+  59          
+  60          /*******************************************************************************
+  61          * Function Name: main
+  62          ********************************************************************************
+  63          *
+  64          * Summary:
+  65          *  main() performs the following functions:
+  66          *  1: Starts the ADC, LCD, PWM, CAN components.
+  67          *  2: Starts ADC conversion.
+  68          *  3: Gets the converted result, sends message over a CAN and displays it on LCD.
+  69          *  4: Polls the status of Switch 1 and sends message over a CAN if it changes.
+  70          *  5: Sets a PWM pulse width and displays it on the LCD.
+  71          *
+  72          * Parameters:
+  73          *  None.
+  74          *
+  75          * Return:
+  76          *  None.
+  77          *
+  78          *******************************************************************************/
+  79          int main()
+  80          {
+  81   1          int16 output;
+  82   1          uint16 resMilliVolts;
+  83   1          char8 txData[DATA_SIZE];
+  84   1      
+  85   1          LCD_Start();
+  86   1      
+  87   1          /* Display value of ADC output on LCD */
+  88   1          LCD_Position(0u, 0u);
+  89   1          LCD_PrintString("ADC");
+  90   1      
+  91   1          /* Display state of switch on LCD */
+  92   1          LCD_Position(1u, 0u);
+  93   1          LCD_PrintString("SW");
+  94   1      
+  95   1          /* Display state of PWM pulse width on LCD */
+  96   1          LCD_Position(0u, 10u);
+  97   1          LCD_PrintString("PWM");
+  98   1      
+  99   1          ADC_Start();
+ 100   1          PWM_Start();        
+ 101   1      
+ 102   1          /* Start ADC conversion */
+ 103   1          ADC_StartConvert();
+ 104   1      
+ 105   1          CAN_Start();
+ 106   1      
+ 107   1          /* Set CAN interrupt handler to local routine */
+ 108   1          CyIntSetVector(CAN_ISR_NUMBER, ISR_CAN);
+ 109   1      
+ 110   1          CyGlobalIntEnable;
+ 111   1      
+ 112   1          for(;;)
+ 113   1          {
+ 114   2              if (ADC_IsEndConversion(ADC_RETURN_STATUS))
+ 115   2              {
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 3   
+
+ 116   3                  /* Gets ADC conversion result */
+ 117   3                  output = ADC_GetResult16();
+ 118   3      
+ 119   3                  /* Saturates ADC result to positive numbers */
+ 120   3                  if (output < 0)
+ 121   3                  {
+ 122   4                      output = 0;
+ 123   4                  }
+ 124   3      
+ 125   3                  /* Converts ADC result to milli volts */
+ 126   3                  resMilliVolts = (uint16) ADC_CountsTo_mVolts(output);
+ 127   3                  
+ 128   3                  /* Sends the value of ADC output via CAN */
+ 129   3                  CAN_TX_DATA_BYTE1(CAN_TX_MAILBOX_ADCdata) = HI8(resMilliVolts);
+ 130   3                  CAN_TX_DATA_BYTE2(CAN_TX_MAILBOX_ADCdata) = LO8(resMilliVolts);
+ 131   3                  CAN_TX_DATA_BYTE3(CAN_TX_MAILBOX_ADCdata) = 0u;
+ 132   3                  CAN_TX_DATA_BYTE4(CAN_TX_MAILBOX_ADCdata) = 0u;
+ 133   3                  CAN_TX_DATA_BYTE5(CAN_TX_MAILBOX_ADCdata) = 0u;
+ 134   3                  CAN_TX_DATA_BYTE6(CAN_TX_MAILBOX_ADCdata) = 0u;
+ 135   3                  CAN_TX_DATA_BYTE7(CAN_TX_MAILBOX_ADCdata) = 0u;
+ 136   3                  CAN_TX_DATA_BYTE8(CAN_TX_MAILBOX_ADCdata) = 0u;
+ 137   3                  CAN_SendMsgADCdata();
+ 138   3      
+ 139   3                  /* Display value of ADC output on LCD */
+ 140   3                  sprintf(txData, "%u.%.3u", (resMilliVolts / 1000u), (resMilliVolts % 1000u));
+ 141   3                  txData[DATA_SIZE - 1u] = (char8) '\0';
+ 142   3                  
+ 143   3                  LCD_Position(0u, 4u);
+ 144   3                  LCD_PrintString(txData);
+ 145   3              }
+ 146   2      
+ 147   2              /* Change configuration at switch press or release event */
+ 148   2              if (switchState != ReadSwSwitch())    /* Switch state changed status */
+ 149   2              {
+ 150   3                  switchState = ReadSwSwitch();    /* Store the current switch state */
+ 151   3                  LCD_Position(1u, 3u);
+ 152   3      
+ 153   3                  if (switchState == SWITCH_RELEASED)
+ 154   3                  {
+ 155   4                      CAN_TX_DATA_BYTE1(CAN_TX_MAILBOX_switchStatus) = SWITCH_PRESSED;
+ 156   4                      LCD_PrintString("pressed ");
+ 157   4                  }
+ 158   3                  else
+ 159   3                  {
+ 160   4                      CAN_TX_DATA_BYTE1(CAN_TX_MAILBOX_switchStatus) = SWITCH_RELEASED;
+ 161   4                      LCD_PrintString("released");
+ 162   4                  }
+ 163   3                  CAN_TX_DATA_BYTE2(CAN_TX_MAILBOX_switchStatus) = 0u;
+ 164   3                  CAN_TX_DATA_BYTE3(CAN_TX_MAILBOX_switchStatus) = 0u;
+ 165   3                  CAN_TX_DATA_BYTE4(CAN_TX_MAILBOX_switchStatus) = 0u;
+ 166   3                  CAN_TX_DATA_BYTE5(CAN_TX_MAILBOX_switchStatus) = 0u;
+ 167   3                  CAN_TX_DATA_BYTE6(CAN_TX_MAILBOX_switchStatus) = 0u;
+ 168   3                  CAN_TX_DATA_BYTE7(CAN_TX_MAILBOX_switchStatus) = 0u;
+ 169   3                  CAN_TX_DATA_BYTE8(CAN_TX_MAILBOX_switchStatus) = 0u;            
+ 170   3      
+ 171   3                  /* Send CAN message with switch state */
+ 172   3                  CAN_SendMsgswitchStatus();
+ 173   3              }
+ 174   2              
+ 175   2              if (isrFlag != 0u)
+ 176   2              {
+ 177   3                  /* Set PWM pulse width */
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 4   
+
+ 178   3                  PWM_WriteCompare(CAN_RX_DATA_BYTE1(CAN_RX_MAILBOX_0));
+ 179   3      
+ 180   3                  /* Display value of PWM pulse width on LCD */
+ 181   3                  LCD_Position(0u, 14u);
+ 182   3                  LCD_PrintInt8(CAN_RX_DATA_BYTE1(CAN_RX_MAILBOX_0));
+ 183   3                  
+ 184   3                  /* Clear the isrFlag */
+ 185   3                  isrFlag = 0u;
+ 186   3              }
+ 187   2      
+ 188   2              CyDelay(100u);
+ 189   2          }
+ 190   1      }
+ 191          
+ 192          
+ 193          /*******************************************************************************
+ 194          * Function Name: ISR_CAN
+ 195          ********************************************************************************
+ 196          *
+ 197          * Summary:
+ 198          *  This ISR is executed at a Receive Message event and set the isrFlag.
+ 199          *
+ 200          * Parameters:
+ 201          *  None.
+ 202          *
+ 203          * Return:
+ 204          *  None.
+ 205          *
+ 206          *******************************************************************************/
+ 207          CY_ISR(ISR_CAN)
+ 208          {
+ 209   1          /* Clear Receive Message flag */
+ 210   1          CAN_INT_SR_REG.byte[1u] = CAN_RX_MESSAGE_MASK;
+ 211   1      
+ 212   1          /* Set the isrFlag */
+ 213   1          isrFlag = 1u;    
+ 214   1      
+ 215   1          /* Acknowledges receipt of new message */
+ 216   1          CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_0);
+ 217   1      }
+ 218          
+ 219          
+ 220          /*******************************************************************************
+ 221          * Function Name: ReadSwSwitch
+ 222          ********************************************************************************
+ 223          * Summary:
+ 224          *  Reads and returns the current status of the switch.
+ 225          *
+ 226          * Parameters:
+ 227          *  None
+ 228          *
+ 229          * Return:
+ 230          *  Returns a non-zero value, if switch is pressed, and a zero value otherwise.
+ 231          *
+ 232          *******************************************************************************/
+ 233          static uint32 ReadSwSwitch(void)
+ 234          {
+ 235   1          uint32 heldDown;
+ 236   1          uint32 swStatus;
+ 237   1      
+ 238   1          swStatus = 0u;  /* Switch is not active */
+ 239   1          heldDown = 0u;  /* Reset debounce counter */
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 5   
+
+ 240   1      
+ 241   1          /* Wait for debounce period before determining whether the switch is pressed */
+ 242   1          while (Switch1_Read() == SWITCH_PRESSED)
+ 243   1          {
+ 244   2              /* Count debounce period */
+ 245   2              CyDelay(SWITCH_DEBOUNCE_UNIT);
+ 246   2              ++heldDown;
+ 247   2      
+ 248   2              if (heldDown > SWITCH_DEBOUNCE_PERIOD)
+ 249   2              {
+ 250   3                  swStatus = 1u; /* Switch is pressed */
+ 251   3                  break;
+ 252   3              }
+ 253   2          }
+ 254   1      
+ 255   1          return (swStatus);
+ 256   1      }
+ 257          
+ 258          /* [] END OF FILE */
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 6   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 79
+                                           ; SOURCE LINE # 80
+                                           ; SOURCE LINE # 85
+0000 120000      E     LCALL   LCD_Start
+                                           ; SOURCE LINE # 88
+0003 7D00              MOV     R5,#00H
+0005 7F00              MOV     R7,#00H
+0007 120000      E     LCALL   _?LCD_Position
+                                           ; SOURCE LINE # 89
+000A 7BFF              MOV     R3,#0FFH
+000C 7A00        R     MOV     R2,#HIGH ?SC_0
+000E 7900        R     MOV     R1,#LOW ?SC_0
+0010 120000      E     LCALL   _?LCD_PrintString
+                                           ; SOURCE LINE # 92
+0013 7D00              MOV     R5,#00H
+0015 7F01              MOV     R7,#01H
+0017 120000      E     LCALL   _?LCD_Position
+                                           ; SOURCE LINE # 93
+001A 7BFF              MOV     R3,#0FFH
+001C 7A00        R     MOV     R2,#HIGH ?SC_4
+001E 7900        R     MOV     R1,#LOW ?SC_4
+0020 120000      E     LCALL   _?LCD_PrintString
+                                           ; SOURCE LINE # 96
+0023 7D0A              MOV     R5,#0AH
+0025 7F00              MOV     R7,#00H
+0027 120000      E     LCALL   _?LCD_Position
+                                           ; SOURCE LINE # 97
+002A 7BFF              MOV     R3,#0FFH
+002C 7A00        R     MOV     R2,#HIGH ?SC_7
+002E 7900        R     MOV     R1,#LOW ?SC_7
+0030 120000      E     LCALL   _?LCD_PrintString
+                                           ; SOURCE LINE # 99
+0033 120000      E     LCALL   ADC_Start
+                                           ; SOURCE LINE # 100
+0036 120000      E     LCALL   PWM_Start
+                                           ; SOURCE LINE # 103
+0039 120000      E     LCALL   ADC_StartConvert
+                                           ; SOURCE LINE # 105
+003C 120000      E     LCALL   CAN_Start
+                                           ; SOURCE LINE # 108
+003F 7C00        R     MOV     R4,#HIGH ISR_CAN
+0041 7D00        R     MOV     R5,#LOW ISR_CAN
+0043 7F10              MOV     R7,#010H
+0045 120000      E     LCALL   _CyIntSetVector
+                                           ; SOURCE LINE # 110
+0048 D2AF              SETB    EA
+004A 9044F4            MOV     DPTR,#044F4H
+004D 74FD              MOV     A,#0FDH
+004F F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 112
+0050         ?C0001:
+                                           ; SOURCE LINE # 113
+                                           ; SOURCE LINE # 114
+0050 7F01              MOV     R7,#01H
+0052 120000      E     LCALL   _ADC_IsEndConversion
+0055 EF                MOV     A,R7
+0056 7003              JNZ     $ + 5H
+0058 020000      R     LJMP    ?C0003
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 7   
+
+                                           ; SOURCE LINE # 115
+                                           ; SOURCE LINE # 117
+005B 120000      E     LCALL   ADC_GetResult16
+005E 900000      R     MOV     DPTR,#output
+0061 EE                MOV     A,R6
+0062 F0                MOVX    @DPTR,A
+0063 A3                INC     DPTR
+0064 EF                MOV     A,R7
+0065 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 120
+0066 900000      R     MOV     DPTR,#output
+0069 E0                MOVX    A,@DPTR
+006A FE                MOV     R6,A
+006B A3                INC     DPTR
+006C E0                MOVX    A,@DPTR
+006D FF                MOV     R7,A
+006E C3                CLR     C
+006F EE                MOV     A,R6
+0070 6480              XRL     A,#080H
+0072 9480              SUBB    A,#080H
+0074 5008              JNC     ?C0004
+                                           ; SOURCE LINE # 121
+                                           ; SOURCE LINE # 122
+0076 900000      R     MOV     DPTR,#output
+0079 E4                CLR     A
+007A F0                MOVX    @DPTR,A
+007B A3                INC     DPTR
+007C E4                CLR     A
+007D F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 123
+007E         ?C0004:
+                                           ; SOURCE LINE # 126
+007E 900000      R     MOV     DPTR,#output
+0081 E0                MOVX    A,@DPTR
+0082 FE                MOV     R6,A
+0083 A3                INC     DPTR
+0084 E0                MOVX    A,@DPTR
+0085 FF                MOV     R7,A
+0086 EE                MOV     A,R6
+0087 33                RLC     A
+0088 95E0              SUBB    A,ACC
+008A FD                MOV     R5,A
+008B FC                MOV     R4,A
+008C 120000      E     LCALL   _ADC_CountsTo_mVolts
+008F 900000      R     MOV     DPTR,#resMilliVolts
+0092 EE                MOV     A,R6
+0093 F0                MOVX    @DPTR,A
+0094 A3                INC     DPTR
+0095 EF                MOV     A,R7
+0096 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 129
+0097 900000      R     MOV     DPTR,#resMilliVolts
+009A E0                MOVX    A,@DPTR
+009B FE                MOV     R6,A
+009C A3                INC     DPTR
+009D E0                MOVX    A,@DPTR
+009E FF                MOV     R7,A
+009F EE                MOV     A,R6
+00A0 FF                MOV     R7,A
+00A1 7E00              MOV     R6,#00H
+00A3 90A03B            MOV     DPTR,#0A03BH
+00A6 EF                MOV     A,R7
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 8   
+
+00A7 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 130
+00A8 900000      R     MOV     DPTR,#resMilliVolts
+00AB E0                MOVX    A,@DPTR
+00AC FE                MOV     R6,A
+00AD A3                INC     DPTR
+00AE E0                MOVX    A,@DPTR
+00AF FF                MOV     R7,A
+00B0 EF                MOV     A,R7
+00B1 54FF              ANL     A,#0FFH
+00B3 FF                MOV     R7,A
+00B4 90A03A            MOV     DPTR,#0A03AH
+00B7 EF                MOV     A,R7
+00B8 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 131
+00B9 90A039            MOV     DPTR,#0A039H
+00BC E4                CLR     A
+00BD F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 132
+00BE 90A038            MOV     DPTR,#0A038H
+00C1 E4                CLR     A
+00C2 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 133
+00C3 90A03F            MOV     DPTR,#0A03FH
+00C6 E4                CLR     A
+00C7 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 134
+00C8 90A03E            MOV     DPTR,#0A03EH
+00CB E4                CLR     A
+00CC F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 135
+00CD 90A03D            MOV     DPTR,#0A03DH
+00D0 E4                CLR     A
+00D1 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 136
+00D2 90A03C            MOV     DPTR,#0A03CH
+00D5 E4                CLR     A
+00D6 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 137
+00D7 120000      E     LCALL   CAN_SendMsgADCdata
+                                           ; SOURCE LINE # 140
+00DA 7B01              MOV     R3,#01H
+00DC 7A00        R     MOV     R2,#HIGH txData
+00DE 7900        R     MOV     R1,#LOW txData
+00E0 C003              PUSH    AR3
+00E2 C002              PUSH    AR2
+00E4 C001              PUSH    AR1
+00E6 7BFF              MOV     R3,#0FFH
+00E8 7A00        R     MOV     R2,#HIGH ?SC_11
+00EA 7900        R     MOV     R1,#LOW ?SC_11
+00EC 900000      E     MOV     DPTR,#?_sprintf?BYTE+03H
+00EF 120000      E     LCALL   ?C?PSTXDATA
+00F2 900000      R     MOV     DPTR,#resMilliVolts
+00F5 E0                MOVX    A,@DPTR
+00F6 FE                MOV     R6,A
+00F7 A3                INC     DPTR
+00F8 E0                MOVX    A,@DPTR
+00F9 FF                MOV     R7,A
+00FA 7C03              MOV     R4,#03H
+00FC 7DE8              MOV     R5,#0E8H
+00FE 120000      E     LCALL   ?C?UIDIV
+0101 900000      E     MOV     DPTR,#?_sprintf?BYTE+06H
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 9   
+
+0104 EE                MOV     A,R6
+0105 F0                MOVX    @DPTR,A
+0106 A3                INC     DPTR
+0107 EF                MOV     A,R7
+0108 F0                MOVX    @DPTR,A
+0109 900000      R     MOV     DPTR,#resMilliVolts
+010C E0                MOVX    A,@DPTR
+010D FE                MOV     R6,A
+010E A3                INC     DPTR
+010F E0                MOVX    A,@DPTR
+0110 FF                MOV     R7,A
+0111 7C03              MOV     R4,#03H
+0113 7DE8              MOV     R5,#0E8H
+0115 120000      E     LCALL   ?C?UIDIV
+0118 900000      E     MOV     DPTR,#?_sprintf?BYTE+08H
+011B EC                MOV     A,R4
+011C F0                MOVX    @DPTR,A
+011D A3                INC     DPTR
+011E ED                MOV     A,R5
+011F F0                MOVX    @DPTR,A
+0120 D001              POP     AR1
+0122 D002              POP     AR2
+0124 D003              POP     AR3
+0126 120000      E     LCALL   _sprintf
+                                           ; SOURCE LINE # 141
+0129 900000      R     MOV     DPTR,#txData+05H
+012C E4                CLR     A
+012D F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 143
+012E 7D04              MOV     R5,#04H
+0130 7F00              MOV     R7,#00H
+0132 120000      E     LCALL   _?LCD_Position
+                                           ; SOURCE LINE # 144
+0135 7B01              MOV     R3,#01H
+0137 7A00        R     MOV     R2,#HIGH txData
+0139 7900        R     MOV     R1,#LOW txData
+013B 120000      E     LCALL   _?LCD_PrintString
+                                           ; SOURCE LINE # 145
+013E         ?C0003:
+                                           ; SOURCE LINE # 148
+013E 120000      R     LCALL   ReadSwSwitch
+0141 A804              MOV     R0,AR4
+0143 A905              MOV     R1,AR5
+0145 AA06              MOV     R2,AR6
+0147 AB07              MOV     R3,AR7
+0149 900000      R     MOV     DPTR,#switchState
+014C E0                MOVX    A,@DPTR
+014D FF                MOV     R7,A
+014E E4                CLR     A
+014F FC                MOV     R4,A
+0150 FD                MOV     R5,A
+0151 FE                MOV     R6,A
+0152 C3                CLR     C
+0153 120000      E     LCALL   ?C?ULCMP
+0156 605D              JZ      ?C0005
+                                           ; SOURCE LINE # 149
+                                           ; SOURCE LINE # 150
+0158 120000      R     LCALL   ReadSwSwitch
+015B 900000      R     MOV     DPTR,#switchState
+015E EF                MOV     A,R7
+015F F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 151
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 10  
+
+0160 7D03              MOV     R5,#03H
+0162 7F01              MOV     R7,#01H
+0164 120000      E     LCALL   _?LCD_Position
+                                           ; SOURCE LINE # 153
+0167 900000      R     MOV     DPTR,#switchState
+016A E0                MOVX    A,@DPTR
+016B FF                MOV     R7,A
+016C EF                MOV     A,R7
+016D B40110            CJNE    A,#01H,?C0006
+                                           ; SOURCE LINE # 154
+                                           ; SOURCE LINE # 155
+0170 90A02B            MOV     DPTR,#0A02BH
+0173 E4                CLR     A
+0174 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 156
+0175 7BFF              MOV     R3,#0FFH
+0177 7A00        R     MOV     R2,#HIGH ?SC_19
+0179 7900        R     MOV     R1,#LOW ?SC_19
+017B 120000      E     LCALL   _?LCD_PrintString
+                                           ; SOURCE LINE # 157
+017E 800F              SJMP    ?C0007
+0180         ?C0006:
+                                           ; SOURCE LINE # 159
+                                           ; SOURCE LINE # 160
+0180 90A02B            MOV     DPTR,#0A02BH
+0183 7401              MOV     A,#01H
+0185 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 161
+0186 7BFF              MOV     R3,#0FFH
+0188 7A00        R     MOV     R2,#HIGH ?SC_28
+018A 7900        R     MOV     R1,#LOW ?SC_28
+018C 120000      E     LCALL   _?LCD_PrintString
+                                           ; SOURCE LINE # 162
+018F         ?C0007:
+                                           ; SOURCE LINE # 163
+018F 90A02A            MOV     DPTR,#0A02AH
+0192 E4                CLR     A
+0193 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 164
+0194 90A029            MOV     DPTR,#0A029H
+0197 E4                CLR     A
+0198 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 165
+0199 90A028            MOV     DPTR,#0A028H
+019C E4                CLR     A
+019D F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 166
+019E 90A02F            MOV     DPTR,#0A02FH
+01A1 E4                CLR     A
+01A2 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 167
+01A3 90A02E            MOV     DPTR,#0A02EH
+01A6 E4                CLR     A
+01A7 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 168
+01A8 90A02D            MOV     DPTR,#0A02DH
+01AB E4                CLR     A
+01AC F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 169
+01AD 90A02C            MOV     DPTR,#0A02CH
+01B0 E4                CLR     A
+01B1 F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 11  
+
+                                           ; SOURCE LINE # 172
+01B2 120000      E     LCALL   CAN_SendMsgswitchStatus
+                                           ; SOURCE LINE # 173
+01B5         ?C0005:
+                                           ; SOURCE LINE # 175
+01B5 900000      R     MOV     DPTR,#isrFlag
+01B8 E0                MOVX    A,@DPTR
+01B9 FF                MOV     R7,A
+01BA EF                MOV     A,R7
+01BB 601C              JZ      ?C0008
+                                           ; SOURCE LINE # 176
+                                           ; SOURCE LINE # 178
+01BD 90A0AB            MOV     DPTR,#0A0ABH
+01C0 E0                MOVX    A,@DPTR
+01C1 FF                MOV     R7,A
+01C2 120000      E     LCALL   _?PWM_WriteCompare
+                                           ; SOURCE LINE # 181
+01C5 7D0E              MOV     R5,#0EH
+01C7 7F00              MOV     R7,#00H
+01C9 120000      E     LCALL   _?LCD_Position
+                                           ; SOURCE LINE # 182
+01CC 90A0AB            MOV     DPTR,#0A0ABH
+01CF E0                MOVX    A,@DPTR
+01D0 FF                MOV     R7,A
+01D1 120000      E     LCALL   _?LCD_PrintInt8
+                                           ; SOURCE LINE # 185
+01D4 900000      R     MOV     DPTR,#isrFlag
+01D7 E4                CLR     A
+01D8 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 186
+01D9         ?C0008:
+                                           ; SOURCE LINE # 188
+01D9 7F64              MOV     R7,#064H
+01DB 7E00              MOV     R6,#00H
+01DD 7D00              MOV     R5,#00H
+01DF 7C00              MOV     R4,#00H
+01E1 120000      E     LCALL   _?CyDelay
+                                           ; SOURCE LINE # 189
+01E4 020000      R     LJMP    ?C0001
+01E7 22                RET     
+             ; FUNCTION main (END)
+
+             ; FUNCTION ISR_CAN (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C083              PUSH    DPH
+0004 C082              PUSH    DPL
+0006 C085              PUSH    DPH1
+0008 C084              PUSH    DPL1
+000A C086              PUSH    DPS
+000C 758600            MOV     DPS,#00H
+000F C000        E     PUSH    ?C?XPAGE1SFR
+0011 750000      E     MOV     ?C?XPAGE1SFR,#?C?XPAGE1RST
+0014 C0D0              PUSH    PSW
+0016 75D000            MOV     PSW,#00H
+0019 C007              PUSH    AR7
+                                           ; SOURCE LINE # 207
+                                           ; SOURCE LINE # 210
+001B 90A001            MOV     DPTR,#0A001H
+001E 7410              MOV     A,#010H
+0020 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 213
+0021 900000      R     MOV     DPTR,#isrFlag
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 12  
+
+0024 7401              MOV     A,#01H
+0026 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 216
+0027 90A0A0            MOV     DPTR,#0A0A0H
+002A E0                MOVX    A,@DPTR
+002B FF                MOV     R7,A
+002C EF                MOV     A,R7
+002D 4401              ORL     A,#01H
+002F FF                MOV     R7,A
+0030 EF                MOV     A,R7
+0031 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 217
+0032 D007              POP     AR7
+0034 D0D0              POP     PSW
+0036 D000        E     POP     ?C?XPAGE1SFR
+0038 D086              POP     DPS
+003A D084              POP     DPL1
+003C D085              POP     DPH1
+003E D082              POP     DPL
+0040 D083              POP     DPH
+0042 D0E0              POP     ACC
+0044 32                RETI    
+             ; FUNCTION ISR_CAN (END)
+
+             ; FUNCTION ReadSwSwitch (BEGIN)
+                                           ; SOURCE LINE # 233
+                                           ; SOURCE LINE # 234
+                                           ; SOURCE LINE # 238
+0000 7F00              MOV     R7,#00H
+0002 7E00              MOV     R6,#00H
+0004 7D00              MOV     R5,#00H
+0006 7C00              MOV     R4,#00H
+0008 900000      R     MOV     DPTR,#swStatus
+000B 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 239
+000E 7F00              MOV     R7,#00H
+0010 7E00              MOV     R6,#00H
+0012 7D00              MOV     R5,#00H
+0014 7C00              MOV     R4,#00H
+0016 900000      R     MOV     DPTR,#heldDown
+0019 120000      E     LCALL   ?C?LSTXDATA
+001C         ?C0011:
+                                           ; SOURCE LINE # 242
+001C 120000      E     LCALL   Switch1_Read
+001F EF                MOV     A,R7
+0020 703F              JNZ     ?C0012
+                                           ; SOURCE LINE # 243
+                                           ; SOURCE LINE # 245
+0022 7F01              MOV     R7,#01H
+0024 7E00              MOV     R6,#00H
+0026 7D00              MOV     R5,#00H
+0028 7C00              MOV     R4,#00H
+002A 120000      E     LCALL   _?CyDelay
+                                           ; SOURCE LINE # 246
+002D 900000      R     MOV     DPTR,#heldDown
+0030 120000      E     LCALL   ?C?LLDXDATA
+0033 7B01              MOV     R3,#01H
+0035 7A00              MOV     R2,#00H
+0037 7900              MOV     R1,#00H
+0039 7800              MOV     R0,#00H
+003B 120000      E     LCALL   ?C?LADD
+003E 900000      R     MOV     DPTR,#heldDown
+C51 COMPILER V9.51   MAIN                                                                  11/19/2018 18:58:10 PAGE 13  
+
+0041 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 248
+0044 900000      R     MOV     DPTR,#heldDown
+0047 120000      E     LCALL   ?C?LLDXDATA
+004A D3                SETB    C
+004B EF                MOV     A,R7
+004C 940A              SUBB    A,#0AH
+004E EE                MOV     A,R6
+004F 9400              SUBB    A,#00H
+0051 40C9              JC      ?C0011
+                                           ; SOURCE LINE # 249
+                                           ; SOURCE LINE # 250
+0053 7F01              MOV     R7,#01H
+0055 7E00              MOV     R6,#00H
+0057 7D00              MOV     R5,#00H
+0059 7C00              MOV     R4,#00H
+005B 900000      R     MOV     DPTR,#swStatus
+005E 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 251
+                                           ; SOURCE LINE # 252
+                                           ; SOURCE LINE # 253
+0061         ?C0012:
+                                           ; SOURCE LINE # 255
+0061 900000      R     MOV     DPTR,#swStatus
+0064 120000      E     LCALL   ?C?LLDXDATA
+                                           ; SOURCE LINE # 256
+0067         ?C0014:
+0067 22                RET     
+             ; FUNCTION ReadSwSwitch (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    661    ----
+   CONSTANT SIZE    =     37    ----
+   XDATA SIZE       =      2      18
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

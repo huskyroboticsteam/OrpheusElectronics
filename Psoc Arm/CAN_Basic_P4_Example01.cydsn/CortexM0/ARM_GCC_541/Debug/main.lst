@@ -1,0 +1,2132 @@
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ISR_CAN,"ax",%progbits
+  20              		.align	2
+  21              		.global	ISR_CAN
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	ISR_CAN, %function
+  25              	ISR_CAN:
+  26              	.LFB36:
+  27              		.file 1 "main.c"
+   1:main.c        **** /*******************************************************************************
+   2:main.c        **** * File Name: main.c
+   3:main.c        **** *
+   4:main.c        **** * Version: 1.0
+   5:main.c        **** *
+   6:main.c        **** * Description:
+   7:main.c        **** *  In this project, the CAN component is configured to transmit two messages
+   8:main.c        **** *  over the CAN bus:
+   9:main.c        **** *   Message 1 - Status of Switch 1. Sent whenever there is a change in the
+  10:main.c        **** *               status.
+  11:main.c        **** *   Message 2 - ADC data. Sent every 100ms.
+  12:main.c        **** *
+  13:main.c        **** *  The component is also configured to receive data which is used to set the
+  14:main.c        **** *  pulse width of the PWM used in the project.
+  15:main.c        **** *  Both transmitted and received data are send out over UART, so that it can be
+  16:main.c        **** *  received on a PC using a USB-UART bridge (PSoC 5LP) on CY8CKIT-044
+  17:main.c        **** *  Development Kit and the terminal software.
+  18:main.c        **** *
+  19:main.c        **** *  This is only one part of the CAN example project. Use this example along
+  20:main.c        **** *  with CAN_Full_P4_Example for complete demonstration.
+  21:main.c        **** *
+  22:main.c        **** * Hardware Dependency:
+  23:main.c        **** *  CY8CKIT-044
+  24:main.c        **** *  CY8CKIT-017
+  25:main.c        **** *
+  26:main.c        **** ********************************************************************************
+  27:main.c        **** * Copyright 2015, Cypress Semiconductor Corporation. All rights reserved.
+  28:main.c        **** * This software is owned by Cypress Semiconductor Corporation and is protected
+  29:main.c        **** * by and subject to worldwide patent and copyright laws and treaties.
+  30:main.c        **** * Therefore, you may use this software ony as provided in the license agreement
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 2
+
+
+  31:main.c        **** * accompanying the software package from which you obtained this software.
+  32:main.c        **** * CYPRESS AND ITS SUPPLIERS MAKE NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  33:main.c        **** * WITH REGARD TO THIS SOFTWARE, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT,
+  34:main.c        **** * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  35:main.c        **** *******************************************************************************/
+  36:main.c        **** #include <project.h>
+  37:main.c        **** #include <stdio.h>
+  38:main.c        **** 
+  39:main.c        **** /* Switch debounce delay in milliseconds */
+  40:main.c        **** #define SWITCH_DEBOUNCE_UNIT   (1u)
+  41:main.c        **** 
+  42:main.c        **** /* Number of debounce units to count delay, before consider that switch is pressed */
+  43:main.c        **** #define SWITCH_DEBOUNCE_PERIOD (10u)
+  44:main.c        **** 
+  45:main.c        **** /* Switch state defines */
+  46:main.c        **** #define SWITCH_RELEASED        (0u)
+  47:main.c        **** #define SWITCH_PRESSED         (1u)
+  48:main.c        **** 
+  49:main.c        **** #define TX_DATA_SIZE           (25u)
+  50:main.c        **** #define ADC_CHANNEL_NUMBER_0   (0u)
+  51:main.c        **** 
+  52:main.c        **** /* Function prototypes */
+  53:main.c        **** static uint32 ReadSwSwitch(void);
+  54:main.c        **** CY_ISR_PROTO(ISR_CAN);
+  55:main.c        **** 
+  56:main.c        **** /* Global variable used to store switch state */
+  57:main.c        **** uint8 switchState = SWITCH_RELEASED;
+  58:main.c        **** 
+  59:main.c        **** /* Global variable used to store ISR flag */
+  60:main.c        **** volatile uint8 isrFlag = 0u;
+  61:main.c        **** 
+  62:main.c        **** 
+  63:main.c        **** /*******************************************************************************
+  64:main.c        **** * Function Name: main
+  65:main.c        **** ********************************************************************************
+  66:main.c        **** *
+  67:main.c        **** * Summary:
+  68:main.c        **** *  main() performs the following functions:
+  69:main.c        **** *  1: Starts the ADC, UART, PWM, CAN, ISR components.
+  70:main.c        **** *  2: Starts ADC conversion.
+  71:main.c        **** *  3: Gets the converted result, sends message over a CAN and sends the 
+  72:main.c        **** *     converted result over UART.
+  73:main.c        **** *  4: Polls the status of Switch 1 and sends a message over CAN if it changes.
+  74:main.c        **** *  5: Sets a PWM pulse width and sends it over UART.
+  75:main.c        **** *
+  76:main.c        **** * Parameters:
+  77:main.c        **** *  None.
+  78:main.c        **** *
+  79:main.c        **** * Return:
+  80:main.c        **** *  None.
+  81:main.c        **** *
+  82:main.c        **** *******************************************************************************/
+  83:main.c        **** int main()
+  84:main.c        **** {
+  85:main.c        ****     int16 output;
+  86:main.c        ****     uint16 resMilliVolts;
+  87:main.c        ****     char8 txData[TX_DATA_SIZE];
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 3
+
+
+  88:main.c        **** 
+  89:main.c        ****     UART_Start();
+  90:main.c        ****     ADC_Start();
+  91:main.c        ****     PWM_Start();
+  92:main.c        **** 
+  93:main.c        ****     /* Start ADC conversion */
+  94:main.c        ****     ADC_StartConvert();
+  95:main.c        ****     CAN_Init();
+  96:main.c        ****     CAN_Start();
+  97:main.c        **** 
+  98:main.c        ****     /* Set CAN interrupt handler to local routine */
+  99:main.c        ****     CyIntSetVector(CAN_ISR_NUMBER, ISR_CAN);
+ 100:main.c        **** 
+ 101:main.c        ****     CyGlobalIntEnable;
+ 102:main.c        **** 
+ 103:main.c        ****     for(;;)
+ 104:main.c        ****     {
+ 105:main.c        ****         if (ADC_IsEndConversion(ADC_RETURN_STATUS))
+ 106:main.c        ****         {
+ 107:main.c        ****             /* Gets ADC conversion result */
+ 108:main.c        ****             output = ADC_GetResult16(ADC_CHANNEL_NUMBER_0);
+ 109:main.c        **** 
+ 110:main.c        ****             /* Saturates ADC result to positive numbers */
+ 111:main.c        ****             if (output < 0)
+ 112:main.c        ****             {
+ 113:main.c        ****                 output = 0;
+ 114:main.c        ****             }
+ 115:main.c        ****             
+ 116:main.c        ****             /* Converts ADC result to milli volts */
+ 117:main.c        ****             resMilliVolts = (uint16) ADC_CountsTo_mVolts(ADC_CHANNEL_NUMBER_0, output);
+ 118:main.c        ****             
+ 119:main.c        ****             /* Sends value of ADC output via CAN */
+ 120:main.c        ****             CAN_TX_DATA_BYTE1(CAN_TX_MAILBOX_ADCdata, HI8(resMilliVolts));
+ 121:main.c        ****             CAN_TX_DATA_BYTE2(CAN_TX_MAILBOX_ADCdata, LO8(resMilliVolts));
+ 122:main.c        ****             CAN_TX_DATA_BYTE3(CAN_TX_MAILBOX_ADCdata, 0u);
+ 123:main.c        ****             CAN_TX_DATA_BYTE4(CAN_TX_MAILBOX_ADCdata, 0u);
+ 124:main.c        ****             CAN_TX_DATA_BYTE5(CAN_TX_MAILBOX_ADCdata, 0u);
+ 125:main.c        ****             CAN_TX_DATA_BYTE6(CAN_TX_MAILBOX_ADCdata, 0u);
+ 126:main.c        ****             CAN_TX_DATA_BYTE7(CAN_TX_MAILBOX_ADCdata, 0u);
+ 127:main.c        ****             CAN_TX_DATA_BYTE8(CAN_TX_MAILBOX_ADCdata, 0u);
+ 128:main.c        ****             CAN_SendMsgADCdata();
+ 129:main.c        **** 
+ 130:main.c        ****             /* Display value of ADC output on LCD */
+ 131:main.c        ****             sprintf(txData, "ADC out: %u.%.3u \r\n", (resMilliVolts / 1000u), (resMilliVolts % 1000
+ 132:main.c        ****             UART_UartPutString(txData);
+ 133:main.c        ****         }
+ 134:main.c        **** 
+ 135:main.c        ****         /* Change configuration at switch press or release event */
+ 136:main.c        ****         if (switchState != ReadSwSwitch())    /* Switch state changed status */
+ 137:main.c        ****         {
+ 138:main.c        ****             /* Store the current switch state */
+ 139:main.c        ****             switchState = ReadSwSwitch();
+ 140:main.c        **** 
+ 141:main.c        ****             /* Fill CAN data depending on switch state */
+ 142:main.c        ****             if (Switch1_Read() == 0u)
+ 143:main.c        ****             {
+ 144:main.c        ****                 CAN_TX_DATA_BYTE1(CAN_TX_MAILBOX_switchStatus, SWITCH_PRESSED);
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 4
+
+
+ 145:main.c        ****                 UART_UartPutString("switch1 pressed.\r\n");
+ 146:main.c        ****             }
+ 147:main.c        ****             else
+ 148:main.c        ****             {
+ 149:main.c        ****                 CAN_TX_DATA_BYTE1(CAN_TX_MAILBOX_switchStatus, SWITCH_RELEASED);
+ 150:main.c        ****                 UART_UartPutString("switch1 released.\r\n");
+ 151:main.c        ****             }
+ 152:main.c        ****             CAN_TX_DATA_BYTE2(CAN_TX_MAILBOX_switchStatus, 0u);
+ 153:main.c        ****             CAN_TX_DATA_BYTE3(CAN_TX_MAILBOX_switchStatus, 0u);
+ 154:main.c        ****             CAN_TX_DATA_BYTE4(CAN_TX_MAILBOX_switchStatus, 0u);
+ 155:main.c        ****             CAN_TX_DATA_BYTE5(CAN_TX_MAILBOX_switchStatus, 0u);
+ 156:main.c        ****             CAN_TX_DATA_BYTE6(CAN_TX_MAILBOX_switchStatus, 0u);
+ 157:main.c        ****             CAN_TX_DATA_BYTE7(CAN_TX_MAILBOX_switchStatus, 0u);
+ 158:main.c        ****             CAN_TX_DATA_BYTE8(CAN_TX_MAILBOX_switchStatus, 0u);
+ 159:main.c        **** 
+ 160:main.c        ****             /* Send CAN message with switch state */
+ 161:main.c        ****             CAN_SendMsgswitchStatus();
+ 162:main.c        ****         }
+ 163:main.c        **** 
+ 164:main.c        ****         if (isrFlag != 0u)
+ 165:main.c        ****         {
+ 166:main.c        ****             /* Set PWM pulse width */
+ 167:main.c        ****             PWM_WriteCompare(CAN_RX_DATA_BYTE1(CAN_RX_MAILBOX_0));
+ 168:main.c        **** 
+ 169:main.c        ****             /* Puts out over UART value of PWM pulse width */
+ 170:main.c        ****             sprintf(txData, "PWM pulse width: %X \r\n", CAN_RX_DATA_BYTE1(CAN_RX_MAILBOX_0));
+ 171:main.c        ****             UART_UartPutString(txData);
+ 172:main.c        ****             
+ 173:main.c        ****             /* Clear the isrFlag */
+ 174:main.c        ****             isrFlag = 0u;
+ 175:main.c        ****         }
+ 176:main.c        **** 
+ 177:main.c        ****         CyDelay(100u);
+ 178:main.c        ****     }
+ 179:main.c        **** }
+ 180:main.c        **** 
+ 181:main.c        **** 
+ 182:main.c        **** /*******************************************************************************
+ 183:main.c        **** * Function Name: ISR_CAN
+ 184:main.c        **** ********************************************************************************
+ 185:main.c        **** *
+ 186:main.c        **** * Summary:
+ 187:main.c        **** *  This ISR is executed at a Receive Message event and set the isrFlag.
+ 188:main.c        **** *
+ 189:main.c        **** * Parameters:
+ 190:main.c        **** *  None.
+ 191:main.c        **** *
+ 192:main.c        **** * Return:
+ 193:main.c        **** *  None.
+ 194:main.c        **** *
+ 195:main.c        **** *******************************************************************************/
+ 196:main.c        **** CY_ISR(ISR_CAN)
+ 197:main.c        **** {
+  28              		.loc 1 197 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 5
+
+
+  32              		@ link register save eliminated.
+ 198:main.c        ****     /* Clear Receive Message flag */
+ 199:main.c        ****     CAN_INT_SR_REG = CAN_RX_MESSAGE_MASK;
+  33              		.loc 1 199 0
+  34 0000 8022     		movs	r2, #128
+  35 0002 5201     		lsls	r2, r2, #5
+  36 0004 044B     		ldr	r3, .L2
+  37 0006 1A60     		str	r2, [r3]
+ 200:main.c        **** 
+ 201:main.c        ****     /* Set the isrFlag */
+ 202:main.c        ****     isrFlag = 1u;
+  38              		.loc 1 202 0
+  39 0008 0123     		movs	r3, #1
+  40 000a 044A     		ldr	r2, .L2+4
+  41 000c 1370     		strb	r3, [r2]
+ 203:main.c        **** 
+ 204:main.c        ****     /* Acknowledges receipt of new message */
+ 205:main.c        ****     CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_0);
+  42              		.loc 1 205 0
+  43 000e 044A     		ldr	r2, .L2+8
+  44 0010 1168     		ldr	r1, [r2]
+  45 0012 0B43     		orrs	r3, r1
+  46 0014 1360     		str	r3, [r2]
+ 206:main.c        **** }
+  47              		.loc 1 206 0
+  48              		@ sp needed
+  49 0016 7047     		bx	lr
+  50              	.L3:
+  51              		.align	2
+  52              	.L2:
+  53 0018 00002F40 		.word	1076822016
+  54 001c 00000000 		.word	.LANCHOR0
+  55 0020 A0002F40 		.word	1076822176
+  56              		.cfi_endproc
+  57              	.LFE36:
+  58              		.size	ISR_CAN, .-ISR_CAN
+  59              		.section	.text.ReadSwSwitch,"ax",%progbits
+  60              		.align	2
+  61              		.code	16
+  62              		.thumb_func
+  63              		.type	ReadSwSwitch, %function
+  64              	ReadSwSwitch:
+  65              	.LFB37:
+ 207:main.c        **** 
+ 208:main.c        **** 
+ 209:main.c        **** /*******************************************************************************
+ 210:main.c        **** * Function Name: ReadSwSwitch
+ 211:main.c        **** ********************************************************************************
+ 212:main.c        **** * Summary:
+ 213:main.c        **** *  Reads and returns the current status of the switch.
+ 214:main.c        **** *
+ 215:main.c        **** * Parameters:
+ 216:main.c        **** *  None
+ 217:main.c        **** *
+ 218:main.c        **** * Return:
+ 219:main.c        **** *  Returns a non-zero value, if switch is pressed, and a zero value otherwise.
+ 220:main.c        **** *
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 6
+
+
+ 221:main.c        **** *******************************************************************************/
+ 222:main.c        **** static uint32 ReadSwSwitch(void)
+ 223:main.c        **** {
+  66              		.loc 1 223 0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70 0000 10B5     		push	{r4, lr}
+  71              		.cfi_def_cfa_offset 8
+  72              		.cfi_offset 4, -8
+  73              		.cfi_offset 14, -4
+  74              	.LVL0:
+ 224:main.c        ****     uint32 heldDown;
+ 225:main.c        ****     uint32 swStatus;
+ 226:main.c        **** 
+ 227:main.c        ****     swStatus = 0u;  /* Switch is not active */
+ 228:main.c        ****     heldDown = 0u;  /* Reset debounce counter */
+  75              		.loc 1 228 0
+  76 0002 0024     		movs	r4, #0
+ 229:main.c        **** 
+ 230:main.c        ****     /* Wait for debounce period before determining whether the switch is pressed */
+ 231:main.c        ****     while (Switch1_Read() == SWITCH_PRESSED)
+  77              		.loc 1 231 0
+  78 0004 05E0     		b	.L5
+  79              	.LVL1:
+  80              	.L7:
+ 232:main.c        ****     {
+ 233:main.c        ****         /* Count debounce period */
+ 234:main.c        ****         CyDelay(SWITCH_DEBOUNCE_UNIT);
+  81              		.loc 1 234 0
+  82 0006 0120     		movs	r0, #1
+  83 0008 FFF7FEFF 		bl	CyDelay
+  84              	.LVL2:
+ 235:main.c        ****         ++heldDown;
+  85              		.loc 1 235 0
+  86 000c 0134     		adds	r4, r4, #1
+  87              	.LVL3:
+ 236:main.c        **** 
+ 237:main.c        ****         if (heldDown > SWITCH_DEBOUNCE_PERIOD)
+  88              		.loc 1 237 0
+  89 000e 0A2C     		cmp	r4, #10
+  90 0010 05D8     		bhi	.L8
+  91              	.LVL4:
+  92              	.L5:
+ 231:main.c        ****     {
+  93              		.loc 1 231 0
+  94 0012 FFF7FEFF 		bl	Switch1_Read
+  95              	.LVL5:
+  96 0016 0128     		cmp	r0, #1
+  97 0018 F5D0     		beq	.L7
+ 227:main.c        ****     heldDown = 0u;  /* Reset debounce counter */
+  98              		.loc 1 227 0
+  99 001a 0020     		movs	r0, #0
+ 100 001c 00E0     		b	.L6
+ 101              	.L8:
+ 238:main.c        ****         {
+ 239:main.c        ****             swStatus = 1u; /* Switch is pressed */
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 7
+
+
+ 102              		.loc 1 239 0
+ 103 001e 0120     		movs	r0, #1
+ 104              	.L6:
+ 105              	.LVL6:
+ 240:main.c        ****             break;
+ 241:main.c        ****         }
+ 242:main.c        ****     }
+ 243:main.c        **** 
+ 244:main.c        ****     return (swStatus);
+ 245:main.c        **** }
+ 106              		.loc 1 245 0
+ 107              		@ sp needed
+ 108              	.LVL7:
+ 109 0020 10BD     		pop	{r4, pc}
+ 110              		.cfi_endproc
+ 111              	.LFE37:
+ 112              		.size	ReadSwSwitch, .-ReadSwSwitch
+ 113              		.global	__aeabi_uidivmod
+ 114              		.global	__aeabi_uidiv
+ 115 0022 C046     		.section	.text.main,"ax",%progbits
+ 116              		.align	2
+ 117              		.global	main
+ 118              		.code	16
+ 119              		.thumb_func
+ 120              		.type	main, %function
+ 121              	main:
+ 122              	.LFB35:
+  84:main.c        ****     int16 output;
+ 123              		.loc 1 84 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 32
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127 0000 30B5     		push	{r4, r5, lr}
+ 128              		.cfi_def_cfa_offset 12
+ 129              		.cfi_offset 4, -12
+ 130              		.cfi_offset 5, -8
+ 131              		.cfi_offset 14, -4
+ 132 0002 89B0     		sub	sp, sp, #36
+ 133              		.cfi_def_cfa_offset 48
+  89:main.c        ****     ADC_Start();
+ 134              		.loc 1 89 0
+ 135 0004 FFF7FEFF 		bl	UART_Start
+ 136              	.LVL8:
+  90:main.c        ****     PWM_Start();
+ 137              		.loc 1 90 0
+ 138 0008 FFF7FEFF 		bl	ADC_Start
+ 139              	.LVL9:
+  91:main.c        **** 
+ 140              		.loc 1 91 0
+ 141 000c FFF7FEFF 		bl	PWM_Start
+ 142              	.LVL10:
+  94:main.c        ****     CAN_Init();
+ 143              		.loc 1 94 0
+ 144 0010 FFF7FEFF 		bl	ADC_StartConvert
+ 145              	.LVL11:
+  95:main.c        ****     CAN_Start();
+ 146              		.loc 1 95 0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 8
+
+
+ 147 0014 FFF7FEFF 		bl	CAN_Init
+ 148              	.LVL12:
+  96:main.c        **** 
+ 149              		.loc 1 96 0
+ 150 0018 FFF7FEFF 		bl	CAN_Start
+ 151              	.LVL13:
+  99:main.c        **** 
+ 152              		.loc 1 99 0
+ 153 001c 5349     		ldr	r1, .L18
+ 154 001e 1D20     		movs	r0, #29
+ 155 0020 FFF7FEFF 		bl	CyIntSetVector
+ 156              	.LVL14:
+ 101:main.c        **** 
+ 157              		.loc 1 101 0
+ 158              		.syntax divided
+ 159              	@ 101 "main.c" 1
+ 160 0024 62B6     		CPSIE   i
+ 161              	@ 0 "" 2
+ 162              		.thumb
+ 163              		.syntax unified
+ 164              	.L16:
+ 105:main.c        ****         {
+ 165              		.loc 1 105 0
+ 166 0026 0120     		movs	r0, #1
+ 167 0028 FFF7FEFF 		bl	ADC_IsEndConversion
+ 168              	.LVL15:
+ 169 002c 0028     		cmp	r0, #0
+ 170 002e 44D0     		beq	.L10
+ 108:main.c        **** 
+ 171              		.loc 1 108 0
+ 172 0030 0020     		movs	r0, #0
+ 173 0032 FFF7FEFF 		bl	ADC_GetResult16
+ 174              	.LVL16:
+ 175 0036 011E     		subs	r1, r0, #0
+ 176              	.LVL17:
+ 111:main.c        ****             {
+ 177              		.loc 1 111 0
+ 178 0038 00DA     		bge	.L11
+ 113:main.c        ****             }
+ 179              		.loc 1 113 0
+ 180 003a 0021     		movs	r1, #0
+ 181              	.L11:
+ 182              	.LVL18:
+ 117:main.c        ****             
+ 183              		.loc 1 117 0
+ 184 003c 0020     		movs	r0, #0
+ 185 003e FFF7FEFF 		bl	ADC_CountsTo_mVolts
+ 186              	.LVL19:
+ 187 0042 84B2     		uxth	r4, r0
+ 188              	.LVL20:
+ 120:main.c        ****             CAN_TX_DATA_BYTE2(CAN_TX_MAILBOX_ADCdata, LO8(resMilliVolts));
+ 189              		.loc 1 120 0
+ 190 0044 4A4B     		ldr	r3, .L18+4
+ 191 0046 1A68     		ldr	r2, [r3]
+ 192 0048 1202     		lsls	r2, r2, #8
+ 193 004a 120A     		lsrs	r2, r2, #8
+ 194 004c 210A     		lsrs	r1, r4, #8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 9
+
+
+ 195 004e 0906     		lsls	r1, r1, #24
+ 196 0050 0A43     		orrs	r2, r1
+ 197 0052 1A60     		str	r2, [r3]
+ 121:main.c        ****             CAN_TX_DATA_BYTE3(CAN_TX_MAILBOX_ADCdata, 0u);
+ 198              		.loc 1 121 0
+ 199 0054 1A68     		ldr	r2, [r3]
+ 200 0056 474D     		ldr	r5, .L18+8
+ 201 0058 2A40     		ands	r2, r5
+ 202 005a C0B2     		uxtb	r0, r0
+ 203 005c 0004     		lsls	r0, r0, #16
+ 204 005e 1043     		orrs	r0, r2
+ 205 0060 1860     		str	r0, [r3]
+ 122:main.c        ****             CAN_TX_DATA_BYTE4(CAN_TX_MAILBOX_ADCdata, 0u);
+ 206              		.loc 1 122 0
+ 207 0062 1A68     		ldr	r2, [r3]
+ 208 0064 4449     		ldr	r1, .L18+12
+ 209 0066 0A40     		ands	r2, r1
+ 210 0068 1A60     		str	r2, [r3]
+ 123:main.c        ****             CAN_TX_DATA_BYTE5(CAN_TX_MAILBOX_ADCdata, 0u);
+ 211              		.loc 1 123 0
+ 212 006a 1A68     		ldr	r2, [r3]
+ 213 006c FF20     		movs	r0, #255
+ 214 006e 8243     		bics	r2, r0
+ 215 0070 1A60     		str	r2, [r3]
+ 124:main.c        ****             CAN_TX_DATA_BYTE6(CAN_TX_MAILBOX_ADCdata, 0u);
+ 216              		.loc 1 124 0
+ 217 0072 424B     		ldr	r3, .L18+16
+ 218 0074 1A68     		ldr	r2, [r3]
+ 219 0076 1202     		lsls	r2, r2, #8
+ 220 0078 120A     		lsrs	r2, r2, #8
+ 221 007a 1A60     		str	r2, [r3]
+ 125:main.c        ****             CAN_TX_DATA_BYTE7(CAN_TX_MAILBOX_ADCdata, 0u);
+ 222              		.loc 1 125 0
+ 223 007c 1A68     		ldr	r2, [r3]
+ 224 007e 1540     		ands	r5, r2
+ 225 0080 1D60     		str	r5, [r3]
+ 126:main.c        ****             CAN_TX_DATA_BYTE8(CAN_TX_MAILBOX_ADCdata, 0u);
+ 226              		.loc 1 126 0
+ 227 0082 1A68     		ldr	r2, [r3]
+ 228 0084 1140     		ands	r1, r2
+ 229 0086 1960     		str	r1, [r3]
+ 127:main.c        ****             CAN_SendMsgADCdata();
+ 230              		.loc 1 127 0
+ 231 0088 1A68     		ldr	r2, [r3]
+ 232 008a 8243     		bics	r2, r0
+ 233 008c 1A60     		str	r2, [r3]
+ 128:main.c        **** 
+ 234              		.loc 1 128 0
+ 235 008e FFF7FEFF 		bl	CAN_SendMsgADCdata
+ 236              	.LVL21:
+ 131:main.c        ****             UART_UartPutString(txData);
+ 237              		.loc 1 131 0
+ 238 0092 FA21     		movs	r1, #250
+ 239 0094 8900     		lsls	r1, r1, #2
+ 240 0096 2000     		movs	r0, r4
+ 241 0098 FFF7FEFF 		bl	__aeabi_uidivmod
+ 242              	.LVL22:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 10
+
+
+ 243 009c 8DB2     		uxth	r5, r1
+ 244 009e FA21     		movs	r1, #250
+ 245 00a0 8900     		lsls	r1, r1, #2
+ 246 00a2 2000     		movs	r0, r4
+ 247 00a4 FFF7FEFF 		bl	__aeabi_uidiv
+ 248              	.LVL23:
+ 249 00a8 82B2     		uxth	r2, r0
+ 250 00aa 2B00     		movs	r3, r5
+ 251 00ac 3449     		ldr	r1, .L18+20
+ 252 00ae 01A8     		add	r0, sp, #4
+ 253 00b0 FFF7FEFF 		bl	sprintf
+ 254              	.LVL24:
+ 132:main.c        ****         }
+ 255              		.loc 1 132 0
+ 256 00b4 01A8     		add	r0, sp, #4
+ 257 00b6 FFF7FEFF 		bl	UART_UartPutString
+ 258              	.LVL25:
+ 259              	.L10:
+ 136:main.c        ****         {
+ 260              		.loc 1 136 0
+ 261 00ba 324B     		ldr	r3, .L18+24
+ 262 00bc 5C78     		ldrb	r4, [r3, #1]
+ 263 00be FFF7FEFF 		bl	ReadSwSwitch
+ 264              	.LVL26:
+ 265 00c2 8442     		cmp	r4, r0
+ 266 00c4 38D0     		beq	.L12
+ 139:main.c        **** 
+ 267              		.loc 1 139 0
+ 268 00c6 FFF7FEFF 		bl	ReadSwSwitch
+ 269              	.LVL27:
+ 270 00ca 2E4B     		ldr	r3, .L18+24
+ 271 00cc 5870     		strb	r0, [r3, #1]
+ 142:main.c        ****             {
+ 272              		.loc 1 142 0
+ 273 00ce FFF7FEFF 		bl	Switch1_Read
+ 274              	.LVL28:
+ 275 00d2 0028     		cmp	r0, #0
+ 276 00d4 0BD1     		bne	.L13
+ 144:main.c        ****                 UART_UartPutString("switch1 pressed.\r\n");
+ 277              		.loc 1 144 0
+ 278 00d6 2C4A     		ldr	r2, .L18+28
+ 279 00d8 1368     		ldr	r3, [r2]
+ 280 00da 1B02     		lsls	r3, r3, #8
+ 281 00dc 1B0A     		lsrs	r3, r3, #8
+ 282 00de 8021     		movs	r1, #128
+ 283 00e0 4904     		lsls	r1, r1, #17
+ 284 00e2 0B43     		orrs	r3, r1
+ 285 00e4 1360     		str	r3, [r2]
+ 145:main.c        ****             }
+ 286              		.loc 1 145 0
+ 287 00e6 2948     		ldr	r0, .L18+32
+ 288 00e8 FFF7FEFF 		bl	UART_UartPutString
+ 289              	.LVL29:
+ 290 00ec 07E0     		b	.L14
+ 291              	.L13:
+ 149:main.c        ****                 UART_UartPutString("switch1 released.\r\n");
+ 292              		.loc 1 149 0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 11
+
+
+ 293 00ee 264A     		ldr	r2, .L18+28
+ 294 00f0 1368     		ldr	r3, [r2]
+ 295 00f2 1B02     		lsls	r3, r3, #8
+ 296 00f4 1B0A     		lsrs	r3, r3, #8
+ 297 00f6 1360     		str	r3, [r2]
+ 150:main.c        ****             }
+ 298              		.loc 1 150 0
+ 299 00f8 2548     		ldr	r0, .L18+36
+ 300 00fa FFF7FEFF 		bl	UART_UartPutString
+ 301              	.LVL30:
+ 302              	.L14:
+ 152:main.c        ****             CAN_TX_DATA_BYTE3(CAN_TX_MAILBOX_switchStatus, 0u);
+ 303              		.loc 1 152 0
+ 304 00fe 224B     		ldr	r3, .L18+28
+ 305 0100 1A68     		ldr	r2, [r3]
+ 306 0102 1C48     		ldr	r0, .L18+8
+ 307 0104 0240     		ands	r2, r0
+ 308 0106 1A60     		str	r2, [r3]
+ 153:main.c        ****             CAN_TX_DATA_BYTE4(CAN_TX_MAILBOX_switchStatus, 0u);
+ 309              		.loc 1 153 0
+ 310 0108 1A68     		ldr	r2, [r3]
+ 311 010a 1B49     		ldr	r1, .L18+12
+ 312 010c 0A40     		ands	r2, r1
+ 313 010e 1A60     		str	r2, [r3]
+ 154:main.c        ****             CAN_TX_DATA_BYTE5(CAN_TX_MAILBOX_switchStatus, 0u);
+ 314              		.loc 1 154 0
+ 315 0110 1A68     		ldr	r2, [r3]
+ 316 0112 FF24     		movs	r4, #255
+ 317 0114 A243     		bics	r2, r4
+ 318 0116 1A60     		str	r2, [r3]
+ 155:main.c        ****             CAN_TX_DATA_BYTE6(CAN_TX_MAILBOX_switchStatus, 0u);
+ 319              		.loc 1 155 0
+ 320 0118 1E4B     		ldr	r3, .L18+40
+ 321 011a 1A68     		ldr	r2, [r3]
+ 322 011c 1202     		lsls	r2, r2, #8
+ 323 011e 120A     		lsrs	r2, r2, #8
+ 324 0120 1A60     		str	r2, [r3]
+ 156:main.c        ****             CAN_TX_DATA_BYTE7(CAN_TX_MAILBOX_switchStatus, 0u);
+ 325              		.loc 1 156 0
+ 326 0122 1A68     		ldr	r2, [r3]
+ 327 0124 1040     		ands	r0, r2
+ 328 0126 1860     		str	r0, [r3]
+ 157:main.c        ****             CAN_TX_DATA_BYTE8(CAN_TX_MAILBOX_switchStatus, 0u);
+ 329              		.loc 1 157 0
+ 330 0128 1A68     		ldr	r2, [r3]
+ 331 012a 1140     		ands	r1, r2
+ 332 012c 1960     		str	r1, [r3]
+ 158:main.c        **** 
+ 333              		.loc 1 158 0
+ 334 012e 1A68     		ldr	r2, [r3]
+ 335 0130 A243     		bics	r2, r4
+ 336 0132 1A60     		str	r2, [r3]
+ 161:main.c        ****         }
+ 337              		.loc 1 161 0
+ 338 0134 FFF7FEFF 		bl	CAN_SendMsgswitchStatus
+ 339              	.LVL31:
+ 340              	.L12:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 12
+
+
+ 164:main.c        ****         {
+ 341              		.loc 1 164 0
+ 342 0138 124B     		ldr	r3, .L18+24
+ 343 013a 1B78     		ldrb	r3, [r3]
+ 344 013c 002B     		cmp	r3, #0
+ 345 013e 10D0     		beq	.L15
+ 167:main.c        **** 
+ 346              		.loc 1 167 0
+ 347 0140 154C     		ldr	r4, .L18+44
+ 348 0142 2068     		ldr	r0, [r4]
+ 349 0144 000E     		lsrs	r0, r0, #24
+ 350 0146 FFF7FEFF 		bl	PWM_WriteCompare
+ 351              	.LVL32:
+ 170:main.c        ****             UART_UartPutString(txData);
+ 352              		.loc 1 170 0
+ 353 014a 2268     		ldr	r2, [r4]
+ 354 014c 120E     		lsrs	r2, r2, #24
+ 355 014e 1349     		ldr	r1, .L18+48
+ 356 0150 01A8     		add	r0, sp, #4
+ 357 0152 FFF7FEFF 		bl	sprintf
+ 358              	.LVL33:
+ 171:main.c        ****             
+ 359              		.loc 1 171 0
+ 360 0156 01A8     		add	r0, sp, #4
+ 361 0158 FFF7FEFF 		bl	UART_UartPutString
+ 362              	.LVL34:
+ 174:main.c        ****         }
+ 363              		.loc 1 174 0
+ 364 015c 0022     		movs	r2, #0
+ 365 015e 094B     		ldr	r3, .L18+24
+ 366 0160 1A70     		strb	r2, [r3]
+ 367              	.L15:
+ 177:main.c        ****     }
+ 368              		.loc 1 177 0
+ 369 0162 6420     		movs	r0, #100
+ 370 0164 FFF7FEFF 		bl	CyDelay
+ 371              	.LVL35:
+ 178:main.c        **** }
+ 372              		.loc 1 178 0
+ 373 0168 5DE7     		b	.L16
+ 374              	.L19:
+ 375 016a C046     		.align	2
+ 376              	.L18:
+ 377 016c 00000000 		.word	ISR_CAN
+ 378 0170 38002F40 		.word	1076822072
+ 379 0174 FFFF00FF 		.word	-16711681
+ 380 0178 FF00FFFF 		.word	-65281
+ 381 017c 3C002F40 		.word	1076822076
+ 382 0180 00000000 		.word	.LC2
+ 383 0184 00000000 		.word	.LANCHOR0
+ 384 0188 28002F40 		.word	1076822056
+ 385 018c 14000000 		.word	.LC5
+ 386 0190 28000000 		.word	.LC7
+ 387 0194 2C002F40 		.word	1076822060
+ 388 0198 A8002F40 		.word	1076822184
+ 389 019c 3C000000 		.word	.LC9
+ 390              		.cfi_endproc
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 13
+
+
+ 391              	.LFE35:
+ 392              		.size	main, .-main
+ 393              		.global	isrFlag
+ 394              		.global	switchState
+ 395              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 396              		.align	2
+ 397              	.LC2:
+ 398 0000 41444320 		.ascii	"ADC out: %u.%.3u \015\012\000"
+ 398      6F75743A 
+ 398      2025752E 
+ 398      252E3375 
+ 398      200D0A00 
+ 399              	.LC5:
+ 400 0014 73776974 		.ascii	"switch1 pressed.\015\012\000"
+ 400      63683120 
+ 400      70726573 
+ 400      7365642E 
+ 400      0D0A00
+ 401 0027 00       		.space	1
+ 402              	.LC7:
+ 403 0028 73776974 		.ascii	"switch1 released.\015\012\000"
+ 403      63683120 
+ 403      72656C65 
+ 403      61736564 
+ 403      2E0D0A00 
+ 404              	.LC9:
+ 405 003c 50574D20 		.ascii	"PWM pulse width: %X \015\012\000"
+ 405      70756C73 
+ 405      65207769 
+ 405      6474683A 
+ 405      20255820 
+ 406              		.bss
+ 407              		.set	.LANCHOR0,. + 0
+ 408              		.type	isrFlag, %object
+ 409              		.size	isrFlag, 1
+ 410              	isrFlag:
+ 411 0000 00       		.space	1
+ 412              		.type	switchState, %object
+ 413              		.size	switchState, 1
+ 414              	switchState:
+ 415 0001 00       		.space	1
+ 416              		.text
+ 417              	.Letext0:
+ 418              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+ 419              		.file 3 "Generated_Source\\PSoC4/CAN.h"
+ 420              		.file 4 "Generated_Source\\PSoC4/CyLib.h"
+ 421              		.file 5 "Generated_Source\\PSoC4/Switch1.h"
+ 422              		.file 6 "Generated_Source\\PSoC4/UART.h"
+ 423              		.file 7 "Generated_Source\\PSoC4/ADC.h"
+ 424              		.file 8 "Generated_Source\\PSoC4/PWM.h"
+ 425              		.file 9 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 426              		.file 10 "Generated_Source\\PSoC4/UART_SPI_UART.h"
+ 427              		.section	.debug_info,"",%progbits
+ 428              	.Ldebug_info0:
+ 429 0000 F7040000 		.4byte	0x4f7
+ 430 0004 0400     		.2byte	0x4
+ 431 0006 00000000 		.4byte	.Ldebug_abbrev0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 14
+
+
+ 432 000a 04       		.byte	0x4
+ 433 000b 01       		.uleb128 0x1
+ 434 000c 71000000 		.4byte	.LASF60
+ 435 0010 0C       		.byte	0xc
+ 436 0011 C8020000 		.4byte	.LASF61
+ 437 0015 1D020000 		.4byte	.LASF62
+ 438 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 439 001d 00000000 		.4byte	0
+ 440 0021 00000000 		.4byte	.Ldebug_line0
+ 441 0025 02       		.uleb128 0x2
+ 442 0026 01       		.byte	0x1
+ 443 0027 06       		.byte	0x6
+ 444 0028 86010000 		.4byte	.LASF0
+ 445 002c 02       		.uleb128 0x2
+ 446 002d 01       		.byte	0x1
+ 447 002e 08       		.byte	0x8
+ 448 002f 70010000 		.4byte	.LASF1
+ 449 0033 02       		.uleb128 0x2
+ 450 0034 02       		.byte	0x2
+ 451 0035 05       		.byte	0x5
+ 452 0036 1F000000 		.4byte	.LASF2
+ 453 003a 02       		.uleb128 0x2
+ 454 003b 02       		.byte	0x2
+ 455 003c 07       		.byte	0x7
+ 456 003d DF010000 		.4byte	.LASF3
+ 457 0041 02       		.uleb128 0x2
+ 458 0042 04       		.byte	0x4
+ 459 0043 05       		.byte	0x5
+ 460 0044 4A010000 		.4byte	.LASF4
+ 461 0048 02       		.uleb128 0x2
+ 462 0049 04       		.byte	0x4
+ 463 004a 07       		.byte	0x7
+ 464 004b D4020000 		.4byte	.LASF5
+ 465 004f 02       		.uleb128 0x2
+ 466 0050 08       		.byte	0x8
+ 467 0051 05       		.byte	0x5
+ 468 0052 36010000 		.4byte	.LASF6
+ 469 0056 02       		.uleb128 0x2
+ 470 0057 08       		.byte	0x8
+ 471 0058 07       		.byte	0x7
+ 472 0059 92010000 		.4byte	.LASF7
+ 473 005d 03       		.uleb128 0x3
+ 474 005e 04       		.byte	0x4
+ 475 005f 05       		.byte	0x5
+ 476 0060 696E7400 		.ascii	"int\000"
+ 477 0064 02       		.uleb128 0x2
+ 478 0065 04       		.byte	0x4
+ 479 0066 07       		.byte	0x7
+ 480 0067 BB010000 		.4byte	.LASF8
+ 481 006b 04       		.uleb128 0x4
+ 482 006c 05010000 		.4byte	.LASF9
+ 483 0070 02       		.byte	0x2
+ 484 0071 D201     		.2byte	0x1d2
+ 485 0073 2C000000 		.4byte	0x2c
+ 486 0077 04       		.uleb128 0x4
+ 487 0078 BA020000 		.4byte	.LASF10
+ 488 007c 02       		.byte	0x2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 15
+
+
+ 489 007d D301     		.2byte	0x1d3
+ 490 007f 3A000000 		.4byte	0x3a
+ 491 0083 04       		.uleb128 0x4
+ 492 0084 C1020000 		.4byte	.LASF11
+ 493 0088 02       		.byte	0x2
+ 494 0089 D401     		.2byte	0x1d4
+ 495 008b 48000000 		.4byte	0x48
+ 496 008f 04       		.uleb128 0x4
+ 497 0090 FF000000 		.4byte	.LASF12
+ 498 0094 02       		.byte	0x2
+ 499 0095 D601     		.2byte	0x1d6
+ 500 0097 33000000 		.4byte	0x33
+ 501 009b 02       		.uleb128 0x2
+ 502 009c 04       		.byte	0x4
+ 503 009d 04       		.byte	0x4
+ 504 009e 30010000 		.4byte	.LASF13
+ 505 00a2 02       		.uleb128 0x2
+ 506 00a3 08       		.byte	0x8
+ 507 00a4 04       		.byte	0x4
+ 508 00a5 83030000 		.4byte	.LASF14
+ 509 00a9 04       		.uleb128 0x4
+ 510 00aa 3A000000 		.4byte	.LASF15
+ 511 00ae 02       		.byte	0x2
+ 512 00af E301     		.2byte	0x1e3
+ 513 00b1 B5000000 		.4byte	0xb5
+ 514 00b5 02       		.uleb128 0x2
+ 515 00b6 01       		.byte	0x1
+ 516 00b7 08       		.byte	0x8
+ 517 00b8 F9010000 		.4byte	.LASF16
+ 518 00bc 04       		.uleb128 0x4
+ 519 00bd CF020000 		.4byte	.LASF17
+ 520 00c1 02       		.byte	0x2
+ 521 00c2 7C02     		.2byte	0x27c
+ 522 00c4 C8000000 		.4byte	0xc8
+ 523 00c8 05       		.uleb128 0x5
+ 524 00c9 6B000000 		.4byte	0x6b
+ 525 00cd 04       		.uleb128 0x4
+ 526 00ce D9010000 		.4byte	.LASF18
+ 527 00d2 02       		.byte	0x2
+ 528 00d3 7E02     		.2byte	0x27e
+ 529 00d5 D9000000 		.4byte	0xd9
+ 530 00d9 05       		.uleb128 0x5
+ 531 00da 83000000 		.4byte	0x83
+ 532 00de 02       		.uleb128 0x2
+ 533 00df 08       		.byte	0x8
+ 534 00e0 04       		.byte	0x4
+ 535 00e1 5D010000 		.4byte	.LASF19
+ 536 00e5 02       		.uleb128 0x2
+ 537 00e6 04       		.byte	0x4
+ 538 00e7 07       		.byte	0x7
+ 539 00e8 29000000 		.4byte	.LASF20
+ 540 00ec 06       		.uleb128 0x6
+ 541 00ed 08       		.byte	0x8
+ 542 00ee 03       		.byte	0x3
+ 543 00ef 75       		.byte	0x75
+ 544 00f0 01010000 		.4byte	0x101
+ 545 00f4 07       		.uleb128 0x7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 16
+
+
+ 546 00f5 58010000 		.4byte	.LASF22
+ 547 00f9 03       		.byte	0x3
+ 548 00fa 77       		.byte	0x77
+ 549 00fb 11010000 		.4byte	0x111
+ 550 00ff 00       		.byte	0
+ 551 0100 00       		.byte	0
+ 552 0101 08       		.uleb128 0x8
+ 553 0102 BC000000 		.4byte	0xbc
+ 554 0106 11010000 		.4byte	0x111
+ 555 010a 09       		.uleb128 0x9
+ 556 010b E5000000 		.4byte	0xe5
+ 557 010f 07       		.byte	0x7
+ 558 0110 00       		.byte	0
+ 559 0111 05       		.uleb128 0x5
+ 560 0112 01010000 		.4byte	0x101
+ 561 0116 0A       		.uleb128 0xa
+ 562 0117 10000000 		.4byte	.LASF21
+ 563 011b 03       		.byte	0x3
+ 564 011c 78       		.byte	0x78
+ 565 011d EC000000 		.4byte	0xec
+ 566 0121 06       		.uleb128 0x6
+ 567 0122 04       		.byte	0x4
+ 568 0123 03       		.byte	0x3
+ 569 0124 7B       		.byte	0x7b
+ 570 0125 36010000 		.4byte	0x136
+ 571 0129 07       		.uleb128 0x7
+ 572 012a 58010000 		.4byte	.LASF22
+ 573 012e 03       		.byte	0x3
+ 574 012f 7D       		.byte	0x7d
+ 575 0130 46010000 		.4byte	0x146
+ 576 0134 00       		.byte	0
+ 577 0135 00       		.byte	0
+ 578 0136 08       		.uleb128 0x8
+ 579 0137 BC000000 		.4byte	0xbc
+ 580 013b 46010000 		.4byte	0x146
+ 581 013f 09       		.uleb128 0x9
+ 582 0140 E5000000 		.4byte	0xe5
+ 583 0144 03       		.byte	0x3
+ 584 0145 00       		.byte	0
+ 585 0146 05       		.uleb128 0x5
+ 586 0147 36010000 		.4byte	0x136
+ 587 014b 0A       		.uleb128 0xa
+ 588 014c 89020000 		.4byte	.LASF23
+ 589 0150 03       		.byte	0x3
+ 590 0151 7E       		.byte	0x7e
+ 591 0152 21010000 		.4byte	0x121
+ 592 0156 06       		.uleb128 0x6
+ 593 0157 20       		.byte	0x20
+ 594 0158 03       		.byte	0x3
+ 595 0159 A0       		.byte	0xa0
+ 596 015a B3010000 		.4byte	0x1b3
+ 597 015e 07       		.uleb128 0x7
+ 598 015f 17020000 		.4byte	.LASF24
+ 599 0163 03       		.byte	0x3
+ 600 0164 A2       		.byte	0xa2
+ 601 0165 4B010000 		.4byte	0x14b
+ 602 0169 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 17
+
+
+ 603 016a 07       		.uleb128 0x7
+ 604 016b 0B010000 		.4byte	.LASF25
+ 605 016f 03       		.byte	0x3
+ 606 0170 A3       		.byte	0xa3
+ 607 0171 4B010000 		.4byte	0x14b
+ 608 0175 04       		.byte	0x4
+ 609 0176 07       		.uleb128 0x7
+ 610 0177 4C000000 		.4byte	.LASF26
+ 611 017b 03       		.byte	0x3
+ 612 017c A4       		.byte	0xa4
+ 613 017d 16010000 		.4byte	0x116
+ 614 0181 08       		.byte	0x8
+ 615 0182 07       		.uleb128 0x7
+ 616 0183 92030000 		.4byte	.LASF27
+ 617 0187 03       		.byte	0x3
+ 618 0188 A5       		.byte	0xa5
+ 619 0189 4B010000 		.4byte	0x14b
+ 620 018d 10       		.byte	0x10
+ 621 018e 07       		.uleb128 0x7
+ 622 018f 10010000 		.4byte	.LASF28
+ 623 0193 03       		.byte	0x3
+ 624 0194 A6       		.byte	0xa6
+ 625 0195 4B010000 		.4byte	0x14b
+ 626 0199 14       		.byte	0x14
+ 627 019a 07       		.uleb128 0x7
+ 628 019b 69010000 		.4byte	.LASF29
+ 629 019f 03       		.byte	0x3
+ 630 01a0 A7       		.byte	0xa7
+ 631 01a1 4B010000 		.4byte	0x14b
+ 632 01a5 18       		.byte	0x18
+ 633 01a6 07       		.uleb128 0x7
+ 634 01a7 F2010000 		.4byte	.LASF30
+ 635 01ab 03       		.byte	0x3
+ 636 01ac A8       		.byte	0xa8
+ 637 01ad 4B010000 		.4byte	0x14b
+ 638 01b1 1C       		.byte	0x1c
+ 639 01b2 00       		.byte	0
+ 640 01b3 0A       		.uleb128 0xa
+ 641 01b4 FE010000 		.4byte	.LASF31
+ 642 01b8 03       		.byte	0x3
+ 643 01b9 A9       		.byte	0xa9
+ 644 01ba 56010000 		.4byte	0x156
+ 645 01be 06       		.uleb128 0x6
+ 646 01bf 10       		.byte	0x10
+ 647 01c0 03       		.byte	0x3
+ 648 01c1 AC       		.byte	0xac
+ 649 01c2 EB010000 		.4byte	0x1eb
+ 650 01c6 07       		.uleb128 0x7
+ 651 01c7 44010000 		.4byte	.LASF32
+ 652 01cb 03       		.byte	0x3
+ 653 01cc AE       		.byte	0xae
+ 654 01cd 4B010000 		.4byte	0x14b
+ 655 01d1 00       		.byte	0
+ 656 01d2 07       		.uleb128 0x7
+ 657 01d3 53010000 		.4byte	.LASF33
+ 658 01d7 03       		.byte	0x3
+ 659 01d8 AF       		.byte	0xaf
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 18
+
+
+ 660 01d9 4B010000 		.4byte	0x14b
+ 661 01dd 04       		.byte	0x4
+ 662 01de 07       		.uleb128 0x7
+ 663 01df 40000000 		.4byte	.LASF34
+ 664 01e3 03       		.byte	0x3
+ 665 01e4 B0       		.byte	0xb0
+ 666 01e5 16010000 		.4byte	0x116
+ 667 01e9 08       		.byte	0x8
+ 668 01ea 00       		.byte	0
+ 669 01eb 0A       		.uleb128 0xa
+ 670 01ec AC020000 		.4byte	.LASF35
+ 671 01f0 03       		.byte	0x3
+ 672 01f1 B1       		.byte	0xb1
+ 673 01f2 BE010000 		.4byte	0x1be
+ 674 01f6 0B       		.uleb128 0xb
+ 675 01f7 54030000 		.4byte	.LASF63
+ 676 01fb 01       		.byte	0x1
+ 677 01fc C4       		.byte	0xc4
+ 678 01fd 00000000 		.4byte	.LFB36
+ 679 0201 24000000 		.4byte	.LFE36-.LFB36
+ 680 0205 01       		.uleb128 0x1
+ 681 0206 9C       		.byte	0x9c
+ 682 0207 0C       		.uleb128 0xc
+ 683 0208 F3020000 		.4byte	.LASF64
+ 684 020c 01       		.byte	0x1
+ 685 020d DE       		.byte	0xde
+ 686 020e 83000000 		.4byte	0x83
+ 687 0212 00000000 		.4byte	.LFB37
+ 688 0216 22000000 		.4byte	.LFE37-.LFB37
+ 689 021a 01       		.uleb128 0x1
+ 690 021b 9C       		.byte	0x9c
+ 691 021c 5B020000 		.4byte	0x25b
+ 692 0220 0D       		.uleb128 0xd
+ 693 0221 A9010000 		.4byte	.LASF36
+ 694 0225 01       		.byte	0x1
+ 695 0226 E0       		.byte	0xe0
+ 696 0227 83000000 		.4byte	0x83
+ 697 022b 00000000 		.4byte	.LLST0
+ 698 022f 0D       		.uleb128 0xd
+ 699 0230 16010000 		.4byte	.LASF37
+ 700 0234 01       		.byte	0x1
+ 701 0235 E1       		.byte	0xe1
+ 702 0236 83000000 		.4byte	0x83
+ 703 023a 1F000000 		.4byte	.LLST1
+ 704 023e 0E       		.uleb128 0xe
+ 705 023f 0C000000 		.4byte	.LVL2
+ 706 0243 3A040000 		.4byte	0x43a
+ 707 0247 51020000 		.4byte	0x251
+ 708 024b 0F       		.uleb128 0xf
+ 709 024c 01       		.uleb128 0x1
+ 710 024d 50       		.byte	0x50
+ 711 024e 01       		.uleb128 0x1
+ 712 024f 31       		.byte	0x31
+ 713 0250 00       		.byte	0
+ 714 0251 10       		.uleb128 0x10
+ 715 0252 16000000 		.4byte	.LVL5
+ 716 0256 45040000 		.4byte	0x445
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 19
+
+
+ 717 025a 00       		.byte	0
+ 718 025b 11       		.uleb128 0x11
+ 719 025c 47000000 		.4byte	.LASF65
+ 720 0260 01       		.byte	0x1
+ 721 0261 53       		.byte	0x53
+ 722 0262 5D000000 		.4byte	0x5d
+ 723 0266 00000000 		.4byte	.LFB35
+ 724 026a A0010000 		.4byte	.LFE35-.LFB35
+ 725 026e 01       		.uleb128 0x1
+ 726 026f 9C       		.byte	0x9c
+ 727 0270 08040000 		.4byte	0x408
+ 728 0274 0D       		.uleb128 0xd
+ 729 0275 7C030000 		.4byte	.LASF38
+ 730 0279 01       		.byte	0x1
+ 731 027a 55       		.byte	0x55
+ 732 027b 8F000000 		.4byte	0x8f
+ 733 027f 3E000000 		.4byte	.LLST2
+ 734 0283 0D       		.uleb128 0xd
+ 735 0284 14030000 		.4byte	.LASF39
+ 736 0288 01       		.byte	0x1
+ 737 0289 56       		.byte	0x56
+ 738 028a 77000000 		.4byte	0x77
+ 739 028e 5C000000 		.4byte	.LLST3
+ 740 0292 12       		.uleb128 0x12
+ 741 0293 66030000 		.4byte	.LASF40
+ 742 0297 01       		.byte	0x1
+ 743 0298 57       		.byte	0x57
+ 744 0299 08040000 		.4byte	0x408
+ 745 029d 02       		.uleb128 0x2
+ 746 029e 91       		.byte	0x91
+ 747 029f 54       		.sleb128 -44
+ 748 02a0 10       		.uleb128 0x10
+ 749 02a1 08000000 		.4byte	.LVL8
+ 750 02a5 50040000 		.4byte	0x450
+ 751 02a9 10       		.uleb128 0x10
+ 752 02aa 0C000000 		.4byte	.LVL9
+ 753 02ae 5B040000 		.4byte	0x45b
+ 754 02b2 10       		.uleb128 0x10
+ 755 02b3 10000000 		.4byte	.LVL10
+ 756 02b7 66040000 		.4byte	0x466
+ 757 02bb 10       		.uleb128 0x10
+ 758 02bc 14000000 		.4byte	.LVL11
+ 759 02c0 72040000 		.4byte	0x472
+ 760 02c4 10       		.uleb128 0x10
+ 761 02c5 18000000 		.4byte	.LVL12
+ 762 02c9 7D040000 		.4byte	0x47d
+ 763 02cd 10       		.uleb128 0x10
+ 764 02ce 1C000000 		.4byte	.LVL13
+ 765 02d2 88040000 		.4byte	0x488
+ 766 02d6 0E       		.uleb128 0xe
+ 767 02d7 24000000 		.4byte	.LVL14
+ 768 02db 93040000 		.4byte	0x493
+ 769 02df F2020000 		.4byte	0x2f2
+ 770 02e3 0F       		.uleb128 0xf
+ 771 02e4 01       		.uleb128 0x1
+ 772 02e5 50       		.byte	0x50
+ 773 02e6 01       		.uleb128 0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 20
+
+
+ 774 02e7 4D       		.byte	0x4d
+ 775 02e8 0F       		.uleb128 0xf
+ 776 02e9 01       		.uleb128 0x1
+ 777 02ea 51       		.byte	0x51
+ 778 02eb 05       		.uleb128 0x5
+ 779 02ec 03       		.byte	0x3
+ 780 02ed 00000000 		.4byte	ISR_CAN
+ 781 02f1 00       		.byte	0
+ 782 02f2 0E       		.uleb128 0xe
+ 783 02f3 2C000000 		.4byte	.LVL15
+ 784 02f7 9E040000 		.4byte	0x49e
+ 785 02fb 05030000 		.4byte	0x305
+ 786 02ff 0F       		.uleb128 0xf
+ 787 0300 01       		.uleb128 0x1
+ 788 0301 50       		.byte	0x50
+ 789 0302 01       		.uleb128 0x1
+ 790 0303 31       		.byte	0x31
+ 791 0304 00       		.byte	0
+ 792 0305 0E       		.uleb128 0xe
+ 793 0306 36000000 		.4byte	.LVL16
+ 794 030a A9040000 		.4byte	0x4a9
+ 795 030e 18030000 		.4byte	0x318
+ 796 0312 0F       		.uleb128 0xf
+ 797 0313 01       		.uleb128 0x1
+ 798 0314 50       		.byte	0x50
+ 799 0315 01       		.uleb128 0x1
+ 800 0316 30       		.byte	0x30
+ 801 0317 00       		.byte	0
+ 802 0318 0E       		.uleb128 0xe
+ 803 0319 42000000 		.4byte	.LVL19
+ 804 031d B4040000 		.4byte	0x4b4
+ 805 0321 2B030000 		.4byte	0x32b
+ 806 0325 0F       		.uleb128 0xf
+ 807 0326 01       		.uleb128 0x1
+ 808 0327 50       		.byte	0x50
+ 809 0328 01       		.uleb128 0x1
+ 810 0329 30       		.byte	0x30
+ 811 032a 00       		.byte	0
+ 812 032b 10       		.uleb128 0x10
+ 813 032c 92000000 		.4byte	.LVL21
+ 814 0330 BF040000 		.4byte	0x4bf
+ 815 0334 0E       		.uleb128 0xe
+ 816 0335 B4000000 		.4byte	.LVL24
+ 817 0339 CB040000 		.4byte	0x4cb
+ 818 033d 57030000 		.4byte	0x357
+ 819 0341 0F       		.uleb128 0xf
+ 820 0342 01       		.uleb128 0x1
+ 821 0343 50       		.byte	0x50
+ 822 0344 02       		.uleb128 0x2
+ 823 0345 91       		.byte	0x91
+ 824 0346 54       		.sleb128 -44
+ 825 0347 0F       		.uleb128 0xf
+ 826 0348 01       		.uleb128 0x1
+ 827 0349 51       		.byte	0x51
+ 828 034a 05       		.uleb128 0x5
+ 829 034b 03       		.byte	0x3
+ 830 034c 00000000 		.4byte	.LC2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 21
+
+
+ 831 0350 0F       		.uleb128 0xf
+ 832 0351 01       		.uleb128 0x1
+ 833 0352 53       		.byte	0x53
+ 834 0353 02       		.uleb128 0x2
+ 835 0354 75       		.byte	0x75
+ 836 0355 00       		.sleb128 0
+ 837 0356 00       		.byte	0
+ 838 0357 0E       		.uleb128 0xe
+ 839 0358 BA000000 		.4byte	.LVL25
+ 840 035c D6040000 		.4byte	0x4d6
+ 841 0360 6B030000 		.4byte	0x36b
+ 842 0364 0F       		.uleb128 0xf
+ 843 0365 01       		.uleb128 0x1
+ 844 0366 50       		.byte	0x50
+ 845 0367 02       		.uleb128 0x2
+ 846 0368 91       		.byte	0x91
+ 847 0369 54       		.sleb128 -44
+ 848 036a 00       		.byte	0
+ 849 036b 10       		.uleb128 0x10
+ 850 036c C2000000 		.4byte	.LVL26
+ 851 0370 07020000 		.4byte	0x207
+ 852 0374 10       		.uleb128 0x10
+ 853 0375 CA000000 		.4byte	.LVL27
+ 854 0379 07020000 		.4byte	0x207
+ 855 037d 10       		.uleb128 0x10
+ 856 037e D2000000 		.4byte	.LVL28
+ 857 0382 45040000 		.4byte	0x445
+ 858 0386 0E       		.uleb128 0xe
+ 859 0387 EC000000 		.4byte	.LVL29
+ 860 038b D6040000 		.4byte	0x4d6
+ 861 038f 9D030000 		.4byte	0x39d
+ 862 0393 0F       		.uleb128 0xf
+ 863 0394 01       		.uleb128 0x1
+ 864 0395 50       		.byte	0x50
+ 865 0396 05       		.uleb128 0x5
+ 866 0397 03       		.byte	0x3
+ 867 0398 14000000 		.4byte	.LC5
+ 868 039c 00       		.byte	0
+ 869 039d 0E       		.uleb128 0xe
+ 870 039e FE000000 		.4byte	.LVL30
+ 871 03a2 D6040000 		.4byte	0x4d6
+ 872 03a6 B4030000 		.4byte	0x3b4
+ 873 03aa 0F       		.uleb128 0xf
+ 874 03ab 01       		.uleb128 0x1
+ 875 03ac 50       		.byte	0x50
+ 876 03ad 05       		.uleb128 0x5
+ 877 03ae 03       		.byte	0x3
+ 878 03af 28000000 		.4byte	.LC7
+ 879 03b3 00       		.byte	0
+ 880 03b4 10       		.uleb128 0x10
+ 881 03b5 38010000 		.4byte	.LVL31
+ 882 03b9 E2040000 		.4byte	0x4e2
+ 883 03bd 10       		.uleb128 0x10
+ 884 03be 4A010000 		.4byte	.LVL32
+ 885 03c2 EE040000 		.4byte	0x4ee
+ 886 03c6 0E       		.uleb128 0xe
+ 887 03c7 56010000 		.4byte	.LVL33
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 22
+
+
+ 888 03cb CB040000 		.4byte	0x4cb
+ 889 03cf E3030000 		.4byte	0x3e3
+ 890 03d3 0F       		.uleb128 0xf
+ 891 03d4 01       		.uleb128 0x1
+ 892 03d5 50       		.byte	0x50
+ 893 03d6 02       		.uleb128 0x2
+ 894 03d7 91       		.byte	0x91
+ 895 03d8 54       		.sleb128 -44
+ 896 03d9 0F       		.uleb128 0xf
+ 897 03da 01       		.uleb128 0x1
+ 898 03db 51       		.byte	0x51
+ 899 03dc 05       		.uleb128 0x5
+ 900 03dd 03       		.byte	0x3
+ 901 03de 3C000000 		.4byte	.LC9
+ 902 03e2 00       		.byte	0
+ 903 03e3 0E       		.uleb128 0xe
+ 904 03e4 5C010000 		.4byte	.LVL34
+ 905 03e8 D6040000 		.4byte	0x4d6
+ 906 03ec F7030000 		.4byte	0x3f7
+ 907 03f0 0F       		.uleb128 0xf
+ 908 03f1 01       		.uleb128 0x1
+ 909 03f2 50       		.byte	0x50
+ 910 03f3 02       		.uleb128 0x2
+ 911 03f4 91       		.byte	0x91
+ 912 03f5 54       		.sleb128 -44
+ 913 03f6 00       		.byte	0
+ 914 03f7 13       		.uleb128 0x13
+ 915 03f8 68010000 		.4byte	.LVL35
+ 916 03fc 3A040000 		.4byte	0x43a
+ 917 0400 0F       		.uleb128 0xf
+ 918 0401 01       		.uleb128 0x1
+ 919 0402 50       		.byte	0x50
+ 920 0403 02       		.uleb128 0x2
+ 921 0404 08       		.byte	0x8
+ 922 0405 64       		.byte	0x64
+ 923 0406 00       		.byte	0
+ 924 0407 00       		.byte	0
+ 925 0408 08       		.uleb128 0x8
+ 926 0409 A9000000 		.4byte	0xa9
+ 927 040d 18040000 		.4byte	0x418
+ 928 0411 09       		.uleb128 0x9
+ 929 0412 E5000000 		.4byte	0xe5
+ 930 0416 18       		.byte	0x18
+ 931 0417 00       		.byte	0
+ 932 0418 14       		.uleb128 0x14
+ 933 0419 22030000 		.4byte	.LASF41
+ 934 041d 01       		.byte	0x1
+ 935 041e 39       		.byte	0x39
+ 936 041f 6B000000 		.4byte	0x6b
+ 937 0423 05       		.uleb128 0x5
+ 938 0424 03       		.byte	0x3
+ 939 0425 00000000 		.4byte	switchState
+ 940 0429 14       		.uleb128 0x14
+ 941 042a 32000000 		.4byte	.LASF42
+ 942 042e 01       		.byte	0x1
+ 943 042f 3C       		.byte	0x3c
+ 944 0430 C8000000 		.4byte	0xc8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 23
+
+
+ 945 0434 05       		.uleb128 0x5
+ 946 0435 03       		.byte	0x3
+ 947 0436 00000000 		.4byte	isrFlag
+ 948 043a 15       		.uleb128 0x15
+ 949 043b 8A030000 		.4byte	.LASF43
+ 950 043f 8A030000 		.4byte	.LASF43
+ 951 0443 04       		.byte	0x4
+ 952 0444 D9       		.byte	0xd9
+ 953 0445 15       		.uleb128 0x15
+ 954 0446 E6020000 		.4byte	.LASF44
+ 955 044a E6020000 		.4byte	.LASF44
+ 956 044e 05       		.byte	0x5
+ 957 044f 32       		.byte	0x32
+ 958 0450 15       		.uleb128 0x15
+ 959 0451 0C020000 		.4byte	.LASF45
+ 960 0455 0C020000 		.4byte	.LASF45
+ 961 0459 06       		.byte	0x6
+ 962 045a 6E       		.byte	0x6e
+ 963 045b 15       		.uleb128 0x15
+ 964 045c 7F020000 		.4byte	.LASF46
+ 965 0460 7F020000 		.4byte	.LASF46
+ 966 0464 07       		.byte	0x7
+ 967 0465 99       		.byte	0x99
+ 968 0466 16       		.uleb128 0x16
+ 969 0467 5C030000 		.4byte	.LASF47
+ 970 046b 5C030000 		.4byte	.LASF47
+ 971 046f 08       		.byte	0x8
+ 972 0470 3201     		.2byte	0x132
+ 973 0472 15       		.uleb128 0x15
+ 974 0473 1F010000 		.4byte	.LASF48
+ 975 0477 1F010000 		.4byte	.LASF48
+ 976 047b 07       		.byte	0x7
+ 977 047c 9D       		.byte	0x9d
+ 978 047d 15       		.uleb128 0x15
+ 979 047e B2010000 		.4byte	.LASF49
+ 980 0482 B2010000 		.4byte	.LASF49
+ 981 0486 03       		.byte	0x3
+ 982 0487 C4       		.byte	0xc4
+ 983 0488 15       		.uleb128 0x15
+ 984 0489 53000000 		.4byte	.LASF50
+ 985 048d 53000000 		.4byte	.LASF50
+ 986 0491 03       		.byte	0x3
+ 987 0492 C5       		.byte	0xc5
+ 988 0493 15       		.uleb128 0x15
+ 989 0494 6D030000 		.4byte	.LASF51
+ 990 0498 6D030000 		.4byte	.LASF51
+ 991 049c 04       		.byte	0x4
+ 992 049d BD       		.byte	0xbd
+ 993 049e 15       		.uleb128 0x15
+ 994 049f 5D000000 		.4byte	.LASF52
+ 995 04a3 5D000000 		.4byte	.LASF52
+ 996 04a7 07       		.byte	0x7
+ 997 04a8 9F       		.byte	0x9f
+ 998 04a9 15       		.uleb128 0x15
+ 999 04aa 00000000 		.4byte	.LASF53
+ 1000 04ae 00000000 		.4byte	.LASF53
+ 1001 04b2 07       		.byte	0x7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 24
+
+
+ 1002 04b3 A0       		.byte	0xa0
+ 1003 04b4 15       		.uleb128 0x15
+ 1004 04b5 00030000 		.4byte	.LASF54
+ 1005 04b9 00030000 		.4byte	.LASF54
+ 1006 04bd 07       		.byte	0x7
+ 1007 04be AC       		.byte	0xac
+ 1008 04bf 16       		.uleb128 0x16
+ 1009 04c0 2E030000 		.4byte	.LASF55
+ 1010 04c4 2E030000 		.4byte	.LASF55
+ 1011 04c8 03       		.byte	0x3
+ 1012 04c9 2001     		.2byte	0x120
+ 1013 04cb 15       		.uleb128 0x15
+ 1014 04cc 7E010000 		.4byte	.LASF56
+ 1015 04d0 7E010000 		.4byte	.LASF56
+ 1016 04d4 09       		.byte	0x9
+ 1017 04d5 E7       		.byte	0xe7
+ 1018 04d6 16       		.uleb128 0x16
+ 1019 04d7 41030000 		.4byte	.LASF57
+ 1020 04db 41030000 		.4byte	.LASF57
+ 1021 04df 0A       		.byte	0xa
+ 1022 04e0 2103     		.2byte	0x321
+ 1023 04e2 16       		.uleb128 0x16
+ 1024 04e3 94020000 		.4byte	.LASF58
+ 1025 04e7 94020000 		.4byte	.LASF58
+ 1026 04eb 03       		.byte	0x3
+ 1027 04ec 1D01     		.2byte	0x11d
+ 1028 04ee 16       		.uleb128 0x16
+ 1029 04ef C8010000 		.4byte	.LASF59
+ 1030 04f3 C8010000 		.4byte	.LASF59
+ 1031 04f7 08       		.byte	0x8
+ 1032 04f8 5501     		.2byte	0x155
+ 1033 04fa 00       		.byte	0
+ 1034              		.section	.debug_abbrev,"",%progbits
+ 1035              	.Ldebug_abbrev0:
+ 1036 0000 01       		.uleb128 0x1
+ 1037 0001 11       		.uleb128 0x11
+ 1038 0002 01       		.byte	0x1
+ 1039 0003 25       		.uleb128 0x25
+ 1040 0004 0E       		.uleb128 0xe
+ 1041 0005 13       		.uleb128 0x13
+ 1042 0006 0B       		.uleb128 0xb
+ 1043 0007 03       		.uleb128 0x3
+ 1044 0008 0E       		.uleb128 0xe
+ 1045 0009 1B       		.uleb128 0x1b
+ 1046 000a 0E       		.uleb128 0xe
+ 1047 000b 55       		.uleb128 0x55
+ 1048 000c 17       		.uleb128 0x17
+ 1049 000d 11       		.uleb128 0x11
+ 1050 000e 01       		.uleb128 0x1
+ 1051 000f 10       		.uleb128 0x10
+ 1052 0010 17       		.uleb128 0x17
+ 1053 0011 00       		.byte	0
+ 1054 0012 00       		.byte	0
+ 1055 0013 02       		.uleb128 0x2
+ 1056 0014 24       		.uleb128 0x24
+ 1057 0015 00       		.byte	0
+ 1058 0016 0B       		.uleb128 0xb
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 25
+
+
+ 1059 0017 0B       		.uleb128 0xb
+ 1060 0018 3E       		.uleb128 0x3e
+ 1061 0019 0B       		.uleb128 0xb
+ 1062 001a 03       		.uleb128 0x3
+ 1063 001b 0E       		.uleb128 0xe
+ 1064 001c 00       		.byte	0
+ 1065 001d 00       		.byte	0
+ 1066 001e 03       		.uleb128 0x3
+ 1067 001f 24       		.uleb128 0x24
+ 1068 0020 00       		.byte	0
+ 1069 0021 0B       		.uleb128 0xb
+ 1070 0022 0B       		.uleb128 0xb
+ 1071 0023 3E       		.uleb128 0x3e
+ 1072 0024 0B       		.uleb128 0xb
+ 1073 0025 03       		.uleb128 0x3
+ 1074 0026 08       		.uleb128 0x8
+ 1075 0027 00       		.byte	0
+ 1076 0028 00       		.byte	0
+ 1077 0029 04       		.uleb128 0x4
+ 1078 002a 16       		.uleb128 0x16
+ 1079 002b 00       		.byte	0
+ 1080 002c 03       		.uleb128 0x3
+ 1081 002d 0E       		.uleb128 0xe
+ 1082 002e 3A       		.uleb128 0x3a
+ 1083 002f 0B       		.uleb128 0xb
+ 1084 0030 3B       		.uleb128 0x3b
+ 1085 0031 05       		.uleb128 0x5
+ 1086 0032 49       		.uleb128 0x49
+ 1087 0033 13       		.uleb128 0x13
+ 1088 0034 00       		.byte	0
+ 1089 0035 00       		.byte	0
+ 1090 0036 05       		.uleb128 0x5
+ 1091 0037 35       		.uleb128 0x35
+ 1092 0038 00       		.byte	0
+ 1093 0039 49       		.uleb128 0x49
+ 1094 003a 13       		.uleb128 0x13
+ 1095 003b 00       		.byte	0
+ 1096 003c 00       		.byte	0
+ 1097 003d 06       		.uleb128 0x6
+ 1098 003e 13       		.uleb128 0x13
+ 1099 003f 01       		.byte	0x1
+ 1100 0040 0B       		.uleb128 0xb
+ 1101 0041 0B       		.uleb128 0xb
+ 1102 0042 3A       		.uleb128 0x3a
+ 1103 0043 0B       		.uleb128 0xb
+ 1104 0044 3B       		.uleb128 0x3b
+ 1105 0045 0B       		.uleb128 0xb
+ 1106 0046 01       		.uleb128 0x1
+ 1107 0047 13       		.uleb128 0x13
+ 1108 0048 00       		.byte	0
+ 1109 0049 00       		.byte	0
+ 1110 004a 07       		.uleb128 0x7
+ 1111 004b 0D       		.uleb128 0xd
+ 1112 004c 00       		.byte	0
+ 1113 004d 03       		.uleb128 0x3
+ 1114 004e 0E       		.uleb128 0xe
+ 1115 004f 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 26
+
+
+ 1116 0050 0B       		.uleb128 0xb
+ 1117 0051 3B       		.uleb128 0x3b
+ 1118 0052 0B       		.uleb128 0xb
+ 1119 0053 49       		.uleb128 0x49
+ 1120 0054 13       		.uleb128 0x13
+ 1121 0055 38       		.uleb128 0x38
+ 1122 0056 0B       		.uleb128 0xb
+ 1123 0057 00       		.byte	0
+ 1124 0058 00       		.byte	0
+ 1125 0059 08       		.uleb128 0x8
+ 1126 005a 01       		.uleb128 0x1
+ 1127 005b 01       		.byte	0x1
+ 1128 005c 49       		.uleb128 0x49
+ 1129 005d 13       		.uleb128 0x13
+ 1130 005e 01       		.uleb128 0x1
+ 1131 005f 13       		.uleb128 0x13
+ 1132 0060 00       		.byte	0
+ 1133 0061 00       		.byte	0
+ 1134 0062 09       		.uleb128 0x9
+ 1135 0063 21       		.uleb128 0x21
+ 1136 0064 00       		.byte	0
+ 1137 0065 49       		.uleb128 0x49
+ 1138 0066 13       		.uleb128 0x13
+ 1139 0067 2F       		.uleb128 0x2f
+ 1140 0068 0B       		.uleb128 0xb
+ 1141 0069 00       		.byte	0
+ 1142 006a 00       		.byte	0
+ 1143 006b 0A       		.uleb128 0xa
+ 1144 006c 16       		.uleb128 0x16
+ 1145 006d 00       		.byte	0
+ 1146 006e 03       		.uleb128 0x3
+ 1147 006f 0E       		.uleb128 0xe
+ 1148 0070 3A       		.uleb128 0x3a
+ 1149 0071 0B       		.uleb128 0xb
+ 1150 0072 3B       		.uleb128 0x3b
+ 1151 0073 0B       		.uleb128 0xb
+ 1152 0074 49       		.uleb128 0x49
+ 1153 0075 13       		.uleb128 0x13
+ 1154 0076 00       		.byte	0
+ 1155 0077 00       		.byte	0
+ 1156 0078 0B       		.uleb128 0xb
+ 1157 0079 2E       		.uleb128 0x2e
+ 1158 007a 00       		.byte	0
+ 1159 007b 3F       		.uleb128 0x3f
+ 1160 007c 19       		.uleb128 0x19
+ 1161 007d 03       		.uleb128 0x3
+ 1162 007e 0E       		.uleb128 0xe
+ 1163 007f 3A       		.uleb128 0x3a
+ 1164 0080 0B       		.uleb128 0xb
+ 1165 0081 3B       		.uleb128 0x3b
+ 1166 0082 0B       		.uleb128 0xb
+ 1167 0083 27       		.uleb128 0x27
+ 1168 0084 19       		.uleb128 0x19
+ 1169 0085 11       		.uleb128 0x11
+ 1170 0086 01       		.uleb128 0x1
+ 1171 0087 12       		.uleb128 0x12
+ 1172 0088 06       		.uleb128 0x6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 27
+
+
+ 1173 0089 40       		.uleb128 0x40
+ 1174 008a 18       		.uleb128 0x18
+ 1175 008b 9742     		.uleb128 0x2117
+ 1176 008d 19       		.uleb128 0x19
+ 1177 008e 00       		.byte	0
+ 1178 008f 00       		.byte	0
+ 1179 0090 0C       		.uleb128 0xc
+ 1180 0091 2E       		.uleb128 0x2e
+ 1181 0092 01       		.byte	0x1
+ 1182 0093 03       		.uleb128 0x3
+ 1183 0094 0E       		.uleb128 0xe
+ 1184 0095 3A       		.uleb128 0x3a
+ 1185 0096 0B       		.uleb128 0xb
+ 1186 0097 3B       		.uleb128 0x3b
+ 1187 0098 0B       		.uleb128 0xb
+ 1188 0099 27       		.uleb128 0x27
+ 1189 009a 19       		.uleb128 0x19
+ 1190 009b 49       		.uleb128 0x49
+ 1191 009c 13       		.uleb128 0x13
+ 1192 009d 11       		.uleb128 0x11
+ 1193 009e 01       		.uleb128 0x1
+ 1194 009f 12       		.uleb128 0x12
+ 1195 00a0 06       		.uleb128 0x6
+ 1196 00a1 40       		.uleb128 0x40
+ 1197 00a2 18       		.uleb128 0x18
+ 1198 00a3 9742     		.uleb128 0x2117
+ 1199 00a5 19       		.uleb128 0x19
+ 1200 00a6 01       		.uleb128 0x1
+ 1201 00a7 13       		.uleb128 0x13
+ 1202 00a8 00       		.byte	0
+ 1203 00a9 00       		.byte	0
+ 1204 00aa 0D       		.uleb128 0xd
+ 1205 00ab 34       		.uleb128 0x34
+ 1206 00ac 00       		.byte	0
+ 1207 00ad 03       		.uleb128 0x3
+ 1208 00ae 0E       		.uleb128 0xe
+ 1209 00af 3A       		.uleb128 0x3a
+ 1210 00b0 0B       		.uleb128 0xb
+ 1211 00b1 3B       		.uleb128 0x3b
+ 1212 00b2 0B       		.uleb128 0xb
+ 1213 00b3 49       		.uleb128 0x49
+ 1214 00b4 13       		.uleb128 0x13
+ 1215 00b5 02       		.uleb128 0x2
+ 1216 00b6 17       		.uleb128 0x17
+ 1217 00b7 00       		.byte	0
+ 1218 00b8 00       		.byte	0
+ 1219 00b9 0E       		.uleb128 0xe
+ 1220 00ba 898201   		.uleb128 0x4109
+ 1221 00bd 01       		.byte	0x1
+ 1222 00be 11       		.uleb128 0x11
+ 1223 00bf 01       		.uleb128 0x1
+ 1224 00c0 31       		.uleb128 0x31
+ 1225 00c1 13       		.uleb128 0x13
+ 1226 00c2 01       		.uleb128 0x1
+ 1227 00c3 13       		.uleb128 0x13
+ 1228 00c4 00       		.byte	0
+ 1229 00c5 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 28
+
+
+ 1230 00c6 0F       		.uleb128 0xf
+ 1231 00c7 8A8201   		.uleb128 0x410a
+ 1232 00ca 00       		.byte	0
+ 1233 00cb 02       		.uleb128 0x2
+ 1234 00cc 18       		.uleb128 0x18
+ 1235 00cd 9142     		.uleb128 0x2111
+ 1236 00cf 18       		.uleb128 0x18
+ 1237 00d0 00       		.byte	0
+ 1238 00d1 00       		.byte	0
+ 1239 00d2 10       		.uleb128 0x10
+ 1240 00d3 898201   		.uleb128 0x4109
+ 1241 00d6 00       		.byte	0
+ 1242 00d7 11       		.uleb128 0x11
+ 1243 00d8 01       		.uleb128 0x1
+ 1244 00d9 31       		.uleb128 0x31
+ 1245 00da 13       		.uleb128 0x13
+ 1246 00db 00       		.byte	0
+ 1247 00dc 00       		.byte	0
+ 1248 00dd 11       		.uleb128 0x11
+ 1249 00de 2E       		.uleb128 0x2e
+ 1250 00df 01       		.byte	0x1
+ 1251 00e0 3F       		.uleb128 0x3f
+ 1252 00e1 19       		.uleb128 0x19
+ 1253 00e2 03       		.uleb128 0x3
+ 1254 00e3 0E       		.uleb128 0xe
+ 1255 00e4 3A       		.uleb128 0x3a
+ 1256 00e5 0B       		.uleb128 0xb
+ 1257 00e6 3B       		.uleb128 0x3b
+ 1258 00e7 0B       		.uleb128 0xb
+ 1259 00e8 49       		.uleb128 0x49
+ 1260 00e9 13       		.uleb128 0x13
+ 1261 00ea 8701     		.uleb128 0x87
+ 1262 00ec 19       		.uleb128 0x19
+ 1263 00ed 11       		.uleb128 0x11
+ 1264 00ee 01       		.uleb128 0x1
+ 1265 00ef 12       		.uleb128 0x12
+ 1266 00f0 06       		.uleb128 0x6
+ 1267 00f1 40       		.uleb128 0x40
+ 1268 00f2 18       		.uleb128 0x18
+ 1269 00f3 9642     		.uleb128 0x2116
+ 1270 00f5 19       		.uleb128 0x19
+ 1271 00f6 01       		.uleb128 0x1
+ 1272 00f7 13       		.uleb128 0x13
+ 1273 00f8 00       		.byte	0
+ 1274 00f9 00       		.byte	0
+ 1275 00fa 12       		.uleb128 0x12
+ 1276 00fb 34       		.uleb128 0x34
+ 1277 00fc 00       		.byte	0
+ 1278 00fd 03       		.uleb128 0x3
+ 1279 00fe 0E       		.uleb128 0xe
+ 1280 00ff 3A       		.uleb128 0x3a
+ 1281 0100 0B       		.uleb128 0xb
+ 1282 0101 3B       		.uleb128 0x3b
+ 1283 0102 0B       		.uleb128 0xb
+ 1284 0103 49       		.uleb128 0x49
+ 1285 0104 13       		.uleb128 0x13
+ 1286 0105 02       		.uleb128 0x2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 29
+
+
+ 1287 0106 18       		.uleb128 0x18
+ 1288 0107 00       		.byte	0
+ 1289 0108 00       		.byte	0
+ 1290 0109 13       		.uleb128 0x13
+ 1291 010a 898201   		.uleb128 0x4109
+ 1292 010d 01       		.byte	0x1
+ 1293 010e 11       		.uleb128 0x11
+ 1294 010f 01       		.uleb128 0x1
+ 1295 0110 31       		.uleb128 0x31
+ 1296 0111 13       		.uleb128 0x13
+ 1297 0112 00       		.byte	0
+ 1298 0113 00       		.byte	0
+ 1299 0114 14       		.uleb128 0x14
+ 1300 0115 34       		.uleb128 0x34
+ 1301 0116 00       		.byte	0
+ 1302 0117 03       		.uleb128 0x3
+ 1303 0118 0E       		.uleb128 0xe
+ 1304 0119 3A       		.uleb128 0x3a
+ 1305 011a 0B       		.uleb128 0xb
+ 1306 011b 3B       		.uleb128 0x3b
+ 1307 011c 0B       		.uleb128 0xb
+ 1308 011d 49       		.uleb128 0x49
+ 1309 011e 13       		.uleb128 0x13
+ 1310 011f 3F       		.uleb128 0x3f
+ 1311 0120 19       		.uleb128 0x19
+ 1312 0121 02       		.uleb128 0x2
+ 1313 0122 18       		.uleb128 0x18
+ 1314 0123 00       		.byte	0
+ 1315 0124 00       		.byte	0
+ 1316 0125 15       		.uleb128 0x15
+ 1317 0126 2E       		.uleb128 0x2e
+ 1318 0127 00       		.byte	0
+ 1319 0128 3F       		.uleb128 0x3f
+ 1320 0129 19       		.uleb128 0x19
+ 1321 012a 3C       		.uleb128 0x3c
+ 1322 012b 19       		.uleb128 0x19
+ 1323 012c 6E       		.uleb128 0x6e
+ 1324 012d 0E       		.uleb128 0xe
+ 1325 012e 03       		.uleb128 0x3
+ 1326 012f 0E       		.uleb128 0xe
+ 1327 0130 3A       		.uleb128 0x3a
+ 1328 0131 0B       		.uleb128 0xb
+ 1329 0132 3B       		.uleb128 0x3b
+ 1330 0133 0B       		.uleb128 0xb
+ 1331 0134 00       		.byte	0
+ 1332 0135 00       		.byte	0
+ 1333 0136 16       		.uleb128 0x16
+ 1334 0137 2E       		.uleb128 0x2e
+ 1335 0138 00       		.byte	0
+ 1336 0139 3F       		.uleb128 0x3f
+ 1337 013a 19       		.uleb128 0x19
+ 1338 013b 3C       		.uleb128 0x3c
+ 1339 013c 19       		.uleb128 0x19
+ 1340 013d 6E       		.uleb128 0x6e
+ 1341 013e 0E       		.uleb128 0xe
+ 1342 013f 03       		.uleb128 0x3
+ 1343 0140 0E       		.uleb128 0xe
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 30
+
+
+ 1344 0141 3A       		.uleb128 0x3a
+ 1345 0142 0B       		.uleb128 0xb
+ 1346 0143 3B       		.uleb128 0x3b
+ 1347 0144 05       		.uleb128 0x5
+ 1348 0145 00       		.byte	0
+ 1349 0146 00       		.byte	0
+ 1350 0147 00       		.byte	0
+ 1351              		.section	.debug_loc,"",%progbits
+ 1352              	.Ldebug_loc0:
+ 1353              	.LLST0:
+ 1354 0000 02000000 		.4byte	.LVL0
+ 1355 0004 06000000 		.4byte	.LVL1
+ 1356 0008 0200     		.2byte	0x2
+ 1357 000a 30       		.byte	0x30
+ 1358 000b 9F       		.byte	0x9f
+ 1359 000c 06000000 		.4byte	.LVL1
+ 1360 0010 20000000 		.4byte	.LVL7
+ 1361 0014 0100     		.2byte	0x1
+ 1362 0016 54       		.byte	0x54
+ 1363 0017 00000000 		.4byte	0
+ 1364 001b 00000000 		.4byte	0
+ 1365              	.LLST1:
+ 1366 001f 02000000 		.4byte	.LVL0
+ 1367 0023 20000000 		.4byte	.LVL6
+ 1368 0027 0200     		.2byte	0x2
+ 1369 0029 30       		.byte	0x30
+ 1370 002a 9F       		.byte	0x9f
+ 1371 002b 20000000 		.4byte	.LVL6
+ 1372 002f 22000000 		.4byte	.LFE37
+ 1373 0033 0100     		.2byte	0x1
+ 1374 0035 50       		.byte	0x50
+ 1375 0036 00000000 		.4byte	0
+ 1376 003a 00000000 		.4byte	0
+ 1377              	.LLST2:
+ 1378 003e 38000000 		.4byte	.LVL17
+ 1379 0042 3C000000 		.4byte	.LVL18
+ 1380 0046 0100     		.2byte	0x1
+ 1381 0048 50       		.byte	0x50
+ 1382 0049 3C000000 		.4byte	.LVL18
+ 1383 004d 41000000 		.4byte	.LVL19-1
+ 1384 0051 0100     		.2byte	0x1
+ 1385 0053 51       		.byte	0x51
+ 1386 0054 00000000 		.4byte	0
+ 1387 0058 00000000 		.4byte	0
+ 1388              	.LLST3:
+ 1389 005c 44000000 		.4byte	.LVL20
+ 1390 0060 BA000000 		.4byte	.LVL25
+ 1391 0064 0100     		.2byte	0x1
+ 1392 0066 54       		.byte	0x54
+ 1393 0067 00000000 		.4byte	0
+ 1394 006b 00000000 		.4byte	0
+ 1395              		.section	.debug_aranges,"",%progbits
+ 1396 0000 2C000000 		.4byte	0x2c
+ 1397 0004 0200     		.2byte	0x2
+ 1398 0006 00000000 		.4byte	.Ldebug_info0
+ 1399 000a 04       		.byte	0x4
+ 1400 000b 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 31
+
+
+ 1401 000c 0000     		.2byte	0
+ 1402 000e 0000     		.2byte	0
+ 1403 0010 00000000 		.4byte	.LFB36
+ 1404 0014 24000000 		.4byte	.LFE36-.LFB36
+ 1405 0018 00000000 		.4byte	.LFB37
+ 1406 001c 22000000 		.4byte	.LFE37-.LFB37
+ 1407 0020 00000000 		.4byte	.LFB35
+ 1408 0024 A0010000 		.4byte	.LFE35-.LFB35
+ 1409 0028 00000000 		.4byte	0
+ 1410 002c 00000000 		.4byte	0
+ 1411              		.section	.debug_ranges,"",%progbits
+ 1412              	.Ldebug_ranges0:
+ 1413 0000 00000000 		.4byte	.LFB36
+ 1414 0004 24000000 		.4byte	.LFE36
+ 1415 0008 00000000 		.4byte	.LFB37
+ 1416 000c 22000000 		.4byte	.LFE37
+ 1417 0010 00000000 		.4byte	.LFB35
+ 1418 0014 A0010000 		.4byte	.LFE35
+ 1419 0018 00000000 		.4byte	0
+ 1420 001c 00000000 		.4byte	0
+ 1421              		.section	.debug_line,"",%progbits
+ 1422              	.Ldebug_line0:
+ 1423 0000 7A010000 		.section	.debug_str,"MS",%progbits,1
+ 1423      02000401 
+ 1423      00000201 
+ 1423      FB0E0D00 
+ 1423      01010101 
+ 1424              	.LASF53:
+ 1425 0000 4144435F 		.ascii	"ADC_GetResult16\000"
+ 1425      47657452 
+ 1425      6573756C 
+ 1425      74313600 
+ 1426              	.LASF21:
+ 1427 0010 43414E5F 		.ascii	"CAN_DATA_BYTES\000"
+ 1427      44415441 
+ 1427      5F425954 
+ 1427      455300
+ 1428              	.LASF2:
+ 1429 001f 73686F72 		.ascii	"short int\000"
+ 1429      7420696E 
+ 1429      7400
+ 1430              	.LASF20:
+ 1431 0029 73697A65 		.ascii	"sizetype\000"
+ 1431      74797065 
+ 1431      00
+ 1432              	.LASF42:
+ 1433 0032 69737246 		.ascii	"isrFlag\000"
+ 1433      6C616700 
+ 1434              	.LASF15:
+ 1435 003a 63686172 		.ascii	"char8\000"
+ 1435      3800
+ 1436              	.LASF34:
+ 1437 0040 74786461 		.ascii	"txdata\000"
+ 1437      746100
+ 1438              	.LASF65:
+ 1439 0047 6D61696E 		.ascii	"main\000"
+ 1439      00
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 32
+
+
+ 1440              	.LASF26:
+ 1441 004c 72786461 		.ascii	"rxdata\000"
+ 1441      746100
+ 1442              	.LASF50:
+ 1443 0053 43414E5F 		.ascii	"CAN_Start\000"
+ 1443      53746172 
+ 1443      7400
+ 1444              	.LASF52:
+ 1445 005d 4144435F 		.ascii	"ADC_IsEndConversion\000"
+ 1445      4973456E 
+ 1445      64436F6E 
+ 1445      76657273 
+ 1445      696F6E00 
+ 1446              	.LASF60:
+ 1447 0071 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1447      43313120 
+ 1447      352E342E 
+ 1447      31203230 
+ 1447      31363036 
+ 1448 00a4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1448      20726576 
+ 1448      6973696F 
+ 1448      6E203233 
+ 1448      37373135 
+ 1449 00d7 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1449      66756E63 
+ 1449      74696F6E 
+ 1449      2D736563 
+ 1449      74696F6E 
+ 1450              	.LASF12:
+ 1451 00ff 696E7431 		.ascii	"int16\000"
+ 1451      3600
+ 1452              	.LASF9:
+ 1453 0105 75696E74 		.ascii	"uint8\000"
+ 1453      3800
+ 1454              	.LASF25:
+ 1455 010b 72786964 		.ascii	"rxid\000"
+ 1455      00
+ 1456              	.LASF28:
+ 1457 0110 72786163 		.ascii	"rxacr\000"
+ 1457      7200
+ 1458              	.LASF37:
+ 1459 0116 73775374 		.ascii	"swStatus\000"
+ 1459      61747573 
+ 1459      00
+ 1460              	.LASF48:
+ 1461 011f 4144435F 		.ascii	"ADC_StartConvert\000"
+ 1461      53746172 
+ 1461      74436F6E 
+ 1461      76657274 
+ 1461      00
+ 1462              	.LASF13:
+ 1463 0130 666C6F61 		.ascii	"float\000"
+ 1463      7400
+ 1464              	.LASF6:
+ 1465 0136 6C6F6E67 		.ascii	"long long int\000"
+ 1465      206C6F6E 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 33
+
+
+ 1465      6720696E 
+ 1465      7400
+ 1466              	.LASF32:
+ 1467 0144 7478636D 		.ascii	"txcmd\000"
+ 1467      6400
+ 1468              	.LASF4:
+ 1469 014a 6C6F6E67 		.ascii	"long int\000"
+ 1469      20696E74 
+ 1469      00
+ 1470              	.LASF33:
+ 1471 0153 74786964 		.ascii	"txid\000"
+ 1471      00
+ 1472              	.LASF22:
+ 1473 0158 62797465 		.ascii	"byte\000"
+ 1473      00
+ 1474              	.LASF19:
+ 1475 015d 6C6F6E67 		.ascii	"long double\000"
+ 1475      20646F75 
+ 1475      626C6500 
+ 1476              	.LASF29:
+ 1477 0169 7278616D 		.ascii	"rxamrd\000"
+ 1477      726400
+ 1478              	.LASF1:
+ 1479 0170 756E7369 		.ascii	"unsigned char\000"
+ 1479      676E6564 
+ 1479      20636861 
+ 1479      7200
+ 1480              	.LASF56:
+ 1481 017e 73707269 		.ascii	"sprintf\000"
+ 1481      6E746600 
+ 1482              	.LASF0:
+ 1483 0186 7369676E 		.ascii	"signed char\000"
+ 1483      65642063 
+ 1483      68617200 
+ 1484              	.LASF7:
+ 1485 0192 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1485      206C6F6E 
+ 1485      6720756E 
+ 1485      7369676E 
+ 1485      65642069 
+ 1486              	.LASF36:
+ 1487 01a9 68656C64 		.ascii	"heldDown\000"
+ 1487      446F776E 
+ 1487      00
+ 1488              	.LASF49:
+ 1489 01b2 43414E5F 		.ascii	"CAN_Init\000"
+ 1489      496E6974 
+ 1489      00
+ 1490              	.LASF8:
+ 1491 01bb 756E7369 		.ascii	"unsigned int\000"
+ 1491      676E6564 
+ 1491      20696E74 
+ 1491      00
+ 1492              	.LASF59:
+ 1493 01c8 50574D5F 		.ascii	"PWM_WriteCompare\000"
+ 1493      57726974 
+ 1493      65436F6D 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 34
+
+
+ 1493      70617265 
+ 1493      00
+ 1494              	.LASF18:
+ 1495 01d9 72656733 		.ascii	"reg32\000"
+ 1495      3200
+ 1496              	.LASF3:
+ 1497 01df 73686F72 		.ascii	"short unsigned int\000"
+ 1497      7420756E 
+ 1497      7369676E 
+ 1497      65642069 
+ 1497      6E7400
+ 1498              	.LASF30:
+ 1499 01f2 72786163 		.ascii	"rxacrd\000"
+ 1499      726400
+ 1500              	.LASF16:
+ 1501 01f9 63686172 		.ascii	"char\000"
+ 1501      00
+ 1502              	.LASF31:
+ 1503 01fe 43414E5F 		.ascii	"CAN_RX_STRUCT\000"
+ 1503      52585F53 
+ 1503      54525543 
+ 1503      5400
+ 1504              	.LASF45:
+ 1505 020c 55415254 		.ascii	"UART_Start\000"
+ 1505      5F537461 
+ 1505      727400
+ 1506              	.LASF24:
+ 1507 0217 7278636D 		.ascii	"rxcmd\000"
+ 1507      6400
+ 1508              	.LASF62:
+ 1509 021d 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
+ 1509      73657273 
+ 1509      5C617573 
+ 1509      74635C4F 
+ 1509      6E654472 
+ 1510 024a 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\CAN_Basic_P4_Example01.cy"
+ 1510      69637332 
+ 1510      3031382D 
+ 1510      31395C50 
+ 1510      736F6320 
+ 1511 027b 64736E00 		.ascii	"dsn\000"
+ 1512              	.LASF46:
+ 1513 027f 4144435F 		.ascii	"ADC_Start\000"
+ 1513      53746172 
+ 1513      7400
+ 1514              	.LASF23:
+ 1515 0289 43414E5F 		.ascii	"CAN_REG_32\000"
+ 1515      5245475F 
+ 1515      333200
+ 1516              	.LASF58:
+ 1517 0294 43414E5F 		.ascii	"CAN_SendMsgswitchStatus\000"
+ 1517      53656E64 
+ 1517      4D736773 
+ 1517      77697463 
+ 1517      68537461 
+ 1518              	.LASF35:
+ 1519 02ac 43414E5F 		.ascii	"CAN_TX_STRUCT\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 35
+
+
+ 1519      54585F53 
+ 1519      54525543 
+ 1519      5400
+ 1520              	.LASF10:
+ 1521 02ba 75696E74 		.ascii	"uint16\000"
+ 1521      313600
+ 1522              	.LASF11:
+ 1523 02c1 75696E74 		.ascii	"uint32\000"
+ 1523      333200
+ 1524              	.LASF61:
+ 1525 02c8 6D61696E 		.ascii	"main.c\000"
+ 1525      2E6300
+ 1526              	.LASF17:
+ 1527 02cf 72656738 		.ascii	"reg8\000"
+ 1527      00
+ 1528              	.LASF5:
+ 1529 02d4 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1529      20756E73 
+ 1529      69676E65 
+ 1529      6420696E 
+ 1529      7400
+ 1530              	.LASF44:
+ 1531 02e6 53776974 		.ascii	"Switch1_Read\000"
+ 1531      6368315F 
+ 1531      52656164 
+ 1531      00
+ 1532              	.LASF64:
+ 1533 02f3 52656164 		.ascii	"ReadSwSwitch\000"
+ 1533      53775377 
+ 1533      69746368 
+ 1533      00
+ 1534              	.LASF54:
+ 1535 0300 4144435F 		.ascii	"ADC_CountsTo_mVolts\000"
+ 1535      436F756E 
+ 1535      7473546F 
+ 1535      5F6D566F 
+ 1535      6C747300 
+ 1536              	.LASF39:
+ 1537 0314 7265734D 		.ascii	"resMilliVolts\000"
+ 1537      696C6C69 
+ 1537      566F6C74 
+ 1537      7300
+ 1538              	.LASF41:
+ 1539 0322 73776974 		.ascii	"switchState\000"
+ 1539      63685374 
+ 1539      61746500 
+ 1540              	.LASF55:
+ 1541 032e 43414E5F 		.ascii	"CAN_SendMsgADCdata\000"
+ 1541      53656E64 
+ 1541      4D736741 
+ 1541      44436461 
+ 1541      746100
+ 1542              	.LASF57:
+ 1543 0341 55415254 		.ascii	"UART_UartPutString\000"
+ 1543      5F556172 
+ 1543      74507574 
+ 1543      53747269 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccJOGwuu.s 			page 36
+
+
+ 1543      6E6700
+ 1544              	.LASF63:
+ 1545 0354 4953525F 		.ascii	"ISR_CAN\000"
+ 1545      43414E00 
+ 1546              	.LASF47:
+ 1547 035c 50574D5F 		.ascii	"PWM_Start\000"
+ 1547      53746172 
+ 1547      7400
+ 1548              	.LASF40:
+ 1549 0366 74784461 		.ascii	"txData\000"
+ 1549      746100
+ 1550              	.LASF51:
+ 1551 036d 4379496E 		.ascii	"CyIntSetVector\000"
+ 1551      74536574 
+ 1551      56656374 
+ 1551      6F7200
+ 1552              	.LASF38:
+ 1553 037c 6F757470 		.ascii	"output\000"
+ 1553      757400
+ 1554              	.LASF14:
+ 1555 0383 646F7562 		.ascii	"double\000"
+ 1555      6C6500
+ 1556              	.LASF43:
+ 1557 038a 43794465 		.ascii	"CyDelay\000"
+ 1557      6C617900 
+ 1558              	.LASF27:
+ 1559 0392 7278616D 		.ascii	"rxamr\000"
+ 1559      7200
+ 1560              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

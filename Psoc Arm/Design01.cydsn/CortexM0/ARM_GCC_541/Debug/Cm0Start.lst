@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
   28:Generated_Source\PSoC4/Cm0Start.c **** 
   29:Generated_Source\PSoC4/Cm0Start.c **** 
   30:Generated_Source\PSoC4/Cm0Start.c **** #if (CY_IP_CPUSS_CM0)
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 2
 
 
   31:Generated_Source\PSoC4/Cm0Start.c ****     /* CPUSS Configuration register */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
   85:Generated_Source\PSoC4/Cm0Start.c ****     what application will be started after a software reset.
   86:Generated_Source\PSoC4/Cm0Start.c ****     *******************************************************************************/
   87:Generated_Source\PSoC4/Cm0Start.c ****     #if (__ARMCC_VERSION)
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 3
 
 
   88:Generated_Source\PSoC4/Cm0Start.c ****         __attribute__ ((section(".bootloaderruntype"), zero_init))
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
   53              		.code	16
   54              		.thumb_func
   55              		.type	_exit, %function
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 4
 
 
   56              	_exit:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  169:Generated_Source\PSoC4/Cm0Start.c ****         /* The bootloadable application image is started at Reset() handler
  170:Generated_Source\PSoC4/Cm0Start.c ****         * as a result of a branch instruction execution from the bootloader.
  171:Generated_Source\PSoC4/Cm0Start.c ****         * So, the stack pointer needs to be reset to be sure that
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 5
 
 
  172:Generated_Source\PSoC4/Cm0Start.c ****         * there is no garbage in the stack.
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  226:Generated_Source\PSoC4/Cm0Start.c ****     __cy_byte_align8 *data; /* Start address of region.  */
  227:Generated_Source\PSoC4/Cm0Start.c ****     size_t init_size;       /* Size of initial data.  */
  228:Generated_Source\PSoC4/Cm0Start.c ****     size_t zero_size;       /* Additional size to be zeroed.  */
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 6
 
 
  229:Generated_Source\PSoC4/Cm0Start.c **** };
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
   85              	.LFB36:
  256:Generated_Source\PSoC4/Cm0Start.c **** 
  257:Generated_Source\PSoC4/Cm0Start.c ****     while(1)
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 7
 
 
  258:Generated_Source\PSoC4/Cm0Start.c ****     {
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  107              		.loc 1 290 0
  108 0012 054A     		ldr	r2, .L9
  109 0014 1360     		str	r3, [r2]
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 8
 
 
  110 0016 05E0     		b	.L8
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  312:Generated_Source\PSoC4/Cm0Start.c **** void Start_c(void)
  313:Generated_Source\PSoC4/Cm0Start.c **** {
  143              		.loc 1 313 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 9
 
 
  144              		.cfi_startproc
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  180 0012 01C9     		ldmia	r1!, {r0}
  181              	.LVL19:
  182 0014 01C3     		stmia	r3!, {r0}
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 10
 
 
  183              	.LVL20:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  220 0032 E9D1     		bne	.L17
  342:Generated_Source\PSoC4/Cm0Start.c ****         }
  343:Generated_Source\PSoC4/Cm0Start.c **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 11
 
 
  344:Generated_Source\PSoC4/Cm0Start.c ****         /* Invoke static objects constructors */
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  252              		.cfi_offset 4, -8
  253              		.cfi_offset 14, -4
  367:Generated_Source\PSoC4/Cm0Start.c ****     #if (CYDEV_PROJ_TYPE == CYDEV_PROJ_TYPE_LOADABLE || CYDEV_PROJ_TYPE == CYDEV_PROJ_TYPE_LOADABLE
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 12
 
 
  368:Generated_Source\PSoC4/Cm0Start.c **** 
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  408:Generated_Source\PSoC4/Cm0Start.c ****         CySysWdtDisable();
  409:Generated_Source\PSoC4/Cm0Start.c ****     #endif  /* (CY_IP_SRSSLT) */
  410:Generated_Source\PSoC4/Cm0Start.c **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 13
 
 
  411:Generated_Source\PSoC4/Cm0Start.c **** #if ((CYDEV_BOOTLOADER_ENABLE) && (CYDEV_PROJ_TYPE != CYDEV_PROJ_TYPE_LOADABLEANDBOOTLOADER))
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  465:Generated_Source\PSoC4/Cm0Start.c **** {
  466:Generated_Source\PSoC4/Cm0Start.c ****     CY_SYS_INITIAL_STACK_POINTER,   /* The initial stack pointer  0 */
  467:Generated_Source\PSoC4/Cm0Start.c ****     #if defined (__ICCARM__) /* The reset handler          1 */
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 14
 
 
  468:Generated_Source\PSoC4/Cm0Start.c ****         __iar_program_start,
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  507:Generated_Source\PSoC4/Cm0Start.c ****     /* Set Ram interrupt vectors to default functions. */
  508:Generated_Source\PSoC4/Cm0Start.c ****     for (indexInit = 0u; indexInit < CY_NUM_VECTORS; indexInit++)
  283              		.loc 1 508 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 15
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 15
 
 
  284 000c 0023     		movs	r3, #0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  530:Generated_Source\PSoC4/Cm0Start.c ****         {
  531:Generated_Source\PSoC4/Cm0Start.c ****             cyBtldrRunType = 0u;
  532:Generated_Source\PSoC4/Cm0Start.c ****         }
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 16
 
 
  533:Generated_Source\PSoC4/Cm0Start.c **** 
@@ -948,9 +948,9 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  348              		.data
  349              		.align	2
  350              		.set	.LANCHOR0,. + 0
- 351              		.type	heapPointer.5895, %object
- 352              		.size	heapPointer.5895, 4
- 353              	heapPointer.5895:
+ 351              		.type	heapPointer.6468, %object
+ 352              		.size	heapPointer.6468, 4
+ 353              	heapPointer.6468:
  354 0000 00000000 		.word	end
  355              		.section	.ramvectors,"aw",%progbits
  356              		.align	2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  358              		.type	CyRamVectors, %object
  359              		.size	CyRamVectors, 192
  360              	CyRamVectors:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 17
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 17
 
 
  361 0000 00000000 		.space	192
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  411 0052 98020000 		.4byte	.LASF6
  412 0056 02       		.uleb128 0x2
  413 0057 08       		.byte	0x8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 18
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 18
 
 
  414 0058 07       		.byte	0x7
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  468 00c8 04       		.byte	0x4
  469 00c9 CD000000 		.4byte	0xcd
  470 00cd 08       		.uleb128 0x8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 19
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 19
 
 
  471 00ce 02       		.uleb128 0x2
@@ -1089,133 +1089,133 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  476 00d6 04       		.byte	0x4
  477 00d7 0A       		.uleb128 0xa
  478 00d8 A3000000 		.4byte	0xa3
- 479 00dc 04       		.uleb128 0x4
- 480 00dd 46000000 		.4byte	.LASF19
- 481 00e1 01       		.byte	0x1
- 482 00e2 DD       		.byte	0xdd
- 483 00e3 2C000000 		.4byte	0x2c
- 484 00e7 0B       		.uleb128 0xb
- 485 00e8 07030000 		.4byte	.LASF50
- 486 00ec 10       		.byte	0x10
- 487 00ed 01       		.byte	0x1
- 488 00ee DF       		.byte	0xdf
- 489 00ef 24010000 		.4byte	0x124
- 490 00f3 0C       		.uleb128 0xc
- 491 00f4 67000000 		.4byte	.LASF20
- 492 00f8 01       		.byte	0x1
- 493 00f9 E1       		.byte	0xe1
- 494 00fa 24010000 		.4byte	0x124
- 495 00fe 00       		.byte	0
- 496 00ff 0C       		.uleb128 0xc
- 497 0100 11010000 		.4byte	.LASF21
- 498 0104 01       		.byte	0x1
- 499 0105 E2       		.byte	0xe2
- 500 0106 24010000 		.4byte	0x124
- 501 010a 04       		.byte	0x4
- 502 010b 0C       		.uleb128 0xc
- 503 010c 2A020000 		.4byte	.LASF22
- 504 0110 01       		.byte	0x1
- 505 0111 E3       		.byte	0xe3
- 506 0112 6B000000 		.4byte	0x6b
- 507 0116 08       		.byte	0x8
- 508 0117 0C       		.uleb128 0xc
- 509 0118 73000000 		.4byte	.LASF23
- 510 011c 01       		.byte	0x1
- 511 011d E4       		.byte	0xe4
- 512 011e 6B000000 		.4byte	0x6b
- 513 0122 0C       		.byte	0xc
- 514 0123 00       		.byte	0
- 515 0124 07       		.uleb128 0x7
- 516 0125 04       		.byte	0x4
- 517 0126 DC000000 		.4byte	0xdc
- 518 012a 0D       		.uleb128 0xd
- 519 012b 81010000 		.4byte	.LASF24
- 520 012f 01       		.byte	0x1
- 521 0130 6C       		.byte	0x6c
- 522 0131 00000000 		.4byte	.LFB34
- 523 0135 10000000 		.4byte	.LFE34-.LFB34
- 524 0139 01       		.uleb128 0x1
- 525 013a 9C       		.byte	0x9c
- 526 013b 49010000 		.4byte	0x149
- 527 013f 0E       		.uleb128 0xe
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 20
+ 479 00dc 07       		.uleb128 0x7
+ 480 00dd 04       		.byte	0x4
+ 481 00de 7D000000 		.4byte	0x7d
+ 482 00e2 04       		.uleb128 0x4
+ 483 00e3 46000000 		.4byte	.LASF19
+ 484 00e7 01       		.byte	0x1
+ 485 00e8 DD       		.byte	0xdd
+ 486 00e9 2C000000 		.4byte	0x2c
+ 487 00ed 0B       		.uleb128 0xb
+ 488 00ee 07030000 		.4byte	.LASF50
+ 489 00f2 10       		.byte	0x10
+ 490 00f3 01       		.byte	0x1
+ 491 00f4 DF       		.byte	0xdf
+ 492 00f5 2A010000 		.4byte	0x12a
+ 493 00f9 0C       		.uleb128 0xc
+ 494 00fa 67000000 		.4byte	.LASF20
+ 495 00fe 01       		.byte	0x1
+ 496 00ff E1       		.byte	0xe1
+ 497 0100 2A010000 		.4byte	0x12a
+ 498 0104 00       		.byte	0
+ 499 0105 0C       		.uleb128 0xc
+ 500 0106 11010000 		.4byte	.LASF21
+ 501 010a 01       		.byte	0x1
+ 502 010b E2       		.byte	0xe2
+ 503 010c 2A010000 		.4byte	0x12a
+ 504 0110 04       		.byte	0x4
+ 505 0111 0C       		.uleb128 0xc
+ 506 0112 2A020000 		.4byte	.LASF22
+ 507 0116 01       		.byte	0x1
+ 508 0117 E3       		.byte	0xe3
+ 509 0118 6B000000 		.4byte	0x6b
+ 510 011c 08       		.byte	0x8
+ 511 011d 0C       		.uleb128 0xc
+ 512 011e 73000000 		.4byte	.LASF23
+ 513 0122 01       		.byte	0x1
+ 514 0123 E4       		.byte	0xe4
+ 515 0124 6B000000 		.4byte	0x6b
+ 516 0128 0C       		.byte	0xc
+ 517 0129 00       		.byte	0
+ 518 012a 07       		.uleb128 0x7
+ 519 012b 04       		.byte	0x4
+ 520 012c E2000000 		.4byte	0xe2
+ 521 0130 0D       		.uleb128 0xd
+ 522 0131 81010000 		.4byte	.LASF24
+ 523 0135 01       		.byte	0x1
+ 524 0136 6C       		.byte	0x6c
+ 525 0137 00000000 		.4byte	.LFB34
+ 526 013b 10000000 		.4byte	.LFE34-.LFB34
+ 527 013f 01       		.uleb128 0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 20
 
 
- 528 0140 06000000 		.4byte	.LVL0
- 529 0144 6A030000 		.4byte	0x36a
- 530 0148 00       		.byte	0
- 531 0149 0D       		.uleb128 0xd
- 532 014a 7B010000 		.4byte	.LASF25
- 533 014e 01       		.byte	0x1
- 534 014f FD       		.byte	0xfd
- 535 0150 00000000 		.4byte	.LFB35
- 536 0154 0A000000 		.4byte	.LFE35-.LFB35
- 537 0158 01       		.uleb128 0x1
- 538 0159 9C       		.byte	0x9c
- 539 015a 7F010000 		.4byte	0x17f
- 540 015e 0F       		.uleb128 0xf
- 541 015f 6C000000 		.4byte	.LASF27
- 542 0163 01       		.byte	0x1
- 543 0164 FD       		.byte	0xfd
- 544 0165 5D000000 		.4byte	0x5d
- 545 0169 00000000 		.4byte	.LLST0
- 546 016d 10       		.uleb128 0x10
- 547 016e 08000000 		.4byte	.LVL3
- 548 0172 75030000 		.4byte	0x375
- 549 0176 11       		.uleb128 0x11
- 550 0177 01       		.uleb128 0x1
- 551 0178 50       		.byte	0x50
- 552 0179 03       		.uleb128 0x3
- 553 017a F3       		.byte	0xf3
- 554 017b 01       		.uleb128 0x1
- 555 017c 50       		.byte	0x50
- 556 017d 00       		.byte	0
- 557 017e 00       		.byte	0
- 558 017f 12       		.uleb128 0x12
- 559 0180 93010000 		.4byte	.LASF26
- 560 0184 01       		.byte	0x1
- 561 0185 1701     		.2byte	0x117
- 562 0187 D5000000 		.4byte	0xd5
- 563 018b 00000000 		.4byte	.LFB36
- 564 018f 30000000 		.4byte	.LFE36-.LFB36
- 565 0193 01       		.uleb128 0x1
- 566 0194 9C       		.byte	0x9c
- 567 0195 E1010000 		.4byte	0x1e1
- 568 0199 13       		.uleb128 0x13
- 569 019a 00030000 		.4byte	.LASF28
- 570 019e 01       		.byte	0x1
- 571 019f 1701     		.2byte	0x117
- 572 01a1 5D000000 		.4byte	0x5d
- 573 01a5 21000000 		.4byte	.LLST1
- 574 01a9 14       		.uleb128 0x14
- 575 01aa 656E6400 		.ascii	"end\000"
- 576 01ae 01       		.byte	0x1
- 577 01af 1901     		.2byte	0x119
- 578 01b1 5D000000 		.4byte	0x5d
- 579 01b5 15       		.uleb128 0x15
- 580 01b6 24010000 		.4byte	.LASF29
- 581 01ba 01       		.byte	0x1
- 582 01bb 1A01     		.2byte	0x11a
- 583 01bd D5000000 		.4byte	0xd5
- 584 01c1 4D000000 		.4byte	.LLST2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 21
+ 528 0140 9C       		.byte	0x9c
+ 529 0141 4F010000 		.4byte	0x14f
+ 530 0145 0E       		.uleb128 0xe
+ 531 0146 06000000 		.4byte	.LVL0
+ 532 014a 6A030000 		.4byte	0x36a
+ 533 014e 00       		.byte	0
+ 534 014f 0D       		.uleb128 0xd
+ 535 0150 7B010000 		.4byte	.LASF25
+ 536 0154 01       		.byte	0x1
+ 537 0155 FD       		.byte	0xfd
+ 538 0156 00000000 		.4byte	.LFB35
+ 539 015a 0A000000 		.4byte	.LFE35-.LFB35
+ 540 015e 01       		.uleb128 0x1
+ 541 015f 9C       		.byte	0x9c
+ 542 0160 85010000 		.4byte	0x185
+ 543 0164 0F       		.uleb128 0xf
+ 544 0165 6C000000 		.4byte	.LASF27
+ 545 0169 01       		.byte	0x1
+ 546 016a FD       		.byte	0xfd
+ 547 016b 5D000000 		.4byte	0x5d
+ 548 016f 00000000 		.4byte	.LLST0
+ 549 0173 10       		.uleb128 0x10
+ 550 0174 08000000 		.4byte	.LVL3
+ 551 0178 75030000 		.4byte	0x375
+ 552 017c 11       		.uleb128 0x11
+ 553 017d 01       		.uleb128 0x1
+ 554 017e 50       		.byte	0x50
+ 555 017f 03       		.uleb128 0x3
+ 556 0180 F3       		.byte	0xf3
+ 557 0181 01       		.uleb128 0x1
+ 558 0182 50       		.byte	0x50
+ 559 0183 00       		.byte	0
+ 560 0184 00       		.byte	0
+ 561 0185 12       		.uleb128 0x12
+ 562 0186 93010000 		.4byte	.LASF26
+ 563 018a 01       		.byte	0x1
+ 564 018b 1701     		.2byte	0x117
+ 565 018d D5000000 		.4byte	0xd5
+ 566 0191 00000000 		.4byte	.LFB36
+ 567 0195 30000000 		.4byte	.LFE36-.LFB36
+ 568 0199 01       		.uleb128 0x1
+ 569 019a 9C       		.byte	0x9c
+ 570 019b E7010000 		.4byte	0x1e7
+ 571 019f 13       		.uleb128 0x13
+ 572 01a0 00030000 		.4byte	.LASF28
+ 573 01a4 01       		.byte	0x1
+ 574 01a5 1701     		.2byte	0x117
+ 575 01a7 5D000000 		.4byte	0x5d
+ 576 01ab 21000000 		.4byte	.LLST1
+ 577 01af 14       		.uleb128 0x14
+ 578 01b0 656E6400 		.ascii	"end\000"
+ 579 01b4 01       		.byte	0x1
+ 580 01b5 1901     		.2byte	0x119
+ 581 01b7 5D000000 		.4byte	0x5d
+ 582 01bb 15       		.uleb128 0x15
+ 583 01bc 24010000 		.4byte	.LASF29
+ 584 01c0 01       		.byte	0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 21
 
 
- 585 01c5 16       		.uleb128 0x16
- 586 01c6 3A000000 		.4byte	.LASF30
- 587 01ca 01       		.byte	0x1
- 588 01cb 1D01     		.2byte	0x11d
- 589 01cd E1010000 		.4byte	0x1e1
- 590 01d1 05       		.uleb128 0x5
- 591 01d2 03       		.byte	0x3
- 592 01d3 00000000 		.4byte	heapPointer.5895
- 593 01d7 0E       		.uleb128 0xe
- 594 01d8 1C000000 		.4byte	.LVL9
- 595 01dc 6A030000 		.4byte	0x36a
- 596 01e0 00       		.byte	0
- 597 01e1 07       		.uleb128 0x7
- 598 01e2 04       		.byte	0x4
- 599 01e3 7D000000 		.4byte	0x7d
+ 585 01c1 1A01     		.2byte	0x11a
+ 586 01c3 D5000000 		.4byte	0xd5
+ 587 01c7 4D000000 		.4byte	.LLST2
+ 588 01cb 16       		.uleb128 0x16
+ 589 01cc 3A000000 		.4byte	.LASF30
+ 590 01d0 01       		.byte	0x1
+ 591 01d1 1D01     		.2byte	0x11d
+ 592 01d3 DC000000 		.4byte	0xdc
+ 593 01d7 05       		.uleb128 0x5
+ 594 01d8 03       		.byte	0x3
+ 595 01d9 00000000 		.4byte	heapPointer.6468
+ 596 01dd 0E       		.uleb128 0xe
+ 597 01de 1C000000 		.4byte	.LVL9
+ 598 01e2 6A030000 		.4byte	0x36a
+ 599 01e6 00       		.byte	0
  600 01e7 17       		.uleb128 0x17
  601 01e8 2C000000 		.4byte	.LASF31
  602 01ec 01       		.byte	0x1
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  639 024f 01       		.byte	0x1
  640 0250 4501     		.2byte	0x145
  641 0252 64000000 		.4byte	0x64
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 22
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 22
 
 
  642 0256 DC000000 		.4byte	.LLST7
@@ -1280,7 +1280,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  658 027f 04       		.byte	0x4
  659 0280 84020000 		.4byte	0x284
  660 0284 0A       		.uleb128 0xa
- 661 0285 E7000000 		.4byte	0xe7
+ 661 0285 ED000000 		.4byte	0xed
  662 0289 07       		.uleb128 0x7
  663 028a 04       		.byte	0x4
  664 028b 89000000 		.4byte	0x89
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  696 02de 00       		.byte	0
  697 02df 1B       		.uleb128 0x1b
  698 02e0 4D010000 		.4byte	.LASF52
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 23
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 23
 
 
  699 02e4 01       		.byte	0x1
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  753 035f 05       		.uleb128 0x5
  754 0360 03       		.byte	0x3
  755 0361 00000000 		.4byte	RomVectors
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 24
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 24
 
 
  756 0365 0A       		.uleb128 0xa
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  810 0018 3E       		.uleb128 0x3e
  811 0019 0B       		.uleb128 0xb
  812 001a 03       		.uleb128 0x3
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 25
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 25
 
 
  813 001b 0E       		.uleb128 0xe
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  867 0051 00       		.byte	0
  868 0052 00       		.byte	0
  869 0053 08       		.uleb128 0x8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 26
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 26
 
 
  870 0054 15       		.uleb128 0x15
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  924 008a 19       		.uleb128 0x19
  925 008b 03       		.uleb128 0x3
  926 008c 0E       		.uleb128 0xe
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 27
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 27
 
 
  927 008d 3A       		.uleb128 0x3a
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  981 00c9 8A8201   		.uleb128 0x410a
  982 00cc 00       		.byte	0
  983 00cd 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 28
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 28
 
 
  984 00ce 18       		.uleb128 0x18
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1038 0106 3B       		.uleb128 0x3b
  1039 0107 05       		.uleb128 0x5
  1040 0108 49       		.uleb128 0x49
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 29
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 29
 
 
  1041 0109 13       		.uleb128 0x13
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1095 0140 12       		.uleb128 0x12
  1096 0141 06       		.uleb128 0x6
  1097 0142 40       		.uleb128 0x40
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 30
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 30
 
 
  1098 0143 18       		.uleb128 0x18
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1152 017b 01       		.uleb128 0x1
  1153 017c 13       		.uleb128 0x13
  1154 017d 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 31
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 31
 
 
  1155 017e 00       		.byte	0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1209 01b4 20       		.uleb128 0x20
  1210 01b5 34       		.uleb128 0x34
  1211 01b6 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 32
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 32
 
 
  1212 01b7 03       		.uleb128 0x3
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1266 0030 0A000000 		.4byte	.LVL6
  1267 0034 0100     		.2byte	0x1
  1268 0036 53       		.byte	0x53
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 33
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 33
 
 
  1269 0037 0A000000 		.4byte	.LVL6
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1323 00c0 51       		.byte	0x51
  1324 00c1 00000000 		.4byte	0
  1325 00c5 00000000 		.4byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 34
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 34
 
 
  1326              	.LLST6:
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1380 0006 00000000 		.4byte	.Ldebug_info0
  1381 000a 04       		.byte	0x4
  1382 000b 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 35
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 35
 
 
  1383 000c 0000     		.2byte	0
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1425      746F7273 
  1425      00
  1426              	.LASF31:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 36
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 36
 
 
  1427 002c 53746172 		.ascii	"Start_c\000"
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1451      676E6564 
  1451      20636861 
  1451      7200
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 37
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 37
 
 
  1452              	.LASF29:
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1476              	.LASF48:
  1477 01bb 47656E65 		.ascii	"Generated_Source\\PSoC4\\Cm0Start.c\000"
  1477      72617465 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 38
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 38
 
 
  1477      645F536F 
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 1
  1501              	.LASF6:
  1502 0298 6C6F6E67 		.ascii	"long long int\000"
  1502      206C6F6E 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMAOda1.s 			page 39
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cczqrrWX.s 			page 39
 
 
  1502      6720696E 

@@ -1,3 +1,14 @@
---------------- Build Started: 11/15/2018 20:20:20 Project: Design01, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
-The code generation step is up to date.
---------------- Build Skipped: 11/15/2018 20:20:20 ---------------
+--------------- Build Started: 11/19/2018 19:58:19 Project: Design01, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+cydsfit.exe -.appdatapath "C:\Users\austc\AppData\Local\Cypress Semiconductor\PSoC Creator\4.2" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p "C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\Design01.cyprj" -d CY8C4248BZI-L489 -s "C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\Generated_Source\PSoC4" -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+ADD: sdb.M0065: information: Analog terminal "ADC_SAR_Seq_1.vinMinus0" on TopDesign is unconnected.
+ * C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\TopDesign\TopDesign.cysch (Signal: Net_389)
+ * C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\TopDesign\TopDesign.cysch (Shape_447.19)
+HDL Generation...
+Synthesis...
+ADD: fit.M0002: error: Signal 'Net_12' is floating (not driven by anything).
+ * C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\TopDesign\TopDesign.cysch (Net_12)
+Dependency Generation...
+Cleanup...
+Error: fit.M0050: The fitter aborted due to errors, please address all errors and rebuild. (App=cydsfit)
+--------------- Build Failed: 11/19/2018 19:58:27 ---------------

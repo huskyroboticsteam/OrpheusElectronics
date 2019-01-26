@@ -17,7 +17,7 @@
 
 #include "Status_Reg_Switches.h"
 
-#if !defined(Status_Reg_Switches_sts_sts_reg__REMOVED) /* Check for removal by optimization */
+#if !defined(Status_Reg_Switches_sts_intr_sts_reg__REMOVED) /* Check for removal by optimization */
 
 
 /*******************************************************************************

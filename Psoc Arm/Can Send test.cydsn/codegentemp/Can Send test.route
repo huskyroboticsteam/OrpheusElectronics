@@ -1,0 +1,27 @@
+net ClockBlock_HFClk
+	term   ":m0s8clockblockcell.hfclk"
+	switch ":m0s8clockblockcell.hfclk==>:interrupt_29.clock"
+	term   ":interrupt_29.clock"
+end ClockBlock_HFClk
+net Net_11
+	term   ":ioport0:pin0.fb"
+	switch ":ioport0:pin0.fb==>:ioport0:smartio_mux_out0.direct_in"
+	switch ":ioport0:smartio_mux_out0.smartio_mux_out==>:ioport0:hsiom_in0.hsiom0_in"
+	switch ":ioport0:hsiom_in0.fixed_ACT_2==>:cancell_1__can_rx__hsiom_permute.ioport0__fixed_out_p0_ACT_2"
+	switch ":cancell_1__can_rx__hsiom_permute.cancell_1__can_rx==>:cancell_1.can_rx"
+	term   ":cancell_1.can_rx"
+end Net_11
+net Net_12
+	term   ":cancell_1.can_tx"
+	switch ":cancell_1.can_tx==>:ioport0:hsiom_out1.fixed_ACT_2"
+	switch ":ioport0:hsiom_out1.hsiom1_out==>:ioport0:smartio_mux_in1.direct_out"
+	switch ":ioport0:smartio_mux_in1.smartio_mux_in==>:ioport0:pin1.pin_input"
+	term   ":ioport0:pin1.pin_input"
+end Net_12
+net Net_2
+	term   ":cancell_1.interrupt"
+	switch ":cancell_1.interrupt==>Stub-:dsiswitch_top@[DSI=(0,0)][side=top]:dsihc_top:v25+:dsiswitch_top@[DSI=(0,0)][side=top]:dsihc_top:v27"
+	switch "Stub-:dsiswitch_top@[DSI=(0,0)][side=top]:dsihc_top:v25+:dsiswitch_top@[DSI=(0,0)][side=top]:dsihc_top:v27==>:interrupt_idmux_29.in_0"
+	switch ":interrupt_idmux_29.interrupt_idmux_29__out==>:interrupt_29.interrupt"
+	term   ":interrupt_29.interrupt"
+end Net_2

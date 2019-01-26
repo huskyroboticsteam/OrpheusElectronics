@@ -1,0 +1,11 @@
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\Design01.cyprj|f987cf50-5cb1-4fe4-9694-9ead57d7e0d3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|df5817ac-4b9e-43b5-8da3-31a6a3620ebd
+C:\Users\austc\OneDrive\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|d9ac4dea-5739-4573-9622-531d67d9c856
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|56316495-ac0b-4e65-aea2-a9db741b26e3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|0ced1aa5-4a87-42e0-925c-698c889f4ebd
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|ad1fbd5a-2bed-4751-917d-5e7297d4284d
+C:\Users\austc\OneDrive\Documents\PSoC Creator\DebouncerExample01.cydsn\DebouncerExample01.cyprj|b8b9e417-fd2b-44f7-af5e-25be8fc5b276
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|a23a8a52-afcd-424f-9497-e672c8974c45
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Basic_P4_Example01.cydsn\CAN_Basic_P4_Example01.cyprj|1f185bc5-006a-468d-b858-7041f16e8355
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj|7127fd9f-d51d-4599-a9fd-cf37451a5fb0
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Can Send test.cydsn\Can Send test.cyprj|6cb97936-722e-45c6-a3ec-b24846254cd1

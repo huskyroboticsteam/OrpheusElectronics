@@ -26,14 +26,16 @@
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\PWM_Motor_PM.c" value="SOURCE_C;CortexM0;;;;PWM_Motor" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\isr_Limit_1.c" value="SOURCE_C;CortexM0;;;;isr_Limit_1" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\isr_Limit_1.h" value="HEADER;;;;;isr_Limit_1" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\isr_Limit_2.c" value="SOURCE_C;CortexM0;;;;isr_Limit_2" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\isr_Limit_2.h" value="HEADER;;;;;isr_Limit_2" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Motor.c" value="SOURCE_C;CortexM0;;;;Pin_Motor" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Motor.h" value="HEADER;;;;;Pin_Motor" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Motor_aliases.h" value="HEADER;;;;;Pin_Motor" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Motor_PM.c" value="SOURCE_C;CortexM0;;;;Pin_Motor" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Clock_PWM.c" value="SOURCE_C;CortexM0;;;;Clock_PWM" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Clock_PWM.h" value="HEADER;;;;;Clock_PWM" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Pot.c" value="SOURCE_C;CortexM0;;;;Pin_Pot" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Pot.h" value="HEADER;;;;;Pin_Pot" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Pot_aliases.h" value="HEADER;;;;;Pin_Pot" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Pot_PM.c" value="SOURCE_C;CortexM0;;;;Pin_Pot" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Direction.c" value="SOURCE_C;CortexM0;;;;Pin_Direction" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Direction.h" value="HEADER;;;;;Pin_Direction" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Direction_aliases.h" value="HEADER;;;;;Pin_Direction" />
@@ -73,11 +75,71 @@
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_count_neg_20_PM.c" value="SOURCE_C;CortexM0;;;;Pin_count_neg_20" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Status_Reg_Switches.c" value="SOURCE_C;CortexM0;;;;Status_Reg_Switches" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Status_Reg_Switches.h" value="HEADER;;;;;Status_Reg_Switches" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_manual_1.c" value="SOURCE_C;CortexM0;;;;Pin_manual_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_manual_1.h" value="HEADER;;;;;Pin_manual_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_manual_1_aliases.h" value="HEADER;;;;;Pin_manual_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_manual_1_PM.c" value="SOURCE_C;CortexM0;;;;Pin_manual_1" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Clock_2.c" value="SOURCE_C;CortexM0;;;;Clock_2" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Clock_2.h" value="HEADER;;;;;Clock_2" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Manual_2.c" value="SOURCE_C;CortexM0;;;;Pin_Manual_2" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Manual_2.h" value="HEADER;;;;;Pin_Manual_2" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Manual_2_aliases.h" value="HEADER;;;;;Pin_Manual_2" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Pin_Manual_2_PM.c" value="SOURCE_C;CortexM0;;;;Pin_Manual_2" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Status_Reg_Manual.c" value="SOURCE_C;CortexM0;;;;Status_Reg_Manual" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Status_Reg_Manual.h" value="HEADER;;;;;Status_Reg_Manual" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\isr_manual.c" value="SOURCE_C;CortexM0;;;;isr_manual" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\isr_manual.h" value="HEADER;;;;;isr_manual" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1.c" value="SOURCE_C;CortexM0;;;;ADC_SAR_Seq_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1.h" value="HEADER;;;;;ADC_SAR_Seq_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1_PM.c" value="SOURCE_C;CortexM0;;;;ADC_SAR_Seq_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1_INT.c" value="SOURCE_C;CortexM0;;;;ADC_SAR_Seq_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\RX_1.c" value="SOURCE_C;CortexM0;;;;RX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\RX_1.h" value="HEADER;;;;;RX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\RX_1_aliases.h" value="HEADER;;;;;RX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\RX_1_PM.c" value="SOURCE_C;CortexM0;;;;RX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\TX_1.c" value="SOURCE_C;CortexM0;;;;TX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\TX_1.h" value="HEADER;;;;;TX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\TX_1_aliases.h" value="HEADER;;;;;TX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\TX_1_PM.c" value="SOURCE_C;CortexM0;;;;TX_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN.c" value="SOURCE_C;CortexM0;;;;CAN" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN.h" value="HEADER;;;;;CAN" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN_INT.c" value="SOURCE_C;CortexM0;;;;CAN" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN_PM.c" value="SOURCE_C;CortexM0;;;;CAN" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN_TX_RX_func.c" value="SOURCE_C;CortexM0;;;;CAN" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART.c" value="SOURCE_C;CortexM0;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART.h" value="HEADER;;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_SPI_UART.h" value="HEADER;;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_SPI_UART.c" value="SOURCE_C;CortexM0;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_SPI_UART_INT.c" value="SOURCE_C;CortexM0;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_PM.c" value="SOURCE_C;CortexM0;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_UART.c" value="SOURCE_C;CortexM0;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_BOOT.c" value="SOURCE_C;CortexM0;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_UART_BOOT.c" value="SOURCE_C;CortexM0;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_PINS.h" value="HEADER;;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_SPI_UART_PVT.h" value="HEADER;;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_PVT.h" value="HEADER;;;;;UART" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_BOOT.h" value="HEADER;;;;;UART" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\QuadDec_Cnt16.c" value="SOURCE_C;CortexM0;;;;QuadDec_Cnt16" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\QuadDec_Cnt16.h" value="HEADER;;;;;QuadDec_Cnt16" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\QuadDec_Cnt16_PM.c" value="SOURCE_C;CortexM0;;;;QuadDec_Cnt16" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1_IRQ.c" value="SOURCE_C;CortexM0;;;;ADC_SAR_Seq_1_IRQ" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1_IRQ.h" value="HEADER;;;;;ADC_SAR_Seq_1_IRQ" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1_intClock.c" value="SOURCE_C;CortexM0;;;;ADC_SAR_Seq_1_intClock" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\ADC_SAR_Seq_1_intClock.h" value="HEADER;;;;;ADC_SAR_Seq_1_intClock" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN_isr.c" value="SOURCE_C;CortexM0;;;;CAN_isr" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN_isr.h" value="HEADER;;;;;CAN_isr" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN_HFCLK.c" value="SOURCE_C;CortexM0;;;;CAN_HFCLK" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\CAN_HFCLK.h" value="HEADER;;;;;CAN_HFCLK" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_SCBCLK.c" value="SOURCE_C;CortexM0;;;;UART_SCBCLK" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_SCBCLK.h" value="HEADER;;;;;UART_SCBCLK" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_tx.c" value="SOURCE_C;CortexM0;;;;UART_tx" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_tx.h" value="HEADER;;;;;UART_tx" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_tx_aliases.h" value="HEADER;;;;;UART_tx" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_tx_PM.c" value="SOURCE_C;CortexM0;;;;UART_tx" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_rx.c" value="SOURCE_C;CortexM0;;;;UART_rx" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_rx.h" value="HEADER;;;;;UART_rx" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_rx_aliases.h" value="HEADER;;;;;UART_rx" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\UART_rx_PM.c" value="SOURCE_C;CortexM0;;;;UART_rx" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\cm0gcc.ld" value="LINKER_SCRIPT;;;b98f980c-3bd1-4fc7-a887-c56a20a46fdd;;cy_boot" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Cm0RealView.scat" value="LINKER_SCRIPT;;;fdb8e1ae-f83a-46cf-9446-1d703716f38a;;cy_boot" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\codegentemp\Cm0Start.c" value="SOURCE_C;CortexM0;;;;cy_boot" />

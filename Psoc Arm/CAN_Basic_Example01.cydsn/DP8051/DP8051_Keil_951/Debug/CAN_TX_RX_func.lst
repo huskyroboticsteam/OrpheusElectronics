@@ -1,0 +1,2053 @@
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE CAN_TX_RX_FUNC
+OBJECT MODULE PLACED IN .\DP8051\DP8051_Keil_951\Debug\CAN_TX_RX_func.obj
+COMPILER INVOKED BY: C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\import\keil\pk51\9.51\C51\BIN\c51.exe 
+                    -Generated_Source\PSoC3\CAN_TX_RX_func.c NOIV LARGE MODDP2 OMF2 VB(1) NOIP INCDIR(.,Generated_Source\PSoC3) FF(3) DB DF(D
+                    -EBUG) WL(2) PR(.\DP8051\DP8051_Keil_951\Debug/CAN_TX_RX_func.lst) CD OT(2,SIZE) OJ(.\DP8051\DP8051_Keil_951\Debug\CAN_TX
+                    -_RX_func.obj)
+
+line level    source
+
+   1          /*******************************************************************************
+   2          * File Name: CAN_TX_RX_func.c
+   3          * Version 3.0
+   4          *
+   5          * Description:
+   6          *  There are functions process "Full" Receive and Transmit mailboxes:
+   7          *     - CAN_SendMsg0-7();
+   8          *     - CAN_ReceiveMsg0-15();
+   9          *  Transmission of message, and receive routine for "Basic" mailboxes:
+  10          *     - CAN_SendMsg();
+  11          *     - CAN_TxCancel();
+  12          *     - CAN_ReceiveMsg();
+  13          *
+  14          *  Note:
+  15          *   None
+  16          *
+  17          ********************************************************************************
+  18          * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  19          * You may use this file only in accordance with the license, terms, conditions,
+  20          * disclaimers, and limitations in the end user license agreement accompanying
+  21          * the software package with which this file was provided.
+  22          *******************************************************************************/
+  23          
+  24          #include "CAN.h"
+  25          #include "cyapicallbacks.h"
+  26          
+  27          /* `#START TX_RX_FUNCTION` */
+  28          
+  29          /* `#END` */
+  30          
+  31          
+  32          /*******************************************************************************
+  33          * FUNCTION NAME:   CAN_SendMsg
+  34          ********************************************************************************
+  35          *
+  36          * Summary:
+  37          *  This function is Send Message from one of Basic mailboxes. The function loops
+  38          *  through the transmit message buffer designed as Basic CAN mailboxes for the
+  39          *  first free available and sends from it. The number of retries is limited.
+  40          *
+  41          * Parameters:
+  42          *  message: The pointer to a structure that contains all required data to send
+  43          *           messages.
+  44          *
+  45          * Return:
+  46          *  Indication if message has been sent.
+  47          *   Define                             Description
+  48          *    CYRET_SUCCESS                      The function passed successfully
+  49          *    CAN_FAIL              The function failed
+  50          *
+  51          *******************************************************************************/
+  52          uint8 CAN_SendMsg(const CAN_TX_MSG *message) 
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 2   
+
+  53          {
+  54   1          uint8 i, j, shift;
+  55   1          uint8 retry = 0u;
+  56   1          uint8 result = CAN_FAIL;
+  57   1          uint32 regTemp;
+  58   1      
+  59   1          while (retry < CAN_RETRY_NUMBER)
+  60   1          {
+  61   2              shift = 1u;    /* Start from first mailbox */
+  62   2              for (i = 0u; i < CAN_NUMBER_OF_TX_MAILBOXES; i++)
+  63   2              {
+  64   3                  /* Find Basic TX mailboxes */
+  65   3                  if ((CAN_TX_MAILBOX_TYPE & shift) == 0u)
+  66   3                  {
+  67   4                      /* Find free mailbox */
+  68   4                      #if (CY_PSOC3 || CY_PSOC5)
+  69   4                          if ((CAN_BUF_SR_REG.byte[2] & shift) == 0u)
+  70   4                      #else  /* CY_PSOC4 */
+                                  if ((CAN_BUF_SR_REG &
+                                      (uint32) ((uint32) shift << CAN_TWO_BYTE_OFFSET)) == 0u)
+                              #endif /* CY_PSOC3 || CY_PSOC5 */
+  74   4                          {
+  75   5                              regTemp = 0u;
+  76   5      
+  77   5                              /* Set message parameters */
+  78   5                              if (message->rtr != CAN_STANDARD_MESSAGE)
+  79   5                              {
+  80   6                                  regTemp = CAN_TX_RTR_MASK;    /* RTR message Enable */
+  81   6                              }
+  82   5      
+  83   5                              if (message->ide == CAN_STANDARD_MESSAGE)
+  84   5                              {
+  85   6                                  CAN_SET_TX_ID_STANDARD_MSG(i, message->id);
+  86   6                              }
+  87   5                              else
+  88   5                              {
+  89   6                                  regTemp |= CAN_TX_IDE_MASK;
+  90   6                                  CAN_SET_TX_ID_EXTENDED_MSG(i, message->id);
+  91   6                              }
+  92   5      
+  93   5                              if (message->dlc < CAN_TX_DLC_MAX_VALUE)
+  94   5                              {
+  95   6                                  regTemp |= ((uint32) message->dlc) << CAN_TWO_BYTE_OFFSET;
+  96   6                              }
+  97   5                              else
+  98   5                              {
+  99   6                                  regTemp |= CAN_TX_DLC_UPPER_VALUE;
+ 100   6                              }
+ 101   5      
+ 102   5                              if (message->irq != CAN_TRANSMIT_INT_DISABLE)
+ 103   5                              {
+ 104   6                                  regTemp |= CAN_TX_INT_ENABLE_MASK;    /* Transmit Interrupt Enable */
+ 105   6                              }
+ 106   5      
+ 107   5                              for (j = 0u; (j < message->dlc) && (j < CAN_TX_DLC_MAX_VALUE); j++)
+ 108   5                              {
+ 109   6                                  #if (CY_PSOC3 || CY_PSOC5)
+ 110   6                                      CAN_TX_DATA_BYTE(i, j) = message->msg->byte[j];
+ 111   6                                  #else /* CY_PSOC4 */
+                                              CAN_TX_DATA_BYTE(i, j, message->msg->byte[j]);
+                                          #endif /* CY_PSOC3 || CY_PSOC5 */
+ 114   6                              }
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 3   
+
+ 115   5      
+ 116   5                              /* Disable isr */
+ 117   5          CyIntDisable(CAN_ISR_NUMBER);
+ 118   5      
+ 119   5                              /* WPN[23] and WPN[3] set to 1 for write to CAN Control reg */
+ 120   5                              CY_SET_REG32(CAN_TX_CMD_PTR(i), (regTemp | CAN_TX_WPN_SET));
+ 121   5      
+ 122   5                              #if (CY_PSOC3 || CY_PSOC5)
+ 123   5                                  CY_SET_REG32(CAN_TX_CMD_PTR(i), CAN_SEND_MESSAGE);
+ 124   5                              #else /* CY_PSOC4 */
+                                          if (message->sst != CAN_STANDARD_MESSAGE)
+                                          {
+                                              /* Single Shot Transmission */
+                                              CAN_TX_CMD_REG(i) |= CAN_SEND_MESSAGE |
+                                              CAN_TX_ABORT_MASK;
+                                          }
+                                          else
+                                          {
+                                              CAN_TX_CMD_REG(i) |= CAN_SEND_MESSAGE;
+                                          }
+                                      #endif /* CY_PSOC3 || CY_PSOC5 */
+ 136   5      
+ 137   5                              /* Enable isr */
+ 138   5          CyIntEnable(CAN_ISR_NUMBER);
+ 139   5      
+ 140   5                              result = CYRET_SUCCESS;
+ 141   5                          }
+ 142   4                  }
+ 143   3                  shift <<= 1u;
+ 144   3                  if (result == CYRET_SUCCESS)
+ 145   3                  {
+ 146   4                      break;
+ 147   4                  }
+ 148   3              }
+ 149   2              if (result == CYRET_SUCCESS)
+ 150   2              {
+ 151   3                  break;
+ 152   3              }
+ 153   2              else
+ 154   2              {
+ 155   3                  retry++;
+ 156   3              }
+ 157   2          }
+ 158   1      
+ 159   1          return (result);
+ 160   1      }
+ 161          
+ 162          
+ 163          /*******************************************************************************
+ 164          * FUNCTION NAME:   CAN_TxCancel
+ 165          ********************************************************************************
+ 166          *
+ 167          * Summary:
+ 168          *  This function cancels transmission of a message that has been queued to be
+ 169          *  transmitted. Values between 0 and 7 are valid.
+ 170          *
+ 171          * Parameters:
+ 172          *  bufferId: The mailbox number.
+ 173          *
+ 174          * Return:
+ 175          *  None.
+ 176          *
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 4   
+
+ 177          *******************************************************************************/
+ 178          void CAN_TxCancel(uint8 bufferId) 
+ 179          {
+ 180   1          if (bufferId < CAN_NUMBER_OF_TX_MAILBOXES)
+ 181   1          {
+ 182   2              CAN_TX_ABORT_MESSAGE(bufferId);
+ 183   2          }
+ 184   1      }
+ 185          
+ 186          
+ 187          #if (CAN_TX0_FUNC_ENABLE)
+ 188              /*******************************************************************************
+ 189              * FUNCTION NAME:   CAN_SendMsgswitchStatus
+ 190              ********************************************************************************
+ 191              *
+ 192              * Summary:
+ 193              *  This function is the entry point to Transmit Message 0. The function checks
+ 194              *  if mailbox 0 doesn't already have un-transmitted messages waiting for
+ 195              *  arbitration. If not initiate transmission of the message.
+ 196              *  Generated only for the Transmit mailbox designed as Full.
+ 197              *
+ 198              * Parameters:
+ 199              *  None.
+ 200              *
+ 201              * Return:
+ 202              *  Indication if Message has been sent.
+ 203              *   Define                             Description
+ 204              *    CYRET_SUCCESS                      The function passed successfully
+ 205              *    CAN_FAIL              The function failed
+ 206              *
+ 207              *******************************************************************************/
+ 208              uint8 CAN_SendMsgswitchStatus(void) 
+ 209              {
+ 210   1              uint8 result = CYRET_SUCCESS;
+ 211   1      
+ 212   1              #if (CY_PSOC3 || CY_PSOC5)
+ 213   1                  if ((CAN_TX[0u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+ 214   1              #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(0u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+ 217   1                  {
+ 218   2                      result = CAN_FAIL;
+ 219   2                  }
+ 220   1                  else
+ 221   1                  {
+ 222   2                      /* `#START MESSAGE_switchStatus_TRASMITTED` */
+ 223   2      
+ 224   2                      /* `#END` */
+ 225   2      
+ 226   2                      #ifdef CAN_SEND_MSG_switchStatus_CALLBACK
+                                  CAN_SendMsg_switchStatus_Callback();
+                              #endif /* CAN_SEND_MSG_switchStatus_CALLBACK */
+ 229   2      
+ 230   2                      CY_SET_REG32(CAN_TX_CMD_PTR(0u),
+ 231   2                      CY_GET_REG32(CAN_TX_CMD_PTR(0u)) | CAN_SEND_MESSAGE);
+ 232   2                  }
+ 233   1      
+ 234   1              return (result);
+ 235   1          }
+ 236          #endif /* CAN_TX0_FUNC_ENABLE */
+ 237          
+ 238          
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 5   
+
+ 239          #if (CAN_TX1_FUNC_ENABLE)
+ 240              /*******************************************************************************
+ 241              * FUNCTION NAME:   CAN_SendMsgADCdata
+ 242              ********************************************************************************
+ 243              *
+ 244              * Summary:
+ 245              *  This function is the entry point to Transmit Message 1. The function checks
+ 246              *  if mailbox 1 doesn't already have un-transmitted messages waiting for
+ 247              *  arbitration. If not initiate transmission of the message.
+ 248              *  Generated only for the Transmit mailbox designed as Full.
+ 249              *
+ 250              * Parameters:
+ 251              *  None.
+ 252              *
+ 253              * Return:
+ 254              *  Indication if Message has been sent.
+ 255              *   Define                             Description
+ 256              *    CYRET_SUCCESS                      The function passed successfully
+ 257              *    CAN_FAIL              The function failed
+ 258              *
+ 259              *******************************************************************************/
+ 260              uint8 CAN_SendMsgADCdata(void) 
+ 261              {
+ 262   1              uint8 result = CYRET_SUCCESS;
+ 263   1      
+ 264   1              #if (CY_PSOC3 || CY_PSOC5)
+ 265   1                  if ((CAN_TX[1u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+ 266   1              #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(1u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+ 269   1                  {
+ 270   2                      result = CAN_FAIL;
+ 271   2                  }
+ 272   1                  else
+ 273   1                  {
+ 274   2                      /* `#START MESSAGE_ADCdata_TRASMITTED` */
+ 275   2      
+ 276   2                      /* `#END` */
+ 277   2      
+ 278   2                      #ifdef CAN_SEND_MSG_ADCdata_CALLBACK
+                                  CAN_SendMsg_ADCdata_Callback();
+                              #endif /* CAN_SEND_MSG_ADCdata_CALLBACK */
+ 281   2      
+ 282   2                      CY_SET_REG32(CAN_TX_CMD_PTR(1u),
+ 283   2                      CY_GET_REG32(CAN_TX_CMD_PTR(1u)) | CAN_SEND_MESSAGE);
+ 284   2                  }
+ 285   1      
+ 286   1              return (result);
+ 287   1          }
+ 288          #endif /* CAN_TX1_FUNC_ENABLE */
+ 289          
+ 290          
+ 291          #if (CAN_TX2_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_SendMsg2
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Transmit Message 2. The function checks
+                  *  if mailbox 2 doesn't already have un-transmitted messages waiting for
+                  *  arbitration. If not initiate transmission of the message.
+                  *  Generated only for the Transmit mailbox designed as Full.
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 6   
+
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  Indication if Message has been sent.
+                  *   Define                             Description
+                  *    CYRET_SUCCESS                      The function passed successfully
+                  *    CAN_FAIL              The function failed
+                  *
+                  *******************************************************************************/
+                  uint8 CAN_SendMsg2(void) 
+                  {
+                      uint8 result = CYRET_SUCCESS;
+              
+                      #if (CY_PSOC3 || CY_PSOC5)
+                          if ((CAN_TX[2u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+                      #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(2u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+                          {
+                              result = CAN_FAIL;
+                          }
+                          else
+                          {
+                              /* `#START MESSAGE_2_TRASMITTED` */
+              
+                              /* `#END` */
+              
+                              #ifdef CAN_SEND_MSG_2_CALLBACK
+                                  CAN_SendMsg_2_Callback();
+                              #endif /* CAN_SEND_MSG_2_CALLBACK */
+              
+                              CY_SET_REG32(CAN_TX_CMD_PTR(2u),
+                              CY_GET_REG32(CAN_TX_CMD_PTR(2u)) | CAN_SEND_MESSAGE);
+                          }
+              
+                      return (result);
+                  }
+              #endif /* CAN_TX2_FUNC_ENABLE */
+ 341          
+ 342          
+ 343          #if (CAN_TX3_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_SendMsg3
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Transmit Message 3. The function checks
+                  *  if mailbox 3 doesn't already have un-transmitted messages waiting for
+                  *  arbitration. If not initiate transmission of the message.
+                  *  Generated only for the Transmit mailbox designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  Indication if Message has been sent.
+                  *   Define                             Description
+                  *    CYRET_SUCCESS                      The function passed successfully
+                  *    CAN_FAIL              The function failed
+                  *
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 7   
+
+                  *******************************************************************************/
+                  uint8 CAN_SendMsg3(void) 
+                  {
+                      uint8 result = CYRET_SUCCESS;
+              
+                      #if (CY_PSOC3 || CY_PSOC5)
+                          if ((CAN_TX[3u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+                      #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(3u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+                          {
+                              result = CAN_FAIL;
+                          }
+                          else
+                          {
+                              /* `#START MESSAGE_3_TRASMITTED` */
+              
+                              /* `#END` */
+              
+                              #ifdef CAN_SEND_MSG_3_CALLBACK
+                                  CAN_SendMsg_3_Callback();
+                              #endif /* CAN_SEND_MSG_3_CALLBACK */
+              
+                              CY_SET_REG32(CAN_TX_CMD_PTR(3u),
+                              CY_GET_REG32(CAN_TX_CMD_PTR(3u)) | CAN_SEND_MESSAGE);
+                          }
+              
+                      return (result);
+                  }
+              #endif /* CAN_TX3_FUNC_ENABLE */
+ 393          
+ 394          
+ 395          #if (CAN_TX4_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_SendMsg4
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Transmit Message 4. The function checks
+                  *  if mailbox 4 doesn't already have un-transmitted messages waiting for
+                  *  arbitration. If not initiate transmission of the message.
+                  *  Generated only for the Transmit mailbox designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  Indication if Message has been sent.
+                  *   Define                             Description
+                  *    CYRET_SUCCESS                      The function passed successfully
+                  *    CAN_FAIL              The function failed
+                  *
+                  *******************************************************************************/
+                  uint8 CAN_SendMsg4(void) 
+                  {
+                      uint8 result = CYRET_SUCCESS;
+              
+                      #if (CY_PSOC3 || CY_PSOC5)
+                          if ((CAN_TX[4u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+                      #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(4u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 8   
+
+                          {
+                              result = CAN_FAIL;
+                          }
+                          else
+                          {
+                              /* `#START MESSAGE_4_TRASMITTED` */
+              
+                              /* `#END` */
+              
+                              #ifdef CAN_SEND_MSG_4_CALLBACK
+                                  CAN_SendMsg_4_Callback();
+                              #endif /* CAN_SEND_MSG_4_CALLBACK */
+              
+                              CY_SET_REG32(CAN_TX_CMD_PTR(4u),
+                              CY_GET_REG32(CAN_TX_CMD_PTR(4u)) | CAN_SEND_MESSAGE);
+                          }
+              
+                      return (result);
+                  }
+              #endif /* CAN_TX4_FUNC_ENABLE */
+ 445          
+ 446          
+ 447          #if (CAN_TX5_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_SendMsg5
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Transmit Message 5. The function checks
+                  *  if mailbox 5 doesn't already have un-transmitted messages waiting for
+                  *  arbitration. If not initiate transmission of the message.
+                  *  Generated only for the Transmit mailbox designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  Indication if Message has been sent.
+                  *   Define                             Description
+                  *    CYRET_SUCCESS                      The function passed successfully
+                  *    CAN_FAIL              The function failed
+                  *
+                  *******************************************************************************/
+                  uint8 CAN_SendMsg5(void) 
+                  {
+                      uint8 result = CYRET_SUCCESS;
+              
+                      #if (CY_PSOC3 || CY_PSOC5)
+                          if ((CAN_TX[5u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+                      #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(5u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+                          {
+                              result = CAN_FAIL;
+                          }
+                          else
+                          {
+                              /* `#START MESSAGE_5_TRASMITTED` */
+              
+                              /* `#END` */
+              
+                              #ifdef CAN_SEND_MSG_5_CALLBACK
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 9   
+
+                                  CAN_SendMsg_5_Callback();
+                              #endif /* CAN_SEND_MSG_5_CALLBACK */
+              
+                              CY_SET_REG32(CAN_TX_CMD_PTR(5u),
+                              CY_GET_REG32(CAN_TX_CMD_PTR(5u)) | CAN_SEND_MESSAGE);
+                          }
+              
+                      return (result);
+                  }
+              #endif /* CAN_TX5_FUNC_ENABLE */
+ 497          
+ 498          
+ 499          #if (CAN_TX6_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_SendMsg6
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Transmit Message 6. The function checks
+                  *  if mailbox 6 doesn't already have un-transmitted messages waiting for
+                  *  arbitration. If not initiate transmission of the message.
+                  *  Generated only for the Transmit mailbox designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  Indication if Message has been sent.
+                  *   Define                             Description
+                  *    CYRET_SUCCESS                      The function passed successfully
+                  *    CAN_FAIL              The function failed
+                  *
+                  *******************************************************************************/
+                  uint8 CAN_SendMsg6(void) 
+                  {
+                      uint8 result = CYRET_SUCCESS;
+              
+                      #if (CY_PSOC3 || CY_PSOC5)
+                          if ((CAN_TX[6u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+                      #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(6u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+                          {
+                              result = CAN_FAIL;
+                          }
+                          else
+                          {
+                              /* `#START MESSAGE_6_TRASMITTED` */
+              
+                              /* `#END` */
+              
+                              #ifdef CAN_SEND_MSG_6_CALLBACK
+                                  CAN_SendMsg_6_Callback();
+                              #endif /* CAN_SEND_MSG_6_CALLBACK */
+              
+                              CY_SET_REG32(CAN_TX_CMD_PTR(6u),
+                              CY_GET_REG32(CAN_TX_CMD_PTR(6u)) | CAN_SEND_MESSAGE);
+                          }
+              
+                      return (result);
+                  }
+              #endif /* CAN_TX6_FUNC_ENABLE */
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 10  
+
+ 549          
+ 550          
+ 551          #if (CAN_TX7_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_SendMsg7)
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Transmit Message 7. The function checks
+                  *  if mailbox 7 doesn't already have un-transmitted messages waiting for
+                  *  arbitration. If not initiate transmission of the message.
+                  *  Generated only for the Transmit mailbox designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  Indication if Message has been sent.
+                  *   Define                             Description
+                  *    CYRET_SUCCESS                      The function passed successfully
+                  *    CAN_FAIL              The function failed
+                  *
+                  *******************************************************************************/
+                  uint8 CAN_SendMsg7(void) 
+                  {
+                      uint8 result = CYRET_SUCCESS;
+              
+                      #if (CY_PSOC3 || CY_PSOC5)
+                          if ((CAN_TX[7u].txcmd.byte[0u] & CAN_TX_REQUEST_PENDING) != 0u)
+                      #else  /* CY_PSOC4 */
+                          if ((CAN_TX_CMD_REG(7u) & CAN_TX_REQUEST_PENDING) != 0u)
+                      #endif /* CY_PSOC3 || CY_PSOC5 */
+                          {
+                              result = CAN_FAIL;
+                          }
+                          else
+                          {
+                              /* `#START MESSAGE_7_TRASMITTED` */
+              
+                              /* `#END` */
+              
+                              #ifdef CAN_SEND_MSG_7_CALLBACK
+                                  CAN_SendMsg_7_Callback();
+                              #endif /* CAN_SEND_MSG_7_CALLBACK */
+              
+                              CY_SET_REG32(CAN_TX_CMD_PTR(7u),
+                              CY_GET_REG32(CAN_TX_CMD_PTR(7u)) | CAN_SEND_MESSAGE);
+                          }
+              
+                      return (result);
+                  }
+              #endif /* CAN_TX7_FUNC_ENABLE */
+ 601          
+ 602          
+ 603          /*******************************************************************************
+ 604          * FUNCTION NAME:   CAN_ReceiveMsg
+ 605          ********************************************************************************
+ 606          *
+ 607          * Summary:
+ 608          *  This function is the entry point to Receive Message Interrupt for Basic
+ 609          *  mailboxes. Clears the Receive particular Message interrupt flag. Generated
+ 610          *  only if one of the Receive mailboxes is designed as Basic.
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 11  
+
+ 611          *
+ 612          * Parameters:
+ 613          *  rxMailbox: The mailbox number that trig Receive Message Interrupt.
+ 614          *
+ 615          * Return:
+ 616          *  None.
+ 617          *
+ 618          * Reentrant:
+ 619          *  Depends on the Customer code.
+ 620          *
+ 621          *******************************************************************************/
+ 622          void CAN_ReceiveMsg(uint8 rxMailbox) 
+ 623          {
+ 624   1          #if (CY_PSOC3 || CY_PSOC5)
+ 625   1              if ((CAN_RX[rxMailbox].rxcmd.byte[0u] & CAN_RX_ACK_MSG) != 0u)
+ 626   1          #else  /* CY_PSOC4 */
+                      if ((CAN_RX_CMD_REG(rxMailbox) & CAN_RX_ACK_MSG) != 0u)
+                  #endif /* CY_PSOC3 || CY_PSOC5 */
+ 629   1              {
+ 630   2                  /* `#START MESSAGE_BASIC_RECEIVED` */
+ 631   2      
+ 632   2                  /* `#END` */
+ 633   2      
+ 634   2                  #ifdef CAN_RECEIVE_MSG_CALLBACK
+                              CAN_ReceiveMsg_Callback();
+                          #endif /* CAN_RECEIVE_MSG_CALLBACK */
+ 637   2      
+ 638   2                  #if (CY_PSOC3 || CY_PSOC5)
+ 639   2                      CAN_RX[rxMailbox].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+ 640   2                  #else  /* CY_PSOC4 */
+                              CAN_RX_CMD_REG(rxMailbox) |= CAN_RX_ACK_MSG;
+                          #endif /* CY_PSOC3 || CY_PSOC5 */
+ 643   2              }
+ 644   1      }
+ 645          
+ 646          
+ 647          #if (CAN_RX0_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg0
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 0 Interrupt. Clears the
+                  *  Receive Message 0 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg0(void) 
+                  {
+                      /* `#START MESSAGE_0_RECEIVED` */
+              
+                      /* `#END` */
+              
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 12  
+
+                      #ifdef CAN_RECEIVE_MSG_0_CALLBACK
+                          CAN_ReceiveMsg_0_Callback();
+                      #endif /* CAN_RECEIVE_MSG_0_CALLBACK */
+              
+                      CAN_RX[0u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX0_FUNC_ENABLE */
+ 680          
+ 681          
+ 682          #if (CAN_RX1_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:    CAN_ReceiveMsg1
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 1 Interrupt. Clears the
+                  *  Receive Message 1 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg1(void) 
+                  {
+                      /* `#START MESSAGE_1_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_1_CALLBACK
+                          CAN_ReceiveMsg_1_Callback();
+                      #endif /* CAN_RECEIVE_MSG_1_CALLBACK */
+              
+                      CAN_RX[1u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX1_FUNC_ENABLE */
+ 715          
+ 716          
+ 717          #if (CAN_RX2_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg2
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 2 Interrupt. Clears the
+                  *  Receive Message 2 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 13  
+
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg2(void) 
+                  {
+                      /* `#START MESSAGE_2_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_2_CALLBACK
+                          CAN_ReceiveMsg_2_Callback();
+                      #endif /* CAN_RECEIVE_MSG_2_CALLBACK */
+              
+                      CAN_RX[2u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX2_FUNC_ENABLE */
+ 750          
+ 751          
+ 752          #if (CAN_RX3_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg3
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 3 Interrupt. Clears the
+                  *  Receive Message 3 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg3(void) 
+                  {
+                      /* `#START MESSAGE_3_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_3_CALLBACK
+                          CAN_ReceiveMsg_3_Callback();
+                      #endif /* CAN_RECEIVE_MSG_3_CALLBACK */
+              
+                      CAN_RX[3u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX3_FUNC_ENABLE */
+ 785          
+ 786          
+ 787          #if (CAN_RX4_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg4
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 4 Interrupt. Clears the
+                  *  Receive Message 4 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 14  
+
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg4(void) 
+                  {
+                      /* `#START MESSAGE_4_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_4_CALLBACK
+                          CAN_ReceiveMsg_4_Callback();
+                      #endif /* CAN_RECEIVE_MSG_4_CALLBACK */
+              
+                      CAN_RX[4u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX4_FUNC_ENABLE */
+ 820          
+ 821          
+ 822          #if (CAN_RX5_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg5
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 5 Interrupt. Clears the
+                  *  Receive Message 5 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg5(void) 
+                  {
+                      /* `#START MESSAGE_5_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_5_CALLBACK
+                          CAN_ReceiveMsg_5_Callback();
+                      #endif /* CAN_RECEIVE_MSG_5_CALLBACK */
+              
+                      CAN_RX[5u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX5_FUNC_ENABLE */
+ 855          
+ 856          
+ 857          #if (CAN_RX6_FUNC_ENABLE)
+                  /*******************************************************************************
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 15  
+
+                  * FUNCTION NAME:   CAN_ReceiveMsg6
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 6 Interrupt. Clears the
+                  *  Receive Message 6 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg6(void) 
+                  {
+                      /* `#START MESSAGE_6_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_6_CALLBACK
+                          CAN_ReceiveMsg_6_Callback();
+                      #endif /* CAN_RECEIVE_MSG_6_CALLBACK */
+              
+                      CAN_RX[6u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX6_FUNC_ENABLE */
+ 890          
+ 891          
+ 892          #if (CAN_RX7_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg7
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 7 Interrupt. Clears the
+                  *  Receive Message 7 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg7(void) 
+                  {
+                      /* `#START MESSAGE_7_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_7_CALLBACK
+                          CAN_ReceiveMsg_7_Callback();
+                      #endif /* CAN_RECEIVE_MSG_7_CALLBACK */
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 16  
+
+              
+                      CAN_RX[7u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX7_FUNC_ENABLE */
+ 925          
+ 926          
+ 927          #if (CAN_RX8_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg8
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 8 Interrupt. Clears the
+                  *  Receive Message 8 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg8(void) 
+                  {
+                      /* `#START MESSAGE_8_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_8_CALLBACK
+                          CAN_ReceiveMsg_8_Callback();
+                      #endif /* CAN_RECEIVE_MSG_8_CALLBACK */
+              
+                      CAN_RX[8u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX8_FUNC_ENABLE */
+ 960          
+ 961          
+ 962          #if (CAN_RX9_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg9
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 9 Interrupt. Clears the
+                  *  Receive Message 9 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg9(void) 
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 17  
+
+                  {
+                      /* `#START MESSAGE_9_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_9_CALLBACK
+                          CAN_ReceiveMsg_9_Callback();
+                      #endif /* CAN_RECEIVE_MSG_9_CALLBACK */
+              
+                      CAN_RX[9u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX9_FUNC_ENABLE */
+ 995          
+ 996          
+ 997          #if (CAN_RX10_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg10
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 10 Interrupt. Clears the
+                  *  Receive Message 10 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg10(void) 
+                  {
+                      /* `#START MESSAGE_10_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_10_CALLBACK
+                          CAN_ReceiveMsg_10_Callback();
+                      #endif /* CAN_RECEIVE_MSG_10_CALLBACK */
+              
+                      CAN_RX[10u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX10_FUNC_ENABLE */
+1030          
+1031          
+1032          #if (CAN_RX11_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg11
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 11 Interrupt. Clears the
+                  *  Receive Message 11 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 18  
+
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg11(void) 
+                  {
+                      /* `#START MESSAGE_11_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_11_CALLBACK
+                          CAN_ReceiveMsg_11_Callback();
+                      #endif /* CAN_RECEIVE_MSG_11_CALLBACK */
+              
+                      CAN_RX[11u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX11_FUNC_ENABLE */
+1065          
+1066          
+1067          #if (CAN_RX12_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg12
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 12 Interrupt. Clears the
+                  *  Receive Message 12 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg12(void) 
+                  {
+                      /* `#START MESSAGE_12_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_12_CALLBACK
+                          CAN_ReceiveMsg_12_Callback();
+                      #endif /* CAN_RECEIVE_MSG_12_CALLBACK */
+              
+                      CAN_RX[12u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX12_FUNC_ENABLE */
+1100          
+1101          
+1102          #if (CAN_RX13_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg13
+                  ********************************************************************************
+                  *
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 19  
+
+                  * Summary:
+                  *  This function is the entry point to Receive Message 13 Interrupt. Clears the
+                  *  Receive Message 13 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg13(void) 
+                  {
+                      /* `#START MESSAGE_13_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_13_CALLBACK
+                          CAN_ReceiveMsg_13_Callback();
+                      #endif /* CAN_RECEIVE_MSG_13_CALLBACK */
+              
+                      CAN_RX[13u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX13_FUNC_ENABLE */
+1135          
+1136          
+1137          #if (CAN_RX14_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg14
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 14 Interrupt. Clears the
+                  *  Receive Message 14 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg14(void) 
+                  {
+                      /* `#START MESSAGE_14_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_14_CALLBACK
+                          CAN_ReceiveMsg_14_Callback();
+                      #endif /* CAN_RECEIVE_MSG_14_CALLBACK */
+              
+                      CAN_RX[14u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 20  
+
+              #endif /* CAN_RX14_FUNC_ENABLE */
+1170          
+1171          
+1172          #if (CAN_RX15_FUNC_ENABLE)
+                  /*******************************************************************************
+                  * FUNCTION NAME:   CAN_ReceiveMsg15
+                  ********************************************************************************
+                  *
+                  * Summary:
+                  *  This function is the entry point to Receive Message 15 Interrupt. Clears the
+                  *  Receive Message 15 interrupt flag. Generated only for the Receive mailbox
+                  *  designed as Full.
+                  *
+                  * Parameters:
+                  *  None.
+                  *
+                  * Return:
+                  *  None.
+                  *
+                  * Reentrant:
+                  *  Depends on the Customer code.
+                  *
+                  *******************************************************************************/
+                  void CAN_ReceiveMsg15(void) 
+                  {
+                      /* `#START MESSAGE_15_RECEIVED` */
+              
+                      /* `#END` */
+              
+                      #ifdef CAN_RECEIVE_MSG_15_CALLBACK
+                          CAN_ReceiveMsg_15_Callback();
+                      #endif /* CAN_RECEIVE_MSG_15_CALLBACK */
+              
+                      CAN_RX[15u].rxcmd.byte[0u] |= CAN_RX_ACK_MSG;
+                  }
+              #endif /* CAN_RX15_FUNC_ENABLE */
+1205          
+1206          
+1207          /* [] END OF FILE */
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 21  
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION _CAN_SendMsg (BEGIN)
+                                           ; SOURCE LINE # 52
+0000 900000      R     MOV     DPTR,#message
+0003 120000      E     LCALL   ?C?PSTXDATA
+                                           ; SOURCE LINE # 53
+                                           ; SOURCE LINE # 55
+0006 900000      R     MOV     DPTR,#retry
+0009 E4                CLR     A
+000A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 56
+000B 900000      R     MOV     DPTR,#result
+000E 7401              MOV     A,#01H
+0010 F0                MOVX    @DPTR,A
+0011         ?C0001:
+                                           ; SOURCE LINE # 59
+0011 900000      R     MOV     DPTR,#retry
+0014 E0                MOVX    A,@DPTR
+0015 FF                MOV     R7,A
+0016 EF                MOV     A,R7
+0017 C3                CLR     C
+0018 9403              SUBB    A,#03H
+001A 4003              JC      $ + 5H
+001C 020000      R     LJMP    ?C0002
+                                           ; SOURCE LINE # 60
+                                           ; SOURCE LINE # 61
+001F 900000      R     MOV     DPTR,#shift
+0022 7401              MOV     A,#01H
+0024 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 62
+0025 900000      R     MOV     DPTR,#i
+0028 E4                CLR     A
+0029 F0                MOVX    @DPTR,A
+002A         ?C0003:
+002A 900000      R     MOV     DPTR,#i
+002D E0                MOVX    A,@DPTR
+002E FF                MOV     R7,A
+002F EF                MOV     A,R7
+0030 C3                CLR     C
+0031 9408              SUBB    A,#08H
+0033 4003              JC      $ + 5H
+0035 020000      R     LJMP    ?C0004
+                                           ; SOURCE LINE # 63
+                                           ; SOURCE LINE # 65
+0038 900000      R     MOV     DPTR,#shift
+003B E0                MOVX    A,@DPTR
+003C FF                MOV     R7,A
+003D EF                MOV     A,R7
+003E 5403              ANL     A,#03H
+0040 FF                MOV     R7,A
+0041 7E00              MOV     R6,#00H
+0043 EF                MOV     A,R7
+0044 4E                ORL     A,R6
+0045 6003              JZ      $ + 5H
+0047 020000      R     LJMP    ?C0006
+                                           ; SOURCE LINE # 66
+                                           ; SOURCE LINE # 69
+004A 900000      R     MOV     DPTR,#shift
+004D E0                MOVX    A,@DPTR
+004E FF                MOV     R7,A
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 22  
+
+004F 90A00A            MOV     DPTR,#0A00AH
+0052 E0                MOVX    A,@DPTR
+0053 FE                MOV     R6,A
+0054 EE                MOV     A,R6
+0055 5F                ANL     A,R7
+0056 FF                MOV     R7,A
+0057 EF                MOV     A,R7
+0058 6003              JZ      $ + 5H
+005A 020000      R     LJMP    ?C0006
+                                           ; SOURCE LINE # 74
+                                           ; SOURCE LINE # 75
+005D 7F00              MOV     R7,#00H
+005F 7E00              MOV     R6,#00H
+0061 7D00              MOV     R5,#00H
+0063 7C00              MOV     R4,#00H
+0065 900000      R     MOV     DPTR,#regTemp
+0068 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 78
+006B 900000      R     MOV     DPTR,#message
+006E 120000      E     LCALL   ?C?PLDXDATA
+0071 E9                MOV     A,R1
+0072 2404              ADD     A,#04H
+0074 F9                MOV     R1,A
+0075 EA                MOV     A,R2
+0076 3400              ADDC    A,#00H
+0078 FA                MOV     R2,A
+0079 120000      E     LCALL   ?C?CLDPTR
+007C FF                MOV     R7,A
+007D EF                MOV     A,R7
+007E 600E              JZ      ?C0008
+                                           ; SOURCE LINE # 79
+                                           ; SOURCE LINE # 80
+0080 7F00              MOV     R7,#00H
+0082 7E00              MOV     R6,#00H
+0084 7D20              MOV     R5,#020H
+0086 7C00              MOV     R4,#00H
+0088 900000      R     MOV     DPTR,#regTemp
+008B 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 81
+008E         ?C0008:
+                                           ; SOURCE LINE # 83
+008E 900000      R     MOV     DPTR,#message
+0091 120000      E     LCALL   ?C?PLDXDATA
+0094 E9                MOV     A,R1
+0095 2405              ADD     A,#05H
+0097 F9                MOV     R1,A
+0098 EA                MOV     A,R2
+0099 3400              ADDC    A,#00H
+009B FA                MOV     R2,A
+009C 120000      E     LCALL   ?C?CLDPTR
+009F FF                MOV     R7,A
+00A0 EF                MOV     A,R7
+00A1 703B              JNZ     ?C0009
+                                           ; SOURCE LINE # 84
+                                           ; SOURCE LINE # 85
+00A3 900000      R     MOV     DPTR,#i
+00A6 E0                MOVX    A,@DPTR
+00A7 FF                MOV     R7,A
+00A8 7E10              MOV     R6,#010H
+00AA EF                MOV     A,R7
+00AB 8EF0              MOV     B,R6
+00AD A4                MUL     AB
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 23  
+
+00AE FF                MOV     R7,A
+00AF AEF0              MOV     R6,B
+00B1 EF                MOV     A,R7
+00B2 2424              ADD     A,#024H
+00B4 FF                MOV     R7,A
+00B5 EE                MOV     A,R6
+00B6 34A0              ADDC    A,#0A0H
+00B8 FE                MOV     R6,A
+00B9 AA06              MOV     R2,AR6
+00BB A907              MOV     R1,AR7
+00BD 7B01              MOV     R3,#01H
+00BF C003              PUSH    AR3
+00C1 C002              PUSH    AR2
+00C3 C001              PUSH    AR1
+00C5 900000      R     MOV     DPTR,#message
+00C8 120000      E     LCALL   ?C?PLDXDATA
+00CB 120000      E     LCALL   ?C?LLDPTR
+00CE 7815              MOV     R0,#015H
+00D0 120000      E     LCALL   ?C?LSHL
+00D3 D001              POP     AR1
+00D5 D002              POP     AR2
+00D7 D003              POP     AR3
+00D9 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 86
+00DC 8055              SJMP    ?C0010
+00DE         ?C0009:
+                                           ; SOURCE LINE # 88
+                                           ; SOURCE LINE # 89
+00DE 900000      R     MOV     DPTR,#regTemp
+00E1 120000      E     LCALL   ?C?LLDXDATA
+00E4 EF                MOV     A,R7
+00E5 4400              ORL     A,#00H
+00E7 FF                MOV     R7,A
+00E8 EE                MOV     A,R6
+00E9 4400              ORL     A,#00H
+00EB FE                MOV     R6,A
+00EC ED                MOV     A,R5
+00ED 4410              ORL     A,#010H
+00EF FD                MOV     R5,A
+00F0 EC                MOV     A,R4
+00F1 4400              ORL     A,#00H
+00F3 FC                MOV     R4,A
+00F4 900000      R     MOV     DPTR,#regTemp
+00F7 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 90
+00FA 900000      R     MOV     DPTR,#i
+00FD E0                MOVX    A,@DPTR
+00FE FF                MOV     R7,A
+00FF 7E10              MOV     R6,#010H
+0101 EF                MOV     A,R7
+0102 8EF0              MOV     B,R6
+0104 A4                MUL     AB
+0105 FF                MOV     R7,A
+0106 AEF0              MOV     R6,B
+0108 EF                MOV     A,R7
+0109 2424              ADD     A,#024H
+010B FF                MOV     R7,A
+010C EE                MOV     A,R6
+010D 34A0              ADDC    A,#0A0H
+010F FE                MOV     R6,A
+0110 AA06              MOV     R2,AR6
+0112 A907              MOV     R1,AR7
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 24  
+
+0114 7B01              MOV     R3,#01H
+0116 C003              PUSH    AR3
+0118 C002              PUSH    AR2
+011A C001              PUSH    AR1
+011C 900000      R     MOV     DPTR,#message
+011F 120000      E     LCALL   ?C?PLDXDATA
+0122 120000      E     LCALL   ?C?LLDPTR
+0125 7803              MOV     R0,#03H
+0127 120000      E     LCALL   ?C?LSHL
+012A D001              POP     AR1
+012C D002              POP     AR2
+012E D003              POP     AR3
+0130 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 91
+0133         ?C0010:
+                                           ; SOURCE LINE # 93
+0133 900000      R     MOV     DPTR,#message
+0136 120000      E     LCALL   ?C?PLDXDATA
+0139 E9                MOV     A,R1
+013A 2406              ADD     A,#06H
+013C F9                MOV     R1,A
+013D EA                MOV     A,R2
+013E 3400              ADDC    A,#00H
+0140 FA                MOV     R2,A
+0141 120000      E     LCALL   ?C?CLDPTR
+0144 FF                MOV     R7,A
+0145 EF                MOV     A,R7
+0146 C3                CLR     C
+0147 9408              SUBB    A,#08H
+0149 5044              JNC     ?C0011
+                                           ; SOURCE LINE # 94
+                                           ; SOURCE LINE # 95
+014B 900000      R     MOV     DPTR,#regTemp
+014E 120000      E     LCALL   ?C?LLDXDATA
+0151 C004              PUSH    AR4
+0153 C005              PUSH    AR5
+0155 C006              PUSH    AR6
+0157 C007              PUSH    AR7
+0159 900000      R     MOV     DPTR,#message
+015C 120000      E     LCALL   ?C?PLDXDATA
+015F E9                MOV     A,R1
+0160 2406              ADD     A,#06H
+0162 F9                MOV     R1,A
+0163 EA                MOV     A,R2
+0164 3400              ADDC    A,#00H
+0166 FA                MOV     R2,A
+0167 120000      E     LCALL   ?C?CLDPTR
+016A FF                MOV     R7,A
+016B E4                CLR     A
+016C FC                MOV     R4,A
+016D FD                MOV     R5,A
+016E FE                MOV     R6,A
+016F 7810              MOV     R0,#010H
+0171 120000      E     LCALL   ?C?LSHL
+0174 A804              MOV     R0,AR4
+0176 A905              MOV     R1,AR5
+0178 AA06              MOV     R2,AR6
+017A AB07              MOV     R3,AR7
+017C D007              POP     AR7
+017E D006              POP     AR6
+0180 D005              POP     AR5
+0182 D004              POP     AR4
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 25  
+
+0184 120000      E     LCALL   ?C?LOR
+0187 900000      R     MOV     DPTR,#regTemp
+018A 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 96
+018D 801C              SJMP    ?C0012
+018F         ?C0011:
+                                           ; SOURCE LINE # 98
+                                           ; SOURCE LINE # 99
+018F 900000      R     MOV     DPTR,#regTemp
+0192 120000      E     LCALL   ?C?LLDXDATA
+0195 EF                MOV     A,R7
+0196 4400              ORL     A,#00H
+0198 FF                MOV     R7,A
+0199 EE                MOV     A,R6
+019A 4400              ORL     A,#00H
+019C FE                MOV     R6,A
+019D ED                MOV     A,R5
+019E 4408              ORL     A,#08H
+01A0 FD                MOV     R5,A
+01A1 EC                MOV     A,R4
+01A2 4400              ORL     A,#00H
+01A4 FC                MOV     R4,A
+01A5 900000      R     MOV     DPTR,#regTemp
+01A8 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 100
+01AB         ?C0012:
+                                           ; SOURCE LINE # 102
+01AB 900000      R     MOV     DPTR,#message
+01AE 120000      E     LCALL   ?C?PLDXDATA
+01B1 E9                MOV     A,R1
+01B2 2407              ADD     A,#07H
+01B4 F9                MOV     R1,A
+01B5 EA                MOV     A,R2
+01B6 3400              ADDC    A,#00H
+01B8 FA                MOV     R2,A
+01B9 120000      E     LCALL   ?C?CLDPTR
+01BC FF                MOV     R7,A
+01BD EF                MOV     A,R7
+01BE 601C              JZ      ?C0013
+                                           ; SOURCE LINE # 103
+                                           ; SOURCE LINE # 104
+01C0 900000      R     MOV     DPTR,#regTemp
+01C3 120000      E     LCALL   ?C?LLDXDATA
+01C6 EF                MOV     A,R7
+01C7 4404              ORL     A,#04H
+01C9 FF                MOV     R7,A
+01CA EE                MOV     A,R6
+01CB 4400              ORL     A,#00H
+01CD FE                MOV     R6,A
+01CE ED                MOV     A,R5
+01CF 4400              ORL     A,#00H
+01D1 FD                MOV     R5,A
+01D2 EC                MOV     A,R4
+01D3 4400              ORL     A,#00H
+01D5 FC                MOV     R4,A
+01D6 900000      R     MOV     DPTR,#regTemp
+01D9 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 105
+01DC         ?C0013:
+                                           ; SOURCE LINE # 107
+01DC 900000      R     MOV     DPTR,#j
+01DF E4                CLR     A
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 26  
+
+01E0 F0                MOVX    @DPTR,A
+01E1         ?C0014:
+01E1 900000      R     MOV     DPTR,#message
+01E4 120000      E     LCALL   ?C?PLDXDATA
+01E7 E9                MOV     A,R1
+01E8 2406              ADD     A,#06H
+01EA F9                MOV     R1,A
+01EB EA                MOV     A,R2
+01EC 3400              ADDC    A,#00H
+01EE FA                MOV     R2,A
+01EF 120000      E     LCALL   ?C?CLDPTR
+01F2 FF                MOV     R7,A
+01F3 900000      R     MOV     DPTR,#j
+01F6 E0                MOVX    A,@DPTR
+01F7 FE                MOV     R6,A
+01F8 EE                MOV     A,R6
+01F9 C3                CLR     C
+01FA 9F                SUBB    A,R7
+01FB 507E              JNC     ?C0015
+01FD 900000      R     MOV     DPTR,#j
+0200 E0                MOVX    A,@DPTR
+0201 FF                MOV     R7,A
+0202 EF                MOV     A,R7
+0203 C3                CLR     C
+0204 9408              SUBB    A,#08H
+0206 5073              JNC     ?C0015
+                                           ; SOURCE LINE # 108
+                                           ; SOURCE LINE # 110
+0208 900000      R     MOV     DPTR,#message
+020B 120000      E     LCALL   ?C?PLDXDATA
+020E E9                MOV     A,R1
+020F 2408              ADD     A,#08H
+0211 F9                MOV     R1,A
+0212 EA                MOV     A,R2
+0213 3400              ADDC    A,#00H
+0215 FA                MOV     R2,A
+0216 120000      E     LCALL   ?C?PLDPTR
+0219 900000      R     MOV     DPTR,#j
+021C E0                MOVX    A,@DPTR
+021D FF                MOV     R7,A
+021E E9                MOV     A,R1
+021F 2F                ADD     A,R7
+0220 F9                MOV     R1,A
+0221 E4                CLR     A
+0222 3A                ADDC    A,R2
+0223 FA                MOV     R2,A
+0224 120000      E     LCALL   ?C?CLDPTR
+0227 FF                MOV     R7,A
+0228 900000      R     MOV     DPTR,#j
+022B E0                MOVX    A,@DPTR
+022C FE                MOV     R6,A
+022D EE                MOV     A,R6
+022E D3                SETB    C
+022F 9403              SUBB    A,#03H
+0231 4013              JC      ?C0017
+0233 900000      R     MOV     DPTR,#j
+0236 E0                MOVX    A,@DPTR
+0237 FE                MOV     R6,A
+0238 EE                MOV     A,R6
+0239 FD                MOV     R5,A
+023A 7C00              MOV     R4,#00H
+023C C3                CLR     C
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 27  
+
+023D 740B              MOV     A,#0BH
+023F 9D                SUBB    A,R5
+0240 FD                MOV     R5,A
+0241 E4                CLR     A
+0242 9C                SUBB    A,R4
+0243 FC                MOV     R4,A
+0244 8011              SJMP    ?C0018
+0246         ?C0017:
+0246 900000      R     MOV     DPTR,#j
+0249 E0                MOVX    A,@DPTR
+024A FE                MOV     R6,A
+024B EE                MOV     A,R6
+024C FD                MOV     R5,A
+024D 7C00              MOV     R4,#00H
+024F C3                CLR     C
+0250 7403              MOV     A,#03H
+0252 9D                SUBB    A,R5
+0253 FD                MOV     R5,A
+0254 E4                CLR     A
+0255 9C                SUBB    A,R4
+0256 FC                MOV     R4,A
+0257         ?C0018:
+0257 900000      R     MOV     DPTR,#i
+025A E0                MOVX    A,@DPTR
+025B FE                MOV     R6,A
+025C 75F010            MOV     B,#010H
+025F EE                MOV     A,R6
+0260 90A028            MOV     DPTR,#0A028H
+0263 120000      E     LCALL   ?C?OFFXADD
+0266 E582              MOV     A,DPL
+0268 2D                ADD     A,R5
+0269 F582              MOV     DPL,A
+026B E583              MOV     A,DPH
+026D 3C                ADDC    A,R4
+026E F583              MOV     DPH,A
+0270 EF                MOV     A,R7
+0271 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 114
+0272 900000      R     MOV     DPTR,#j
+0275 E0                MOVX    A,@DPTR
+0276 04                INC     A
+0277 F0                MOVX    @DPTR,A
+0278 020000      R     LJMP    ?C0014
+027B         ?C0015:
+                                           ; SOURCE LINE # 117
+027B 9044CA            MOV     DPTR,#044CAH
+027E 7401              MOV     A,#01H
+0280 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 120
+0281 900000      R     MOV     DPTR,#i
+0284 E0                MOVX    A,@DPTR
+0285 FF                MOV     R7,A
+0286 7E10              MOV     R6,#010H
+0288 EF                MOV     A,R7
+0289 8EF0              MOV     B,R6
+028B A4                MUL     AB
+028C FF                MOV     R7,A
+028D AEF0              MOV     R6,B
+028F EF                MOV     A,R7
+0290 2420              ADD     A,#020H
+0292 FF                MOV     R7,A
+0293 EE                MOV     A,R6
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 28  
+
+0294 34A0              ADDC    A,#0A0H
+0296 FE                MOV     R6,A
+0297 AA06              MOV     R2,AR6
+0299 A907              MOV     R1,AR7
+029B 7B01              MOV     R3,#01H
+029D 900000      R     MOV     DPTR,#regTemp
+02A0 120000      E     LCALL   ?C?LLDXDATA
+02A3 EF                MOV     A,R7
+02A4 4408              ORL     A,#08H
+02A6 FF                MOV     R7,A
+02A7 EE                MOV     A,R6
+02A8 4400              ORL     A,#00H
+02AA FE                MOV     R6,A
+02AB ED                MOV     A,R5
+02AC 4480              ORL     A,#080H
+02AE FD                MOV     R5,A
+02AF EC                MOV     A,R4
+02B0 4400              ORL     A,#00H
+02B2 FC                MOV     R4,A
+02B3 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 123
+02B6 900000      R     MOV     DPTR,#i
+02B9 E0                MOVX    A,@DPTR
+02BA FF                MOV     R7,A
+02BB 7E10              MOV     R6,#010H
+02BD EF                MOV     A,R7
+02BE 8EF0              MOV     B,R6
+02C0 A4                MUL     AB
+02C1 FF                MOV     R7,A
+02C2 AEF0              MOV     R6,B
+02C4 EF                MOV     A,R7
+02C5 2420              ADD     A,#020H
+02C7 FF                MOV     R7,A
+02C8 EE                MOV     A,R6
+02C9 34A0              ADDC    A,#0A0H
+02CB FE                MOV     R6,A
+02CC AA06              MOV     R2,AR6
+02CE A907              MOV     R1,AR7
+02D0 7B01              MOV     R3,#01H
+02D2 7F01              MOV     R7,#01H
+02D4 7E00              MOV     R6,#00H
+02D6 7D00              MOV     R5,#00H
+02D8 7C00              MOV     R4,#00H
+02DA 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 138
+02DD 9044C2            MOV     DPTR,#044C2H
+02E0 7401              MOV     A,#01H
+02E2 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 140
+02E3 900000      R     MOV     DPTR,#result
+02E6 E4                CLR     A
+02E7 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 141
+                                           ; SOURCE LINE # 142
+02E8         ?C0006:
+                                           ; SOURCE LINE # 143
+02E8 900000      R     MOV     DPTR,#shift
+02EB E0                MOVX    A,@DPTR
+02EC FF                MOV     R7,A
+02ED EF                MOV     A,R7
+02EE 25E0              ADD     A,ACC
+02F0 FF                MOV     R7,A
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 29  
+
+02F1 900000      R     MOV     DPTR,#shift
+02F4 EF                MOV     A,R7
+02F5 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 144
+02F6 900000      R     MOV     DPTR,#result
+02F9 E0                MOVX    A,@DPTR
+02FA FF                MOV     R7,A
+02FB EF                MOV     A,R7
+02FC 6009              JZ      ?C0004
+                                           ; SOURCE LINE # 145
+                                           ; SOURCE LINE # 146
+                                           ; SOURCE LINE # 147
+02FE         ?C0019:
+                                           ; SOURCE LINE # 148
+02FE         ?C0005:
+02FE 900000      R     MOV     DPTR,#i
+0301 E0                MOVX    A,@DPTR
+0302 04                INC     A
+0303 F0                MOVX    @DPTR,A
+0304 020000      R     LJMP    ?C0003
+0307         ?C0004:
+                                           ; SOURCE LINE # 149
+0307 900000      R     MOV     DPTR,#result
+030A E0                MOVX    A,@DPTR
+030B FF                MOV     R7,A
+030C EF                MOV     A,R7
+030D 7005              JNZ     ?C0020
+                                           ; SOURCE LINE # 150
+                                           ; SOURCE LINE # 151
+030F 800C              SJMP    ?C0002
+                                           ; SOURCE LINE # 152
+0311 020000      R     LJMP    ?C0001
+0314         ?C0020:
+                                           ; SOURCE LINE # 154
+                                           ; SOURCE LINE # 155
+0314 900000      R     MOV     DPTR,#retry
+0317 E0                MOVX    A,@DPTR
+0318 04                INC     A
+0319 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 156
+                                           ; SOURCE LINE # 157
+031A 020000      R     LJMP    ?C0001
+031D         ?C0002:
+                                           ; SOURCE LINE # 159
+031D 900000      R     MOV     DPTR,#result
+0320 E0                MOVX    A,@DPTR
+0321 FF                MOV     R7,A
+                                           ; SOURCE LINE # 160
+0322         ?C0022:
+0322 22                RET     
+             ; FUNCTION _CAN_SendMsg (END)
+
+             ; FUNCTION _CAN_TxCancel (BEGIN)
+                                           ; SOURCE LINE # 178
+0000 900000      R     MOV     DPTR,#bufferId
+0003 EF                MOV     A,R7
+0004 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 179
+                                           ; SOURCE LINE # 180
+0005 900000      R     MOV     DPTR,#bufferId
+0008 E0                MOVX    A,@DPTR
+0009 FF                MOV     R7,A
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 30  
+
+000A EF                MOV     A,R7
+000B C3                CLR     C
+000C 9408              SUBB    A,#08H
+000E 502A              JNC     ?C0024
+                                           ; SOURCE LINE # 181
+                                           ; SOURCE LINE # 182
+0010 900000      R     MOV     DPTR,#bufferId
+0013 E0                MOVX    A,@DPTR
+0014 FF                MOV     R7,A
+0015 75F010            MOV     B,#010H
+0018 EF                MOV     A,R7
+0019 90A020            MOV     DPTR,#0A020H
+001C 120000      E     LCALL   ?C?OFFXADD
+001F E0                MOVX    A,@DPTR
+0020 FF                MOV     R7,A
+0021 EF                MOV     A,R7
+0022 54FE              ANL     A,#0FEH
+0024 FF                MOV     R7,A
+0025 EF                MOV     A,R7
+0026 4402              ORL     A,#02H
+0028 FF                MOV     R7,A
+0029 900000      R     MOV     DPTR,#bufferId
+002C E0                MOVX    A,@DPTR
+002D FE                MOV     R6,A
+002E 75F010            MOV     B,#010H
+0031 EE                MOV     A,R6
+0032 90A020            MOV     DPTR,#0A020H
+0035 120000      E     LCALL   ?C?OFFXADD
+0038 EF                MOV     A,R7
+0039 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 183
+                                           ; SOURCE LINE # 184
+003A         ?C0024:
+003A 22                RET     
+             ; FUNCTION _CAN_TxCancel (END)
+
+             ; FUNCTION CAN_SendMsgswitchStatus (BEGIN)
+                                           ; SOURCE LINE # 208
+                                           ; SOURCE LINE # 209
+                                           ; SOURCE LINE # 210
+0000 900000      R     MOV     DPTR,#result
+0003 E4                CLR     A
+0004 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 213
+0005 90A020            MOV     DPTR,#0A020H
+0008 E0                MOVX    A,@DPTR
+0009 FF                MOV     R7,A
+000A EF                MOV     A,R7
+000B 5401              ANL     A,#01H
+000D FF                MOV     R7,A
+000E 7E00              MOV     R6,#00H
+0010 EF                MOV     A,R7
+0011 4E                ORL     A,R6
+0012 6008              JZ      ?C0025
+                                           ; SOURCE LINE # 217
+                                           ; SOURCE LINE # 218
+0014 900000      R     MOV     DPTR,#result
+0017 7401              MOV     A,#01H
+0019 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 219
+001A 8022              SJMP    ?C0026
+001C         ?C0025:
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 31  
+
+                                           ; SOURCE LINE # 221
+                                           ; SOURCE LINE # 231
+001C 7B02              MOV     R3,#02H
+001E 7AA0              MOV     R2,#0A0H
+0020 7920              MOV     R1,#020H
+0022 120000      E     LCALL   _cyread32_nodpx
+0025 EF                MOV     A,R7
+0026 4401              ORL     A,#01H
+0028 FF                MOV     R7,A
+0029 EE                MOV     A,R6
+002A 4400              ORL     A,#00H
+002C FE                MOV     R6,A
+002D ED                MOV     A,R5
+002E 4400              ORL     A,#00H
+0030 FD                MOV     R5,A
+0031 EC                MOV     A,R4
+0032 4400              ORL     A,#00H
+0034 FC                MOV     R4,A
+0035 7B02              MOV     R3,#02H
+0037 7AA0              MOV     R2,#0A0H
+0039 7920              MOV     R1,#020H
+003B 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 232
+003E         ?C0026:
+                                           ; SOURCE LINE # 234
+003E 900000      R     MOV     DPTR,#result
+0041 E0                MOVX    A,@DPTR
+0042 FF                MOV     R7,A
+                                           ; SOURCE LINE # 235
+0043         ?C0027:
+0043 22                RET     
+             ; FUNCTION CAN_SendMsgswitchStatus (END)
+
+             ; FUNCTION CAN_SendMsgADCdata (BEGIN)
+                                           ; SOURCE LINE # 260
+                                           ; SOURCE LINE # 261
+                                           ; SOURCE LINE # 262
+0000 900000      R     MOV     DPTR,#result
+0003 E4                CLR     A
+0004 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 265
+0005 90A030            MOV     DPTR,#0A030H
+0008 E0                MOVX    A,@DPTR
+0009 FF                MOV     R7,A
+000A EF                MOV     A,R7
+000B 5401              ANL     A,#01H
+000D FF                MOV     R7,A
+000E 7E00              MOV     R6,#00H
+0010 EF                MOV     A,R7
+0011 4E                ORL     A,R6
+0012 6008              JZ      ?C0028
+                                           ; SOURCE LINE # 269
+                                           ; SOURCE LINE # 270
+0014 900000      R     MOV     DPTR,#result
+0017 7401              MOV     A,#01H
+0019 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 271
+001A 8022              SJMP    ?C0029
+001C         ?C0028:
+                                           ; SOURCE LINE # 273
+                                           ; SOURCE LINE # 283
+001C 7B02              MOV     R3,#02H
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 32  
+
+001E 7AA0              MOV     R2,#0A0H
+0020 7930              MOV     R1,#030H
+0022 120000      E     LCALL   _cyread32_nodpx
+0025 EF                MOV     A,R7
+0026 4401              ORL     A,#01H
+0028 FF                MOV     R7,A
+0029 EE                MOV     A,R6
+002A 4400              ORL     A,#00H
+002C FE                MOV     R6,A
+002D ED                MOV     A,R5
+002E 4400              ORL     A,#00H
+0030 FD                MOV     R5,A
+0031 EC                MOV     A,R4
+0032 4400              ORL     A,#00H
+0034 FC                MOV     R4,A
+0035 7B02              MOV     R3,#02H
+0037 7AA0              MOV     R2,#0A0H
+0039 7930              MOV     R1,#030H
+003B 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 284
+003E         ?C0029:
+                                           ; SOURCE LINE # 286
+003E 900000      R     MOV     DPTR,#result
+0041 E0                MOVX    A,@DPTR
+0042 FF                MOV     R7,A
+                                           ; SOURCE LINE # 287
+0043         ?C0030:
+0043 22                RET     
+             ; FUNCTION CAN_SendMsgADCdata (END)
+
+             ; FUNCTION _CAN_ReceiveMsg (BEGIN)
+                                           ; SOURCE LINE # 622
+0000 900000      R     MOV     DPTR,#rxMailbox
+0003 EF                MOV     A,R7
+0004 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 623
+                                           ; SOURCE LINE # 625
+0005 900000      R     MOV     DPTR,#rxMailbox
+0008 E0                MOVX    A,@DPTR
+0009 FF                MOV     R7,A
+000A 75F020            MOV     B,#020H
+000D EF                MOV     A,R7
+000E 90A0A0            MOV     DPTR,#0A0A0H
+0011 120000      E     LCALL   ?C?OFFXADD
+0014 E0                MOVX    A,@DPTR
+0015 FF                MOV     R7,A
+0016 EF                MOV     A,R7
+0017 30E017            JNB     ACC.0,?C0032
+                                           ; SOURCE LINE # 629
+                                           ; SOURCE LINE # 639
+001A 900000      R     MOV     DPTR,#rxMailbox
+001D E0                MOVX    A,@DPTR
+001E FF                MOV     R7,A
+001F 75F020            MOV     B,#020H
+0022 EF                MOV     A,R7
+0023 90A0A0            MOV     DPTR,#0A0A0H
+0026 120000      E     LCALL   ?C?OFFXADD
+0029 E0                MOVX    A,@DPTR
+002A FF                MOV     R7,A
+002B EF                MOV     A,R7
+002C 4401              ORL     A,#01H
+002E FF                MOV     R7,A
+C51 COMPILER V9.51   CAN_TX_RX_FUNC                                                        11/19/2018 18:58:11 PAGE 33  
+
+002F EF                MOV     A,R7
+0030 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 643
+                                           ; SOURCE LINE # 644
+0031         ?C0032:
+0031 22                RET     
+             ; FUNCTION _CAN_ReceiveMsg (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1048    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----      16
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

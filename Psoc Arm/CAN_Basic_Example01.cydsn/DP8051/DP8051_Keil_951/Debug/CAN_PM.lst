@@ -1,0 +1,410 @@
+C51 COMPILER V9.51   CAN_PM                                                                11/19/2018 18:58:11 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE CAN_PM
+OBJECT MODULE PLACED IN .\DP8051\DP8051_Keil_951\Debug\CAN_PM.obj
+COMPILER INVOKED BY: C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\import\keil\pk51\9.51\C51\BIN\c51.exe 
+                    -Generated_Source\PSoC3\CAN_PM.c NOIV LARGE MODDP2 OMF2 VB(1) NOIP INCDIR(.,Generated_Source\PSoC3) FF(3) DB DF(DEBUG) WL
+                    -(2) PR(.\DP8051\DP8051_Keil_951\Debug/CAN_PM.lst) CD OT(2,SIZE) OJ(.\DP8051\DP8051_Keil_951\Debug\CAN_PM.obj)
+
+line level    source
+
+   1          /*******************************************************************************
+   2          * File Name: CAN_PM.c
+   3          * Version 3.0
+   4          *
+   5          * Description:
+   6          *  This file contains the setup, control and status commands to support
+   7          *  component operations in the low power mode.
+   8          *
+   9          * Note:
+  10          *
+  11          ********************************************************************************
+  12          * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13          * You may use this file only in accordance with the license, terms, conditions,
+  14          * disclaimers, and limitations in the end user license agreement accompanying
+  15          * the software package with which this file was provided.
+  16          *******************************************************************************/
+  17          
+  18          #include "CAN.h"
+  19          
+  20          static CAN_BACKUP_STRUCT CAN_backup =
+  21          {
+  22              0u,
+  23              #if (CY_PSOC3 || CY_PSOC5)
+  24                  0u,
+  25                  CAN_INIT_INTERRUPT_MASK,
+  26                  CAN_MODE_MASK,
+  27                  (((uint32) ((uint32) CAN_SYNC_EDGE    << CAN_EDGE_MODE_SHIFT))     |
+  28                  ((uint32) ((uint32) CAN_SAMPLING_MODE << CAN_SAMPLE_MODE_SHIFT))   |
+  29                  ((uint32) ((uint32) CAN_CFG_REG_SJW   << CAN_CFG_REG_SJW_SHIFT))   |
+  30                  ((uint32) ((uint32) CAN_RESET_TYPE    << CAN_RESET_SHIFT))         |
+  31                  ((uint32) ((uint32) CAN_CFG_REG_TSEG2 << CAN_CFG_REG_TSEG2_SHIFT)) |
+  32                  ((uint32) ((uint32) CAN_CFG_REG_TSEG1 << CAN_CFG_REG_TSEG1_SHIFT)) |
+  33                  ((uint32) ((uint32) CAN_ARBITER       << CAN_ARBITER_SHIFT))       |
+  34                  ((uint32) ((uint32) CAN_BITRATE       << CAN_BITRATE_SHIFT)))
+  35              #endif /* CY_PSOC3 || CY_PSOC5 */
+  36          };
+  37          
+  38          
+  39          /*******************************************************************************
+  40          * Function Name: CAN_SaveConfig
+  41          ********************************************************************************
+  42          *
+  43          * Summary:
+  44          *  Save the CAN configuration.
+  45          *
+  46          * Parameters:
+  47          *  None.
+  48          *
+  49          * Return:
+  50          *  None.
+  51          *
+  52          * Global Variables:
+  53          *  CAN_backup - Modified when non-retention registers are saved.
+C51 COMPILER V9.51   CAN_PM                                                                11/19/2018 18:58:11 PAGE 2   
+
+  54          *
+  55          * Reentrant:
+  56          *  No.
+  57          *
+  58          *******************************************************************************/
+  59          void CAN_SaveConfig(void) 
+  60          {
+  61   1          #if (CY_PSOC3 || CY_PSOC5)
+  62   1              CAN_backup.intSr = (CY_GET_REG32(CAN_INT_SR_PTR));
+  63   1              CAN_backup.intEn = (CY_GET_REG32(CAN_INT_EN_PTR));
+  64   1              CAN_backup.cmd = (CY_GET_REG32(CAN_CMD_PTR));
+  65   1              CAN_backup.cfg = (CY_GET_REG32(CAN_CFG_PTR));
+  66   1          #endif /* CY_PSOC3 || CY_PSOC5 */
+  67   1      }
+  68          
+  69          
+  70          /*******************************************************************************
+  71          * Function Name: CAN_RestoreConfig
+  72          ********************************************************************************
+  73          *
+  74          * Summary:
+  75          *  Restore the CAN configuration.
+  76          *
+  77          * Parameters:
+  78          *  None.
+  79          *
+  80          * Return:
+  81          *  None.
+  82          *
+  83          * Global Variables:
+  84          *  CAN_backup - Used when non-retention registers are restored.
+  85          *
+  86          * Side Effects:
+  87          *  If this API is called without first calling SaveConfig then default values
+  88          *  from Customizer will be in the following registers: CAN_INT_SR,
+  89          *  CAN_INT_EN, CAN_CMD, CAN_CFG.
+  90          *
+  91          *******************************************************************************/
+  92          void CAN_RestoreConfig(void) 
+  93          {
+  94   1          #if (CY_PSOC3 || CY_PSOC5)
+  95   1              CY_SET_REG32(CAN_INT_SR_PTR, CAN_backup.intSr);
+  96   1              CY_SET_REG32(CAN_INT_EN_PTR, CAN_backup.intEn);
+  97   1              CY_SET_REG32(CAN_CMD_PTR, CAN_backup.cmd);
+  98   1              CY_SET_REG32(CAN_CFG_PTR, CAN_backup.cfg);
+  99   1          #endif /* CY_PSOC3 || CY_PSOC5 */
+ 100   1      }
+ 101          
+ 102          
+ 103          /*******************************************************************************
+ 104          * Function Name: CAN_Sleep
+ 105          ********************************************************************************
+ 106          *
+ 107          * Summary:
+ 108          *  Prepares CAN Component to go to sleep.
+ 109          *
+ 110          * Parameters:
+ 111          *  None.
+ 112          *
+ 113          * Return:
+ 114          *  None.
+ 115          *
+C51 COMPILER V9.51   CAN_PM                                                                11/19/2018 18:58:11 PAGE 3   
+
+ 116          * Global Variables:
+ 117          *  CAN_backup - Modified when non-retention registers are saved.
+ 118          *
+ 119          * Reentrant:
+ 120          *  No.
+ 121          *
+ 122          *******************************************************************************/
+ 123          void CAN_Sleep(void) 
+ 124          {
+ 125   1          #if (!(CY_PSOC3 || CY_PSOC5))
+                      uint8 i;
+                  #endif /* (!(CY_PSOC3 || CY_PSOC5)) */
+ 128   1      
+ 129   1          if (0u != (CY_GET_REG32(CAN_CMD_PTR) & CAN_MODE_MASK))
+ 130   1          {
+ 131   2              CAN_backup.enableState = 1u;
+ 132   2          }
+ 133   1          else /* CAN block is disabled */
+ 134   1          {
+ 135   2              CAN_backup.enableState = 0u;
+ 136   2          }
+ 137   1      
+ 138   1          #if (CY_PSOC3 || CY_PSOC5)
+ 139   1              CAN_SaveConfig();
+ 140   1              (void) CAN_Stop();
+ 141   1          #else /* CY_PSOC4 */
+                      /* Abort respective pending TX message requests */
+                      for (i = 0u; i < CAN_NUMBER_OF_TX_MAILBOXES; i++)
+                      {
+                          CAN_TX_ABORT_MESSAGE(i);
+                      }
+              
+                      /* Sets CAN controller to Stop mode */
+                      (void) CAN_Stop();
+              
+                      /* Clear Global Interrupt enable Flag */
+                      (void) CAN_GlobalIntDisable();
+                  #endif /* CY_PSOC3 || CY_PSOC5 */
+ 154   1      }
+ 155          
+ 156          
+ 157          /*******************************************************************************
+ 158          * Function Name: CAN_Wakeup
+ 159          ********************************************************************************
+ 160          *
+ 161          * Summary:
+ 162          *  Prepares CAN Component to wake up.
+ 163          *
+ 164          * Parameters:
+ 165          *  None.
+ 166          *
+ 167          * Return:
+ 168          *  None.
+ 169          *
+ 170          * Global Variables:
+ 171          *  CAN_backup - Used when non-retention registers are restored.
+ 172          *
+ 173          * Reentrant:
+ 174          *  No.
+ 175          *
+ 176          *******************************************************************************/
+ 177          void CAN_Wakeup(void) 
+C51 COMPILER V9.51   CAN_PM                                                                11/19/2018 18:58:11 PAGE 4   
+
+ 178          {
+ 179   1          #if (CY_PSOC3 || CY_PSOC5)
+ 180   1              /* Enable CAN block in Active mode */
+ 181   1              CAN_PM_ACT_CFG_REG |= CAN_ACT_PWR_EN;
+ 182   1              /* Enable CAN block in Alternate Active (Standby) mode */
+ 183   1              CAN_PM_STBY_CFG_REG |= CAN_STBY_PWR_EN;
+ 184   1      
+ 185   1              CAN_RestoreConfig();
+ 186   1      
+ 187   1              /* Reconfigure Rx and Tx Buffers control registers */
+ 188   1              (void) CAN_RxTxBuffersConfig();
+ 189   1      
+ 190   1              if (CAN_backup.enableState != 0u)
+ 191   1              {
+ 192   2                  /* Enable component's operation */
+ 193   2                  (void) CAN_Enable();
+ 194   2              } /* Do nothing if component's block was disabled before */
+ 195   1          #else /* CY_PSOC4 */
+                      /* Clear all INT_STATUS bits */
+                      CAN_INT_SR_REG = CAN_INT_STATUS_MASK;
+              
+                      /* Set Global Interrupt enable Flag */
+                      (void) CAN_GlobalIntEnable();
+              
+                      if (CAN_backup.enableState != 0u)
+                      {
+                          (void) CAN_Enable();
+                      } /* Do nothing if component's block was disabled before */
+                  #endif /* CY_PSOC3 || CY_PSOC5 */
+ 207   1      }
+ 208          
+ 209          
+ 210          /* [] END OF FILE */
+C51 COMPILER V9.51   CAN_PM                                                                11/19/2018 18:58:11 PAGE 5   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION CAN_SaveConfig (BEGIN)
+                                           ; SOURCE LINE # 59
+                                           ; SOURCE LINE # 60
+                                           ; SOURCE LINE # 62
+0000 7B02              MOV     R3,#02H
+0002 7AA0              MOV     R2,#0A0H
+0004 7900              MOV     R1,#00H
+0006 120000      E     LCALL   _cyread32_nodpx
+0009 900000      R     MOV     DPTR,#CAN_backup+01H
+000C 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 63
+000F 7B02              MOV     R3,#02H
+0011 7AA0              MOV     R2,#0A0H
+0013 7904              MOV     R1,#04H
+0015 120000      E     LCALL   _cyread32_nodpx
+0018 900000      R     MOV     DPTR,#CAN_backup+05H
+001B 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 64
+001E 7B02              MOV     R3,#02H
+0020 7AA0              MOV     R2,#0A0H
+0022 7910              MOV     R1,#010H
+0024 120000      E     LCALL   _cyread32_nodpx
+0027 900000      R     MOV     DPTR,#CAN_backup+09H
+002A 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 65
+002D 7B02              MOV     R3,#02H
+002F 7AA0              MOV     R2,#0A0H
+0031 7914              MOV     R1,#014H
+0033 120000      E     LCALL   _cyread32_nodpx
+0036 900000      R     MOV     DPTR,#CAN_backup+0DH
+0039 120000      E     LCALL   ?C?LSTXDATA
+                                           ; SOURCE LINE # 67
+003C 22                RET     
+             ; FUNCTION CAN_SaveConfig (END)
+
+             ; FUNCTION CAN_RestoreConfig (BEGIN)
+                                           ; SOURCE LINE # 92
+                                           ; SOURCE LINE # 93
+                                           ; SOURCE LINE # 95
+0000 7B02              MOV     R3,#02H
+0002 7AA0              MOV     R2,#0A0H
+0004 7900              MOV     R1,#00H
+0006 900000      R     MOV     DPTR,#CAN_backup+01H
+0009 120000      E     LCALL   ?C?LLDXDATA
+000C 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 96
+000F 7B02              MOV     R3,#02H
+0011 7AA0              MOV     R2,#0A0H
+0013 7904              MOV     R1,#04H
+0015 900000      R     MOV     DPTR,#CAN_backup+05H
+0018 120000      E     LCALL   ?C?LLDXDATA
+001B 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 97
+001E 7B02              MOV     R3,#02H
+0020 7AA0              MOV     R2,#0A0H
+0022 7910              MOV     R1,#010H
+0024 900000      R     MOV     DPTR,#CAN_backup+09H
+0027 120000      E     LCALL   ?C?LLDXDATA
+002A 120000      E     LCALL   _cywrite32_nodpx
+C51 COMPILER V9.51   CAN_PM                                                                11/19/2018 18:58:11 PAGE 6   
+
+                                           ; SOURCE LINE # 98
+002D 7B02              MOV     R3,#02H
+002F 7AA0              MOV     R2,#0A0H
+0031 7914              MOV     R1,#014H
+0033 900000      R     MOV     DPTR,#CAN_backup+0DH
+0036 120000      E     LCALL   ?C?LLDXDATA
+0039 120000      E     LCALL   _cywrite32_nodpx
+                                           ; SOURCE LINE # 100
+003C 22                RET     
+             ; FUNCTION CAN_RestoreConfig (END)
+
+             ; FUNCTION CAN_Sleep (BEGIN)
+                                           ; SOURCE LINE # 123
+                                           ; SOURCE LINE # 124
+                                           ; SOURCE LINE # 129
+0000 7B02              MOV     R3,#02H
+0002 7AA0              MOV     R2,#0A0H
+0004 7910              MOV     R1,#010H
+0006 120000      E     LCALL   _cyread32_nodpx
+0009 EF                MOV     A,R7
+000A 5401              ANL     A,#01H
+000C FF                MOV     R7,A
+000D EE                MOV     A,R6
+000E 5400              ANL     A,#00H
+0010 FE                MOV     R6,A
+0011 ED                MOV     A,R5
+0012 5400              ANL     A,#00H
+0014 FD                MOV     R5,A
+0015 EC                MOV     A,R4
+0016 5400              ANL     A,#00H
+0018 FC                MOV     R4,A
+0019 EF                MOV     A,R7
+001A 4E                ORL     A,R6
+001B 6008              JZ      ?C0003
+                                           ; SOURCE LINE # 130
+                                           ; SOURCE LINE # 131
+001D 900000      R     MOV     DPTR,#CAN_backup
+0020 7401              MOV     A,#01H
+0022 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 132
+0023 8005              SJMP    ?C0004
+0025         ?C0003:
+                                           ; SOURCE LINE # 134
+                                           ; SOURCE LINE # 135
+0025 900000      R     MOV     DPTR,#CAN_backup
+0028 E4                CLR     A
+0029 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 136
+002A         ?C0004:
+                                           ; SOURCE LINE # 139
+002A 120000      R     LCALL   CAN_SaveConfig
+                                           ; SOURCE LINE # 140
+002D 120000      E     LCALL   CAN_Stop
+                                           ; SOURCE LINE # 154
+0030 22                RET     
+             ; FUNCTION CAN_Sleep (END)
+
+             ; FUNCTION CAN_Wakeup (BEGIN)
+                                           ; SOURCE LINE # 177
+                                           ; SOURCE LINE # 178
+                                           ; SOURCE LINE # 181
+0000 9043A6            MOV     DPTR,#043A6H
+C51 COMPILER V9.51   CAN_PM                                                                11/19/2018 18:58:11 PAGE 7   
+
+0003 E0                MOVX    A,@DPTR
+0004 FF                MOV     R7,A
+0005 EF                MOV     A,R7
+0006 4401              ORL     A,#01H
+0008 FF                MOV     R7,A
+0009 EF                MOV     A,R7
+000A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 183
+000B 9043B6            MOV     DPTR,#043B6H
+000E E0                MOVX    A,@DPTR
+000F FF                MOV     R7,A
+0010 EF                MOV     A,R7
+0011 4401              ORL     A,#01H
+0013 FF                MOV     R7,A
+0014 EF                MOV     A,R7
+0015 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 185
+0016 120000      R     LCALL   CAN_RestoreConfig
+                                           ; SOURCE LINE # 188
+0019 120000      E     LCALL   CAN_RxTxBuffersConfig
+                                           ; SOURCE LINE # 190
+001C 900000      R     MOV     DPTR,#CAN_backup
+001F E0                MOVX    A,@DPTR
+0020 FF                MOV     R7,A
+0021 EF                MOV     A,R7
+0022 6003              JZ      ?C0007
+                                           ; SOURCE LINE # 191
+                                           ; SOURCE LINE # 193
+0024 120000      E     LCALL   CAN_Enable
+                                           ; SOURCE LINE # 194
+                                           ; SOURCE LINE # 207
+0027         ?C0007:
+0027 22                RET     
+             ; FUNCTION CAN_Wakeup (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    211    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     17    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

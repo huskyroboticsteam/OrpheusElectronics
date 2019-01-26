@@ -1,0 +1,20 @@
+# CAN_Basic_P4_unmodified
+# 2018-12-23 00:17:05Z
+
+# IO_4@[IOP=(0)][IoId=(4)] is reserved: KhzXtalEnabled
+dont_use_io iocell 0 4
+# IO_5@[IOP=(0)][IoId=(5)] is reserved: KhzXtalEnabled
+dont_use_io iocell 0 5
+# IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
+dont_use_io iocell 3 2
+# IO_3@[IOP=(3)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 3 3
+set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
+set_io "RX(0)" iocell 0 0
+set_io "TX(0)" iocell 0 1
+set_io "\UART:tx(0)\" iocell 3 1
+set_io "\UART:rx(0)\" iocell 3 0
+set_io "Switch1(0)" iocell 0 7
+set_io "V1(0)" iocell 2 0
+set_io "PWM_OUT(0)" iocell 0 2
+set_location "\ADC:cy_psoc4_sar\" p4sarcell -1 -1 0

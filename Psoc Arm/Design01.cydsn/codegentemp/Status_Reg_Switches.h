@@ -72,10 +72,10 @@ uint8 Status_Reg_Switches_ReadMask(void) ;
 ***************************************/
 
 /* Status Register */
-#define Status_Reg_Switches_Status             (* (reg8 *) Status_Reg_Switches_sts_sts_reg__STATUS_REG )
-#define Status_Reg_Switches_Status_PTR         (  (reg8 *) Status_Reg_Switches_sts_sts_reg__STATUS_REG )
-#define Status_Reg_Switches_Status_Mask        (* (reg8 *) Status_Reg_Switches_sts_sts_reg__MASK_REG )
-#define Status_Reg_Switches_Status_Aux_Ctrl    (* (reg8 *) Status_Reg_Switches_sts_sts_reg__STATUS_AUX_CTL_REG )
+#define Status_Reg_Switches_Status             (* (reg8 *) Status_Reg_Switches_sts_intr_sts_reg__STATUS_REG )
+#define Status_Reg_Switches_Status_PTR         (  (reg8 *) Status_Reg_Switches_sts_intr_sts_reg__STATUS_REG )
+#define Status_Reg_Switches_Status_Mask        (* (reg8 *) Status_Reg_Switches_sts_intr_sts_reg__MASK_REG )
+#define Status_Reg_Switches_Status_Aux_Ctrl    (* (reg8 *) Status_Reg_Switches_sts_intr_sts_reg__STATUS_AUX_CTL_REG )
 
 #endif /* End CY_STATUS_REG_Status_Reg_Switches_H */
 
