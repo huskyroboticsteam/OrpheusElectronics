@@ -30,9 +30,13 @@ int main(){
 	init_encoder();
 	init_motor();
 	set_motor_mode(MOTOR_MODE_PID);
-	enable_motor(0x10 | get_dip_switch());
+	enable_motor();
 	PORTE = 0;
 	set_LED(0, 3);
+	set_Kp(0, 7);
+	set_Ki(0, 3);
+	set_Kd(0, 1);
+	delay_mS(500);
 	while(1){
 		mS = get_mS();
 		if(!PID_due){ //Don't busy the processor if the PID is due to run

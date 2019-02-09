@@ -4,11 +4,11 @@
 
 uint8_t LED_states;
 
-int16_t min(int16_t a, int16_t b){
+int32_t min(int32_t a, int32_t b){
 	return (a < b)? a:b;
 }
 
-int16_t max(int16_t a, int16_t b){
+int32_t max(int32_t a, int32_t b){
 	return (a > b)? a:b;
 }
 

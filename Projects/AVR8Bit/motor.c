@@ -246,8 +246,10 @@ void motor_control_tick(){
 			//motor_target_pos = 262144; //Now try to find the upper limit
 		if(motor_target_pos < 0)
 			motor_target_pos = 0;
-		motor_power = 0;
-		set_motor_power(0);
+		if(motor_power < 0){ 
+			motor_power = 0;
+			set_motor_power(0);
+		}
 	}
 	if(limit_sw & 2){
 		motor_max_pos = get_encoder_ticks();
@@ -257,8 +259,10 @@ void motor_control_tick(){
 		if(motor_mode & MOTOR_MODE_INDEX){ //Are we in index mode?
 			motor_mode &= ~MOTOR_MODE_INDEX; //Leave indexing mode
 		}
-		motor_power = 0;
-		set_motor_power(0);
+		if(motor_power > 0){
+			motor_power = 0;
+			set_motor_power(0);
+		}
 	}
 	if(motor_mode & MOTOR_MODE_PID && PID_due){ //Are we supposed to run the PID?
 	//	tprintf("period=%d\n", get_mS() - last);
@@ -275,6 +279,8 @@ void motor_control_tick(){
 		int16_t dv = errorv - last_vel_err; //d term
 		last_vel_err = errorv; 
 		int32_t mvp = (errorv*Kp2)/20 + (vel_i*Ki2)/20 + (dv*Kd2)/20; //Compute the motor power for the velocity loop
+		//int32_t mvp = errorv/2 + vel_i / 8 + dv/10;
+	//	tprintf("%d %d %d %d %d %d | ", (int16_t)motor_target_vel, (int16_t)vel, (int16_t)errorv, (int16_t)dv, (int16_t)vel_i, (int16_t)mvp);
 		if(errorv < -16 || errorv > 16)
 			vel_i += errorv; //Update the integral term. Ignore small steady state errors
 		if(vel_i > 16384) vel_i = 16384; //Constrain the intergral term to prevent integral wind-up
@@ -301,12 +307,12 @@ void motor_control_tick(){
 		#endif
 		/*Position PID*/
 		int32_t pos = get_encoder_ticks();
-		//#ifndef DUAL_PID
+		#ifndef DUAL_PID
 		if(pos < pid_target - 128 || pos > pid_target + 128){ /*If there is a large error, the PID is out of lock*/
 		//	tprintf("Assinging PID target %l, %l\n", pid_target, pos);
 			pid_target = pid_target/2 + pos/2; //Adjust the PID target closer to the actual motor position to keep it from racing to it
 		}
-		//#endif
+		#endif
 		int32_t errorp = pid_target - pos; //P
 		int32_t dp = errorp - last_pos_err; //D
 		last_pos_err = errorp;
@@ -316,18 +322,16 @@ void motor_control_tick(){
 		if(pos_i < -768) pos_i = -768;
 		int32_t mpp = (errorp*Kp)/20 + (pos_i*Ki)/20 + (dp*Kd)/20;
 		if(mpp > 1023) mpp = 1023; /*Clamp the motor power to the accepted range of -1023 to +1023*/
-		if(mpp < -1023) mpp = -1023;
-		//tprintf("%d %d %d %d %d | ", (int16_t)motor_target_vel, (int16_t)vel, (int16_t)errorv, (int16_t)dv, (int16_t)vel_i);
-		
+		if(mpp < -1023) mpp = -1023;		
 		motor_power = mpp; //Set the motor power to the output
 		#ifdef DUAL_PID
-		if(int_abs(errorp) > 300){ //If there is a large error, let the velocity PID take over
+		if(int_abs(errorp) > 100){ //If there is a large error, let the velocity PID take over
 			motor_power = mvp;
 		}
 		#endif
 		#ifdef DEBUG
 		av = (av*9)/10 + get_motor_velocity()/10;
-		tprintf("%d %d %d %d %d %d %d %d\n", (int16_t)motor_target_pos, (int16_t)pid_target, (int16_t)pos, (int16_t)errorp, (int16_t)dp, (int16_t)pos_i, (int16_t)motor_power, av);
+		tprintf("%l %l %l %d %d %d %d %d\n", (int32_t)motor_target_pos, (int32_t)pid_target, (int32_t)pos, (int16_t)errorp, (int16_t)dp, (int16_t)pos_i, (int16_t)motor_power, av);
 		//tprintf("%d %d %d %d\n", (int16_t)pid_target, (int16_t)pos, (int16_t)av, (int16_t)motor_power);
 		//last_mS = get_mS();
 		#endif
@@ -362,4 +366,9 @@ uint8_t get_motor_mode(){
 /*Gets the state of the limit switches*/
 uint8_t get_motor_limit_switch_state(){
 	return ((~PIND) & 0x02); //Get GPIO data
+}
+
+/*Gets the motor maximum position*/
+uint32_t get_motor_max_position(){
+	return motor_max_pos;
 }

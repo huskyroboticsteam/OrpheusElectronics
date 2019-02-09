@@ -8,6 +8,8 @@
 #include "usart.h"
 #include "messaging.h"
 
+unsigned int ticks_per_degree = 1;
+
 /*Handle a recieved CAN message*/
 void handle_CAN_message(struct CAN_msg *m){
 	uint8_t sender = (m->id & 0x3E0) >> 5;
@@ -31,9 +33,14 @@ void handle_CAN_message(struct CAN_msg *m){
 				set_motor_power(mp);
 			}
 			break;
-		case 0x04: //Set angle
-			param1 = m->data[1] | m->data[2]<<8;
-			param2 = m->data[3] | m->data[4]<<8;
+		case 0x04: //Set angle + velocity
+			param1 *= ticks_per_degree;
+			param2 *= ticks_per_degree;
+			param1 /= 100;
+			param2 /= 100;
+			if(param1 > get_motor_max_position()){
+				send_CAN_error(CAN_ERROR_INVALID_ARGUMENT, m->data[0]);
+			}
 			set_target_position(param1);
 			set_target_velocity(param2);
 			break;
@@ -50,6 +57,9 @@ void handle_CAN_message(struct CAN_msg *m){
 			break;
 		case 0x0E: //Set D
 			set_Kd(m->data[1] | m->data[2]<<8, m->data[3] | m->data[4]<<8);
+			break;
+		case 0x0F: //Set ticks per degree
+			ticks_per_degree = param1;
 			break;
 		case 0x10: //Model request
 			send_model_number(sender);

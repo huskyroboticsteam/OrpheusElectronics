@@ -28,21 +28,23 @@ int main(){
 	usart_init(19200);
 	_delay_ms(666);
 	sei();
-	tprintf("Hello, World!\n");
-	delay_mS(1000);
 	init_encoder();
 	init_motor();
 	set_motor_mode(MOTOR_MODE_PID);
 	enable_motor();
 	PORTE = 0;
 	char target_string[8], vel_string[8];
+	set_Kp(0, 10);
+	set_Ki(0, 3);
+	set_Kd(0, 2);
 	while(1){
 		if(!PID_due && usart_available()){
 			read_string(target_string, ' ');
 			read_string(vel_string, '\r');
 			//tprintf("\nGot \"%s\", \"%s\"\n", target_string, vel_string);
-			int a = atoi(target_string);
-			int b = atoi(vel_string);
+			uint16_t a = atoi(target_string);
+			uint16_t b = atoi(vel_string);
+			tprintf("%l, %l\n", (uint32_t)a, (uint32_t)b);
 			set_target_velocity(a);
 			set_target_position(b);
 		}

@@ -28,5 +28,6 @@ void set_Kd(uint16_t d1, uint16_t d2);
 void index_motor();
 void motor_control_tick();
 uint8_t get_motor_limit_switch_state();
+uint32_t get_motor_max_position();
 
 #endif
