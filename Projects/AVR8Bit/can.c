@@ -272,7 +272,7 @@ void CAN_dump_state(){
 void dump_CAN_message(struct CAN_msg m){
 	int i;
 	tprintf("\n-CAN MESSAGE-\n");
-	tprintf("id=%d, flags=0x%X, length=%d\n", m.id, (long)m.flags, m.length);
+	tprintf("id=0x%X, flags=0x%X, length=%d\n", m.id, (long)m.flags, m.length);
 	tprintf("HEX={");
 	for(i = 0;i < m.length;i++){
 		tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");
