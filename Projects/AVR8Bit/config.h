@@ -30,7 +30,7 @@
 #define USART_TX_BUF_SZ 16 //UART TX buffer size
 #define USART_RX_BUF_SZ 16 //UART RX buffer size
 
-#define L298_MC //Use L298 motor driver code for testing
+//#define L298_MC //Use L298 motor driver code for testing
 
 #define CAN_ERROR_OVERCURRENT 1
 #define CAN_ERROR_COMMAN_FAILED 2

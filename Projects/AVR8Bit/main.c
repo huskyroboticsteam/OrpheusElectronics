@@ -31,6 +31,7 @@ int main(){
 	init_motor();
 	set_motor_mode(MOTOR_MODE_PID);
 	enable_motor();
+	init_ADC();
 	PORTE = 0;
 	set_LED(0, 3);
 	set_Kp(0, 7);

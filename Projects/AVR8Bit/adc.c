@@ -32,7 +32,7 @@ uint16_t read_ADC(uint8_t pin){
 
 /*Switches to the internal (2.56V) Vref*/
 void internalAREF(){
-	if(!(ADMUX & 0xC0)){
+	if((ADMUX & 0xC0) != 0xC0){
 		ADMUX |= 0xC0;
 		delay_mS(5);
 		read_ADC(0); //As per the datasheet, discard the first reading after changing AREF
@@ -41,7 +41,7 @@ void internalAREF(){
 
 /*Uses VIN for Vref (5 or 3.3V)*/
 void externalAREF(){
-	if(ADMUX & 0xC0){
+	if(ADMUX & 0xC0 == 0xC0){
 		ADMUX &= ~0xC0;
 		ADMUX = (1<<6);
 		delay_mS(5);

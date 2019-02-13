@@ -1,4 +1,4 @@
-set MCU=at90can128
+set MCU=at90can32
 
 del avr_mc.elf avr_mc.hex
 avr-gcc -c timers.c -o timers.o -Iinclude -I. -mmcu=%MCU% -O3 

@@ -22,11 +22,17 @@ uint8_t state: the mode for the LED:
 	3 -> Steady on
 */
 void set_LED(uint8_t L, uint8_t state){
-	if(L > 4 || state > 3) return;
-	if(state){
-		state = 4 - state;
+	if(L > 3 || state > 3) return;
+	if(state == 1 || state == 2){
+		state = 3 - state;
 	}
+	L <<= 1;
 	LED_states = (LED_states & ~(3 << L)) | (state << L);
+	tprintf("LED state: %d\n", LED_states);
+	for(int i = 0;i < 4;i++){
+		uint8_t v = (LED_states >> (2*i)) & 3;
+		tprintf("%d ", v);
+	}
 }
 
 /*Integer implementation of abs()*/
@@ -43,8 +49,8 @@ void inline update_LEDS(uint16_t count){
 	uint8_t v;
 	if(!LED_states) return;
 	for(i = 0;i < 4;i++){
-		v = (i >> (2*i)) & 3;
-		if(v == 0 || count % v){
+		v = (LED_states >> (2*i)) & 3;
+		if(v == 0 || ((count % (1+(v*2))) && v != 3)){
 			PORTA &= ~(1 << (i+4));
 		} else {
 			PORTA |= 1 << (i+4);

@@ -34,6 +34,10 @@ int main(){
 	uint16_t my_address = 0x10;
 	CAN_set_RX_filter(0, 0);
 	tprintf("CAN init\n");
+	//DDRA = 0xF0;
+	init_ADC();
+	PORTA = 0xFF;
+	//PORTA = PORTA << 4;
 	init_CAN(CAN_125_BAUD, 4, 0);
 	delay_mS(1000);
 	while(1){
@@ -41,6 +45,7 @@ int main(){
 			CAN_get_msg(&m);
 			dump_CAN_message(m);
 		}
+		//tprintf("%d ", (uint16_t)get_voltage());
 		//CAN_dump_state();
 		delay_mS(250);
 	}
