@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccHieK56.s 			page 1
 
 
    1              		.syntax unified
@@ -27,38 +27,38 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 1
   24 0006 00000000 		.4byte	.Ldebug_abbrev0
   25 000a 04       		.byte	0x4
   26 000b 01       		.uleb128 0x1
-  27 000c 03010000 		.4byte	.LASF14
+  27 000c 0B010000 		.4byte	.LASF14
   28 0010 0C       		.byte	0xc
-  29 0011 C6000000 		.4byte	.LASF15
-  30 0015 4A000000 		.4byte	.LASF16
+  29 0011 BC000000 		.4byte	.LASF15
+  30 0015 1B000000 		.4byte	.LASF16
   31 0019 00000000 		.4byte	.Ldebug_line0
   32 001d 02       		.uleb128 0x2
   33 001e 01       		.byte	0x1
   34 001f 06       		.byte	0x6
-  35 0020 A4010000 		.4byte	.LASF0
+  35 0020 AC010000 		.4byte	.LASF0
   36 0024 02       		.uleb128 0x2
   37 0025 01       		.byte	0x1
   38 0026 08       		.byte	0x8
-  39 0027 B8000000 		.4byte	.LASF1
+  39 0027 AE000000 		.4byte	.LASF1
   40 002b 02       		.uleb128 0x2
   41 002c 02       		.byte	0x2
   42 002d 05       		.byte	0x5
-  43 002e BC010000 		.4byte	.LASF2
+  43 002e C4010000 		.4byte	.LASF2
   44 0032 02       		.uleb128 0x2
   45 0033 02       		.byte	0x2
   46 0034 07       		.byte	0x7
-  47 0035 91010000 		.4byte	.LASF3
+  47 0035 99010000 		.4byte	.LASF3
   48 0039 02       		.uleb128 0x2
   49 003a 04       		.byte	0x4
   50 003b 05       		.byte	0x5
-  51 003c F3000000 		.4byte	.LASF4
+  51 003c E9000000 		.4byte	.LASF4
   52 0040 02       		.uleb128 0x2
   53 0041 04       		.byte	0x4
   54 0042 07       		.byte	0x7
-  55 0043 1B000000 		.4byte	.LASF5
+  55 0043 F2000000 		.4byte	.LASF5
   56 0047 02       		.uleb128 0x2
   57 0048 08       		.byte	0x8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccHieK56.s 			page 2
 
 
   58 0049 05       		.byte	0x5
@@ -66,7 +66,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 1
   60 004e 02       		.uleb128 0x2
   61 004f 08       		.byte	0x8
   62 0050 07       		.byte	0x7
-  63 0051 2D000000 		.4byte	.LASF7
+  63 0051 91000000 		.4byte	.LASF7
   64 0055 03       		.uleb128 0x3
   65 0056 04       		.byte	0x4
   66 0057 05       		.byte	0x5
@@ -78,23 +78,23 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 1
   72 0063 02       		.uleb128 0x2
   73 0064 04       		.byte	0x4
   74 0065 04       		.byte	0x4
-  75 0066 44000000 		.4byte	.LASF9
+  75 0066 A8000000 		.4byte	.LASF9
   76 006a 02       		.uleb128 0x2
   77 006b 08       		.byte	0x8
   78 006c 04       		.byte	0x4
-  79 006d FC000000 		.4byte	.LASF10
+  79 006d 04010000 		.4byte	.LASF10
   80 0071 02       		.uleb128 0x2
   81 0072 01       		.byte	0x1
   82 0073 08       		.byte	0x8
-  83 0074 EE000000 		.4byte	.LASF11
+  83 0074 E4000000 		.4byte	.LASF11
   84 0078 02       		.uleb128 0x2
   85 0079 08       		.byte	0x8
   86 007a 04       		.byte	0x4
-  87 007b B0010000 		.4byte	.LASF12
+  87 007b B8010000 		.4byte	.LASF12
   88 007f 02       		.uleb128 0x2
   89 0080 04       		.byte	0x4
   90 0081 07       		.byte	0x7
-  91 0082 C6010000 		.4byte	.LASF13
+  91 0082 CE010000 		.4byte	.LASF13
   92 0086 00       		.byte	0
   93              		.section	.debug_abbrev,"",%progbits
   94              	.Ldebug_abbrev0:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 1
  112 0011 00       		.byte	0
  113 0012 0B       		.uleb128 0xb
  114 0013 0B       		.uleb128 0xb
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccHieK56.s 			page 3
 
 
  115 0014 3E       		.uleb128 0x3e
@@ -166,99 +166,100 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 1
  149      676E6564 
  149      20696E74 
  149      00
- 150              	.LASF5:
- 151 001b 6C6F6E67 		.ascii	"long unsigned int\000"
- 151      20756E73 
- 151      69676E65 
- 151      6420696E 
- 151      7400
- 152              	.LASF7:
- 153 002d 6C6F6E67 		.ascii	"long long unsigned int\000"
- 153      206C6F6E 
- 153      6720756E 
- 153      7369676E 
- 153      65642069 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 4
+ 150              	.LASF16:
+ 151 001b 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
+ 151      73657273 
+ 151      5C617573 
+ 151      74635C4F 
+ 151      6E654472 
+ 152 0048 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\working CAN_Basic_P4_Orig"
+ 152      69637332 
+ 152      3031382D 
+ 152      31395C50 
+ 152      736F6320 
+ 153 0079 696E616C 		.ascii	"inal + uart debug.cydsn\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccHieK56.s 			page 4
 
 
- 154              	.LASF9:
- 155 0044 666C6F61 		.ascii	"float\000"
- 155      7400
- 156              	.LASF16:
- 157 004a 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
- 157      73657273 
- 157      5C617573 
- 157      74635C4F 
- 157      6E654472 
- 158 0077 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\CAN_Basic_P4_Original + u"
- 158      69637332 
- 158      3031382D 
- 158      31395C50 
- 158      736F6320 
- 159 00a8 61727420 		.ascii	"art debug.cydsn\000"
- 159      64656275 
- 159      672E6379 
- 159      64736E00 
- 160              	.LASF1:
- 161 00b8 756E7369 		.ascii	"unsigned char\000"
- 161      676E6564 
- 161      20636861 
- 161      7200
- 162              	.LASF15:
- 163 00c6 47656E65 		.ascii	"Generated_Source\\PSoC4\\UART_UART_BOOT.c\000"
- 163      72617465 
- 163      645F536F 
- 163      75726365 
- 163      5C50536F 
- 164              	.LASF11:
- 165 00ee 63686172 		.ascii	"char\000"
+ 153      202B2075 
+ 153      61727420 
+ 153      64656275 
+ 153      672E6379 
+ 154              	.LASF7:
+ 155 0091 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 155      206C6F6E 
+ 155      6720756E 
+ 155      7369676E 
+ 155      65642069 
+ 156              	.LASF9:
+ 157 00a8 666C6F61 		.ascii	"float\000"
+ 157      7400
+ 158              	.LASF1:
+ 159 00ae 756E7369 		.ascii	"unsigned char\000"
+ 159      676E6564 
+ 159      20636861 
+ 159      7200
+ 160              	.LASF15:
+ 161 00bc 47656E65 		.ascii	"Generated_Source\\PSoC4\\UART_UART_BOOT.c\000"
+ 161      72617465 
+ 161      645F536F 
+ 161      75726365 
+ 161      5C50536F 
+ 162              	.LASF11:
+ 163 00e4 63686172 		.ascii	"char\000"
+ 163      00
+ 164              	.LASF4:
+ 165 00e9 6C6F6E67 		.ascii	"long int\000"
+ 165      20696E74 
  165      00
- 166              	.LASF4:
- 167 00f3 6C6F6E67 		.ascii	"long int\000"
- 167      20696E74 
- 167      00
+ 166              	.LASF5:
+ 167 00f2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 167      20756E73 
+ 167      69676E65 
+ 167      6420696E 
+ 167      7400
  168              	.LASF10:
- 169 00fc 646F7562 		.ascii	"double\000"
+ 169 0104 646F7562 		.ascii	"double\000"
  169      6C6500
  170              	.LASF14:
- 171 0103 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 171 010b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  171      43313120 
  171      352E342E 
  171      31203230 
  171      31363036 
- 172 0136 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 172 013e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
  172      20726576 
  172      6973696F 
  172      6E203233 
  172      37373135 
- 173 0169 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 173 0171 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
  173      66756E63 
  173      74696F6E 
  173      2D736563 
  173      74696F6E 
  174              	.LASF3:
- 175 0191 73686F72 		.ascii	"short unsigned int\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccaFKrss.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccHieK56.s 			page 5
 
 
+ 175 0199 73686F72 		.ascii	"short unsigned int\000"
  175      7420756E 
  175      7369676E 
  175      65642069 
  175      6E7400
  176              	.LASF0:
- 177 01a4 7369676E 		.ascii	"signed char\000"
+ 177 01ac 7369676E 		.ascii	"signed char\000"
  177      65642063 
  177      68617200 
  178              	.LASF12:
- 179 01b0 6C6F6E67 		.ascii	"long double\000"
+ 179 01b8 6C6F6E67 		.ascii	"long double\000"
  179      20646F75 
  179      626C6500 
  180              	.LASF2:
- 181 01bc 73686F72 		.ascii	"short int\000"
+ 181 01c4 73686F72 		.ascii	"short int\000"
  181      7420696E 
  181      7400
  182              	.LASF13:
- 183 01c6 73697A65 		.ascii	"sizetype\000"
+ 183 01ce 73697A65 		.ascii	"sizetype\000"
  183      74797065 
  183      00
  184              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

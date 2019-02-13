@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Psoc Arm\Design01\Source Files\main.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Psoc Arm\CAN_Full_P4_Example02\Source Files\main.c">
 <ExpandedNodeIds>
 <v>Psoc Arm</v>
 <v>Psoc Arm\Can Send test\TopDesign</v>
@@ -88,6 +88,24 @@
 <v>Psoc Arm\CAN_Full_P4_Example01\CAN_Full_P4_Example.pdf</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\Generated_Source</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\Generated_Source\PSoC4</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Pins</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Analog</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\DMA</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Clocks</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Interrupts</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\System</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Directives</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Flash Security</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Header Files</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Header Files\cyapicallbacks.h</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Source Files</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Source Files\main.c</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example.pdf</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4</v>
 <v>Psoc Arm\DebouncerExample01\TopDesign</v>
 <v>Psoc Arm\DebouncerExample01\DebouncerExample01.cydwr</v>
 <v>Psoc Arm\DebouncerExample01\DebouncerExample01.cydwr\Pins</v>
@@ -106,22 +124,37 @@
 <v>Psoc Arm\DebouncerExample01\DebouncerExample.pdf</v>
 <v>Psoc Arm\DebouncerExample01\Generated_Source</v>
 <v>Psoc Arm\DebouncerExample01\Generated_Source\PSoC5</v>
-<v>Psoc Arm\Design01</v>
-<v>Psoc Arm\Design01\TopDesign</v>
-<v>Psoc Arm\Design01\Design01.cydwr</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Pins</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Analog</v>
-<v>Psoc Arm\Design01\Design01.cydwr\DMA</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Clocks</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Interrupts</v>
-<v>Psoc Arm\Design01\Design01.cydwr\System</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Directives</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Flash Security</v>
-<v>Psoc Arm\Design01\Header Files</v>
-<v>Psoc Arm\Design01\Header Files\cyapicallbacks.h</v>
-<v>Psoc Arm\Design01\Source Files</v>
-<v>Psoc Arm\Design01\Source Files\main.c</v>
-<v>Psoc Arm\Design01\Generated_Source\PSoC4</v>
+<v>Psoc Arm\Dev Board\TopDesign</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\Pins</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\Analog</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\DMA</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\Clocks</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\Interrupts</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\System</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\Directives</v>
+<v>Psoc Arm\Dev Board\Dev Board.cydwr\Flash Security</v>
+<v>Psoc Arm\Dev Board\Header Files</v>
+<v>Psoc Arm\Dev Board\Header Files\cyapicallbacks.h</v>
+<v>Psoc Arm\Dev Board\Source Files</v>
+<v>Psoc Arm\Dev Board\Source Files\main.c</v>
+<v>Psoc Arm\Dev Board\Generated_Source\PSoC4</v>
+<v>Psoc Arm\Motor Board\TopDesign</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\Pins</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\Analog</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\DMA</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\Clocks</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\Interrupts</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\System</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\Directives</v>
+<v>Psoc Arm\Motor Board\Motor Board.cydwr\Flash Security</v>
+<v>Psoc Arm\Motor Board\Header Files</v>
+<v>Psoc Arm\Motor Board\Header Files\cyapicallbacks.h</v>
+<v>Psoc Arm\Motor Board\Source Files</v>
+<v>Psoc Arm\Motor Board\Source Files\main.c</v>
+<v>Psoc Arm\Motor Board\Generated_Source</v>
+<v>Psoc Arm\Motor Board\Generated_Source\PSoC4</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\TopDesign</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\working CAN_Basic_P4_Original + uart debug.cydwr</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\working CAN_Basic_P4_Original + uart debug.cydwr\Pins</v>
@@ -146,24 +179,34 @@
 <v>Psoc Arm\CAN_Basic_P4_Example01</v>
 <v>Psoc Arm\CAN_Basic_P4_unmodified</v>
 <v>Psoc Arm\CAN_Full_P4_Example01</v>
-<v>Psoc Arm\DebouncerExample01</v>
-<v>Psoc Arm\Design01</v>
-<v>Psoc Arm\Design01\TopDesign</v>
-<v>Psoc Arm\Design01\Design01.cydwr</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Pins</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Analog</v>
-<v>Psoc Arm\Design01\Design01.cydwr\DMA</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Clocks</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Interrupts</v>
-<v>Psoc Arm\Design01\Design01.cydwr\System</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Directives</v>
-<v>Psoc Arm\Design01\Design01.cydwr\Flash Security</v>
-<v>Psoc Arm\Design01\Header Files</v>
-<v>Psoc Arm\Design01\Header Files\cyapicallbacks.h</v>
-<v>Psoc Arm\Design01\Source Files</v>
-<v>Psoc Arm\Design01\Source Files\main.c</v>
-<v>Psoc Arm\Design01\Generated_Source</v>
-<v>Psoc Arm\working CAN_Basic_P4_Original + uart debug</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Pins</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Analog</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\DMA</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Clocks</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Interrupts</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\System</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Directives</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.cydwr\Flash Security</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Header Files</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Header Files\cyapicallbacks.h</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Source Files</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Source Files\main.c</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example.pdf</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\CAN</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\CAN_HFCLK</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\CAN_isr</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\cy_boot</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\cy_dmac</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\cy_lfclk</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\Em_EEPROM_Dynamic</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\RX</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\TX</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4\UART</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -196,12 +239,23 @@
 <v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\TopDesign.cysch</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200L</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200M</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\TopDesign.cysch</v>
 <v>Psoc Arm\DebouncerExample01</v>
 <v>Psoc Arm\DebouncerExample01\TopDesign</v>
 <v>Psoc Arm\DebouncerExample01\TopDesign\TopDesign.cysch</v>
-<v>Psoc Arm\Design01</v>
-<v>Psoc Arm\Design01\TopDesign</v>
-<v>Psoc Arm\Design01\TopDesign\TopDesign.cysch</v>
+<v>Psoc Arm\Dev Board</v>
+<v>Psoc Arm\Dev Board\TopDesign</v>
+<v>Psoc Arm\Dev Board\TopDesign\TopDesign.cysch</v>
+<v>Psoc Arm\Motor Board</v>
+<v>Psoc Arm\Motor Board\TopDesign</v>
+<v>Psoc Arm\Motor Board\TopDesign\TopDesign.cysch</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\TopDesign</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\TopDesign\PSoC4</v>
@@ -240,11 +294,11 @@
 <v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\TopDesign.cysch</v>
-<v>Psoc Arm\DebouncerExample01</v>
-<v>Psoc Arm\DebouncerExample01\TopDesign</v>
-<v>Psoc Arm\DebouncerExample01\TopDesign\TopDesign.cysch</v>
-<v>Psoc Arm\Design01</v>
-<v>Psoc Arm\Design01\TopDesign</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200L</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -417,6 +471,51 @@
 <v>Psoc Arm\CAN_Full_P4_Example01\CAN_Full_P4_Example01.gpdsc</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\CAN_Full_P4_Example01.rpt</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\CAN_Full_P4_Example01_timing.html</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\RX.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\RX_PM.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\TX.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_PM.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx_PM.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SCBCLK.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART_INT.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx_PM.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART_BOOT.lst</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\CAN_Full_P4_Example02.elf</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\CAN_Full_P4_Example02.hex</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CortexM0\ARM_GCC_541\Debug\CAN_Full_P4_Example02.map</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.gpdsc</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.rpt</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02_timing.html</v>
 <v>Psoc Arm\DebouncerExample01</v>
 <v>Psoc Arm\DebouncerExample01\CortexM3</v>
 <v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541</v>
@@ -446,97 +545,190 @@
 <v>Psoc Arm\DebouncerExample01\DebouncerExample01.gpdsc</v>
 <v>Psoc Arm\DebouncerExample01\DebouncerExample01.rpt</v>
 <v>Psoc Arm\DebouncerExample01\DebouncerExample01_timing.html</v>
-<v>Psoc Arm\Design01</v>
-<v>Psoc Arm\Design01\CortexM0</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_INT.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_intClock.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_IRQ.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_Limit_1.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_manual.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_10.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_10_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_20.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_20_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_neg_10.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_neg_10_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_neg_20.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_count_neg_20_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_debug.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_debug_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_A.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_A_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_B.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_B_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_1.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_1_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_2.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_2_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_manual_1.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_manual_1_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Manual_2.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Manual_2_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_Cnt16.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_Cnt16_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\RX_1.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\RX_1_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Status_Reg_Manual.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Status_Reg_Switches.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SCBCLK.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART_INT.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx_PM.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART_BOOT.lst</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Design01.elf</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Design01.hex</v>
-<v>Psoc Arm\Design01\CortexM0\ARM_GCC_541\Debug\Design01.map</v>
-<v>Psoc Arm\Design01\Design01.gpdsc</v>
-<v>Psoc Arm\Design01\Design01.rpt</v>
-<v>Psoc Arm\Design01\Design01_timing.html</v>
+<v>Psoc Arm\Dev Board</v>
+<v>Psoc Arm\Dev Board\CortexM0</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_INT.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_intClock.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_IRQ.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Can_addr.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Current_sense.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Current_sense_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_1_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_2.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_2_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_3.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_3_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_4.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_4_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_Limit_1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_A.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_A_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_B.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_B_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_1_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_2.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_2_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Test.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Test_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_Cnt16.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_Cnt16_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\RX_1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\RX_1_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare1_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare2.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare2_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Status_Reg_Switches.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SCBCLK.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART_INT.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx_PM.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART_BOOT.lst</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Dev Board.elf</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Dev Board.hex</v>
+<v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541\Debug\Dev Board.map</v>
+<v>Psoc Arm\Dev Board\Dev Board.gpdsc</v>
+<v>Psoc Arm\Dev Board\Dev Board.rpt</v>
+<v>Psoc Arm\Dev Board\Dev Board_timing.html</v>
+<v>Psoc Arm\Motor Board</v>
+<v>Psoc Arm\Motor Board\CortexM0</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_INT.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_intClock.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_IRQ.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_SAR_Seq_1_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Can_addr.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Current_sense.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Current_sense_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_1_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_2.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_2_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_3.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_3_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_4.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_4_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_Limit_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_A.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_A_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_B.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Encoder_B_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_1_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_2.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit_2_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Test.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Test_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_Cnt16.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_Cnt16_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\QuadDec_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\RX_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\RX_1_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare1_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare2.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare2_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Status_Reg_Switches.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SCBCLK.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_SPI_UART_INT.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_tx_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_UART_BOOT.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Motor Board.elf</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Motor Board.hex</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Motor Board.map</v>
+<v>Psoc Arm\Motor Board\Motor Board.gpdsc</v>
+<v>Psoc Arm\Motor Board\Motor Board.rpt</v>
+<v>Psoc Arm\Motor Board\Motor Board_timing.html</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\CortexM0</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\CortexM0\ARM_GCC_541</v>
@@ -600,37 +792,9 @@
 <VisibleNodeIds>
 <v>Psoc Arm</v>
 <v>Psoc Arm\Can Send test</v>
-<v>Psoc Arm\Can Send test\Can Send test.gpdsc</v>
 <v>Psoc Arm\Can Send test\Can Send test.rpt</v>
 <v>Psoc Arm\Can Send test\Can Send test_timing.html</v>
 <v>Psoc Arm\CAN_Basic_P4_Example01</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_INT.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_intClock.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_IRQ.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_PM.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -694,6 +858,17 @@
 <v>Psoc Arm\CAN_Full_P4_Example01\cy_pins_v2_20</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Psoc Arm\CAN_Full_P4_Example01\SCB_P4_v3_20.pdf</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\PSoC 4 Architecture TRM</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\PSoC 4200L Family Datasheet</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\System Reference Guides</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\System Reference Guides\cy_boot_v5_60</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\System Reference Guides\cy_dmac_v1_10</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\System Reference Guides\cy_lfclk_v1_20</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\CAN_v3_0.pdf</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\cy_pins_v2_20</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Psoc Arm\CAN_Full_P4_Example02\SCB_P4_v3_20.pdf</v>
 <v>Psoc Arm\DebouncerExample01</v>
 <v>Psoc Arm\DebouncerExample01\PSoC 5LP Architecture TRM</v>
 <v>Psoc Arm\DebouncerExample01\CY8C58LP Family Datasheet</v>
@@ -708,35 +883,58 @@
 <v>Psoc Arm\DebouncerExample01\Gnd_v1_0.pdf</v>
 <v>Psoc Arm\DebouncerExample01\not_v1_0.pdf</v>
 <v>Psoc Arm\DebouncerExample01\SwitchSPST_v1_0.pdf</v>
-<v>Psoc Arm\Design01</v>
-<v>Psoc Arm\Design01\PSoC 4 Architecture TRM</v>
-<v>Psoc Arm\Design01\PSoC 4200L Family Datasheet</v>
-<v>Psoc Arm\Design01\System Reference Guides</v>
-<v>Psoc Arm\Design01\System Reference Guides\cy_boot_v5_70</v>
-<v>Psoc Arm\Design01\System Reference Guides\cy_dmac_v1_10</v>
-<v>Psoc Arm\Design01\System Reference Guides\cy_lfclk_v1_20</v>
-<v>Psoc Arm\Design01\ADC_SAR_SEQ_P4_v2_50.pdf</v>
-<v>Psoc Arm\Design01\CAN_v3_0.pdf</v>
-<v>Psoc Arm\Design01\cy_clock_v2_20</v>
-<v>Psoc Arm\Design01\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
-<v>Psoc Arm\Design01\cy_isr_v1_70</v>
-<v>Psoc Arm\Design01\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
-<v>Psoc Arm\Design01\cy_pins_v2_20</v>
-<v>Psoc Arm\Design01\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
-<v>Psoc Arm\Design01\CyStatusReg_v1_90</v>
-<v>Psoc Arm\Design01\CyStatusReg_v1_90\CyStatusReg_v1_90.pdf</v>
-<v>Psoc Arm\Design01\Debouncer_v1_0</v>
-<v>Psoc Arm\Design01\Debouncer_v1_0\Debouncer_v1_0.pdf</v>
-<v>Psoc Arm\Design01\Gnd_v1_0</v>
-<v>Psoc Arm\Design01\Gnd_v1_0\Gnd_v1_0.pdf</v>
-<v>Psoc Arm\Design01\not_v1_0</v>
-<v>Psoc Arm\Design01\not_v1_0\not_v1_0.pdf</v>
-<v>Psoc Arm\Design01\QuadDec_v3_0.pdf</v>
-<v>Psoc Arm\Design01\SCB_P4_v4_0.pdf</v>
-<v>Psoc Arm\Design01\SwitchSPST_v1_0</v>
-<v>Psoc Arm\Design01\SwitchSPST_v1_0\SwitchSPST_v1_0.pdf</v>
-<v>Psoc Arm\Design01\TCPWM_P4_v2_10</v>
-<v>Psoc Arm\Design01\TCPWM_P4_v2_10\TCPWM_P4_v2_10.pdf</v>
+<v>Psoc Arm\Dev Board</v>
+<v>Psoc Arm\Dev Board\PSoC 4 Architecture TRM</v>
+<v>Psoc Arm\Dev Board\PSoC 4200L Family Datasheet</v>
+<v>Psoc Arm\Dev Board\System Reference Guides</v>
+<v>Psoc Arm\Dev Board\System Reference Guides\cy_boot_v5_70</v>
+<v>Psoc Arm\Dev Board\System Reference Guides\cy_dmac_v1_10</v>
+<v>Psoc Arm\Dev Board\System Reference Guides\cy_lfclk_v1_20</v>
+<v>Psoc Arm\Dev Board\ADC_SAR_SEQ_P4_v2_50.pdf</v>
+<v>Psoc Arm\Dev Board\CAN_v3_0.pdf</v>
+<v>Psoc Arm\Dev Board\cy_clock_v2_20</v>
+<v>Psoc Arm\Dev Board\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>Psoc Arm\Dev Board\cy_isr_v1_70.pdf</v>
+<v>Psoc Arm\Dev Board\cy_pins_v2_20</v>
+<v>Psoc Arm\Dev Board\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Psoc Arm\Dev Board\CyStatusReg_v1_90</v>
+<v>Psoc Arm\Dev Board\CyStatusReg_v1_90\CyStatusReg_v1_90.pdf</v>
+<v>Psoc Arm\Dev Board\Debouncer_v1_0.pdf</v>
+<v>Psoc Arm\Dev Board\Gnd_v1_0</v>
+<v>Psoc Arm\Dev Board\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>Psoc Arm\Dev Board\not_v1_0</v>
+<v>Psoc Arm\Dev Board\not_v1_0\not_v1_0.pdf</v>
+<v>Psoc Arm\Dev Board\QuadDec_v3_0.pdf</v>
+<v>Psoc Arm\Dev Board\SCB_P4_v4_0.pdf</v>
+<v>Psoc Arm\Dev Board\SwitchSPST_v1_0</v>
+<v>Psoc Arm\Dev Board\SwitchSPST_v1_0\SwitchSPST_v1_0.pdf</v>
+<v>Psoc Arm\Dev Board\TCPWM_P4_v2_10.pdf</v>
+<v>Psoc Arm\Motor Board</v>
+<v>Psoc Arm\Motor Board\PSoC 4 Architecture TRM</v>
+<v>Psoc Arm\Motor Board\PSoC 4200L Family Datasheet</v>
+<v>Psoc Arm\Motor Board\System Reference Guides</v>
+<v>Psoc Arm\Motor Board\System Reference Guides\cy_boot_v5_70</v>
+<v>Psoc Arm\Motor Board\System Reference Guides\cy_dmac_v1_10</v>
+<v>Psoc Arm\Motor Board\System Reference Guides\cy_lfclk_v1_20</v>
+<v>Psoc Arm\Motor Board\ADC_SAR_SEQ_P4_v2_50.pdf</v>
+<v>Psoc Arm\Motor Board\CAN_v3_0.pdf</v>
+<v>Psoc Arm\Motor Board\cy_clock_v2_20</v>
+<v>Psoc Arm\Motor Board\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>Psoc Arm\Motor Board\cy_isr_v1_70.pdf</v>
+<v>Psoc Arm\Motor Board\cy_pins_v2_20</v>
+<v>Psoc Arm\Motor Board\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Psoc Arm\Motor Board\CyStatusReg_v1_90</v>
+<v>Psoc Arm\Motor Board\CyStatusReg_v1_90\CyStatusReg_v1_90.pdf</v>
+<v>Psoc Arm\Motor Board\Debouncer_v1_0.pdf</v>
+<v>Psoc Arm\Motor Board\Gnd_v1_0</v>
+<v>Psoc Arm\Motor Board\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>Psoc Arm\Motor Board\not_v1_0</v>
+<v>Psoc Arm\Motor Board\not_v1_0\not_v1_0.pdf</v>
+<v>Psoc Arm\Motor Board\QuadDec_v3_0.pdf</v>
+<v>Psoc Arm\Motor Board\SCB_P4_v4_0.pdf</v>
+<v>Psoc Arm\Motor Board\SwitchSPST_v1_0</v>
+<v>Psoc Arm\Motor Board\SwitchSPST_v1_0\SwitchSPST_v1_0.pdf</v>
+<v>Psoc Arm\Motor Board\TCPWM_P4_v2_10.pdf</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\PSoC 4 Architecture TRM</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\PSoC 4200L Family Datasheet</v>
@@ -797,14 +995,12 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Design01.cydsn\main.c" />
-<name v=".\Design01.cydsn\Design01.cydwr" />
+<name v=".\Motor Board.cydsn\main.c" />
+<name v=".\Motor Board.cydsn\Motor Board.cydwr" />
+<name v=".\Motor Board.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\Dev Board.cydsn\main.c" />
 <name v=".\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" />
-<name v=".\working CAN_Basic_P4_Original + uart debug.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\Design01.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\CAN_Basic_P4_unmodified.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\CAN_Full_P4_Example01.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\CAN_Full_P4_Example01.cydsn\main.c" />
+<name v=".\CAN_Full_P4_Example02.cydsn\main.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -812,7 +1008,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1234, 612" SelectedTabbedMdiWindow="e9a5abb9-4178-4253-8838-6d79fceec3d1"><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\main.c" Guid="74cbb756-553a-4e94-a4b8-4ba5c7bb5964" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\Design01.cydwr" Guid="c50e89f5-f768-4b74-9cc6-6db753885e20" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" Guid="294d69c3-e7b2-4532-a4e6-f5a9e5ebf65c" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\TopDesign\TopDesign.cysch" Guid="8a121728-7765-4f10-bb0a-d06b679a6ce0" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Design01.cydsn\TopDesign\TopDesign.cysch" Guid="2bc89f46-360f-46e5-8a91-1a3add0ae85a" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Basic_P4_unmodified.cydsn\TopDesign\TopDesign.cysch" Guid="67402fbd-72af-4c3b-b62a-1b2919d6fd4a" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example01.cydsn\TopDesign\TopDesign.cysch" Guid="e9a5abb9-4178-4253-8838-6d79fceec3d1" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example01.cydsn\main.c" Guid="d7f7d66e-4205-4a4b-a4dd-86df15032da5" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1218, 596" SelectedTabbedMdiWindow="65a2808c-7838-423a-a6c5-f3e50ff64fe6"><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\main.c" Guid="0713128b-35fd-419b-82df-f27aeaea66a7" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Motor Board.cydwr" Guid="670b7a0e-6e20-4f29-b926-a8f6c73f117f" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\TopDesign\TopDesign.cysch" Guid="73bde889-7ac5-4875-b5fd-619bc39ec5ad" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Dev Board.cydsn\main.c" Guid="410c6297-b5fd-4c40-ac81-64022dd8512c" /><ToolWindow Key="Output Window Plugin:7305390e-eabe-4963-b21f-3a0f11b4b1d5:Output Window" Guid="65a2808c-7838-423a-a6c5-f3e50ff64fe6" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="5b7b8485-d0ab-4e37-a0a7-90eeea460fea" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" Guid="d4cc9bf4-4bb3-4474-9613-a817ef0884a8" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example02.cydsn\main.c" Guid="75f0535c-b88a-449a-8083-576659639feb" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

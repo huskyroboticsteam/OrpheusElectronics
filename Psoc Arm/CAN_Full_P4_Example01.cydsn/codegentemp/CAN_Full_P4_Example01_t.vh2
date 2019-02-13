@@ -1,5 +1,5 @@
 -- Project:   C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj
--- Generated: 11/20/2018 00:56:32
+-- Generated: 02/05/2019 23:31:28
 -- PSoC Creator  4.2
 
 ENTITY CAN_Full_P4_Example01 IS
@@ -72,7 +72,7 @@ ARCHITECTURE __DEFAULT__ OF CAN_Full_P4_Example01 IS
     ATTRIBUTE lib_model OF RX(0) : LABEL IS "iocell1";
     ATTRIBUTE Location OF RX(0) : LABEL IS "P0[0]";
     ATTRIBUTE lib_model OF TX(0) : LABEL IS "iocell2";
-    ATTRIBUTE Location OF TX(0) : LABEL IS "P0[1]";
+    ATTRIBUTE Location OF TX(0) : LABEL IS "P4[6]";
     ATTRIBUTE lib_model OF \UART:tx(0)\ : LABEL IS "iocell3";
     ATTRIBUTE Location OF \UART:tx(0)\ : LABEL IS "P3[1]";
     ATTRIBUTE lib_model OF \UART:rx(0)\ : LABEL IS "iocell4";

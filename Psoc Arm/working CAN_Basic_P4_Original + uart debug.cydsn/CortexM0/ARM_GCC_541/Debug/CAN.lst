@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
   28:Generated_Source\PSoC4/CAN.c **** *
   29:Generated_Source\PSoC4/CAN.c **** * Summary:
   30:Generated_Source\PSoC4/CAN.c **** *  Inits/Restores default CAN Rx and Tx Buffers control registers configuration
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 2
 
 
   31:Generated_Source\PSoC4/CAN.c **** *  provided by the customizer.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
   85:Generated_Source\PSoC4/CAN.c ****     /* Initialize TX mailboxes */
   86:Generated_Source\PSoC4/CAN.c ****     for (i = 0u; i < CAN_NUMBER_OF_TX_MAILBOXES; i++)
   87:Generated_Source\PSoC4/CAN.c ****     {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 3
 
 
   88:Generated_Source\PSoC4/CAN.c ****         if (CAN_TxBufConfig((const CAN_TX_CFG *)
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  142:Generated_Source\PSoC4/CAN.c **** 
  143:Generated_Source\PSoC4/CAN.c ****     #if (CY_PSOC3 || CY_PSOC5)
  144:Generated_Source\PSoC4/CAN.c ****         uint8 enableInterrupts;
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 4
 
 
  145:Generated_Source\PSoC4/CAN.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  199:Generated_Source\PSoC4/CAN.c ****                                     if (CAN_SetEdgeMode(CAN_SYNC_EDGE) == CYRET_SUCCESS)
  200:Generated_Source\PSoC4/CAN.c ****                                     {
  201:Generated_Source\PSoC4/CAN.c ****                                         localResult = CYRET_SUCCESS;
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 5
 
 
  202:Generated_Source\PSoC4/CAN.c ****                                     }
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  256:Generated_Source\PSoC4/CAN.c ****     uint32 timeout = CAN_MODE_STATE_RUN_TIMEOUT;
  257:Generated_Source\PSoC4/CAN.c ****     uint8 result = CAN_FAIL;
  258:Generated_Source\PSoC4/CAN.c **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 6
 
 
  259:Generated_Source\PSoC4/CAN.c ****     #if (CY_PSOC3 || CY_PSOC5)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  313:Generated_Source\PSoC4/CAN.c **** *    CAN_FAIL              The function failed
  314:Generated_Source\PSoC4/CAN.c **** *
  315:Generated_Source\PSoC4/CAN.c **** * Global variables:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 7
 
 
  316:Generated_Source\PSoC4/CAN.c **** *  CAN_initVar - used to check the initial configuration, modified
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32 0000 10B5     		push	{r4, lr}
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 8
 
 
   33              		.cfi_def_cfa_offset 8
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
   65 0022 04D0     		beq	.L6
   66              	.LVL3:
  387:Generated_Source\PSoC4/CAN.c ****     {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 9
 
 
  388:Generated_Source\PSoC4/CAN.c ****         result = CYRET_SUCCESS;
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  409:Generated_Source\PSoC4/CAN.c **** 
  410:Generated_Source\PSoC4/CAN.c **** /*******************************************************************************
  411:Generated_Source\PSoC4/CAN.c **** * FUNCTION NAME:   CAN_GlobalIntEnable
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 10
 
 
  412:Generated_Source\PSoC4/CAN.c **** ********************************************************************************
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  118              		.loc 1 444 0
  119 0014 0020     		movs	r0, #0
  120              	.L10:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 11
 
 
  121              	.LVL8:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  165 001a 1360     		str	r3, [r2]
  256:Generated_Source\PSoC4/CAN.c ****     uint8 result = CAN_FAIL;
  166              		.loc 1 256 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 12
 
 
  167 001c 9023     		movs	r3, #144
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  213              		.thumb_func
  214              		.type	CAN_GlobalIntDisable, %function
  215              	CAN_GlobalIntDisable:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 13
 
 
  216              	.LFB7:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  233              		.loc 1 471 0
  234 0010 0120     		movs	r0, #1
  235 0012 00E0     		b	.L23
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 14
 
 
  236              	.L24:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  517:Generated_Source\PSoC4/CAN.c **** *
  518:Generated_Source\PSoC4/CAN.c **** *******************************************************************************/
  519:Generated_Source\PSoC4/CAN.c **** uint8 CAN_SetPreScaler(uint16 bitrate) 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 15
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 15
 
 
  520:Generated_Source\PSoC4/CAN.c **** {
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  288 001e 0120     		movs	r0, #1
  289 0020 02E0     		b	.L28
  290              	.LVL20:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 16
 
 
  291              	.L29:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  565:Generated_Source\PSoC4/CAN.c **** *    CAN_ROUND_ROBIN       The Round Robin arbitration
  566:Generated_Source\PSoC4/CAN.c **** *    CAN_FIXED_PRIORITY    The Fixed Priority arbitration.
  567:Generated_Source\PSoC4/CAN.c **** *
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 17
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 17
 
 
  568:Generated_Source\PSoC4/CAN.c **** * Return:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  337              		.loc 1 606 0
  338 000e 1B68     		ldr	r3, [r3]
  339 0010 DB04     		lsls	r3, r3, #19
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 18
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 18
 
 
  340 0012 0CD5     		bpl	.L36
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  624:Generated_Source\PSoC4/CAN.c **** }
  374              		.loc 1 624 0
  375              		@ sp needed
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 19
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 19
 
 
  376 0034 7047     		bx	lr
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  400              		.cfi_offset 4, -16
  401              		.cfi_offset 5, -12
  402              		.cfi_offset 6, -8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 20
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 20
 
 
  403              		.cfi_offset 14, -4
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  680:Generated_Source\PSoC4/CAN.c ****                         cfgTemp = 0u;
  681:Generated_Source\PSoC4/CAN.c ****                         /* Set appropriate bits */
  682:Generated_Source\PSoC4/CAN.c ****                         if (sm != CAN_ONE_SAMPLE_POINT)
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 21
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 21
 
 
  683:Generated_Source\PSoC4/CAN.c ****                         {
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  456              		.loc 1 710 0
  457 0040 2C68     		ldr	r4, [r5]
  711:Generated_Source\PSoC4/CAN.c ****                        CAN_CFG_REG_TSEG1_SHIFT)) == (uint32) ((uint32) ((uint32) cfgTemp &
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 22
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 22
 
 
  458              		.loc 1 711 0
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  727:Generated_Source\PSoC4/CAN.c **** 
  728:Generated_Source\PSoC4/CAN.c ****                         /* Verify 1st byte of CAN_CFG_REG register */
  729:Generated_Source\PSoC4/CAN.c ****                         if ((CAN_CFG_REG & (CAN_CFG_REG_TSEG2_MASK |
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 23
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 23
 
 
  494              		.loc 1 729 0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  542              	.LVL58:
  543              	.L41:
  733:Generated_Source\PSoC4/CAN.c ****                         }
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 24
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 24
 
 
  734:Generated_Source\PSoC4/CAN.c ****                     }
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  769:Generated_Source\PSoC4/CAN.c **** uint8 CAN_SetRestartType(uint8 reset) 
  770:Generated_Source\PSoC4/CAN.c **** {
  563              		.loc 1 770 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 25
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 25
 
 
  564              		.cfi_startproc
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  587              	.L56:
  801:Generated_Source\PSoC4/CAN.c ****             {
  802:Generated_Source\PSoC4/CAN.c ****                 result = CYRET_SUCCESS;
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 26
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 26
 
 
  803:Generated_Source\PSoC4/CAN.c ****             }
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  624              		.section	.text.CAN_SetEdgeMode,"ax",%progbits
  625              		.align	2
  626              		.global	CAN_SetEdgeMode
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 27
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 27
 
 
  627              		.code	16
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  862:Generated_Source\PSoC4/CAN.c ****             CAN_CFG_REG.byte[0u] |= CAN_EDGE_MODE_MASK;
  863:Generated_Source\PSoC4/CAN.c **** 
  864:Generated_Source\PSoC4/CAN.c ****             /* Verify that bit is set */
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 28
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 28
 
 
  865:Generated_Source\PSoC4/CAN.c ****             if ((CAN_CFG_REG.byte[0u] & CAN_EDGE_MODE_MASK) != 0u)
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  845:Generated_Source\PSoC4/CAN.c **** 
  667              		.loc 1 845 0
  668 0028 0120     		movs	r0, #1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 29
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 29
 
 
  669              	.LVL70:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  910:Generated_Source\PSoC4/CAN.c **** *    CAN_ACTIVE_RUN_MODE    The CAN controller is in the Active
  911:Generated_Source\PSoC4/CAN.c **** *                                        mode
  912:Generated_Source\PSoC4/CAN.c **** *    CAN_LISTEN_ONLY_MODE   The CAN controller is in the Listen
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 30
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 30
 
 
  913:Generated_Source\PSoC4/CAN.c **** *                                        Only mode: The output is held at the
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  967:Generated_Source\PSoC4/CAN.c **** 
  968:Generated_Source\PSoC4/CAN.c ****         if ((result == CYRET_SUCCESS) && (opMode != CAN_STOP_MODE))
  969:Generated_Source\PSoC4/CAN.c ****         {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 31
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 31
 
 
  970:Generated_Source\PSoC4/CAN.c ****             if (opMode == CAN_LISTEN_ONLY_MODE)
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1024:Generated_Source\PSoC4/CAN.c ****         }
 1025:Generated_Source\PSoC4/CAN.c ****     #endif /* CY_PSOC3 || CY_PSOC5 */
 1026:Generated_Source\PSoC4/CAN.c **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 32
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 32
 
 
 1027:Generated_Source\PSoC4/CAN.c ****     return (result);
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  724 0012 1DD8     		bhi	.L72
  725              	.LVL77:
 1057:Generated_Source\PSoC4/CAN.c ****         ((((uint32) regAddr & CAN_REG_ADDR_MASK)) <=
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 33
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 33
 
 
 1058:Generated_Source\PSoC4/CAN.c ****         ((uint32) CAN_RX_LAST_REGISTER_PTR & CAN_REG_ADDR_MASK)))
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1081:Generated_Source\PSoC4/CAN.c ****         }
 1082:Generated_Source\PSoC4/CAN.c ****         /* All registers except RX CMD*/
 1083:Generated_Source\PSoC4/CAN.c ****         else
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 34
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 34
 
 
 1084:Generated_Source\PSoC4/CAN.c ****         {
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1100:Generated_Source\PSoC4/CAN.c ****     }
 1101:Generated_Source\PSoC4/CAN.c **** 
 1102:Generated_Source\PSoC4/CAN.c ****     return (result);
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 35
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 35
 
 
 1103:Generated_Source\PSoC4/CAN.c **** }
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1137:Generated_Source\PSoC4/CAN.c **** *   Define                             Description
 1138:Generated_Source\PSoC4/CAN.c **** *    CYRET_SUCCESS                      The function passed successfully
 1139:Generated_Source\PSoC4/CAN.c **** *    CAN_FAIL              The function failed
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 36
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 36
 
 
 1140:Generated_Source\PSoC4/CAN.c **** *
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  836              		.loc 1 1167 0
  837              		@ sp needed
  838 0014 7047     		bx	lr
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 37
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 37
 
 
  839              	.L81:
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  867 000c 0020     		movs	r0, #0
  868              	.L83:
 1194:Generated_Source\PSoC4/CAN.c ****                   CAN_TX_ERROR_FLAG_MASK) ? 1u : 0u);
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 38
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 38
 
 
 1195:Generated_Source\PSoC4/CAN.c ****     #endif /* CY_PSOC3 || CY_PSOC5 */
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  894 0002 1B68     		ldr	r3, [r3]
  895 0004 1B03     		lsls	r3, r3, #12
  896 0006 01D5     		bpl	.L89
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 39
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 39
 
 
  897 0008 0120     		movs	r0, #1
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1250:Generated_Source\PSoC4/CAN.c ****         /* Get state of transmit error count */
 1251:Generated_Source\PSoC4/CAN.c ****         return ((uint8) CAN_ERR_SR_REG);    /* bits 7-0 */
  925              		.loc 1 1251 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 40
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 40
 
 
  926 0000 014B     		ldr	r3, .L93
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  954 0002 1868     		ldr	r0, [r3]
  955 0004 000A     		lsrs	r0, r0, #8
  956 0006 C0B2     		uxtb	r0, r0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 41
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 41
 
 
 1278:Generated_Source\PSoC4/CAN.c ****     #endif /* CY_PSOC3 || CY_PSOC5 */
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  984 0006 0323     		movs	r3, #3
  985 0008 1840     		ands	r0, r3
 1305:Generated_Source\PSoC4/CAN.c ****                 CAN_ERROR_STATE_MASK));
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 42
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 42
 
 
 1306:Generated_Source\PSoC4/CAN.c ****     #endif /* CY_PSOC3 || CY_PSOC5 */
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1332:Generated_Source\PSoC4/CAN.c **** 
 1333:Generated_Source\PSoC4/CAN.c ****     /* Write RX CMD Register */
 1334:Generated_Source\PSoC4/CAN.c ****     CY_SET_REG32((reg32 *) (&CAN_RX[rxConfig->rxmailbox].rxcmd), (rxConfig->rxcmd |
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 43
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 43
 
 
  1014              		.loc 1 1334 0
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1056 0046 5A69     		ldr	r2, [r3, #20]
  1057 0048 C168     		ldr	r1, [r0, #12]
  1058 004a 8A42     		cmp	r2, r1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 44
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 44
 
 
  1059 004c 16D1     		bne	.L105
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1104 0082 00E0     		b	.L102
  1105              	.LVL108:
  1106              	.L107:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 45
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 45
 
 
 1354:Generated_Source\PSoC4/CAN.c ****                     {
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1383:Generated_Source\PSoC4/CAN.c **** *
 1384:Generated_Source\PSoC4/CAN.c **** *******************************************************************************/
 1385:Generated_Source\PSoC4/CAN.c **** uint8 CAN_TxBufConfig(const CAN_TX_CFG *txConfig)
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 46
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 46
 
 
 1386:Generated_Source\PSoC4/CAN.c ****                                    
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1173 0034 5A68     		ldr	r2, [r3, #4]
  1174 0036 8368     		ldr	r3, [r0, #8]
  1175 0038 9A42     		cmp	r2, r3
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 47
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 47
 
 
  1176 003a 03D0     		beq	.L113
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1221              		.cfi_offset 6, -8
  1222              		.cfi_offset 14, -4
  1223              	.LVL117:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 48
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 48
 
 
   86:Generated_Source\PSoC4/CAN.c ****     {
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
   99:Generated_Source\PSoC4/CAN.c ****         {
  1270              		.loc 1 99 0 discriminator 2
  1271 003c 0134     		adds	r4, r4, #1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 49
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 49
 
 
  1272              	.LVL124:
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1418:Generated_Source\PSoC4/CAN.c **** *
 1419:Generated_Source\PSoC4/CAN.c **** * Parameters:
 1420:Generated_Source\PSoC4/CAN.c **** *  swap: Swap Enable/Disable setting.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 50
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 50
 
 
 1421:Generated_Source\PSoC4/CAN.c **** *   Define                                   Description
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1449:Generated_Source\PSoC4/CAN.c ****             result = CYRET_SUCCESS;
 1450:Generated_Source\PSoC4/CAN.c ****         }
 1451:Generated_Source\PSoC4/CAN.c ****     }
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 51
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 51
 
 
 1452:Generated_Source\PSoC4/CAN.c ****     else    /* Little endian */
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1374              		.align	2
  1375              		.global	CAN_Init
  1376              		.code	16
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 52
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 52
 
 
  1377              		.thumb_func
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1422 0028 002B     		cmp	r3, #0
  1423 002a 4AD0     		beq	.L141
  177:Generated_Source\PSoC4/CAN.c **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 53
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 53
 
 
  1424              		.loc 1 177 0
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1470 0076 FFF7FEFF 		bl	CAN_SetEdgeMode
  1471              	.LVL149:
  1472 007a 0028     		cmp	r0, #0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 54
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 54
 
 
  1473 007c 0BD0     		beq	.L147
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1520 00bc 09D0     		beq	.L151
  140:Generated_Source\PSoC4/CAN.c ****     uint8 localResult = CAN_FAIL;
  1521              		.loc 1 140 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 55
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 55
 
 
  1522 00be 0130     		adds	r0, r0, #1
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1573              	.LVL157:
  327:Generated_Source\PSoC4/CAN.c ****     {
  1574              		.loc 1 327 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 56
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 56
 
 
  1575 0002 084B     		ldr	r3, .L158
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1622              	.LVL162:
  1623 0000 70B5     		push	{r4, r5, r6, lr}
  1624              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 57
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 57
 
 
  1625              		.cfi_offset 4, -16
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1669 0034 002C     		cmp	r4, #0
  1670 0036 0BD0     		beq	.L162
 1012:Generated_Source\PSoC4/CAN.c ****                 {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 58
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 58
 
 
  1671              		.loc 1 1012 0 is_stmt 1
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1471:Generated_Source\PSoC4/CAN.c **** * Summary:
 1472:Generated_Source\PSoC4/CAN.c **** *  This function sets the Error Capture register mode. The two modes are
 1473:Generated_Source\PSoC4/CAN.c **** *  possible: Free Running and Error Capture.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 59
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 59
 
 
 1474:Generated_Source\PSoC4/CAN.c **** *
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1738              	.L170:
 1503:Generated_Source\PSoC4/CAN.c ****         {
 1504:Generated_Source\PSoC4/CAN.c ****             result = CYRET_SUCCESS;
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 60
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 60
 
 
 1505:Generated_Source\PSoC4/CAN.c ****         }
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1776              		.size	CAN_SetErrorCaptureRegisterMode, .-CAN_SetErrorCaptureRegisterMode
  1777              		.section	.text.CAN_ReadErrorCaptureRegister,"ax",%progbits
  1778              		.align	2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 61
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 61
 
 
  1779              		.global	CAN_ReadErrorCaptureRegister
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
 1568:Generated_Source\PSoC4/CAN.c **** *
 1569:Generated_Source\PSoC4/CAN.c **** *******************************************************************************/
 1570:Generated_Source\PSoC4/CAN.c **** uint32 CAN_ReadErrorCaptureRegister(void)
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 62
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 62
 
 
 1571:Generated_Source\PSoC4/CAN.c **** {
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1814              		@ frame_needed = 0, uses_anonymous_args = 0
  1815              		@ link register save eliminated.
  1816              	.LVL179:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 63
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 63
 
 
 1596:Generated_Source\PSoC4/CAN.c ****     uint8 result = CAN_FAIL;
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1858 0010 00001800 		.word	1572864
  1859 0014 10000000 		.word	16
  1860 0018 02       		.byte	2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 64
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 64
 
 
  1861 0019 000000   		.space	3
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1915 00b8 00000000 		.word	0
  1916 00bc 00000000 		.word	0
  1917 00c0 06       		.byte	6
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 65
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 65
 
 
  1918 00c1 000000   		.space	3
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1972 0000 00       		.space	1
  1973              		.text
  1974              	.Letext0:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 66
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 66
 
 
  1975              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
@@ -3913,39 +3913,39 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  1984 000b 01       		.uleb128 0x1
  1985 000c 4F000000 		.4byte	.LASF89
  1986 0010 0C       		.byte	0xc
- 1987 0011 4D010000 		.4byte	.LASF90
- 1988 0015 DD030000 		.4byte	.LASF91
+ 1987 0011 60010000 		.4byte	.LASF90
+ 1988 0015 BE010000 		.4byte	.LASF91
  1989 0019 00000000 		.4byte	.Ldebug_ranges0+0
  1990 001d 00000000 		.4byte	0
  1991 0021 00000000 		.4byte	.Ldebug_line0
  1992 0025 02       		.uleb128 0x2
  1993 0026 01       		.byte	0x1
  1994 0027 06       		.byte	0x6
- 1995 0028 23010000 		.4byte	.LASF0
+ 1995 0028 36010000 		.4byte	.LASF0
  1996 002c 02       		.uleb128 0x2
  1997 002d 01       		.byte	0x1
  1998 002e 08       		.byte	0x8
- 1999 002f 8D030000 		.4byte	.LASF1
+ 1999 002f 03040000 		.4byte	.LASF1
  2000 0033 02       		.uleb128 0x2
  2001 0034 02       		.byte	0x2
  2002 0035 05       		.byte	0x5
- 2003 0036 9B030000 		.4byte	.LASF2
+ 2003 0036 11040000 		.4byte	.LASF2
  2004 003a 02       		.uleb128 0x2
  2005 003b 02       		.byte	0x2
  2006 003c 07       		.byte	0x7
- 2007 003d 1C020000 		.4byte	.LASF3
+ 2007 003d 92020000 		.4byte	.LASF3
  2008 0041 02       		.uleb128 0x2
  2009 0042 04       		.byte	0x4
  2010 0043 05       		.byte	0x5
- 2011 0044 6A010000 		.4byte	.LASF4
+ 2011 0044 7D010000 		.4byte	.LASF4
  2012 0048 02       		.uleb128 0x2
  2013 0049 04       		.byte	0x4
  2014 004a 07       		.byte	0x7
- 2015 004b F4010000 		.4byte	.LASF5
+ 2015 004b 6A020000 		.4byte	.LASF5
  2016 004f 02       		.uleb128 0x2
  2017 0050 08       		.byte	0x8
  2018 0051 05       		.byte	0x5
- 2019 0052 15010000 		.4byte	.LASF6
+ 2019 0052 28010000 		.4byte	.LASF6
  2020 0056 02       		.uleb128 0x2
  2021 0057 08       		.byte	0x8
  2022 0058 07       		.byte	0x7
@@ -3957,12 +3957,12 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2028 0064 02       		.uleb128 0x2
  2029 0065 04       		.byte	0x4
  2030 0066 07       		.byte	0x7
- 2031 0067 E7010000 		.4byte	.LASF8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 67
+ 2031 0067 5D020000 		.4byte	.LASF8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 67
 
 
  2032 006b 04       		.uleb128 0x4
- 2033 006c 87010000 		.4byte	.LASF9
+ 2033 006c 9A010000 		.4byte	.LASF9
  2034 0070 02       		.byte	0x2
  2035 0071 D201     		.2byte	0x1d2
  2036 0073 2C000000 		.4byte	0x2c
@@ -3972,31 +3972,31 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2040 007d D301     		.2byte	0x1d3
  2041 007f 3A000000 		.4byte	0x3a
  2042 0083 04       		.uleb128 0x4
- 2043 0084 9A010000 		.4byte	.LASF11
+ 2043 0084 AD010000 		.4byte	.LASF11
  2044 0088 02       		.byte	0x2
  2045 0089 D401     		.2byte	0x1d4
  2046 008b 48000000 		.4byte	0x48
  2047 008f 02       		.uleb128 0x2
  2048 0090 04       		.byte	0x4
  2049 0091 04       		.byte	0x4
- 2050 0092 65030000 		.4byte	.LASF12
+ 2050 0092 DB030000 		.4byte	.LASF12
  2051 0096 02       		.uleb128 0x2
  2052 0097 08       		.byte	0x8
  2053 0098 04       		.byte	0x4
- 2054 0099 93010000 		.4byte	.LASF13
+ 2054 0099 A6010000 		.4byte	.LASF13
  2055 009d 02       		.uleb128 0x2
  2056 009e 01       		.byte	0x1
  2057 009f 08       		.byte	0x8
- 2058 00a0 7C040000 		.4byte	.LASF14
+ 2058 00a0 84040000 		.4byte	.LASF14
  2059 00a4 04       		.uleb128 0x4
- 2060 00a5 88030000 		.4byte	.LASF15
+ 2060 00a5 FE030000 		.4byte	.LASF15
  2061 00a9 02       		.byte	0x2
  2062 00aa 7C02     		.2byte	0x27c
  2063 00ac B0000000 		.4byte	0xb0
  2064 00b0 05       		.uleb128 0x5
  2065 00b1 6B000000 		.4byte	0x6b
  2066 00b5 04       		.uleb128 0x4
- 2067 00b6 B8020000 		.4byte	.LASF16
+ 2067 00b6 2E030000 		.4byte	.LASF16
  2068 00ba 02       		.byte	0x2
  2069 00bb 7E02     		.2byte	0x27e
  2070 00bd C1000000 		.4byte	0xc1
@@ -4005,20 +4005,20 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2073 00c6 02       		.uleb128 0x2
  2074 00c7 08       		.byte	0x8
  2075 00c8 04       		.byte	0x4
- 2076 00c9 F5020000 		.4byte	.LASF17
+ 2076 00c9 6B030000 		.4byte	.LASF17
  2077 00cd 02       		.uleb128 0x2
  2078 00ce 04       		.byte	0x4
  2079 00cf 07       		.byte	0x7
- 2080 00d0 EC020000 		.4byte	.LASF18
+ 2080 00d0 62030000 		.4byte	.LASF18
  2081 00d4 06       		.uleb128 0x6
  2082 00d5 08       		.byte	0x8
  2083 00d6 03       		.byte	0x3
  2084 00d7 75       		.byte	0x75
  2085 00d8 E9000000 		.4byte	0xe9
  2086 00dc 07       		.uleb128 0x7
- 2087 00dd A1010000 		.4byte	.LASF20
+ 2087 00dd B4010000 		.4byte	.LASF20
  2088 00e1 03       		.byte	0x3
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 68
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 68
 
 
  2089 00e2 77       		.byte	0x77
@@ -4035,7 +4035,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2100 00f9 05       		.uleb128 0x5
  2101 00fa E9000000 		.4byte	0xe9
  2102 00fe 0A       		.uleb128 0xa
- 2103 00ff C7040000 		.4byte	.LASF19
+ 2103 00ff CF040000 		.4byte	.LASF19
  2104 0103 03       		.byte	0x3
  2105 0104 78       		.byte	0x78
  2106 0105 D4000000 		.4byte	0xd4
@@ -4045,7 +4045,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2110 010c 7B       		.byte	0x7b
  2111 010d 1E010000 		.4byte	0x11e
  2112 0111 07       		.uleb128 0x7
- 2113 0112 A1010000 		.4byte	.LASF20
+ 2113 0112 B4010000 		.4byte	.LASF20
  2114 0116 03       		.byte	0x3
  2115 0117 7D       		.byte	0x7d
  2116 0118 2E010000 		.4byte	0x12e
@@ -4061,7 +4061,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2126 012e 05       		.uleb128 0x5
  2127 012f 1E010000 		.4byte	0x11e
  2128 0133 0A       		.uleb128 0xa
- 2129 0134 E1020000 		.4byte	.LASF21
+ 2129 0134 57030000 		.4byte	.LASF21
  2130 0138 03       		.byte	0x3
  2131 0139 7E       		.byte	0x7e
  2132 013a 09010000 		.4byte	0x109
@@ -4071,14 +4071,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2136 0141 8F       		.byte	0x8f
  2137 0142 77010000 		.4byte	0x177
  2138 0146 07       		.uleb128 0x7
- 2139 0147 D7020000 		.4byte	.LASF22
+ 2139 0147 4D030000 		.4byte	.LASF22
  2140 014b 03       		.byte	0x3
  2141 014c 91       		.byte	0x91
  2142 014d 6B000000 		.4byte	0x6b
  2143 0151 00       		.byte	0
  2144 0152 07       		.uleb128 0x7
- 2145 0153 04050000 		.4byte	.LASF23
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 69
+ 2145 0153 0C050000 		.4byte	.LASF23
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 69
 
 
  2146 0157 03       		.byte	0x3
@@ -4086,20 +4086,20 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2148 0159 83000000 		.4byte	0x83
  2149 015d 04       		.byte	0x4
  2150 015e 07       		.uleb128 0x7
- 2151 015f 8D010000 		.4byte	.LASF24
+ 2151 015f A0010000 		.4byte	.LASF24
  2152 0163 03       		.byte	0x3
  2153 0164 93       		.byte	0x93
  2154 0165 83000000 		.4byte	0x83
  2155 0169 08       		.byte	0x8
  2156 016a 07       		.uleb128 0x7
- 2157 016b 28050000 		.4byte	.LASF25
+ 2157 016b 30050000 		.4byte	.LASF25
  2158 016f 03       		.byte	0x3
  2159 0170 94       		.byte	0x94
  2160 0171 83000000 		.4byte	0x83
  2161 0175 0C       		.byte	0xc
  2162 0176 00       		.byte	0
  2163 0177 0A       		.uleb128 0xa
- 2164 0178 73020000 		.4byte	.LASF26
+ 2164 0178 E9020000 		.4byte	.LASF26
  2165 017c 03       		.byte	0x3
  2166 017d 95       		.byte	0x95
  2167 017e 3E010000 		.4byte	0x13e
@@ -4109,7 +4109,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2171 0185 98       		.byte	0x98
  2172 0186 AF010000 		.4byte	0x1af
  2173 018a 07       		.uleb128 0x7
- 2174 018b D6040000 		.4byte	.LASF27
+ 2174 018b DE040000 		.4byte	.LASF27
  2175 018f 03       		.byte	0x3
  2176 0190 9A       		.byte	0x9a
  2177 0191 6B000000 		.4byte	0x6b
@@ -4121,14 +4121,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2183 019d 83000000 		.4byte	0x83
  2184 01a1 04       		.byte	0x4
  2185 01a2 07       		.uleb128 0x7
- 2186 01a3 23050000 		.4byte	.LASF29
+ 2186 01a3 2B050000 		.4byte	.LASF29
  2187 01a7 03       		.byte	0x3
  2188 01a8 9C       		.byte	0x9c
  2189 01a9 83000000 		.4byte	0x83
  2190 01ad 08       		.byte	0x8
  2191 01ae 00       		.byte	0
  2192 01af 0A       		.uleb128 0xa
- 2193 01b0 3D050000 		.4byte	.LASF30
+ 2193 01b0 45050000 		.4byte	.LASF30
  2194 01b4 03       		.byte	0x3
  2195 01b5 9D       		.byte	0x9d
  2196 01b6 82010000 		.4byte	0x182
@@ -4138,34 +4138,34 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2200 01bd A0       		.byte	0xa0
  2201 01be 17020000 		.4byte	0x217
  2202 01c2 07       		.uleb128 0x7
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 70
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 70
 
 
- 2203 01c3 04050000 		.4byte	.LASF23
+ 2203 01c3 0C050000 		.4byte	.LASF23
  2204 01c7 03       		.byte	0x3
  2205 01c8 A2       		.byte	0xa2
  2206 01c9 33010000 		.4byte	0x133
  2207 01cd 00       		.byte	0
  2208 01ce 07       		.uleb128 0x7
- 2209 01cf 1B030000 		.4byte	.LASF31
+ 2209 01cf 91030000 		.4byte	.LASF31
  2210 01d3 03       		.byte	0x3
  2211 01d4 A3       		.byte	0xa3
  2212 01d5 33010000 		.4byte	0x133
  2213 01d9 04       		.byte	0x4
  2214 01da 07       		.uleb128 0x7
- 2215 01db 80010000 		.4byte	.LASF32
+ 2215 01db 93010000 		.4byte	.LASF32
  2216 01df 03       		.byte	0x3
  2217 01e0 A4       		.byte	0xa4
  2218 01e1 FE000000 		.4byte	0xfe
  2219 01e5 08       		.byte	0x8
  2220 01e6 07       		.uleb128 0x7
- 2221 01e7 8D010000 		.4byte	.LASF24
+ 2221 01e7 A0010000 		.4byte	.LASF24
  2222 01eb 03       		.byte	0x3
  2223 01ec A5       		.byte	0xa5
  2224 01ed 33010000 		.4byte	0x133
  2225 01f1 10       		.byte	0x10
  2226 01f2 07       		.uleb128 0x7
- 2227 01f3 28050000 		.4byte	.LASF25
+ 2227 01f3 30050000 		.4byte	.LASF25
  2228 01f7 03       		.byte	0x3
  2229 01f8 A6       		.byte	0xa6
  2230 01f9 33010000 		.4byte	0x133
@@ -4177,14 +4177,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2236 0205 33010000 		.4byte	0x133
  2237 0209 18       		.byte	0x18
  2238 020a 07       		.uleb128 0x7
- 2239 020b 36050000 		.4byte	.LASF34
+ 2239 020b 3E050000 		.4byte	.LASF34
  2240 020f 03       		.byte	0x3
  2241 0210 A8       		.byte	0xa8
  2242 0211 33010000 		.4byte	0x133
  2243 0215 1C       		.byte	0x1c
  2244 0216 00       		.byte	0
  2245 0217 0A       		.uleb128 0xa
- 2246 0218 2F020000 		.4byte	.LASF35
+ 2246 0218 A5020000 		.4byte	.LASF35
  2247 021c 03       		.byte	0x3
  2248 021d A9       		.byte	0xa9
  2249 021e BA010000 		.4byte	0x1ba
@@ -4198,25 +4198,25 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2257 022f 03       		.byte	0x3
  2258 0230 AE       		.byte	0xae
  2259 0231 33010000 		.4byte	0x133
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 71
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 71
 
 
  2260 0235 00       		.byte	0
  2261 0236 07       		.uleb128 0x7
- 2262 0237 23050000 		.4byte	.LASF29
+ 2262 0237 2B050000 		.4byte	.LASF29
  2263 023b 03       		.byte	0x3
  2264 023c AF       		.byte	0xaf
  2265 023d 33010000 		.4byte	0x133
  2266 0241 04       		.byte	0x4
  2267 0242 07       		.uleb128 0x7
- 2268 0243 B1020000 		.4byte	.LASF36
+ 2268 0243 27030000 		.4byte	.LASF36
  2269 0247 03       		.byte	0x3
  2270 0248 B0       		.byte	0xb0
  2271 0249 FE000000 		.4byte	0xfe
  2272 024d 08       		.byte	0x8
  2273 024e 00       		.byte	0
  2274 024f 0A       		.uleb128 0xa
- 2275 0250 CF030000 		.4byte	.LASF37
+ 2275 0250 45040000 		.4byte	.LASF37
  2276 0254 03       		.byte	0x3
  2277 0255 B1       		.byte	0xb1
  2278 0256 22020000 		.4byte	0x222
@@ -4231,13 +4231,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2287 026f 9C       		.byte	0x9c
  2288 0270 A4020000 		.4byte	0x2a4
  2289 0274 0C       		.uleb128 0xc
- 2290 0275 06020000 		.4byte	.LASF38
+ 2290 0275 7C020000 		.4byte	.LASF38
  2291 0279 01       		.byte	0x1
  2292 027a 7001     		.2byte	0x170
  2293 027c 83000000 		.4byte	0x83
  2294 0280 00000000 		.4byte	.LLST0
  2295 0284 0C       		.uleb128 0xc
- 2296 0285 48050000 		.4byte	.LASF39
+ 2296 0285 50050000 		.4byte	.LASF39
  2297 0289 01       		.byte	0x1
  2298 028a 7101     		.2byte	0x171
  2299 028c 6B000000 		.4byte	0x6b
@@ -4253,12 +4253,12 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2309 02a2 00       		.byte	0
  2310 02a3 00       		.byte	0
  2311 02a4 0B       		.uleb128 0xb
- 2312 02a5 50020000 		.4byte	.LASF41
+ 2312 02a5 C6020000 		.4byte	.LASF41
  2313 02a9 01       		.byte	0x1
  2314 02aa AB01     		.2byte	0x1ab
  2315 02ac 6B000000 		.4byte	0x6b
  2316 02b0 00000000 		.4byte	.LFB6
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 72
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 72
 
 
  2317 02b4 1C000000 		.4byte	.LFE6-.LFB6
@@ -4266,14 +4266,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2319 02b9 9C       		.byte	0x9c
  2320 02ba CF020000 		.4byte	0x2cf
  2321 02be 0C       		.uleb128 0xc
- 2322 02bf 48050000 		.4byte	.LASF39
+ 2322 02bf 50050000 		.4byte	.LASF39
  2323 02c3 01       		.byte	0x1
  2324 02c4 AD01     		.2byte	0x1ad
  2325 02c6 6B000000 		.4byte	0x6b
  2326 02ca 63000000 		.4byte	.LLST2
  2327 02ce 00       		.byte	0
  2328 02cf 0F       		.uleb128 0xf
- 2329 02d0 C4030000 		.4byte	.LASF42
+ 2329 02d0 3A040000 		.4byte	.LASF42
  2330 02d4 01       		.byte	0x1
  2331 02d5 FE       		.byte	0xfe
  2332 02d6 6B000000 		.4byte	0x6b
@@ -4283,13 +4283,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2336 02e3 9C       		.byte	0x9c
  2337 02e4 21030000 		.4byte	0x321
  2338 02e8 0C       		.uleb128 0xc
- 2339 02e9 06020000 		.4byte	.LASF38
+ 2339 02e9 7C020000 		.4byte	.LASF38
  2340 02ed 01       		.byte	0x1
  2341 02ee 0001     		.2byte	0x100
  2342 02f0 83000000 		.4byte	0x83
  2343 02f4 82000000 		.4byte	.LLST3
  2344 02f8 0C       		.uleb128 0xc
- 2345 02f9 48050000 		.4byte	.LASF39
+ 2345 02f9 50050000 		.4byte	.LASF39
  2346 02fd 01       		.byte	0x1
  2347 02fe 0101     		.2byte	0x101
  2348 0300 6B000000 		.4byte	0x6b
@@ -4308,7 +4308,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2361 031f 00       		.byte	0
  2362 0320 00       		.byte	0
  2363 0321 0B       		.uleb128 0xb
- 2364 0322 2F010000 		.4byte	.LASF43
+ 2364 0322 42010000 		.4byte	.LASF43
  2365 0326 01       		.byte	0x1
  2366 0327 D501     		.2byte	0x1d5
  2367 0329 6B000000 		.4byte	0x6b
@@ -4318,17 +4318,17 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2371 0336 9C       		.byte	0x9c
  2372 0337 4C030000 		.4byte	0x34c
  2373 033b 0C       		.uleb128 0xc
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 73
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 73
 
 
- 2374 033c 48050000 		.4byte	.LASF39
+ 2374 033c 50050000 		.4byte	.LASF39
  2375 0340 01       		.byte	0x1
  2376 0341 D701     		.2byte	0x1d7
  2377 0343 6B000000 		.4byte	0x6b
  2378 0347 C2000000 		.4byte	.LLST5
  2379 034b 00       		.byte	0
  2380 034c 0B       		.uleb128 0xb
- 2381 034d 6B040000 		.4byte	.LASF44
+ 2381 034d 73040000 		.4byte	.LASF44
  2382 0351 01       		.byte	0x1
  2383 0352 0702     		.2byte	0x207
  2384 0354 6B000000 		.4byte	0x6b
@@ -4338,20 +4338,20 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2388 0361 9C       		.byte	0x9c
  2389 0362 87030000 		.4byte	0x387
  2390 0366 11       		.uleb128 0x11
- 2391 0367 0D010000 		.4byte	.LASF46
+ 2391 0367 20010000 		.4byte	.LASF46
  2392 036b 01       		.byte	0x1
  2393 036c 0702     		.2byte	0x207
  2394 036e 77000000 		.4byte	0x77
  2395 0372 E1000000 		.4byte	.LLST6
  2396 0376 0C       		.uleb128 0xc
- 2397 0377 48050000 		.4byte	.LASF39
+ 2397 0377 50050000 		.4byte	.LASF39
  2398 037b 01       		.byte	0x1
  2399 037c 0902     		.2byte	0x209
  2400 037e 6B000000 		.4byte	0x6b
  2401 0382 26010000 		.4byte	.LLST7
  2402 0386 00       		.byte	0
  2403 0387 0B       		.uleb128 0xb
- 2404 0388 85020000 		.4byte	.LASF45
+ 2404 0388 FB020000 		.4byte	.LASF45
  2405 038c 01       		.byte	0x1
  2406 038d 3F02     		.2byte	0x23f
  2407 038f 6B000000 		.4byte	0x6b
@@ -4361,24 +4361,24 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2411 039c 9C       		.byte	0x9c
  2412 039d C2030000 		.4byte	0x3c2
  2413 03a1 11       		.uleb128 0x11
- 2414 03a2 2E050000 		.4byte	.LASF47
+ 2414 03a2 36050000 		.4byte	.LASF47
  2415 03a6 01       		.byte	0x1
  2416 03a7 3F02     		.2byte	0x23f
  2417 03a9 6B000000 		.4byte	0x6b
  2418 03ad 69010000 		.4byte	.LLST8
  2419 03b1 0C       		.uleb128 0xc
- 2420 03b2 48050000 		.4byte	.LASF39
+ 2420 03b2 50050000 		.4byte	.LASF39
  2421 03b6 01       		.byte	0x1
  2422 03b7 4102     		.2byte	0x241
  2423 03b9 6B000000 		.4byte	0x6b
  2424 03bd D5010000 		.4byte	.LLST9
  2425 03c1 00       		.byte	0
  2426 03c2 0B       		.uleb128 0xb
- 2427 03c3 F2040000 		.4byte	.LASF48
+ 2427 03c3 FA040000 		.4byte	.LASF48
  2428 03c7 01       		.byte	0x1
  2429 03c8 8C02     		.2byte	0x28c
  2430 03ca 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 74
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 74
 
 
  2431 03ce 00000000 		.4byte	.LFB10
@@ -4387,13 +4387,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2434 03d7 9C       		.byte	0x9c
  2435 03d8 3C040000 		.4byte	0x43c
  2436 03dc 11       		.uleb128 0x11
- 2437 03dd E0040000 		.4byte	.LASF49
+ 2437 03dd E8040000 		.4byte	.LASF49
  2438 03e1 01       		.byte	0x1
  2439 03e2 8C02     		.2byte	0x28c
  2440 03e4 6B000000 		.4byte	0x6b
  2441 03e8 F4010000 		.4byte	.LLST10
  2442 03ec 11       		.uleb128 0x11
- 2443 03ed E9040000 		.4byte	.LASF50
+ 2443 03ed F1040000 		.4byte	.LASF50
  2444 03f1 01       		.byte	0x1
  2445 03f2 8C02     		.2byte	0x28c
  2446 03f4 6B000000 		.4byte	0x6b
@@ -4411,20 +4411,20 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2458 0413 6B000000 		.4byte	0x6b
  2459 0417 1F030000 		.4byte	.LLST13
  2460 041b 0C       		.uleb128 0xc
- 2461 041c 48050000 		.4byte	.LASF39
+ 2461 041c 50050000 		.4byte	.LASF39
  2462 0420 01       		.byte	0x1
  2463 0421 8F02     		.2byte	0x28f
  2464 0423 6B000000 		.4byte	0x6b
  2465 0427 59030000 		.4byte	.LLST14
  2466 042b 0C       		.uleb128 0xc
- 2467 042c CF020000 		.4byte	.LASF51
+ 2467 042c 45030000 		.4byte	.LASF51
  2468 0430 01       		.byte	0x1
  2469 0431 9002     		.2byte	0x290
  2470 0433 6B000000 		.4byte	0x6b
  2471 0437 9C030000 		.4byte	.LLST15
  2472 043b 00       		.byte	0
  2473 043c 0B       		.uleb128 0xb
- 2474 043d 4F050000 		.4byte	.LASF52
+ 2474 043d 57050000 		.4byte	.LASF52
  2475 0441 01       		.byte	0x1
  2476 0442 0103     		.2byte	0x301
  2477 0444 6B000000 		.4byte	0x6b
@@ -4438,19 +4438,19 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2485 045b 01       		.byte	0x1
  2486 045c 0103     		.2byte	0x301
  2487 045e 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 75
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 75
 
 
  2488 0462 E7030000 		.4byte	.LLST16
  2489 0466 0C       		.uleb128 0xc
- 2490 0467 48050000 		.4byte	.LASF39
+ 2490 0467 50050000 		.4byte	.LASF39
  2491 046b 01       		.byte	0x1
  2492 046c 0303     		.2byte	0x303
  2493 046e 6B000000 		.4byte	0x6b
  2494 0472 53040000 		.4byte	.LLST17
  2495 0476 00       		.byte	0
  2496 0477 0B       		.uleb128 0xb
- 2497 0478 81040000 		.4byte	.LASF54
+ 2497 0478 89040000 		.4byte	.LASF54
  2498 047c 01       		.byte	0x1
  2499 047d 4B03     		.2byte	0x34b
  2500 047f 6B000000 		.4byte	0x6b
@@ -4466,14 +4466,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2510 0499 6B000000 		.4byte	0x6b
  2511 049d 72040000 		.4byte	.LLST18
  2512 04a1 0C       		.uleb128 0xc
- 2513 04a2 48050000 		.4byte	.LASF39
+ 2513 04a2 50050000 		.4byte	.LASF39
  2514 04a6 01       		.byte	0x1
  2515 04a7 4D03     		.2byte	0x34d
  2516 04a9 6B000000 		.4byte	0x6b
  2517 04ad DE040000 		.4byte	.LLST19
  2518 04b1 00       		.byte	0
  2519 04b2 0B       		.uleb128 0xb
- 2520 04b3 52030000 		.4byte	.LASF56
+ 2520 04b3 C8030000 		.4byte	.LASF56
  2521 04b7 01       		.byte	0x1
  2522 04b8 1A04     		.2byte	0x41a
  2523 04ba 6B000000 		.4byte	0x6b
@@ -4483,22 +4483,22 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2527 04c7 9C       		.byte	0x9c
  2528 04c8 45050000 		.4byte	0x545
  2529 04cc 11       		.uleb128 0x11
- 2530 04cd C7020000 		.4byte	.LASF57
+ 2530 04cd 3D030000 		.4byte	.LASF57
  2531 04d1 01       		.byte	0x1
  2532 04d2 1A04     		.2byte	0x41a
  2533 04d4 45050000 		.4byte	0x545
  2534 04d8 FD040000 		.4byte	.LLST20
  2535 04dc 11       		.uleb128 0x11
- 2536 04dd 91040000 		.4byte	.LASF58
+ 2536 04dd 99040000 		.4byte	.LASF58
  2537 04e1 01       		.byte	0x1
  2538 04e2 1A04     		.2byte	0x41a
  2539 04e4 83000000 		.4byte	0x83
  2540 04e8 55050000 		.4byte	.LLST21
  2541 04ec 0C       		.uleb128 0xc
- 2542 04ed 48050000 		.4byte	.LASF39
+ 2542 04ed 50050000 		.4byte	.LASF39
  2543 04f1 01       		.byte	0x1
  2544 04f2 1D04     		.2byte	0x41d
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 76
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 76
 
 
  2545 04f4 6B000000 		.4byte	0x6b
@@ -4547,7 +4547,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2588 0546 04       		.byte	0x4
  2589 0547 B5000000 		.4byte	0xb5
  2590 054b 0B       		.uleb128 0xb
- 2591 054c D8010000 		.4byte	.LASF59
+ 2591 054c 4E020000 		.4byte	.LASF59
  2592 0550 01       		.byte	0x1
  2593 0551 7604     		.2byte	0x476
  2594 0553 6B000000 		.4byte	0x6b
@@ -4557,8 +4557,8 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2598 0560 9C       		.byte	0x9c
  2599 0561 86050000 		.4byte	0x586
  2600 0565 11       		.uleb128 0x11
- 2601 0566 A6010000 		.4byte	.LASF60
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 77
+ 2601 0566 B9010000 		.4byte	.LASF60
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 77
 
 
  2602 056a 01       		.byte	0x1
@@ -4566,14 +4566,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2604 056d 77000000 		.4byte	0x77
  2605 0571 0A060000 		.4byte	.LLST23
  2606 0575 0C       		.uleb128 0xc
- 2607 0576 48050000 		.4byte	.LASF39
+ 2607 0576 50050000 		.4byte	.LASF39
  2608 057a 01       		.byte	0x1
  2609 057b 7804     		.2byte	0x478
  2610 057d 6B000000 		.4byte	0x6b
  2611 0581 44060000 		.4byte	.LLST24
  2612 0585 00       		.byte	0
  2613 0586 15       		.uleb128 0x15
- 2614 0587 A5030000 		.4byte	.LASF61
+ 2614 0587 1B040000 		.4byte	.LASF61
  2615 058b 01       		.byte	0x1
  2616 058c A104     		.2byte	0x4a1
  2617 058e 6B000000 		.4byte	0x6b
@@ -4582,7 +4582,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2620 059a 01       		.uleb128 0x1
  2621 059b 9C       		.byte	0x9c
  2622 059c 15       		.uleb128 0x15
- 2623 059d AB010000 		.4byte	.LASF62
+ 2623 059d 0D010000 		.4byte	.LASF62
  2624 05a1 01       		.byte	0x1
  2625 05a2 BF04     		.2byte	0x4bf
  2626 05a4 6B000000 		.4byte	0x6b
@@ -4591,7 +4591,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2629 05b0 01       		.uleb128 0x1
  2630 05b1 9C       		.byte	0x9c
  2631 05b2 15       		.uleb128 0x15
- 2632 05b3 94020000 		.4byte	.LASF63
+ 2632 05b3 0A030000 		.4byte	.LASF63
  2633 05b7 01       		.byte	0x1
  2634 05b8 DC04     		.2byte	0x4dc
  2635 05ba 6B000000 		.4byte	0x6b
@@ -4609,7 +4609,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2647 05dc 01       		.uleb128 0x1
  2648 05dd 9C       		.byte	0x9c
  2649 05de 15       		.uleb128 0x15
- 2650 05df 09030000 		.4byte	.LASF65
+ 2650 05df 7F030000 		.4byte	.LASF65
  2651 05e3 01       		.byte	0x1
  2652 05e4 1105     		.2byte	0x511
  2653 05e6 6B000000 		.4byte	0x6b
@@ -4618,10 +4618,10 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2656 05f2 01       		.uleb128 0x1
  2657 05f3 9C       		.byte	0x9c
  2658 05f4 0B       		.uleb128 0xb
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 78
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 78
 
 
- 2659 05f5 13050000 		.4byte	.LASF66
+ 2659 05f5 1B050000 		.4byte	.LASF66
  2660 05f9 01       		.byte	0x1
  2661 05fa 3005     		.2byte	0x530
  2662 05fc 6B000000 		.4byte	0x6b
@@ -4631,13 +4631,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2666 0609 9C       		.byte	0x9c
  2667 060a 2F060000 		.4byte	0x62f
  2668 060e 11       		.uleb128 0x11
- 2669 060f A8020000 		.4byte	.LASF67
+ 2669 060f 1E030000 		.4byte	.LASF67
  2670 0613 01       		.byte	0x1
  2671 0614 3005     		.2byte	0x530
  2672 0616 2F060000 		.4byte	0x62f
  2673 061a 63060000 		.4byte	.LLST25
  2674 061e 0C       		.uleb128 0xc
- 2675 061f 48050000 		.4byte	.LASF39
+ 2675 061f 50050000 		.4byte	.LASF39
  2676 0623 01       		.byte	0x1
  2677 0624 3305     		.2byte	0x533
  2678 0626 6B000000 		.4byte	0x6b
@@ -4649,7 +4649,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2684 0635 16       		.uleb128 0x16
  2685 0636 77010000 		.4byte	0x177
  2686 063a 0B       		.uleb128 0xb
- 2687 063b 98040000 		.4byte	.LASF68
+ 2687 063b A0040000 		.4byte	.LASF68
  2688 063f 01       		.byte	0x1
  2689 0640 6905     		.2byte	0x569
  2690 0642 6B000000 		.4byte	0x6b
@@ -4659,13 +4659,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2694 064f 9C       		.byte	0x9c
  2695 0650 75060000 		.4byte	0x675
  2696 0654 11       		.uleb128 0x11
- 2697 0655 0A050000 		.4byte	.LASF69
+ 2697 0655 12050000 		.4byte	.LASF69
  2698 0659 01       		.byte	0x1
  2699 065a 6905     		.2byte	0x569
  2700 065c 75060000 		.4byte	0x675
  2701 0660 20070000 		.4byte	.LLST27
  2702 0664 0C       		.uleb128 0xc
- 2703 0665 48050000 		.4byte	.LASF39
+ 2703 0665 50050000 		.4byte	.LASF39
  2704 0669 01       		.byte	0x1
  2705 066a 6C05     		.2byte	0x56c
  2706 066c 6B000000 		.4byte	0x6b
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2713 067c AF010000 		.4byte	0x1af
  2714 0680 0F       		.uleb128 0xf
  2715 0681 30000000 		.4byte	.LASF70
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 79
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 79
 
 
  2716 0685 01       		.byte	0x1
@@ -4690,7 +4690,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2722 0694 9C       		.byte	0x9c
  2723 0695 11070000 		.4byte	0x711
  2724 0699 17       		.uleb128 0x17
- 2725 069a 3D020000 		.4byte	.LASF71
+ 2725 069a B3020000 		.4byte	.LASF71
  2726 069e 01       		.byte	0x1
  2727 069f 32       		.byte	0x32
  2728 06a0 21070000 		.4byte	0x721
@@ -4698,7 +4698,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2730 06a5 03       		.byte	0x3
  2731 06a6 60000000 		.4byte	CAN_RXConfigStruct.5033
  2732 06aa 17       		.uleb128 0x17
- 2733 06ab B4040000 		.4byte	.LASF72
+ 2733 06ab BC040000 		.4byte	.LASF72
  2734 06af 01       		.byte	0x1
  2735 06b0 46       		.byte	0x46
  2736 06b1 36070000 		.4byte	0x736
@@ -4706,7 +4706,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2738 06b6 03       		.byte	0x3
  2739 06b7 00000000 		.4byte	CAN_TXConfigStruct.5034
  2740 06bb 18       		.uleb128 0x18
- 2741 06bc 48050000 		.4byte	.LASF39
+ 2741 06bc 50050000 		.4byte	.LASF39
  2742 06c0 01       		.byte	0x1
  2743 06c1 52       		.byte	0x52
  2744 06c2 6B000000 		.4byte	0x6b
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2770 06f2 00000000 		.4byte	.LANCHOR0
  2771 06f6 22       		.byte	0x22
  2772 06f7 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 80
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 80
 
 
  2773 06f8 0D       		.uleb128 0xd
@@ -4776,7 +4776,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2805 0736 16       		.uleb128 0x16
  2806 0737 26070000 		.4byte	0x726
  2807 073b 0B       		.uleb128 0xb
- 2808 073c BE010000 		.4byte	.LASF73
+ 2808 073c 34020000 		.4byte	.LASF73
  2809 0740 01       		.byte	0x1
  2810 0741 9E05     		.2byte	0x59e
  2811 0743 6B000000 		.4byte	0x6b
@@ -4786,23 +4786,23 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2815 0750 9C       		.byte	0x9c
  2816 0751 76070000 		.4byte	0x776
  2817 0755 11       		.uleb128 0x11
- 2818 0756 4D030000 		.4byte	.LASF74
+ 2818 0756 C3030000 		.4byte	.LASF74
  2819 075a 01       		.byte	0x1
  2820 075b 9E05     		.2byte	0x59e
  2821 075d 6B000000 		.4byte	0x6b
  2822 0761 E6070000 		.4byte	.LLST31
  2823 0765 0C       		.uleb128 0xc
- 2824 0766 48050000 		.4byte	.LASF39
+ 2824 0766 50050000 		.4byte	.LASF39
  2825 076a 01       		.byte	0x1
  2826 076b A005     		.2byte	0x5a0
  2827 076d 6B000000 		.4byte	0x6b
  2828 0771 52080000 		.4byte	.LLST32
  2829 0775 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 81
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 81
 
 
  2830 0776 0F       		.uleb128 0xf
- 2831 0777 BE020000 		.4byte	.LASF75
+ 2831 0777 34030000 		.4byte	.LASF75
  2832 077b 01       		.byte	0x1
  2833 077c 89       		.byte	0x89
  2834 077d 6B000000 		.4byte	0x6b
@@ -4812,19 +4812,19 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2838 078a 9C       		.byte	0x9c
  2839 078b 69080000 		.4byte	0x869
  2840 078f 18       		.uleb128 0x18
- 2841 0790 06020000 		.4byte	.LASF38
+ 2841 0790 7C020000 		.4byte	.LASF38
  2842 0794 01       		.byte	0x1
  2843 0795 8B       		.byte	0x8b
  2844 0796 83000000 		.4byte	0x83
  2845 079a 71080000 		.4byte	.LLST33
  2846 079e 18       		.uleb128 0x18
- 2847 079f 48050000 		.4byte	.LASF39
+ 2847 079f 50050000 		.4byte	.LASF39
  2848 07a3 01       		.byte	0x1
  2849 07a4 8C       		.byte	0x8c
  2850 07a5 6B000000 		.4byte	0x6b
  2851 07a9 9D080000 		.4byte	.LLST34
  2852 07ad 18       		.uleb128 0x18
- 2853 07ae A8040000 		.4byte	.LASF76
+ 2853 07ae B0040000 		.4byte	.LASF76
  2854 07b2 01       		.byte	0x1
  2855 07b3 8D       		.byte	0x8d
  2856 07b4 6B000000 		.4byte	0x6b
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2884 07f1 50       		.byte	0x50
  2885 07f2 01       		.uleb128 0x1
  2886 07f3 4D       		.byte	0x4d
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 82
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 82
 
 
  2887 07f4 0E       		.uleb128 0xe
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2941 0860 0E       		.uleb128 0xe
  2942 0861 01       		.uleb128 0x1
  2943 0862 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 83
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 83
 
 
  2944 0863 03       		.uleb128 0x3
@@ -4937,7 +4937,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2957 087e 9C       		.byte	0x9c
  2958 087f A6080000 		.4byte	0x8a6
  2959 0883 0C       		.uleb128 0xc
- 2960 0884 48050000 		.4byte	.LASF39
+ 2960 0884 50050000 		.4byte	.LASF39
  2961 0888 01       		.byte	0x1
  2962 0889 4501     		.2byte	0x145
  2963 088b 6B000000 		.4byte	0x6b
@@ -4950,7 +4950,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2970 08a1 CF020000 		.4byte	0x2cf
  2971 08a5 00       		.byte	0
  2972 08a6 0B       		.uleb128 0xb
- 2973 08a7 0E020000 		.4byte	.LASF78
+ 2973 08a7 84020000 		.4byte	.LASF78
  2974 08ab 01       		.byte	0x1
  2975 08ac AA03     		.2byte	0x3aa
  2976 08ae 6B000000 		.4byte	0x6b
@@ -4960,25 +4960,25 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  2980 08bb 9C       		.byte	0x9c
  2981 08bc 0C090000 		.4byte	0x90c
  2982 08c0 11       		.uleb128 0x11
- 2983 08c1 7E020000 		.4byte	.LASF79
+ 2983 08c1 F4020000 		.4byte	.LASF79
  2984 08c5 01       		.byte	0x1
  2985 08c6 AA03     		.2byte	0x3aa
  2986 08c8 6B000000 		.4byte	0x6b
  2987 08cc 33090000 		.4byte	.LLST37
  2988 08d0 0C       		.uleb128 0xc
- 2989 08d1 48050000 		.4byte	.LASF39
+ 2989 08d1 50050000 		.4byte	.LASF39
  2990 08d5 01       		.byte	0x1
  2991 08d6 AF03     		.2byte	0x3af
  2992 08d8 6B000000 		.4byte	0x6b
  2993 08dc 54090000 		.4byte	.LLST38
  2994 08e0 0C       		.uleb128 0xc
- 2995 08e1 44010000 		.4byte	.LASF80
+ 2995 08e1 57010000 		.4byte	.LASF80
  2996 08e5 01       		.byte	0x1
  2997 08e6 B003     		.2byte	0x3b0
  2998 08e8 6B000000 		.4byte	0x6b
  2999 08ec 95090000 		.4byte	.LLST39
  3000 08f0 10       		.uleb128 0x10
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 84
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 84
 
 
  3001 08f1 1E000000 		.4byte	.LVL165
@@ -4991,7 +4991,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3008 0907 CF020000 		.4byte	0x2cf
  3009 090b 00       		.byte	0
  3010 090c 0B       		.uleb128 0xb
- 3011 090d 4B040000 		.4byte	.LASF81
+ 3011 090d 53040000 		.4byte	.LASF81
  3012 0911 01       		.byte	0x1
  3013 0912 D505     		.2byte	0x5d5
  3014 0914 6B000000 		.4byte	0x6b
@@ -5001,20 +5001,20 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3018 0921 9C       		.byte	0x9c
  3019 0922 47090000 		.4byte	0x947
  3020 0926 11       		.uleb128 0x11
- 3021 0927 01030000 		.4byte	.LASF82
+ 3021 0927 77030000 		.4byte	.LASF82
  3022 092b 01       		.byte	0x1
  3023 092c D505     		.2byte	0x5d5
  3024 092e 6B000000 		.4byte	0x6b
  3025 0932 B4090000 		.4byte	.LLST40
  3026 0936 0C       		.uleb128 0xc
- 3027 0937 48050000 		.4byte	.LASF39
+ 3027 0937 50050000 		.4byte	.LASF39
  3028 093b 01       		.byte	0x1
  3029 093c D705     		.2byte	0x5d7
  3030 093e 6B000000 		.4byte	0x6b
  3031 0942 200A0000 		.4byte	.LLST41
  3032 0946 00       		.byte	0
  3033 0947 15       		.uleb128 0x15
- 3034 0948 6B030000 		.4byte	.LASF83
+ 3034 0948 E1030000 		.4byte	.LASF83
  3035 094c 01       		.byte	0x1
  3036 094d 2206     		.2byte	0x622
  3037 094f 83000000 		.4byte	0x83
@@ -5023,7 +5023,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3040 095b 01       		.uleb128 0x1
  3041 095c 9C       		.byte	0x9c
  3042 095d 0B       		.uleb128 0xb
- 3043 095e 20030000 		.4byte	.LASF84
+ 3043 095e 96030000 		.4byte	.LASF84
  3044 0962 01       		.byte	0x1
  3045 0963 3A06     		.2byte	0x63a
  3046 0965 6B000000 		.4byte	0x6b
@@ -5033,12 +5033,12 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3050 0972 9C       		.byte	0x9c
  3051 0973 88090000 		.4byte	0x988
  3052 0977 0C       		.uleb128 0xc
- 3053 0978 48050000 		.4byte	.LASF39
+ 3053 0978 50050000 		.4byte	.LASF39
  3054 097c 01       		.byte	0x1
  3055 097d 3C06     		.2byte	0x63c
  3056 097f 6B000000 		.4byte	0x6b
  3057 0983 3F0A0000 		.4byte	.LLST42
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 85
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 85
 
 
  3058 0987 00       		.byte	0
@@ -5051,23 +5051,23 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3065 0994 03       		.byte	0x3
  3066 0995 00000000 		.4byte	CAN_initVar
  3067 0999 1B       		.uleb128 0x1b
- 3068 099a 73010000 		.4byte	.LASF85
- 3069 099e 73010000 		.4byte	.LASF85
+ 3068 099a 86010000 		.4byte	.LASF85
+ 3069 099e 86010000 		.4byte	.LASF85
  3070 09a2 04       		.byte	0x4
  3071 09a3 C5       		.byte	0xc5
  3072 09a4 1B       		.uleb128 0x1b
- 3073 09a5 B8030000 		.4byte	.LASF86
- 3074 09a9 B8030000 		.4byte	.LASF86
+ 3073 09a5 2E040000 		.4byte	.LASF86
+ 3074 09a9 2E040000 		.4byte	.LASF86
  3075 09ad 04       		.byte	0x4
  3076 09ae C3       		.byte	0xc3
  3077 09af 1B       		.uleb128 0x1b
- 3078 09b0 64020000 		.4byte	.LASF87
- 3079 09b4 64020000 		.4byte	.LASF87
+ 3078 09b0 DA020000 		.4byte	.LASF87
+ 3079 09b4 DA020000 		.4byte	.LASF87
  3080 09b8 04       		.byte	0x4
  3081 09b9 BD       		.byte	0xbd
  3082 09ba 1B       		.uleb128 0x1b
- 3083 09bb 3C030000 		.4byte	.LASF88
- 3084 09bf 3C030000 		.4byte	.LASF88
+ 3083 09bb B2030000 		.4byte	.LASF88
+ 3084 09bf B2030000 		.4byte	.LASF88
  3085 09c3 04       		.byte	0x4
  3086 09c4 C0       		.byte	0xc0
  3087 09c5 00       		.byte	0
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3112 0016 0B       		.uleb128 0xb
  3113 0017 0B       		.uleb128 0xb
  3114 0018 3E       		.uleb128 0x3e
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 86
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 86
 
 
  3115 0019 0B       		.uleb128 0xb
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3169 004f 3A       		.uleb128 0x3a
  3170 0050 0B       		.uleb128 0xb
  3171 0051 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 87
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 87
 
 
  3172 0052 0B       		.uleb128 0xb
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3226 0088 01       		.uleb128 0x1
  3227 0089 12       		.uleb128 0x12
  3228 008a 06       		.uleb128 0x6
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 88
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 88
 
 
  3229 008b 40       		.uleb128 0x40
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3283 00c7 49       		.uleb128 0x49
  3284 00c8 13       		.uleb128 0x13
  3285 00c9 11       		.uleb128 0x11
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 89
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 89
 
 
  3286 00ca 01       		.uleb128 0x1
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3340 0105 01       		.uleb128 0x1
  3341 0106 31       		.uleb128 0x31
  3342 0107 13       		.uleb128 0x13
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 90
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 90
 
 
  3343 0108 01       		.uleb128 0x1
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3397 013f 49       		.uleb128 0x49
  3398 0140 13       		.uleb128 0x13
  3399 0141 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 91
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 91
 
 
  3400 0142 18       		.uleb128 0x18
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3454 0178 19       		.uleb128 0x19
  3455 0179 3C       		.uleb128 0x3c
  3456 017a 19       		.uleb128 0x19
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 92
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 92
 
 
  3457 017b 6E       		.uleb128 0x6e
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3511 0067 16000000 		.4byte	.LVL8
  3512 006b 0200     		.2byte	0x2
  3513 006d 31       		.byte	0x31
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 93
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 93
 
 
  3514 006e 9F       		.byte	0x9f
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3568 00f8 50       		.byte	0x50
  3569 00f9 9F       		.byte	0x9f
  3570 00fa 22000000 		.4byte	.LVL20
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 94
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 94
 
 
  3571 00fe 24000000 		.4byte	.LVL21
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3625 0181 9F       		.byte	0x9f
  3626 0182 18000000 		.4byte	.LVL26
  3627 0186 2C000000 		.4byte	.LVL27
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 95
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 95
 
 
  3628 018a 0100     		.2byte	0x1
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3682 020a 01       		.uleb128 0x1
  3683 020b 50       		.byte	0x50
  3684 020c 9F       		.byte	0x9f
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 96
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 96
 
 
  3685 020d 76000000 		.4byte	.LVL44
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3739 0289 9F       		.byte	0x9f
  3740 028a 8A000000 		.4byte	.LVL54
  3741 028e 8C000000 		.4byte	.LVL55
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 97
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 97
 
 
  3742 0292 0100     		.2byte	0x1
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3796 0311 0400     		.2byte	0x4
  3797 0313 F3       		.byte	0xf3
  3798 0314 01       		.uleb128 0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 98
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 98
 
 
  3799 0315 52       		.byte	0x52
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3853 0394 00000000 		.4byte	0
  3854 0398 00000000 		.4byte	0
  3855              	.LLST15:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 99
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 99
 
 
  3856 039c 2E000000 		.4byte	.LVL35
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3910 0424 2E000000 		.4byte	.LVL64
  3911 0428 30000000 		.4byte	.LVL65
  3912 042c 0400     		.2byte	0x4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 100
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 100
 
 
  3913 042e F3       		.byte	0xf3
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  3967 04ac 0100     		.2byte	0x1
  3968 04ae 50       		.byte	0x50
  3969 04af 2E000000 		.4byte	.LVL72
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 101
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 101
 
 
  3970 04b3 30000000 		.4byte	.LVL73
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4024 053c 0100     		.2byte	0x1
  4025 053e 55       		.byte	0x55
  4026 053f 5A000000 		.4byte	.LVL92
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 102
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 102
 
 
  4027 0543 64000000 		.4byte	.LFE14
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4081 05c3 00000000 		.4byte	0
  4082              	.LLST22:
  4083 05c7 06000000 		.4byte	.LVL76
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 103
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 103
 
 
  4084 05cb 14000000 		.4byte	.LVL77
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4138 064e 31       		.byte	0x31
  4139 064f 9F       		.byte	0x9f
  4140 0650 14000000 		.4byte	.LVL96
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 104
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 104
 
 
  4141 0654 1C000000 		.4byte	.LFE15
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4195 06d2 82000000 		.4byte	.LVL107
  4196 06d6 84000000 		.4byte	.LVL108
  4197 06da 0400     		.2byte	0x4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 105
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 105
 
 
  4198 06dc F3       		.byte	0xf3
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4252 075a 0100     		.2byte	0x1
  4253 075c 50       		.byte	0x50
  4254 075d 46000000 		.4byte	.LVL116
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 106
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 106
 
 
  4255 0761 58000000 		.4byte	.LFE22
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4309 07ea 16000000 		.4byte	.LVL131
  4310 07ee 0100     		.2byte	0x1
  4311 07f0 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 107
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 107
 
 
  4312 07f1 16000000 		.4byte	.LVL131
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4366              	.LLST33:
  4367 0871 02000000 		.4byte	.LVL138
  4368 0875 1A000000 		.4byte	.LVL139
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 108
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 108
 
 
  4369 0879 0400     		.2byte	0x4
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4423 0902 10000000 		.4byte	.LVL159
  4424 0906 0100     		.2byte	0x1
  4425 0908 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 109
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 109
 
 
  4426 0909 10000000 		.4byte	.LVL159
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4480              	.LLST39:
  4481 0995 04000000 		.4byte	.LVL163
  4482 0999 1A000000 		.4byte	.LVL164
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 110
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 110
 
 
  4483 099d 0200     		.2byte	0x2
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4537 0a18 00000000 		.4byte	0
  4538 0a1c 00000000 		.4byte	0
  4539              	.LLST41:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 111
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 111
 
 
  4540 0a20 00000000 		.4byte	.LVL171
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4594 006c 14000000 		.4byte	.LFE16-.LFB16
  4595 0070 00000000 		.4byte	.LFB17
  4596 0074 14000000 		.4byte	.LFE17-.LFB17
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 112
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 112
 
 
  4597 0078 00000000 		.4byte	.LFB18
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4651 0060 00000000 		.4byte	.LFB17
  4652 0064 14000000 		.4byte	.LFE17
  4653 0068 00000000 		.4byte	.LFB18
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 113
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 113
 
 
  4654 006c 0C000000 		.4byte	.LFE18
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4695 0030 43414E5F 		.ascii	"CAN_RxTxBuffersConfig\000"
  4695      52785478 
  4695      42756666 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 114
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 114
 
 
  4695      65727343 
@@ -6819,387 +6819,388 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 1
  4709 0101 43414E5F 		.ascii	"CAN_initVar\000"
  4709      696E6974 
  4709      56617200 
- 4710              	.LASF46:
- 4711 010d 62697472 		.ascii	"bitrate\000"
- 4711      61746500 
- 4712              	.LASF6:
- 4713 0115 6C6F6E67 		.ascii	"long long int\000"
- 4713      206C6F6E 
- 4713      6720696E 
- 4713      7400
- 4714              	.LASF0:
- 4715 0123 7369676E 		.ascii	"signed char\000"
- 4715      65642063 
- 4715      68617200 
- 4716              	.LASF43:
- 4717 012f 43414E5F 		.ascii	"CAN_GlobalIntDisable\000"
- 4717      476C6F62 
- 4717      616C496E 
- 4717      74446973 
- 4717      61626C65 
- 4718              	.LASF80:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 115
+ 4710              	.LASF62:
+ 4711 010d 43414E5F 		.ascii	"CAN_GetRXErrorFlag\000"
+ 4711      47657452 
+ 4711      58457272 
+ 4711      6F72466C 
+ 4711      616700
+ 4712              	.LASF46:
+ 4713 0120 62697472 		.ascii	"bitrate\000"
+ 4713      61746500 
+ 4714              	.LASF6:
+ 4715 0128 6C6F6E67 		.ascii	"long long int\000"
+ 4715      206C6F6E 
+ 4715      6720696E 
+ 4715      7400
+ 4716              	.LASF0:
+ 4717 0136 7369676E 		.ascii	"signed char\000"
+ 4717      65642063 
+ 4717      68617200 
+ 4718              	.LASF43:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 115
 
 
- 4719 0144 72756E53 		.ascii	"runState\000"
- 4719      74617465 
- 4719      00
- 4720              	.LASF90:
- 4721 014d 47656E65 		.ascii	"Generated_Source\\PSoC4\\CAN.c\000"
- 4721      72617465 
- 4721      645F536F 
- 4721      75726365 
- 4721      5C50536F 
- 4722              	.LASF4:
- 4723 016a 6C6F6E67 		.ascii	"long int\000"
- 4723      20696E74 
- 4723      00
- 4724              	.LASF85:
- 4725 0173 4379496E 		.ascii	"CyIntDisable\000"
- 4725      74446973 
- 4725      61626C65 
+ 4719 0142 43414E5F 		.ascii	"CAN_GlobalIntDisable\000"
+ 4719      476C6F62 
+ 4719      616C496E 
+ 4719      74446973 
+ 4719      61626C65 
+ 4720              	.LASF80:
+ 4721 0157 72756E53 		.ascii	"runState\000"
+ 4721      74617465 
+ 4721      00
+ 4722              	.LASF90:
+ 4723 0160 47656E65 		.ascii	"Generated_Source\\PSoC4\\CAN.c\000"
+ 4723      72617465 
+ 4723      645F536F 
+ 4723      75726365 
+ 4723      5C50536F 
+ 4724              	.LASF4:
+ 4725 017d 6C6F6E67 		.ascii	"long int\000"
+ 4725      20696E74 
  4725      00
- 4726              	.LASF32:
- 4727 0180 72786461 		.ascii	"rxdata\000"
- 4727      746100
- 4728              	.LASF9:
- 4729 0187 75696E74 		.ascii	"uint8\000"
- 4729      3800
- 4730              	.LASF24:
- 4731 018d 7278616D 		.ascii	"rxamr\000"
- 4731      7200
- 4732              	.LASF13:
- 4733 0193 646F7562 		.ascii	"double\000"
- 4733      6C6500
- 4734              	.LASF11:
- 4735 019a 75696E74 		.ascii	"uint32\000"
- 4735      333200
- 4736              	.LASF20:
- 4737 01a1 62797465 		.ascii	"byte\000"
- 4737      00
- 4738              	.LASF60:
- 4739 01a6 6D61736B 		.ascii	"mask\000"
+ 4726              	.LASF85:
+ 4727 0186 4379496E 		.ascii	"CyIntDisable\000"
+ 4727      74446973 
+ 4727      61626C65 
+ 4727      00
+ 4728              	.LASF32:
+ 4729 0193 72786461 		.ascii	"rxdata\000"
+ 4729      746100
+ 4730              	.LASF9:
+ 4731 019a 75696E74 		.ascii	"uint8\000"
+ 4731      3800
+ 4732              	.LASF24:
+ 4733 01a0 7278616D 		.ascii	"rxamr\000"
+ 4733      7200
+ 4734              	.LASF13:
+ 4735 01a6 646F7562 		.ascii	"double\000"
+ 4735      6C6500
+ 4736              	.LASF11:
+ 4737 01ad 75696E74 		.ascii	"uint32\000"
+ 4737      333200
+ 4738              	.LASF20:
+ 4739 01b4 62797465 		.ascii	"byte\000"
  4739      00
- 4740              	.LASF62:
- 4741 01ab 43414E5F 		.ascii	"CAN_GetRXErrorFlag\000"
- 4741      47657452 
- 4741      58457272 
- 4741      6F72466C 
- 4741      616700
- 4742              	.LASF73:
- 4743 01be 43414E5F 		.ascii	"CAN_SetSwapDataEndianness\000"
- 4743      53657453 
- 4743      77617044 
- 4743      61746145 
- 4743      6E646961 
- 4744              	.LASF59:
- 4745 01d8 43414E5F 		.ascii	"CAN_SetIrqMask\000"
- 4745      53657449 
- 4745      72714D61 
- 4745      736B00
- 4746              	.LASF8:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 116
+ 4740              	.LASF60:
+ 4741 01b9 6D61736B 		.ascii	"mask\000"
+ 4741      00
+ 4742              	.LASF91:
+ 4743 01be 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
+ 4743      73657273 
+ 4743      5C617573 
+ 4743      74635C4F 
+ 4743      6E654472 
+ 4744 01eb 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\working CAN_Basic_P4_Orig"
+ 4744      69637332 
+ 4744      3031382D 
+ 4744      31395C50 
+ 4744      736F6320 
+ 4745 021c 696E616C 		.ascii	"inal + uart debug.cydsn\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 116
 
 
- 4747 01e7 756E7369 		.ascii	"unsigned int\000"
- 4747      676E6564 
- 4747      20696E74 
- 4747      00
- 4748              	.LASF5:
- 4749 01f4 6C6F6E67 		.ascii	"long unsigned int\000"
- 4749      20756E73 
- 4749      69676E65 
- 4749      6420696E 
- 4749      7400
- 4750              	.LASF38:
- 4751 0206 74696D65 		.ascii	"timeout\000"
- 4751      6F757400 
- 4752              	.LASF78:
- 4753 020e 43414E5F 		.ascii	"CAN_SetOpMode\000"
- 4753      5365744F 
- 4753      704D6F64 
- 4753      6500
- 4754              	.LASF3:
- 4755 021c 73686F72 		.ascii	"short unsigned int\000"
- 4755      7420756E 
- 4755      7369676E 
- 4755      65642069 
- 4755      6E7400
- 4756              	.LASF35:
- 4757 022f 43414E5F 		.ascii	"CAN_RX_STRUCT\000"
- 4757      52585F53 
- 4757      54525543 
- 4757      5400
- 4758              	.LASF71:
- 4759 023d 43414E5F 		.ascii	"CAN_RXConfigStruct\000"
- 4759      5258436F 
- 4759      6E666967 
- 4759      53747275 
- 4759      637400
- 4760              	.LASF41:
- 4761 0250 43414E5F 		.ascii	"CAN_GlobalIntEnable\000"
- 4761      476C6F62 
- 4761      616C496E 
- 4761      74456E61 
- 4761      626C6500 
- 4762              	.LASF87:
- 4763 0264 4379496E 		.ascii	"CyIntSetVector\000"
- 4763      74536574 
- 4763      56656374 
- 4763      6F7200
- 4764              	.LASF26:
- 4765 0273 43414E5F 		.ascii	"CAN_RX_CFG\000"
- 4765      52585F43 
- 4765      464700
- 4766              	.LASF79:
- 4767 027e 6F704D6F 		.ascii	"opMode\000"
- 4767      646500
- 4768              	.LASF45:
- 4769 0285 43414E5F 		.ascii	"CAN_SetArbiter\000"
- 4769      53657441 
- 4769      72626974 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 117
+ 4745      202B2075 
+ 4745      61727420 
+ 4745      64656275 
+ 4745      672E6379 
+ 4746              	.LASF73:
+ 4747 0234 43414E5F 		.ascii	"CAN_SetSwapDataEndianness\000"
+ 4747      53657453 
+ 4747      77617044 
+ 4747      61746145 
+ 4747      6E646961 
+ 4748              	.LASF59:
+ 4749 024e 43414E5F 		.ascii	"CAN_SetIrqMask\000"
+ 4749      53657449 
+ 4749      72714D61 
+ 4749      736B00
+ 4750              	.LASF8:
+ 4751 025d 756E7369 		.ascii	"unsigned int\000"
+ 4751      676E6564 
+ 4751      20696E74 
+ 4751      00
+ 4752              	.LASF5:
+ 4753 026a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4753      20756E73 
+ 4753      69676E65 
+ 4753      6420696E 
+ 4753      7400
+ 4754              	.LASF38:
+ 4755 027c 74696D65 		.ascii	"timeout\000"
+ 4755      6F757400 
+ 4756              	.LASF78:
+ 4757 0284 43414E5F 		.ascii	"CAN_SetOpMode\000"
+ 4757      5365744F 
+ 4757      704D6F64 
+ 4757      6500
+ 4758              	.LASF3:
+ 4759 0292 73686F72 		.ascii	"short unsigned int\000"
+ 4759      7420756E 
+ 4759      7369676E 
+ 4759      65642069 
+ 4759      6E7400
+ 4760              	.LASF35:
+ 4761 02a5 43414E5F 		.ascii	"CAN_RX_STRUCT\000"
+ 4761      52585F53 
+ 4761      54525543 
+ 4761      5400
+ 4762              	.LASF71:
+ 4763 02b3 43414E5F 		.ascii	"CAN_RXConfigStruct\000"
+ 4763      5258436F 
+ 4763      6E666967 
+ 4763      53747275 
+ 4763      637400
+ 4764              	.LASF41:
+ 4765 02c6 43414E5F 		.ascii	"CAN_GlobalIntEnable\000"
+ 4765      476C6F62 
+ 4765      616C496E 
+ 4765      74456E61 
+ 4765      626C6500 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 117
 
 
- 4769      657200
- 4770              	.LASF63:
- 4771 0294 43414E5F 		.ascii	"CAN_GetTXErrorCount\000"
- 4771      47657454 
- 4771      58457272 
- 4771      6F72436F 
- 4771      756E7400 
- 4772              	.LASF67:
- 4773 02a8 7278436F 		.ascii	"rxConfig\000"
- 4773      6E666967 
- 4773      00
- 4774              	.LASF36:
- 4775 02b1 74786461 		.ascii	"txdata\000"
- 4775      746100
- 4776              	.LASF16:
- 4777 02b8 72656733 		.ascii	"reg32\000"
- 4777      3200
- 4778              	.LASF75:
- 4779 02be 43414E5F 		.ascii	"CAN_Init\000"
- 4779      496E6974 
- 4779      00
- 4780              	.LASF57:
- 4781 02c7 72656741 		.ascii	"regAddr\000"
- 4781      64647200 
- 4782              	.LASF51:
- 4783 02cf 63666754 		.ascii	"cfgTemp\000"
- 4783      656D7000 
- 4784              	.LASF22:
- 4785 02d7 72786D61 		.ascii	"rxmailbox\000"
- 4785      696C626F 
- 4785      7800
- 4786              	.LASF21:
- 4787 02e1 43414E5F 		.ascii	"CAN_REG_32\000"
- 4787      5245475F 
- 4787      333200
- 4788              	.LASF18:
- 4789 02ec 73697A65 		.ascii	"sizetype\000"
- 4789      74797065 
- 4789      00
- 4790              	.LASF17:
- 4791 02f5 6C6F6E67 		.ascii	"long double\000"
- 4791      20646F75 
- 4791      626C6500 
- 4792              	.LASF82:
- 4793 0301 6563724D 		.ascii	"ecrMode\000"
- 4793      6F646500 
- 4794              	.LASF65:
- 4795 0309 43414E5F 		.ascii	"CAN_GetErrorState\000"
- 4795      47657445 
- 4795      72726F72 
- 4795      53746174 
- 4795      6500
- 4796              	.LASF31:
- 4797 031b 72786964 		.ascii	"rxid\000"
- 4797      00
- 4798              	.LASF84:
- 4799 0320 43414E5F 		.ascii	"CAN_ArmErrorCaptureRegister\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 118
+ 4766              	.LASF87:
+ 4767 02da 4379496E 		.ascii	"CyIntSetVector\000"
+ 4767      74536574 
+ 4767      56656374 
+ 4767      6F7200
+ 4768              	.LASF26:
+ 4769 02e9 43414E5F 		.ascii	"CAN_RX_CFG\000"
+ 4769      52585F43 
+ 4769      464700
+ 4770              	.LASF79:
+ 4771 02f4 6F704D6F 		.ascii	"opMode\000"
+ 4771      646500
+ 4772              	.LASF45:
+ 4773 02fb 43414E5F 		.ascii	"CAN_SetArbiter\000"
+ 4773      53657441 
+ 4773      72626974 
+ 4773      657200
+ 4774              	.LASF63:
+ 4775 030a 43414E5F 		.ascii	"CAN_GetTXErrorCount\000"
+ 4775      47657454 
+ 4775      58457272 
+ 4775      6F72436F 
+ 4775      756E7400 
+ 4776              	.LASF67:
+ 4777 031e 7278436F 		.ascii	"rxConfig\000"
+ 4777      6E666967 
+ 4777      00
+ 4778              	.LASF36:
+ 4779 0327 74786461 		.ascii	"txdata\000"
+ 4779      746100
+ 4780              	.LASF16:
+ 4781 032e 72656733 		.ascii	"reg32\000"
+ 4781      3200
+ 4782              	.LASF75:
+ 4783 0334 43414E5F 		.ascii	"CAN_Init\000"
+ 4783      496E6974 
+ 4783      00
+ 4784              	.LASF57:
+ 4785 033d 72656741 		.ascii	"regAddr\000"
+ 4785      64647200 
+ 4786              	.LASF51:
+ 4787 0345 63666754 		.ascii	"cfgTemp\000"
+ 4787      656D7000 
+ 4788              	.LASF22:
+ 4789 034d 72786D61 		.ascii	"rxmailbox\000"
+ 4789      696C626F 
+ 4789      7800
+ 4790              	.LASF21:
+ 4791 0357 43414E5F 		.ascii	"CAN_REG_32\000"
+ 4791      5245475F 
+ 4791      333200
+ 4792              	.LASF18:
+ 4793 0362 73697A65 		.ascii	"sizetype\000"
+ 4793      74797065 
+ 4793      00
+ 4794              	.LASF17:
+ 4795 036b 6C6F6E67 		.ascii	"long double\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 118
 
 
- 4799      41726D45 
+ 4795      20646F75 
+ 4795      626C6500 
+ 4796              	.LASF82:
+ 4797 0377 6563724D 		.ascii	"ecrMode\000"
+ 4797      6F646500 
+ 4798              	.LASF65:
+ 4799 037f 43414E5F 		.ascii	"CAN_GetErrorState\000"
+ 4799      47657445 
  4799      72726F72 
- 4799      43617074 
- 4799      75726552 
- 4800              	.LASF88:
- 4801 033c 4379496E 		.ascii	"CyIntSetPriority\000"
- 4801      74536574 
- 4801      5072696F 
- 4801      72697479 
+ 4799      53746174 
+ 4799      6500
+ 4800              	.LASF31:
+ 4801 0391 72786964 		.ascii	"rxid\000"
  4801      00
- 4802              	.LASF74:
- 4803 034d 73776170 		.ascii	"swap\000"
- 4803      00
- 4804              	.LASF56:
- 4805 0352 43414E5F 		.ascii	"CAN_RXRegisterInit\000"
- 4805      52585265 
- 4805      67697374 
- 4805      6572496E 
- 4805      697400
- 4806              	.LASF12:
- 4807 0365 666C6F61 		.ascii	"float\000"
- 4807      7400
- 4808              	.LASF83:
- 4809 036b 43414E5F 		.ascii	"CAN_ReadErrorCaptureRegister\000"
- 4809      52656164 
- 4809      4572726F 
- 4809      72436170 
- 4809      74757265 
- 4810              	.LASF15:
- 4811 0388 72656738 		.ascii	"reg8\000"
- 4811      00
- 4812              	.LASF1:
- 4813 038d 756E7369 		.ascii	"unsigned char\000"
- 4813      676E6564 
- 4813      20636861 
- 4813      7200
- 4814              	.LASF2:
- 4815 039b 73686F72 		.ascii	"short int\000"
- 4815      7420696E 
- 4815      7400
- 4816              	.LASF61:
- 4817 03a5 43414E5F 		.ascii	"CAN_GetTXErrorFlag\000"
- 4817      47657454 
- 4817      58457272 
- 4817      6F72466C 
- 4817      616700
- 4818              	.LASF86:
- 4819 03b8 4379496E 		.ascii	"CyIntEnable\000"
- 4819      74456E61 
- 4819      626C6500 
- 4820              	.LASF42:
- 4821 03c4 43414E5F 		.ascii	"CAN_Enable\000"
- 4821      456E6162 
- 4821      6C6500
- 4822              	.LASF37:
- 4823 03cf 43414E5F 		.ascii	"CAN_TX_STRUCT\000"
- 4823      54585F53 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 119
+ 4802              	.LASF84:
+ 4803 0396 43414E5F 		.ascii	"CAN_ArmErrorCaptureRegister\000"
+ 4803      41726D45 
+ 4803      72726F72 
+ 4803      43617074 
+ 4803      75726552 
+ 4804              	.LASF88:
+ 4805 03b2 4379496E 		.ascii	"CyIntSetPriority\000"
+ 4805      74536574 
+ 4805      5072696F 
+ 4805      72697479 
+ 4805      00
+ 4806              	.LASF74:
+ 4807 03c3 73776170 		.ascii	"swap\000"
+ 4807      00
+ 4808              	.LASF56:
+ 4809 03c8 43414E5F 		.ascii	"CAN_RXRegisterInit\000"
+ 4809      52585265 
+ 4809      67697374 
+ 4809      6572496E 
+ 4809      697400
+ 4810              	.LASF12:
+ 4811 03db 666C6F61 		.ascii	"float\000"
+ 4811      7400
+ 4812              	.LASF83:
+ 4813 03e1 43414E5F 		.ascii	"CAN_ReadErrorCaptureRegister\000"
+ 4813      52656164 
+ 4813      4572726F 
+ 4813      72436170 
+ 4813      74757265 
+ 4814              	.LASF15:
+ 4815 03fe 72656738 		.ascii	"reg8\000"
+ 4815      00
+ 4816              	.LASF1:
+ 4817 0403 756E7369 		.ascii	"unsigned char\000"
+ 4817      676E6564 
+ 4817      20636861 
+ 4817      7200
+ 4818              	.LASF2:
+ 4819 0411 73686F72 		.ascii	"short int\000"
+ 4819      7420696E 
+ 4819      7400
+ 4820              	.LASF61:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 119
 
 
- 4823      54525543 
- 4823      5400
- 4824              	.LASF91:
- 4825 03dd 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
- 4825      73657273 
- 4825      5C617573 
- 4825      74635C4F 
- 4825      6E654472 
- 4826 040a 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\CAN_Basic_P4_Original + u"
- 4826      69637332 
- 4826      3031382D 
- 4826      31395C50 
- 4826      736F6320 
- 4827 043b 61727420 		.ascii	"art debug.cydsn\000"
- 4827      64656275 
- 4827      672E6379 
- 4827      64736E00 
+ 4821 041b 43414E5F 		.ascii	"CAN_GetTXErrorFlag\000"
+ 4821      47657454 
+ 4821      58457272 
+ 4821      6F72466C 
+ 4821      616700
+ 4822              	.LASF86:
+ 4823 042e 4379496E 		.ascii	"CyIntEnable\000"
+ 4823      74456E61 
+ 4823      626C6500 
+ 4824              	.LASF42:
+ 4825 043a 43414E5F 		.ascii	"CAN_Enable\000"
+ 4825      456E6162 
+ 4825      6C6500
+ 4826              	.LASF37:
+ 4827 0445 43414E5F 		.ascii	"CAN_TX_STRUCT\000"
+ 4827      54585F53 
+ 4827      54525543 
+ 4827      5400
  4828              	.LASF81:
- 4829 044b 43414E5F 		.ascii	"CAN_SetErrorCaptureRegisterMode\000"
+ 4829 0453 43414E5F 		.ascii	"CAN_SetErrorCaptureRegisterMode\000"
  4829      53657445 
  4829      72726F72 
  4829      43617074 
  4829      75726552 
  4830              	.LASF44:
- 4831 046b 43414E5F 		.ascii	"CAN_SetPreScaler\000"
+ 4831 0473 43414E5F 		.ascii	"CAN_SetPreScaler\000"
  4831      53657450 
  4831      72655363 
  4831      616C6572 
  4831      00
  4832              	.LASF14:
- 4833 047c 63686172 		.ascii	"char\000"
+ 4833 0484 63686172 		.ascii	"char\000"
  4833      00
  4834              	.LASF54:
- 4835 0481 43414E5F 		.ascii	"CAN_SetEdgeMode\000"
+ 4835 0489 43414E5F 		.ascii	"CAN_SetEdgeMode\000"
  4835      53657445 
  4835      6467654D 
  4835      6F646500 
  4836              	.LASF58:
- 4837 0491 636F6E66 		.ascii	"config\000"
+ 4837 0499 636F6E66 		.ascii	"config\000"
  4837      696700
  4838              	.LASF68:
- 4839 0498 43414E5F 		.ascii	"CAN_TxBufConfig\000"
+ 4839 04a0 43414E5F 		.ascii	"CAN_TxBufConfig\000"
  4839      54784275 
  4839      66436F6E 
  4839      66696700 
  4840              	.LASF76:
- 4841 04a8 6C6F6361 		.ascii	"localResult\000"
+ 4841 04b0 6C6F6361 		.ascii	"localResult\000"
  4841      6C526573 
  4841      756C7400 
  4842              	.LASF72:
- 4843 04b4 43414E5F 		.ascii	"CAN_TXConfigStruct\000"
+ 4843 04bc 43414E5F 		.ascii	"CAN_TXConfigStruct\000"
  4843      5458436F 
  4843      6E666967 
  4843      53747275 
  4843      637400
  4844              	.LASF19:
- 4845 04c7 43414E5F 		.ascii	"CAN_DATA_BYTES\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 120
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 120
 
 
+ 4845 04cf 43414E5F 		.ascii	"CAN_DATA_BYTES\000"
  4845      44415441 
  4845      5F425954 
  4845      455300
  4846              	.LASF27:
- 4847 04d6 74786D61 		.ascii	"txmailbox\000"
+ 4847 04de 74786D61 		.ascii	"txmailbox\000"
  4847      696C626F 
  4847      7800
  4848              	.LASF49:
- 4849 04e0 63666754 		.ascii	"cfgTseg1\000"
+ 4849 04e8 63666754 		.ascii	"cfgTseg1\000"
  4849      73656731 
  4849      00
  4850              	.LASF50:
- 4851 04e9 63666754 		.ascii	"cfgTseg2\000"
+ 4851 04f1 63666754 		.ascii	"cfgTseg2\000"
  4851      73656732 
  4851      00
  4852              	.LASF48:
- 4853 04f2 43414E5F 		.ascii	"CAN_SetTsegSample\000"
+ 4853 04fa 43414E5F 		.ascii	"CAN_SetTsegSample\000"
  4853      53657454 
  4853      73656753 
  4853      616D706C 
  4853      6500
  4854              	.LASF23:
- 4855 0504 7278636D 		.ascii	"rxcmd\000"
+ 4855 050c 7278636D 		.ascii	"rxcmd\000"
  4855      6400
  4856              	.LASF69:
- 4857 050a 7478436F 		.ascii	"txConfig\000"
+ 4857 0512 7478436F 		.ascii	"txConfig\000"
  4857      6E666967 
  4857      00
  4858              	.LASF66:
- 4859 0513 43414E5F 		.ascii	"CAN_RxBufConfig\000"
+ 4859 051b 43414E5F 		.ascii	"CAN_RxBufConfig\000"
  4859      52784275 
  4859      66436F6E 
  4859      66696700 
  4860              	.LASF29:
- 4861 0523 74786964 		.ascii	"txid\000"
+ 4861 052b 74786964 		.ascii	"txid\000"
  4861      00
  4862              	.LASF25:
- 4863 0528 72786163 		.ascii	"rxacr\000"
+ 4863 0530 72786163 		.ascii	"rxacr\000"
  4863      7200
  4864              	.LASF47:
- 4865 052e 61726269 		.ascii	"arbiter\000"
+ 4865 0536 61726269 		.ascii	"arbiter\000"
  4865      74657200 
  4866              	.LASF34:
- 4867 0536 72786163 		.ascii	"rxacrd\000"
+ 4867 053e 72786163 		.ascii	"rxacrd\000"
  4867      726400
  4868              	.LASF30:
- 4869 053d 43414E5F 		.ascii	"CAN_TX_CFG\000"
+ 4869 0545 43414E5F 		.ascii	"CAN_TX_CFG\000"
  4869      54585F43 
  4869      464700
  4870              	.LASF39:
- 4871 0548 72657375 		.ascii	"result\000"
+ 4871 0550 72657375 		.ascii	"result\000"
  4871      6C7400
  4872              	.LASF52:
- 4873 054f 43414E5F 		.ascii	"CAN_SetRestartType\000"
+ 4873 0557 43414E5F 		.ascii	"CAN_SetRestartType\000"
  4873      53657452 
  4873      65737461 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccik3nSg.s 			page 121
+
+
  4873      72745479 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBmW9TW.s 			page 121
-
-
  4873      706500
  4874              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

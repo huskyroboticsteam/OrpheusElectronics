@@ -1,5 +1,5 @@
 # CAN_Full_P4_Example01
-# 2018-11-20 08:56:31Z
+# 2019-02-06 07:31:27Z
 
 # IO_4@[IOP=(0)][IoId=(4)] is reserved: KhzXtalEnabled
 dont_use_io iocell 0 4
@@ -12,7 +12,7 @@ dont_use_io iocell 3 3
 set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
 set_location "ClockBlock" m0s8clockblockcell -1 -1 0
 set_io "RX(0)" iocell 0 0
-set_io "TX(0)" iocell 0 1
+set_io "TX(0)" iocell 4 6
 set_io "\UART:tx(0)\" iocell 3 1
 set_io "\UART:rx(0)\" iocell 3 0
 set_location "\UART:SCB\" m0s8scbcell -1 -1 1

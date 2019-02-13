@@ -1,6 +1,6 @@
 -- ======================================================================
 -- CAN_Full_P4_Example01.ctl generated from CAN_Full_P4_Example01
--- 11/20/2018 at 00:56
+-- 02/05/2019 at 23:31
 -- This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 -- ======================================================================
 

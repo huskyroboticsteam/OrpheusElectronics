@@ -3,17 +3,19 @@
 <!--This file is machine generated and read. It is not intended to be edited by hand.-->
 <!--Due to this, there is no schema for this file.-->
 <CyGuid_2867d519-54d2-4c01-9830-c51cb08bc3dd type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWorkspaceSerialize" version="5" xml_contents_version="3" name="Psoc Arm" persistent="Psoc Arm.cywrk" platform="NOT_USED">
-<current_project name=".\Design01.cydsn\Design01.cyprj" />
+<current_project name=".\Motor Board.cydsn\Motor Board.cyprj" />
 <wrkspc_folders />
 <files />
 <projects>
-<v>.\Design01.cydsn\Design01.cyprj</v>
+<v>.\Dev Board.cydsn\Dev Board.cyprj</v>
 <v>..\..\..\PSoC Creator\DebouncerExample01.cydsn\DebouncerExample01.cyprj</v>
 <v>.\CAN_Basic_P4_Example01.cydsn\CAN_Basic_P4_Example01.cyprj</v>
 <v>.\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj</v>
 <v>.\Can Send test.cydsn\Can Send test.cyprj</v>
 <v>.\CAN_Basic_P4_unmodified.cydsn\CAN_Basic_P4_unmodified.cyprj</v>
 <v>.\working CAN_Basic_P4_Original + uart debug.cydsn\working CAN_Basic_P4_Original + uart debug.cyprj</v>
+<v>.\CAN_Full_P4_Example02.cydsn\CAN_Full_P4_Example02.cyprj</v>
+<v>.\Motor Board.cydsn\Motor Board.cyprj</v>
 </projects>
 <workspace_id v="b047e3a0-d217-403c-b935-5cf79557afe5" />
 <WriteAppVersionLastSavedWith v="4.2.0.641" />

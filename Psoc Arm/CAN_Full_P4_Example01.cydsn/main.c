@@ -100,7 +100,7 @@ int main()
     messagePWM.rtr = PWM_MESSAGE_RTR;
 
     UART_Start();
-    CAN_Init(); 
+
     CAN_Start();
 
     /* Set CAN interrupt handler to local routine */

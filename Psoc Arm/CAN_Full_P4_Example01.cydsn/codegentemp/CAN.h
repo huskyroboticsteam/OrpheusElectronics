@@ -85,7 +85,7 @@ extern uint8 CAN_initVar;
 #define CAN_TX7_FUNC_ENABLE            (0u)
 #define CAN_RX0_FUNC_ENABLE            (1u)
 #define CAN_RX1_FUNC_ENABLE            (1u)
-#define CAN_RX2_FUNC_ENABLE            (0u)
+#define CAN_RX2_FUNC_ENABLE            (1u)
 #define CAN_RX3_FUNC_ENABLE            (0u)
 #define CAN_RX4_FUNC_ENABLE            (0u)
 #define CAN_RX5_FUNC_ENABLE            (0u)
@@ -99,7 +99,7 @@ extern uint8 CAN_initVar;
 #define CAN_RX13_FUNC_ENABLE           (0u)
 #define CAN_RX14_FUNC_ENABLE           (0u)
 #define CAN_RX15_FUNC_ENABLE           (0u)
-#define CAN_RX_MAILBOX_TYPE            (0x3u)
+#define CAN_RX_MAILBOX_TYPE            (0x7u)
 #define CAN_TX_MAILBOX_TYPE            (0x0u)
 
 
@@ -444,7 +444,7 @@ void  CAN_ReceiveMsg(uint8 rxMailbox) ;
 ***************************************/
 
 /* General */
-#define CAN_BITRATE                   (11u)
+#define CAN_BITRATE                   (23u)
 #define CAN_CFG_REG_TSEG1             (13u - 1u)
 #define CAN_CFG_REG_TSEG2             (2u - 1u)
 #define CAN_CFG_REG_SJW               (2u - 1u)

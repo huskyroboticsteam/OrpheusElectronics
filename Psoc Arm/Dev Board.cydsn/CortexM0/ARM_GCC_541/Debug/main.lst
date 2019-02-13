@@ -1,0 +1,3675 @@
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ISR_CAN,"ax",%progbits
+  20              		.align	2
+  21              		.global	ISR_CAN
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	ISR_CAN, %function
+  25              	ISR_CAN:
+  26              	.LFB44:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include <project.h>
+  13:main.c        **** #include "cyapicallbacks.h"
+  14:main.c        **** #include <stdio.h>
+  15:main.c        **** 
+  16:main.c        **** uint32 message_id = 0;
+  17:main.c        **** #define MESSAGE_IDE             (0u)    /* Standard message */
+  18:main.c        **** #define MESSAGE_IRQ             (0u)    /* No transmit IRQ */
+  19:main.c        **** #define MESSAGE_RTR             (0u)    /* No RTR */
+  20:main.c        **** 
+  21:main.c        **** #define TX_DATA_SIZE            (50u)
+  22:main.c        **** #define PWM_PERIOD = 1000;
+  23:main.c        **** 
+  24:main.c        **** CY_ISR_PROTO(ISR_CAN);
+  25:main.c        **** //global var
+  26:main.c        **** uint8 uart_debug = 1;
+  27:main.c        **** int GEAR_RATIO;
+  28:main.c        **** int CAN_TIMEOUT;
+  29:main.c        **** int pwm_compare;
+  30:main.c        **** int i = 0;
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 2
+
+
+  31:main.c        **** int lastp = 0;
+  32:main.c        **** int kp,ki,kd;
+  33:main.c        **** volatile uint8 isrFlag = 0u;
+  34:main.c        **** 
+  35:main.c        **** int mailbox = 0x000;
+  36:main.c        **** uint8 emergency = 0;
+  37:main.c        **** char8 txData[TX_DATA_SIZE];
+  38:main.c        **** /* Global variables used to store configuration and data for BASIC CAN mailbox */
+  39:main.c        **** CAN_DATA_BYTES_MSG data;
+  40:main.c        **** CAN_TX_MSG message;
+  41:main.c        **** 
+  42:main.c        **** 
+  43:main.c        **** 
+  44:main.c        **** 
+  45:main.c        **** CY_ISR(Pin_Limit_1_Handler){// void Pin_SW_Handler(void)
+  46:main.c        ****     set_PWM(pwm_compare);
+  47:main.c        ****     Pin_Limit_1_ClearInterrupt();
+  48:main.c        **** }
+  49:main.c        **** 
+  50:main.c        **** int main(void)
+  51:main.c        **** {
+  52:main.c        **** 
+  53:main.c        ****     initialize_can_addr();
+  54:main.c        ****         /* BASIC CAN mailbox configuration */
+  55:main.c        ****     message.dlc = CAN_TX_DLC_MAX_VALUE;
+  56:main.c        ****     set_CAN_ID(0b1);
+  57:main.c        ****     message.ide = MESSAGE_IDE;
+  58:main.c        ****     message.irq = MESSAGE_IRQ;
+  59:main.c        ****     message.msg = &data;
+  60:main.c        ****     message.rtr = MESSAGE_RTR;
+  61:main.c        ****     CyIntSetVector(CAN_ISR_NUMBER, ISR_CAN);
+  62:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  63:main.c        ****     initialize();
+  64:main.c        ****     int test = 0b1;
+  65:main.c        ****     for(;;)
+  66:main.c        ****     {
+  67:main.c        ****         if(!emergency) {
+  68:main.c        ****            //Spare1_Write((Status_Reg_Switches_Read() & 0b10) >> 0b1);
+  69:main.c        ****            //Spare2_Write(Status_Reg_Switches_Read() & 0b01);
+  70:main.c        ****             CAN_Send_Model();
+  71:main.c        ****             CyDelay(1000);
+  72:main.c        ****             /*CyDelay(1000);
+  73:main.c        ****             CAN_Send_Encoder();
+  74:main.c        ****             CyDelay(1000);
+  75:main.c        ****             CAN_Send_Telemetry();
+  76:main.c        ****             CyDelay(1000);
+  77:main.c        ****             */
+  78:main.c        **** 
+  79:main.c        ****            //set_PWM(pwm_compare); 
+  80:main.c        ****            /* CyDelay(100);
+  81:main.c        ****             if(up){
+  82:main.c        ****                 pwm_compare += 100;
+  83:main.c        ****             } else {
+  84:main.c        ****                 pwm_compare -= 100;   
+  85:main.c        ****             }
+  86:main.c        ****             if(pwm_compare > 1000) {
+  87:main.c        ****                 up = 0;   
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 3
+
+
+  88:main.c        ****             } else if (pwm_compare < -1000) {
+  89:main.c        ****                 up = 1;
+  90:main.c        ****             }
+  91:main.c        ****             */
+  92:main.c        ****             // inturupts limit switch, stops motor
+  93:main.c        ****             // intrupts second priority to read CAN
+  94:main.c        ****             // sets PWM
+  95:main.c        ****             // hardware encoder counter
+  96:main.c        ****             // read pot info
+  97:main.c        ****             // Sends to BB info over CAN
+  98:main.c        ****             // if no CAN data after ~100ms stop motors
+  99:main.c        ****         }
+ 100:main.c        ****     }
+ 101:main.c        **** }
+ 102:main.c        **** /*
+ 103:main.c        **** void check_Pin(void) {
+ 104:main.c        ****     if(Status_Reg_Switches_ReadMask() & 0b01) {
+ 105:main.c        ****         limit_1_pressed = 0;
+ 106:main.c        ****     }
+ 107:main.c        ****     if(Status_Reg_Switches_ReadMask() & 0b10) {
+ 108:main.c        ****         limit_2_pressed = 0;   
+ 109:main.c        ****     }
+ 110:main.c        **** }
+ 111:main.c        **** */
+ 112:main.c        **** void emergency_halt(void) {
+ 113:main.c        ****     PWM_Motor_Stop();
+ 114:main.c        ****     emergency = 1;
+ 115:main.c        ****     // stops all motors;
+ 116:main.c        ****     // waits for restart CAN signal.
+ 117:main.c        **** }
+ 118:main.c        **** 
+ 119:main.c        **** 
+ 120:main.c        **** //11000000010 0x602 base rotation to BBB 
+ 121:main.c        **** //11000100010 0x622 shoulder to BBB
+ 122:main.c        **** //11001000010 0x642 elbow ""
+ 123:main.c        **** //11001100010 0x662 forearm rotation ""
+ 124:main.c        **** //11010000010 0x682 diff wrist 1 ""
+ 125:main.c        **** //11010100010 0x6A2 diff wrist 2 ""
+ 126:main.c        **** //11011000010 0x6C2 hand ""
+ 127:main.c        **** void initialize_can_addr(void) {
+ 128:main.c        ****     uint8 setting = Can_addr_Read();
+ 129:main.c        ****     switch(Can_addr_Read()) {
+ 130:main.c        ****         case 0b1111:
+ 131:main.c        ****             message_id = 0b10000;
+ 132:main.c        ****         case 0b0001:
+ 133:main.c        ****             message_id = 0b10001;
+ 134:main.c        ****         case 0b0010:
+ 135:main.c        ****             message_id = 0b10011;
+ 136:main.c        ****         case 0b0011:
+ 137:main.c        ****             message_id = 0b10100;
+ 138:main.c        ****         case 0b0100:
+ 139:main.c        ****             message_id = 0b10100;
+ 140:main.c        ****         case 0b0101:
+ 141:main.c        ****             message_id = 0b10101;
+ 142:main.c        ****         case 0b0110:
+ 143:main.c        ****             message_id = 0b10110;
+ 144:main.c        ****     }
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 4
+
+
+ 145:main.c        ****    // MESSAGE_ID = 0x6C2u;
+ 146:main.c        ****     if(uart_debug) {
+ 147:main.c        ****         sprintf(txData, "CAN dip setting:  %x Message ID: %lx\r\n",setting, message_id);
+ 148:main.c        ****         UART_UartPutString(txData); 
+ 149:main.c        ****     }
+ 150:main.c        **** }
+ 151:main.c        **** 
+ 152:main.c        **** void set_CAN_ID(uint32 priority) {
+ 153:main.c        ****     message.id = (priority << 10) | (message_id << 5) | 0b00010;
+ 154:main.c        **** }
+ 155:main.c        **** 
+ 156:main.c        **** void initialize(void) {
+ 157:main.c        ****     int can_start = CAN_Start();
+ 158:main.c        ****   //  int can_global = CAN_GlobalIntEnable();
+ 159:main.c        ****     ADC_SAR_Seq_1_Start();
+ 160:main.c        ****     ADC_SAR_Seq_1_StartConvert();
+ 161:main.c        ****     QuadDec_Start();// QuadDec_GetCounter()
+ 162:main.c        ****     PWM_Motor_Start();
+ 163:main.c        ****     if(uart_debug) {
+ 164:main.c        ****         UART_Start();
+ 165:main.c        ****         sprintf(txData, "CAN_Start():  %u\r\n",can_start);
+ 166:main.c        ****         UART_UartPutString(txData); 
+ 167:main.c        ****       //  sprintf(txData, "CAN_GlobalIntEnable():  %u\r\n",can_global);
+ 168:main.c        ****      //   UART_UartPutString(txData); 
+ 169:main.c        ****     }
+ 170:main.c        **** }
+ 171:main.c        **** void CAN_Send_Encoder(void){
+ 172:main.c        ****     //message.id = 0x1;
+ 173:main.c        ****     data.byte[0u] = 0x14u;
+ 174:main.c        ****     data.byte[1u] = LO8(QuadDec_GetCounter());
+ 175:main.c        ****     data.byte[2u] = HI8(QuadDec_GetCounter());
+ 176:main.c        ****     data.byte[3u] = 0;
+ 177:main.c        ****     data.byte[4u] = 0;
+ 178:main.c        ****     CAN_SendMsg(&message);
+ 179:main.c        ****     if(uart_debug) {
+ 180:main.c        ****         sprintf(txData, "CAN_Send_Encoder: byte[0u] %x byte[1u] %x\r\n",data.byte[0u],data.byte[1u]
+ 181:main.c        ****         UART_UartPutString(txData); 
+ 182:main.c        ****     }
+ 183:main.c        **** }
+ 184:main.c        **** 
+ 185:main.c        **** void CAN_Send_Telemetry(void) {
+ 186:main.c        ****     //message.id = 0x2;
+ 187:main.c        ****     data.byte[0u] = 0x18u;
+ 188:main.c        ****     data.byte[1u] = 1;
+ 189:main.c        ****     data.byte[2u] = 2;
+ 190:main.c        ****     data.byte[3u] = 3;
+ 191:main.c        ****     data.byte[4u] = 4;
+ 192:main.c        ****     CAN_SendMsg(&message);
+ 193:main.c        ****     if(uart_debug) {
+ 194:main.c        ****         sprintf(txData, "Telemerty: byte[0u] %x byte[1u] %x\r\n",data.byte[0u],data.byte[1u]);
+ 195:main.c        ****         UART_UartPutString(txData); 
+ 196:main.c        ****     }
+ 197:main.c        **** }
+ 198:main.c        **** 
+ 199:main.c        **** void CAN_Send_Model(void) {
+ 200:main.c        ****     //message.id = 0x3;
+ 201:main.c        ****     data.byte[0u] = 0x12u;
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 5
+
+
+ 202:main.c        ****     data.byte[1u] = Can_addr_Read();
+ 203:main.c        ****    // data.byte[2u] = 0;
+ 204:main.c        ****     //data.byte[3u] = 0;
+ 205:main.c        ****    // data.byte[4u] = 0;
+ 206:main.c        ****     CAN_SendMsg(&message);
+ 207:main.c        ****     if(uart_debug) {
+ 208:main.c        ****         sprintf(txData, "Model: byte[0u] %x byte[1u] %x\r\n",data.byte[0u],data.byte[1u]);
+ 209:main.c        ****         UART_UartPutString(txData); 
+ 210:main.c        ****     }
+ 211:main.c        **** }
+ 212:main.c        **** /*
+ 213:main.c        **** void CAN_Read(int *read) {
+ 214:main.c        ****     // writes to the read array the data that was sent
+ 215:main.c        **** }
+ 216:main.c        **** 
+ 217:main.c        **** void CAN_Send(int Mailbox, uint8 type, uint8 b1, uint8 b2, uint8 b3, uint8 b4) {
+ 218:main.c        ****     int send_msg = CAN_SendMsg();
+ 219:main.c        ****     if(uart_debug) {
+ 220:main.c        ****         sprintf(txData, "Can send adc msg:  %u\r\n", send_msg );
+ 221:main.c        ****         UART_UartPutString(txData);
+ 222:main.c        ****     }
+ 223:main.c        **** }
+ 224:main.c        **** */
+ 225:main.c        **** CY_ISR(ISR_CAN)
+ 226:main.c        **** {
+  28              		.loc 1 226 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+ 227:main.c        ****     /* Clear Receive Message flag */
+ 228:main.c        ****     CAN_INT_SR_REG = CAN_RX_MESSAGE_MASK;
+  33              		.loc 1 228 0
+  34 0000 8022     		movs	r2, #128
+  35 0002 5201     		lsls	r2, r2, #5
+  36 0004 044B     		ldr	r3, .L2
+  37 0006 1A60     		str	r2, [r3]
+ 229:main.c        **** 
+ 230:main.c        ****     /* Set the isrFlag */
+ 231:main.c        ****     isrFlag = 1u;
+  38              		.loc 1 231 0
+  39 0008 0123     		movs	r3, #1
+  40 000a 044A     		ldr	r2, .L2+4
+  41 000c 1370     		strb	r3, [r2]
+ 232:main.c        **** 
+ 233:main.c        ****     /* Acknowledges receipt of new message */
+ 234:main.c        ****     CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_0);
+  42              		.loc 1 234 0
+  43 000e 044A     		ldr	r2, .L2+8
+  44 0010 1168     		ldr	r1, [r2]
+  45 0012 0B43     		orrs	r3, r1
+  46 0014 1360     		str	r3, [r2]
+ 235:main.c        **** }
+  47              		.loc 1 235 0
+  48              		@ sp needed
+  49 0016 7047     		bx	lr
+  50              	.L3:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 6
+
+
+  51              		.align	2
+  52              	.L2:
+  53 0018 00002F40 		.word	1076822016
+  54 001c 00000000 		.word	.LANCHOR0
+  55 0020 A0002F40 		.word	1076822176
+  56              		.cfi_endproc
+  57              	.LFE44:
+  58              		.size	ISR_CAN, .-ISR_CAN
+  59              		.section	.text.emergency_halt,"ax",%progbits
+  60              		.align	2
+  61              		.global	emergency_halt
+  62              		.code	16
+  63              		.thumb_func
+  64              		.type	emergency_halt, %function
+  65              	emergency_halt:
+  66              	.LFB37:
+ 112:main.c        ****     PWM_Motor_Stop();
+  67              		.loc 1 112 0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 0000 10B5     		push	{r4, lr}
+  72              		.cfi_def_cfa_offset 8
+  73              		.cfi_offset 4, -8
+  74              		.cfi_offset 14, -4
+ 113:main.c        ****     emergency = 1;
+  75              		.loc 1 113 0
+  76 0002 FFF7FEFF 		bl	PWM_Motor_Stop
+  77              	.LVL0:
+ 114:main.c        ****     // stops all motors;
+  78              		.loc 1 114 0
+  79 0006 0122     		movs	r2, #1
+  80 0008 014B     		ldr	r3, .L5
+  81 000a 5A70     		strb	r2, [r3, #1]
+ 117:main.c        **** 
+  82              		.loc 1 117 0
+  83              		@ sp needed
+  84 000c 10BD     		pop	{r4, pc}
+  85              	.L6:
+  86 000e C046     		.align	2
+  87              	.L5:
+  88 0010 00000000 		.word	.LANCHOR0
+  89              		.cfi_endproc
+  90              	.LFE37:
+  91              		.size	emergency_halt, .-emergency_halt
+  92              		.section	.text.initialize_can_addr,"ax",%progbits
+  93              		.align	2
+  94              		.global	initialize_can_addr
+  95              		.code	16
+  96              		.thumb_func
+  97              		.type	initialize_can_addr, %function
+  98              	initialize_can_addr:
+  99              	.LFB38:
+ 127:main.c        ****     uint8 setting = Can_addr_Read();
+ 100              		.loc 1 127 0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 7
+
+
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104 0000 70B5     		push	{r4, r5, r6, lr}
+ 105              		.cfi_def_cfa_offset 16
+ 106              		.cfi_offset 4, -16
+ 107              		.cfi_offset 5, -12
+ 108              		.cfi_offset 6, -8
+ 109              		.cfi_offset 14, -4
+ 128:main.c        ****     switch(Can_addr_Read()) {
+ 110              		.loc 1 128 0
+ 111 0002 FFF7FEFF 		bl	Can_addr_Read
+ 112              	.LVL1:
+ 113 0006 0400     		movs	r4, r0
+ 114              	.LVL2:
+ 129:main.c        ****         case 0b1111:
+ 115              		.loc 1 129 0
+ 116 0008 FFF7FEFF 		bl	Can_addr_Read
+ 117              	.LVL3:
+ 118 000c 0F28     		cmp	r0, #15
+ 119 000e 06D8     		bhi	.L8
+ 120 0010 8000     		lsls	r0, r0, #2
+ 121 0012 0B4B     		ldr	r3, .L18
+ 122 0014 1B58     		ldr	r3, [r3, r0]
+ 123 0016 9F46     		mov	pc, r3
+ 124              		.section	.rodata
+ 125              		.align	2
+ 126              	.L10:
+ 127 0000 1E000000 		.word	.L8
+ 128 0004 18000000 		.word	.L15
+ 129 0008 18000000 		.word	.L15
+ 130 000c 18000000 		.word	.L15
+ 131 0010 18000000 		.word	.L15
+ 132 0014 18000000 		.word	.L15
+ 133 0018 18000000 		.word	.L15
+ 134 001c 1E000000 		.word	.L8
+ 135 0020 1E000000 		.word	.L8
+ 136 0024 1E000000 		.word	.L8
+ 137 0028 1E000000 		.word	.L8
+ 138 002c 1E000000 		.word	.L8
+ 139 0030 1E000000 		.word	.L8
+ 140 0034 1E000000 		.word	.L8
+ 141 0038 1E000000 		.word	.L8
+ 142 003c 18000000 		.word	.L15
+ 143              		.section	.text.initialize_can_addr
+ 144              	.L15:
+ 143:main.c        ****     }
+ 145              		.loc 1 143 0
+ 146 0018 1622     		movs	r2, #22
+ 147 001a 0A4B     		ldr	r3, .L18+4
+ 148 001c 5A60     		str	r2, [r3, #4]
+ 149              	.L8:
+ 146:main.c        ****         sprintf(txData, "CAN dip setting:  %x Message ID: %lx\r\n",setting, message_id);
+ 150              		.loc 1 146 0
+ 151 001e 0A4B     		ldr	r3, .L18+8
+ 152 0020 1B78     		ldrb	r3, [r3]
+ 153 0022 002B     		cmp	r3, #0
+ 154 0024 0AD0     		beq	.L7
+ 147:main.c        ****         UART_UartPutString(txData); 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 8
+
+
+ 155              		.loc 1 147 0
+ 156 0026 074B     		ldr	r3, .L18+4
+ 157 0028 5B68     		ldr	r3, [r3, #4]
+ 158 002a 084D     		ldr	r5, .L18+12
+ 159 002c 2200     		movs	r2, r4
+ 160 002e 0849     		ldr	r1, .L18+16
+ 161 0030 2800     		movs	r0, r5
+ 162 0032 FFF7FEFF 		bl	sprintf
+ 163              	.LVL4:
+ 148:main.c        ****     }
+ 164              		.loc 1 148 0
+ 165 0036 2800     		movs	r0, r5
+ 166 0038 FFF7FEFF 		bl	UART_UartPutString
+ 167              	.LVL5:
+ 168              	.L7:
+ 150:main.c        **** 
+ 169              		.loc 1 150 0
+ 170              		@ sp needed
+ 171              	.LVL6:
+ 172 003c 70BD     		pop	{r4, r5, r6, pc}
+ 173              	.L19:
+ 174 003e C046     		.align	2
+ 175              	.L18:
+ 176 0040 00000000 		.word	.L10
+ 177 0044 00000000 		.word	.LANCHOR0
+ 178 0048 00000000 		.word	.LANCHOR1
+ 179 004c 00000000 		.word	txData
+ 180 0050 00000000 		.word	.LC5
+ 181              		.cfi_endproc
+ 182              	.LFE38:
+ 183              		.size	initialize_can_addr, .-initialize_can_addr
+ 184              		.section	.text.set_CAN_ID,"ax",%progbits
+ 185              		.align	2
+ 186              		.global	set_CAN_ID
+ 187              		.code	16
+ 188              		.thumb_func
+ 189              		.type	set_CAN_ID, %function
+ 190              	set_CAN_ID:
+ 191              	.LFB39:
+ 152:main.c        ****     message.id = (priority << 10) | (message_id << 5) | 0b00010;
+ 192              		.loc 1 152 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              		@ link register save eliminated.
+ 197              	.LVL7:
+ 153:main.c        **** }
+ 198              		.loc 1 153 0
+ 199 0000 8002     		lsls	r0, r0, #10
+ 200              	.LVL8:
+ 201 0002 044B     		ldr	r3, .L21
+ 202 0004 5B68     		ldr	r3, [r3, #4]
+ 203 0006 5B01     		lsls	r3, r3, #5
+ 204 0008 1843     		orrs	r0, r3
+ 205 000a 0223     		movs	r3, #2
+ 206 000c 1843     		orrs	r0, r3
+ 207 000e 024B     		ldr	r3, .L21+4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 9
+
+
+ 208 0010 1860     		str	r0, [r3]
+ 154:main.c        **** 
+ 209              		.loc 1 154 0
+ 210              		@ sp needed
+ 211 0012 7047     		bx	lr
+ 212              	.L22:
+ 213              		.align	2
+ 214              	.L21:
+ 215 0014 00000000 		.word	.LANCHOR0
+ 216 0018 00000000 		.word	message
+ 217              		.cfi_endproc
+ 218              	.LFE39:
+ 219              		.size	set_CAN_ID, .-set_CAN_ID
+ 220              		.section	.text.initialize,"ax",%progbits
+ 221              		.align	2
+ 222              		.global	initialize
+ 223              		.code	16
+ 224              		.thumb_func
+ 225              		.type	initialize, %function
+ 226              	initialize:
+ 227              	.LFB40:
+ 156:main.c        ****     int can_start = CAN_Start();
+ 228              		.loc 1 156 0
+ 229              		.cfi_startproc
+ 230              		@ args = 0, pretend = 0, frame = 0
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232 0000 70B5     		push	{r4, r5, r6, lr}
+ 233              		.cfi_def_cfa_offset 16
+ 234              		.cfi_offset 4, -16
+ 235              		.cfi_offset 5, -12
+ 236              		.cfi_offset 6, -8
+ 237              		.cfi_offset 14, -4
+ 157:main.c        ****   //  int can_global = CAN_GlobalIntEnable();
+ 238              		.loc 1 157 0
+ 239 0002 FFF7FEFF 		bl	CAN_Start
+ 240              	.LVL9:
+ 241 0006 0400     		movs	r4, r0
+ 242              	.LVL10:
+ 159:main.c        ****     ADC_SAR_Seq_1_StartConvert();
+ 243              		.loc 1 159 0
+ 244 0008 FFF7FEFF 		bl	ADC_SAR_Seq_1_Start
+ 245              	.LVL11:
+ 160:main.c        ****     QuadDec_Start();// QuadDec_GetCounter()
+ 246              		.loc 1 160 0
+ 247 000c FFF7FEFF 		bl	ADC_SAR_Seq_1_StartConvert
+ 248              	.LVL12:
+ 161:main.c        ****     PWM_Motor_Start();
+ 249              		.loc 1 161 0
+ 250 0010 FFF7FEFF 		bl	QuadDec_Start
+ 251              	.LVL13:
+ 162:main.c        ****     if(uart_debug) {
+ 252              		.loc 1 162 0
+ 253 0014 FFF7FEFF 		bl	PWM_Motor_Start
+ 254              	.LVL14:
+ 163:main.c        ****         UART_Start();
+ 255              		.loc 1 163 0
+ 256 0018 074B     		ldr	r3, .L25
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 10
+
+
+ 257 001a 1B78     		ldrb	r3, [r3]
+ 258 001c 002B     		cmp	r3, #0
+ 259 001e 0AD0     		beq	.L23
+ 164:main.c        ****         sprintf(txData, "CAN_Start():  %u\r\n",can_start);
+ 260              		.loc 1 164 0
+ 261 0020 FFF7FEFF 		bl	UART_Start
+ 262              	.LVL15:
+ 165:main.c        ****         UART_UartPutString(txData); 
+ 263              		.loc 1 165 0
+ 264 0024 054D     		ldr	r5, .L25+4
+ 265 0026 2200     		movs	r2, r4
+ 266 0028 0549     		ldr	r1, .L25+8
+ 267 002a 2800     		movs	r0, r5
+ 268 002c FFF7FEFF 		bl	sprintf
+ 269              	.LVL16:
+ 166:main.c        ****       //  sprintf(txData, "CAN_GlobalIntEnable():  %u\r\n",can_global);
+ 270              		.loc 1 166 0
+ 271 0030 2800     		movs	r0, r5
+ 272 0032 FFF7FEFF 		bl	UART_UartPutString
+ 273              	.LVL17:
+ 274              	.L23:
+ 170:main.c        **** void CAN_Send_Encoder(void){
+ 275              		.loc 1 170 0
+ 276              		@ sp needed
+ 277              	.LVL18:
+ 278 0036 70BD     		pop	{r4, r5, r6, pc}
+ 279              	.L26:
+ 280              		.align	2
+ 281              	.L25:
+ 282 0038 00000000 		.word	.LANCHOR1
+ 283 003c 00000000 		.word	txData
+ 284 0040 28000000 		.word	.LC11
+ 285              		.cfi_endproc
+ 286              	.LFE40:
+ 287              		.size	initialize, .-initialize
+ 288              		.section	.text.CAN_Send_Encoder,"ax",%progbits
+ 289              		.align	2
+ 290              		.global	CAN_Send_Encoder
+ 291              		.code	16
+ 292              		.thumb_func
+ 293              		.type	CAN_Send_Encoder, %function
+ 294              	CAN_Send_Encoder:
+ 295              	.LFB41:
+ 171:main.c        ****     //message.id = 0x1;
+ 296              		.loc 1 171 0
+ 297              		.cfi_startproc
+ 298              		@ args = 0, pretend = 0, frame = 0
+ 299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 300 0000 10B5     		push	{r4, lr}
+ 301              		.cfi_def_cfa_offset 8
+ 302              		.cfi_offset 4, -8
+ 303              		.cfi_offset 14, -4
+ 173:main.c        ****     data.byte[1u] = LO8(QuadDec_GetCounter());
+ 304              		.loc 1 173 0
+ 305 0002 104C     		ldr	r4, .L29
+ 306 0004 1423     		movs	r3, #20
+ 307 0006 2370     		strb	r3, [r4]
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 11
+
+
+ 174:main.c        ****     data.byte[2u] = HI8(QuadDec_GetCounter());
+ 308              		.loc 1 174 0
+ 309 0008 FFF7FEFF 		bl	QuadDec_GetCounter
+ 310              	.LVL19:
+ 311 000c 6070     		strb	r0, [r4, #1]
+ 175:main.c        ****     data.byte[3u] = 0;
+ 312              		.loc 1 175 0
+ 313 000e FFF7FEFF 		bl	QuadDec_GetCounter
+ 314              	.LVL20:
+ 315 0012 80B2     		uxth	r0, r0
+ 316 0014 000A     		lsrs	r0, r0, #8
+ 317 0016 A070     		strb	r0, [r4, #2]
+ 176:main.c        ****     data.byte[4u] = 0;
+ 318              		.loc 1 176 0
+ 319 0018 0023     		movs	r3, #0
+ 320 001a E370     		strb	r3, [r4, #3]
+ 177:main.c        ****     CAN_SendMsg(&message);
+ 321              		.loc 1 177 0
+ 322 001c 2371     		strb	r3, [r4, #4]
+ 178:main.c        ****     if(uart_debug) {
+ 323              		.loc 1 178 0
+ 324 001e 0A48     		ldr	r0, .L29+4
+ 325 0020 FFF7FEFF 		bl	CAN_SendMsg
+ 326              	.LVL21:
+ 179:main.c        ****         sprintf(txData, "CAN_Send_Encoder: byte[0u] %x byte[1u] %x\r\n",data.byte[0u],data.byte[1u]
+ 327              		.loc 1 179 0
+ 328 0024 094B     		ldr	r3, .L29+8
+ 329 0026 1B78     		ldrb	r3, [r3]
+ 330 0028 002B     		cmp	r3, #0
+ 331 002a 0AD0     		beq	.L27
+ 180:main.c        ****         UART_UartPutString(txData); 
+ 332              		.loc 1 180 0
+ 333 002c 054B     		ldr	r3, .L29
+ 334 002e 1A78     		ldrb	r2, [r3]
+ 335 0030 5B78     		ldrb	r3, [r3, #1]
+ 336 0032 074C     		ldr	r4, .L29+12
+ 337 0034 0749     		ldr	r1, .L29+16
+ 338 0036 2000     		movs	r0, r4
+ 339 0038 FFF7FEFF 		bl	sprintf
+ 340              	.LVL22:
+ 181:main.c        ****     }
+ 341              		.loc 1 181 0
+ 342 003c 2000     		movs	r0, r4
+ 343 003e FFF7FEFF 		bl	UART_UartPutString
+ 344              	.LVL23:
+ 345              	.L27:
+ 183:main.c        **** 
+ 346              		.loc 1 183 0
+ 347              		@ sp needed
+ 348 0042 10BD     		pop	{r4, pc}
+ 349              	.L30:
+ 350              		.align	2
+ 351              	.L29:
+ 352 0044 00000000 		.word	data
+ 353 0048 00000000 		.word	message
+ 354 004c 00000000 		.word	.LANCHOR1
+ 355 0050 00000000 		.word	txData
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 12
+
+
+ 356 0054 3C000000 		.word	.LC17
+ 357              		.cfi_endproc
+ 358              	.LFE41:
+ 359              		.size	CAN_Send_Encoder, .-CAN_Send_Encoder
+ 360              		.section	.text.CAN_Send_Telemetry,"ax",%progbits
+ 361              		.align	2
+ 362              		.global	CAN_Send_Telemetry
+ 363              		.code	16
+ 364              		.thumb_func
+ 365              		.type	CAN_Send_Telemetry, %function
+ 366              	CAN_Send_Telemetry:
+ 367              	.LFB42:
+ 185:main.c        ****     //message.id = 0x2;
+ 368              		.loc 1 185 0
+ 369              		.cfi_startproc
+ 370              		@ args = 0, pretend = 0, frame = 0
+ 371              		@ frame_needed = 0, uses_anonymous_args = 0
+ 372 0000 10B5     		push	{r4, lr}
+ 373              		.cfi_def_cfa_offset 8
+ 374              		.cfi_offset 4, -8
+ 375              		.cfi_offset 14, -4
+ 187:main.c        ****     data.byte[1u] = 1;
+ 376              		.loc 1 187 0
+ 377 0002 0F4B     		ldr	r3, .L33
+ 378 0004 1822     		movs	r2, #24
+ 379 0006 1A70     		strb	r2, [r3]
+ 188:main.c        ****     data.byte[2u] = 2;
+ 380              		.loc 1 188 0
+ 381 0008 173A     		subs	r2, r2, #23
+ 382 000a 5A70     		strb	r2, [r3, #1]
+ 189:main.c        ****     data.byte[3u] = 3;
+ 383              		.loc 1 189 0
+ 384 000c 0132     		adds	r2, r2, #1
+ 385 000e 9A70     		strb	r2, [r3, #2]
+ 190:main.c        ****     data.byte[4u] = 4;
+ 386              		.loc 1 190 0
+ 387 0010 0132     		adds	r2, r2, #1
+ 388 0012 DA70     		strb	r2, [r3, #3]
+ 191:main.c        ****     CAN_SendMsg(&message);
+ 389              		.loc 1 191 0
+ 390 0014 0132     		adds	r2, r2, #1
+ 391 0016 1A71     		strb	r2, [r3, #4]
+ 192:main.c        ****     if(uart_debug) {
+ 392              		.loc 1 192 0
+ 393 0018 0A48     		ldr	r0, .L33+4
+ 394 001a FFF7FEFF 		bl	CAN_SendMsg
+ 395              	.LVL24:
+ 193:main.c        ****         sprintf(txData, "Telemerty: byte[0u] %x byte[1u] %x\r\n",data.byte[0u],data.byte[1u]);
+ 396              		.loc 1 193 0
+ 397 001e 0A4B     		ldr	r3, .L33+8
+ 398 0020 1B78     		ldrb	r3, [r3]
+ 399 0022 002B     		cmp	r3, #0
+ 400 0024 0AD0     		beq	.L31
+ 194:main.c        ****         UART_UartPutString(txData); 
+ 401              		.loc 1 194 0
+ 402 0026 064B     		ldr	r3, .L33
+ 403 0028 1A78     		ldrb	r2, [r3]
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 13
+
+
+ 404 002a 5B78     		ldrb	r3, [r3, #1]
+ 405 002c 074C     		ldr	r4, .L33+12
+ 406 002e 0849     		ldr	r1, .L33+16
+ 407 0030 2000     		movs	r0, r4
+ 408 0032 FFF7FEFF 		bl	sprintf
+ 409              	.LVL25:
+ 195:main.c        ****     }
+ 410              		.loc 1 195 0
+ 411 0036 2000     		movs	r0, r4
+ 412 0038 FFF7FEFF 		bl	UART_UartPutString
+ 413              	.LVL26:
+ 414              	.L31:
+ 197:main.c        **** 
+ 415              		.loc 1 197 0
+ 416              		@ sp needed
+ 417 003c 10BD     		pop	{r4, pc}
+ 418              	.L34:
+ 419 003e C046     		.align	2
+ 420              	.L33:
+ 421 0040 00000000 		.word	data
+ 422 0044 00000000 		.word	message
+ 423 0048 00000000 		.word	.LANCHOR1
+ 424 004c 00000000 		.word	txData
+ 425 0050 68000000 		.word	.LC23
+ 426              		.cfi_endproc
+ 427              	.LFE42:
+ 428              		.size	CAN_Send_Telemetry, .-CAN_Send_Telemetry
+ 429              		.section	.text.CAN_Send_Model,"ax",%progbits
+ 430              		.align	2
+ 431              		.global	CAN_Send_Model
+ 432              		.code	16
+ 433              		.thumb_func
+ 434              		.type	CAN_Send_Model, %function
+ 435              	CAN_Send_Model:
+ 436              	.LFB43:
+ 199:main.c        ****     //message.id = 0x3;
+ 437              		.loc 1 199 0
+ 438              		.cfi_startproc
+ 439              		@ args = 0, pretend = 0, frame = 0
+ 440              		@ frame_needed = 0, uses_anonymous_args = 0
+ 441 0000 10B5     		push	{r4, lr}
+ 442              		.cfi_def_cfa_offset 8
+ 443              		.cfi_offset 4, -8
+ 444              		.cfi_offset 14, -4
+ 201:main.c        ****     data.byte[1u] = Can_addr_Read();
+ 445              		.loc 1 201 0
+ 446 0002 0C4C     		ldr	r4, .L37
+ 447 0004 1223     		movs	r3, #18
+ 448 0006 2370     		strb	r3, [r4]
+ 202:main.c        ****    // data.byte[2u] = 0;
+ 449              		.loc 1 202 0
+ 450 0008 FFF7FEFF 		bl	Can_addr_Read
+ 451              	.LVL27:
+ 452 000c 6070     		strb	r0, [r4, #1]
+ 206:main.c        ****     if(uart_debug) {
+ 453              		.loc 1 206 0
+ 454 000e 0A48     		ldr	r0, .L37+4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 14
+
+
+ 455 0010 FFF7FEFF 		bl	CAN_SendMsg
+ 456              	.LVL28:
+ 207:main.c        ****         sprintf(txData, "Model: byte[0u] %x byte[1u] %x\r\n",data.byte[0u],data.byte[1u]);
+ 457              		.loc 1 207 0
+ 458 0014 094B     		ldr	r3, .L37+8
+ 459 0016 1B78     		ldrb	r3, [r3]
+ 460 0018 002B     		cmp	r3, #0
+ 461 001a 0AD0     		beq	.L35
+ 208:main.c        ****         UART_UartPutString(txData); 
+ 462              		.loc 1 208 0
+ 463 001c 054B     		ldr	r3, .L37
+ 464 001e 1A78     		ldrb	r2, [r3]
+ 465 0020 5B78     		ldrb	r3, [r3, #1]
+ 466 0022 074C     		ldr	r4, .L37+12
+ 467 0024 0749     		ldr	r1, .L37+16
+ 468 0026 2000     		movs	r0, r4
+ 469 0028 FFF7FEFF 		bl	sprintf
+ 470              	.LVL29:
+ 209:main.c        ****     }
+ 471              		.loc 1 209 0
+ 472 002c 2000     		movs	r0, r4
+ 473 002e FFF7FEFF 		bl	UART_UartPutString
+ 474              	.LVL30:
+ 475              	.L35:
+ 211:main.c        **** /*
+ 476              		.loc 1 211 0
+ 477              		@ sp needed
+ 478 0032 10BD     		pop	{r4, pc}
+ 479              	.L38:
+ 480              		.align	2
+ 481              	.L37:
+ 482 0034 00000000 		.word	data
+ 483 0038 00000000 		.word	message
+ 484 003c 00000000 		.word	.LANCHOR1
+ 485 0040 00000000 		.word	txData
+ 486 0044 90000000 		.word	.LC29
+ 487              		.cfi_endproc
+ 488              	.LFE43:
+ 489              		.size	CAN_Send_Model, .-CAN_Send_Model
+ 490              		.section	.text.main,"ax",%progbits
+ 491              		.align	2
+ 492              		.global	main
+ 493              		.code	16
+ 494              		.thumb_func
+ 495              		.type	main, %function
+ 496              	main:
+ 497              	.LFB36:
+  51:main.c        **** 
+ 498              		.loc 1 51 0
+ 499              		.cfi_startproc
+ 500              		@ args = 0, pretend = 0, frame = 0
+ 501              		@ frame_needed = 0, uses_anonymous_args = 0
+ 502 0000 10B5     		push	{r4, lr}
+ 503              		.cfi_def_cfa_offset 8
+ 504              		.cfi_offset 4, -8
+ 505              		.cfi_offset 14, -4
+  53:main.c        ****         /* BASIC CAN mailbox configuration */
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 15
+
+
+ 506              		.loc 1 53 0
+ 507 0002 FFF7FEFF 		bl	initialize_can_addr
+ 508              	.LVL31:
+  55:main.c        ****     set_CAN_ID(0b1);
+ 509              		.loc 1 55 0
+ 510 0006 0F4C     		ldr	r4, .L42
+ 511 0008 0823     		movs	r3, #8
+ 512 000a A371     		strb	r3, [r4, #6]
+  56:main.c        ****     message.ide = MESSAGE_IDE;
+ 513              		.loc 1 56 0
+ 514 000c 0120     		movs	r0, #1
+ 515 000e FFF7FEFF 		bl	set_CAN_ID
+ 516              	.LVL32:
+  57:main.c        ****     message.irq = MESSAGE_IRQ;
+ 517              		.loc 1 57 0
+ 518 0012 0023     		movs	r3, #0
+ 519 0014 6371     		strb	r3, [r4, #5]
+  58:main.c        ****     message.msg = &data;
+ 520              		.loc 1 58 0
+ 521 0016 E371     		strb	r3, [r4, #7]
+  59:main.c        ****     message.rtr = MESSAGE_RTR;
+ 522              		.loc 1 59 0
+ 523 0018 0B4A     		ldr	r2, .L42+4
+ 524 001a E260     		str	r2, [r4, #12]
+  60:main.c        ****     CyIntSetVector(CAN_ISR_NUMBER, ISR_CAN);
+ 525              		.loc 1 60 0
+ 526 001c 2371     		strb	r3, [r4, #4]
+  61:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 527              		.loc 1 61 0
+ 528 001e 0B49     		ldr	r1, .L42+8
+ 529 0020 1D20     		movs	r0, #29
+ 530 0022 FFF7FEFF 		bl	CyIntSetVector
+ 531              	.LVL33:
+  62:main.c        ****     initialize();
+ 532              		.loc 1 62 0
+ 533              		.syntax divided
+ 534              	@ 62 "main.c" 1
+ 535 0026 62B6     		CPSIE   i
+ 536              	@ 0 "" 2
+  63:main.c        ****     int test = 0b1;
+ 537              		.loc 1 63 0
+ 538              		.thumb
+ 539              		.syntax unified
+ 540 0028 FFF7FEFF 		bl	initialize
+ 541              	.LVL34:
+ 542              	.L40:
+  67:main.c        ****            //Spare1_Write((Status_Reg_Switches_Read() & 0b10) >> 0b1);
+ 543              		.loc 1 67 0
+ 544 002c 084B     		ldr	r3, .L42+12
+ 545 002e 5B78     		ldrb	r3, [r3, #1]
+ 546 0030 002B     		cmp	r3, #0
+ 547 0032 FBD1     		bne	.L40
+  70:main.c        ****             CyDelay(1000);
+ 548              		.loc 1 70 0
+ 549 0034 FFF7FEFF 		bl	CAN_Send_Model
+ 550              	.LVL35:
+  71:main.c        ****             /*CyDelay(1000);
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 16
+
+
+ 551              		.loc 1 71 0
+ 552 0038 FA20     		movs	r0, #250
+ 553 003a 8000     		lsls	r0, r0, #2
+ 554 003c FFF7FEFF 		bl	CyDelay
+ 555              	.LVL36:
+ 556 0040 F4E7     		b	.L40
+ 557              	.L43:
+ 558 0042 C046     		.align	2
+ 559              	.L42:
+ 560 0044 00000000 		.word	message
+ 561 0048 00000000 		.word	data
+ 562 004c 00000000 		.word	ISR_CAN
+ 563 0050 00000000 		.word	.LANCHOR0
+ 564              		.cfi_endproc
+ 565              	.LFE36:
+ 566              		.size	main, .-main
+ 567              		.section	.text.set_PWM,"ax",%progbits
+ 568              		.align	2
+ 569              		.global	set_PWM
+ 570              		.code	16
+ 571              		.thumb_func
+ 572              		.type	set_PWM, %function
+ 573              	set_PWM:
+ 574              	.LFB45:
+ 236:main.c        **** 
+ 237:main.c        **** /*
+ 238:main.c        **** uint32 pot_Read(void) {
+ 239:main.c        ****     // returns a position of the pot
+ 240:main.c        **** }
+ 241:main.c        ****  
+ 242:main.c        **** */
+ 243:main.c        ****     // takes between -1000 and 1000
+ 244:main.c        **** void set_PWM(int compare) {
+ 575              		.loc 1 244 0
+ 576              		.cfi_startproc
+ 577              		@ args = 0, pretend = 0, frame = 0
+ 578              		@ frame_needed = 0, uses_anonymous_args = 0
+ 579              	.LVL37:
+ 580 0000 10B5     		push	{r4, lr}
+ 581              		.cfi_def_cfa_offset 8
+ 582              		.cfi_offset 4, -8
+ 583              		.cfi_offset 14, -4
+ 584 0002 0400     		movs	r4, r0
+ 245:main.c        ****     if (compare < -1000 || compare > 1000) { return; }
+ 585              		.loc 1 245 0
+ 586 0004 FA23     		movs	r3, #250
+ 587 0006 9B00     		lsls	r3, r3, #2
+ 588 0008 C218     		adds	r2, r0, r3
+ 589 000a FA23     		movs	r3, #250
+ 590 000c DB00     		lsls	r3, r3, #3
+ 591 000e 9A42     		cmp	r2, r3
+ 592 0010 1CD8     		bhi	.L44
+ 246:main.c        ****     if (compare < 0 && !(Status_Reg_Switches_Read() & 0b01)) {
+ 593              		.loc 1 246 0
+ 594 0012 0028     		cmp	r0, #0
+ 595 0014 0ADA     		bge	.L46
+ 596              		.loc 1 246 0 is_stmt 0 discriminator 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 17
+
+
+ 597 0016 FFF7FEFF 		bl	Status_Reg_Switches_Read
+ 598              	.LVL38:
+ 599 001a C307     		lsls	r3, r0, #31
+ 600 001c 06D4     		bmi	.L46
+ 247:main.c        ****         Pin_Direction_Write(0);
+ 601              		.loc 1 247 0 is_stmt 1
+ 602 001e 0020     		movs	r0, #0
+ 603 0020 FFF7FEFF 		bl	Pin_Direction_Write
+ 604              	.LVL39:
+ 248:main.c        ****         PWM_Motor_WriteCompare(-compare);
+ 605              		.loc 1 248 0
+ 606 0024 6042     		rsbs	r0, r4, #0
+ 607 0026 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 608              	.LVL40:
+ 609 002a 0FE0     		b	.L44
+ 610              	.L46:
+ 249:main.c        ****     } else if (compare > 0 && !(Status_Reg_Switches_Read() & 0b10)){
+ 611              		.loc 1 249 0
+ 612 002c 002C     		cmp	r4, #0
+ 613 002e 0ADD     		ble	.L47
+ 614              		.loc 1 249 0 is_stmt 0 discriminator 1
+ 615 0030 FFF7FEFF 		bl	Status_Reg_Switches_Read
+ 616              	.LVL41:
+ 617 0034 8307     		lsls	r3, r0, #30
+ 618 0036 06D4     		bmi	.L47
+ 250:main.c        ****         Pin_Direction_Write(1);
+ 619              		.loc 1 250 0 is_stmt 1
+ 620 0038 0120     		movs	r0, #1
+ 621 003a FFF7FEFF 		bl	Pin_Direction_Write
+ 622              	.LVL42:
+ 251:main.c        ****         PWM_Motor_WriteCompare(compare);
+ 623              		.loc 1 251 0
+ 624 003e 2000     		movs	r0, r4
+ 625 0040 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 626              	.LVL43:
+ 627 0044 02E0     		b	.L44
+ 628              	.L47:
+ 252:main.c        ****     } else {
+ 253:main.c        ****         PWM_Motor_WriteCompare(0);   
+ 629              		.loc 1 253 0
+ 630 0046 0020     		movs	r0, #0
+ 631 0048 FFF7FEFF 		bl	PWM_Motor_WriteCompare
+ 632              	.LVL44:
+ 633              	.L44:
+ 254:main.c        ****     }
+ 255:main.c        **** }
+ 634              		.loc 1 255 0
+ 635              		@ sp needed
+ 636              	.LVL45:
+ 637 004c 10BD     		pop	{r4, pc}
+ 638              		.cfi_endproc
+ 639              	.LFE45:
+ 640              		.size	set_PWM, .-set_PWM
+ 641 004e C046     		.section	.text.Pin_Limit_1_Handler,"ax",%progbits
+ 642              		.align	2
+ 643              		.global	Pin_Limit_1_Handler
+ 644              		.code	16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 18
+
+
+ 645              		.thumb_func
+ 646              		.type	Pin_Limit_1_Handler, %function
+ 647              	Pin_Limit_1_Handler:
+ 648              	.LFB35:
+  45:main.c        ****     set_PWM(pwm_compare);
+ 649              		.loc 1 45 0
+ 650              		.cfi_startproc
+ 651              		@ args = 0, pretend = 0, frame = 0
+ 652              		@ frame_needed = 0, uses_anonymous_args = 0
+ 653 0000 10B5     		push	{r4, lr}
+ 654              		.cfi_def_cfa_offset 8
+ 655              		.cfi_offset 4, -8
+ 656              		.cfi_offset 14, -4
+  46:main.c        ****     Pin_Limit_1_ClearInterrupt();
+ 657              		.loc 1 46 0
+ 658 0002 034B     		ldr	r3, .L49
+ 659 0004 1868     		ldr	r0, [r3]
+ 660 0006 FFF7FEFF 		bl	set_PWM
+ 661              	.LVL46:
+  47:main.c        **** }
+ 662              		.loc 1 47 0
+ 663 000a FFF7FEFF 		bl	Pin_Limit_1_ClearInterrupt
+ 664              	.LVL47:
+  48:main.c        **** 
+ 665              		.loc 1 48 0
+ 666              		@ sp needed
+ 667 000e 10BD     		pop	{r4, pc}
+ 668              	.L50:
+ 669              		.align	2
+ 670              	.L49:
+ 671 0010 00000000 		.word	pwm_compare
+ 672              		.cfi_endproc
+ 673              	.LFE35:
+ 674              		.size	Pin_Limit_1_Handler, .-Pin_Limit_1_Handler
+ 675              		.section	.text.degrees_to_tick,"ax",%progbits
+ 676              		.align	2
+ 677              		.global	degrees_to_tick
+ 678              		.code	16
+ 679              		.thumb_func
+ 680              		.type	degrees_to_tick, %function
+ 681              	degrees_to_tick:
+ 682              	.LFB47:
+ 256:main.c        **** 
+ 257:main.c        **** 
+ 258:main.c        **** void set_Position(int degrees) {
+ 259:main.c        ****     int PWM = position_PID(degrees_to_tick(degrees));
+ 260:main.c        ****     if(PWM > 1000){
+ 261:main.c        ****         set_PWM(1000);   
+ 262:main.c        ****     } else if(PWM < -1000) {
+ 263:main.c        ****         set_PWM(-1000);
+ 264:main.c        ****     } else {
+ 265:main.c        ****         set_PWM(PWM);   
+ 266:main.c        ****     }
+ 267:main.c        **** }
+ 268:main.c        **** 
+ 269:main.c        **** int degrees_to_tick(int degrees){
+ 683              		.loc 1 269 0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 19
+
+
+ 684              		.cfi_startproc
+ 685              		@ args = 0, pretend = 0, frame = 0
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 687              		@ link register save eliminated.
+ 688              	.LVL48:
+ 270:main.c        ****     int ratio = 1;
+ 271:main.c        ****     return(degrees * ratio);
+ 272:main.c        **** }
+ 689              		.loc 1 272 0
+ 690              		@ sp needed
+ 691 0000 7047     		bx	lr
+ 692              		.cfi_endproc
+ 693              	.LFE47:
+ 694              		.size	degrees_to_tick, .-degrees_to_tick
+ 695 0002 C046     		.section	.text.position_PID,"ax",%progbits
+ 696              		.align	2
+ 697              		.global	position_PID
+ 698              		.code	16
+ 699              		.thumb_func
+ 700              		.type	position_PID, %function
+ 701              	position_PID:
+ 702              	.LFB48:
+ 273:main.c        **** 
+ 274:main.c        **** int position_PID(int target){
+ 703              		.loc 1 274 0
+ 704              		.cfi_startproc
+ 705              		@ args = 0, pretend = 0, frame = 0
+ 706              		@ frame_needed = 0, uses_anonymous_args = 0
+ 707              	.LVL49:
+ 708 0000 10B5     		push	{r4, lr}
+ 709              		.cfi_def_cfa_offset 8
+ 710              		.cfi_offset 4, -8
+ 711              		.cfi_offset 14, -4
+ 712 0002 0400     		movs	r4, r0
+ 275:main.c        ****     int current =  QuadDec_GetCounter();
+ 713              		.loc 1 275 0
+ 714 0004 FFF7FEFF 		bl	QuadDec_GetCounter
+ 715              	.LVL50:
+ 276:main.c        ****     int p = target - current;
+ 716              		.loc 1 276 0
+ 717 0008 211A     		subs	r1, r4, r0
+ 718              	.LVL51:
+ 277:main.c        ****     i = i + p;
+ 719              		.loc 1 277 0
+ 720 000a 064C     		ldr	r4, .L53
+ 721              	.LVL52:
+ 722 000c A368     		ldr	r3, [r4, #8]
+ 723 000e CA18     		adds	r2, r1, r3
+ 724 0010 A260     		str	r2, [r4, #8]
+ 278:main.c        ****     int d = p - lastp;
+ 725              		.loc 1 278 0
+ 726 0012 E368     		ldr	r3, [r4, #12]
+ 727 0014 CB1A     		subs	r3, r1, r3
+ 728              	.LVL53:
+ 279:main.c        ****     lastp = current;
+ 729              		.loc 1 279 0
+ 730 0016 E060     		str	r0, [r4, #12]
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 20
+
+
+ 280:main.c        ****     return (p*10 + i*10 + d*10);
+ 731              		.loc 1 280 0
+ 732 0018 8A18     		adds	r2, r1, r2
+ 733 001a 9B18     		adds	r3, r3, r2
+ 734              	.LVL54:
+ 735 001c 9A00     		lsls	r2, r3, #2
+ 736 001e D318     		adds	r3, r2, r3
+ 737 0020 5800     		lsls	r0, r3, #1
+ 738              	.LVL55:
+ 281:main.c        **** }
+ 739              		.loc 1 281 0
+ 740              		@ sp needed
+ 741 0022 10BD     		pop	{r4, pc}
+ 742              	.L54:
+ 743              		.align	2
+ 744              	.L53:
+ 745 0024 00000000 		.word	.LANCHOR0
+ 746              		.cfi_endproc
+ 747              	.LFE48:
+ 748              		.size	position_PID, .-position_PID
+ 749              		.section	.text.set_Position,"ax",%progbits
+ 750              		.align	2
+ 751              		.global	set_Position
+ 752              		.code	16
+ 753              		.thumb_func
+ 754              		.type	set_Position, %function
+ 755              	set_Position:
+ 756              	.LFB46:
+ 258:main.c        ****     int PWM = position_PID(degrees_to_tick(degrees));
+ 757              		.loc 1 258 0
+ 758              		.cfi_startproc
+ 759              		@ args = 0, pretend = 0, frame = 0
+ 760              		@ frame_needed = 0, uses_anonymous_args = 0
+ 761              	.LVL56:
+ 762 0000 10B5     		push	{r4, lr}
+ 763              		.cfi_def_cfa_offset 8
+ 764              		.cfi_offset 4, -8
+ 765              		.cfi_offset 14, -4
+ 259:main.c        ****     if(PWM > 1000){
+ 766              		.loc 1 259 0
+ 767 0002 FFF7FEFF 		bl	degrees_to_tick
+ 768              	.LVL57:
+ 769 0006 FFF7FEFF 		bl	position_PID
+ 770              	.LVL58:
+ 260:main.c        ****         set_PWM(1000);   
+ 771              		.loc 1 260 0
+ 772 000a FA23     		movs	r3, #250
+ 773 000c 9B00     		lsls	r3, r3, #2
+ 774 000e 9842     		cmp	r0, r3
+ 775 0010 03DD     		ble	.L56
+ 261:main.c        ****     } else if(PWM < -1000) {
+ 776              		.loc 1 261 0
+ 777 0012 1800     		movs	r0, r3
+ 778              	.LVL59:
+ 779 0014 FFF7FEFF 		bl	set_PWM
+ 780              	.LVL60:
+ 781 0018 08E0     		b	.L55
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 21
+
+
+ 782              	.LVL61:
+ 783              	.L56:
+ 262:main.c        ****         set_PWM(-1000);
+ 784              		.loc 1 262 0
+ 785 001a 054B     		ldr	r3, .L59
+ 786 001c 9842     		cmp	r0, r3
+ 787 001e 03DA     		bge	.L58
+ 263:main.c        ****     } else {
+ 788              		.loc 1 263 0
+ 789 0020 1800     		movs	r0, r3
+ 790              	.LVL62:
+ 791 0022 FFF7FEFF 		bl	set_PWM
+ 792              	.LVL63:
+ 793 0026 01E0     		b	.L55
+ 794              	.LVL64:
+ 795              	.L58:
+ 265:main.c        ****     }
+ 796              		.loc 1 265 0
+ 797 0028 FFF7FEFF 		bl	set_PWM
+ 798              	.LVL65:
+ 799              	.L55:
+ 267:main.c        **** 
+ 800              		.loc 1 267 0
+ 801              		@ sp needed
+ 802 002c 10BD     		pop	{r4, pc}
+ 803              	.L60:
+ 804 002e C046     		.align	2
+ 805              	.L59:
+ 806 0030 18FCFFFF 		.word	-1000
+ 807              		.cfi_endproc
+ 808              	.LFE46:
+ 809              		.size	set_Position, .-set_Position
+ 810              		.comm	message,16,4
+ 811              		.comm	data,8,4
+ 812              		.comm	txData,50,4
+ 813              		.global	emergency
+ 814              		.global	mailbox
+ 815              		.global	isrFlag
+ 816              		.comm	kd,4,4
+ 817              		.comm	ki,4,4
+ 818              		.comm	kp,4,4
+ 819              		.global	lastp
+ 820              		.global	i
+ 821              		.comm	pwm_compare,4,4
+ 822              		.comm	CAN_TIMEOUT,4,4
+ 823              		.comm	GEAR_RATIO,4,4
+ 824              		.global	uart_debug
+ 825              		.global	message_id
+ 826              		.data
+ 827              		.set	.LANCHOR1,. + 0
+ 828              		.type	uart_debug, %object
+ 829              		.size	uart_debug, 1
+ 830              	uart_debug:
+ 831 0000 01       		.byte	1
+ 832              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 833              		.align	2
+ 834              	.LC5:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 22
+
+
+ 835 0000 43414E20 		.ascii	"CAN dip setting:  %x Message ID: %lx\015\012\000"
+ 835      64697020 
+ 835      73657474 
+ 835      696E673A 
+ 835      20202578 
+ 836 0027 00       		.space	1
+ 837              	.LC11:
+ 838 0028 43414E5F 		.ascii	"CAN_Start():  %u\015\012\000"
+ 838      53746172 
+ 838      7428293A 
+ 838      20202575 
+ 838      0D0A00
+ 839 003b 00       		.space	1
+ 840              	.LC17:
+ 841 003c 43414E5F 		.ascii	"CAN_Send_Encoder: byte[0u] %x byte[1u] %x\015\012\000"
+ 841      53656E64 
+ 841      5F456E63 
+ 841      6F646572 
+ 841      3A206279 
+ 842              	.LC23:
+ 843 0068 54656C65 		.ascii	"Telemerty: byte[0u] %x byte[1u] %x\015\012\000"
+ 843      6D657274 
+ 843      793A2062 
+ 843      7974655B 
+ 843      30755D20 
+ 844 008d 000000   		.space	3
+ 845              	.LC29:
+ 846 0090 4D6F6465 		.ascii	"Model: byte[0u] %x byte[1u] %x\015\012\000"
+ 846      6C3A2062 
+ 846      7974655B 
+ 846      30755D20 
+ 846      25782062 
+ 847              		.bss
+ 848              		.align	2
+ 849              		.set	.LANCHOR0,. + 0
+ 850              		.type	isrFlag, %object
+ 851              		.size	isrFlag, 1
+ 852              	isrFlag:
+ 853 0000 00       		.space	1
+ 854              		.type	emergency, %object
+ 855              		.size	emergency, 1
+ 856              	emergency:
+ 857 0001 00       		.space	1
+ 858 0002 0000     		.space	2
+ 859              		.type	message_id, %object
+ 860              		.size	message_id, 4
+ 861              	message_id:
+ 862 0004 00000000 		.space	4
+ 863              		.type	i, %object
+ 864              		.size	i, 4
+ 865              	i:
+ 866 0008 00000000 		.space	4
+ 867              		.type	lastp, %object
+ 868              		.size	lastp, 4
+ 869              	lastp:
+ 870 000c 00000000 		.space	4
+ 871              		.type	mailbox, %object
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 23
+
+
+ 872              		.size	mailbox, 4
+ 873              	mailbox:
+ 874 0010 00000000 		.space	4
+ 875              		.text
+ 876              	.Letext0:
+ 877              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+ 878              		.file 3 "Generated_Source\\PSoC4/CAN.h"
+ 879              		.file 4 "Generated_Source\\PSoC4/PWM_Motor.h"
+ 880              		.file 5 "Generated_Source\\PSoC4/Can_addr.h"
+ 881              		.file 6 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 882              		.file 7 "Generated_Source\\PSoC4/UART_SPI_UART.h"
+ 883              		.file 8 "Generated_Source\\PSoC4/ADC_SAR_Seq_1.h"
+ 884              		.file 9 "Generated_Source\\PSoC4/QuadDec.h"
+ 885              		.file 10 "Generated_Source\\PSoC4/UART.h"
+ 886              		.file 11 "Generated_Source\\PSoC4/CyLib.h"
+ 887              		.file 12 "Generated_Source\\PSoC4/Status_Reg_Switches.h"
+ 888              		.file 13 "Generated_Source\\PSoC4/Pin_Direction.h"
+ 889              		.file 14 "Generated_Source\\PSoC4/Pin_Limit_1.h"
+ 890              		.section	.debug_info,"",%progbits
+ 891              	.Ldebug_info0:
+ 892 0000 02090000 		.4byte	0x902
+ 893 0004 0400     		.2byte	0x4
+ 894 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 895 000a 04       		.byte	0x4
+ 896 000b 01       		.uleb128 0x1
+ 897 000c 0C010000 		.4byte	.LASF84
+ 898 0010 0C       		.byte	0xc
+ 899 0011 04040000 		.4byte	.LASF85
+ 900 0015 81020000 		.4byte	.LASF86
+ 901 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 902 001d 00000000 		.4byte	0
+ 903 0021 00000000 		.4byte	.Ldebug_line0
+ 904 0025 02       		.uleb128 0x2
+ 905 0026 01       		.byte	0x1
+ 906 0027 06       		.byte	0x6
+ 907 0028 DE020000 		.4byte	.LASF0
+ 908 002c 02       		.uleb128 0x2
+ 909 002d 01       		.byte	0x1
+ 910 002e 08       		.byte	0x8
+ 911 002f 1F020000 		.4byte	.LASF1
+ 912 0033 02       		.uleb128 0x2
+ 913 0034 02       		.byte	0x2
+ 914 0035 05       		.byte	0x5
+ 915 0036 DB000000 		.4byte	.LASF2
+ 916 003a 02       		.uleb128 0x2
+ 917 003b 02       		.byte	0x2
+ 918 003c 07       		.byte	0x7
+ 919 003d BA030000 		.4byte	.LASF3
+ 920 0041 02       		.uleb128 0x2
+ 921 0042 04       		.byte	0x4
+ 922 0043 05       		.byte	0x5
+ 923 0044 F0010000 		.4byte	.LASF4
+ 924 0048 02       		.uleb128 0x2
+ 925 0049 04       		.byte	0x4
+ 926 004a 07       		.byte	0x7
+ 927 004b F9010000 		.4byte	.LASF5
+ 928 004f 02       		.uleb128 0x2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 24
+
+
+ 929 0050 08       		.byte	0x8
+ 930 0051 05       		.byte	0x5
+ 931 0052 B6000000 		.4byte	.LASF6
+ 932 0056 02       		.uleb128 0x2
+ 933 0057 08       		.byte	0x8
+ 934 0058 07       		.byte	0x7
+ 935 0059 EA020000 		.4byte	.LASF7
+ 936 005d 03       		.uleb128 0x3
+ 937 005e 04       		.byte	0x4
+ 938 005f 05       		.byte	0x5
+ 939 0060 696E7400 		.ascii	"int\000"
+ 940 0064 02       		.uleb128 0x2
+ 941 0065 04       		.byte	0x4
+ 942 0066 07       		.byte	0x7
+ 943 0067 01030000 		.4byte	.LASF8
+ 944 006b 04       		.uleb128 0x4
+ 945 006c AD010000 		.4byte	.LASF9
+ 946 0070 02       		.byte	0x2
+ 947 0071 E401     		.2byte	0x1e4
+ 948 0073 2C000000 		.4byte	0x2c
+ 949 0077 04       		.uleb128 0x4
+ 950 0078 F6030000 		.4byte	.LASF10
+ 951 007c 02       		.byte	0x2
+ 952 007d E501     		.2byte	0x1e5
+ 953 007f 3A000000 		.4byte	0x3a
+ 954 0083 04       		.uleb128 0x4
+ 955 0084 FD030000 		.4byte	.LASF11
+ 956 0088 02       		.byte	0x2
+ 957 0089 E601     		.2byte	0x1e6
+ 958 008b 48000000 		.4byte	0x48
+ 959 008f 02       		.uleb128 0x2
+ 960 0090 04       		.byte	0x4
+ 961 0091 04       		.byte	0x4
+ 962 0092 D0010000 		.4byte	.LASF12
+ 963 0096 02       		.uleb128 0x2
+ 964 0097 08       		.byte	0x8
+ 965 0098 04       		.byte	0x4
+ 966 0099 97040000 		.4byte	.LASF13
+ 967 009d 04       		.uleb128 0x4
+ 968 009e 99000000 		.4byte	.LASF14
+ 969 00a2 02       		.byte	0x2
+ 970 00a3 F501     		.2byte	0x1f5
+ 971 00a5 A9000000 		.4byte	0xa9
+ 972 00a9 02       		.uleb128 0x2
+ 973 00aa 01       		.byte	0x1
+ 974 00ab 08       		.byte	0x8
+ 975 00ac 87030000 		.4byte	.LASF15
+ 976 00b0 04       		.uleb128 0x4
+ 977 00b1 0B040000 		.4byte	.LASF16
+ 978 00b5 02       		.byte	0x2
+ 979 00b6 8E02     		.2byte	0x28e
+ 980 00b8 BC000000 		.4byte	0xbc
+ 981 00bc 05       		.uleb128 0x5
+ 982 00bd 6B000000 		.4byte	0x6b
+ 983 00c1 04       		.uleb128 0x4
+ 984 00c2 C0040000 		.4byte	.LASF17
+ 985 00c6 02       		.byte	0x2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 25
+
+
+ 986 00c7 9002     		.2byte	0x290
+ 987 00c9 CD000000 		.4byte	0xcd
+ 988 00cd 05       		.uleb128 0x5
+ 989 00ce 83000000 		.4byte	0x83
+ 990 00d2 02       		.uleb128 0x2
+ 991 00d3 08       		.byte	0x8
+ 992 00d4 04       		.byte	0x4
+ 993 00d5 5B020000 		.4byte	.LASF18
+ 994 00d9 02       		.uleb128 0x2
+ 995 00da 04       		.byte	0x4
+ 996 00db 07       		.byte	0x7
+ 997 00dc 83000000 		.4byte	.LASF19
+ 998 00e0 06       		.uleb128 0x6
+ 999 00e1 08       		.byte	0x8
+ 1000 00e2 03       		.byte	0x3
+ 1001 00e3 6F       		.byte	0x6f
+ 1002 00e4 F5000000 		.4byte	0xf5
+ 1003 00e8 07       		.uleb128 0x7
+ 1004 00e9 50020000 		.4byte	.LASF21
+ 1005 00ed 03       		.byte	0x3
+ 1006 00ee 71       		.byte	0x71
+ 1007 00ef F5000000 		.4byte	0xf5
+ 1008 00f3 00       		.byte	0
+ 1009 00f4 00       		.byte	0
+ 1010 00f5 08       		.uleb128 0x8
+ 1011 00f6 6B000000 		.4byte	0x6b
+ 1012 00fa 05010000 		.4byte	0x105
+ 1013 00fe 09       		.uleb128 0x9
+ 1014 00ff D9000000 		.4byte	0xd9
+ 1015 0103 07       		.byte	0x7
+ 1016 0104 00       		.byte	0
+ 1017 0105 0A       		.uleb128 0xa
+ 1018 0106 26030000 		.4byte	.LASF20
+ 1019 010a 03       		.byte	0x3
+ 1020 010b 72       		.byte	0x72
+ 1021 010c E0000000 		.4byte	0xe0
+ 1022 0110 06       		.uleb128 0x6
+ 1023 0111 08       		.byte	0x8
+ 1024 0112 03       		.byte	0x3
+ 1025 0113 75       		.byte	0x75
+ 1026 0114 25010000 		.4byte	0x125
+ 1027 0118 07       		.uleb128 0x7
+ 1028 0119 50020000 		.4byte	.LASF21
+ 1029 011d 03       		.byte	0x3
+ 1030 011e 77       		.byte	0x77
+ 1031 011f 35010000 		.4byte	0x135
+ 1032 0123 00       		.byte	0
+ 1033 0124 00       		.byte	0
+ 1034 0125 08       		.uleb128 0x8
+ 1035 0126 B0000000 		.4byte	0xb0
+ 1036 012a 35010000 		.4byte	0x135
+ 1037 012e 09       		.uleb128 0x9
+ 1038 012f D9000000 		.4byte	0xd9
+ 1039 0133 07       		.byte	0x7
+ 1040 0134 00       		.byte	0
+ 1041 0135 05       		.uleb128 0x5
+ 1042 0136 25010000 		.4byte	0x125
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 26
+
+
+ 1043 013a 0A       		.uleb128 0xa
+ 1044 013b 40000000 		.4byte	.LASF22
+ 1045 013f 03       		.byte	0x3
+ 1046 0140 78       		.byte	0x78
+ 1047 0141 10010000 		.4byte	0x110
+ 1048 0145 06       		.uleb128 0x6
+ 1049 0146 04       		.byte	0x4
+ 1050 0147 03       		.byte	0x3
+ 1051 0148 7B       		.byte	0x7b
+ 1052 0149 5A010000 		.4byte	0x15a
+ 1053 014d 07       		.uleb128 0x7
+ 1054 014e 50020000 		.4byte	.LASF21
+ 1055 0152 03       		.byte	0x3
+ 1056 0153 7D       		.byte	0x7d
+ 1057 0154 6A010000 		.4byte	0x16a
+ 1058 0158 00       		.byte	0
+ 1059 0159 00       		.byte	0
+ 1060 015a 08       		.uleb128 0x8
+ 1061 015b B0000000 		.4byte	0xb0
+ 1062 015f 6A010000 		.4byte	0x16a
+ 1063 0163 09       		.uleb128 0x9
+ 1064 0164 D9000000 		.4byte	0xd9
+ 1065 0168 03       		.byte	0x3
+ 1066 0169 00       		.byte	0
+ 1067 016a 05       		.uleb128 0x5
+ 1068 016b 5A010000 		.4byte	0x15a
+ 1069 016f 0A       		.uleb128 0xa
+ 1070 0170 E5010000 		.4byte	.LASF23
+ 1071 0174 03       		.byte	0x3
+ 1072 0175 7E       		.byte	0x7e
+ 1073 0176 45010000 		.4byte	0x145
+ 1074 017a 06       		.uleb128 0x6
+ 1075 017b 10       		.byte	0x10
+ 1076 017c 03       		.byte	0x3
+ 1077 017d 81       		.byte	0x81
+ 1078 017e D6010000 		.4byte	0x1d6
+ 1079 0182 0B       		.uleb128 0xb
+ 1080 0183 696400   		.ascii	"id\000"
+ 1081 0186 03       		.byte	0x3
+ 1082 0187 83       		.byte	0x83
+ 1083 0188 83000000 		.4byte	0x83
+ 1084 018c 00       		.byte	0
+ 1085 018d 0B       		.uleb128 0xb
+ 1086 018e 72747200 		.ascii	"rtr\000"
+ 1087 0192 03       		.byte	0x3
+ 1088 0193 84       		.byte	0x84
+ 1089 0194 6B000000 		.4byte	0x6b
+ 1090 0198 04       		.byte	0x4
+ 1091 0199 0B       		.uleb128 0xb
+ 1092 019a 69646500 		.ascii	"ide\000"
+ 1093 019e 03       		.byte	0x3
+ 1094 019f 85       		.byte	0x85
+ 1095 01a0 6B000000 		.4byte	0x6b
+ 1096 01a4 05       		.byte	0x5
+ 1097 01a5 0B       		.uleb128 0xb
+ 1098 01a6 646C6300 		.ascii	"dlc\000"
+ 1099 01aa 03       		.byte	0x3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 27
+
+
+ 1100 01ab 86       		.byte	0x86
+ 1101 01ac 6B000000 		.4byte	0x6b
+ 1102 01b0 06       		.byte	0x6
+ 1103 01b1 0B       		.uleb128 0xb
+ 1104 01b2 69727100 		.ascii	"irq\000"
+ 1105 01b6 03       		.byte	0x3
+ 1106 01b7 87       		.byte	0x87
+ 1107 01b8 6B000000 		.4byte	0x6b
+ 1108 01bc 07       		.byte	0x7
+ 1109 01bd 0B       		.uleb128 0xb
+ 1110 01be 73737400 		.ascii	"sst\000"
+ 1111 01c2 03       		.byte	0x3
+ 1112 01c3 89       		.byte	0x89
+ 1113 01c4 6B000000 		.4byte	0x6b
+ 1114 01c8 08       		.byte	0x8
+ 1115 01c9 0B       		.uleb128 0xb
+ 1116 01ca 6D736700 		.ascii	"msg\000"
+ 1117 01ce 03       		.byte	0x3
+ 1118 01cf 8B       		.byte	0x8b
+ 1119 01d0 D6010000 		.4byte	0x1d6
+ 1120 01d4 0C       		.byte	0xc
+ 1121 01d5 00       		.byte	0
+ 1122 01d6 0C       		.uleb128 0xc
+ 1123 01d7 04       		.byte	0x4
+ 1124 01d8 05010000 		.4byte	0x105
+ 1125 01dc 0A       		.uleb128 0xa
+ 1126 01dd 18040000 		.4byte	.LASF24
+ 1127 01e1 03       		.byte	0x3
+ 1128 01e2 8C       		.byte	0x8c
+ 1129 01e3 7A010000 		.4byte	0x17a
+ 1130 01e7 06       		.uleb128 0x6
+ 1131 01e8 20       		.byte	0x20
+ 1132 01e9 03       		.byte	0x3
+ 1133 01ea A0       		.byte	0xa0
+ 1134 01eb 44020000 		.4byte	0x244
+ 1135 01ef 07       		.uleb128 0x7
+ 1136 01f0 B4030000 		.4byte	.LASF25
+ 1137 01f4 03       		.byte	0x3
+ 1138 01f5 A2       		.byte	0xa2
+ 1139 01f6 6F010000 		.4byte	0x16f
+ 1140 01fa 00       		.byte	0
+ 1141 01fb 07       		.uleb128 0x7
+ 1142 01fc B3010000 		.4byte	.LASF26
+ 1143 0200 03       		.byte	0x3
+ 1144 0201 A3       		.byte	0xa3
+ 1145 0202 6F010000 		.4byte	0x16f
+ 1146 0206 04       		.byte	0x4
+ 1147 0207 07       		.uleb128 0x7
+ 1148 0208 CA000000 		.4byte	.LASF27
+ 1149 020c 03       		.byte	0x3
+ 1150 020d A4       		.byte	0xa4
+ 1151 020e 3A010000 		.4byte	0x13a
+ 1152 0212 08       		.byte	0x8
+ 1153 0213 07       		.uleb128 0x7
+ 1154 0214 BA040000 		.4byte	.LASF28
+ 1155 0218 03       		.byte	0x3
+ 1156 0219 A5       		.byte	0xa5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 28
+
+
+ 1157 021a 6F010000 		.4byte	0x16f
+ 1158 021e 10       		.byte	0x10
+ 1159 021f 07       		.uleb128 0x7
+ 1160 0220 55020000 		.4byte	.LASF29
+ 1161 0224 03       		.byte	0x3
+ 1162 0225 A6       		.byte	0xa6
+ 1163 0226 6F010000 		.4byte	0x16f
+ 1164 022a 14       		.byte	0x14
+ 1165 022b 07       		.uleb128 0x7
+ 1166 022c 6F020000 		.4byte	.LASF30
+ 1167 0230 03       		.byte	0x3
+ 1168 0231 A7       		.byte	0xa7
+ 1169 0232 6F010000 		.4byte	0x16f
+ 1170 0236 18       		.byte	0x18
+ 1171 0237 07       		.uleb128 0x7
+ 1172 0238 80030000 		.4byte	.LASF31
+ 1173 023c 03       		.byte	0x3
+ 1174 023d A8       		.byte	0xa8
+ 1175 023e 6F010000 		.4byte	0x16f
+ 1176 0242 1C       		.byte	0x1c
+ 1177 0243 00       		.byte	0
+ 1178 0244 0A       		.uleb128 0xa
+ 1179 0245 8C030000 		.4byte	.LASF32
+ 1180 0249 03       		.byte	0x3
+ 1181 024a A9       		.byte	0xa9
+ 1182 024b E7010000 		.4byte	0x1e7
+ 1183 024f 0D       		.uleb128 0xd
+ 1184 0250 62040000 		.4byte	.LASF87
+ 1185 0254 01       		.byte	0x1
+ 1186 0255 E1       		.byte	0xe1
+ 1187 0256 00000000 		.4byte	.LFB44
+ 1188 025a 24000000 		.4byte	.LFE44-.LFB44
+ 1189 025e 01       		.uleb128 0x1
+ 1190 025f 9C       		.byte	0x9c
+ 1191 0260 0E       		.uleb128 0xe
+ 1192 0261 2D020000 		.4byte	.LASF33
+ 1193 0265 01       		.byte	0x1
+ 1194 0266 70       		.byte	0x70
+ 1195 0267 00000000 		.4byte	.LFB37
+ 1196 026b 14000000 		.4byte	.LFE37-.LFB37
+ 1197 026f 01       		.uleb128 0x1
+ 1198 0270 9C       		.byte	0x9c
+ 1199 0271 7F020000 		.4byte	0x27f
+ 1200 0275 0F       		.uleb128 0xf
+ 1201 0276 06000000 		.4byte	.LVL0
+ 1202 027a 3A080000 		.4byte	0x83a
+ 1203 027e 00       		.byte	0
+ 1204 027f 0E       		.uleb128 0xe
+ 1205 0280 0B020000 		.4byte	.LASF34
+ 1206 0284 01       		.byte	0x1
+ 1207 0285 7F       		.byte	0x7f
+ 1208 0286 00000000 		.4byte	.LFB38
+ 1209 028a 54000000 		.4byte	.LFE38-.LFB38
+ 1210 028e 01       		.uleb128 0x1
+ 1211 028f 9C       		.byte	0x9c
+ 1212 0290 E9020000 		.4byte	0x2e9
+ 1213 0294 10       		.uleb128 0x10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 29
+
+
+ 1214 0295 4F000000 		.4byte	.LASF37
+ 1215 0299 01       		.byte	0x1
+ 1216 029a 80       		.byte	0x80
+ 1217 029b 6B000000 		.4byte	0x6b
+ 1218 029f 00000000 		.4byte	.LLST0
+ 1219 02a3 0F       		.uleb128 0xf
+ 1220 02a4 06000000 		.4byte	.LVL1
+ 1221 02a8 46080000 		.4byte	0x846
+ 1222 02ac 0F       		.uleb128 0xf
+ 1223 02ad 0C000000 		.4byte	.LVL3
+ 1224 02b1 46080000 		.4byte	0x846
+ 1225 02b5 11       		.uleb128 0x11
+ 1226 02b6 36000000 		.4byte	.LVL4
+ 1227 02ba 51080000 		.4byte	0x851
+ 1228 02be D8020000 		.4byte	0x2d8
+ 1229 02c2 12       		.uleb128 0x12
+ 1230 02c3 01       		.uleb128 0x1
+ 1231 02c4 50       		.byte	0x50
+ 1232 02c5 02       		.uleb128 0x2
+ 1233 02c6 75       		.byte	0x75
+ 1234 02c7 00       		.sleb128 0
+ 1235 02c8 12       		.uleb128 0x12
+ 1236 02c9 01       		.uleb128 0x1
+ 1237 02ca 51       		.byte	0x51
+ 1238 02cb 05       		.uleb128 0x5
+ 1239 02cc 03       		.byte	0x3
+ 1240 02cd 00000000 		.4byte	.LC5
+ 1241 02d1 12       		.uleb128 0x12
+ 1242 02d2 01       		.uleb128 0x1
+ 1243 02d3 52       		.byte	0x52
+ 1244 02d4 02       		.uleb128 0x2
+ 1245 02d5 74       		.byte	0x74
+ 1246 02d6 00       		.sleb128 0
+ 1247 02d7 00       		.byte	0
+ 1248 02d8 13       		.uleb128 0x13
+ 1249 02d9 3C000000 		.4byte	.LVL5
+ 1250 02dd 5C080000 		.4byte	0x85c
+ 1251 02e1 12       		.uleb128 0x12
+ 1252 02e2 01       		.uleb128 0x1
+ 1253 02e3 50       		.byte	0x50
+ 1254 02e4 02       		.uleb128 0x2
+ 1255 02e5 75       		.byte	0x75
+ 1256 02e6 00       		.sleb128 0
+ 1257 02e7 00       		.byte	0
+ 1258 02e8 00       		.byte	0
+ 1259 02e9 0E       		.uleb128 0xe
+ 1260 02ea B8010000 		.4byte	.LASF35
+ 1261 02ee 01       		.byte	0x1
+ 1262 02ef 98       		.byte	0x98
+ 1263 02f0 00000000 		.4byte	.LFB39
+ 1264 02f4 1C000000 		.4byte	.LFE39-.LFB39
+ 1265 02f8 01       		.uleb128 0x1
+ 1266 02f9 9C       		.byte	0x9c
+ 1267 02fa 0E030000 		.4byte	0x30e
+ 1268 02fe 14       		.uleb128 0x14
+ 1269 02ff 80040000 		.4byte	.LASF44
+ 1270 0303 01       		.byte	0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 30
+
+
+ 1271 0304 98       		.byte	0x98
+ 1272 0305 83000000 		.4byte	0x83
+ 1273 0309 13000000 		.4byte	.LLST1
+ 1274 030d 00       		.byte	0
+ 1275 030e 0E       		.uleb128 0xe
+ 1276 030f 76020000 		.4byte	.LASF36
+ 1277 0313 01       		.byte	0x1
+ 1278 0314 9C       		.byte	0x9c
+ 1279 0315 00000000 		.4byte	.LFB40
+ 1280 0319 44000000 		.4byte	.LFE40-.LFB40
+ 1281 031d 01       		.uleb128 0x1
+ 1282 031e 9C       		.byte	0x9c
+ 1283 031f 9C030000 		.4byte	0x39c
+ 1284 0323 10       		.uleb128 0x10
+ 1285 0324 5E000000 		.4byte	.LASF38
+ 1286 0328 01       		.byte	0x1
+ 1287 0329 9D       		.byte	0x9d
+ 1288 032a 5D000000 		.4byte	0x5d
+ 1289 032e 34000000 		.4byte	.LLST2
+ 1290 0332 0F       		.uleb128 0xf
+ 1291 0333 06000000 		.4byte	.LVL9
+ 1292 0337 68080000 		.4byte	0x868
+ 1293 033b 0F       		.uleb128 0xf
+ 1294 033c 0C000000 		.4byte	.LVL11
+ 1295 0340 73080000 		.4byte	0x873
+ 1296 0344 0F       		.uleb128 0xf
+ 1297 0345 10000000 		.4byte	.LVL12
+ 1298 0349 7E080000 		.4byte	0x87e
+ 1299 034d 0F       		.uleb128 0xf
+ 1300 034e 14000000 		.4byte	.LVL13
+ 1301 0352 89080000 		.4byte	0x889
+ 1302 0356 0F       		.uleb128 0xf
+ 1303 0357 18000000 		.4byte	.LVL14
+ 1304 035b 94080000 		.4byte	0x894
+ 1305 035f 0F       		.uleb128 0xf
+ 1306 0360 24000000 		.4byte	.LVL15
+ 1307 0364 A0080000 		.4byte	0x8a0
+ 1308 0368 11       		.uleb128 0x11
+ 1309 0369 30000000 		.4byte	.LVL16
+ 1310 036d 51080000 		.4byte	0x851
+ 1311 0371 8B030000 		.4byte	0x38b
+ 1312 0375 12       		.uleb128 0x12
+ 1313 0376 01       		.uleb128 0x1
+ 1314 0377 50       		.byte	0x50
+ 1315 0378 02       		.uleb128 0x2
+ 1316 0379 75       		.byte	0x75
+ 1317 037a 00       		.sleb128 0
+ 1318 037b 12       		.uleb128 0x12
+ 1319 037c 01       		.uleb128 0x1
+ 1320 037d 51       		.byte	0x51
+ 1321 037e 05       		.uleb128 0x5
+ 1322 037f 03       		.byte	0x3
+ 1323 0380 28000000 		.4byte	.LC11
+ 1324 0384 12       		.uleb128 0x12
+ 1325 0385 01       		.uleb128 0x1
+ 1326 0386 52       		.byte	0x52
+ 1327 0387 02       		.uleb128 0x2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 31
+
+
+ 1328 0388 74       		.byte	0x74
+ 1329 0389 00       		.sleb128 0
+ 1330 038a 00       		.byte	0
+ 1331 038b 13       		.uleb128 0x13
+ 1332 038c 36000000 		.4byte	.LVL17
+ 1333 0390 5C080000 		.4byte	0x85c
+ 1334 0394 12       		.uleb128 0x12
+ 1335 0395 01       		.uleb128 0x1
+ 1336 0396 50       		.byte	0x50
+ 1337 0397 02       		.uleb128 0x2
+ 1338 0398 75       		.byte	0x75
+ 1339 0399 00       		.sleb128 0
+ 1340 039a 00       		.byte	0
+ 1341 039b 00       		.byte	0
+ 1342 039c 0E       		.uleb128 0xe
+ 1343 039d DA030000 		.4byte	.LASF39
+ 1344 03a1 01       		.byte	0x1
+ 1345 03a2 AB       		.byte	0xab
+ 1346 03a3 00000000 		.4byte	.LFB41
+ 1347 03a7 58000000 		.4byte	.LFE41-.LFB41
+ 1348 03ab 01       		.uleb128 0x1
+ 1349 03ac 9C       		.byte	0x9c
+ 1350 03ad 08040000 		.4byte	0x408
+ 1351 03b1 0F       		.uleb128 0xf
+ 1352 03b2 0C000000 		.4byte	.LVL19
+ 1353 03b6 AB080000 		.4byte	0x8ab
+ 1354 03ba 0F       		.uleb128 0xf
+ 1355 03bb 12000000 		.4byte	.LVL20
+ 1356 03bf AB080000 		.4byte	0x8ab
+ 1357 03c3 11       		.uleb128 0x11
+ 1358 03c4 24000000 		.4byte	.LVL21
+ 1359 03c8 B6080000 		.4byte	0x8b6
+ 1360 03cc DA030000 		.4byte	0x3da
+ 1361 03d0 12       		.uleb128 0x12
+ 1362 03d1 01       		.uleb128 0x1
+ 1363 03d2 50       		.byte	0x50
+ 1364 03d3 05       		.uleb128 0x5
+ 1365 03d4 03       		.byte	0x3
+ 1366 03d5 00000000 		.4byte	message
+ 1367 03d9 00       		.byte	0
+ 1368 03da 11       		.uleb128 0x11
+ 1369 03db 3C000000 		.4byte	.LVL22
+ 1370 03df 51080000 		.4byte	0x851
+ 1371 03e3 F7030000 		.4byte	0x3f7
+ 1372 03e7 12       		.uleb128 0x12
+ 1373 03e8 01       		.uleb128 0x1
+ 1374 03e9 50       		.byte	0x50
+ 1375 03ea 02       		.uleb128 0x2
+ 1376 03eb 74       		.byte	0x74
+ 1377 03ec 00       		.sleb128 0
+ 1378 03ed 12       		.uleb128 0x12
+ 1379 03ee 01       		.uleb128 0x1
+ 1380 03ef 51       		.byte	0x51
+ 1381 03f0 05       		.uleb128 0x5
+ 1382 03f1 03       		.byte	0x3
+ 1383 03f2 3C000000 		.4byte	.LC17
+ 1384 03f6 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 32
+
+
+ 1385 03f7 13       		.uleb128 0x13
+ 1386 03f8 42000000 		.4byte	.LVL23
+ 1387 03fc 5C080000 		.4byte	0x85c
+ 1388 0400 12       		.uleb128 0x12
+ 1389 0401 01       		.uleb128 0x1
+ 1390 0402 50       		.byte	0x50
+ 1391 0403 02       		.uleb128 0x2
+ 1392 0404 74       		.byte	0x74
+ 1393 0405 00       		.sleb128 0
+ 1394 0406 00       		.byte	0
+ 1395 0407 00       		.byte	0
+ 1396 0408 0E       		.uleb128 0xe
+ 1397 0409 E5000000 		.4byte	.LASF40
+ 1398 040d 01       		.byte	0x1
+ 1399 040e B9       		.byte	0xb9
+ 1400 040f 00000000 		.4byte	.LFB42
+ 1401 0413 54000000 		.4byte	.LFE42-.LFB42
+ 1402 0417 01       		.uleb128 0x1
+ 1403 0418 9C       		.byte	0x9c
+ 1404 0419 62040000 		.4byte	0x462
+ 1405 041d 11       		.uleb128 0x11
+ 1406 041e 1E000000 		.4byte	.LVL24
+ 1407 0422 B6080000 		.4byte	0x8b6
+ 1408 0426 34040000 		.4byte	0x434
+ 1409 042a 12       		.uleb128 0x12
+ 1410 042b 01       		.uleb128 0x1
+ 1411 042c 50       		.byte	0x50
+ 1412 042d 05       		.uleb128 0x5
+ 1413 042e 03       		.byte	0x3
+ 1414 042f 00000000 		.4byte	message
+ 1415 0433 00       		.byte	0
+ 1416 0434 11       		.uleb128 0x11
+ 1417 0435 36000000 		.4byte	.LVL25
+ 1418 0439 51080000 		.4byte	0x851
+ 1419 043d 51040000 		.4byte	0x451
+ 1420 0441 12       		.uleb128 0x12
+ 1421 0442 01       		.uleb128 0x1
+ 1422 0443 50       		.byte	0x50
+ 1423 0444 02       		.uleb128 0x2
+ 1424 0445 74       		.byte	0x74
+ 1425 0446 00       		.sleb128 0
+ 1426 0447 12       		.uleb128 0x12
+ 1427 0448 01       		.uleb128 0x1
+ 1428 0449 51       		.byte	0x51
+ 1429 044a 05       		.uleb128 0x5
+ 1430 044b 03       		.byte	0x3
+ 1431 044c 68000000 		.4byte	.LC23
+ 1432 0450 00       		.byte	0
+ 1433 0451 13       		.uleb128 0x13
+ 1434 0452 3C000000 		.4byte	.LVL26
+ 1435 0456 5C080000 		.4byte	0x85c
+ 1436 045a 12       		.uleb128 0x12
+ 1437 045b 01       		.uleb128 0x1
+ 1438 045c 50       		.byte	0x50
+ 1439 045d 02       		.uleb128 0x2
+ 1440 045e 74       		.byte	0x74
+ 1441 045f 00       		.sleb128 0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 33
+
+
+ 1442 0460 00       		.byte	0
+ 1443 0461 00       		.byte	0
+ 1444 0462 0E       		.uleb128 0xe
+ 1445 0463 9A030000 		.4byte	.LASF41
+ 1446 0467 01       		.byte	0x1
+ 1447 0468 C7       		.byte	0xc7
+ 1448 0469 00000000 		.4byte	.LFB43
+ 1449 046d 48000000 		.4byte	.LFE43-.LFB43
+ 1450 0471 01       		.uleb128 0x1
+ 1451 0472 9C       		.byte	0x9c
+ 1452 0473 C5040000 		.4byte	0x4c5
+ 1453 0477 0F       		.uleb128 0xf
+ 1454 0478 0C000000 		.4byte	.LVL27
+ 1455 047c 46080000 		.4byte	0x846
+ 1456 0480 11       		.uleb128 0x11
+ 1457 0481 14000000 		.4byte	.LVL28
+ 1458 0485 B6080000 		.4byte	0x8b6
+ 1459 0489 97040000 		.4byte	0x497
+ 1460 048d 12       		.uleb128 0x12
+ 1461 048e 01       		.uleb128 0x1
+ 1462 048f 50       		.byte	0x50
+ 1463 0490 05       		.uleb128 0x5
+ 1464 0491 03       		.byte	0x3
+ 1465 0492 00000000 		.4byte	message
+ 1466 0496 00       		.byte	0
+ 1467 0497 11       		.uleb128 0x11
+ 1468 0498 2C000000 		.4byte	.LVL29
+ 1469 049c 51080000 		.4byte	0x851
+ 1470 04a0 B4040000 		.4byte	0x4b4
+ 1471 04a4 12       		.uleb128 0x12
+ 1472 04a5 01       		.uleb128 0x1
+ 1473 04a6 50       		.byte	0x50
+ 1474 04a7 02       		.uleb128 0x2
+ 1475 04a8 74       		.byte	0x74
+ 1476 04a9 00       		.sleb128 0
+ 1477 04aa 12       		.uleb128 0x12
+ 1478 04ab 01       		.uleb128 0x1
+ 1479 04ac 51       		.byte	0x51
+ 1480 04ad 05       		.uleb128 0x5
+ 1481 04ae 03       		.byte	0x3
+ 1482 04af 90000000 		.4byte	.LC29
+ 1483 04b3 00       		.byte	0
+ 1484 04b4 13       		.uleb128 0x13
+ 1485 04b5 32000000 		.4byte	.LVL30
+ 1486 04b9 5C080000 		.4byte	0x85c
+ 1487 04bd 12       		.uleb128 0x12
+ 1488 04be 01       		.uleb128 0x1
+ 1489 04bf 50       		.byte	0x50
+ 1490 04c0 02       		.uleb128 0x2
+ 1491 04c1 74       		.byte	0x74
+ 1492 04c2 00       		.sleb128 0
+ 1493 04c3 00       		.byte	0
+ 1494 04c4 00       		.byte	0
+ 1495 04c5 15       		.uleb128 0x15
+ 1496 04c6 94000000 		.4byte	.LASF88
+ 1497 04ca 01       		.byte	0x1
+ 1498 04cb 32       		.byte	0x32
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 34
+
+
+ 1499 04cc 5D000000 		.4byte	0x5d
+ 1500 04d0 00000000 		.4byte	.LFB36
+ 1501 04d4 54000000 		.4byte	.LFE36-.LFB36
+ 1502 04d8 01       		.uleb128 0x1
+ 1503 04d9 9C       		.byte	0x9c
+ 1504 04da 46050000 		.4byte	0x546
+ 1505 04de 16       		.uleb128 0x16
+ 1506 04df CB010000 		.4byte	.LASF42
+ 1507 04e3 01       		.byte	0x1
+ 1508 04e4 40       		.byte	0x40
+ 1509 04e5 5D000000 		.4byte	0x5d
+ 1510 04e9 01       		.byte	0x1
+ 1511 04ea 0F       		.uleb128 0xf
+ 1512 04eb 06000000 		.4byte	.LVL31
+ 1513 04ef 7F020000 		.4byte	0x27f
+ 1514 04f3 11       		.uleb128 0x11
+ 1515 04f4 12000000 		.4byte	.LVL32
+ 1516 04f8 E9020000 		.4byte	0x2e9
+ 1517 04fc 06050000 		.4byte	0x506
+ 1518 0500 12       		.uleb128 0x12
+ 1519 0501 01       		.uleb128 0x1
+ 1520 0502 50       		.byte	0x50
+ 1521 0503 01       		.uleb128 0x1
+ 1522 0504 31       		.byte	0x31
+ 1523 0505 00       		.byte	0
+ 1524 0506 11       		.uleb128 0x11
+ 1525 0507 26000000 		.4byte	.LVL33
+ 1526 050b C2080000 		.4byte	0x8c2
+ 1527 050f 22050000 		.4byte	0x522
+ 1528 0513 12       		.uleb128 0x12
+ 1529 0514 01       		.uleb128 0x1
+ 1530 0515 50       		.byte	0x50
+ 1531 0516 01       		.uleb128 0x1
+ 1532 0517 4D       		.byte	0x4d
+ 1533 0518 12       		.uleb128 0x12
+ 1534 0519 01       		.uleb128 0x1
+ 1535 051a 51       		.byte	0x51
+ 1536 051b 05       		.uleb128 0x5
+ 1537 051c 03       		.byte	0x3
+ 1538 051d 00000000 		.4byte	ISR_CAN
+ 1539 0521 00       		.byte	0
+ 1540 0522 0F       		.uleb128 0xf
+ 1541 0523 2C000000 		.4byte	.LVL34
+ 1542 0527 0E030000 		.4byte	0x30e
+ 1543 052b 0F       		.uleb128 0xf
+ 1544 052c 38000000 		.4byte	.LVL35
+ 1545 0530 62040000 		.4byte	0x462
+ 1546 0534 13       		.uleb128 0x13
+ 1547 0535 40000000 		.4byte	.LVL36
+ 1548 0539 CD080000 		.4byte	0x8cd
+ 1549 053d 12       		.uleb128 0x12
+ 1550 053e 01       		.uleb128 0x1
+ 1551 053f 50       		.byte	0x50
+ 1552 0540 03       		.uleb128 0x3
+ 1553 0541 0A       		.byte	0xa
+ 1554 0542 E803     		.2byte	0x3e8
+ 1555 0544 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 35
+
+
+ 1556 0545 00       		.byte	0
+ 1557 0546 0E       		.uleb128 0xe
+ 1558 0547 C3010000 		.4byte	.LASF43
+ 1559 054b 01       		.byte	0x1
+ 1560 054c F4       		.byte	0xf4
+ 1561 054d 00000000 		.4byte	.LFB45
+ 1562 0551 4E000000 		.4byte	.LFE45-.LFB45
+ 1563 0555 01       		.uleb128 0x1
+ 1564 0556 9C       		.byte	0x9c
+ 1565 0557 DB050000 		.4byte	0x5db
+ 1566 055b 14       		.uleb128 0x14
+ 1567 055c 4F040000 		.4byte	.LASF45
+ 1568 0560 01       		.byte	0x1
+ 1569 0561 F4       		.byte	0xf4
+ 1570 0562 5D000000 		.4byte	0x5d
+ 1571 0566 52000000 		.4byte	.LLST3
+ 1572 056a 0F       		.uleb128 0xf
+ 1573 056b 1A000000 		.4byte	.LVL38
+ 1574 056f D8080000 		.4byte	0x8d8
+ 1575 0573 11       		.uleb128 0x11
+ 1576 0574 24000000 		.4byte	.LVL39
+ 1577 0578 E3080000 		.4byte	0x8e3
+ 1578 057c 86050000 		.4byte	0x586
+ 1579 0580 12       		.uleb128 0x12
+ 1580 0581 01       		.uleb128 0x1
+ 1581 0582 50       		.byte	0x50
+ 1582 0583 01       		.uleb128 0x1
+ 1583 0584 30       		.byte	0x30
+ 1584 0585 00       		.byte	0
+ 1585 0586 11       		.uleb128 0x11
+ 1586 0587 2A000000 		.4byte	.LVL40
+ 1587 058b EE080000 		.4byte	0x8ee
+ 1588 058f 9B050000 		.4byte	0x59b
+ 1589 0593 12       		.uleb128 0x12
+ 1590 0594 01       		.uleb128 0x1
+ 1591 0595 50       		.byte	0x50
+ 1592 0596 03       		.uleb128 0x3
+ 1593 0597 74       		.byte	0x74
+ 1594 0598 00       		.sleb128 0
+ 1595 0599 1F       		.byte	0x1f
+ 1596 059a 00       		.byte	0
+ 1597 059b 0F       		.uleb128 0xf
+ 1598 059c 34000000 		.4byte	.LVL41
+ 1599 05a0 D8080000 		.4byte	0x8d8
+ 1600 05a4 11       		.uleb128 0x11
+ 1601 05a5 3E000000 		.4byte	.LVL42
+ 1602 05a9 E3080000 		.4byte	0x8e3
+ 1603 05ad B7050000 		.4byte	0x5b7
+ 1604 05b1 12       		.uleb128 0x12
+ 1605 05b2 01       		.uleb128 0x1
+ 1606 05b3 50       		.byte	0x50
+ 1607 05b4 01       		.uleb128 0x1
+ 1608 05b5 31       		.byte	0x31
+ 1609 05b6 00       		.byte	0
+ 1610 05b7 11       		.uleb128 0x11
+ 1611 05b8 44000000 		.4byte	.LVL43
+ 1612 05bc EE080000 		.4byte	0x8ee
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 36
+
+
+ 1613 05c0 CB050000 		.4byte	0x5cb
+ 1614 05c4 12       		.uleb128 0x12
+ 1615 05c5 01       		.uleb128 0x1
+ 1616 05c6 50       		.byte	0x50
+ 1617 05c7 02       		.uleb128 0x2
+ 1618 05c8 74       		.byte	0x74
+ 1619 05c9 00       		.sleb128 0
+ 1620 05ca 00       		.byte	0
+ 1621 05cb 13       		.uleb128 0x13
+ 1622 05cc 4C000000 		.4byte	.LVL44
+ 1623 05d0 EE080000 		.4byte	0x8ee
+ 1624 05d4 12       		.uleb128 0x12
+ 1625 05d5 01       		.uleb128 0x1
+ 1626 05d6 50       		.byte	0x50
+ 1627 05d7 01       		.uleb128 0x1
+ 1628 05d8 30       		.byte	0x30
+ 1629 05d9 00       		.byte	0
+ 1630 05da 00       		.byte	0
+ 1631 05db 0E       		.uleb128 0xe
+ 1632 05dc F8000000 		.4byte	.LASF46
+ 1633 05e0 01       		.byte	0x1
+ 1634 05e1 2D       		.byte	0x2d
+ 1635 05e2 00000000 		.4byte	.LFB35
+ 1636 05e6 14000000 		.4byte	.LFE35-.LFB35
+ 1637 05ea 01       		.uleb128 0x1
+ 1638 05eb 9C       		.byte	0x9c
+ 1639 05ec 03060000 		.4byte	0x603
+ 1640 05f0 0F       		.uleb128 0xf
+ 1641 05f1 0A000000 		.4byte	.LVL46
+ 1642 05f5 46050000 		.4byte	0x546
+ 1643 05f9 0F       		.uleb128 0xf
+ 1644 05fa 0E000000 		.4byte	.LVL47
+ 1645 05fe FA080000 		.4byte	0x8fa
+ 1646 0602 00       		.byte	0
+ 1647 0603 17       		.uleb128 0x17
+ 1648 0604 2F040000 		.4byte	.LASF49
+ 1649 0608 01       		.byte	0x1
+ 1650 0609 0D01     		.2byte	0x10d
+ 1651 060b 5D000000 		.4byte	0x5d
+ 1652 060f 00000000 		.4byte	.LFB47
+ 1653 0613 02000000 		.4byte	.LFE47-.LFB47
+ 1654 0617 01       		.uleb128 0x1
+ 1655 0618 9C       		.byte	0x9c
+ 1656 0619 39060000 		.4byte	0x639
+ 1657 061d 18       		.uleb128 0x18
+ 1658 061e 67020000 		.4byte	.LASF47
+ 1659 0622 01       		.byte	0x1
+ 1660 0623 0D01     		.2byte	0x10d
+ 1661 0625 5D000000 		.4byte	0x5d
+ 1662 0629 01       		.uleb128 0x1
+ 1663 062a 50       		.byte	0x50
+ 1664 062b 19       		.uleb128 0x19
+ 1665 062c F0030000 		.4byte	.LASF48
+ 1666 0630 01       		.byte	0x1
+ 1667 0631 0E01     		.2byte	0x10e
+ 1668 0633 5D000000 		.4byte	0x5d
+ 1669 0637 01       		.byte	0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 37
+
+
+ 1670 0638 00       		.byte	0
+ 1671 0639 17       		.uleb128 0x17
+ 1672 063a 73030000 		.4byte	.LASF50
+ 1673 063e 01       		.byte	0x1
+ 1674 063f 1201     		.2byte	0x112
+ 1675 0641 5D000000 		.4byte	0x5d
+ 1676 0645 00000000 		.4byte	.LFB48
+ 1677 0649 28000000 		.4byte	.LFE48-.LFB48
+ 1678 064d 01       		.uleb128 0x1
+ 1679 064e 9C       		.byte	0x9c
+ 1680 064f 97060000 		.4byte	0x697
+ 1681 0653 1A       		.uleb128 0x1a
+ 1682 0654 57000000 		.4byte	.LASF51
+ 1683 0658 01       		.byte	0x1
+ 1684 0659 1201     		.2byte	0x112
+ 1685 065b 5D000000 		.4byte	0x5d
+ 1686 065f 7E000000 		.4byte	.LLST4
+ 1687 0663 1B       		.uleb128 0x1b
+ 1688 0664 52030000 		.4byte	.LASF52
+ 1689 0668 01       		.byte	0x1
+ 1690 0669 1301     		.2byte	0x113
+ 1691 066b 5D000000 		.4byte	0x5d
+ 1692 066f AA000000 		.4byte	.LLST5
+ 1693 0673 1C       		.uleb128 0x1c
+ 1694 0674 7000     		.ascii	"p\000"
+ 1695 0676 01       		.byte	0x1
+ 1696 0677 1401     		.2byte	0x114
+ 1697 0679 5D000000 		.4byte	0x5d
+ 1698 067d 01       		.uleb128 0x1
+ 1699 067e 51       		.byte	0x51
+ 1700 067f 1D       		.uleb128 0x1d
+ 1701 0680 6400     		.ascii	"d\000"
+ 1702 0682 01       		.byte	0x1
+ 1703 0683 1601     		.2byte	0x116
+ 1704 0685 5D000000 		.4byte	0x5d
+ 1705 0689 CC000000 		.4byte	.LLST6
+ 1706 068d 0F       		.uleb128 0xf
+ 1707 068e 08000000 		.4byte	.LVL50
+ 1708 0692 AB080000 		.4byte	0x8ab
+ 1709 0696 00       		.byte	0
+ 1710 0697 1E       		.uleb128 0x1e
+ 1711 0698 CD030000 		.4byte	.LASF53
+ 1712 069c 01       		.byte	0x1
+ 1713 069d 0201     		.2byte	0x102
+ 1714 069f 00000000 		.4byte	.LFB46
+ 1715 06a3 34000000 		.4byte	.LFE46-.LFB46
+ 1716 06a7 01       		.uleb128 0x1
+ 1717 06a8 9C       		.byte	0x9c
+ 1718 06a9 1F070000 		.4byte	0x71f
+ 1719 06ad 1A       		.uleb128 0x1a
+ 1720 06ae 67020000 		.4byte	.LASF47
+ 1721 06b2 01       		.byte	0x1
+ 1722 06b3 0201     		.2byte	0x102
+ 1723 06b5 5D000000 		.4byte	0x5d
+ 1724 06b9 F3000000 		.4byte	.LLST7
+ 1725 06bd 1D       		.uleb128 0x1d
+ 1726 06be 50574D00 		.ascii	"PWM\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 38
+
+
+ 1727 06c2 01       		.byte	0x1
+ 1728 06c3 0301     		.2byte	0x103
+ 1729 06c5 5D000000 		.4byte	0x5d
+ 1730 06c9 14010000 		.4byte	.LLST8
+ 1731 06cd 11       		.uleb128 0x11
+ 1732 06ce 06000000 		.4byte	.LVL57
+ 1733 06d2 03060000 		.4byte	0x603
+ 1734 06d6 E2060000 		.4byte	0x6e2
+ 1735 06da 12       		.uleb128 0x12
+ 1736 06db 01       		.uleb128 0x1
+ 1737 06dc 50       		.byte	0x50
+ 1738 06dd 03       		.uleb128 0x3
+ 1739 06de F3       		.byte	0xf3
+ 1740 06df 01       		.uleb128 0x1
+ 1741 06e0 50       		.byte	0x50
+ 1742 06e1 00       		.byte	0
+ 1743 06e2 0F       		.uleb128 0xf
+ 1744 06e3 0A000000 		.4byte	.LVL58
+ 1745 06e7 39060000 		.4byte	0x639
+ 1746 06eb 11       		.uleb128 0x11
+ 1747 06ec 18000000 		.4byte	.LVL60
+ 1748 06f0 46050000 		.4byte	0x546
+ 1749 06f4 00070000 		.4byte	0x700
+ 1750 06f8 12       		.uleb128 0x12
+ 1751 06f9 01       		.uleb128 0x1
+ 1752 06fa 50       		.byte	0x50
+ 1753 06fb 03       		.uleb128 0x3
+ 1754 06fc 0A       		.byte	0xa
+ 1755 06fd E803     		.2byte	0x3e8
+ 1756 06ff 00       		.byte	0
+ 1757 0700 11       		.uleb128 0x11
+ 1758 0701 26000000 		.4byte	.LVL63
+ 1759 0705 46050000 		.4byte	0x546
+ 1760 0709 15070000 		.4byte	0x715
+ 1761 070d 12       		.uleb128 0x12
+ 1762 070e 01       		.uleb128 0x1
+ 1763 070f 50       		.byte	0x50
+ 1764 0710 03       		.uleb128 0x3
+ 1765 0711 0B       		.byte	0xb
+ 1766 0712 18FC     		.2byte	0xfc18
+ 1767 0714 00       		.byte	0
+ 1768 0715 0F       		.uleb128 0xf
+ 1769 0716 2C000000 		.4byte	.LVL65
+ 1770 071a 46050000 		.4byte	0x546
+ 1771 071e 00       		.byte	0
+ 1772 071f 1F       		.uleb128 0x1f
+ 1773 0720 57040000 		.4byte	.LASF54
+ 1774 0724 01       		.byte	0x1
+ 1775 0725 10       		.byte	0x10
+ 1776 0726 83000000 		.4byte	0x83
+ 1777 072a 05       		.uleb128 0x5
+ 1778 072b 03       		.byte	0x3
+ 1779 072c 00000000 		.4byte	message_id
+ 1780 0730 1F       		.uleb128 0x1f
+ 1781 0731 C6040000 		.4byte	.LASF55
+ 1782 0735 01       		.byte	0x1
+ 1783 0736 1A       		.byte	0x1a
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 39
+
+
+ 1784 0737 6B000000 		.4byte	0x6b
+ 1785 073b 05       		.uleb128 0x5
+ 1786 073c 03       		.byte	0x3
+ 1787 073d 00000000 		.4byte	uart_debug
+ 1788 0741 1F       		.uleb128 0x1f
+ 1789 0742 68030000 		.4byte	.LASF56
+ 1790 0746 01       		.byte	0x1
+ 1791 0747 1B       		.byte	0x1b
+ 1792 0748 5D000000 		.4byte	0x5d
+ 1793 074c 05       		.uleb128 0x5
+ 1794 074d 03       		.byte	0x3
+ 1795 074e 00000000 		.4byte	GEAR_RATIO
+ 1796 0752 1F       		.uleb128 0x1f
+ 1797 0753 0E030000 		.4byte	.LASF57
+ 1798 0757 01       		.byte	0x1
+ 1799 0758 1C       		.byte	0x1c
+ 1800 0759 5D000000 		.4byte	0x5d
+ 1801 075d 05       		.uleb128 0x5
+ 1802 075e 03       		.byte	0x3
+ 1803 075f 00000000 		.4byte	CAN_TIMEOUT
+ 1804 0763 1F       		.uleb128 0x1f
+ 1805 0764 1A030000 		.4byte	.LASF58
+ 1806 0768 01       		.byte	0x1
+ 1807 0769 1D       		.byte	0x1d
+ 1808 076a 5D000000 		.4byte	0x5d
+ 1809 076e 05       		.uleb128 0x5
+ 1810 076f 03       		.byte	0x3
+ 1811 0770 00000000 		.4byte	pwm_compare
+ 1812 0774 20       		.uleb128 0x20
+ 1813 0775 6900     		.ascii	"i\000"
+ 1814 0777 01       		.byte	0x1
+ 1815 0778 1E       		.byte	0x1e
+ 1816 0779 5D000000 		.4byte	0x5d
+ 1817 077d 05       		.uleb128 0x5
+ 1818 077e 03       		.byte	0x3
+ 1819 077f 00000000 		.4byte	i
+ 1820 0783 1F       		.uleb128 0x1f
+ 1821 0784 C4000000 		.4byte	.LASF59
+ 1822 0788 01       		.byte	0x1
+ 1823 0789 1F       		.byte	0x1f
+ 1824 078a 5D000000 		.4byte	0x5d
+ 1825 078e 05       		.uleb128 0x5
+ 1826 078f 03       		.byte	0x3
+ 1827 0790 00000000 		.4byte	lastp
+ 1828 0794 20       		.uleb128 0x20
+ 1829 0795 6B7000   		.ascii	"kp\000"
+ 1830 0798 01       		.byte	0x1
+ 1831 0799 20       		.byte	0x20
+ 1832 079a 5D000000 		.4byte	0x5d
+ 1833 079e 05       		.uleb128 0x5
+ 1834 079f 03       		.byte	0x3
+ 1835 07a0 00000000 		.4byte	kp
+ 1836 07a4 20       		.uleb128 0x20
+ 1837 07a5 6B6900   		.ascii	"ki\000"
+ 1838 07a8 01       		.byte	0x1
+ 1839 07a9 20       		.byte	0x20
+ 1840 07aa 5D000000 		.4byte	0x5d
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 40
+
+
+ 1841 07ae 05       		.uleb128 0x5
+ 1842 07af 03       		.byte	0x3
+ 1843 07b0 00000000 		.4byte	ki
+ 1844 07b4 20       		.uleb128 0x20
+ 1845 07b5 6B6400   		.ascii	"kd\000"
+ 1846 07b8 01       		.byte	0x1
+ 1847 07b9 20       		.byte	0x20
+ 1848 07ba 5D000000 		.4byte	0x5d
+ 1849 07be 05       		.uleb128 0x5
+ 1850 07bf 03       		.byte	0x3
+ 1851 07c0 00000000 		.4byte	kd
+ 1852 07c4 1F       		.uleb128 0x1f
+ 1853 07c5 8C000000 		.4byte	.LASF60
+ 1854 07c9 01       		.byte	0x1
+ 1855 07ca 21       		.byte	0x21
+ 1856 07cb BC000000 		.4byte	0xbc
+ 1857 07cf 05       		.uleb128 0x5
+ 1858 07d0 03       		.byte	0x3
+ 1859 07d1 00000000 		.4byte	isrFlag
+ 1860 07d5 1F       		.uleb128 0x1f
+ 1861 07d6 38000000 		.4byte	.LASF61
+ 1862 07da 01       		.byte	0x1
+ 1863 07db 23       		.byte	0x23
+ 1864 07dc 5D000000 		.4byte	0x5d
+ 1865 07e0 05       		.uleb128 0x5
+ 1866 07e1 03       		.byte	0x3
+ 1867 07e2 00000000 		.4byte	mailbox
+ 1868 07e6 1F       		.uleb128 0x1f
+ 1869 07e7 1B000000 		.4byte	.LASF62
+ 1870 07eb 01       		.byte	0x1
+ 1871 07ec 24       		.byte	0x24
+ 1872 07ed 6B000000 		.4byte	0x6b
+ 1873 07f1 05       		.uleb128 0x5
+ 1874 07f2 03       		.byte	0x3
+ 1875 07f3 00000000 		.4byte	emergency
+ 1876 07f7 08       		.uleb128 0x8
+ 1877 07f8 9D000000 		.4byte	0x9d
+ 1878 07fc 07080000 		.4byte	0x807
+ 1879 0800 09       		.uleb128 0x9
+ 1880 0801 D9000000 		.4byte	0xd9
+ 1881 0805 31       		.byte	0x31
+ 1882 0806 00       		.byte	0
+ 1883 0807 1F       		.uleb128 0x1f
+ 1884 0808 6A040000 		.4byte	.LASF63
+ 1885 080c 01       		.byte	0x1
+ 1886 080d 25       		.byte	0x25
+ 1887 080e F7070000 		.4byte	0x7f7
+ 1888 0812 05       		.uleb128 0x5
+ 1889 0813 03       		.byte	0x3
+ 1890 0814 00000000 		.4byte	txData
+ 1891 0818 1F       		.uleb128 0x1f
+ 1892 0819 EB030000 		.4byte	.LASF64
+ 1893 081d 01       		.byte	0x1
+ 1894 081e 27       		.byte	0x27
+ 1895 081f 05010000 		.4byte	0x105
+ 1896 0823 05       		.uleb128 0x5
+ 1897 0824 03       		.byte	0x3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 41
+
+
+ 1898 0825 00000000 		.4byte	data
+ 1899 0829 1F       		.uleb128 0x1f
+ 1900 082a 10040000 		.4byte	.LASF65
+ 1901 082e 01       		.byte	0x1
+ 1902 082f 28       		.byte	0x28
+ 1903 0830 DC010000 		.4byte	0x1dc
+ 1904 0834 05       		.uleb128 0x5
+ 1905 0835 03       		.byte	0x3
+ 1906 0836 00000000 		.4byte	message
+ 1907 083a 21       		.uleb128 0x21
+ 1908 083b D6010000 		.4byte	.LASF66
+ 1909 083f D6010000 		.4byte	.LASF66
+ 1910 0843 04       		.byte	0x4
+ 1911 0844 3301     		.2byte	0x133
+ 1912 0846 22       		.uleb128 0x22
+ 1913 0847 89040000 		.4byte	.LASF67
+ 1914 084b 89040000 		.4byte	.LASF67
+ 1915 084f 05       		.byte	0x5
+ 1916 0850 30       		.byte	0x30
+ 1917 0851 22       		.uleb128 0x22
+ 1918 0852 D6020000 		.4byte	.LASF68
+ 1919 0856 D6020000 		.4byte	.LASF68
+ 1920 085a 06       		.byte	0x6
+ 1921 085b E7       		.byte	0xe7
+ 1922 085c 21       		.uleb128 0x21
+ 1923 085d 9A010000 		.4byte	.LASF69
+ 1924 0861 9A010000 		.4byte	.LASF69
+ 1925 0865 07       		.byte	0x7
+ 1926 0866 2A03     		.2byte	0x32a
+ 1927 0868 22       		.uleb128 0x22
+ 1928 0869 D1000000 		.4byte	.LASF70
+ 1929 086d D1000000 		.4byte	.LASF70
+ 1930 0871 03       		.byte	0x3
+ 1931 0872 C5       		.byte	0xc5
+ 1932 0873 22       		.uleb128 0x22
+ 1933 0874 A6040000 		.4byte	.LASF71
+ 1934 0878 A6040000 		.4byte	.LASF71
+ 1935 087c 08       		.byte	0x8
+ 1936 087d 99       		.byte	0x99
+ 1937 087e 22       		.uleb128 0x22
+ 1938 087f 00000000 		.4byte	.LASF72
+ 1939 0883 00000000 		.4byte	.LASF72
+ 1940 0887 08       		.byte	0x8
+ 1941 0888 9D       		.byte	0x9d
+ 1942 0889 22       		.uleb128 0x22
+ 1943 088a 5A030000 		.4byte	.LASF73
+ 1944 088e 5A030000 		.4byte	.LASF73
+ 1945 0892 09       		.byte	0x9
+ 1946 0893 48       		.byte	0x48
+ 1947 0894 21       		.uleb128 0x21
+ 1948 0895 3F040000 		.4byte	.LASF74
+ 1949 0899 3F040000 		.4byte	.LASF74
+ 1950 089d 04       		.byte	0x4
+ 1951 089e 3201     		.2byte	0x132
+ 1952 08a0 22       		.uleb128 0x22
+ 1953 08a1 A9030000 		.4byte	.LASF75
+ 1954 08a5 A9030000 		.4byte	.LASF75
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 42
+
+
+ 1955 08a9 0A       		.byte	0xa
+ 1956 08aa 72       		.byte	0x72
+ 1957 08ab 22       		.uleb128 0x22
+ 1958 08ac 25000000 		.4byte	.LASF76
+ 1959 08b0 25000000 		.4byte	.LASF76
+ 1960 08b4 09       		.byte	0x9
+ 1961 08b5 4E       		.byte	0x4e
+ 1962 08b6 21       		.uleb128 0x21
+ 1963 08b7 23040000 		.4byte	.LASF77
+ 1964 08bb 23040000 		.4byte	.LASF77
+ 1965 08bf 03       		.byte	0x3
+ 1966 08c0 1801     		.2byte	0x118
+ 1967 08c2 22       		.uleb128 0x22
+ 1968 08c3 71040000 		.4byte	.LASF78
+ 1969 08c7 71040000 		.4byte	.LASF78
+ 1970 08cb 0B       		.byte	0xb
+ 1971 08cc BD       		.byte	0xbd
+ 1972 08cd 22       		.uleb128 0x22
+ 1973 08ce 9E040000 		.4byte	.LASF79
+ 1974 08d2 9E040000 		.4byte	.LASF79
+ 1975 08d6 0B       		.byte	0xb
+ 1976 08d7 D9       		.byte	0xd9
+ 1977 08d8 22       		.uleb128 0x22
+ 1978 08d9 39030000 		.4byte	.LASF80
+ 1979 08dd 39030000 		.4byte	.LASF80
+ 1980 08e1 0C       		.byte	0xc
+ 1981 08e2 30       		.byte	0x30
+ 1982 08e3 22       		.uleb128 0x22
+ 1983 08e4 3C020000 		.4byte	.LASF81
+ 1984 08e8 3C020000 		.4byte	.LASF81
+ 1985 08ec 0D       		.byte	0xd
+ 1986 08ed 33       		.byte	0x33
+ 1987 08ee 21       		.uleb128 0x21
+ 1988 08ef 9F000000 		.4byte	.LASF82
+ 1989 08f3 9F000000 		.4byte	.LASF82
+ 1990 08f7 04       		.byte	0x4
+ 1991 08f8 5501     		.2byte	0x155
+ 1992 08fa 22       		.uleb128 0x22
+ 1993 08fb 68000000 		.4byte	.LASF83
+ 1994 08ff 68000000 		.4byte	.LASF83
+ 1995 0903 0E       		.byte	0xe
+ 1996 0904 39       		.byte	0x39
+ 1997 0905 00       		.byte	0
+ 1998              		.section	.debug_abbrev,"",%progbits
+ 1999              	.Ldebug_abbrev0:
+ 2000 0000 01       		.uleb128 0x1
+ 2001 0001 11       		.uleb128 0x11
+ 2002 0002 01       		.byte	0x1
+ 2003 0003 25       		.uleb128 0x25
+ 2004 0004 0E       		.uleb128 0xe
+ 2005 0005 13       		.uleb128 0x13
+ 2006 0006 0B       		.uleb128 0xb
+ 2007 0007 03       		.uleb128 0x3
+ 2008 0008 0E       		.uleb128 0xe
+ 2009 0009 1B       		.uleb128 0x1b
+ 2010 000a 0E       		.uleb128 0xe
+ 2011 000b 55       		.uleb128 0x55
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 43
+
+
+ 2012 000c 17       		.uleb128 0x17
+ 2013 000d 11       		.uleb128 0x11
+ 2014 000e 01       		.uleb128 0x1
+ 2015 000f 10       		.uleb128 0x10
+ 2016 0010 17       		.uleb128 0x17
+ 2017 0011 00       		.byte	0
+ 2018 0012 00       		.byte	0
+ 2019 0013 02       		.uleb128 0x2
+ 2020 0014 24       		.uleb128 0x24
+ 2021 0015 00       		.byte	0
+ 2022 0016 0B       		.uleb128 0xb
+ 2023 0017 0B       		.uleb128 0xb
+ 2024 0018 3E       		.uleb128 0x3e
+ 2025 0019 0B       		.uleb128 0xb
+ 2026 001a 03       		.uleb128 0x3
+ 2027 001b 0E       		.uleb128 0xe
+ 2028 001c 00       		.byte	0
+ 2029 001d 00       		.byte	0
+ 2030 001e 03       		.uleb128 0x3
+ 2031 001f 24       		.uleb128 0x24
+ 2032 0020 00       		.byte	0
+ 2033 0021 0B       		.uleb128 0xb
+ 2034 0022 0B       		.uleb128 0xb
+ 2035 0023 3E       		.uleb128 0x3e
+ 2036 0024 0B       		.uleb128 0xb
+ 2037 0025 03       		.uleb128 0x3
+ 2038 0026 08       		.uleb128 0x8
+ 2039 0027 00       		.byte	0
+ 2040 0028 00       		.byte	0
+ 2041 0029 04       		.uleb128 0x4
+ 2042 002a 16       		.uleb128 0x16
+ 2043 002b 00       		.byte	0
+ 2044 002c 03       		.uleb128 0x3
+ 2045 002d 0E       		.uleb128 0xe
+ 2046 002e 3A       		.uleb128 0x3a
+ 2047 002f 0B       		.uleb128 0xb
+ 2048 0030 3B       		.uleb128 0x3b
+ 2049 0031 05       		.uleb128 0x5
+ 2050 0032 49       		.uleb128 0x49
+ 2051 0033 13       		.uleb128 0x13
+ 2052 0034 00       		.byte	0
+ 2053 0035 00       		.byte	0
+ 2054 0036 05       		.uleb128 0x5
+ 2055 0037 35       		.uleb128 0x35
+ 2056 0038 00       		.byte	0
+ 2057 0039 49       		.uleb128 0x49
+ 2058 003a 13       		.uleb128 0x13
+ 2059 003b 00       		.byte	0
+ 2060 003c 00       		.byte	0
+ 2061 003d 06       		.uleb128 0x6
+ 2062 003e 13       		.uleb128 0x13
+ 2063 003f 01       		.byte	0x1
+ 2064 0040 0B       		.uleb128 0xb
+ 2065 0041 0B       		.uleb128 0xb
+ 2066 0042 3A       		.uleb128 0x3a
+ 2067 0043 0B       		.uleb128 0xb
+ 2068 0044 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 44
+
+
+ 2069 0045 0B       		.uleb128 0xb
+ 2070 0046 01       		.uleb128 0x1
+ 2071 0047 13       		.uleb128 0x13
+ 2072 0048 00       		.byte	0
+ 2073 0049 00       		.byte	0
+ 2074 004a 07       		.uleb128 0x7
+ 2075 004b 0D       		.uleb128 0xd
+ 2076 004c 00       		.byte	0
+ 2077 004d 03       		.uleb128 0x3
+ 2078 004e 0E       		.uleb128 0xe
+ 2079 004f 3A       		.uleb128 0x3a
+ 2080 0050 0B       		.uleb128 0xb
+ 2081 0051 3B       		.uleb128 0x3b
+ 2082 0052 0B       		.uleb128 0xb
+ 2083 0053 49       		.uleb128 0x49
+ 2084 0054 13       		.uleb128 0x13
+ 2085 0055 38       		.uleb128 0x38
+ 2086 0056 0B       		.uleb128 0xb
+ 2087 0057 00       		.byte	0
+ 2088 0058 00       		.byte	0
+ 2089 0059 08       		.uleb128 0x8
+ 2090 005a 01       		.uleb128 0x1
+ 2091 005b 01       		.byte	0x1
+ 2092 005c 49       		.uleb128 0x49
+ 2093 005d 13       		.uleb128 0x13
+ 2094 005e 01       		.uleb128 0x1
+ 2095 005f 13       		.uleb128 0x13
+ 2096 0060 00       		.byte	0
+ 2097 0061 00       		.byte	0
+ 2098 0062 09       		.uleb128 0x9
+ 2099 0063 21       		.uleb128 0x21
+ 2100 0064 00       		.byte	0
+ 2101 0065 49       		.uleb128 0x49
+ 2102 0066 13       		.uleb128 0x13
+ 2103 0067 2F       		.uleb128 0x2f
+ 2104 0068 0B       		.uleb128 0xb
+ 2105 0069 00       		.byte	0
+ 2106 006a 00       		.byte	0
+ 2107 006b 0A       		.uleb128 0xa
+ 2108 006c 16       		.uleb128 0x16
+ 2109 006d 00       		.byte	0
+ 2110 006e 03       		.uleb128 0x3
+ 2111 006f 0E       		.uleb128 0xe
+ 2112 0070 3A       		.uleb128 0x3a
+ 2113 0071 0B       		.uleb128 0xb
+ 2114 0072 3B       		.uleb128 0x3b
+ 2115 0073 0B       		.uleb128 0xb
+ 2116 0074 49       		.uleb128 0x49
+ 2117 0075 13       		.uleb128 0x13
+ 2118 0076 00       		.byte	0
+ 2119 0077 00       		.byte	0
+ 2120 0078 0B       		.uleb128 0xb
+ 2121 0079 0D       		.uleb128 0xd
+ 2122 007a 00       		.byte	0
+ 2123 007b 03       		.uleb128 0x3
+ 2124 007c 08       		.uleb128 0x8
+ 2125 007d 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 45
+
+
+ 2126 007e 0B       		.uleb128 0xb
+ 2127 007f 3B       		.uleb128 0x3b
+ 2128 0080 0B       		.uleb128 0xb
+ 2129 0081 49       		.uleb128 0x49
+ 2130 0082 13       		.uleb128 0x13
+ 2131 0083 38       		.uleb128 0x38
+ 2132 0084 0B       		.uleb128 0xb
+ 2133 0085 00       		.byte	0
+ 2134 0086 00       		.byte	0
+ 2135 0087 0C       		.uleb128 0xc
+ 2136 0088 0F       		.uleb128 0xf
+ 2137 0089 00       		.byte	0
+ 2138 008a 0B       		.uleb128 0xb
+ 2139 008b 0B       		.uleb128 0xb
+ 2140 008c 49       		.uleb128 0x49
+ 2141 008d 13       		.uleb128 0x13
+ 2142 008e 00       		.byte	0
+ 2143 008f 00       		.byte	0
+ 2144 0090 0D       		.uleb128 0xd
+ 2145 0091 2E       		.uleb128 0x2e
+ 2146 0092 00       		.byte	0
+ 2147 0093 3F       		.uleb128 0x3f
+ 2148 0094 19       		.uleb128 0x19
+ 2149 0095 03       		.uleb128 0x3
+ 2150 0096 0E       		.uleb128 0xe
+ 2151 0097 3A       		.uleb128 0x3a
+ 2152 0098 0B       		.uleb128 0xb
+ 2153 0099 3B       		.uleb128 0x3b
+ 2154 009a 0B       		.uleb128 0xb
+ 2155 009b 27       		.uleb128 0x27
+ 2156 009c 19       		.uleb128 0x19
+ 2157 009d 11       		.uleb128 0x11
+ 2158 009e 01       		.uleb128 0x1
+ 2159 009f 12       		.uleb128 0x12
+ 2160 00a0 06       		.uleb128 0x6
+ 2161 00a1 40       		.uleb128 0x40
+ 2162 00a2 18       		.uleb128 0x18
+ 2163 00a3 9742     		.uleb128 0x2117
+ 2164 00a5 19       		.uleb128 0x19
+ 2165 00a6 00       		.byte	0
+ 2166 00a7 00       		.byte	0
+ 2167 00a8 0E       		.uleb128 0xe
+ 2168 00a9 2E       		.uleb128 0x2e
+ 2169 00aa 01       		.byte	0x1
+ 2170 00ab 3F       		.uleb128 0x3f
+ 2171 00ac 19       		.uleb128 0x19
+ 2172 00ad 03       		.uleb128 0x3
+ 2173 00ae 0E       		.uleb128 0xe
+ 2174 00af 3A       		.uleb128 0x3a
+ 2175 00b0 0B       		.uleb128 0xb
+ 2176 00b1 3B       		.uleb128 0x3b
+ 2177 00b2 0B       		.uleb128 0xb
+ 2178 00b3 27       		.uleb128 0x27
+ 2179 00b4 19       		.uleb128 0x19
+ 2180 00b5 11       		.uleb128 0x11
+ 2181 00b6 01       		.uleb128 0x1
+ 2182 00b7 12       		.uleb128 0x12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 46
+
+
+ 2183 00b8 06       		.uleb128 0x6
+ 2184 00b9 40       		.uleb128 0x40
+ 2185 00ba 18       		.uleb128 0x18
+ 2186 00bb 9742     		.uleb128 0x2117
+ 2187 00bd 19       		.uleb128 0x19
+ 2188 00be 01       		.uleb128 0x1
+ 2189 00bf 13       		.uleb128 0x13
+ 2190 00c0 00       		.byte	0
+ 2191 00c1 00       		.byte	0
+ 2192 00c2 0F       		.uleb128 0xf
+ 2193 00c3 898201   		.uleb128 0x4109
+ 2194 00c6 00       		.byte	0
+ 2195 00c7 11       		.uleb128 0x11
+ 2196 00c8 01       		.uleb128 0x1
+ 2197 00c9 31       		.uleb128 0x31
+ 2198 00ca 13       		.uleb128 0x13
+ 2199 00cb 00       		.byte	0
+ 2200 00cc 00       		.byte	0
+ 2201 00cd 10       		.uleb128 0x10
+ 2202 00ce 34       		.uleb128 0x34
+ 2203 00cf 00       		.byte	0
+ 2204 00d0 03       		.uleb128 0x3
+ 2205 00d1 0E       		.uleb128 0xe
+ 2206 00d2 3A       		.uleb128 0x3a
+ 2207 00d3 0B       		.uleb128 0xb
+ 2208 00d4 3B       		.uleb128 0x3b
+ 2209 00d5 0B       		.uleb128 0xb
+ 2210 00d6 49       		.uleb128 0x49
+ 2211 00d7 13       		.uleb128 0x13
+ 2212 00d8 02       		.uleb128 0x2
+ 2213 00d9 17       		.uleb128 0x17
+ 2214 00da 00       		.byte	0
+ 2215 00db 00       		.byte	0
+ 2216 00dc 11       		.uleb128 0x11
+ 2217 00dd 898201   		.uleb128 0x4109
+ 2218 00e0 01       		.byte	0x1
+ 2219 00e1 11       		.uleb128 0x11
+ 2220 00e2 01       		.uleb128 0x1
+ 2221 00e3 31       		.uleb128 0x31
+ 2222 00e4 13       		.uleb128 0x13
+ 2223 00e5 01       		.uleb128 0x1
+ 2224 00e6 13       		.uleb128 0x13
+ 2225 00e7 00       		.byte	0
+ 2226 00e8 00       		.byte	0
+ 2227 00e9 12       		.uleb128 0x12
+ 2228 00ea 8A8201   		.uleb128 0x410a
+ 2229 00ed 00       		.byte	0
+ 2230 00ee 02       		.uleb128 0x2
+ 2231 00ef 18       		.uleb128 0x18
+ 2232 00f0 9142     		.uleb128 0x2111
+ 2233 00f2 18       		.uleb128 0x18
+ 2234 00f3 00       		.byte	0
+ 2235 00f4 00       		.byte	0
+ 2236 00f5 13       		.uleb128 0x13
+ 2237 00f6 898201   		.uleb128 0x4109
+ 2238 00f9 01       		.byte	0x1
+ 2239 00fa 11       		.uleb128 0x11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 47
+
+
+ 2240 00fb 01       		.uleb128 0x1
+ 2241 00fc 31       		.uleb128 0x31
+ 2242 00fd 13       		.uleb128 0x13
+ 2243 00fe 00       		.byte	0
+ 2244 00ff 00       		.byte	0
+ 2245 0100 14       		.uleb128 0x14
+ 2246 0101 05       		.uleb128 0x5
+ 2247 0102 00       		.byte	0
+ 2248 0103 03       		.uleb128 0x3
+ 2249 0104 0E       		.uleb128 0xe
+ 2250 0105 3A       		.uleb128 0x3a
+ 2251 0106 0B       		.uleb128 0xb
+ 2252 0107 3B       		.uleb128 0x3b
+ 2253 0108 0B       		.uleb128 0xb
+ 2254 0109 49       		.uleb128 0x49
+ 2255 010a 13       		.uleb128 0x13
+ 2256 010b 02       		.uleb128 0x2
+ 2257 010c 17       		.uleb128 0x17
+ 2258 010d 00       		.byte	0
+ 2259 010e 00       		.byte	0
+ 2260 010f 15       		.uleb128 0x15
+ 2261 0110 2E       		.uleb128 0x2e
+ 2262 0111 01       		.byte	0x1
+ 2263 0112 3F       		.uleb128 0x3f
+ 2264 0113 19       		.uleb128 0x19
+ 2265 0114 03       		.uleb128 0x3
+ 2266 0115 0E       		.uleb128 0xe
+ 2267 0116 3A       		.uleb128 0x3a
+ 2268 0117 0B       		.uleb128 0xb
+ 2269 0118 3B       		.uleb128 0x3b
+ 2270 0119 0B       		.uleb128 0xb
+ 2271 011a 27       		.uleb128 0x27
+ 2272 011b 19       		.uleb128 0x19
+ 2273 011c 49       		.uleb128 0x49
+ 2274 011d 13       		.uleb128 0x13
+ 2275 011e 8701     		.uleb128 0x87
+ 2276 0120 19       		.uleb128 0x19
+ 2277 0121 11       		.uleb128 0x11
+ 2278 0122 01       		.uleb128 0x1
+ 2279 0123 12       		.uleb128 0x12
+ 2280 0124 06       		.uleb128 0x6
+ 2281 0125 40       		.uleb128 0x40
+ 2282 0126 18       		.uleb128 0x18
+ 2283 0127 9742     		.uleb128 0x2117
+ 2284 0129 19       		.uleb128 0x19
+ 2285 012a 01       		.uleb128 0x1
+ 2286 012b 13       		.uleb128 0x13
+ 2287 012c 00       		.byte	0
+ 2288 012d 00       		.byte	0
+ 2289 012e 16       		.uleb128 0x16
+ 2290 012f 34       		.uleb128 0x34
+ 2291 0130 00       		.byte	0
+ 2292 0131 03       		.uleb128 0x3
+ 2293 0132 0E       		.uleb128 0xe
+ 2294 0133 3A       		.uleb128 0x3a
+ 2295 0134 0B       		.uleb128 0xb
+ 2296 0135 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 48
+
+
+ 2297 0136 0B       		.uleb128 0xb
+ 2298 0137 49       		.uleb128 0x49
+ 2299 0138 13       		.uleb128 0x13
+ 2300 0139 1C       		.uleb128 0x1c
+ 2301 013a 0B       		.uleb128 0xb
+ 2302 013b 00       		.byte	0
+ 2303 013c 00       		.byte	0
+ 2304 013d 17       		.uleb128 0x17
+ 2305 013e 2E       		.uleb128 0x2e
+ 2306 013f 01       		.byte	0x1
+ 2307 0140 3F       		.uleb128 0x3f
+ 2308 0141 19       		.uleb128 0x19
+ 2309 0142 03       		.uleb128 0x3
+ 2310 0143 0E       		.uleb128 0xe
+ 2311 0144 3A       		.uleb128 0x3a
+ 2312 0145 0B       		.uleb128 0xb
+ 2313 0146 3B       		.uleb128 0x3b
+ 2314 0147 05       		.uleb128 0x5
+ 2315 0148 27       		.uleb128 0x27
+ 2316 0149 19       		.uleb128 0x19
+ 2317 014a 49       		.uleb128 0x49
+ 2318 014b 13       		.uleb128 0x13
+ 2319 014c 11       		.uleb128 0x11
+ 2320 014d 01       		.uleb128 0x1
+ 2321 014e 12       		.uleb128 0x12
+ 2322 014f 06       		.uleb128 0x6
+ 2323 0150 40       		.uleb128 0x40
+ 2324 0151 18       		.uleb128 0x18
+ 2325 0152 9742     		.uleb128 0x2117
+ 2326 0154 19       		.uleb128 0x19
+ 2327 0155 01       		.uleb128 0x1
+ 2328 0156 13       		.uleb128 0x13
+ 2329 0157 00       		.byte	0
+ 2330 0158 00       		.byte	0
+ 2331 0159 18       		.uleb128 0x18
+ 2332 015a 05       		.uleb128 0x5
+ 2333 015b 00       		.byte	0
+ 2334 015c 03       		.uleb128 0x3
+ 2335 015d 0E       		.uleb128 0xe
+ 2336 015e 3A       		.uleb128 0x3a
+ 2337 015f 0B       		.uleb128 0xb
+ 2338 0160 3B       		.uleb128 0x3b
+ 2339 0161 05       		.uleb128 0x5
+ 2340 0162 49       		.uleb128 0x49
+ 2341 0163 13       		.uleb128 0x13
+ 2342 0164 02       		.uleb128 0x2
+ 2343 0165 18       		.uleb128 0x18
+ 2344 0166 00       		.byte	0
+ 2345 0167 00       		.byte	0
+ 2346 0168 19       		.uleb128 0x19
+ 2347 0169 34       		.uleb128 0x34
+ 2348 016a 00       		.byte	0
+ 2349 016b 03       		.uleb128 0x3
+ 2350 016c 0E       		.uleb128 0xe
+ 2351 016d 3A       		.uleb128 0x3a
+ 2352 016e 0B       		.uleb128 0xb
+ 2353 016f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 49
+
+
+ 2354 0170 05       		.uleb128 0x5
+ 2355 0171 49       		.uleb128 0x49
+ 2356 0172 13       		.uleb128 0x13
+ 2357 0173 1C       		.uleb128 0x1c
+ 2358 0174 0B       		.uleb128 0xb
+ 2359 0175 00       		.byte	0
+ 2360 0176 00       		.byte	0
+ 2361 0177 1A       		.uleb128 0x1a
+ 2362 0178 05       		.uleb128 0x5
+ 2363 0179 00       		.byte	0
+ 2364 017a 03       		.uleb128 0x3
+ 2365 017b 0E       		.uleb128 0xe
+ 2366 017c 3A       		.uleb128 0x3a
+ 2367 017d 0B       		.uleb128 0xb
+ 2368 017e 3B       		.uleb128 0x3b
+ 2369 017f 05       		.uleb128 0x5
+ 2370 0180 49       		.uleb128 0x49
+ 2371 0181 13       		.uleb128 0x13
+ 2372 0182 02       		.uleb128 0x2
+ 2373 0183 17       		.uleb128 0x17
+ 2374 0184 00       		.byte	0
+ 2375 0185 00       		.byte	0
+ 2376 0186 1B       		.uleb128 0x1b
+ 2377 0187 34       		.uleb128 0x34
+ 2378 0188 00       		.byte	0
+ 2379 0189 03       		.uleb128 0x3
+ 2380 018a 0E       		.uleb128 0xe
+ 2381 018b 3A       		.uleb128 0x3a
+ 2382 018c 0B       		.uleb128 0xb
+ 2383 018d 3B       		.uleb128 0x3b
+ 2384 018e 05       		.uleb128 0x5
+ 2385 018f 49       		.uleb128 0x49
+ 2386 0190 13       		.uleb128 0x13
+ 2387 0191 02       		.uleb128 0x2
+ 2388 0192 17       		.uleb128 0x17
+ 2389 0193 00       		.byte	0
+ 2390 0194 00       		.byte	0
+ 2391 0195 1C       		.uleb128 0x1c
+ 2392 0196 34       		.uleb128 0x34
+ 2393 0197 00       		.byte	0
+ 2394 0198 03       		.uleb128 0x3
+ 2395 0199 08       		.uleb128 0x8
+ 2396 019a 3A       		.uleb128 0x3a
+ 2397 019b 0B       		.uleb128 0xb
+ 2398 019c 3B       		.uleb128 0x3b
+ 2399 019d 05       		.uleb128 0x5
+ 2400 019e 49       		.uleb128 0x49
+ 2401 019f 13       		.uleb128 0x13
+ 2402 01a0 02       		.uleb128 0x2
+ 2403 01a1 18       		.uleb128 0x18
+ 2404 01a2 00       		.byte	0
+ 2405 01a3 00       		.byte	0
+ 2406 01a4 1D       		.uleb128 0x1d
+ 2407 01a5 34       		.uleb128 0x34
+ 2408 01a6 00       		.byte	0
+ 2409 01a7 03       		.uleb128 0x3
+ 2410 01a8 08       		.uleb128 0x8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 50
+
+
+ 2411 01a9 3A       		.uleb128 0x3a
+ 2412 01aa 0B       		.uleb128 0xb
+ 2413 01ab 3B       		.uleb128 0x3b
+ 2414 01ac 05       		.uleb128 0x5
+ 2415 01ad 49       		.uleb128 0x49
+ 2416 01ae 13       		.uleb128 0x13
+ 2417 01af 02       		.uleb128 0x2
+ 2418 01b0 17       		.uleb128 0x17
+ 2419 01b1 00       		.byte	0
+ 2420 01b2 00       		.byte	0
+ 2421 01b3 1E       		.uleb128 0x1e
+ 2422 01b4 2E       		.uleb128 0x2e
+ 2423 01b5 01       		.byte	0x1
+ 2424 01b6 3F       		.uleb128 0x3f
+ 2425 01b7 19       		.uleb128 0x19
+ 2426 01b8 03       		.uleb128 0x3
+ 2427 01b9 0E       		.uleb128 0xe
+ 2428 01ba 3A       		.uleb128 0x3a
+ 2429 01bb 0B       		.uleb128 0xb
+ 2430 01bc 3B       		.uleb128 0x3b
+ 2431 01bd 05       		.uleb128 0x5
+ 2432 01be 27       		.uleb128 0x27
+ 2433 01bf 19       		.uleb128 0x19
+ 2434 01c0 11       		.uleb128 0x11
+ 2435 01c1 01       		.uleb128 0x1
+ 2436 01c2 12       		.uleb128 0x12
+ 2437 01c3 06       		.uleb128 0x6
+ 2438 01c4 40       		.uleb128 0x40
+ 2439 01c5 18       		.uleb128 0x18
+ 2440 01c6 9742     		.uleb128 0x2117
+ 2441 01c8 19       		.uleb128 0x19
+ 2442 01c9 01       		.uleb128 0x1
+ 2443 01ca 13       		.uleb128 0x13
+ 2444 01cb 00       		.byte	0
+ 2445 01cc 00       		.byte	0
+ 2446 01cd 1F       		.uleb128 0x1f
+ 2447 01ce 34       		.uleb128 0x34
+ 2448 01cf 00       		.byte	0
+ 2449 01d0 03       		.uleb128 0x3
+ 2450 01d1 0E       		.uleb128 0xe
+ 2451 01d2 3A       		.uleb128 0x3a
+ 2452 01d3 0B       		.uleb128 0xb
+ 2453 01d4 3B       		.uleb128 0x3b
+ 2454 01d5 0B       		.uleb128 0xb
+ 2455 01d6 49       		.uleb128 0x49
+ 2456 01d7 13       		.uleb128 0x13
+ 2457 01d8 3F       		.uleb128 0x3f
+ 2458 01d9 19       		.uleb128 0x19
+ 2459 01da 02       		.uleb128 0x2
+ 2460 01db 18       		.uleb128 0x18
+ 2461 01dc 00       		.byte	0
+ 2462 01dd 00       		.byte	0
+ 2463 01de 20       		.uleb128 0x20
+ 2464 01df 34       		.uleb128 0x34
+ 2465 01e0 00       		.byte	0
+ 2466 01e1 03       		.uleb128 0x3
+ 2467 01e2 08       		.uleb128 0x8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 51
+
+
+ 2468 01e3 3A       		.uleb128 0x3a
+ 2469 01e4 0B       		.uleb128 0xb
+ 2470 01e5 3B       		.uleb128 0x3b
+ 2471 01e6 0B       		.uleb128 0xb
+ 2472 01e7 49       		.uleb128 0x49
+ 2473 01e8 13       		.uleb128 0x13
+ 2474 01e9 3F       		.uleb128 0x3f
+ 2475 01ea 19       		.uleb128 0x19
+ 2476 01eb 02       		.uleb128 0x2
+ 2477 01ec 18       		.uleb128 0x18
+ 2478 01ed 00       		.byte	0
+ 2479 01ee 00       		.byte	0
+ 2480 01ef 21       		.uleb128 0x21
+ 2481 01f0 2E       		.uleb128 0x2e
+ 2482 01f1 00       		.byte	0
+ 2483 01f2 3F       		.uleb128 0x3f
+ 2484 01f3 19       		.uleb128 0x19
+ 2485 01f4 3C       		.uleb128 0x3c
+ 2486 01f5 19       		.uleb128 0x19
+ 2487 01f6 6E       		.uleb128 0x6e
+ 2488 01f7 0E       		.uleb128 0xe
+ 2489 01f8 03       		.uleb128 0x3
+ 2490 01f9 0E       		.uleb128 0xe
+ 2491 01fa 3A       		.uleb128 0x3a
+ 2492 01fb 0B       		.uleb128 0xb
+ 2493 01fc 3B       		.uleb128 0x3b
+ 2494 01fd 05       		.uleb128 0x5
+ 2495 01fe 00       		.byte	0
+ 2496 01ff 00       		.byte	0
+ 2497 0200 22       		.uleb128 0x22
+ 2498 0201 2E       		.uleb128 0x2e
+ 2499 0202 00       		.byte	0
+ 2500 0203 3F       		.uleb128 0x3f
+ 2501 0204 19       		.uleb128 0x19
+ 2502 0205 3C       		.uleb128 0x3c
+ 2503 0206 19       		.uleb128 0x19
+ 2504 0207 6E       		.uleb128 0x6e
+ 2505 0208 0E       		.uleb128 0xe
+ 2506 0209 03       		.uleb128 0x3
+ 2507 020a 0E       		.uleb128 0xe
+ 2508 020b 3A       		.uleb128 0x3a
+ 2509 020c 0B       		.uleb128 0xb
+ 2510 020d 3B       		.uleb128 0x3b
+ 2511 020e 0B       		.uleb128 0xb
+ 2512 020f 00       		.byte	0
+ 2513 0210 00       		.byte	0
+ 2514 0211 00       		.byte	0
+ 2515              		.section	.debug_loc,"",%progbits
+ 2516              	.Ldebug_loc0:
+ 2517              	.LLST0:
+ 2518 0000 08000000 		.4byte	.LVL2
+ 2519 0004 3C000000 		.4byte	.LVL6
+ 2520 0008 0100     		.2byte	0x1
+ 2521 000a 54       		.byte	0x54
+ 2522 000b 00000000 		.4byte	0
+ 2523 000f 00000000 		.4byte	0
+ 2524              	.LLST1:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 52
+
+
+ 2525 0013 00000000 		.4byte	.LVL7
+ 2526 0017 02000000 		.4byte	.LVL8
+ 2527 001b 0100     		.2byte	0x1
+ 2528 001d 50       		.byte	0x50
+ 2529 001e 02000000 		.4byte	.LVL8
+ 2530 0022 1C000000 		.4byte	.LFE39
+ 2531 0026 0400     		.2byte	0x4
+ 2532 0028 F3       		.byte	0xf3
+ 2533 0029 01       		.uleb128 0x1
+ 2534 002a 50       		.byte	0x50
+ 2535 002b 9F       		.byte	0x9f
+ 2536 002c 00000000 		.4byte	0
+ 2537 0030 00000000 		.4byte	0
+ 2538              	.LLST2:
+ 2539 0034 08000000 		.4byte	.LVL10
+ 2540 0038 0B000000 		.4byte	.LVL11-1
+ 2541 003c 0100     		.2byte	0x1
+ 2542 003e 50       		.byte	0x50
+ 2543 003f 0B000000 		.4byte	.LVL11-1
+ 2544 0043 36000000 		.4byte	.LVL18
+ 2545 0047 0100     		.2byte	0x1
+ 2546 0049 54       		.byte	0x54
+ 2547 004a 00000000 		.4byte	0
+ 2548 004e 00000000 		.4byte	0
+ 2549              	.LLST3:
+ 2550 0052 00000000 		.4byte	.LVL37
+ 2551 0056 19000000 		.4byte	.LVL38-1
+ 2552 005a 0100     		.2byte	0x1
+ 2553 005c 50       		.byte	0x50
+ 2554 005d 19000000 		.4byte	.LVL38-1
+ 2555 0061 4C000000 		.4byte	.LVL45
+ 2556 0065 0100     		.2byte	0x1
+ 2557 0067 54       		.byte	0x54
+ 2558 0068 4C000000 		.4byte	.LVL45
+ 2559 006c 4E000000 		.4byte	.LFE45
+ 2560 0070 0400     		.2byte	0x4
+ 2561 0072 F3       		.byte	0xf3
+ 2562 0073 01       		.uleb128 0x1
+ 2563 0074 50       		.byte	0x50
+ 2564 0075 9F       		.byte	0x9f
+ 2565 0076 00000000 		.4byte	0
+ 2566 007a 00000000 		.4byte	0
+ 2567              	.LLST4:
+ 2568 007e 00000000 		.4byte	.LVL49
+ 2569 0082 07000000 		.4byte	.LVL50-1
+ 2570 0086 0100     		.2byte	0x1
+ 2571 0088 50       		.byte	0x50
+ 2572 0089 07000000 		.4byte	.LVL50-1
+ 2573 008d 0C000000 		.4byte	.LVL52
+ 2574 0091 0100     		.2byte	0x1
+ 2575 0093 54       		.byte	0x54
+ 2576 0094 0C000000 		.4byte	.LVL52
+ 2577 0098 28000000 		.4byte	.LFE48
+ 2578 009c 0400     		.2byte	0x4
+ 2579 009e F3       		.byte	0xf3
+ 2580 009f 01       		.uleb128 0x1
+ 2581 00a0 50       		.byte	0x50
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 53
+
+
+ 2582 00a1 9F       		.byte	0x9f
+ 2583 00a2 00000000 		.4byte	0
+ 2584 00a6 00000000 		.4byte	0
+ 2585              	.LLST5:
+ 2586 00aa 08000000 		.4byte	.LVL50
+ 2587 00ae 22000000 		.4byte	.LVL55
+ 2588 00b2 0100     		.2byte	0x1
+ 2589 00b4 50       		.byte	0x50
+ 2590 00b5 22000000 		.4byte	.LVL55
+ 2591 00b9 28000000 		.4byte	.LFE48
+ 2592 00bd 0500     		.2byte	0x5
+ 2593 00bf 03       		.byte	0x3
+ 2594 00c0 00000000 		.4byte	lastp
+ 2595 00c4 00000000 		.4byte	0
+ 2596 00c8 00000000 		.4byte	0
+ 2597              	.LLST6:
+ 2598 00cc 16000000 		.4byte	.LVL53
+ 2599 00d0 1C000000 		.4byte	.LVL54
+ 2600 00d4 0100     		.2byte	0x1
+ 2601 00d6 53       		.byte	0x53
+ 2602 00d7 1C000000 		.4byte	.LVL54
+ 2603 00db 28000000 		.4byte	.LFE48
+ 2604 00df 0A00     		.2byte	0xa
+ 2605 00e1 71       		.byte	0x71
+ 2606 00e2 00       		.sleb128 0
+ 2607 00e3 03       		.byte	0x3
+ 2608 00e4 00000000 		.4byte	lastp
+ 2609 00e8 06       		.byte	0x6
+ 2610 00e9 1C       		.byte	0x1c
+ 2611 00ea 9F       		.byte	0x9f
+ 2612 00eb 00000000 		.4byte	0
+ 2613 00ef 00000000 		.4byte	0
+ 2614              	.LLST7:
+ 2615 00f3 00000000 		.4byte	.LVL56
+ 2616 00f7 05000000 		.4byte	.LVL57-1
+ 2617 00fb 0100     		.2byte	0x1
+ 2618 00fd 50       		.byte	0x50
+ 2619 00fe 05000000 		.4byte	.LVL57-1
+ 2620 0102 34000000 		.4byte	.LFE46
+ 2621 0106 0400     		.2byte	0x4
+ 2622 0108 F3       		.byte	0xf3
+ 2623 0109 01       		.uleb128 0x1
+ 2624 010a 50       		.byte	0x50
+ 2625 010b 9F       		.byte	0x9f
+ 2626 010c 00000000 		.4byte	0
+ 2627 0110 00000000 		.4byte	0
+ 2628              	.LLST8:
+ 2629 0114 0A000000 		.4byte	.LVL58
+ 2630 0118 14000000 		.4byte	.LVL59
+ 2631 011c 0100     		.2byte	0x1
+ 2632 011e 50       		.byte	0x50
+ 2633 011f 1A000000 		.4byte	.LVL61
+ 2634 0123 22000000 		.4byte	.LVL62
+ 2635 0127 0100     		.2byte	0x1
+ 2636 0129 50       		.byte	0x50
+ 2637 012a 28000000 		.4byte	.LVL64
+ 2638 012e 2B000000 		.4byte	.LVL65-1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 54
+
+
+ 2639 0132 0100     		.2byte	0x1
+ 2640 0134 50       		.byte	0x50
+ 2641 0135 00000000 		.4byte	0
+ 2642 0139 00000000 		.4byte	0
+ 2643              		.section	.debug_aranges,"",%progbits
+ 2644 0000 84000000 		.4byte	0x84
+ 2645 0004 0200     		.2byte	0x2
+ 2646 0006 00000000 		.4byte	.Ldebug_info0
+ 2647 000a 04       		.byte	0x4
+ 2648 000b 00       		.byte	0
+ 2649 000c 0000     		.2byte	0
+ 2650 000e 0000     		.2byte	0
+ 2651 0010 00000000 		.4byte	.LFB44
+ 2652 0014 24000000 		.4byte	.LFE44-.LFB44
+ 2653 0018 00000000 		.4byte	.LFB37
+ 2654 001c 14000000 		.4byte	.LFE37-.LFB37
+ 2655 0020 00000000 		.4byte	.LFB38
+ 2656 0024 54000000 		.4byte	.LFE38-.LFB38
+ 2657 0028 00000000 		.4byte	.LFB39
+ 2658 002c 1C000000 		.4byte	.LFE39-.LFB39
+ 2659 0030 00000000 		.4byte	.LFB40
+ 2660 0034 44000000 		.4byte	.LFE40-.LFB40
+ 2661 0038 00000000 		.4byte	.LFB41
+ 2662 003c 58000000 		.4byte	.LFE41-.LFB41
+ 2663 0040 00000000 		.4byte	.LFB42
+ 2664 0044 54000000 		.4byte	.LFE42-.LFB42
+ 2665 0048 00000000 		.4byte	.LFB43
+ 2666 004c 48000000 		.4byte	.LFE43-.LFB43
+ 2667 0050 00000000 		.4byte	.LFB36
+ 2668 0054 54000000 		.4byte	.LFE36-.LFB36
+ 2669 0058 00000000 		.4byte	.LFB45
+ 2670 005c 4E000000 		.4byte	.LFE45-.LFB45
+ 2671 0060 00000000 		.4byte	.LFB35
+ 2672 0064 14000000 		.4byte	.LFE35-.LFB35
+ 2673 0068 00000000 		.4byte	.LFB47
+ 2674 006c 02000000 		.4byte	.LFE47-.LFB47
+ 2675 0070 00000000 		.4byte	.LFB48
+ 2676 0074 28000000 		.4byte	.LFE48-.LFB48
+ 2677 0078 00000000 		.4byte	.LFB46
+ 2678 007c 34000000 		.4byte	.LFE46-.LFB46
+ 2679 0080 00000000 		.4byte	0
+ 2680 0084 00000000 		.4byte	0
+ 2681              		.section	.debug_ranges,"",%progbits
+ 2682              	.Ldebug_ranges0:
+ 2683 0000 00000000 		.4byte	.LFB44
+ 2684 0004 24000000 		.4byte	.LFE44
+ 2685 0008 00000000 		.4byte	.LFB37
+ 2686 000c 14000000 		.4byte	.LFE37
+ 2687 0010 00000000 		.4byte	.LFB38
+ 2688 0014 54000000 		.4byte	.LFE38
+ 2689 0018 00000000 		.4byte	.LFB39
+ 2690 001c 1C000000 		.4byte	.LFE39
+ 2691 0020 00000000 		.4byte	.LFB40
+ 2692 0024 44000000 		.4byte	.LFE40
+ 2693 0028 00000000 		.4byte	.LFB41
+ 2694 002c 58000000 		.4byte	.LFE41
+ 2695 0030 00000000 		.4byte	.LFB42
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 55
+
+
+ 2696 0034 54000000 		.4byte	.LFE42
+ 2697 0038 00000000 		.4byte	.LFB43
+ 2698 003c 48000000 		.4byte	.LFE43
+ 2699 0040 00000000 		.4byte	.LFB36
+ 2700 0044 54000000 		.4byte	.LFE36
+ 2701 0048 00000000 		.4byte	.LFB45
+ 2702 004c 4E000000 		.4byte	.LFE45
+ 2703 0050 00000000 		.4byte	.LFB35
+ 2704 0054 14000000 		.4byte	.LFE35
+ 2705 0058 00000000 		.4byte	.LFB47
+ 2706 005c 02000000 		.4byte	.LFE47
+ 2707 0060 00000000 		.4byte	.LFB48
+ 2708 0064 28000000 		.4byte	.LFE48
+ 2709 0068 00000000 		.4byte	.LFB46
+ 2710 006c 34000000 		.4byte	.LFE46
+ 2711 0070 00000000 		.4byte	0
+ 2712 0074 00000000 		.4byte	0
+ 2713              		.section	.debug_line,"",%progbits
+ 2714              	.Ldebug_line0:
+ 2715 0000 B0020000 		.section	.debug_str,"MS",%progbits,1
+ 2715      02005F01 
+ 2715      00000201 
+ 2715      FB0E0D00 
+ 2715      01010101 
+ 2716              	.LASF72:
+ 2717 0000 4144435F 		.ascii	"ADC_SAR_Seq_1_StartConvert\000"
+ 2717      5341525F 
+ 2717      5365715F 
+ 2717      315F5374 
+ 2717      61727443 
+ 2718              	.LASF62:
+ 2719 001b 656D6572 		.ascii	"emergency\000"
+ 2719      67656E63 
+ 2719      7900
+ 2720              	.LASF76:
+ 2721 0025 51756164 		.ascii	"QuadDec_GetCounter\000"
+ 2721      4465635F 
+ 2721      47657443 
+ 2721      6F756E74 
+ 2721      657200
+ 2722              	.LASF61:
+ 2723 0038 6D61696C 		.ascii	"mailbox\000"
+ 2723      626F7800 
+ 2724              	.LASF22:
+ 2725 0040 43414E5F 		.ascii	"CAN_DATA_BYTES\000"
+ 2725      44415441 
+ 2725      5F425954 
+ 2725      455300
+ 2726              	.LASF37:
+ 2727 004f 73657474 		.ascii	"setting\000"
+ 2727      696E6700 
+ 2728              	.LASF51:
+ 2729 0057 74617267 		.ascii	"target\000"
+ 2729      657400
+ 2730              	.LASF38:
+ 2731 005e 63616E5F 		.ascii	"can_start\000"
+ 2731      73746172 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 56
+
+
+ 2731      7400
+ 2732              	.LASF83:
+ 2733 0068 50696E5F 		.ascii	"Pin_Limit_1_ClearInterrupt\000"
+ 2733      4C696D69 
+ 2733      745F315F 
+ 2733      436C6561 
+ 2733      72496E74 
+ 2734              	.LASF19:
+ 2735 0083 73697A65 		.ascii	"sizetype\000"
+ 2735      74797065 
+ 2735      00
+ 2736              	.LASF60:
+ 2737 008c 69737246 		.ascii	"isrFlag\000"
+ 2737      6C616700 
+ 2738              	.LASF88:
+ 2739 0094 6D61696E 		.ascii	"main\000"
+ 2739      00
+ 2740              	.LASF14:
+ 2741 0099 63686172 		.ascii	"char8\000"
+ 2741      3800
+ 2742              	.LASF82:
+ 2743 009f 50574D5F 		.ascii	"PWM_Motor_WriteCompare\000"
+ 2743      4D6F746F 
+ 2743      725F5772 
+ 2743      69746543 
+ 2743      6F6D7061 
+ 2744              	.LASF6:
+ 2745 00b6 6C6F6E67 		.ascii	"long long int\000"
+ 2745      206C6F6E 
+ 2745      6720696E 
+ 2745      7400
+ 2746              	.LASF59:
+ 2747 00c4 6C617374 		.ascii	"lastp\000"
+ 2747      7000
+ 2748              	.LASF27:
+ 2749 00ca 72786461 		.ascii	"rxdata\000"
+ 2749      746100
+ 2750              	.LASF70:
+ 2751 00d1 43414E5F 		.ascii	"CAN_Start\000"
+ 2751      53746172 
+ 2751      7400
+ 2752              	.LASF2:
+ 2753 00db 73686F72 		.ascii	"short int\000"
+ 2753      7420696E 
+ 2753      7400
+ 2754              	.LASF40:
+ 2755 00e5 43414E5F 		.ascii	"CAN_Send_Telemetry\000"
+ 2755      53656E64 
+ 2755      5F54656C 
+ 2755      656D6574 
+ 2755      727900
+ 2756              	.LASF46:
+ 2757 00f8 50696E5F 		.ascii	"Pin_Limit_1_Handler\000"
+ 2757      4C696D69 
+ 2757      745F315F 
+ 2757      48616E64 
+ 2757      6C657200 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 57
+
+
+ 2758              	.LASF84:
+ 2759 010c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2759      43313120 
+ 2759      352E342E 
+ 2759      31203230 
+ 2759      31363036 
+ 2760 013f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 2760      20726576 
+ 2760      6973696F 
+ 2760      6E203233 
+ 2760      37373135 
+ 2761 0172 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2761      66756E63 
+ 2761      74696F6E 
+ 2761      2D736563 
+ 2761      74696F6E 
+ 2762              	.LASF69:
+ 2763 019a 55415254 		.ascii	"UART_UartPutString\000"
+ 2763      5F556172 
+ 2763      74507574 
+ 2763      53747269 
+ 2763      6E6700
+ 2764              	.LASF9:
+ 2765 01ad 75696E74 		.ascii	"uint8\000"
+ 2765      3800
+ 2766              	.LASF26:
+ 2767 01b3 72786964 		.ascii	"rxid\000"
+ 2767      00
+ 2768              	.LASF35:
+ 2769 01b8 7365745F 		.ascii	"set_CAN_ID\000"
+ 2769      43414E5F 
+ 2769      494400
+ 2770              	.LASF43:
+ 2771 01c3 7365745F 		.ascii	"set_PWM\000"
+ 2771      50574D00 
+ 2772              	.LASF42:
+ 2773 01cb 74657374 		.ascii	"test\000"
+ 2773      00
+ 2774              	.LASF12:
+ 2775 01d0 666C6F61 		.ascii	"float\000"
+ 2775      7400
+ 2776              	.LASF66:
+ 2777 01d6 50574D5F 		.ascii	"PWM_Motor_Stop\000"
+ 2777      4D6F746F 
+ 2777      725F5374 
+ 2777      6F7000
+ 2778              	.LASF23:
+ 2779 01e5 43414E5F 		.ascii	"CAN_REG_32\000"
+ 2779      5245475F 
+ 2779      333200
+ 2780              	.LASF4:
+ 2781 01f0 6C6F6E67 		.ascii	"long int\000"
+ 2781      20696E74 
+ 2781      00
+ 2782              	.LASF5:
+ 2783 01f9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2783      20756E73 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 58
+
+
+ 2783      69676E65 
+ 2783      6420696E 
+ 2783      7400
+ 2784              	.LASF34:
+ 2785 020b 696E6974 		.ascii	"initialize_can_addr\000"
+ 2785      69616C69 
+ 2785      7A655F63 
+ 2785      616E5F61 
+ 2785      64647200 
+ 2786              	.LASF1:
+ 2787 021f 756E7369 		.ascii	"unsigned char\000"
+ 2787      676E6564 
+ 2787      20636861 
+ 2787      7200
+ 2788              	.LASF33:
+ 2789 022d 656D6572 		.ascii	"emergency_halt\000"
+ 2789      67656E63 
+ 2789      795F6861 
+ 2789      6C7400
+ 2790              	.LASF81:
+ 2791 023c 50696E5F 		.ascii	"Pin_Direction_Write\000"
+ 2791      44697265 
+ 2791      6374696F 
+ 2791      6E5F5772 
+ 2791      69746500 
+ 2792              	.LASF21:
+ 2793 0250 62797465 		.ascii	"byte\000"
+ 2793      00
+ 2794              	.LASF29:
+ 2795 0255 72786163 		.ascii	"rxacr\000"
+ 2795      7200
+ 2796              	.LASF18:
+ 2797 025b 6C6F6E67 		.ascii	"long double\000"
+ 2797      20646F75 
+ 2797      626C6500 
+ 2798              	.LASF47:
+ 2799 0267 64656772 		.ascii	"degrees\000"
+ 2799      65657300 
+ 2800              	.LASF30:
+ 2801 026f 7278616D 		.ascii	"rxamrd\000"
+ 2801      726400
+ 2802              	.LASF36:
+ 2803 0276 696E6974 		.ascii	"initialize\000"
+ 2803      69616C69 
+ 2803      7A6500
+ 2804              	.LASF86:
+ 2805 0281 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
+ 2805      73657273 
+ 2805      5C617573 
+ 2805      74635C4F 
+ 2805      6E654472 
+ 2806 02ae 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\Dev Board.cydsn\000"
+ 2806      69637332 
+ 2806      3031382D 
+ 2806      31395C50 
+ 2806      736F6320 
+ 2807              	.LASF68:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 59
+
+
+ 2808 02d6 73707269 		.ascii	"sprintf\000"
+ 2808      6E746600 
+ 2809              	.LASF0:
+ 2810 02de 7369676E 		.ascii	"signed char\000"
+ 2810      65642063 
+ 2810      68617200 
+ 2811              	.LASF7:
+ 2812 02ea 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2812      206C6F6E 
+ 2812      6720756E 
+ 2812      7369676E 
+ 2812      65642069 
+ 2813              	.LASF8:
+ 2814 0301 756E7369 		.ascii	"unsigned int\000"
+ 2814      676E6564 
+ 2814      20696E74 
+ 2814      00
+ 2815              	.LASF57:
+ 2816 030e 43414E5F 		.ascii	"CAN_TIMEOUT\000"
+ 2816      54494D45 
+ 2816      4F555400 
+ 2817              	.LASF58:
+ 2818 031a 70776D5F 		.ascii	"pwm_compare\000"
+ 2818      636F6D70 
+ 2818      61726500 
+ 2819              	.LASF20:
+ 2820 0326 43414E5F 		.ascii	"CAN_DATA_BYTES_MSG\000"
+ 2820      44415441 
+ 2820      5F425954 
+ 2820      45535F4D 
+ 2820      534700
+ 2821              	.LASF80:
+ 2822 0339 53746174 		.ascii	"Status_Reg_Switches_Read\000"
+ 2822      75735F52 
+ 2822      65675F53 
+ 2822      77697463 
+ 2822      6865735F 
+ 2823              	.LASF52:
+ 2824 0352 63757272 		.ascii	"current\000"
+ 2824      656E7400 
+ 2825              	.LASF73:
+ 2826 035a 51756164 		.ascii	"QuadDec_Start\000"
+ 2826      4465635F 
+ 2826      53746172 
+ 2826      7400
+ 2827              	.LASF56:
+ 2828 0368 47454152 		.ascii	"GEAR_RATIO\000"
+ 2828      5F524154 
+ 2828      494F00
+ 2829              	.LASF50:
+ 2830 0373 706F7369 		.ascii	"position_PID\000"
+ 2830      74696F6E 
+ 2830      5F504944 
+ 2830      00
+ 2831              	.LASF31:
+ 2832 0380 72786163 		.ascii	"rxacrd\000"
+ 2832      726400
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 60
+
+
+ 2833              	.LASF15:
+ 2834 0387 63686172 		.ascii	"char\000"
+ 2834      00
+ 2835              	.LASF32:
+ 2836 038c 43414E5F 		.ascii	"CAN_RX_STRUCT\000"
+ 2836      52585F53 
+ 2836      54525543 
+ 2836      5400
+ 2837              	.LASF41:
+ 2838 039a 43414E5F 		.ascii	"CAN_Send_Model\000"
+ 2838      53656E64 
+ 2838      5F4D6F64 
+ 2838      656C00
+ 2839              	.LASF75:
+ 2840 03a9 55415254 		.ascii	"UART_Start\000"
+ 2840      5F537461 
+ 2840      727400
+ 2841              	.LASF25:
+ 2842 03b4 7278636D 		.ascii	"rxcmd\000"
+ 2842      6400
+ 2843              	.LASF3:
+ 2844 03ba 73686F72 		.ascii	"short unsigned int\000"
+ 2844      7420756E 
+ 2844      7369676E 
+ 2844      65642069 
+ 2844      6E7400
+ 2845              	.LASF53:
+ 2846 03cd 7365745F 		.ascii	"set_Position\000"
+ 2846      506F7369 
+ 2846      74696F6E 
+ 2846      00
+ 2847              	.LASF39:
+ 2848 03da 43414E5F 		.ascii	"CAN_Send_Encoder\000"
+ 2848      53656E64 
+ 2848      5F456E63 
+ 2848      6F646572 
+ 2848      00
+ 2849              	.LASF64:
+ 2850 03eb 64617461 		.ascii	"data\000"
+ 2850      00
+ 2851              	.LASF48:
+ 2852 03f0 72617469 		.ascii	"ratio\000"
+ 2852      6F00
+ 2853              	.LASF10:
+ 2854 03f6 75696E74 		.ascii	"uint16\000"
+ 2854      313600
+ 2855              	.LASF11:
+ 2856 03fd 75696E74 		.ascii	"uint32\000"
+ 2856      333200
+ 2857              	.LASF85:
+ 2858 0404 6D61696E 		.ascii	"main.c\000"
+ 2858      2E6300
+ 2859              	.LASF16:
+ 2860 040b 72656738 		.ascii	"reg8\000"
+ 2860      00
+ 2861              	.LASF65:
+ 2862 0410 6D657373 		.ascii	"message\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 61
+
+
+ 2862      61676500 
+ 2863              	.LASF24:
+ 2864 0418 43414E5F 		.ascii	"CAN_TX_MSG\000"
+ 2864      54585F4D 
+ 2864      534700
+ 2865              	.LASF77:
+ 2866 0423 43414E5F 		.ascii	"CAN_SendMsg\000"
+ 2866      53656E64 
+ 2866      4D736700 
+ 2867              	.LASF49:
+ 2868 042f 64656772 		.ascii	"degrees_to_tick\000"
+ 2868      6565735F 
+ 2868      746F5F74 
+ 2868      69636B00 
+ 2869              	.LASF74:
+ 2870 043f 50574D5F 		.ascii	"PWM_Motor_Start\000"
+ 2870      4D6F746F 
+ 2870      725F5374 
+ 2870      61727400 
+ 2871              	.LASF45:
+ 2872 044f 636F6D70 		.ascii	"compare\000"
+ 2872      61726500 
+ 2873              	.LASF54:
+ 2874 0457 6D657373 		.ascii	"message_id\000"
+ 2874      6167655F 
+ 2874      696400
+ 2875              	.LASF87:
+ 2876 0462 4953525F 		.ascii	"ISR_CAN\000"
+ 2876      43414E00 
+ 2877              	.LASF63:
+ 2878 046a 74784461 		.ascii	"txData\000"
+ 2878      746100
+ 2879              	.LASF78:
+ 2880 0471 4379496E 		.ascii	"CyIntSetVector\000"
+ 2880      74536574 
+ 2880      56656374 
+ 2880      6F7200
+ 2881              	.LASF44:
+ 2882 0480 7072696F 		.ascii	"priority\000"
+ 2882      72697479 
+ 2882      00
+ 2883              	.LASF67:
+ 2884 0489 43616E5F 		.ascii	"Can_addr_Read\000"
+ 2884      61646472 
+ 2884      5F526561 
+ 2884      6400
+ 2885              	.LASF13:
+ 2886 0497 646F7562 		.ascii	"double\000"
+ 2886      6C6500
+ 2887              	.LASF79:
+ 2888 049e 43794465 		.ascii	"CyDelay\000"
+ 2888      6C617900 
+ 2889              	.LASF71:
+ 2890 04a6 4144435F 		.ascii	"ADC_SAR_Seq_1_Start\000"
+ 2890      5341525F 
+ 2890      5365715F 
+ 2890      315F5374 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\cchVYGeC.s 			page 62
+
+
+ 2890      61727400 
+ 2891              	.LASF28:
+ 2892 04ba 7278616D 		.ascii	"rxamr\000"
+ 2892      7200
+ 2893              	.LASF17:
+ 2894 04c0 72656733 		.ascii	"reg32\000"
+ 2894      3200
+ 2895              	.LASF55:
+ 2896 04c6 75617274 		.ascii	"uart_debug\000"
+ 2896      5F646562 
+ 2896      756700
+ 2897              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
