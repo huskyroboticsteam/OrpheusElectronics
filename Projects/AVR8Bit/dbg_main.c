@@ -29,28 +29,32 @@ int main(){
 	usart_init(19200);
 	_delay_ms(666);
 	sei();
-	tprintf("Hello, World!");
+	tprintf("Hello, World!\n");
 	init_encoder();
 	init_ADC();
 	DDRA = 0xF0;
 	//PORTA = 0xFF;
 	//extern uint8_t LED_states;
 	//LED_states = 0xFF;
-	set_LED(0, 0);
-	set_LED(1, 1);
-	set_LED(2, 2);
-	set_LED(3, 3);
-	init_motor();
+	/*set_LED(0, 3);
+	set_LED(1, 3);
+	set_LED(2, 3);
+	set_LED(3, 3);*/
+	//PORTA = 0xF0;
+	//init_motor();
 	init_ADC();
-	
+	delay_mS(1000);
 	//set_motor_mode(MOTOR_MODE_PID);
 	//enable_motor();
+	PORTE = 1<<PE4;
 	//PORTE = 0;
 	char target_string[8], vel_string[8];
 	set_Kp(0, 10);
 	set_Ki(0, 3);
 	set_Kd(0, 2);
 	i = 0;
+	int d = 2;
+	//set_motor_power(1023);
 	while(1){
 	/*	if(!PID_due && usart_available()){
 			read_string(target_string, ' ');
@@ -64,6 +68,22 @@ int main(){
 		}*/
 		//motor_control_tick();
 		//tprintf("Tick\n");
+		uint32_t c = 0;
+		for(int i = 0;i < 1000;i++){
+			c += get_motor_current();
+		}
+		c /= 1000;
+		tprintf("%dmV %dmA\n", (uint16_t)get_voltage(), c);
+		
+		//tprintf("pwm=%d, %l ticks, %dmV %dmA\n", (uint16_t)i, (uint32_t)get_encoder_ticks(), (uint16_t)get_voltage(), (uint16_t)get_motor_current());
+		i += d;
+		if(i > 1022){
+			d = 0;
+		}
+		if(i < -1022){
+			d = 2;
+		}
+		set_motor_power(200);
 		delay_mS(100);
 	}
 }

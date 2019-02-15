@@ -28,11 +28,7 @@ void set_LED(uint8_t L, uint8_t state){
 	}
 	L <<= 1;
 	LED_states = (LED_states & ~(3 << L)) | (state << L);
-	tprintf("LED state: %d\n", LED_states);
-	for(int i = 0;i < 4;i++){
-		uint8_t v = (LED_states >> (2*i)) & 3;
-		tprintf("%d ", v);
-	}
+	//tprintf("LED:%d\n", LED_states);
 }
 
 /*Integer implementation of abs()*/
@@ -47,7 +43,10 @@ uint16_t count: The timer count
 void inline update_LEDS(uint16_t count){
 	int i;
 	uint8_t v;
-	if(!LED_states) return;
+	if(!LED_states){
+		PORTA = 0;
+		return;
+	}
 	for(i = 0;i < 4;i++){
 		v = (LED_states >> (2*i)) & 3;
 		if(v == 0 || ((count % (1+(v*2))) && v != 3)){

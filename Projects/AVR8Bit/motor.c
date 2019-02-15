@@ -10,6 +10,8 @@
 #include "usart.h"
 #include "util.h"
 
+uint16_t current;
+
 int32_t motor_target_pos; //Motor target position/
 int16_t motor_target_vel; //Motor target velocity
 int32_t motor_max_pos; //The maximum position of the motor
@@ -42,6 +44,7 @@ void init_motor(){
 	MOTOR_DIR_PORT |= (1<<MOTOR_DIR);
 	/*Set current sense pin to input*/
 	MOTOR_CS_DDR &= ~(1<<MOTOR_CS);
+	PORTE |= (1<<PE4);
 	motor_max_pos = 1024; //BS this since we don't know yet
 	motor_max_current = DEFAULT_MOTOR_CURRENT_LIMIT; 
 	motor_target_pos = 0; //The encoder should start at 0 so this is a reasonable default
@@ -62,12 +65,12 @@ void init_motor(){
 	init_encoder();
 }
 
-/*Sets the motor power
+/*Sets the motor power directly without limit switch checking or updating variables
   Parameters:
   int16_t power: the motor power to set -1023 to +1023
   Negative values reverse the motor
 */
-void set_motor_power(int16_t power){
+void set_motor_power_raw(int16_t power){
 	if(power > 1023) power = 1023; /*Contrain power from -1023 to +1023*/
 	if(power < -1023) power = -1023;
 	#ifdef L298_MC /*L298 based motor controller*/
@@ -96,6 +99,26 @@ void set_motor_power(int16_t power){
 	}
 	write_PWM(MOTOR_PWM, power);
 	#endif
+}
+
+/*Sets the motor power more safely
+  Parameters:
+  int16_t power: the motor power to set -1023 to +1023
+  Negative values reverse the motor*/
+void set_motor_power(int16_t power){
+	motor_power = power;
+	uint8_t limit_sw = get_motor_limit_switch_state();
+	if(limit_sw & 1){
+		if(motor_power < 0){ 
+			motor_power = 0;
+		}
+	}
+	if(limit_sw & 2){
+		if(motor_power > 0){
+			motor_power = 0;
+		}
+	}
+	set_motor_power_raw(motor_power);
 }
 
 /*Sets Kp for both PID loops. Value unchanged if a parameter is 0
@@ -149,18 +172,24 @@ void set_Kd(uint16_t d1, uint16_t d2){
 /*Returns the motor current in milliamps*/
 uint16_t get_motor_current(){
 	internalAREF(); //Use the 2.56V internal VRef for more precision
-	uint16_t val = read_ADC(MOTOR_CS);
+	uint32_t val = read_ADC(MOTOR_CS);
 	//ADMUX &= 0xC0;
 	//delay_mS(5);
 	//2.5 mV/unit. 8 Units/Amp
-	if(val < 20) return 0;
-	val -= 20; //Remove 50mV offset;
-	val <<= 8; //Multiply by 128
-	return val;
+	if(val < 20){
+		val = 0;
+	} else {
+		val -= 20; //Remove 50mV offset;
+		//val <<= 7; //Multiply by 128
+		val <<= 6;
+	}
+	//current = (current*9)/10 + val/10;
+	return val;//current;
 }
 
 /*Returns true if the motor is stalled*/
 uint8_t check_motor_stall(){
+	return FALSE;/*
 	static uint32_t overcurrent_since;
 	if(get_motor_current() > motor_max_current){
 		if(get_mS() - overcurrent_since > 500){ //Has the motor been over the limit for at least 500mS?
@@ -169,7 +198,7 @@ uint8_t check_motor_stall(){
 	} else {
 		overcurrent_since = get_mS(); //Not overcurrent so reset the timer
 	}
-	return FALSE;
+	return FALSE;*/
 }
 
 /*Sets the maximum motor current in mA.
@@ -232,10 +261,10 @@ void motor_control_tick(){
 	if(!(motor_mode & MOTOR_MODE_PID)){ //If the PID is disabled, simply unset the PID due flag
 		PID_due = 0;
 	}
-	if(check_motor_stall() || PORTE & (1<<PE4)){ //Motor stall or fault pin asserted from motor driver
+	if(check_motor_stall() || !(PINE & (1<<PE4))){ //Motor stall or fault pin asserted from motor driver
 		motor_power = 0;
 		disable_motor();
-		send_CAN_error(CAN_ERROR_OVERCURRENT, get_motor_current()>>10);
+		send_CAN_error(CAN_ERROR_OVERCURRENT, /*get_motor_current()>>10*/0);
 		set_LED(1, 1);
 	}
 	uint8_t limit_sw = get_motor_limit_switch_state();
@@ -248,7 +277,7 @@ void motor_control_tick(){
 			motor_target_pos = 0;
 		if(motor_power < 0){ 
 			motor_power = 0;
-			set_motor_power(0);
+			set_motor_power_raw(0);
 		}
 	}
 	if(limit_sw & 2){
@@ -261,7 +290,7 @@ void motor_control_tick(){
 		}
 		if(motor_power > 0){
 			motor_power = 0;
-			set_motor_power(0);
+			set_motor_power_raw(0);
 		}
 	}
 	if(motor_mode & MOTOR_MODE_PID && PID_due){ //Are we supposed to run the PID?
@@ -338,7 +367,7 @@ void motor_control_tick(){
 		pid_runs++;
 		PID_due = 0; //We're done running the PID for now
 	}
-	set_motor_power(motor_power);		
+	set_motor_power_raw(motor_power);		
 }
 
 /*Enables the motor*/
@@ -349,7 +378,7 @@ void enable_motor(){
 
 /*Disables the motor*/
 void disable_motor(){
-	set_motor_power(0);
+	set_motor_power_raw(0);
 	motor_mode &= ~MOTOR_MODE_ENABLED;
 }
 

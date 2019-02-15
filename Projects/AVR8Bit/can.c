@@ -57,12 +57,16 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 		CANSTMOB &= 0;
 		CANIDM4 = 0;
 		CANIDM3 = 0;
-		CANIDM2 = 0;
-		CANIDM1 = 0;
+		//CANIDM2 = 0;
+		//CANIDM1 = 0;
 		CANIDT4 = 0;
 		CANIDT3 = 0;
-		CANIDT2 = 0;
-		CANIDT1 = 0;
+		//CANIDT2 = 0;
+		//CANIDT1 = 0;
+		CANIDT2 = ((RX_tag & 3) << 5);
+		CANIDT1 = ((RX_tag & 0x7F8) >> 3);
+		CANIDM2 = ((RX_mask & 3) << 5);
+		CANIDM1 = ((RX_mask & 0x7F8) >> 3);
 		if(i > txmobs){
 			CANCDMOB = (1 << CONMOB1); //Mark RX mobs
 			enable_mob_interrupt(i);
@@ -124,7 +128,7 @@ uint8_t mob_enabled(uint8_t mob){
 	}
 }
 
-/*Returns the number of CAN messages waiting*/
+/*Returns the number of CAN s waiting*/
 uint8_t CAN_msg_available(){
 	return msgs_av;
 }
@@ -159,8 +163,8 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 	/*Reset the MOb*/
 	CANIDT4 = 0;
 	CANIDT3 = 0;
-	CANIDT2 = (RX_mask & 0x03) << 5;
-	CANIDT1 = (RX_mask & 0x7F8) >> 3;
+	CANIDT2 = (RX_tag & 0x03) << 5;
+	CANIDT1 = (RX_tag & 0x7F8) >> 3;
 	enable_mob_interrupt(mob);
 	rxed_mobs[!!(mob & 8)] &= ~(1 << (mob & 7)); //Mark that the message has been taken
 	CANCDMOB = (1<<CONMOB1); //Re-enable recieve
@@ -234,7 +238,7 @@ void CAN_dump_state(){
 		select_mob(i);
 		uint32_t canstmob = CANSTMOB;
 		uint32_t cancdmob = CANCDMOB; 
-		tprintf("mob %d: (%c), I=%c, IDT=%d, DLC=%d, CANST=0x%X", i, mob_enabled(i)? 'E': 'D', mob_interrupt_enabled(i)? 'E': 'D', (uint16_t)((CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3)), (int)(cancdmob & 15), canstmob);
+		tprintf("mob %d: (%c), I=%c, IDT=%d, IDM=%d, DLC=%d, CANST=0x%X", i, mob_enabled(i)? 'E': 'D', mob_interrupt_enabled(i)? 'E': 'D', (uint16_t)((CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3)), (uint16_t)((CANIDM2 >> 5) | ((uint16_t)CANIDM1 << 3)), (int)(cancdmob & 15), canstmob);
 		if(canstmob != 0){
 			tprintf("{");
 			for(j = 0;j < 8;j++){
@@ -272,7 +276,7 @@ void CAN_dump_state(){
 void dump_CAN_message(struct CAN_msg m){
 	int i;
 	tprintf("\n-CAN MESSAGE-\n");
-	tprintf("id=0x%X, flags=0x%X, length=%d\n", m.id, (long)m.flags, m.length);
+	tprintf("id=0x%X, flags=0x%X, length=%d\n", (long)m.id, (long)m.flags, m.length);
 	tprintf("HEX={");
 	for(i = 0;i < m.length;i++){
 		tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");

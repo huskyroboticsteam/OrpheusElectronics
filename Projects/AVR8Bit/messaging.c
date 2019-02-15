@@ -16,6 +16,7 @@ void handle_CAN_message(struct CAN_msg *m){
 	uint16_t param1, param2;
 	param1 = (m->data[1] << 8) | m->data[2];
 	param2 = (m->data[3] << 8) | m->data[4];
+	tprintf("sender=%X, command=%X\n", (uint32_t)sender, (uint32_t)m->data[0]);
 	switch(m->data[0]){
 		case 0x00: //Set Mode
 			if(m->data[1]){
