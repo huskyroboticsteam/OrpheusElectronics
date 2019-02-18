@@ -43,6 +43,7 @@ void init_encoder(){
 	encoder_ticks = 0; //Reset count
 	gate_control_top = 24; //Short gate time
 	EICRB |= 0x50; //Enable pin change interrupt on PE6, PE7
+	EICRA = 0;
 	EIMSK |= 0xC0;
 }
 

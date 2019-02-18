@@ -28,7 +28,7 @@ uint8_t tgt_inc; //The increment for the PID target
 uint8_t slow; //"Slow" mode (less than 5 encoder ticks per 20mS)
 #endif
 uint16_t pid_runs; //The number of times the PID has run
-uint16_t motor_power;
+int16_t motor_power;
 
 uint16_t motor_max_current;
 
@@ -45,6 +45,7 @@ void init_motor(){
 	/*Set current sense pin to input*/
 	MOTOR_CS_DDR &= ~(1<<MOTOR_CS);
 	PORTE |= (1<<PE4);
+	PORTD = 3; //Turn on limit switch pullup
 	motor_max_pos = 1024; //BS this since we don't know yet
 	motor_max_current = DEFAULT_MOTOR_CURRENT_LIMIT; 
 	motor_target_pos = 0; //The encoder should start at 0 so this is a reasonable default
@@ -106,6 +107,10 @@ void set_motor_power_raw(int16_t power){
   int16_t power: the motor power to set -1023 to +1023
   Negative values reverse the motor*/
 void set_motor_power(int16_t power){
+	if(!(motor_mode & MOTOR_MODE_ENABLED)){
+		set_motor_power_raw(0);
+		return;
+	}
 	motor_power = power;
 	uint8_t limit_sw = get_motor_limit_switch_state();
 	if(limit_sw & 1){
@@ -118,6 +123,7 @@ void set_motor_power(int16_t power){
 			motor_power = 0;
 		}
 	}
+	tprintf("%X\n", limit_sw);
 	set_motor_power_raw(motor_power);
 }
 
@@ -172,7 +178,9 @@ void set_Kd(uint16_t d1, uint16_t d2){
 /*Returns the motor current in milliamps*/
 uint16_t get_motor_current(){
 	internalAREF(); //Use the 2.56V internal VRef for more precision
+	//set_motor_power_raw(1023);
 	uint32_t val = read_ADC(MOTOR_CS);
+	//set_motor_power_raw(motor_power);
 	//ADMUX &= 0xC0;
 	//delay_mS(5);
 	//2.5 mV/unit. 8 Units/Amp
@@ -180,7 +188,7 @@ uint16_t get_motor_current(){
 		val = 0;
 	} else {
 		val -= 20; //Remove 50mV offset;
-		//val <<= 7; //Multiply by 128
+	//	val <<= 7; //Multiply by 128
 		val <<= 6;
 	}
 	//current = (current*9)/10 + val/10;
@@ -394,7 +402,8 @@ uint8_t get_motor_mode(){
 
 /*Gets the state of the limit switches*/
 uint8_t get_motor_limit_switch_state(){
-	return ((~PIND) & 0x02); //Get GPIO data
+	//return ((~PIND) & 0x03); //Get GPIO data
+	return (~PIND & 2) | ((~PINC & 2) >> 1);
 }
 
 /*Gets the motor maximum position*/
