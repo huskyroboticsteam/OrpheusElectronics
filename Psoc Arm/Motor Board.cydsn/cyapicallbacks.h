@@ -13,10 +13,14 @@
 #define CYAPICALLBACKS_H
 
 #include "project.h"
-    
+
 
     
 //void check_Pin(void);
+    struct Can_data 
+    {
+        uint8 b0,b1,b2,b3,b4,done;
+    };
 void initialize_can_addr(void);
 void set_CAN_ID(uint32 priority);
 void CAN_Send_Encoder(void);
@@ -26,8 +30,6 @@ void initialize(void);
 int encoder(void);
 void emergency_Stop(void);
 void initialize(void);
-void CAN_Read(int *read);
-void CAN_Send(int Mailbox, uint8 type, uint8 b1, uint8 b2, uint8 b3, uint8 b4);
 uint32 pot_Read(void);
 void set_PWM(int period);
 int degrees_to_tick();

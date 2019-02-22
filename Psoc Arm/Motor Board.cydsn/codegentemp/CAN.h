@@ -72,7 +72,7 @@ extern uint8 CAN_initVar;
     #define CAN_SST_FAILURE_USE_HELPER     (1u)
 #endif /* (!(CY_PSOC3 || CY_PSOC5)) */
 
-#define CAN_ADVANCED_INTERRUPT_CFG         (0u)
+#define CAN_ADVANCED_INTERRUPT_CFG         (1u)
 
 /* TX/RX Function Enable */
 #define CAN_TX0_FUNC_ENABLE            (0u)
@@ -450,7 +450,7 @@ void  CAN_ReceiveMsg(uint8 rxMailbox) ;
 #define CAN_CFG_REG_SJW               (2u - 1u)
 #define CAN_SAMPLING_MODE             (0u)
 #define CAN_ARBITER                   (0u)
-#define CAN_RESET_TYPE                (0u)
+#define CAN_RESET_TYPE                (1u)
 #define CAN_SYNC_EDGE                 (0u)
 
 #if (!(CY_PSOC3 || CY_PSOC5))

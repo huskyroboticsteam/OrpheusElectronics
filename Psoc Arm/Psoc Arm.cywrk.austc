@@ -654,7 +654,6 @@
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
-<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
@@ -670,15 +669,16 @@
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_1.lst</v>
-<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_1_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_2.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_2_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_3.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_3_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_4.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_4_PM.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\fault.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\fault_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_Limit_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_period.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Direction_PM.lst</v>
@@ -709,6 +709,8 @@
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare2.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Spare2_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Status_Reg_Switches.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Timer_1.lst</v>
+<v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\Timer_1_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\TX_1_PM.lst</v>
 <v>Psoc Arm\Motor Board\CortexM0\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
@@ -920,7 +922,8 @@
 <v>Psoc Arm\Motor Board\CAN_v3_0.pdf</v>
 <v>Psoc Arm\Motor Board\cy_clock_v2_20</v>
 <v>Psoc Arm\Motor Board\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
-<v>Psoc Arm\Motor Board\cy_isr_v1_70.pdf</v>
+<v>Psoc Arm\Motor Board\cy_isr_v1_70</v>
+<v>Psoc Arm\Motor Board\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
 <v>Psoc Arm\Motor Board\cy_pins_v2_20</v>
 <v>Psoc Arm\Motor Board\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Psoc Arm\Motor Board\CyStatusReg_v1_90</v>
@@ -935,6 +938,8 @@
 <v>Psoc Arm\Motor Board\SwitchSPST_v1_0</v>
 <v>Psoc Arm\Motor Board\SwitchSPST_v1_0\SwitchSPST_v1_0.pdf</v>
 <v>Psoc Arm\Motor Board\TCPWM_P4_v2_10.pdf</v>
+<v>Psoc Arm\Motor Board\Timer_v2_80.pdf</v>
+<v>Psoc Arm\Motor Board\ZeroTerminal.pdf</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\PSoC 4 Architecture TRM</v>
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\PSoC 4200L Family Datasheet</v>
@@ -996,11 +1001,9 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\Motor Board.cydsn\main.c" />
-<name v=".\Motor Board.cydsn\Motor Board.cydwr" />
 <name v=".\Motor Board.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\Dev Board.cydsn\main.c" />
-<name v=".\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" />
-<name v=".\CAN_Full_P4_Example02.cydsn\main.c" />
+<name v=".\Motor Board.cydsn\Motor Board.cydwr" />
+<name v=".\Motor Board.cydsn\Generated_Source\PSoC4\CAN.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -1008,7 +1011,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1218, 596" SelectedTabbedMdiWindow="65a2808c-7838-423a-a6c5-f3e50ff64fe6"><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\main.c" Guid="0713128b-35fd-419b-82df-f27aeaea66a7" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Motor Board.cydwr" Guid="670b7a0e-6e20-4f29-b926-a8f6c73f117f" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\TopDesign\TopDesign.cysch" Guid="73bde889-7ac5-4875-b5fd-619bc39ec5ad" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Dev Board.cydsn\main.c" Guid="410c6297-b5fd-4c40-ac81-64022dd8512c" /><ToolWindow Key="Output Window Plugin:7305390e-eabe-4963-b21f-3a0f11b4b1d5:Output Window" Guid="65a2808c-7838-423a-a6c5-f3e50ff64fe6" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="5b7b8485-d0ab-4e37-a0a7-90eeea460fea" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" Guid="d4cc9bf4-4bb3-4474-9613-a817ef0884a8" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example02.cydsn\main.c" Guid="75f0535c-b88a-449a-8083-576659639feb" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="592, 594" SelectedTabbedMdiWindow="c17c7d41-91a8-46df-8b83-35f94468425a"><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\main.c" Guid="c17c7d41-91a8-46df-8b83-35f94468425a" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\TopDesign\TopDesign.cysch" Guid="e43b1790-273d-484b-a03c-6ff7822b112d" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Motor Board.cydwr" Guid="08169db1-6034-4942-a596-01566611f97c" /><ToolWindow Key="Output Window Plugin:7305390e-eabe-4963-b21f-3a0f11b4b1d5:Output Window" Guid="65a2808c-7838-423a-a6c5-f3e50ff64fe6" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="5b7b8485-d0ab-4e37-a0a7-90eeea460fea" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Generated_Source\PSoC4\CAN.h" Guid="44bfeaaf-9c5d-4ed3-b4ef-7c8477a5a089" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

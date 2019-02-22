@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Dip_1.c  
+* File Name: fault.c  
 * Version 2.20
 *
 * Description:
@@ -13,35 +13,35 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "Dip_1.h"
+#include "fault.h"
 
 
-#if defined(Dip_1__PC)
-    #define Dip_1_SetP4PinDriveMode(shift, mode)  \
+#if defined(fault__PC)
+    #define fault_SetP4PinDriveMode(shift, mode)  \
     do { \
-        Dip_1_PC =   (Dip_1_PC & \
-                                (uint32)(~(uint32)(Dip_1_DRIVE_MODE_IND_MASK << \
-                                (Dip_1_DRIVE_MODE_BITS * (shift))))) | \
+        fault_PC =   (fault_PC & \
+                                (uint32)(~(uint32)(fault_DRIVE_MODE_IND_MASK << \
+                                (fault_DRIVE_MODE_BITS * (shift))))) | \
                                 (uint32)((uint32)(mode) << \
-                                (Dip_1_DRIVE_MODE_BITS * (shift))); \
+                                (fault_DRIVE_MODE_BITS * (shift))); \
     } while (0)
 #else
     #if (CY_PSOC4_4200L)
-        #define Dip_1_SetP4PinDriveMode(shift, mode)  \
+        #define fault_SetP4PinDriveMode(shift, mode)  \
         do { \
-            Dip_1_USBIO_CTRL_REG = (Dip_1_USBIO_CTRL_REG & \
-                                    (uint32)(~(uint32)(Dip_1_DRIVE_MODE_IND_MASK << \
-                                    (Dip_1_DRIVE_MODE_BITS * (shift))))) | \
+            fault_USBIO_CTRL_REG = (fault_USBIO_CTRL_REG & \
+                                    (uint32)(~(uint32)(fault_DRIVE_MODE_IND_MASK << \
+                                    (fault_DRIVE_MODE_BITS * (shift))))) | \
                                     (uint32)((uint32)(mode) << \
-                                    (Dip_1_DRIVE_MODE_BITS * (shift))); \
+                                    (fault_DRIVE_MODE_BITS * (shift))); \
         } while (0)
     #endif
 #endif
   
 
-#if defined(Dip_1__PC) || (CY_PSOC4_4200L) 
+#if defined(fault__PC) || (CY_PSOC4_4200L) 
     /*******************************************************************************
-    * Function Name: Dip_1_SetDriveMode
+    * Function Name: fault_SetDriveMode
     ****************************************************************************//**
     *
     * \brief Sets the drive mode for each of the Pins component's pins.
@@ -67,17 +67,17 @@
     *  APIs (primary method) or disable interrupts around this function.
     *
     * \funcusage
-    *  \snippet Dip_1_SUT.c usage_Dip_1_SetDriveMode
+    *  \snippet fault_SUT.c usage_fault_SetDriveMode
     *******************************************************************************/
-    void Dip_1_SetDriveMode(uint8 mode)
+    void fault_SetDriveMode(uint8 mode)
     {
-		Dip_1_SetP4PinDriveMode(Dip_1__0__SHIFT, mode);
+		fault_SetP4PinDriveMode(fault__0__SHIFT, mode);
     }
 #endif
 
 
 /*******************************************************************************
-* Function Name: Dip_1_Write
+* Function Name: fault_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -106,18 +106,18 @@
 *  this function.
 *
 * \funcusage
-*  \snippet Dip_1_SUT.c usage_Dip_1_Write
+*  \snippet fault_SUT.c usage_fault_Write
 *******************************************************************************/
-void Dip_1_Write(uint8 value)
+void fault_Write(uint8 value)
 {
-    uint8 drVal = (uint8)(Dip_1_DR & (uint8)(~Dip_1_MASK));
-    drVal = (drVal | ((uint8)(value << Dip_1_SHIFT) & Dip_1_MASK));
-    Dip_1_DR = (uint32)drVal;
+    uint8 drVal = (uint8)(fault_DR & (uint8)(~fault_MASK));
+    drVal = (drVal | ((uint8)(value << fault_SHIFT) & fault_MASK));
+    fault_DR = (uint32)drVal;
 }
 
 
 /*******************************************************************************
-* Function Name: Dip_1_Read
+* Function Name: fault_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -131,16 +131,16 @@ void Dip_1_Write(uint8 value)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet Dip_1_SUT.c usage_Dip_1_Read  
+*  \snippet fault_SUT.c usage_fault_Read  
 *******************************************************************************/
-uint8 Dip_1_Read(void)
+uint8 fault_Read(void)
 {
-    return (uint8)((Dip_1_PS & Dip_1_MASK) >> Dip_1_SHIFT);
+    return (uint8)((fault_PS & fault_MASK) >> fault_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: Dip_1_ReadDataReg
+* Function Name: fault_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -149,8 +149,8 @@ uint8 Dip_1_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred Dip_1_Read() API because the 
-* Dip_1_ReadDataReg() reads the data register instead of the status 
+* preferred fault_Read() API because the 
+* fault_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -159,16 +159,16 @@ uint8 Dip_1_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet Dip_1_SUT.c usage_Dip_1_ReadDataReg 
+*  \snippet fault_SUT.c usage_fault_ReadDataReg 
 *******************************************************************************/
-uint8 Dip_1_ReadDataReg(void)
+uint8 fault_ReadDataReg(void)
 {
-    return (uint8)((Dip_1_DR & Dip_1_MASK) >> Dip_1_SHIFT);
+    return (uint8)((fault_DR & fault_MASK) >> fault_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: Dip_1_SetInterruptMode
+* Function Name: fault_SetInterruptMode
 ****************************************************************************//**
 *
 * \brief Configures the interrupt mode for each of the Pins component's
@@ -181,12 +181,12 @@ uint8 Dip_1_ReadDataReg(void)
 * \param position
 *  The pin position as listed in the Pins component. You may OR these to be 
 *  able to configure the interrupt mode of multiple pins within a Pins 
-*  component. Or you may use Dip_1_INTR_ALL to configure the
+*  component. Or you may use fault_INTR_ALL to configure the
 *  interrupt mode of all the pins in the Pins component.       
-*  - Dip_1_0_INTR       (First pin in the list)
-*  - Dip_1_1_INTR       (Second pin in the list)
+*  - fault_0_INTR       (First pin in the list)
+*  - fault_1_INTR       (Second pin in the list)
 *  - ...
-*  - Dip_1_INTR_ALL     (All pins in Pins component)
+*  - fault_INTR_ALL     (All pins in Pins component)
 *
 * \param mode
 *  Interrupt mode for the selected pins. Valid options are documented in
@@ -202,19 +202,19 @@ uint8 Dip_1_ReadDataReg(void)
 *  port.
 *
 * \funcusage
-*  \snippet Dip_1_SUT.c usage_Dip_1_SetInterruptMode
+*  \snippet fault_SUT.c usage_fault_SetInterruptMode
 *******************************************************************************/
-void Dip_1_SetInterruptMode(uint16 position, uint16 mode)
+void fault_SetInterruptMode(uint16 position, uint16 mode)
 {
     uint32 intrCfg;
     
-    intrCfg =  Dip_1_INTCFG & (uint32)(~(uint32)position);
-    Dip_1_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+    intrCfg =  fault_INTCFG & (uint32)(~(uint32)position);
+    fault_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
 }
 
 
 /*******************************************************************************
-* Function Name: Dip_1_ClearInterrupt
+* Function Name: fault_ClearInterrupt
 ****************************************************************************//**
 *
 * \brief Clears any active interrupts attached with the component and returns 
@@ -231,13 +231,13 @@ void Dip_1_SetInterruptMode(uint16 position, uint16 mode)
 *  those associated with the Pins component.
 *
 * \funcusage
-*  \snippet Dip_1_SUT.c usage_Dip_1_ClearInterrupt
+*  \snippet fault_SUT.c usage_fault_ClearInterrupt
 *******************************************************************************/
-uint8 Dip_1_ClearInterrupt(void)
+uint8 fault_ClearInterrupt(void)
 {
-	uint8 maskedStatus = (uint8)(Dip_1_INTSTAT & Dip_1_MASK);
-	Dip_1_INTSTAT = maskedStatus;
-    return maskedStatus >> Dip_1_SHIFT;
+	uint8 maskedStatus = (uint8)(fault_INTSTAT & fault_MASK);
+	fault_INTSTAT = maskedStatus;
+    return maskedStatus >> fault_SHIFT;
 }
 
 

@@ -135,10 +135,10 @@ extern uint8  PWM_Motor_initVar;
 #define PWM_Motor_TC_COMPARE_SWAP                (0lu)
 
 /* PWM Mode */
-#define PWM_Motor_PWM_PERIOD_VALUE               (1000lu)
+#define PWM_Motor_PWM_PERIOD_VALUE               (255lu)
 #define PWM_Motor_PWM_PERIOD_BUF_VALUE           (65535lu)
 #define PWM_Motor_PWM_PERIOD_SWAP                (0lu)
-#define PWM_Motor_PWM_COMPARE_VALUE              (1000lu)
+#define PWM_Motor_PWM_COMPARE_VALUE              (0lu)
 #define PWM_Motor_PWM_COMPARE_BUF_VALUE          (65535lu)
 #define PWM_Motor_PWM_COMPARE_SWAP               (0lu)
 

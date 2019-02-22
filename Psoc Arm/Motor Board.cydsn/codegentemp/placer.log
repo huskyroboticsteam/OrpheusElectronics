@@ -6,7 +6,7 @@
 
 #Build Date:         Dec  5 2017 15:35:27
 
-#File Generated:     Feb 12 2019 16:41:32
+#File Generated:     Feb 21 2019 21:47:19
 
 #Purpose:            
 
@@ -44,17 +44,17 @@ Phase 2
 Phase 3
 
 Design Statistics after Packing
-    Number of Combinational MCs 	:	9
+    Number of Combinational MCs 	:	11
     Number of Sequential MCs    	:	21
-    Number of DPs               	:	2
-    Number of Controls          	:	1
-    Number of Status            	:	4
+    Number of DPs               	:	6
+    Number of Controls          	:	2
+    Number of Status            	:	5
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
 
 Device Utilization Summary after Packing
-    Macrocells                  :	30/64
-    UDBS                        :	6/8
+    Macrocells                  :	32/64
+    UDBS                        :	8/8
     IOs                         :	19/76
 
 
@@ -76,15 +76,14 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 13
+Number of clocks: 12
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.0 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.0 MHz
-Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
 Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
 Clock: Clock_PWM            | Frequency: N/A       | Target:  20.0 MHz
 Clock: Clock_PWM(FFB)       | Frequency: N/A       | Target:  20.0 MHz
 Clock: CyExtClk             | Frequency: N/A       | Target:  40.0 MHz
-Clock: CyHFClk              | Frequency: N/A       | Target:  40.0 MHz
+Clock: CyHFClk              | Frequency:  28.0 MHz | Target:  40.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  40.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  40.0 MHz
@@ -95,21 +94,20 @@ Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
                      End of Clock Summary
 ######################################################################
 
-D2088: Phase 6, elapsed time : 0.0 (sec)
+D2088: Phase 6, elapsed time : 0.1 (sec)
 
 Phase 7
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 13
+Number of clocks: 12
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.0 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.0 MHz
-Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
 Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
 Clock: Clock_PWM            | Frequency: N/A       | Target:  20.0 MHz
 Clock: Clock_PWM(FFB)       | Frequency: N/A       | Target:  20.0 MHz
 Clock: CyExtClk             | Frequency: N/A       | Target:  40.0 MHz
-Clock: CyHFClk              | Frequency: N/A       | Target:  40.0 MHz
+Clock: CyHFClk              | Frequency:  28.0 MHz | Target:  40.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  40.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  40.0 MHz
@@ -119,20 +117,20 @@ Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
 ======================================================================
                      End of Clock Summary
 ######################################################################
-D2088: Phase 7, elapsed time : 0.3 (sec)
+D2088: Phase 7, elapsed time : 0.4 (sec)
 
 Final Design Statistics
-    Number of Combinational MCs 	:	9
+    Number of Combinational MCs 	:	11
     Number of Sequential MCs    	:	21
-    Number of DPs               	:	2
-    Number of Controls          	:	1
-    Number of Status            	:	4
+    Number of DPs               	:	6
+    Number of Controls          	:	2
+    Number of Status            	:	5
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
     Number of IOs       	:	19
 
 Device Utilization Summary
-    Macrocells                  :	30/64
+    Macrocells                  :	32/64
     IOs                         :	19/76
 
 
@@ -149,15 +147,14 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 13
+Number of clocks: 12
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.0 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.0 MHz
-Clock: Clock_1              | Frequency:  33.2 MHz | Target:   0.0 MHz
 Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
 Clock: Clock_PWM            | Frequency: N/A       | Target:  20.0 MHz
 Clock: Clock_PWM(FFB)       | Frequency: N/A       | Target:  20.0 MHz
 Clock: CyExtClk             | Frequency: N/A       | Target:  40.0 MHz
-Clock: CyHFClk              | Frequency: N/A       | Target:  40.0 MHz
+Clock: CyHFClk              | Frequency:  28.0 MHz | Target:  40.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  40.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  40.0 MHz
@@ -173,5 +170,5 @@ D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 1.1 sec.
+I2076: Total run-time: 1.2 sec.
 

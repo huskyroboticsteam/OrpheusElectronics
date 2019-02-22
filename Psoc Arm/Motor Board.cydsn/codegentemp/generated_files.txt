@@ -55,8 +55,6 @@
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Pin_Encoder_B.h" value="HEADER;;;;;Pin_Encoder_B" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Pin_Encoder_B_aliases.h" value="HEADER;;;;;Pin_Encoder_B" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Pin_Encoder_B_PM.c" value="SOURCE_C;CortexM0;;;;Pin_Encoder_B" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Clock_1.c" value="SOURCE_C;CortexM0;;;;Clock_1" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Clock_1.h" value="HEADER;;;;;Clock_1" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Spare1.c" value="SOURCE_C;CortexM0;;;;Spare1" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Spare1.h" value="HEADER;;;;;Spare1" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Spare1_aliases.h" value="HEADER;;;;;Spare1" />
@@ -99,10 +97,6 @@
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\UART_SPI_UART_PVT.h" value="HEADER;;;;;UART" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\UART_PVT.h" value="HEADER;;;;;UART" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\UART_BOOT.h" value="HEADER;;;;;UART" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Dip_1.c" value="SOURCE_C;CortexM0;;;;Dip_1" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Dip_1.h" value="HEADER;;;;;Dip_1" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Dip_1_aliases.h" value="HEADER;;;;;Dip_1" />
-  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Dip_1_PM.c" value="SOURCE_C;CortexM0;;;;Dip_1" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Dip_3.c" value="SOURCE_C;CortexM0;;;;Dip_3" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Dip_3.h" value="HEADER;;;;;Dip_3" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Dip_3_aliases.h" value="HEADER;;;;;Dip_3" />
@@ -121,6 +115,15 @@
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Current_sense.h" value="HEADER;;;;;Current_sense" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Current_sense_aliases.h" value="HEADER;;;;;Current_sense" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Current_sense_PM.c" value="SOURCE_C;CortexM0;;;;Current_sense" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\fault.c" value="SOURCE_C;CortexM0;;;;fault" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\fault.h" value="HEADER;;;;;fault" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\fault_aliases.h" value="HEADER;;;;;fault" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\fault_PM.c" value="SOURCE_C;CortexM0;;;;fault" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Timer_1.c" value="SOURCE_C;CortexM0;;;;Timer_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Timer_1.h" value="HEADER;;;;;Timer_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\Timer_1_PM.c" value="SOURCE_C;CortexM0;;;;Timer_1" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\isr_period.c" value="SOURCE_C;CortexM0;;;;isr_period" />
+  <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\isr_period.h" value="HEADER;;;;;isr_period" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\QuadDec_Cnt16.c" value="SOURCE_C;CortexM0;;;;QuadDec_Cnt16" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\QuadDec_Cnt16.h" value="HEADER;;;;;QuadDec_Cnt16" />
   <file name="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\codegentemp\QuadDec_Cnt16_PM.c" value="SOURCE_C;CortexM0;;;;QuadDec_Cnt16" />

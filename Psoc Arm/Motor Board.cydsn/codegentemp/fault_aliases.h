@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Dip_1.h  
+* File Name: fault.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_Dip_1_ALIASES_H) /* Pins Dip_1_ALIASES_H */
-#define CY_PINS_Dip_1_ALIASES_H
+#if !defined(CY_PINS_fault_ALIASES_H) /* Pins fault_ALIASES_H */
+#define CY_PINS_fault_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -26,17 +26,17 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define Dip_1_0			(Dip_1__0__PC)
-#define Dip_1_0_PS		(Dip_1__0__PS)
-#define Dip_1_0_PC		(Dip_1__0__PC)
-#define Dip_1_0_DR		(Dip_1__0__DR)
-#define Dip_1_0_SHIFT	(Dip_1__0__SHIFT)
-#define Dip_1_0_INTR	((uint16)((uint16)0x0003u << (Dip_1__0__SHIFT*2u)))
+#define fault_0			(fault__0__PC)
+#define fault_0_PS		(fault__0__PS)
+#define fault_0_PC		(fault__0__PC)
+#define fault_0_DR		(fault__0__DR)
+#define fault_0_SHIFT	(fault__0__SHIFT)
+#define fault_0_INTR	((uint16)((uint16)0x0003u << (fault__0__SHIFT*2u)))
 
-#define Dip_1_INTR_ALL	 ((uint16)(Dip_1_0_INTR))
+#define fault_INTR_ALL	 ((uint16)(fault_0_INTR))
 
 
-#endif /* End Pins Dip_1_ALIASES_H */
+#endif /* End Pins fault_ALIASES_H */
 
 
 /* [] END OF FILE */
