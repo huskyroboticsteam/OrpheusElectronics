@@ -145,8 +145,8 @@ int main(void)
             
             
            // CAN_Send_Model();
-            
-          /*  CyDelay(100);
+            /*
+            CyDelay(100);
             if(up){
                 pwm_compare += 10;
             } else {
@@ -268,8 +268,8 @@ void initialize(void) {
     int can_start = CAN_Start();
     Status_Reg_Switches_InterruptEnable();
     //Timer_1_Start();
-    ADC_SAR_Seq_1_Start();
-    ADC_SAR_Seq_1_StartConvert();
+   // ADC_SAR_Seq_1_Start();
+    //ADC_SAR_Seq_1_StartConvert();
     QuadDec_Start();
     PWM_Motor_Start();
     if(uart_debug) {

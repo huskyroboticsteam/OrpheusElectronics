@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: ADC_SAR_Seq_1_intClock.c
+* File Name: timer_clock.c
 * Version 2.20
 *
 *  Description:
@@ -17,12 +17,12 @@
 *******************************************************************************/
 
 #include <cydevice_trm.h>
-#include "ADC_SAR_Seq_1_intClock.h"
+#include "timer_clock.h"
 
 #if defined CYREG_PERI_DIV_CMD
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_intClock_StartEx
+* Function Name: timer_clock_StartEx
 ********************************************************************************
 *
 * Summary:
@@ -36,24 +36,24 @@
 *  None
 *
 *******************************************************************************/
-void ADC_SAR_Seq_1_intClock_StartEx(uint32 alignClkDiv)
+void timer_clock_StartEx(uint32 alignClkDiv)
 {
     /* Make sure any previous start command has finished. */
-    while((ADC_SAR_Seq_1_intClock_CMD_REG & ADC_SAR_Seq_1_intClock_CMD_ENABLE_MASK) != 0u)
+    while((timer_clock_CMD_REG & timer_clock_CMD_ENABLE_MASK) != 0u)
     {
     }
     
     /* Specify the target divider and it's alignment divider, and enable. */
-    ADC_SAR_Seq_1_intClock_CMD_REG =
-        ((uint32)ADC_SAR_Seq_1_intClock__DIV_ID << ADC_SAR_Seq_1_intClock_CMD_DIV_SHIFT)|
-        (alignClkDiv << ADC_SAR_Seq_1_intClock_CMD_PA_DIV_SHIFT) |
-        (uint32)ADC_SAR_Seq_1_intClock_CMD_ENABLE_MASK;
+    timer_clock_CMD_REG =
+        ((uint32)timer_clock__DIV_ID << timer_clock_CMD_DIV_SHIFT)|
+        (alignClkDiv << timer_clock_CMD_PA_DIV_SHIFT) |
+        (uint32)timer_clock_CMD_ENABLE_MASK;
 }
 
 #else
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_intClock_Start
+* Function Name: timer_clock_Start
 ********************************************************************************
 *
 * Summary:
@@ -67,17 +67,17 @@ void ADC_SAR_Seq_1_intClock_StartEx(uint32 alignClkDiv)
 *
 *******************************************************************************/
 
-void ADC_SAR_Seq_1_intClock_Start(void)
+void timer_clock_Start(void)
 {
     /* Set the bit to enable the clock. */
-    ADC_SAR_Seq_1_intClock_ENABLE_REG |= ADC_SAR_Seq_1_intClock__ENABLE_MASK;
+    timer_clock_ENABLE_REG |= timer_clock__ENABLE_MASK;
 }
 
 #endif /* CYREG_PERI_DIV_CMD */
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_intClock_Stop
+* Function Name: timer_clock_Stop
 ********************************************************************************
 *
 * Summary:
@@ -92,31 +92,31 @@ void ADC_SAR_Seq_1_intClock_Start(void)
 *  None
 *
 *******************************************************************************/
-void ADC_SAR_Seq_1_intClock_Stop(void)
+void timer_clock_Stop(void)
 {
 #if defined CYREG_PERI_DIV_CMD
 
     /* Make sure any previous start command has finished. */
-    while((ADC_SAR_Seq_1_intClock_CMD_REG & ADC_SAR_Seq_1_intClock_CMD_ENABLE_MASK) != 0u)
+    while((timer_clock_CMD_REG & timer_clock_CMD_ENABLE_MASK) != 0u)
     {
     }
     
     /* Specify the target divider and it's alignment divider, and disable. */
-    ADC_SAR_Seq_1_intClock_CMD_REG =
-        ((uint32)ADC_SAR_Seq_1_intClock__DIV_ID << ADC_SAR_Seq_1_intClock_CMD_DIV_SHIFT)|
-        ((uint32)ADC_SAR_Seq_1_intClock_CMD_DISABLE_MASK);
+    timer_clock_CMD_REG =
+        ((uint32)timer_clock__DIV_ID << timer_clock_CMD_DIV_SHIFT)|
+        ((uint32)timer_clock_CMD_DISABLE_MASK);
 
 #else
 
     /* Clear the bit to disable the clock. */
-    ADC_SAR_Seq_1_intClock_ENABLE_REG &= (uint32)(~ADC_SAR_Seq_1_intClock__ENABLE_MASK);
+    timer_clock_ENABLE_REG &= (uint32)(~timer_clock__ENABLE_MASK);
     
 #endif /* CYREG_PERI_DIV_CMD */
 }
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_intClock_SetFractionalDividerRegister
+* Function Name: timer_clock_SetFractionalDividerRegister
 ********************************************************************************
 *
 * Summary:
@@ -131,35 +131,35 @@ void ADC_SAR_Seq_1_intClock_Stop(void)
 *  None
 *
 *******************************************************************************/
-void ADC_SAR_Seq_1_intClock_SetFractionalDividerRegister(uint16 clkDivider, uint8 clkFractional)
+void timer_clock_SetFractionalDividerRegister(uint16 clkDivider, uint8 clkFractional)
 {
     uint32 maskVal;
     uint32 regVal;
     
-#if defined (ADC_SAR_Seq_1_intClock__FRAC_MASK) || defined (CYREG_PERI_DIV_CMD)
+#if defined (timer_clock__FRAC_MASK) || defined (CYREG_PERI_DIV_CMD)
     
 	/* get all but divider bits */
-    maskVal = ADC_SAR_Seq_1_intClock_DIV_REG & 
-                    (uint32)(~(uint32)(ADC_SAR_Seq_1_intClock_DIV_INT_MASK | ADC_SAR_Seq_1_intClock_DIV_FRAC_MASK)); 
+    maskVal = timer_clock_DIV_REG & 
+                    (uint32)(~(uint32)(timer_clock_DIV_INT_MASK | timer_clock_DIV_FRAC_MASK)); 
 	/* combine mask and new divider vals into 32-bit value */
     regVal = maskVal |
-        ((uint32)((uint32)clkDivider <<  ADC_SAR_Seq_1_intClock_DIV_INT_SHIFT) & ADC_SAR_Seq_1_intClock_DIV_INT_MASK) |
-        ((uint32)((uint32)clkFractional << ADC_SAR_Seq_1_intClock_DIV_FRAC_SHIFT) & ADC_SAR_Seq_1_intClock_DIV_FRAC_MASK);
+        ((uint32)((uint32)clkDivider <<  timer_clock_DIV_INT_SHIFT) & timer_clock_DIV_INT_MASK) |
+        ((uint32)((uint32)clkFractional << timer_clock_DIV_FRAC_SHIFT) & timer_clock_DIV_FRAC_MASK);
     
 #else
     /* get all but integer divider bits */
-    maskVal = ADC_SAR_Seq_1_intClock_DIV_REG & (uint32)(~(uint32)ADC_SAR_Seq_1_intClock__DIVIDER_MASK);
+    maskVal = timer_clock_DIV_REG & (uint32)(~(uint32)timer_clock__DIVIDER_MASK);
     /* combine mask and new divider val into 32-bit value */
     regVal = clkDivider | maskVal;
     
-#endif /* ADC_SAR_Seq_1_intClock__FRAC_MASK || CYREG_PERI_DIV_CMD */
+#endif /* timer_clock__FRAC_MASK || CYREG_PERI_DIV_CMD */
 
-    ADC_SAR_Seq_1_intClock_DIV_REG = regVal;
+    timer_clock_DIV_REG = regVal;
 }
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_intClock_GetDividerRegister
+* Function Name: timer_clock_GetDividerRegister
 ********************************************************************************
 *
 * Summary:
@@ -173,15 +173,15 @@ void ADC_SAR_Seq_1_intClock_SetFractionalDividerRegister(uint16 clkDivider, uint
 *  divide by 2, the return value will be 1.
 *
 *******************************************************************************/
-uint16 ADC_SAR_Seq_1_intClock_GetDividerRegister(void)
+uint16 timer_clock_GetDividerRegister(void)
 {
-    return (uint16)((ADC_SAR_Seq_1_intClock_DIV_REG & ADC_SAR_Seq_1_intClock_DIV_INT_MASK)
-        >> ADC_SAR_Seq_1_intClock_DIV_INT_SHIFT);
+    return (uint16)((timer_clock_DIV_REG & timer_clock_DIV_INT_MASK)
+        >> timer_clock_DIV_INT_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_intClock_GetFractionalDividerRegister
+* Function Name: timer_clock_GetFractionalDividerRegister
 ********************************************************************************
 *
 * Summary:
@@ -195,15 +195,15 @@ uint16 ADC_SAR_Seq_1_intClock_GetDividerRegister(void)
 *  0 if the fractional divider is not in use.
 *
 *******************************************************************************/
-uint8 ADC_SAR_Seq_1_intClock_GetFractionalDividerRegister(void)
+uint8 timer_clock_GetFractionalDividerRegister(void)
 {
-#if defined (ADC_SAR_Seq_1_intClock__FRAC_MASK)
+#if defined (timer_clock__FRAC_MASK)
     /* return fractional divider bits */
-    return (uint8)((ADC_SAR_Seq_1_intClock_DIV_REG & ADC_SAR_Seq_1_intClock_DIV_FRAC_MASK)
-        >> ADC_SAR_Seq_1_intClock_DIV_FRAC_SHIFT);
+    return (uint8)((timer_clock_DIV_REG & timer_clock_DIV_FRAC_MASK)
+        >> timer_clock_DIV_FRAC_SHIFT);
 #else
     return 0u;
-#endif /* ADC_SAR_Seq_1_intClock__FRAC_MASK */
+#endif /* timer_clock__FRAC_MASK */
 }
 
 
