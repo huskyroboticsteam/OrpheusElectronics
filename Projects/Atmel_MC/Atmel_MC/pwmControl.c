@@ -9,10 +9,10 @@
 pa8
 */
 
-int SPEED_RES = 255; // input speed resolution
-int CLK_FREQ = 12000000; // input clock frequency to PWM block
-int PWM_FREQ = 333; //Hz, 100kHz max
-int PWM_PERIOD = CLK_FREQ / PWM_FREQ; 
+// int SPEED_RES = 255; // input speed resolution
+// int CLK_FREQ = 12000000; // input clock frequency to PWM block
+// int PWM_FREQ = 333; //Hz, 100kHz max
+// int PWM_PERIOD = CLK_FREQ / PWM_FREQ; 
 
 // Compares the pwm values
 /*

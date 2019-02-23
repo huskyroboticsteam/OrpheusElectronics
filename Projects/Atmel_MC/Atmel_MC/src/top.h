@@ -7,9 +7,11 @@
 #ifndef TOP_H_
 #define TOP_H_
 
-#include <can.h>
+//#include <can.h>
+//#include <can0.h>
+//#include <can1.h>
 #include <stdio.h>
-#include <interrupt.h>
+//#include <interrupt.h>
 #include <asf.h>
 #include <string.h>
 #include <conf_can.h>
@@ -17,8 +19,7 @@
 #include "structs.h"
 #include "TCB.h"
 #include "functions.h"
-#include "comms.h"
-#include "can.h"
+//#include "comms.h"
 #include "pins.h"
 
 #define NUM_TASKS 6
@@ -32,6 +33,6 @@
 int SPEED_RES = 255; // input speed resolution
 int CLK_FREQ = 12000000; // input clock frequency to PWM block
 int PWM_FREQ = 333; //Hz, 100kHz max
-int PWM_PERIOD = CLK_FREQ / PWM_FREQ;
+//int PWM_PERIOD = CLK_FREQ / PWM_FREQ;
 
 #endif

@@ -22,10 +22,10 @@ void comms(void *myCanDataPtr) {
 	bool txFlag;
 	initTC3();
 	if (txFlag) {
-		can_tx(id_value, *data, canDataPtr);
+		tx(id_value, *data, canDataPtr);
 		// enable interrupt
 	} else {
-		can_rx(id_value, *data, canDataPtr);
+		rx(id_value, *data, canDataPtr);
 		// disable interrupt
 	}
 		
@@ -46,7 +46,7 @@ void initTC3() {
 	system_interrupt_enable(SYSTEM_INTERRUPT_MODULE_CAN0);
 }
 
-static void can_tx(uint32_t id_value, uint8_t *data, canData canDataPtr)
+static void tx(uint32_t id_value, uint8_t *data, canData canDataPtr)
 {
 	uint8_t i;
 	// can_get_tx_buffer_element_defaults(&canDataPtr);
@@ -60,7 +60,7 @@ static void can_tx(uint32_t id_value, uint8_t *data, canData canDataPtr)
 	// can_tx_transfer_request(&can_instance, 1 << CAN_TX_BUFFER_INDEX);
 }
 
-static void can_rx(uint32_t id_value, uint8_t *data, canData canDataPtr)
+static void rx(uint32_t id_value, uint8_t *data, canData canDataPtr)
 {
 	uint8_t i;
 	for (i = 0; i < 16; i++)

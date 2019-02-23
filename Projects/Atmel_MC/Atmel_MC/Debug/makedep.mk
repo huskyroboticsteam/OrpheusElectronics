@@ -2,15 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-comms.c
+can.c
 
 emergencyStop.c
 
 encoder.c
 
-initialize.c
-
 limit_switch.c
+
+motorPID.c
 
 pwmControl.c
 

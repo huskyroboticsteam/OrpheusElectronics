@@ -17,40 +17,64 @@ int32_t max_pos;
 int32_t pid_target; //position PID target (current)
 uint8_t pid_target_inc; 
 
+uint16_t motor_dir;
+uint16_t pwm_val;
 uint16_t pid_runs; 
 uint16_t motor_power;
 uint16_t motor_max_current;
 uint8_t motor_mode; 
 
+void motorPID(void *myPwmDataPtr) {
+	pwmMotorData *pwmDataPtr = (pwmMotorData*) myPwmDataPtr;
+	init_motor();
+	set_motor_power(pwmDataPtr->motorPower);
+}
+
+
 void init_motor() {
-	kp = ;
-	ki = ;
-	kd = ;
+	kp = DEFAULT_Kp;
+	ki = DEFAULT_Ki;
+	kd = DEFAULT_Kd;
 	target_pos = 0;
 	max_pos = 1024;
 	pid_target = 0;
 	pid_target_inc = 0;
 
-	uint16_t pid_runs;
-	uint16_t motor_power;
-	uint16_t motor_max_current;
-	uint8_t motor_mode;
+	pid_runs;
+	motor_power;
+	motor_max_current;
+	motor_mode;
 }
 
 void set_motor_power(void *myPwmDataPtr) {
 	pwmMotorData *pwmDataPtr = (pwmMotorData*) myPwmDataPtr;
-	int i;
-	for (i = 0; i < NUM_MOTORS; i++) {}
-		pwmDataPtr->pwmVal[i];
+	if (pwmDataPtr->motorPower > 1023) {
+		pwmDataPtr->motorPower = 1023;
 	}
-	pwmControl();
+	if (pwmDataPtr->motorPower < -1023) {
+		pwmDataPtr->motorPower = -1023;
+	}
+	if(pwmDataPtr->motorPower == 0) { //Shut down the motor if it isn't enabled or power is 0
+		pwmControl(0, pwm_val);
+		PWMPIN &= (1<<pwm_val);
+		return;
+	}
+	if(pwmDataPtr->motorPower < 0){
+		if(DIRPIN & (1<<motor_dir)){
+			DIRPIN &= ~(1<<motor_dir); //Reverse
+		}
+		pwmDataPtr->motorPower = -pwmDataPtr->motorPower; //PWM is always positive
+	} else {
+		if(!(DIRPIN & (1<<DIRPIN))){
+			DIRPIN |= (1<<DIRPIN); //Forward
+		}
+	}
+	pwmControl(pwmDataPtr->motorPower, PWMPIN);
 }
 
-void pwmControl(uint16_t pwmVal) {
-	int i;
-	for (i = 0; i < NUM_MOTORS; i++) {
-		PWMPIN1 = pwmVal[i];
-	}
+void pwmControl(uint16_t pwmVal, uint8_t pin) {
+	pwmVal &= 1023;
+	pin = pwmVal;
 }
 
 void set_PID(uint16_t p1, uint16_t i1, uint16_t d1) {

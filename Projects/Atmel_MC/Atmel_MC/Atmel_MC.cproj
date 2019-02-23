@@ -490,9 +490,6 @@
     <Compile Include="encoder.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="initialize.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="limit_switch.c">
       <SubType>compile</SubType>
     </Compile>
@@ -505,7 +502,13 @@
     <Compile Include="scheduler.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\config\conf_can.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\functions.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\pins.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\structs.h">
