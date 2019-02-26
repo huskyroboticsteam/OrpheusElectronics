@@ -63,9 +63,9 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 		CANIDT3 = 0;
 		//CANIDT2 = 0;
 		//CANIDT1 = 0;
-		CANIDT2 = ((RX_tag & 3) << 5);
+		CANIDT2 = ((RX_tag & 7) << 5);
 		CANIDT1 = ((RX_tag & 0x7F8) >> 3);
-		CANIDM2 = ((RX_mask & 3) << 5);
+		CANIDM2 = ((RX_mask & 7) << 5);
 		CANIDM1 = ((RX_mask & 0x7F8) >> 3);
 		if(i > txmobs){
 			CANCDMOB = (1 << CONMOB1); //Mark RX mobs
@@ -84,7 +84,7 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 
 /*Returns the value of the binary representation of the dipswitch*/
 uint8_t get_dip_switch(){
-	return ~(PINA & 15);
+	return (~PINA) & 15;
 }
 
 /*Selects the MOB to operate on*/
@@ -163,7 +163,7 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 	/*Reset the MOb*/
 	CANIDT4 = 0;
 	CANIDT3 = 0;
-	CANIDT2 = (RX_tag & 0x03) << 5;
+	CANIDT2 = (RX_tag & 0x07) << 5;
 	CANIDT1 = (RX_tag & 0x7F8) >> 3;
 	enable_mob_interrupt(mob);
 	rxed_mobs[!!(mob & 8)] &= ~(1 << (mob & 7)); //Mark that the message has been taken
@@ -204,7 +204,7 @@ uint8_t CAN_send_msg(struct CAN_msg *buf){
 	}
 	CANIDT4 = 0; //CAN v2.0 - we don't care
 	CANIDT3 = (buf->flags & CAN_RTR)? (1<<RTRTAG): 0; //Sending an RTR?
-	CANIDT2 = ((buf->id & 3) << 5);
+	CANIDT2 = ((buf->id & 7) << 5);
 	CANIDT1 = ((buf->id & 0x7F8) >> 3);
 	CANCDMOB |= (1<<CONMOB0);
 	enable_mob_interrupt(mob); //Enable MOb interrupt
@@ -221,9 +221,9 @@ void CAN_set_RX_filter(uint16_t mask, uint16_t tag){
 		if(mob_enabled(i)){
 			select_mob(i);
 			if(CANCDMOB & (1<<CONMOB1)){
-				CANIDT2 = ((tag & 3) << 5);
+				CANIDT2 = ((tag & 7) << 5);
 				CANIDT1 = ((tag & 0x7F8) >> 3);
-				CANIDM2 = ((mask & 3) << 5);
+				CANIDM2 = ((mask & 7) << 5);
 				CANIDM1 = ((mask & 0x7F8) >> 3);
 			}
 		}

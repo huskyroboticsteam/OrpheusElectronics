@@ -45,6 +45,7 @@ void init_motor(){
 	/*Set current sense pin to input*/
 	MOTOR_CS_DDR &= ~(1<<MOTOR_CS);
 	PORTE |= (1<<PE4);
+	DDRE |= (1<<PE5);
 	PORTD = 3; //Turn on limit switch pullup
 	motor_max_pos = 1024; //BS this since we don't know yet
 	motor_max_current = DEFAULT_MOTOR_CURRENT_LIMIT; 
@@ -85,7 +86,7 @@ void set_motor_power_raw(int16_t power){
 	#else /*Pololu motor controller*/
 	if(power == 0 || !(motor_mode & MOTOR_MODE_ENABLED)){ //Shut down the motor if it isn't enabled or power is 0
 		write_PWM(MOTOR_PWM, 0);
-		MOTOR_PWM_PORT &= (1<<MOTOR_PWM);
+		MOTOR_PWM_PORT &= ~(1<<MOTOR_PWM);
 		return;
 	}
 	if(power < 0){
@@ -273,7 +274,7 @@ void motor_control_tick(){
 		motor_power = 0;
 		disable_motor();
 		send_CAN_error(CAN_ERROR_OVERCURRENT, /*get_motor_current()>>10*/0);
-		set_LED(1, 1);
+		set_LED(0, 1);
 	}
 	uint8_t limit_sw = get_motor_limit_switch_state();
 	if(limit_sw & 1){
@@ -381,7 +382,7 @@ void motor_control_tick(){
 /*Enables the motor*/
 void enable_motor(){
 	motor_mode |= MOTOR_MODE_ENABLED;
-	set_LED(1, 0);
+	set_LED(0, 0);
 }
 
 /*Disables the motor*/

@@ -3,7 +3,7 @@
 #define VS_PIN 1
 
 #define MODEL_NUMBER 0x02 //Change this to change the model number
-#define BEAGLEBONE_ADDRESS 0x08 //CAN address of the BBB
+#define BEAGLEBONE_ADDRESS 0x02 //CAN address of the BBB
 
 #define MOTOR_PWM_PORT PORTE
 #define MOTOR_PWM_DDR DDRE

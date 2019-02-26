@@ -12,5 +12,6 @@ avr-gcc -c spi.c -o spi.o -Iinclude -I. -mmcu=%MCU% -Os
 avr-gcc -c messaging.c -o messaging.o -Iinclude -I. -mmcu=%MCU% -Os
 avr-gcc -c util.c -o util.o -Iinclude -I. -mmcu=%MCU% -Os
 avr-gcc -c dbg_main.c -o main.o -Iinclude -I. -mmcu=%MCU% -Os
-avr-gcc main.o messaging.o spi.o usart.o motor.o encoder.o can.o adc.o pwm.o timers.o util.o -mmcu=%MCU% -o avr_mc.elf
+avr-gcc -c servo.c -o servo.o -Iinclude -I. -mmcu=%MCU% -Os
+avr-gcc main.o messaging.o spi.o usart.o motor.o encoder.o can.o adc.o pwm.o timers.o servo.o util.o -mmcu=%MCU% -o avr_mc.elf
 avr-size -C avr_mc.elf --mcu=%MCU%

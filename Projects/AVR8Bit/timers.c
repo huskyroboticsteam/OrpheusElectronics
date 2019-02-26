@@ -3,6 +3,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "timers.h"
+#include "servo.h"
 #include "util.h"
 
 volatile uint32_t TOF_Cnt; //Timer1 overflow counter
@@ -14,6 +15,7 @@ ISR(TIMER1_OVF_vect){ //This should fire every 40mS
 		update_LEDS((uint16_t)TOF_Cnt);
 	}
 	PID_due = 1;
+	servo_high();
 }
 
 /*Set up the AVR's timers for PWM and time information*/
@@ -29,6 +31,7 @@ void setup_timers(){
 	OCR1A = 10000; //Count to 10000 before resetting
 	TCNT1 = 0;
 	TIMSK1 = (1 << TOIE1); //Enable interrupt on match
+	
 	
 	//Timer 3: 10-bit phase correct PWM, CLK/64
 	TCCR3A = (1<<WGM31) | (1<<WGM30);

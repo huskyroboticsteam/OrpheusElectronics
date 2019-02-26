@@ -7,6 +7,7 @@
 #include "adc.h"
 #include "usart.h"
 #include "messaging.h"
+#include "pwm.h"
 
 unsigned int ticks_per_degree = 1;
 
@@ -20,10 +21,11 @@ void handle_CAN_message(struct CAN_msg *m){
 	switch(m->data[0]){
 		case 0x00: //Set Mode
 			if(m->data[1]){
-				set_motor_mode(get_motor_mode() & ~MOTOR_MODE_PID);
-			} else {
 				set_motor_mode(get_motor_mode() | MOTOR_MODE_PID);
+			} else {
+				set_motor_mode(get_motor_mode() & ~MOTOR_MODE_PID);
 			}
+			enable_motor();
 			break;
 		case 0x02: //Set PWM/Direction
 			if(!(get_motor_mode() & MOTOR_MODE_PID)){
@@ -49,6 +51,7 @@ void handle_CAN_message(struct CAN_msg *m){
 			index_motor();
 			break;
 		case 0x08: //Reset
+			enable_motor();
 			break;
 		case 0x0A: //Set P
 			set_Kp(m->data[1] | m->data[2]<<8, m->data[3] | m->data[4]<<8);
@@ -64,6 +67,9 @@ void handle_CAN_message(struct CAN_msg *m){
 			break;
 		case 0x10: //Model request
 			send_model_number(sender);
+			break;
+		case 0x16:
+			write_PWM(PE5, m->data[1] * 4);
 			break;
 		case 0xFF: /*error*/
 			tprintf("Error %d\n", m->data[1]);

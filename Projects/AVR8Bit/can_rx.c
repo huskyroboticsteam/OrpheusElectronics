@@ -50,7 +50,7 @@ int main(){
 			//CAN_dump_state();
 			CAN_get_msg(&m);
 			dump_CAN_message(m);
-			handle_CAN_message(&m);
+			//handle_CAN_message(&m);
 			set_LED(1, 3);
 		}
 		//tprintf("%d ", (uint16_t)get_voltage());

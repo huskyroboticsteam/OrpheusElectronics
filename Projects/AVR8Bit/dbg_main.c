@@ -12,6 +12,7 @@
 #include "adc.h"
 #include "can.h"
 #include "usart.h"
+#include "servo.h"
 #include <util.h>
 /*struct CAN_msg {
 	uint16_t id;
@@ -24,6 +25,7 @@ void read_string(char*,char);
 
 int main(){
 	//DDRE = (1 << PE4) | (1 << PE3);
+	PORTA = 0xF0;
 	setup_timers();
 	usart_init(19200);
 	//_delay_ms(666);
@@ -44,6 +46,7 @@ int main(){
 	set_LED(3, 3);*/
 	//PORTA = 0xF0;
 	init_motor();
+	init_servo();
 	//init_ADC();
 	//delay_mS(1000);
 	_delay_ms(1000);
@@ -59,6 +62,10 @@ int main(){
 	int i = 0;
 	int d = 2;
 	//set_motor_power(1023);
+	set_LED(0, 0);
+	set_LED(1, 0);
+	set_LED(2, 3);
+	set_LED(3, 0);
 	while(1){
 	/*	if(!PID_due && usart_available()){
 			read_string(target_string, ' ');
@@ -80,18 +87,31 @@ int main(){
 		//tprintf("%dmV %dmA\n", (uint16_t)get_voltage(), c);
 		
 		tprintf("pwm=%d, %l ticks, %dmV %dmA\n", (uint16_t)i, (uint32_t)get_encoder_ticks(), (uint16_t)get_voltage(), (uint16_t)get_motor_current());
+		int ls = get_motor_limit_switch_state();
+		/*if(ls){
+			if(ls & 1){
+				tprintf("LS1 ");
+			}
+			if(ls & 2){
+				tprintf("LS2");
+			}
+			tprintf("\n");
+		}*/
 		set_motor_power(i);
 		i += d;
-		if(i < -500){
+		if(i < -0){
 			d = 2;
 		}
-		if(i > 500){
+		if(i > 200){
 			d = -2;
+		}
+		if(i > 0 && i < 180){
+			set_servo_position(i);
 		}
 	//tprintf("%d\n", get_motor_limit_switch_state());
 	//	delay_mS(1000);
 		//set_motor_power(0);
 		//delay_mS(300);
-		_delay_ms(200);
+		_delay_ms(100);
 	}
 }
