@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
   29:Generated_Source\PSoC4/cyfitter_cfg.c **** #if defined(__GNUC__) || defined(__ARMCC_VERSION)
   30:Generated_Source\PSoC4/cyfitter_cfg.c ****     #define CYPACKED 
   31:Generated_Source\PSoC4/cyfitter_cfg.c ****     #define CYPACKED_ATTR __attribute__ ((packed))
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 2
 
 
   32:Generated_Source\PSoC4/cyfitter_cfg.c ****     #define CYALIGNED __attribute__ ((aligned))
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
   86:Generated_Source\PSoC4/cyfitter_cfg.c **** }
   87:Generated_Source\PSoC4/cyfitter_cfg.c **** CY_CFG_UNUSED
   88:Generated_Source\PSoC4/cyfitter_cfg.c **** static void CYCONFIGCPYCODE(void *dest, const void *src, size_t n);
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 3
 
 
   89:Generated_Source\PSoC4/cyfitter_cfg.c **** CY_CFG_UNUSED
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  143:Generated_Source\PSoC4/cyfitter_cfg.c ****     /* `#END` */
  144:Generated_Source\PSoC4/cyfitter_cfg.c **** 
  145:Generated_Source\PSoC4/cyfitter_cfg.c ****     while(1) {}
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 4
 
 
  146:Generated_Source\PSoC4/cyfitter_cfg.c **** #endif /* CY_CFG_CLOCK_STARTUP_ERROR_CALLBACK */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  179:Generated_Source\PSoC4/cyfitter_cfg.c **** 	{
  180:Generated_Source\PSoC4/cyfitter_cfg.c **** 		uint32 baseAddr = addr_table[i];
   48              		.loc 1 180 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 5
 
 
   49 0008 BB00     		lsls	r3, r7, #2
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
   90              		@ sp needed
   91              	.LVL10:
   92              	.LVL11:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 6
 
 
   93 0030 F0BD     		pop	{r4, r5, r6, r7, pc}
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  234:Generated_Source\PSoC4/cyfitter_cfg.c **** 	CY_SET_REG32((void *)CYREG_PERI_DIV_CMD, 0x8000FF44u);
  235:Generated_Source\PSoC4/cyfitter_cfg.c **** 
  236:Generated_Source\PSoC4/cyfitter_cfg.c **** 	/* CYDEV_CLK_IMO_CONFIG Starting address: CYDEV_CLK_IMO_CONFIG */
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 7
 
 
  237:Generated_Source\PSoC4/cyfitter_cfg.c **** 	CY_SET_REG32((void *)(CYREG_CLK_IMO_CONFIG), 0x80000000u);
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  110 0000 0323     		movs	r3, #3
  111 0002 044A     		ldr	r2, .L7
  112 0004 1360     		str	r3, [r2]
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 8
 
 
  285:Generated_Source\PSoC4/cyfitter_cfg.c **** 	CY_SET_XTND_REG32((void CYFAR *)CYREG_CTBM1_DFT_CTRL, 0x00000003u);
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  161              		.align	2
  162              		.code	16
  163              		.thumb_func
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 9
 
 
  164              		.type	ClockSetup, %function
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  209 0032 0860     		str	r0, [r1]
  228:Generated_Source\PSoC4/cyfitter_cfg.c **** 	CY_SET_REG32((void *)CYREG_PERI_DIV_16_CTL1, 0x00000100u);
  210              		.loc 1 228 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 10
 
 
  211 0034 2149     		ldr	r1, .L11+36
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  254 0074 1D4B     		ldr	r3, .L11+84
  255 0076 1A60     		str	r2, [r3]
  252:Generated_Source\PSoC4/cyfitter_cfg.c **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 11
 
 
  256              		.loc 1 252 0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  305 00f8 00000000 		.word	CySysWdtIsr
  306              		.cfi_endproc
  307              	.LFE38:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 12
 
 
  308              		.size	ClockSetup, .-ClockSetup
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  334 0104 1A70     		strb	r2, [r3]
  335              	.LVL18:
  336              	.LBB3:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 13
 
 
  316:Generated_Source\PSoC4/cyfitter_cfg.c **** 	{
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  370:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x60u, 0x40u},
  371:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x62u, 0x40u},
  372:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x64u, 0x40u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 14
 
 
  373:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x65u, 0x40u},
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  427:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xE8u, 0x80u},
  428:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xEAu, 0x80u},
  429:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xECu, 0x80u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 15
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 15
 
 
  430:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xEEu, 0x80u},
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  484:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x0Au, 0x68u},
  485:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x0Cu, 0xFEu},
  486:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x0Du, 0x0Cu},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 16
 
 
  487:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x0Eu, 0x01u},
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  541:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xAEu, 0x01u},
  542:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xAFu, 0x02u},
  543:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xB1u, 0x03u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 17
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 17
 
 
  544:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xB4u, 0x02u},
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  598:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xA2u, 0x08u},
  599:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xA4u, 0x44u},
  600:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xA5u, 0x20u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 18
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 18
 
 
  601:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xA7u, 0x02u},
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  655:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x8Cu, 0x0Au},
  656:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x8Du, 0x01u},
  657:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x96u, 0x01u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 19
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 19
 
 
  658:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x97u, 0x01u},
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  712:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x1Bu, 0x40u},
  713:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x1Cu, 0x08u},
  714:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x1Du, 0x28u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 20
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 20
 
 
  715:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x22u, 0x50u},
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  769:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x03u, 0x02u},
  770:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x05u, 0x73u},
  771:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x06u, 0x07u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 21
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 21
 
 
  772:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x08u, 0x10u},
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  826:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x0Au, 0x02u},
  827:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x0Eu, 0x08u},
  828:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x0Fu, 0x22u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 22
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 22
 
 
  829:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x10u, 0x20u},
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  883:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xDAu, 0xC0u},
  884:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0xE6u, 0x10u},
  885:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x03u, 0x80u},
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 23
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 23
 
 
  886:Generated_Source\PSoC4/cyfitter_cfg.c **** 			{0x06u, 0x20u},
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  343              		.loc 1 933 0 discriminator 3
  344 010a 3A48     		ldr	r0, .L16+4
  345 010c 6200     		lsls	r2, r4, #1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 24
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 24
 
 
  346 010e 1319     		adds	r3, r2, r4
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  389 014e 0822     		movs	r2, #8
  390 0150 2E4B     		ldr	r3, .L16+28
  391 0152 1A60     		str	r2, [r3]
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 25
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 25
 
 
  943:Generated_Source\PSoC4/cyfitter_cfg.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  969:Generated_Source\PSoC4/cyfitter_cfg.c **** 		CY_SET_XTND_REG8((void *)CYREG_UDB_UDB_WAIT_CFG, (uint8)((CY_GET_XTND_REG8((void *)CYREG_UDB_UDB_
  420              		.loc 1 969 0
  421 017c 2D48     		ldr	r0, .L16+68
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 26
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 26
 
 
  422 017e 0378     		ldrb	r3, [r0]
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  986:Generated_Source\PSoC4/cyfitter_cfg.c **** 	/* IOPINS0_3 Starting address: CYDEV_GPIO_PRT3_BASE */
  987:Generated_Source\PSoC4/cyfitter_cfg.c **** 	CY_SET_REG32((void *)(CYREG_GPIO_PRT3_PC), 0x00000D80u);
  460              		.loc 1 987 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 27
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 27
 
 
  461 01ba D822     		movs	r2, #216
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  494              		.loc 1 1008 0
  495              		@ sp needed
  496              	.LVL26:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 28
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 28
 
 
  497 01ec 10BD     		pop	{r4, pc}
@@ -1667,18 +1667,18 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  540              		.align	2
  541              		.set	.LANCHOR0,. + 0
  542              		.set	.LANCHOR1,. + 1152
- 543              		.type	cfg_memset_list.6468, %object
- 544              		.size	cfg_memset_list.6468, 12
- 545              	cfg_memset_list.6468:
+ 543              		.type	cfg_memset_list.6477, %object
+ 544              		.size	cfg_memset_list.6477, 12
+ 545              	cfg_memset_list.6477:
  546 0000 00300F40 		.word	1074737152
  547 0004 0008     		.short	2048
  548 0006 00400F40 		.4byte	1074741248
  549 000a 0008     		.short	2048
- 550              		.type	cy_cfg_data_table.6463, %object
- 551              		.size	cy_cfg_data_table.6463, 1150
- 552              	cy_cfg_data_table.6463:
+ 550              		.type	cy_cfg_data_table.6472, %object
+ 551              		.size	cy_cfg_data_table.6472, 1150
+ 552              	cy_cfg_data_table.6472:
  553 000c 81       		.byte	-127
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 29
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 29
 
 
  554 000d 0D       		.byte	13
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  608 0043 04       		.byte	4
  609 0044 5A       		.byte	90
  610 0045 04       		.byte	4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 30
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 30
 
 
  611 0046 5B       		.byte	91
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  665 007c 97       		.byte	-105
  666 007d 0F       		.byte	15
  667 007e 98       		.byte	-104
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 31
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 31
 
 
  668 007f 0E       		.byte	14
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  722 00b5 01       		.byte	1
  723 00b6 E0       		.byte	-32
  724 00b7 40       		.byte	64
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 32
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 32
 
 
  725 00b8 E2       		.byte	-30
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  779 00ee 29       		.byte	41
  780 00ef 01       		.byte	1
  781 00f0 2D       		.byte	45
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 33
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 33
 
 
  782 00f1 80       		.byte	-128
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  836 0127 C5       		.byte	-59
  837 0128 01       		.byte	1
  838 0129 30       		.byte	48
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 34
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 34
 
 
  839 012a 02       		.byte	2
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  893 0160 40       		.byte	64
  894 0161 54       		.byte	84
  895 0162 45       		.byte	69
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 35
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 35
 
 
  896 0163 EC       		.byte	-20
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  950 0199 01       		.byte	1
  951 019a 9E       		.byte	-98
  952 019b 02       		.byte	2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 36
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 36
 
 
  953 019c 9F       		.byte	-97
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1007 01d2 20       		.byte	32
  1008 01d3 80       		.byte	-128
  1009 01d4 21       		.byte	33
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 37
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 37
 
 
  1010 01d5 01       		.byte	1
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1064 020b 04       		.byte	4
  1065 020c 9B       		.byte	-101
  1066 020d 40       		.byte	64
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 38
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 38
 
 
  1067 020e 9D       		.byte	-99
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1121 0244 35       		.byte	53
  1122 0245 02       		.byte	2
  1123 0246 36       		.byte	54
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 39
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 39
 
 
  1124 0247 01       		.byte	1
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1178 027d 40       		.byte	64
  1179 027e 6D       		.byte	109
  1180 027f 20       		.byte	32
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 40
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 40
 
 
  1181 0280 6E       		.byte	110
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1235 02b6 CB       		.byte	-53
  1236 02b7 FF       		.byte	-1
  1237 02b8 CD       		.byte	-51
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 41
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 41
 
 
  1238 02b9 AF       		.byte	-81
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1292 02ef 21       		.byte	33
  1293 02f0 10       		.byte	16
  1294 02f1 20       		.byte	32
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 42
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 42
 
 
  1295 02f2 11       		.byte	17
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1349 0328 5A       		.byte	90
  1350 0329 A0       		.byte	-96
  1351 032a 63       		.byte	99
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 43
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 43
 
 
  1352 032b 40       		.byte	64
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1406 0361 0C       		.byte	12
  1407 0362 D8       		.byte	-40
  1408 0363 01       		.byte	1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 44
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 44
 
 
  1409 0364 EE       		.byte	-18
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1463 039a 33       		.byte	51
  1464 039b FF       		.byte	-1
  1465 039c 34       		.byte	52
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 45
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 45
 
 
  1466 039d 0F       		.byte	15
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1520 03d3 10       		.byte	16
  1521 03d4 DD       		.byte	-35
  1522 03d5 10       		.byte	16
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 46
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 46
 
 
  1523 03d6 DF       		.byte	-33
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1577 040c 3E       		.byte	62
  1578 040d 01       		.byte	1
  1579 040e 5A       		.byte	90
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 47
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 47
 
 
  1580 040f 81       		.byte	-127
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1634 0445 FF       		.byte	-1
  1635 0446 D8       		.byte	-40
  1636 0447 60       		.byte	96
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 48
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 48
 
 
  1637 0448 DE       		.byte	-34
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1691 047e B1       		.byte	-79
  1692 047f 10       		.byte	16
  1693 0480 B4       		.byte	-76
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 49
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 49
 
 
  1694 0481 10       		.byte	16
@@ -2891,9 +2891,9 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1701 0488 12       		.byte	18
  1702 0489 06       		.byte	6
  1703 048a 0000     		.space	2
- 1704              		.type	cy_cfg_addr_table.6462, %object
- 1705              		.size	cy_cfg_addr_table.6462, 64
- 1706              	cy_cfg_addr_table.6462:
+ 1704              		.type	cy_cfg_addr_table.6471, %object
+ 1705              		.size	cy_cfg_addr_table.6471, 64
+ 1706              	cy_cfg_addr_table.6471:
  1707 048c 04000F40 		.word	1074724868
  1708 0490 5A300F40 		.word	1074737242
  1709 0494 2F310F40 		.word	1074737455
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1748 0031 02       		.byte	0x2
  1749 0032 D8       		.byte	0xd8
  1750 0033 37000000 		.4byte	0x37
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 50
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 50
 
 
  1751 0037 04       		.uleb128 0x4
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1805 0095 53000000 		.4byte	0x53
  1806 0099 06       		.uleb128 0x6
  1807 009a 4A010000 		.4byte	.LASF14
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 51
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 51
 
 
  1808 009e 03       		.byte	0x3
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1862 010e 3C020000 		.4byte	.LASF27
  1863 0112 01       		.byte	0x1
  1864 0113 AE       		.byte	0xae
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 52
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 52
 
 
  1865 0114 00000000 		.4byte	.LFB37
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1919 018b 04       		.byte	0x4
  1920 018c 90010000 		.4byte	0x190
  1921 0190 10       		.uleb128 0x10
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 53
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 53
 
 
  1922 0191 02010000 		.4byte	0x102
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  1976 01f4 0A       		.uleb128 0xa
  1977 01f5 41000000 		.4byte	.LASF29
  1978 01f9 01       		.byte	0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 54
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 54
 
 
  1979 01fa D3       		.byte	0xd3
@@ -3238,10 +3238,10 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2033 026b 77030000 		.4byte	0x377
  2034 026f 05       		.uleb128 0x5
  2035 0270 03       		.byte	0x3
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 55
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 55
 
 
- 2036 0271 8C040000 		.4byte	cy_cfg_addr_table.6462
+ 2036 0271 8C040000 		.4byte	cy_cfg_addr_table.6471
  2037 0275 18       		.uleb128 0x18
  2038 0276 B5000000 		.4byte	.LASF31
  2039 027a 01       		.byte	0x1
@@ -3249,7 +3249,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2041 027d 8D030000 		.4byte	0x38d
  2042 0281 05       		.uleb128 0x5
  2043 0282 03       		.byte	0x3
- 2044 0283 0C000000 		.4byte	cy_cfg_data_table.6463
+ 2044 0283 0C000000 		.4byte	cy_cfg_data_table.6472
  2045 0287 19       		.uleb128 0x19
  2046 0288 06       		.byte	0x6
  2047 0289 01       		.byte	0x1
@@ -3289,7 +3289,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2081 02d4 DE020000 		.4byte	0x2de
  2082 02d8 05       		.uleb128 0x5
  2083 02d9 03       		.byte	0x3
- 2084 02da 00000000 		.4byte	cfg_memset_list.6468
+ 2084 02da 00000000 		.4byte	cfg_memset_list.6477
  2085 02de 10       		.uleb128 0x10
  2086 02df B7020000 		.4byte	0x2b7
  2087 02e3 1D       		.uleb128 0x1d
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2090 02e7 9F03     		.2byte	0x39f
  2091 02e9 8D000000 		.4byte	0x8d
  2092 02ed BC000000 		.4byte	.LLST6
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 56
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 56
 
 
  2093 02f1 17       		.uleb128 0x17
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2147 0352 00       		.byte	0
  2148 0353 00       		.byte	0
  2149 0354 1E       		.uleb128 0x1e
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 57
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 57
 
 
  2150 0355 E8010000 		.4byte	.LVL24
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2204 0009 1B       		.uleb128 0x1b
  2205 000a 0E       		.uleb128 0xe
  2206 000b 55       		.uleb128 0x55
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 58
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 58
 
 
  2207 000c 17       		.uleb128 0x17
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2261 0042 3A       		.uleb128 0x3a
  2262 0043 0B       		.uleb128 0xb
  2263 0044 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 59
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 59
 
 
  2264 0045 05       		.uleb128 0x5
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2318 007b 06       		.uleb128 0x6
  2319 007c 40       		.uleb128 0x40
  2320 007d 18       		.uleb128 0x18
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 60
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 60
 
 
  2321 007e 9742     		.uleb128 0x2117
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2375 00b5 49       		.uleb128 0x49
  2376 00b6 13       		.uleb128 0x13
  2377 00b7 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 61
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 61
 
 
  2378 00b8 17       		.uleb128 0x17
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2432 00ef 00       		.byte	0
  2433 00f0 13       		.uleb128 0x13
  2434 00f1 898201   		.uleb128 0x4109
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 62
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 62
 
 
  2435 00f4 01       		.byte	0x1
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2489 0130 01       		.byte	0x1
  2490 0131 11       		.uleb128 0x11
  2491 0132 01       		.uleb128 0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 63
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 63
 
 
  2492 0133 12       		.uleb128 0x12
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2546 0169 01       		.uleb128 0x1
  2547 016a 13       		.uleb128 0x13
  2548 016b 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 64
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 64
 
 
  2549 016c 00       		.byte	0
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2603 01a4 00       		.byte	0
  2604 01a5 00       		.byte	0
  2605 01a6 21       		.uleb128 0x21
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 65
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 65
 
 
  2606 01a7 2E       		.uleb128 0x2e
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2660 005b 53       		.byte	0x53
  2661 005c 26000000 		.4byte	.LVL8
  2662 0060 2C000000 		.4byte	.LVL9
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 66
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 66
 
 
  2663 0064 0100     		.2byte	0x1
@@ -3958,14 +3958,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2717 00ea 28010000 		.4byte	.LVL21
  2718 00ee 0B00     		.2byte	0xb
  2719 00f0 74       		.byte	0x74
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 67
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 67
 
 
  2720 00f1 00       		.sleb128 0
  2721 00f2 36       		.byte	0x36
  2722 00f3 1E       		.byte	0x1e
  2723 00f4 03       		.byte	0x3
- 2724 00f5 00000000 		.4byte	cfg_memset_list.6468
+ 2724 00f5 00000000 		.4byte	cfg_memset_list.6477
  2725 00f9 22       		.byte	0x22
  2726 00fa 9F       		.byte	0x9f
  2727 00fb 28010000 		.4byte	.LVL21
@@ -3976,7 +3976,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2732 0107 36       		.byte	0x36
  2733 0108 1E       		.byte	0x1e
  2734 0109 03       		.byte	0x3
- 2735 010a 00000000 		.4byte	cfg_memset_list.6468
+ 2735 010a 00000000 		.4byte	cfg_memset_list.6477
  2736 010e 22       		.byte	0x22
  2737 010f 9F       		.byte	0x9f
  2738 0110 00000000 		.4byte	0
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2774              		.section	.debug_line,"",%progbits
  2775              	.Ldebug_line0:
  2776 0000 90010000 		.section	.debug_str,"MS",%progbits,1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 68
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 68
 
 
  2776      0200D600 
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2797      7461626C 
  2797      6500
  2798              	.LASF16:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 69
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 69
 
 
  2799 00c7 666C6F61 		.ascii	"float\000"
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2825      5F746162 
  2825      6C6500
  2826              	.LASF15:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 70
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 70
 
 
  2827 015c 75696E74 		.ascii	"uint32\000"
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 1
  2848              	.LASF21:
  2849 0253 76616C75 		.ascii	"value\000"
  2849      6500
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccOBcOmj.s 			page 71
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBYoBty.s 			page 71
 
 
  2850              	.LASF22:

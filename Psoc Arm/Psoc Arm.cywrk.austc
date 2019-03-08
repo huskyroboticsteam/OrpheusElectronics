@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Psoc Arm\Motor Board\Header Files\cyapicallbacks.h">
 <ExpandedNodeIds>
 <v>Psoc Arm</v>
 <v>Psoc Arm\Can Send test\TopDesign</v>
@@ -174,6 +174,12 @@
 <v>Psoc Arm\working CAN_Basic_P4_Original + uart debug\Generated_Source\PSoC4</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
+<v>Psoc Arm</v>
+<v>Psoc Arm\Can Send test</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified</v>
+<v>Psoc Arm\CAN_Full_P4_Example01</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
 <v>Psoc Arm\DebouncerExample01</v>
 <v>Psoc Arm\Dev Board</v>
 <v>Psoc Arm\Motor Board</v>
@@ -181,32 +187,6 @@
 <v>Psoc Arm\Motor Board\Motor Board.cydwr</v>
 <v>Psoc Arm\Motor Board\Motor Board.cydwr\Pins</v>
 <v>Psoc Arm\Motor Board\Motor Board.cydwr\Analog</v>
-<v>Psoc Arm\Motor Board\Motor Board.cydwr\DMA</v>
-<v>Psoc Arm\Motor Board\Motor Board.cydwr\Clocks</v>
-<v>Psoc Arm\Motor Board\Motor Board.cydwr\Interrupts</v>
-<v>Psoc Arm\Motor Board\Motor Board.cydwr\System</v>
-<v>Psoc Arm\Motor Board\Motor Board.cydwr\Directives</v>
-<v>Psoc Arm\Motor Board\Motor Board.cydwr\Flash Security</v>
-<v>Psoc Arm\Motor Board\Header Files</v>
-<v>Psoc Arm\Motor Board\Header Files\cyapicallbacks.h</v>
-<v>Psoc Arm\Motor Board\Source Files</v>
-<v>Psoc Arm\Motor Board\Source Files\main.c</v>
-<v>Psoc Arm\Motor Board\Generated_Source</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\CAN</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Can_addr</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\CAN_HFCLK</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\CAN_isr</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Clock_1</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Clock_2</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Clock_PWM</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\cy_boot</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\cy_dmac</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\cy_lfclk</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Dip_2</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Dip_3</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Dip_4</v>
-<v>Psoc Arm\Motor Board\Generated_Source\PSoC4\Em_EEPROM_Dynamic</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -279,26 +259,6 @@
 <v>Psoc Arm\CAN_Basic_P4_Example01\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
 <v>Psoc Arm\CAN_Basic_P4_Example01\TopDesign\TopDesign.cysch</v>
 <v>Psoc Arm\CAN_Basic_P4_unmodified</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200L</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200M</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\TopDesign.cysch</v>
-<v>Psoc Arm\CAN_Full_P4_Example01</v>
-<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign</v>
-<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4</v>
-<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200L</v>
-<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
-<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M</v>
-<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
-<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\TopDesign.cysch</v>
-<v>Psoc Arm\CAN_Full_P4_Example02</v>
-<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign</v>
-<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4</v>
-<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200L</v>
-<v>Psoc Arm\CAN_Full_P4_Example02\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -787,9 +747,17 @@
 <VisibleNodeIds>
 <v>Psoc Arm</v>
 <v>Psoc Arm\Can Send test</v>
+<v>Psoc Arm\Can Send test\Can Send test.gpdsc</v>
 <v>Psoc Arm\Can Send test\Can Send test.rpt</v>
 <v>Psoc Arm\Can Send test\Can Send test_timing.html</v>
 <v>Psoc Arm\CAN_Basic_P4_Example01</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC.lst</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_INT.lst</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_intClock.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -963,26 +931,6 @@
 <v>Psoc Arm\Can Send test\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Psoc Arm\CAN_Basic_P4_Example01</v>
 <v>Psoc Arm\CAN_Basic_P4_Example01\PSoC 4 Architecture TRM</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\PSoC 4200L Family Datasheet</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides\cy_boot_v5_60</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides\cy_dmac_v1_10</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides\cy_lfclk_v1_20</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\ADC_SAR_SEQ_P4_v2_50.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\CAN_v3_0.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\cy_clock_v2_20.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\cy_pins_v2_20</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\Gnd_v1_0.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\SCB_P4_v3_20.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\SwitchSPST_v1_0.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_Example01\TCPWM_P4_v2_10.pdf</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\PSoC 4 Architecture TRM</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\PSoC 4200L Family Datasheet</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\System Reference Guides</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\System Reference Guides\cy_boot_v5_60</v>
-<v>Psoc Arm\CAN_Basic_P4_unmodified\System Reference Guides\cy_dmac_v1_10</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
@@ -993,11 +941,11 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\Motor Board.cydsn\main.c" />
+<name v=".\Motor Board.cydsn\cyapicallbacks.h" />
 <name v=".\Motor Board.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\Motor Board.cydsn\Motor Board.cydwr" />
 <name v=".\Motor Board.cydsn\Generated_Source\PSoC4\CAN.h" />
 <name v="..\..\..\PSoC Creator\DebouncerExample01.cydsn\cyapicallbacks.h" />
-<name v=".\Motor Board.cydsn\cyapicallbacks.h" />
 <name v=".\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" />
 <name v=".\CAN_Full_P4_Example02.cydsn\main.c" />
 </OpenDocs>
@@ -1007,7 +955,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1234, 612" SelectedTabbedMdiWindow="c17c7d41-91a8-46df-8b83-35f94468425a"><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\main.c" Guid="c17c7d41-91a8-46df-8b83-35f94468425a" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\TopDesign\TopDesign.cysch" Guid="e43b1790-273d-484b-a03c-6ff7822b112d" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Motor Board.cydwr" Guid="08169db1-6034-4942-a596-01566611f97c" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Generated_Source\PSoC4\CAN.h" Guid="44bfeaaf-9c5d-4ed3-b4ef-7c8477a5a089" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\PSoC Creator\DebouncerExample01.cydsn\cyapicallbacks.h" Guid="af9961f9-e474-427a-bab2-56b3af03c910" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\cyapicallbacks.h" Guid="0a9369d7-5de0-4a15-b049-7ff7c2b0c60d" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" Guid="4690c992-661d-4153-bc18-9e0f1194aa47" /><ToolWindow Key="Output Window Plugin:7305390e-eabe-4963-b21f-3a0f11b4b1d5:Output Window" Guid="65a2808c-7838-423a-a6c5-f3e50ff64fe6" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="5b7b8485-d0ab-4e37-a0a7-90eeea460fea" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example02.cydsn\main.c" Guid="44320b82-bca1-4657-b005-888206eaa744" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1234, 612" SelectedTabbedMdiWindow="96267489-dc1d-4f6b-a77a-4e70b3e61d63"><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\main.c" Guid="96267489-dc1d-4f6b-a77a-4e70b3e61d63" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\cyapicallbacks.h" Guid="0a9369d7-5de0-4a15-b049-7ff7c2b0c60d" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\TopDesign\TopDesign.cysch" Guid="e43b1790-273d-484b-a03c-6ff7822b112d" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Motor Board.cydwr" Guid="08169db1-6034-4942-a596-01566611f97c" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board.cydsn\Generated_Source\PSoC4\CAN.h" Guid="44bfeaaf-9c5d-4ed3-b4ef-7c8477a5a089" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\PSoC Creator\DebouncerExample01.cydsn\cyapicallbacks.h" Guid="af9961f9-e474-427a-bab2-56b3af03c910" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\main.c" Guid="4690c992-661d-4153-bc18-9e0f1194aa47" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\CAN_Full_P4_Example02.cydsn\main.c" Guid="44320b82-bca1-4657-b005-888206eaa744" /><ToolWindow Key="Output Window Plugin:7305390e-eabe-4963-b21f-3a0f11b4b1d5:Output Window" Guid="65a2808c-7838-423a-a6c5-f3e50ff64fe6" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="5b7b8485-d0ab-4e37-a0a7-90eeea460fea" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

@@ -21,11 +21,17 @@
     {
         uint8 b0,b1,b2,b3,b4,done;
     };
+    struct Error
+    {
+        uint8 code,param,done;  
+    };
 void initialize_can_addr(void);
 void set_CAN_ID(uint32 priority);
+void set_data(uint16 addr);
 void CAN_Send_Encoder(void);
 void CAN_Send_Telemetry(void);
 void CAN_Send_Model(void);
+void CAN_Send_Error(uint8 code, uint8 param);
 void initialize(void);
 int encoder(void);
 void emergency_Stop(void);
