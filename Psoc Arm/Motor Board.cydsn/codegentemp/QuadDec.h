@@ -102,7 +102,7 @@ void  QuadDec_RestoreConfig(void) ;
 *    Enumerated Types and Parameters
 ***************************************/
 
-#define QuadDec_GLITCH_FILTERING           (1u)
+#define QuadDec_GLITCH_FILTERING           (0u)
 #define QuadDec_INDEX_INPUT                (0u)
 
 

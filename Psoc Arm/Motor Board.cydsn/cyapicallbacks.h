@@ -38,9 +38,9 @@ void emergency_Stop(void);
 void initialize(void);
 uint32 pot_Read(void);
 void set_PWM(int period);
-int degrees_to_tick();
-int position_PID();
-void set_Position(int encoder);
+int degrees_to_tick(int degrees);
+int position_PID(int target);
+void set_Position(int degrees);
 void set_Speed(int current_spd, int speed);
 
 

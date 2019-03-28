@@ -1,6 +1,6 @@
 // ======================================================================
 // Motor Board.v generated from TopDesign.cysch
-// 03/07/2019 at 19:19
+// 03/07/2019 at 23:20
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -338,7 +338,7 @@ endmodule
 `include "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v"
 `endif
 
-// QuadDec_v3_0(Counter8bit=false, CounterResolution=4, CounterSize=16, CounterSizeReplacementString=int16, CounterSizeReplacementStringUnsigned=uint16, TypeCastReplacementString=int32, UsingGlitchFiltering=true, UsingIndexInput=false, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=QuadDec_v3_0, CY_CONFIG_TITLE=QuadDec, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=QuadDec, CY_INSTANCE_SHORT_NAME=QuadDec, CY_MAJOR_VERSION=3, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.2, INSTANCE_NAME=QuadDec, )
+// QuadDec_v3_0(Counter8bit=false, CounterResolution=4, CounterSize=16, CounterSizeReplacementString=int16, CounterSizeReplacementStringUnsigned=uint16, TypeCastReplacementString=int32, UsingGlitchFiltering=false, UsingIndexInput=false, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=QuadDec_v3_0, CY_CONFIG_TITLE=QuadDec, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=QuadDec, CY_INSTANCE_SHORT_NAME=QuadDec, CY_MAJOR_VERSION=3, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.2, INSTANCE_NAME=QuadDec, )
 module QuadDec_v3_0_2 (
     quad_A,
     quad_B,
@@ -352,7 +352,7 @@ module QuadDec_v3_0_2 (
     output      interrupt;
 
     parameter CounterResolution = 4;
-    parameter UsingGlitchFiltering = 1;
+    parameter UsingGlitchFiltering = 0;
     parameter UsingIndexInput = 0;
 
           wire  Net_1126;
@@ -422,7 +422,7 @@ module QuadDec_v3_0_2 (
         .underflow(Net_611),
         .interrupt(interrupt));
     defparam bQuadDec.CounterResolution = 4;
-    defparam bQuadDec.UsingGlitchFiltering = 1;
+    defparam bQuadDec.UsingGlitchFiltering = 0;
     defparam bQuadDec.UsingIndexInput = 0;
 
 
@@ -1501,7 +1501,7 @@ module top ;
         .clock(Net_142),
         .interrupt(Net_707));
     defparam QuadDec.CounterResolution = 4;
-    defparam QuadDec.UsingGlitchFiltering = 1;
+    defparam QuadDec.UsingGlitchFiltering = 0;
     defparam QuadDec.UsingIndexInput = 0;
 
 	wire [0:0] tmpOE__Pin_Encoder_A_net;

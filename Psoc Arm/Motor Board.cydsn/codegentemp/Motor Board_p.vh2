@@ -1,5 +1,5 @@
 -- Project:   Motor Board
--- Generated: 03/07/2019 19:19:45
+-- Generated: 03/07/2019 23:20:34
 -- PSoC Creator  4.2
 
 ENTITY \Motor Board\ IS
@@ -128,13 +128,7 @@ ARCHITECTURE __DEFAULT__ OF \Motor Board\ IS
     SIGNAL \QuadDec:Net_530\ : bit;
     SIGNAL \QuadDec:Net_611\ : bit;
     SIGNAL \QuadDec:bQuadDec:error\ : bit;
-    SIGNAL \QuadDec:bQuadDec:quad_A_delayed_0\ : bit;
-    SIGNAL \QuadDec:bQuadDec:quad_A_delayed_1\ : bit;
-    SIGNAL \QuadDec:bQuadDec:quad_A_delayed_2\ : bit;
     SIGNAL \QuadDec:bQuadDec:quad_A_filt\ : bit;
-    SIGNAL \QuadDec:bQuadDec:quad_B_delayed_0\ : bit;
-    SIGNAL \QuadDec:bQuadDec:quad_B_delayed_1\ : bit;
-    SIGNAL \QuadDec:bQuadDec:quad_B_delayed_2\ : bit;
     SIGNAL \QuadDec:bQuadDec:quad_B_filt\ : bit;
     SIGNAL \QuadDec:bQuadDec:state_0\ : bit;
     SIGNAL \QuadDec:bQuadDec:state_1\ : bit;
@@ -262,12 +256,8 @@ ARCHITECTURE __DEFAULT__ OF \Motor Board\ IS
     ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:sSTSReg:stsreg\ : LABEL IS "statusicell1";
     ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:sC16:counterdp:u0\ : LABEL IS "datapathcell1";
     ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:sC16:counterdp:u1\ : LABEL IS "datapathcell2";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_A_delayed_0\ : LABEL IS "macrocell10";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_A_delayed_1\ : LABEL IS "macrocell11";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_A_delayed_2\ : LABEL IS "macrocell12";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_B_delayed_0\ : LABEL IS "macrocell13";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_B_delayed_1\ : LABEL IS "macrocell14";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_B_delayed_2\ : LABEL IS "macrocell15";
+    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_A_filt\ : LABEL IS "macrocell10";
+    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_B_filt\ : LABEL IS "macrocell11";
     ATTRIBUTE lib_model OF \QuadDec:bQuadDec:Stsreg\ : LABEL IS "statusicell2";
     ATTRIBUTE lib_model OF \Status_Reg_Switches:sts_intr:sts_reg\ : LABEL IS "statusicell3";
     ATTRIBUTE lib_model OF \Can_addr:sts:sts_reg\ : LABEL IS "statuscell1";
@@ -276,22 +266,20 @@ ARCHITECTURE __DEFAULT__ OF \Motor Board\ IS
     ATTRIBUTE lib_model OF \Timer_1:TimerUDB:sT24:timerdp:u0\ : LABEL IS "datapathcell3";
     ATTRIBUTE lib_model OF \Timer_1:TimerUDB:sT24:timerdp:u1\ : LABEL IS "datapathcell4";
     ATTRIBUTE lib_model OF \Timer_1:TimerUDB:sT24:timerdp:u2\ : LABEL IS "datapathcell5";
-    ATTRIBUTE lib_model OF \QuadDec:Net_1251\ : LABEL IS "macrocell16";
-    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:overflow_reg_i\ : LABEL IS "macrocell17";
-    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:underflow_reg_i\ : LABEL IS "macrocell18";
-    ATTRIBUTE lib_model OF \QuadDec:Net_1275\ : LABEL IS "macrocell19";
-    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:prevCompare\ : LABEL IS "macrocell20";
-    ATTRIBUTE lib_model OF \QuadDec:Net_1251_split\ : LABEL IS "macrocell21";
-    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:count_stored_i\ : LABEL IS "macrocell22";
-    ATTRIBUTE lib_model OF \QuadDec:Net_1203\ : LABEL IS "macrocell23";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_A_filt\ : LABEL IS "macrocell24";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:quad_B_filt\ : LABEL IS "macrocell25";
-    ATTRIBUTE lib_model OF \QuadDec:Net_1260\ : LABEL IS "macrocell26";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:error\ : LABEL IS "macrocell27";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:state_1\ : LABEL IS "macrocell28";
-    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:state_0\ : LABEL IS "macrocell29";
-    ATTRIBUTE lib_model OF Net_966_0 : LABEL IS "macrocell30";
-    ATTRIBUTE lib_model OF Net_966_1 : LABEL IS "macrocell31";
+    ATTRIBUTE lib_model OF \QuadDec:Net_1251\ : LABEL IS "macrocell12";
+    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:overflow_reg_i\ : LABEL IS "macrocell13";
+    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:underflow_reg_i\ : LABEL IS "macrocell14";
+    ATTRIBUTE lib_model OF \QuadDec:Net_1275\ : LABEL IS "macrocell15";
+    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:prevCompare\ : LABEL IS "macrocell16";
+    ATTRIBUTE lib_model OF \QuadDec:Net_1251_split\ : LABEL IS "macrocell17";
+    ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:count_stored_i\ : LABEL IS "macrocell18";
+    ATTRIBUTE lib_model OF \QuadDec:Net_1203\ : LABEL IS "macrocell19";
+    ATTRIBUTE lib_model OF \QuadDec:Net_1260\ : LABEL IS "macrocell20";
+    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:error\ : LABEL IS "macrocell21";
+    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:state_1\ : LABEL IS "macrocell22";
+    ATTRIBUTE lib_model OF \QuadDec:bQuadDec:state_0\ : LABEL IS "macrocell23";
+    ATTRIBUTE lib_model OF Net_966_0 : LABEL IS "macrocell24";
+    ATTRIBUTE lib_model OF Net_966_1 : LABEL IS "macrocell25";
     COMPONENT cancell
         PORT (
             clock : IN std_ulogic;
@@ -2542,71 +2530,27 @@ BEGIN
             sor => \QuadDec:Cnt16:CounterUDB:sC16:counterdp:u1.sor__sig\,
             cmsbo => \QuadDec:Cnt16:CounterUDB:sC16:counterdp:u1.cmsbo__sig\);
 
-    \QuadDec:bQuadDec:quad_A_delayed_0\:macrocell
+    \QuadDec:bQuadDec:quad_A_filt\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
-            q => \QuadDec:bQuadDec:quad_A_delayed_0\,
+            q => \QuadDec:bQuadDec:quad_A_filt\,
             clock_0 => Net_142_digital,
             main_0 => Net_139);
 
-    \QuadDec:bQuadDec:quad_A_delayed_1\:macrocell
+    \QuadDec:bQuadDec:quad_B_filt\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
-            q => \QuadDec:bQuadDec:quad_A_delayed_1\,
-            clock_0 => Net_142_digital,
-            main_0 => \QuadDec:bQuadDec:quad_A_delayed_0\);
-
-    \QuadDec:bQuadDec:quad_A_delayed_2\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \QuadDec:bQuadDec:quad_A_delayed_2\,
-            clock_0 => Net_142_digital,
-            main_0 => \QuadDec:bQuadDec:quad_A_delayed_1\);
-
-    \QuadDec:bQuadDec:quad_B_delayed_0\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \QuadDec:bQuadDec:quad_B_delayed_0\,
+            q => \QuadDec:bQuadDec:quad_B_filt\,
             clock_0 => Net_142_digital,
             main_0 => Net_140);
-
-    \QuadDec:bQuadDec:quad_B_delayed_1\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \QuadDec:bQuadDec:quad_B_delayed_1\,
-            clock_0 => Net_142_digital,
-            main_0 => \QuadDec:bQuadDec:quad_B_delayed_0\);
-
-    \QuadDec:bQuadDec:quad_B_delayed_2\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \QuadDec:bQuadDec:quad_B_delayed_2\,
-            clock_0 => Net_142_digital,
-            main_0 => \QuadDec:bQuadDec:quad_B_delayed_1\);
 
     \QuadDec:bQuadDec:Stsreg\:statusicell
         GENERIC MAP(
@@ -3005,34 +2949,6 @@ BEGIN
             main_3 => \QuadDec:bQuadDec:state_1\,
             main_4 => \QuadDec:bQuadDec:state_0\,
             main_5 => \QuadDec:Net_1203_split\);
-
-    \QuadDec:bQuadDec:quad_A_filt\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (main_0 * main_1 * main_2 * !main_3)",
-            regmode => 2,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \QuadDec:bQuadDec:quad_A_filt\,
-            clock_0 => Net_142_digital,
-            main_0 => \QuadDec:bQuadDec:quad_A_delayed_0\,
-            main_1 => \QuadDec:bQuadDec:quad_A_delayed_1\,
-            main_2 => \QuadDec:bQuadDec:quad_A_delayed_2\,
-            main_3 => \QuadDec:bQuadDec:quad_A_filt\);
-
-    \QuadDec:bQuadDec:quad_B_filt\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (main_0 * main_1 * main_2 * !main_3)",
-            regmode => 2,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \QuadDec:bQuadDec:quad_B_filt\,
-            clock_0 => Net_142_digital,
-            main_0 => \QuadDec:bQuadDec:quad_B_delayed_0\,
-            main_1 => \QuadDec:bQuadDec:quad_B_delayed_1\,
-            main_2 => \QuadDec:bQuadDec:quad_B_delayed_2\,
-            main_3 => \QuadDec:bQuadDec:quad_B_filt\);
 
     \QuadDec:Net_1260\:macrocell
         GENERIC MAP(
