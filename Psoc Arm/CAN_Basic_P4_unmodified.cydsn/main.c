@@ -122,7 +122,7 @@ int main()
             }
             
             /* Converts ADC result to milli volts */
-            resMilliVolts = (uint16) ADC_CountsTo_mVolts(ADC_CHANNEL_NUMBER_0, output);
+            resMilliVolts = #include <stdio.h> ADC_CountsTo_mVolts(ADC_CHANNEL_NUMBER_0, output);
             
             /* Sends value of ADC output via CAN */
             CAN_TX_DATA_BYTE1(CAN_TX_MAILBOX_ADCdata, HI8(resMilliVolts));

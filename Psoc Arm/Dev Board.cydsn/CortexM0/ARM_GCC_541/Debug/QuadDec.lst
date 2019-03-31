@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
   28:Generated_Source\PSoC4/QuadDec.c **** /*******************************************************************************
   29:Generated_Source\PSoC4/QuadDec.c **** * Function Name: QuadDec_Init
   30:Generated_Source\PSoC4/QuadDec.c **** ********************************************************************************
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 2
 
 
   31:Generated_Source\PSoC4/QuadDec.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
   66:Generated_Source\PSoC4/QuadDec.c **** * Return:
   67:Generated_Source\PSoC4/QuadDec.c **** *  None.
   68:Generated_Source\PSoC4/QuadDec.c **** *
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 3
 
 
   69:Generated_Source\PSoC4/QuadDec.c **** *******************************************************************************/
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  123:Generated_Source\PSoC4/QuadDec.c ****         *  (QuadDec_COUNTER_SIZE == QuadDec_COUNTER_SIZE_32_BIT) 
  124:Generated_Source\PSoC4/QuadDec.c ****         */
  125:Generated_Source\PSoC4/QuadDec.c ****         QuadDec_Cnt16_Start();
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 4
 
 
  126:Generated_Source\PSoC4/QuadDec.c ****         QuadDec_Cnt16_WriteCounter(QuadDec_COUNTER_INIT_VALUE);
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  169:Generated_Source\PSoC4/QuadDec.c ****  
  170:Generated_Source\PSoC4/QuadDec.c ****     enableInterrupts = CyEnterCriticalSection();
   58              		.loc 1 170 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 5
 
 
   59 0006 FFF7FEFF 		bl	CyEnterCriticalSection
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  196:Generated_Source\PSoC4/QuadDec.c **** *
  197:Generated_Source\PSoC4/QuadDec.c **** * Global variables:
  198:Generated_Source\PSoC4/QuadDec.c **** *  QuadDec_count32SoftPart - used to get hi 16 bit for current value
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 6
 
 
  199:Generated_Source\PSoC4/QuadDec.c **** *  of the 32-bit counter, when Counter size equal 32-bit.
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  107              		@ sp needed
  108 000e 10BD     		pop	{r4, pc}
  109              	.L7:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 7
 
 
  110              		.align	2
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  133              		.loc 1 264 0
  134 0002 0028     		cmp	r0, #0
  135 0004 05DB     		blt	.L9
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 8
 
 
  265:Generated_Source\PSoC4/QuadDec.c ****         {
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  167              		.size	QuadDec_SetCounter, .-QuadDec_SetCounter
  168              		.section	.text.QuadDec_GetEvents,"ax",%progbits
  169              		.align	2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 9
 
 
  170              		.global	QuadDec_GetEvents
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  198              		.global	QuadDec_SetInterruptMask
  199              		.code	16
  200              		.thumb_func
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 10
 
 
  201              		.type	QuadDec_SetInterruptMask, %function
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  227              		.thumb_func
  228              		.type	QuadDec_Enable, %function
  229              	QuadDec_Enable:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 11
 
 
  230              	.LFB2:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  117:Generated_Source\PSoC4/QuadDec.c ****     #if (QuadDec_COUNTER_SIZE == QuadDec_COUNTER_SIZE_8_BIT)
  277              		.loc 1 117 0
  278              		.cfi_startproc
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 12
 
 
  279              		@ args = 0, pretend = 0, frame = 0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  345:Generated_Source\PSoC4/QuadDec.c **** * Function Name: QuadDec_GetInterruptMask
  346:Generated_Source\PSoC4/QuadDec.c **** ********************************************************************************
  347:Generated_Source\PSoC4/QuadDec.c **** *
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 13
 
 
  348:Generated_Source\PSoC4/QuadDec.c **** * Summary:
@@ -776,20 +776,20 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  360 0006 00000000 		.4byte	.Ldebug_abbrev0
  361 000a 04       		.byte	0x4
  362 000b 01       		.uleb128 0x1
- 363 000c 97010000 		.4byte	.LASF37
+ 363 000c E3010000 		.4byte	.LASF37
  364 0010 0C       		.byte	0xc
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 14
 
 
  365 0011 51000000 		.4byte	.LASF38
- 366 0015 9D020000 		.4byte	.LASF39
+ 366 0015 5D010000 		.4byte	.LASF39
  367 0019 00000000 		.4byte	.Ldebug_ranges0+0
  368 001d 00000000 		.4byte	0
  369 0021 00000000 		.4byte	.Ldebug_line0
  370 0025 02       		.uleb128 0x2
  371 0026 01       		.byte	0x1
  372 0027 06       		.byte	0x6
- 373 0028 FE020000 		.4byte	.LASF0
+ 373 0028 F5020000 		.4byte	.LASF0
  374 002c 02       		.uleb128 0x2
  375 002d 01       		.byte	0x1
  376 002e 08       		.byte	0x8
@@ -797,7 +797,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  378 0033 02       		.uleb128 0x2
  379 0034 02       		.byte	0x2
  380 0035 05       		.byte	0x5
- 381 0036 6C020000 		.4byte	.LASF2
+ 381 0036 B8020000 		.4byte	.LASF2
  382 003a 02       		.uleb128 0x2
  383 003b 02       		.byte	0x2
  384 003c 07       		.byte	0x7
@@ -805,7 +805,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  386 0041 02       		.uleb128 0x2
  387 0042 04       		.byte	0x4
  388 0043 05       		.byte	0x5
- 389 0044 8F020000 		.4byte	.LASF4
+ 389 0044 DB020000 		.4byte	.LASF4
  390 0048 02       		.uleb128 0x2
  391 0049 04       		.byte	0x4
  392 004a 07       		.byte	0x7
@@ -813,7 +813,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  394 004f 02       		.uleb128 0x2
  395 0050 08       		.byte	0x8
  396 0051 05       		.byte	0x5
- 397 0052 33020000 		.4byte	.LASF6
+ 397 0052 7F020000 		.4byte	.LASF6
  398 0056 02       		.uleb128 0x2
  399 0057 08       		.byte	0x8
  400 0058 07       		.byte	0x7
@@ -825,9 +825,9 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  406 0064 02       		.uleb128 0x2
  407 0065 04       		.byte	0x4
  408 0066 07       		.byte	0x7
- 409 0067 74010000 		.4byte	.LASF8
+ 409 0067 C0010000 		.4byte	.LASF8
  410 006b 04       		.uleb128 0x4
- 411 006c 76020000 		.4byte	.LASF9
+ 411 006c C2020000 		.4byte	.LASF9
  412 0070 02       		.byte	0x2
  413 0071 E401     		.2byte	0x1e4
  414 0073 2C000000 		.4byte	0x2c
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  419 007f 3A000000 		.4byte	0x3a
  420 0083 04       		.uleb128 0x4
  421 0084 F4000000 		.4byte	.LASF11
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 15
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 15
 
 
  422 0088 02       		.byte	0x2
@@ -860,9 +860,9 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  438 00a9 02       		.uleb128 0x2
  439 00aa 01       		.byte	0x1
  440 00ab 08       		.byte	0x8
- 441 00ac 98020000 		.4byte	.LASF15
+ 441 00ac E4020000 		.4byte	.LASF15
  442 00b0 04       		.uleb128 0x4
- 443 00b1 25020000 		.4byte	.LASF16
+ 443 00b1 71020000 		.4byte	.LASF16
  444 00b5 02       		.byte	0x2
  445 00b6 8E02     		.2byte	0x28e
  446 00b8 BC000000 		.4byte	0xbc
@@ -871,13 +871,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  449 00c1 02       		.uleb128 0x2
  450 00c2 08       		.byte	0x8
  451 00c3 04       		.byte	0x4
- 452 00c4 F2020000 		.4byte	.LASF17
+ 452 00c4 E9020000 		.4byte	.LASF17
  453 00c8 02       		.uleb128 0x2
  454 00c9 04       		.byte	0x4
  455 00ca 07       		.byte	0x7
- 456 00cb 2A020000 		.4byte	.LASF18
+ 456 00cb 76020000 		.4byte	.LASF18
  457 00cf 06       		.uleb128 0x6
- 458 00d0 5F020000 		.4byte	.LASF40
+ 458 00d0 AB020000 		.4byte	.LASF40
  459 00d4 01       		.byte	0x1
  460 00d5 2A       		.byte	0x2a
  461 00d6 00000000 		.4byte	.LFB1
@@ -885,7 +885,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  463 00de 01       		.uleb128 0x1
  464 00df 9C       		.byte	0x9c
  465 00e0 07       		.uleb128 0x7
- 466 00e1 0A030000 		.4byte	.LASF22
+ 466 00e1 01030000 		.4byte	.LASF22
  467 00e5 01       		.byte	0x1
  468 00e6 9D       		.byte	0x9d
  469 00e7 00000000 		.4byte	.LFB4
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  476 00fa 01       		.byte	0x1
  477 00fb 9F       		.byte	0x9f
  478 00fc 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 16
 
 
  479 0100 00000000 		.4byte	.LLST0
@@ -940,7 +940,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  515 015a B2020000 		.4byte	0x2b2
  516 015e 00       		.byte	0
  517 015f 0C       		.uleb128 0xc
- 518 0160 7C020000 		.4byte	.LASF23
+ 518 0160 C8020000 		.4byte	.LASF23
  519 0164 01       		.byte	0x1
  520 0165 0201     		.2byte	0x102
  521 0167 00000000 		.4byte	.LFB6
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  533 0186 06000000 		.4byte	.LASF20
  534 018a 01       		.byte	0x1
  535 018b 0601     		.2byte	0x106
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 17
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 17
 
 
  536 018d 77000000 		.4byte	0x77
@@ -977,7 +977,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  549 01b3 01       		.uleb128 0x1
  550 01b4 9C       		.byte	0x9c
  551 01b5 0C       		.uleb128 0xc
- 552 01b6 41020000 		.4byte	.LASF24
+ 552 01b6 8D020000 		.4byte	.LASF24
  553 01ba 01       		.byte	0x1
  554 01bb 4C01     		.2byte	0x14c
  555 01bd 00000000 		.4byte	.LFB8
@@ -986,7 +986,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  558 01c6 9C       		.byte	0x9c
  559 01c7 DA010000 		.4byte	0x1da
  560 01cb 10       		.uleb128 0x10
- 561 01cc 5A020000 		.4byte	.LASF26
+ 561 01cc A6020000 		.4byte	.LASF26
  562 01d0 01       		.byte	0x1
  563 01d1 4C01     		.2byte	0x14c
  564 01d3 6B000000 		.4byte	0x6b
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  590 020e 01       		.uleb128 0x1
  591 020f 3F       		.byte	0x3f
  592 0210 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 18
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 18
 
 
  593 0211 09       		.uleb128 0x9
@@ -1059,7 +1059,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  628 0265 DA010000 		.4byte	0x1da
  629 0269 00       		.byte	0
  630 026a 0F       		.uleb128 0xf
- 631 026b 17030000 		.4byte	.LASF30
+ 631 026b 0E030000 		.4byte	.LASF30
  632 026f 01       		.byte	0x1
  633 0270 6801     		.2byte	0x168
  634 0272 6B000000 		.4byte	0x6b
@@ -1078,19 +1078,19 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  647 0291 14       		.uleb128 0x14
  648 0292 9E000000 		.4byte	.LASF31
  649 0296 9E000000 		.4byte	.LASF31
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 19
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 19
 
 
  650 029a 03       		.byte	0x3
  651 029b 50       		.byte	0x50
  652 029c 14       		.uleb128 0x14
- 653 029d 5D010000 		.4byte	.LASF32
- 654 02a1 5D010000 		.4byte	.LASF32
+ 653 029d A9010000 		.4byte	.LASF32
+ 654 02a1 A9010000 		.4byte	.LASF32
  655 02a5 04       		.byte	0x4
  656 02a6 E5       		.byte	0xe5
  657 02a7 14       		.uleb128 0x14
- 658 02a8 81010000 		.4byte	.LASF33
- 659 02ac 81010000 		.4byte	.LASF33
+ 658 02a8 CD010000 		.4byte	.LASF33
+ 659 02ac CD010000 		.4byte	.LASF33
  660 02b0 04       		.byte	0x4
  661 02b1 E6       		.byte	0xe6
  662 02b2 14       		.uleb128 0x14
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  704 0018 3E       		.uleb128 0x3e
  705 0019 0B       		.uleb128 0xb
  706 001a 03       		.uleb128 0x3
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 20
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 20
 
 
  707 001b 0E       		.uleb128 0xe
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  761 0052 19       		.uleb128 0x19
  762 0053 00       		.byte	0
  763 0054 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 21
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 21
 
 
  764 0055 07       		.uleb128 0x7
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  818 008e 03       		.uleb128 0x3
  819 008f 0E       		.uleb128 0xe
  820 0090 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 22
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 22
 
 
  821 0091 0B       		.uleb128 0xb
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  875 00c9 19       		.uleb128 0x19
  876 00ca 01       		.uleb128 0x1
  877 00cb 13       		.uleb128 0x13
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 23
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 23
 
 
  878 00cc 00       		.byte	0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  932 0103 19       		.uleb128 0x19
  933 0104 00       		.byte	0
  934 0105 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 24
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 24
 
 
  935 0106 10       		.uleb128 0x10
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  989 0141 00       		.byte	0
  990 0142 3F       		.uleb128 0x3f
  991 0143 19       		.uleb128 0x19
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 25
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 25
 
 
  992 0144 3C       		.uleb128 0x3c
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  1046 0063 F3       		.byte	0xf3
  1047 0064 01       		.uleb128 0x1
  1048 0065 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 26
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 26
 
 
  1049 0066 9F       		.byte	0x9f
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  1103 000c 20000000 		.4byte	.LFE4
  1104 0010 00000000 		.4byte	.LFB5
  1105 0014 14000000 		.4byte	.LFE5
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 27
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 27
 
 
  1106 0018 00000000 		.4byte	.LFB6
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  1136      5C50536F 
  1137              	.LASF27:
  1138 0072 51756164 		.ascii	"QuadDec_Enable\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 28
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 28
 
 
  1138      4465635F 
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  1160 0124 656E6162 		.ascii	"enableInterrupts\000"
  1160      6C65496E 
  1160      74657272 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 29
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 29
 
 
  1160      75707473 
@@ -1698,117 +1698,117 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 1
  1167              	.LASF10:
  1168 0156 75696E74 		.ascii	"uint16\000"
  1168      313600
- 1169              	.LASF32:
- 1170 015d 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 1170      74657243 
- 1170      72697469 
- 1170      63616C53 
- 1170      65637469 
- 1171              	.LASF8:
- 1172 0174 756E7369 		.ascii	"unsigned int\000"
- 1172      676E6564 
- 1172      20696E74 
- 1172      00
- 1173              	.LASF33:
- 1174 0181 43794578 		.ascii	"CyExitCriticalSection\000"
- 1174      69744372 
- 1174      69746963 
- 1174      616C5365 
- 1174      6374696F 
- 1175              	.LASF37:
- 1176 0197 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1176      43313120 
- 1176      352E342E 
- 1176      31203230 
- 1176      31363036 
- 1177 01ca 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 1177      20726576 
- 1177      6973696F 
- 1177      6E203233 
- 1177      37373135 
- 1178 01fd 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1178      66756E63 
- 1178      74696F6E 
- 1178      2D736563 
- 1178      74696F6E 
- 1179              	.LASF16:
- 1180 0225 72656738 		.ascii	"reg8\000"
- 1180      00
- 1181              	.LASF18:
- 1182 022a 73697A65 		.ascii	"sizetype\000"
- 1182      74797065 
- 1182      00
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 30
+ 1169              	.LASF39:
+ 1170 015d 433A5C55 		.ascii	"C:\\Users\\austc\\Documents\\GitHub\\OrpheusElectro"
+ 1170      73657273 
+ 1170      5C617573 
+ 1170      74635C44 
+ 1170      6F63756D 
+ 1171 018b 6E696373 		.ascii	"nics\\Psoc Arm\\Dev Board.cydsn\000"
+ 1171      5C50736F 
+ 1171      63204172 
+ 1171      6D5C4465 
+ 1171      7620426F 
+ 1172              	.LASF32:
+ 1173 01a9 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 1173      74657243 
+ 1173      72697469 
+ 1173      63616C53 
+ 1173      65637469 
+ 1174              	.LASF8:
+ 1175 01c0 756E7369 		.ascii	"unsigned int\000"
+ 1175      676E6564 
+ 1175      20696E74 
+ 1175      00
+ 1176              	.LASF33:
+ 1177 01cd 43794578 		.ascii	"CyExitCriticalSection\000"
+ 1177      69744372 
+ 1177      69746963 
+ 1177      616C5365 
+ 1177      6374696F 
+ 1178              	.LASF37:
+ 1179 01e3 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1179      43313120 
+ 1179      352E342E 
+ 1179      31203230 
+ 1179      31363036 
+ 1180 0216 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1180      20726576 
+ 1180      6973696F 
+ 1180      6E203233 
+ 1180      37373135 
+ 1181 0249 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 30
 
 
- 1183              	.LASF6:
- 1184 0233 6C6F6E67 		.ascii	"long long int\000"
- 1184      206C6F6E 
- 1184      6720696E 
- 1184      7400
- 1185              	.LASF24:
- 1186 0241 51756164 		.ascii	"QuadDec_SetInterruptMask\000"
- 1186      4465635F 
- 1186      53657449 
- 1186      6E746572 
- 1186      72757074 
- 1187              	.LASF26:
- 1188 025a 6D61736B 		.ascii	"mask\000"
- 1188      00
- 1189              	.LASF40:
- 1190 025f 51756164 		.ascii	"QuadDec_Init\000"
- 1190      4465635F 
- 1190      496E6974 
- 1190      00
- 1191              	.LASF2:
- 1192 026c 73686F72 		.ascii	"short int\000"
- 1192      7420696E 
- 1192      7400
- 1193              	.LASF9:
- 1194 0276 75696E74 		.ascii	"uint8\000"
- 1194      3800
- 1195              	.LASF23:
- 1196 027c 51756164 		.ascii	"QuadDec_SetCounter\000"
- 1196      4465635F 
- 1196      53657443 
- 1196      6F756E74 
- 1196      657200
- 1197              	.LASF4:
- 1198 028f 6C6F6E67 		.ascii	"long int\000"
- 1198      20696E74 
- 1198      00
- 1199              	.LASF15:
- 1200 0298 63686172 		.ascii	"char\000"
- 1200      00
- 1201              	.LASF39:
- 1202 029d 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
- 1202      73657273 
- 1202      5C617573 
- 1202      74635C4F 
- 1202      6E654472 
- 1203 02ca 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\Dev Board.cydsn\000"
- 1203      69637332 
- 1203      3031382D 
- 1203      31395C50 
- 1203      736F6320 
+ 1181      66756E63 
+ 1181      74696F6E 
+ 1181      2D736563 
+ 1181      74696F6E 
+ 1182              	.LASF16:
+ 1183 0271 72656738 		.ascii	"reg8\000"
+ 1183      00
+ 1184              	.LASF18:
+ 1185 0276 73697A65 		.ascii	"sizetype\000"
+ 1185      74797065 
+ 1185      00
+ 1186              	.LASF6:
+ 1187 027f 6C6F6E67 		.ascii	"long long int\000"
+ 1187      206C6F6E 
+ 1187      6720696E 
+ 1187      7400
+ 1188              	.LASF24:
+ 1189 028d 51756164 		.ascii	"QuadDec_SetInterruptMask\000"
+ 1189      4465635F 
+ 1189      53657449 
+ 1189      6E746572 
+ 1189      72757074 
+ 1190              	.LASF26:
+ 1191 02a6 6D61736B 		.ascii	"mask\000"
+ 1191      00
+ 1192              	.LASF40:
+ 1193 02ab 51756164 		.ascii	"QuadDec_Init\000"
+ 1193      4465635F 
+ 1193      496E6974 
+ 1193      00
+ 1194              	.LASF2:
+ 1195 02b8 73686F72 		.ascii	"short int\000"
+ 1195      7420696E 
+ 1195      7400
+ 1196              	.LASF9:
+ 1197 02c2 75696E74 		.ascii	"uint8\000"
+ 1197      3800
+ 1198              	.LASF23:
+ 1199 02c8 51756164 		.ascii	"QuadDec_SetCounter\000"
+ 1199      4465635F 
+ 1199      53657443 
+ 1199      6F756E74 
+ 1199      657200
+ 1200              	.LASF4:
+ 1201 02db 6C6F6E67 		.ascii	"long int\000"
+ 1201      20696E74 
+ 1201      00
+ 1202              	.LASF15:
+ 1203 02e4 63686172 		.ascii	"char\000"
+ 1203      00
  1204              	.LASF17:
- 1205 02f2 6C6F6E67 		.ascii	"long double\000"
+ 1205 02e9 6C6F6E67 		.ascii	"long double\000"
  1205      20646F75 
  1205      626C6500 
  1206              	.LASF0:
- 1207 02fe 7369676E 		.ascii	"signed char\000"
+ 1207 02f5 7369676E 		.ascii	"signed char\000"
  1207      65642063 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccMc5dgz.s 			page 31
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccmVSsqg.s 			page 31
 
 
  1207      68617200 
  1208              	.LASF22:
- 1209 030a 51756164 		.ascii	"QuadDec_Stop\000"
+ 1209 0301 51756164 		.ascii	"QuadDec_Stop\000"
  1209      4465635F 
  1209      53746F70 
  1209      00
  1210              	.LASF30:
- 1211 0317 51756164 		.ascii	"QuadDec_GetInterruptMask\000"
+ 1211 030e 51756164 		.ascii	"QuadDec_GetInterruptMask\000"
  1211      4465635F 
  1211      47657449 
  1211      6E746572 

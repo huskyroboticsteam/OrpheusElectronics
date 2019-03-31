@@ -1,0 +1,25 @@
+(DELAYFILE
+ (SDFVERSION "IEEE 1497 4.0")
+ (DATE "2019-03-29T20:10:42Z")
+ (DESIGN "I2C_Master_Low_Level01")
+ (VENDOR "Cypress Semiconductor")
+ (PROGRAM "PSoC Creator")
+ (VERSION " 4.2")
+ (DIVIDER .)
+ (TIMESCALE 1 ns)
+ (CELL
+  (CELLTYPE "I2C_Master_Low_Level01")
+  (INSTANCE *)
+  (DELAY
+   (ABSOLUTE
+    (INTERCONNECT ClockBlock.hfclk \\mI2C\:SCB_IRQ\\.clock (0.000:0.000:0.000))
+    (INTERCONNECT \\mI2C\:SCB\\.interrupt \\mI2C\:SCB_IRQ\\.interrupt (0.000:0.000:0.000))
+    (INTERCONNECT \\mI2C\:scl\(0\)\\.fb \\mI2C\:SCB\\.i2c_scl (0.000:0.000:0.000))
+    (INTERCONNECT \\mI2C\:sda\(0\)\\.fb \\mI2C\:SCB\\.i2c_sda (0.000:0.000:0.000))
+    (INTERCONNECT ClockBlock.ff_div_2 \\mI2C\:SCB\\.clock (0.000:0.000:0.000))
+    (INTERCONNECT \\mI2C\:sda\(0\)_PAD\\ \\mI2C\:sda\(0\)\\.pad_in (0.000:0.000:0.000))
+    (INTERCONNECT \\mI2C\:scl\(0\)_PAD\\ \\mI2C\:scl\(0\)\\.pad_in (0.000:0.000:0.000))
+   )
+  )
+ )
+)

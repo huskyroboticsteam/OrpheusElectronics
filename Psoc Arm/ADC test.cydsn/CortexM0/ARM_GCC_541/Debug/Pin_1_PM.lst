@@ -1,0 +1,667 @@
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Pin_1_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Pin_1_Sleep,"ax",%progbits
+  20              		.align	2
+  21              		.global	Pin_1_Sleep
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	Pin_1_Sleep, %function
+  25              	Pin_1_Sleep:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC4\\Pin_1_PM.c"
+   1:Generated_Source\PSoC4/Pin_1_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC4/Pin_1_PM.c **** * File Name: Pin_1.c  
+   3:Generated_Source\PSoC4/Pin_1_PM.c **** * Version 2.20
+   4:Generated_Source\PSoC4/Pin_1_PM.c **** *
+   5:Generated_Source\PSoC4/Pin_1_PM.c **** * Description:
+   6:Generated_Source\PSoC4/Pin_1_PM.c **** *  This file contains APIs to set up the Pins component for low power modes.
+   7:Generated_Source\PSoC4/Pin_1_PM.c **** *
+   8:Generated_Source\PSoC4/Pin_1_PM.c **** * Note:
+   9:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  10:Generated_Source\PSoC4/Pin_1_PM.c **** ********************************************************************************
+  11:Generated_Source\PSoC4/Pin_1_PM.c **** * Copyright 2015, Cypress Semiconductor Corporation.  All rights reserved.
+  12:Generated_Source\PSoC4/Pin_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:Generated_Source\PSoC4/Pin_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:Generated_Source\PSoC4/Pin_1_PM.c **** * the software package with which this file was provided.
+  15:Generated_Source\PSoC4/Pin_1_PM.c **** *******************************************************************************/
+  16:Generated_Source\PSoC4/Pin_1_PM.c **** 
+  17:Generated_Source\PSoC4/Pin_1_PM.c **** #include "cytypes.h"
+  18:Generated_Source\PSoC4/Pin_1_PM.c **** #include "Pin_1.h"
+  19:Generated_Source\PSoC4/Pin_1_PM.c **** 
+  20:Generated_Source\PSoC4/Pin_1_PM.c **** static Pin_1_BACKUP_STRUCT  Pin_1_backup = {0u, 0u, 0u};
+  21:Generated_Source\PSoC4/Pin_1_PM.c **** 
+  22:Generated_Source\PSoC4/Pin_1_PM.c **** 
+  23:Generated_Source\PSoC4/Pin_1_PM.c **** /*******************************************************************************
+  24:Generated_Source\PSoC4/Pin_1_PM.c **** * Function Name: Pin_1_Sleep
+  25:Generated_Source\PSoC4/Pin_1_PM.c **** ****************************************************************************//**
+  26:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  27:Generated_Source\PSoC4/Pin_1_PM.c **** * \brief Stores the pin configuration and prepares the pin for entering chip 
+  28:Generated_Source\PSoC4/Pin_1_PM.c **** *  deep-sleep/hibernate modes. This function applies only to SIO and USBIO pins.
+  29:Generated_Source\PSoC4/Pin_1_PM.c **** *  It should not be called for GPIO or GPIO_OVT pins.
+  30:Generated_Source\PSoC4/Pin_1_PM.c **** *
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 2
+
+
+  31:Generated_Source\PSoC4/Pin_1_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  32:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  33:Generated_Source\PSoC4/Pin_1_PM.c **** * \return 
+  34:Generated_Source\PSoC4/Pin_1_PM.c **** *  None 
+  35:Generated_Source\PSoC4/Pin_1_PM.c **** *  
+  36:Generated_Source\PSoC4/Pin_1_PM.c **** * \sideeffect
+  37:Generated_Source\PSoC4/Pin_1_PM.c **** *  For SIO pins, this function configures the pin input threshold to CMOS and
+  38:Generated_Source\PSoC4/Pin_1_PM.c **** *  drive level to Vddio. This is needed for SIO pins when in device 
+  39:Generated_Source\PSoC4/Pin_1_PM.c **** *  deep-sleep/hibernate modes.
+  40:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  41:Generated_Source\PSoC4/Pin_1_PM.c **** * \funcusage
+  42:Generated_Source\PSoC4/Pin_1_PM.c **** *  \snippet Pin_1_SUT.c usage_Pin_1_Sleep_Wakeup
+  43:Generated_Source\PSoC4/Pin_1_PM.c **** *******************************************************************************/
+  44:Generated_Source\PSoC4/Pin_1_PM.c **** void Pin_1_Sleep(void)
+  45:Generated_Source\PSoC4/Pin_1_PM.c **** {
+  28              		.loc 1 45 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  46:Generated_Source\PSoC4/Pin_1_PM.c ****     #if defined(Pin_1__PC)
+  47:Generated_Source\PSoC4/Pin_1_PM.c ****         Pin_1_backup.pcState = Pin_1_PC;
+  33              		.loc 1 47 0
+  34 0000 054B     		ldr	r3, .L2
+  35 0002 1B68     		ldr	r3, [r3]
+  36 0004 054A     		ldr	r2, .L2+4
+  37 0006 1360     		str	r3, [r2]
+  48:Generated_Source\PSoC4/Pin_1_PM.c ****     #else
+  49:Generated_Source\PSoC4/Pin_1_PM.c ****         #if (CY_PSOC4_4200L)
+  50:Generated_Source\PSoC4/Pin_1_PM.c ****             /* Save the regulator state and put the PHY into suspend mode */
+  51:Generated_Source\PSoC4/Pin_1_PM.c ****             Pin_1_backup.usbState = Pin_1_CR1_REG;
+  52:Generated_Source\PSoC4/Pin_1_PM.c ****             Pin_1_USB_POWER_REG |= Pin_1_USBIO_ENTER_SLEEP;
+  53:Generated_Source\PSoC4/Pin_1_PM.c ****             Pin_1_CR1_REG &= Pin_1_USBIO_CR1_OFF;
+  54:Generated_Source\PSoC4/Pin_1_PM.c ****         #endif
+  55:Generated_Source\PSoC4/Pin_1_PM.c ****     #endif
+  56:Generated_Source\PSoC4/Pin_1_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Pin_1__SIO)
+  57:Generated_Source\PSoC4/Pin_1_PM.c ****         Pin_1_backup.sioState = Pin_1_SIO_REG;
+  38              		.loc 1 57 0
+  39 0008 054B     		ldr	r3, .L2+8
+  40 000a 1968     		ldr	r1, [r3]
+  41 000c 5160     		str	r1, [r2, #4]
+  58:Generated_Source\PSoC4/Pin_1_PM.c ****         /* SIO requires unregulated output buffer and single ended input buffer */
+  59:Generated_Source\PSoC4/Pin_1_PM.c ****         Pin_1_SIO_REG &= (uint32)(~Pin_1_SIO_LPM_MASK);
+  42              		.loc 1 59 0
+  43 000e 1A68     		ldr	r2, [r3]
+  44 0010 0321     		movs	r1, #3
+  45 0012 8A43     		bics	r2, r1
+  46 0014 1A60     		str	r2, [r3]
+  60:Generated_Source\PSoC4/Pin_1_PM.c ****     #endif  
+  61:Generated_Source\PSoC4/Pin_1_PM.c **** }
+  47              		.loc 1 61 0
+  48              		@ sp needed
+  49 0016 7047     		bx	lr
+  50              	.L3:
+  51              		.align	2
+  52              	.L2:
+  53 0018 080C0440 		.word	1074007048
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 3
+
+
+  54 001c 00000000 		.word	.LANCHOR0
+  55 0020 140C0440 		.word	1074007060
+  56              		.cfi_endproc
+  57              	.LFE0:
+  58              		.size	Pin_1_Sleep, .-Pin_1_Sleep
+  59              		.section	.text.Pin_1_Wakeup,"ax",%progbits
+  60              		.align	2
+  61              		.global	Pin_1_Wakeup
+  62              		.code	16
+  63              		.thumb_func
+  64              		.type	Pin_1_Wakeup, %function
+  65              	Pin_1_Wakeup:
+  66              	.LFB1:
+  62:Generated_Source\PSoC4/Pin_1_PM.c **** 
+  63:Generated_Source\PSoC4/Pin_1_PM.c **** 
+  64:Generated_Source\PSoC4/Pin_1_PM.c **** /*******************************************************************************
+  65:Generated_Source\PSoC4/Pin_1_PM.c **** * Function Name: Pin_1_Wakeup
+  66:Generated_Source\PSoC4/Pin_1_PM.c **** ****************************************************************************//**
+  67:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  68:Generated_Source\PSoC4/Pin_1_PM.c **** * \brief Restores the pin configuration that was saved during Pin_Sleep(). This 
+  69:Generated_Source\PSoC4/Pin_1_PM.c **** * function applies only to SIO and USBIO pins. It should not be called for
+  70:Generated_Source\PSoC4/Pin_1_PM.c **** * GPIO or GPIO_OVT pins.
+  71:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  72:Generated_Source\PSoC4/Pin_1_PM.c **** * For USBIO pins, the wakeup is only triggered for falling edge interrupts.
+  73:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  74:Generated_Source\PSoC4/Pin_1_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  75:Generated_Source\PSoC4/Pin_1_PM.c **** *
+  76:Generated_Source\PSoC4/Pin_1_PM.c **** * \return 
+  77:Generated_Source\PSoC4/Pin_1_PM.c **** *  None
+  78:Generated_Source\PSoC4/Pin_1_PM.c **** *  
+  79:Generated_Source\PSoC4/Pin_1_PM.c **** * \funcusage
+  80:Generated_Source\PSoC4/Pin_1_PM.c **** *  Refer to Pin_1_Sleep() for an example usage.
+  81:Generated_Source\PSoC4/Pin_1_PM.c **** *******************************************************************************/
+  82:Generated_Source\PSoC4/Pin_1_PM.c **** void Pin_1_Wakeup(void)
+  83:Generated_Source\PSoC4/Pin_1_PM.c **** {
+  67              		.loc 1 83 0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  84:Generated_Source\PSoC4/Pin_1_PM.c ****     #if defined(Pin_1__PC)
+  85:Generated_Source\PSoC4/Pin_1_PM.c ****         Pin_1_PC = Pin_1_backup.pcState;
+  72              		.loc 1 85 0
+  73 0000 034B     		ldr	r3, .L5
+  74 0002 044A     		ldr	r2, .L5+4
+  75 0004 1968     		ldr	r1, [r3]
+  76 0006 1160     		str	r1, [r2]
+  86:Generated_Source\PSoC4/Pin_1_PM.c ****     #else
+  87:Generated_Source\PSoC4/Pin_1_PM.c ****         #if (CY_PSOC4_4200L)
+  88:Generated_Source\PSoC4/Pin_1_PM.c ****             /* Restore the regulator state and come out of suspend mode */
+  89:Generated_Source\PSoC4/Pin_1_PM.c ****             Pin_1_USB_POWER_REG &= Pin_1_USBIO_EXIT_SLEEP_PH1;
+  90:Generated_Source\PSoC4/Pin_1_PM.c ****             Pin_1_CR1_REG = Pin_1_backup.usbState;
+  91:Generated_Source\PSoC4/Pin_1_PM.c ****             Pin_1_USB_POWER_REG &= Pin_1_USBIO_EXIT_SLEEP_PH2;
+  92:Generated_Source\PSoC4/Pin_1_PM.c ****         #endif
+  93:Generated_Source\PSoC4/Pin_1_PM.c ****     #endif
+  94:Generated_Source\PSoC4/Pin_1_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Pin_1__SIO)
+  95:Generated_Source\PSoC4/Pin_1_PM.c ****         Pin_1_SIO_REG = Pin_1_backup.sioState;
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 4
+
+
+  77              		.loc 1 95 0
+  78 0008 5A68     		ldr	r2, [r3, #4]
+  79 000a 034B     		ldr	r3, .L5+8
+  80 000c 1A60     		str	r2, [r3]
+  96:Generated_Source\PSoC4/Pin_1_PM.c ****     #endif
+  97:Generated_Source\PSoC4/Pin_1_PM.c **** }
+  81              		.loc 1 97 0
+  82              		@ sp needed
+  83 000e 7047     		bx	lr
+  84              	.L6:
+  85              		.align	2
+  86              	.L5:
+  87 0010 00000000 		.word	.LANCHOR0
+  88 0014 080C0440 		.word	1074007048
+  89 0018 140C0440 		.word	1074007060
+  90              		.cfi_endproc
+  91              	.LFE1:
+  92              		.size	Pin_1_Wakeup, .-Pin_1_Wakeup
+  93              		.bss
+  94              		.align	2
+  95              		.set	.LANCHOR0,. + 0
+  96              		.type	Pin_1_backup, %object
+  97              		.size	Pin_1_backup, 12
+  98              	Pin_1_backup:
+  99 0000 00000000 		.space	12
+  99      00000000 
+  99      00000000 
+ 100              		.text
+ 101              	.Letext0:
+ 102              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
+ 103              		.file 3 "Generated_Source\\PSoC4\\Pin_1.h"
+ 104              		.section	.debug_info,"",%progbits
+ 105              	.Ldebug_info0:
+ 106 0000 05010000 		.4byte	0x105
+ 107 0004 0400     		.2byte	0x4
+ 108 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 109 000a 04       		.byte	0x4
+ 110 000b 01       		.uleb128 0x1
+ 111 000c C2000000 		.4byte	.LASF20
+ 112 0010 0C       		.byte	0xc
+ 113 0011 0F000000 		.4byte	.LASF21
+ 114 0015 87010000 		.4byte	.LASF22
+ 115 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 116 001d 00000000 		.4byte	0
+ 117 0021 00000000 		.4byte	.Ldebug_line0
+ 118 0025 02       		.uleb128 0x2
+ 119 0026 01       		.byte	0x1
+ 120 0027 06       		.byte	0x6
+ 121 0028 D2010000 		.4byte	.LASF0
+ 122 002c 02       		.uleb128 0x2
+ 123 002d 01       		.byte	0x1
+ 124 002e 08       		.byte	0x8
+ 125 002f 37000000 		.4byte	.LASF1
+ 126 0033 02       		.uleb128 0x2
+ 127 0034 02       		.byte	0x2
+ 128 0035 05       		.byte	0x5
+ 129 0036 6C010000 		.4byte	.LASF2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 5
+
+
+ 130 003a 02       		.uleb128 0x2
+ 131 003b 02       		.byte	0x2
+ 132 003c 07       		.byte	0x7
+ 133 003d 64000000 		.4byte	.LASF3
+ 134 0041 02       		.uleb128 0x2
+ 135 0042 04       		.byte	0x4
+ 136 0043 05       		.byte	0x5
+ 137 0044 7E010000 		.4byte	.LASF4
+ 138 0048 02       		.uleb128 0x2
+ 139 0049 04       		.byte	0x4
+ 140 004a 07       		.byte	0x7
+ 141 004b 52000000 		.4byte	.LASF5
+ 142 004f 02       		.uleb128 0x2
+ 143 0050 08       		.byte	0x8
+ 144 0051 05       		.byte	0x5
+ 145 0052 59010000 		.4byte	.LASF6
+ 146 0056 02       		.uleb128 0x2
+ 147 0057 08       		.byte	0x8
+ 148 0058 07       		.byte	0x7
+ 149 0059 AB000000 		.4byte	.LASF7
+ 150 005d 03       		.uleb128 0x3
+ 151 005e 04       		.byte	0x4
+ 152 005f 05       		.byte	0x5
+ 153 0060 696E7400 		.ascii	"int\000"
+ 154 0064 02       		.uleb128 0x2
+ 155 0065 04       		.byte	0x4
+ 156 0066 07       		.byte	0x7
+ 157 0067 9E000000 		.4byte	.LASF8
+ 158 006b 04       		.uleb128 0x4
+ 159 006c 97000000 		.4byte	.LASF12
+ 160 0070 02       		.byte	0x2
+ 161 0071 E601     		.2byte	0x1e6
+ 162 0073 48000000 		.4byte	0x48
+ 163 0077 02       		.uleb128 0x2
+ 164 0078 04       		.byte	0x4
+ 165 0079 04       		.byte	0x4
+ 166 007a 31000000 		.4byte	.LASF9
+ 167 007e 02       		.uleb128 0x2
+ 168 007f 08       		.byte	0x8
+ 169 0080 04       		.byte	0x4
+ 170 0081 90000000 		.4byte	.LASF10
+ 171 0085 02       		.uleb128 0x2
+ 172 0086 01       		.byte	0x1
+ 173 0087 08       		.byte	0x8
+ 174 0088 67010000 		.4byte	.LASF11
+ 175 008c 04       		.uleb128 0x4
+ 176 008d 00000000 		.4byte	.LASF13
+ 177 0091 02       		.byte	0x2
+ 178 0092 9002     		.2byte	0x290
+ 179 0094 98000000 		.4byte	0x98
+ 180 0098 05       		.uleb128 0x5
+ 181 0099 6B000000 		.4byte	0x6b
+ 182 009d 06       		.uleb128 0x6
+ 183 009e 0C       		.byte	0xc
+ 184 009f 03       		.byte	0x3
+ 185 00a0 21       		.byte	0x21
+ 186 00a1 CA000000 		.4byte	0xca
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 6
+
+
+ 187 00a5 07       		.uleb128 0x7
+ 188 00a6 76010000 		.4byte	.LASF14
+ 189 00aa 03       		.byte	0x3
+ 190 00ab 23       		.byte	0x23
+ 191 00ac 6B000000 		.4byte	0x6b
+ 192 00b0 00       		.byte	0
+ 193 00b1 07       		.uleb128 0x7
+ 194 00b2 50010000 		.4byte	.LASF15
+ 195 00b6 03       		.byte	0x3
+ 196 00b7 24       		.byte	0x24
+ 197 00b8 6B000000 		.4byte	0x6b
+ 198 00bc 04       		.byte	0x4
+ 199 00bd 07       		.uleb128 0x7
+ 200 00be 06000000 		.4byte	.LASF16
+ 201 00c2 03       		.byte	0x3
+ 202 00c3 25       		.byte	0x25
+ 203 00c4 6B000000 		.4byte	0x6b
+ 204 00c8 08       		.byte	0x8
+ 205 00c9 00       		.byte	0
+ 206 00ca 08       		.uleb128 0x8
+ 207 00cb DE010000 		.4byte	.LASF17
+ 208 00cf 03       		.byte	0x3
+ 209 00d0 26       		.byte	0x26
+ 210 00d1 9D000000 		.4byte	0x9d
+ 211 00d5 09       		.uleb128 0x9
+ 212 00d6 77000000 		.4byte	.LASF18
+ 213 00da 01       		.byte	0x1
+ 214 00db 2C       		.byte	0x2c
+ 215 00dc 00000000 		.4byte	.LFB0
+ 216 00e0 24000000 		.4byte	.LFE0-.LFB0
+ 217 00e4 01       		.uleb128 0x1
+ 218 00e5 9C       		.byte	0x9c
+ 219 00e6 09       		.uleb128 0x9
+ 220 00e7 83000000 		.4byte	.LASF19
+ 221 00eb 01       		.byte	0x1
+ 222 00ec 52       		.byte	0x52
+ 223 00ed 00000000 		.4byte	.LFB1
+ 224 00f1 1C000000 		.4byte	.LFE1-.LFB1
+ 225 00f5 01       		.uleb128 0x1
+ 226 00f6 9C       		.byte	0x9c
+ 227 00f7 0A       		.uleb128 0xa
+ 228 00f8 45000000 		.4byte	.LASF23
+ 229 00fc 01       		.byte	0x1
+ 230 00fd 14       		.byte	0x14
+ 231 00fe CA000000 		.4byte	0xca
+ 232 0102 05       		.uleb128 0x5
+ 233 0103 03       		.byte	0x3
+ 234 0104 00000000 		.4byte	Pin_1_backup
+ 235 0108 00       		.byte	0
+ 236              		.section	.debug_abbrev,"",%progbits
+ 237              	.Ldebug_abbrev0:
+ 238 0000 01       		.uleb128 0x1
+ 239 0001 11       		.uleb128 0x11
+ 240 0002 01       		.byte	0x1
+ 241 0003 25       		.uleb128 0x25
+ 242 0004 0E       		.uleb128 0xe
+ 243 0005 13       		.uleb128 0x13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 7
+
+
+ 244 0006 0B       		.uleb128 0xb
+ 245 0007 03       		.uleb128 0x3
+ 246 0008 0E       		.uleb128 0xe
+ 247 0009 1B       		.uleb128 0x1b
+ 248 000a 0E       		.uleb128 0xe
+ 249 000b 55       		.uleb128 0x55
+ 250 000c 17       		.uleb128 0x17
+ 251 000d 11       		.uleb128 0x11
+ 252 000e 01       		.uleb128 0x1
+ 253 000f 10       		.uleb128 0x10
+ 254 0010 17       		.uleb128 0x17
+ 255 0011 00       		.byte	0
+ 256 0012 00       		.byte	0
+ 257 0013 02       		.uleb128 0x2
+ 258 0014 24       		.uleb128 0x24
+ 259 0015 00       		.byte	0
+ 260 0016 0B       		.uleb128 0xb
+ 261 0017 0B       		.uleb128 0xb
+ 262 0018 3E       		.uleb128 0x3e
+ 263 0019 0B       		.uleb128 0xb
+ 264 001a 03       		.uleb128 0x3
+ 265 001b 0E       		.uleb128 0xe
+ 266 001c 00       		.byte	0
+ 267 001d 00       		.byte	0
+ 268 001e 03       		.uleb128 0x3
+ 269 001f 24       		.uleb128 0x24
+ 270 0020 00       		.byte	0
+ 271 0021 0B       		.uleb128 0xb
+ 272 0022 0B       		.uleb128 0xb
+ 273 0023 3E       		.uleb128 0x3e
+ 274 0024 0B       		.uleb128 0xb
+ 275 0025 03       		.uleb128 0x3
+ 276 0026 08       		.uleb128 0x8
+ 277 0027 00       		.byte	0
+ 278 0028 00       		.byte	0
+ 279 0029 04       		.uleb128 0x4
+ 280 002a 16       		.uleb128 0x16
+ 281 002b 00       		.byte	0
+ 282 002c 03       		.uleb128 0x3
+ 283 002d 0E       		.uleb128 0xe
+ 284 002e 3A       		.uleb128 0x3a
+ 285 002f 0B       		.uleb128 0xb
+ 286 0030 3B       		.uleb128 0x3b
+ 287 0031 05       		.uleb128 0x5
+ 288 0032 49       		.uleb128 0x49
+ 289 0033 13       		.uleb128 0x13
+ 290 0034 00       		.byte	0
+ 291 0035 00       		.byte	0
+ 292 0036 05       		.uleb128 0x5
+ 293 0037 35       		.uleb128 0x35
+ 294 0038 00       		.byte	0
+ 295 0039 49       		.uleb128 0x49
+ 296 003a 13       		.uleb128 0x13
+ 297 003b 00       		.byte	0
+ 298 003c 00       		.byte	0
+ 299 003d 06       		.uleb128 0x6
+ 300 003e 13       		.uleb128 0x13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 8
+
+
+ 301 003f 01       		.byte	0x1
+ 302 0040 0B       		.uleb128 0xb
+ 303 0041 0B       		.uleb128 0xb
+ 304 0042 3A       		.uleb128 0x3a
+ 305 0043 0B       		.uleb128 0xb
+ 306 0044 3B       		.uleb128 0x3b
+ 307 0045 0B       		.uleb128 0xb
+ 308 0046 01       		.uleb128 0x1
+ 309 0047 13       		.uleb128 0x13
+ 310 0048 00       		.byte	0
+ 311 0049 00       		.byte	0
+ 312 004a 07       		.uleb128 0x7
+ 313 004b 0D       		.uleb128 0xd
+ 314 004c 00       		.byte	0
+ 315 004d 03       		.uleb128 0x3
+ 316 004e 0E       		.uleb128 0xe
+ 317 004f 3A       		.uleb128 0x3a
+ 318 0050 0B       		.uleb128 0xb
+ 319 0051 3B       		.uleb128 0x3b
+ 320 0052 0B       		.uleb128 0xb
+ 321 0053 49       		.uleb128 0x49
+ 322 0054 13       		.uleb128 0x13
+ 323 0055 38       		.uleb128 0x38
+ 324 0056 0B       		.uleb128 0xb
+ 325 0057 00       		.byte	0
+ 326 0058 00       		.byte	0
+ 327 0059 08       		.uleb128 0x8
+ 328 005a 16       		.uleb128 0x16
+ 329 005b 00       		.byte	0
+ 330 005c 03       		.uleb128 0x3
+ 331 005d 0E       		.uleb128 0xe
+ 332 005e 3A       		.uleb128 0x3a
+ 333 005f 0B       		.uleb128 0xb
+ 334 0060 3B       		.uleb128 0x3b
+ 335 0061 0B       		.uleb128 0xb
+ 336 0062 49       		.uleb128 0x49
+ 337 0063 13       		.uleb128 0x13
+ 338 0064 00       		.byte	0
+ 339 0065 00       		.byte	0
+ 340 0066 09       		.uleb128 0x9
+ 341 0067 2E       		.uleb128 0x2e
+ 342 0068 00       		.byte	0
+ 343 0069 3F       		.uleb128 0x3f
+ 344 006a 19       		.uleb128 0x19
+ 345 006b 03       		.uleb128 0x3
+ 346 006c 0E       		.uleb128 0xe
+ 347 006d 3A       		.uleb128 0x3a
+ 348 006e 0B       		.uleb128 0xb
+ 349 006f 3B       		.uleb128 0x3b
+ 350 0070 0B       		.uleb128 0xb
+ 351 0071 27       		.uleb128 0x27
+ 352 0072 19       		.uleb128 0x19
+ 353 0073 11       		.uleb128 0x11
+ 354 0074 01       		.uleb128 0x1
+ 355 0075 12       		.uleb128 0x12
+ 356 0076 06       		.uleb128 0x6
+ 357 0077 40       		.uleb128 0x40
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 9
+
+
+ 358 0078 18       		.uleb128 0x18
+ 359 0079 9742     		.uleb128 0x2117
+ 360 007b 19       		.uleb128 0x19
+ 361 007c 00       		.byte	0
+ 362 007d 00       		.byte	0
+ 363 007e 0A       		.uleb128 0xa
+ 364 007f 34       		.uleb128 0x34
+ 365 0080 00       		.byte	0
+ 366 0081 03       		.uleb128 0x3
+ 367 0082 0E       		.uleb128 0xe
+ 368 0083 3A       		.uleb128 0x3a
+ 369 0084 0B       		.uleb128 0xb
+ 370 0085 3B       		.uleb128 0x3b
+ 371 0086 0B       		.uleb128 0xb
+ 372 0087 49       		.uleb128 0x49
+ 373 0088 13       		.uleb128 0x13
+ 374 0089 02       		.uleb128 0x2
+ 375 008a 18       		.uleb128 0x18
+ 376 008b 00       		.byte	0
+ 377 008c 00       		.byte	0
+ 378 008d 00       		.byte	0
+ 379              		.section	.debug_aranges,"",%progbits
+ 380 0000 24000000 		.4byte	0x24
+ 381 0004 0200     		.2byte	0x2
+ 382 0006 00000000 		.4byte	.Ldebug_info0
+ 383 000a 04       		.byte	0x4
+ 384 000b 00       		.byte	0
+ 385 000c 0000     		.2byte	0
+ 386 000e 0000     		.2byte	0
+ 387 0010 00000000 		.4byte	.LFB0
+ 388 0014 24000000 		.4byte	.LFE0-.LFB0
+ 389 0018 00000000 		.4byte	.LFB1
+ 390 001c 1C000000 		.4byte	.LFE1-.LFB1
+ 391 0020 00000000 		.4byte	0
+ 392 0024 00000000 		.4byte	0
+ 393              		.section	.debug_ranges,"",%progbits
+ 394              	.Ldebug_ranges0:
+ 395 0000 00000000 		.4byte	.LFB0
+ 396 0004 24000000 		.4byte	.LFE0
+ 397 0008 00000000 		.4byte	.LFB1
+ 398 000c 1C000000 		.4byte	.LFE1
+ 399 0010 00000000 		.4byte	0
+ 400 0014 00000000 		.4byte	0
+ 401              		.section	.debug_line,"",%progbits
+ 402              	.Ldebug_line0:
+ 403 0000 80000000 		.section	.debug_str,"MS",%progbits,1
+ 403      02005000 
+ 403      00000201 
+ 403      FB0E0D00 
+ 403      01010101 
+ 404              	.LASF13:
+ 405 0000 72656733 		.ascii	"reg32\000"
+ 405      3200
+ 406              	.LASF16:
+ 407 0006 75736253 		.ascii	"usbState\000"
+ 407      74617465 
+ 407      00
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 10
+
+
+ 408              	.LASF21:
+ 409 000f 47656E65 		.ascii	"Generated_Source\\PSoC4\\Pin_1_PM.c\000"
+ 409      72617465 
+ 409      645F536F 
+ 409      75726365 
+ 409      5C50536F 
+ 410              	.LASF9:
+ 411 0031 666C6F61 		.ascii	"float\000"
+ 411      7400
+ 412              	.LASF1:
+ 413 0037 756E7369 		.ascii	"unsigned char\000"
+ 413      676E6564 
+ 413      20636861 
+ 413      7200
+ 414              	.LASF23:
+ 415 0045 50696E5F 		.ascii	"Pin_1_backup\000"
+ 415      315F6261 
+ 415      636B7570 
+ 415      00
+ 416              	.LASF5:
+ 417 0052 6C6F6E67 		.ascii	"long unsigned int\000"
+ 417      20756E73 
+ 417      69676E65 
+ 417      6420696E 
+ 417      7400
+ 418              	.LASF3:
+ 419 0064 73686F72 		.ascii	"short unsigned int\000"
+ 419      7420756E 
+ 419      7369676E 
+ 419      65642069 
+ 419      6E7400
+ 420              	.LASF18:
+ 421 0077 50696E5F 		.ascii	"Pin_1_Sleep\000"
+ 421      315F536C 
+ 421      65657000 
+ 422              	.LASF19:
+ 423 0083 50696E5F 		.ascii	"Pin_1_Wakeup\000"
+ 423      315F5761 
+ 423      6B657570 
+ 423      00
+ 424              	.LASF10:
+ 425 0090 646F7562 		.ascii	"double\000"
+ 425      6C6500
+ 426              	.LASF12:
+ 427 0097 75696E74 		.ascii	"uint32\000"
+ 427      333200
+ 428              	.LASF8:
+ 429 009e 756E7369 		.ascii	"unsigned int\000"
+ 429      676E6564 
+ 429      20696E74 
+ 429      00
+ 430              	.LASF7:
+ 431 00ab 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 431      206C6F6E 
+ 431      6720756E 
+ 431      7369676E 
+ 431      65642069 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 11
+
+
+ 432              	.LASF20:
+ 433 00c2 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 433      43313120 
+ 433      352E342E 
+ 433      31203230 
+ 433      31363036 
+ 434 00f5 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 434      20726576 
+ 434      6973696F 
+ 434      6E203233 
+ 434      37373135 
+ 435 0128 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 435      66756E63 
+ 435      74696F6E 
+ 435      2D736563 
+ 435      74696F6E 
+ 436              	.LASF15:
+ 437 0150 73696F53 		.ascii	"sioState\000"
+ 437      74617465 
+ 437      00
+ 438              	.LASF6:
+ 439 0159 6C6F6E67 		.ascii	"long long int\000"
+ 439      206C6F6E 
+ 439      6720696E 
+ 439      7400
+ 440              	.LASF11:
+ 441 0167 63686172 		.ascii	"char\000"
+ 441      00
+ 442              	.LASF2:
+ 443 016c 73686F72 		.ascii	"short int\000"
+ 443      7420696E 
+ 443      7400
+ 444              	.LASF14:
+ 445 0176 70635374 		.ascii	"pcState\000"
+ 445      61746500 
+ 446              	.LASF4:
+ 447 017e 6C6F6E67 		.ascii	"long int\000"
+ 447      20696E74 
+ 447      00
+ 448              	.LASF22:
+ 449 0187 433A5C55 		.ascii	"C:\\Users\\austc\\Documents\\GitHub\\OrpheusElectro"
+ 449      73657273 
+ 449      5C617573 
+ 449      74635C44 
+ 449      6F63756D 
+ 450 01b5 6E696373 		.ascii	"nics\\Psoc Arm\\ADC test.cydsn\000"
+ 450      5C50736F 
+ 450      63204172 
+ 450      6D5C4144 
+ 450      43207465 
+ 451              	.LASF0:
+ 452 01d2 7369676E 		.ascii	"signed char\000"
+ 452      65642063 
+ 452      68617200 
+ 453              	.LASF17:
+ 454 01de 50696E5F 		.ascii	"Pin_1_BACKUP_STRUCT\000"
+ 454      315F4241 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccH42TXh.s 			page 12
+
+
+ 454      434B5550 
+ 454      5F535452 
+ 454      55435400 
+ 455              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

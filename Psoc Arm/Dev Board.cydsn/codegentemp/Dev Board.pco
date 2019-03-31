@@ -1,5 +1,5 @@
 # Dev Board
-# 2019-02-09 20:36:46Z
+# 2019-03-28 19:44:51Z
 
 # IO_4@[IOP=(0)][IoId=(4)] is reserved: KhzXtalEnabled
 dont_use_io iocell 0 4
@@ -14,7 +14,7 @@ set_location "ClockBlock" m0s8clockblockcell -1 -1 0
 set_io "Pin_Limit_1(0)" iocell 1 7
 set_io "Pin_Limit_2(0)" iocell 4 7
 set_io "Pin_Motor(0)" iocell 1 6
-set_io "Pin_Pot(0)" iocell 2 7
+set_io "Pin_Pot(0)" iocell 2 5
 set_io "Pin_Direction(0)" iocell 1 4
 set_io "Pin_Test(0)" iocell 5 3
 set_io "Pin_Encoder_A(0)" iocell 5 5
@@ -30,6 +30,8 @@ set_io "Dip_3(0)" iocell 0 2
 set_io "Dip_2(0)" iocell 0 3
 set_io "Dip_4(0)" iocell 0 1
 set_io "Current_sense(0)" iocell 2 0
+set_io "\I2C_1:sda(0)\" iocell 6 5
+set_io "\I2C_1:scl(0)\" iocell 6 4
 set_location "\QuadDec:Cnt16:CounterUDB:reload\" 0 2 0 0
 set_location "\QuadDec:Cnt16:CounterUDB:status_0\" 0 3 0 0
 set_location "\QuadDec:Cnt16:CounterUDB:status_2\" 0 2 0 3
@@ -57,6 +59,8 @@ set_location "\CAN:isr\" interrupt -1 -1 29
 set_location "\CAN:CanIP\" cancell -1 -1 1
 set_location "\UART:SCB\" m0s8scbcell -1 -1 1
 set_location "\Can_addr:sts:sts_reg\" 1 3 3
+set_location "\I2C_1:SCB_IRQ\" interrupt -1 -1 9
+set_location "\I2C_1:SCB\" m0s8scbcell -1 -1 0
 set_location "\QuadDec:Net_1251\" 0 3 1 2
 set_location "\QuadDec:Cnt16:CounterUDB:overflow_reg_i\" 0 2 0 2
 set_location "\QuadDec:Cnt16:CounterUDB:underflow_reg_i\" 0 3 0 3

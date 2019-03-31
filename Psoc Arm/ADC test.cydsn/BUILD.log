@@ -1,0 +1,27 @@
+--------------- Build Started: 03/29/2019 23:04:19 Project: ADC test, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+cydsfit.exe -.appdatapath "C:\Users\austc\AppData\Local\Cypress Semiconductor\PSoC Creator\4.2" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p "C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\ADC test.cydsn\ADC test.cyprj" -d CY8C4248BZI-L489 -s "C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\ADC test.cydsn\Generated_Source\PSoC4" -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+ADD: sdb.M0061: information: Info from component: ADC_SAR_Seq_1. The actual sample rate (9259 SPS) differs from the desired sample rate (9263 SPS) due to the clock configuration in the DWR.
+ * C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\ADC test.cydsn\TopDesign\TopDesign.cysch (Instance:ADC_SAR_Seq_1)
+HDL Generation...
+Synthesis...
+Tech Mapping...
+ADD: pft.M0040: information: The following 2 pin(s) will be assigned a location by the fitter: \UART:rx(0)\, \UART:tx(0)\
+Analog Placement...
+Warning: apr.M0093: Opamp \Opamp:cy_psoc4_abuf\ output pin vout(0) is fixed in an incompatible location [IOP=(2)][IoId=(1)] (App=cydsfit)
+Analog Routing...
+Info: apr.M0021: 
+      Failed to route net "Net_145".
+      Error: No valid route exists
+      Ports:              vminus
+             vout10
+             analog_term
+      Sources:              PASS0.CTB0.OA0.vout10
+      Targets:              PASS0.CTB0.OA0.vminus
+             USERIO vout(0)
+     (App=cydsfit)
+Error: apr.M0003: Unable to find a solution for the analog routing. (App=cydsfit)
+Dependency Generation...
+Cleanup...
+Error: fit.M0050: The fitter aborted due to errors, please address all errors and rebuild. (App=cydsfit)
+--------------- Build Failed: 03/29/2019 23:04:27 ---------------

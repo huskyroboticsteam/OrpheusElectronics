@@ -1,0 +1,13 @@
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Dev Board.cydsn\Dev Board.cyprj|74805f84-41b8-429e-8266-270ebb744d5c
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|84b0f780-ecba-475d-8bf4-c4260b479df4
+C:\Users\austc\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|fc1bb78d-2244-42e7-bc39-a46d955a6b95
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|a3ba043b-8d80-4698-b519-73024a8d7682
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|455744ce-f3cf-4f91-9ff5-300f76295631
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|bba878d3-df0c-409c-8720-6cc19808d3f9
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Basic_P4_Example01.cydsn\CAN_Basic_P4_Example01.cyprj|0b61c321-ac49-4ff6-a3a6-e2b575b0d224
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj|a0e3b806-3bcf-4a48-a609-e048753cffb5
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Can Send test.cydsn\Can Send test.cyprj|900465f4-67c2-45f3-a8a2-30816098f0fb
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Basic_P4_unmodified.cydsn\CAN_Basic_P4_unmodified.cyprj|c01a6be4-8037-4ef0-81d4-5f40a0bba7ad
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\working CAN_Basic_P4_Original + uart debug.cyprj|24d763cc-d7df-47c6-aa6c-42a1d848bc73
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Full_P4_Example02.cydsn\CAN_Full_P4_Example02.cyprj|84af7b02-2ac1-498a-a26c-0a754cb27de0
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Motor Board.cydsn\Motor Board.cyprj|af2cb188-eb9f-4b9d-a9d8-b5eaa2a10cfd

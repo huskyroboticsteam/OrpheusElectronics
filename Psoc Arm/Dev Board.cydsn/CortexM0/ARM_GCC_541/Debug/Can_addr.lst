@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
   28:Generated_Source\PSoC4/Can_addr.c **** *  Reads the current value assigned to the Status Register.
   29:Generated_Source\PSoC4/Can_addr.c **** *
   30:Generated_Source\PSoC4/Can_addr.c **** * Parameters:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 2
 
 
   31:Generated_Source\PSoC4/Can_addr.c **** *  None.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
   58:Generated_Source\PSoC4/Can_addr.c **** {
   55              		.loc 1 58 0
   56              		.cfi_startproc
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 3
 
 
   57              		@ args = 0, pretend = 0, frame = 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
   76:Generated_Source\PSoC4/Can_addr.c **** * Return:
   77:Generated_Source\PSoC4/Can_addr.c **** *  None.
   78:Generated_Source\PSoC4/Can_addr.c **** *
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 4
 
 
   79:Generated_Source\PSoC4/Can_addr.c **** *******************************************************************************/
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
   95:Generated_Source\PSoC4/Can_addr.c **** *
   96:Generated_Source\PSoC4/Can_addr.c **** * Parameters:
   97:Generated_Source\PSoC4/Can_addr.c **** *  mask:  Value to write into the mask register.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 5
 
 
   98:Generated_Source\PSoC4/Can_addr.c **** *
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  121:Generated_Source\PSoC4/Can_addr.c **** *
  122:Generated_Source\PSoC4/Can_addr.c **** * Return:
  123:Generated_Source\PSoC4/Can_addr.c **** *  The value of the interrupt mask of the Status Register.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 6
 
 
  124:Generated_Source\PSoC4/Can_addr.c **** *
@@ -337,40 +337,40 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  190 0006 00000000 		.4byte	.Ldebug_abbrev0
  191 000a 04       		.byte	0x4
  192 000b 01       		.uleb128 0x1
- 193 000c EF000000 		.4byte	.LASF24
+ 193 000c D6000000 		.4byte	.LASF24
  194 0010 0C       		.byte	0xc
  195 0011 7A000000 		.4byte	.LASF25
- 196 0015 9C010000 		.4byte	.LASF26
+ 196 0015 CC010000 		.4byte	.LASF26
  197 0019 00000000 		.4byte	.Ldebug_ranges0+0
  198 001d 00000000 		.4byte	0
  199 0021 00000000 		.4byte	.Ldebug_line0
  200 0025 02       		.uleb128 0x2
  201 0026 01       		.byte	0x1
  202 0027 06       		.byte	0x6
- 203 0028 90010000 		.4byte	.LASF0
+ 203 0028 77010000 		.4byte	.LASF0
  204 002c 02       		.uleb128 0x2
  205 002d 01       		.byte	0x1
  206 002e 08       		.byte	0x8
- 207 002f BA000000 		.4byte	.LASF1
+ 207 002f A1000000 		.4byte	.LASF1
  208 0033 02       		.uleb128 0x2
  209 0034 02       		.byte	0x2
  210 0035 05       		.byte	0x5
- 211 0036 21020000 		.4byte	.LASF2
+ 211 0036 18020000 		.4byte	.LASF2
  212 003a 02       		.uleb128 0x2
  213 003b 02       		.byte	0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 7
 
 
  214 003c 07       		.byte	0x7
- 215 003d 7D010000 		.4byte	.LASF3
+ 215 003d 64010000 		.4byte	.LASF3
  216 0041 02       		.uleb128 0x2
  217 0042 04       		.byte	0x4
  218 0043 05       		.byte	0x5
- 219 0044 CD000000 		.4byte	.LASF4
+ 219 0044 B4000000 		.4byte	.LASF4
  220 0048 02       		.uleb128 0x2
  221 0049 04       		.byte	0x4
  222 004a 07       		.byte	0x7
- 223 004b D6000000 		.4byte	.LASF5
+ 223 004b BD000000 		.4byte	.LASF5
  224 004f 02       		.uleb128 0x2
  225 0050 08       		.byte	0x8
  226 0051 05       		.byte	0x5
@@ -399,13 +399,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  249 007e 02       		.uleb128 0x2
  250 007f 08       		.byte	0x8
  251 0080 04       		.byte	0x4
- 252 0081 E8000000 		.4byte	.LASF10
+ 252 0081 CF000000 		.4byte	.LASF10
  253 0085 02       		.uleb128 0x2
  254 0086 01       		.byte	0x1
  255 0087 08       		.byte	0x8
- 256 0088 C8000000 		.4byte	.LASF11
+ 256 0088 AF000000 		.4byte	.LASF11
  257 008c 04       		.uleb128 0x4
- 258 008d 2B020000 		.4byte	.LASF13
+ 258 008d 22020000 		.4byte	.LASF13
  259 0091 02       		.byte	0x2
  260 0092 8E02     		.2byte	0x28e
  261 0094 98000000 		.4byte	0x98
@@ -414,16 +414,16 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  264 009d 02       		.uleb128 0x2
  265 009e 08       		.byte	0x8
  266 009f 04       		.byte	0x4
- 267 00a0 15020000 		.4byte	.LASF14
+ 267 00a0 C0010000 		.4byte	.LASF14
  268 00a4 02       		.uleb128 0x2
  269 00a5 04       		.byte	0x4
  270 00a6 07       		.byte	0x7
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 8
 
 
- 271 00a7 30020000 		.4byte	.LASF15
+ 271 00a7 27020000 		.4byte	.LASF15
  272 00ab 06       		.uleb128 0x6
- 273 00ac 07020000 		.4byte	.LASF20
+ 273 00ac B2010000 		.4byte	.LASF20
  274 00b0 01       		.byte	0x1
  275 00b1 25       		.byte	0x25
  276 00b2 6B000000 		.4byte	0x6b
@@ -432,7 +432,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  279 00be 01       		.uleb128 0x1
  280 00bf 9C       		.byte	0x9c
  281 00c0 07       		.uleb128 0x7
- 282 00c1 9C000000 		.4byte	.LASF16
+ 282 00c1 83010000 		.4byte	.LASF16
  283 00c5 01       		.byte	0x1
  284 00c6 39       		.byte	0x39
  285 00c7 00000000 		.4byte	.LFB2
@@ -441,7 +441,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  288 00d0 9C       		.byte	0x9c
  289 00d1 F7000000 		.4byte	0xf7
  290 00d5 08       		.uleb128 0x8
- 291 00d6 39020000 		.4byte	.LASF18
+ 291 00d6 30020000 		.4byte	.LASF18
  292 00da 01       		.byte	0x1
  293 00db 3B       		.byte	0x3b
  294 00dc 6B000000 		.4byte	0x6b
@@ -454,7 +454,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  301 00f2 73010000 		.4byte	0x173
  302 00f6 00       		.byte	0
  303 00f7 07       		.uleb128 0x7
- 304 00f8 48020000 		.4byte	.LASF17
+ 304 00f8 3F020000 		.4byte	.LASF17
  305 00fc 01       		.byte	0x1
  306 00fd 50       		.byte	0x50
  307 00fe 00000000 		.4byte	.LFB3
@@ -463,7 +463,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  310 0107 9C       		.byte	0x9c
  311 0108 2E010000 		.4byte	0x12e
  312 010c 08       		.uleb128 0x8
- 313 010d 39020000 		.4byte	.LASF18
+ 313 010d 30020000 		.4byte	.LASF18
  314 0111 01       		.byte	0x1
  315 0112 52       		.byte	0x52
  316 0113 6B000000 		.4byte	0x6b
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  325 012e 07       		.uleb128 0x7
  326 012f 38000000 		.4byte	.LASF19
  327 0133 01       		.byte	0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 9
 
 
  328 0134 67       		.byte	0x67
@@ -488,7 +488,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  332 013e 9C       		.byte	0x9c
  333 013f 53010000 		.4byte	0x153
  334 0143 0A       		.uleb128 0xa
- 335 0144 B5000000 		.4byte	.LASF27
+ 335 0144 9C000000 		.4byte	.LASF27
  336 0148 01       		.byte	0x1
  337 0149 67       		.byte	0x67
  338 014a 6B000000 		.4byte	0x6b
@@ -509,8 +509,8 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  353 0171 03       		.byte	0x3
  354 0172 E5       		.byte	0xe5
  355 0173 0B       		.uleb128 0xb
- 356 0174 F1010000 		.4byte	.LASF23
- 357 0178 F1010000 		.4byte	.LASF23
+ 356 0174 9C010000 		.4byte	.LASF23
+ 357 0178 9C010000 		.4byte	.LASF23
  358 017c 03       		.byte	0x3
  359 017d E6       		.byte	0xe6
  360 017e 00       		.byte	0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  382 0013 02       		.uleb128 0x2
  383 0014 24       		.uleb128 0x24
  384 0015 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 10
 
 
  385 0016 0B       		.uleb128 0xb
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  439 004c 11       		.uleb128 0x11
  440 004d 01       		.uleb128 0x1
  441 004e 12       		.uleb128 0x12
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 11
 
 
  442 004f 06       		.uleb128 0x6
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  496 0089 00       		.byte	0
  497 008a 00       		.byte	0
  498 008b 0A       		.uleb128 0xa
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 12
 
 
  499 008c 05       		.uleb128 0x5
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  553 0035 10000000 		.4byte	.LFE4
  554 0039 0100     		.2byte	0x1
  555 003b 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 13
 
 
  556 003c 00000000 		.4byte	0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  600 001b 4379456E 		.ascii	"CyEnterCriticalSection\000"
  600      74657243 
  600      72697469 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 14
 
 
  600      63616C53 
@@ -813,112 +813,112 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 1
  612      645F536F 
  612      75726365 
  612      5C50536F 
- 613              	.LASF16:
- 614 009c 43616E5F 		.ascii	"Can_addr_InterruptEnable\000"
- 614      61646472 
- 614      5F496E74 
- 614      65727275 
- 614      7074456E 
- 615              	.LASF27:
- 616 00b5 6D61736B 		.ascii	"mask\000"
- 616      00
- 617              	.LASF1:
- 618 00ba 756E7369 		.ascii	"unsigned char\000"
- 618      676E6564 
- 618      20636861 
- 618      7200
- 619              	.LASF11:
- 620 00c8 63686172 		.ascii	"char\000"
+ 613              	.LASF27:
+ 614 009c 6D61736B 		.ascii	"mask\000"
+ 614      00
+ 615              	.LASF1:
+ 616 00a1 756E7369 		.ascii	"unsigned char\000"
+ 616      676E6564 
+ 616      20636861 
+ 616      7200
+ 617              	.LASF11:
+ 618 00af 63686172 		.ascii	"char\000"
+ 618      00
+ 619              	.LASF4:
+ 620 00b4 6C6F6E67 		.ascii	"long int\000"
+ 620      20696E74 
  620      00
- 621              	.LASF4:
- 622 00cd 6C6F6E67 		.ascii	"long int\000"
- 622      20696E74 
- 622      00
- 623              	.LASF5:
- 624 00d6 6C6F6E67 		.ascii	"long unsigned int\000"
- 624      20756E73 
- 624      69676E65 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 15
+ 621              	.LASF5:
+ 622 00bd 6C6F6E67 		.ascii	"long unsigned int\000"
+ 622      20756E73 
+ 622      69676E65 
+ 622      6420696E 
+ 622      7400
+ 623              	.LASF10:
+ 624 00cf 646F7562 		.ascii	"double\000"
+ 624      6C6500
+ 625              	.LASF24:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 15
 
 
- 624      6420696E 
- 624      7400
- 625              	.LASF10:
- 626 00e8 646F7562 		.ascii	"double\000"
- 626      6C6500
- 627              	.LASF24:
- 628 00ef 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 628      43313120 
- 628      352E342E 
- 628      31203230 
- 628      31363036 
- 629 0122 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 629      20726576 
- 629      6973696F 
- 629      6E203233 
- 629      37373135 
- 630 0155 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 630      66756E63 
- 630      74696F6E 
- 630      2D736563 
- 630      74696F6E 
- 631              	.LASF3:
- 632 017d 73686F72 		.ascii	"short unsigned int\000"
- 632      7420756E 
- 632      7369676E 
- 632      65642069 
- 632      6E7400
- 633              	.LASF0:
- 634 0190 7369676E 		.ascii	"signed char\000"
- 634      65642063 
- 634      68617200 
- 635              	.LASF26:
- 636 019c 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
- 636      73657273 
- 636      5C617573 
- 636      74635C4F 
- 636      6E654472 
- 637 01c9 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\Dev Board.cydsn\000"
- 637      69637332 
- 637      3031382D 
- 637      31395C50 
- 637      736F6320 
- 638              	.LASF23:
- 639 01f1 43794578 		.ascii	"CyExitCriticalSection\000"
- 639      69744372 
- 639      69746963 
- 639      616C5365 
- 639      6374696F 
- 640              	.LASF20:
- 641 0207 43616E5F 		.ascii	"Can_addr_Read\000"
- 641      61646472 
- 641      5F526561 
- 641      6400
- 642              	.LASF14:
- 643 0215 6C6F6E67 		.ascii	"long double\000"
- 643      20646F75 
- 643      626C6500 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc3r9Exu.s 			page 16
+ 626 00d6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 626      43313120 
+ 626      352E342E 
+ 626      31203230 
+ 626      31363036 
+ 627 0109 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 627      20726576 
+ 627      6973696F 
+ 627      6E203233 
+ 627      37373135 
+ 628 013c 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 628      66756E63 
+ 628      74696F6E 
+ 628      2D736563 
+ 628      74696F6E 
+ 629              	.LASF3:
+ 630 0164 73686F72 		.ascii	"short unsigned int\000"
+ 630      7420756E 
+ 630      7369676E 
+ 630      65642069 
+ 630      6E7400
+ 631              	.LASF0:
+ 632 0177 7369676E 		.ascii	"signed char\000"
+ 632      65642063 
+ 632      68617200 
+ 633              	.LASF16:
+ 634 0183 43616E5F 		.ascii	"Can_addr_InterruptEnable\000"
+ 634      61646472 
+ 634      5F496E74 
+ 634      65727275 
+ 634      7074456E 
+ 635              	.LASF23:
+ 636 019c 43794578 		.ascii	"CyExitCriticalSection\000"
+ 636      69744372 
+ 636      69746963 
+ 636      616C5365 
+ 636      6374696F 
+ 637              	.LASF20:
+ 638 01b2 43616E5F 		.ascii	"Can_addr_Read\000"
+ 638      61646472 
+ 638      5F526561 
+ 638      6400
+ 639              	.LASF14:
+ 640 01c0 6C6F6E67 		.ascii	"long double\000"
+ 640      20646F75 
+ 640      626C6500 
+ 641              	.LASF26:
+ 642 01cc 433A5C55 		.ascii	"C:\\Users\\austc\\Documents\\GitHub\\OrpheusElectro"
+ 642      73657273 
+ 642      5C617573 
+ 642      74635C44 
+ 642      6F63756D 
+ 643 01fa 6E696373 		.ascii	"nics\\Psoc Arm\\Dev Board.cydsn\000"
+ 643      5C50736F 
+ 643      63204172 
+ 643      6D5C4465 
+ 643      7620426F 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccuMqBLI.s 			page 16
 
 
  644              	.LASF2:
- 645 0221 73686F72 		.ascii	"short int\000"
+ 645 0218 73686F72 		.ascii	"short int\000"
  645      7420696E 
  645      7400
  646              	.LASF13:
- 647 022b 72656738 		.ascii	"reg8\000"
+ 647 0222 72656738 		.ascii	"reg8\000"
  647      00
  648              	.LASF15:
- 649 0230 73697A65 		.ascii	"sizetype\000"
+ 649 0227 73697A65 		.ascii	"sizetype\000"
  649      74797065 
  649      00
  650              	.LASF18:
- 651 0239 696E7465 		.ascii	"interruptState\000"
+ 651 0230 696E7465 		.ascii	"interruptState\000"
  651      72727570 
  651      74537461 
  651      746500
  652              	.LASF17:
- 653 0248 43616E5F 		.ascii	"Can_addr_InterruptDisable\000"
+ 653 023f 43616E5F 		.ascii	"Can_addr_InterruptDisable\000"
  653      61646472 
  653      5F496E74 
  653      65727275 

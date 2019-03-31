@@ -1,5 +1,5 @@
 # Dev Board
-# 2019-02-09 20:36:44Z
+# 2019-03-28 19:44:49Z
 
 # IO_4@[IOP=(0)][IoId=(4)] is reserved: KhzXtalEnabled
 dont_use_io iocell 0 4
@@ -13,7 +13,7 @@ set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
 set_io "Pin_Limit_1(0)" iocell 1 7
 set_io "Pin_Limit_2(0)" iocell 4 7
 set_io "Pin_Motor(0)" iocell 1 6
-set_io "Pin_Pot(0)" iocell 2 7
+set_io "Pin_Pot(0)" iocell 2 5
 set_io "Pin_Direction(0)" iocell 1 4
 set_io "Pin_Test(0)" iocell 5 3
 set_io "Pin_Encoder_A(0)" iocell 5 5
@@ -25,4 +25,6 @@ set_io "TX_1(0)" iocell 4 6
 set_io "\UART:tx(0)\" iocell 3 1
 set_io "\UART:rx(0)\" iocell 3 0
 set_io "Current_sense(0)" iocell 2 0
+set_io "\I2C_1:sda(0)\" iocell 6 5
+set_io "\I2C_1:scl(0)\" iocell 6 4
 set_location "\ADC_SAR_Seq_1:cy_psoc4_sar\" p4sarcell -1 -1 0

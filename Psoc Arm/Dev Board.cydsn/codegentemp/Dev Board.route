@@ -781,6 +781,8 @@ net ClockBlock_HFClk
 	term   ":interrupt_17.clock"
 	switch ":m0s8clockblockcell.hfclk==>:interrupt_29.clock"
 	term   ":interrupt_29.clock"
+	switch ":m0s8clockblockcell.hfclk==>:interrupt_9.clock"
+	term   ":interrupt_9.clock"
 end ClockBlock_HFClk
 net Net_786_digital
 	term   ":m0s8clockgenblockcell.gen_clk_out_1"
@@ -791,6 +793,20 @@ net Net_786_digital
 	switch ":udb@[UDB=(0,1)]:clockreset:clk_pld0_mux.pld0_clk==>:udb@[UDB=(0,1)]:pld0:mc0.clock_0"
 	term   ":udb@[UDB=(0,1)]:pld0:mc0.clock_0"
 end Net_786_digital
+net Net_1082
+	term   ":m0s8scbcell_0.interrupt"
+	switch ":m0s8scbcell_0.interrupt==>:interrupt_idmux_9.in_0"
+	switch ":interrupt_idmux_9.interrupt_idmux_9__out==>:interrupt_9.interrupt"
+	term   ":interrupt_9.interrupt"
+end Net_1082
+net Net_1099
+	term   ":ioport6:pin4.fb"
+	switch ":ioport6:pin4.fb==>:ioport6:smartio_mux_out4.direct_in"
+	switch ":ioport6:smartio_mux_out4.smartio_mux_out==>:ioport6:hsiom_in4.hsiom4_in"
+	switch ":ioport6:hsiom_in4.fixed_DPSLP_2==>:m0s8scbcell_0__i2c_scl__hsiom_permute.ioport6__fixed_out_p4_DPSLP_2"
+	switch ":m0s8scbcell_0__i2c_scl__hsiom_permute.m0s8scbcell_0__i2c_scl==>:m0s8scbcell_0.i2c_scl"
+	term   ":m0s8scbcell_0.i2c_scl"
+end Net_1099
 net Net_11
 	term   ":ioport0:pin0.fb"
 	switch ":ioport0:pin0.fb==>:ioport0:smartio_mux_out0.direct_in"
@@ -799,6 +815,14 @@ net Net_11
 	switch ":cancell_1__can_rx__hsiom_permute.cancell_1__can_rx==>:cancell_1.can_rx"
 	term   ":cancell_1.can_rx"
 end Net_11
+net Net_1100
+	term   ":ioport6:pin5.fb"
+	switch ":ioport6:pin5.fb==>:ioport6:smartio_mux_out5.direct_in"
+	switch ":ioport6:smartio_mux_out5.smartio_mux_out==>:ioport6:hsiom_in5.hsiom5_in"
+	switch ":ioport6:hsiom_in5.fixed_DPSLP_2==>:m0s8scbcell_0__i2c_sda__hsiom_permute.ioport6__fixed_out_p5_DPSLP_2"
+	switch ":m0s8scbcell_0__i2c_sda__hsiom_permute.m0s8scbcell_0__i2c_sda==>:m0s8scbcell_0.i2c_sda"
+	term   ":m0s8scbcell_0.i2c_sda"
+end Net_1100
 net Net_12
 	term   ":cancell_1.can_tx"
 	switch ":cancell_1.can_tx==>:ioport4:hsiom_out6.fixed_ACT_2"

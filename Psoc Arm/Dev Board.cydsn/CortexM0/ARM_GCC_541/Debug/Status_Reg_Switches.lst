@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
   28:Generated_Source\PSoC4/Status_Reg_Switches.c **** *  Reads the current value assigned to the Status Register.
   29:Generated_Source\PSoC4/Status_Reg_Switches.c **** *
   30:Generated_Source\PSoC4/Status_Reg_Switches.c **** * Parameters:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 2
 
 
   31:Generated_Source\PSoC4/Status_Reg_Switches.c **** *  None.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
   58:Generated_Source\PSoC4/Status_Reg_Switches.c **** {
   55              		.loc 1 58 0
   56              		.cfi_startproc
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 3
 
 
   57              		@ args = 0, pretend = 0, frame = 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
   76:Generated_Source\PSoC4/Status_Reg_Switches.c **** * Return:
   77:Generated_Source\PSoC4/Status_Reg_Switches.c **** *  None.
   78:Generated_Source\PSoC4/Status_Reg_Switches.c **** *
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 4
 
 
   79:Generated_Source\PSoC4/Status_Reg_Switches.c **** *******************************************************************************/
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
   95:Generated_Source\PSoC4/Status_Reg_Switches.c **** *
   96:Generated_Source\PSoC4/Status_Reg_Switches.c **** * Parameters:
   97:Generated_Source\PSoC4/Status_Reg_Switches.c **** *  mask:  Value to write into the mask register.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 5
 
 
   98:Generated_Source\PSoC4/Status_Reg_Switches.c **** *
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  121:Generated_Source\PSoC4/Status_Reg_Switches.c **** *
  122:Generated_Source\PSoC4/Status_Reg_Switches.c **** * Return:
  123:Generated_Source\PSoC4/Status_Reg_Switches.c **** *  The value of the interrupt mask of the Status Register.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 6
 
 
  124:Generated_Source\PSoC4/Status_Reg_Switches.c **** *
@@ -337,40 +337,40 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  190 0006 00000000 		.4byte	.Ldebug_abbrev0
  191 000a 04       		.byte	0x4
  192 000b 01       		.uleb128 0x1
- 193 000c 59010000 		.4byte	.LASF24
+ 193 000c A5010000 		.4byte	.LASF24
  194 0010 0C       		.byte	0xc
- 195 0011 E7000000 		.4byte	.LASF25
- 196 0015 06020000 		.4byte	.LASF26
+ 195 0011 33010000 		.4byte	.LASF25
+ 196 0015 1B000000 		.4byte	.LASF26
  197 0019 00000000 		.4byte	.Ldebug_ranges0+0
  198 001d 00000000 		.4byte	0
  199 0021 00000000 		.4byte	.Ldebug_line0
  200 0025 02       		.uleb128 0x2
  201 0026 01       		.byte	0x1
  202 0027 06       		.byte	0x6
- 203 0028 FA010000 		.4byte	.LASF0
+ 203 0028 46020000 		.4byte	.LASF0
  204 002c 02       		.uleb128 0x2
  205 002d 01       		.byte	0x1
  206 002e 08       		.byte	0x8
- 207 002f 1E010000 		.4byte	.LASF1
+ 207 002f 6A010000 		.4byte	.LASF1
  208 0033 02       		.uleb128 0x2
  209 0034 02       		.byte	0x2
  210 0035 05       		.byte	0x5
- 211 0036 7D020000 		.4byte	.LASF2
+ 211 0036 74020000 		.4byte	.LASF2
  212 003a 02       		.uleb128 0x2
  213 003b 02       		.byte	0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 7
 
 
  214 003c 07       		.byte	0x7
- 215 003d E7010000 		.4byte	.LASF3
+ 215 003d 33020000 		.4byte	.LASF3
  216 0041 02       		.uleb128 0x2
  217 0042 04       		.byte	0x4
  218 0043 05       		.byte	0x5
- 219 0044 49010000 		.4byte	.LASF4
+ 219 0044 95010000 		.4byte	.LASF4
  220 0048 02       		.uleb128 0x2
  221 0049 04       		.byte	0x4
  222 004a 07       		.byte	0x7
- 223 004b 7B000000 		.4byte	.LASF5
+ 223 004b C7000000 		.4byte	.LASF5
  224 004f 02       		.uleb128 0x2
  225 0050 08       		.byte	0x8
  226 0051 05       		.byte	0x5
@@ -378,7 +378,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  228 0056 02       		.uleb128 0x2
  229 0057 08       		.byte	0x8
  230 0058 07       		.byte	0x7
- 231 0059 8D000000 		.4byte	.LASF7
+ 231 0059 D9000000 		.4byte	.LASF7
  232 005d 03       		.uleb128 0x3
  233 005e 04       		.byte	0x4
  234 005f 05       		.byte	0x5
@@ -388,24 +388,24 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  238 0066 07       		.byte	0x7
  239 0067 0E000000 		.4byte	.LASF8
  240 006b 04       		.uleb128 0x4
- 241 006c 75000000 		.4byte	.LASF12
+ 241 006c C1000000 		.4byte	.LASF12
  242 0070 02       		.byte	0x2
  243 0071 E401     		.2byte	0x1e4
  244 0073 2C000000 		.4byte	0x2c
  245 0077 02       		.uleb128 0x2
  246 0078 04       		.byte	0x4
  247 0079 04       		.byte	0x4
- 248 007a BD000000 		.4byte	.LASF9
+ 248 007a 09010000 		.4byte	.LASF9
  249 007e 02       		.uleb128 0x2
  250 007f 08       		.byte	0x8
  251 0080 04       		.byte	0x4
- 252 0081 52010000 		.4byte	.LASF10
+ 252 0081 9E010000 		.4byte	.LASF10
  253 0085 02       		.uleb128 0x2
  254 0086 01       		.byte	0x1
  255 0087 08       		.byte	0x8
- 256 0088 14010000 		.4byte	.LASF11
+ 256 0088 60010000 		.4byte	.LASF11
  257 008c 04       		.uleb128 0x4
- 258 008d 87020000 		.4byte	.LASF13
+ 258 008d 7E020000 		.4byte	.LASF13
  259 0091 02       		.byte	0x2
  260 0092 8E02     		.2byte	0x28e
  261 0094 98000000 		.4byte	0x98
@@ -414,16 +414,16 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  264 009d 02       		.uleb128 0x2
  265 009e 08       		.byte	0x8
  266 009f 04       		.byte	0x4
- 267 00a0 71020000 		.4byte	.LASF14
+ 267 00a0 68020000 		.4byte	.LASF14
  268 00a4 02       		.uleb128 0x2
  269 00a5 04       		.byte	0x4
  270 00a6 07       		.byte	0x7
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 8
 
 
- 271 00a7 8C020000 		.4byte	.LASF15
+ 271 00a7 83020000 		.4byte	.LASF15
  272 00ab 06       		.uleb128 0x6
- 273 00ac A4000000 		.4byte	.LASF20
+ 273 00ac F0000000 		.4byte	.LASF20
  274 00b0 01       		.byte	0x1
  275 00b1 25       		.byte	0x25
  276 00b2 6B000000 		.4byte	0x6b
@@ -432,7 +432,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  279 00be 01       		.uleb128 0x1
  280 00bf 9C       		.byte	0x9c
  281 00c0 07       		.uleb128 0x7
- 282 00c1 C3000000 		.4byte	.LASF16
+ 282 00c1 0F010000 		.4byte	.LASF16
  283 00c5 01       		.byte	0x1
  284 00c6 39       		.byte	0x39
  285 00c7 00000000 		.4byte	.LFB2
@@ -441,7 +441,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  288 00d0 9C       		.byte	0x9c
  289 00d1 F7000000 		.4byte	0xf7
  290 00d5 08       		.uleb128 0x8
- 291 00d6 95020000 		.4byte	.LASF18
+ 291 00d6 8C020000 		.4byte	.LASF18
  292 00da 01       		.byte	0x1
  293 00db 3B       		.byte	0x3b
  294 00dc 6B000000 		.4byte	0x6b
@@ -454,7 +454,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  301 00f2 73010000 		.4byte	0x173
  302 00f6 00       		.byte	0
  303 00f7 07       		.uleb128 0x7
- 304 00f8 50000000 		.4byte	.LASF17
+ 304 00f8 9C000000 		.4byte	.LASF17
  305 00fc 01       		.byte	0x1
  306 00fd 50       		.byte	0x50
  307 00fe 00000000 		.4byte	.LFB3
@@ -463,7 +463,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  310 0107 9C       		.byte	0x9c
  311 0108 2E010000 		.4byte	0x12e
  312 010c 08       		.uleb128 0x8
- 313 010d 95020000 		.4byte	.LASF18
+ 313 010d 8C020000 		.4byte	.LASF18
  314 0111 01       		.byte	0x1
  315 0112 52       		.byte	0x52
  316 0113 6B000000 		.4byte	0x6b
@@ -476,9 +476,9 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  323 0129 73010000 		.4byte	0x173
  324 012d 00       		.byte	0
  325 012e 07       		.uleb128 0x7
- 326 012f 1B000000 		.4byte	.LASF19
+ 326 012f 67000000 		.4byte	.LASF19
  327 0133 01       		.byte	0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 9
 
 
  328 0134 67       		.byte	0x67
@@ -488,14 +488,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  332 013e 9C       		.byte	0x9c
  333 013f 53010000 		.4byte	0x153
  334 0143 0A       		.uleb128 0xa
- 335 0144 19010000 		.4byte	.LASF27
+ 335 0144 65010000 		.4byte	.LASF27
  336 0148 01       		.byte	0x1
  337 0149 67       		.byte	0x67
  338 014a 6B000000 		.4byte	0x6b
  339 014e 26000000 		.4byte	.LLST2
  340 0152 00       		.byte	0
  341 0153 06       		.uleb128 0x6
- 342 0154 2C010000 		.4byte	.LASF21
+ 342 0154 78010000 		.4byte	.LASF21
  343 0158 01       		.byte	0x1
  344 0159 7E       		.byte	0x7e
  345 015a 6B000000 		.4byte	0x6b
@@ -504,13 +504,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  348 0166 01       		.uleb128 0x1
  349 0167 9C       		.byte	0x9c
  350 0168 0B       		.uleb128 0xb
- 351 0169 39000000 		.4byte	.LASF22
- 352 016d 39000000 		.4byte	.LASF22
+ 351 0169 85000000 		.4byte	.LASF22
+ 352 016d 85000000 		.4byte	.LASF22
  353 0171 03       		.byte	0x3
  354 0172 E5       		.byte	0xe5
  355 0173 0B       		.uleb128 0xb
- 356 0174 5B020000 		.4byte	.LASF23
- 357 0178 5B020000 		.4byte	.LASF23
+ 356 0174 52020000 		.4byte	.LASF23
+ 357 0178 52020000 		.4byte	.LASF23
  358 017c 03       		.byte	0x3
  359 017d E6       		.byte	0xe6
  360 017e 00       		.byte	0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  382 0013 02       		.uleb128 0x2
  383 0014 24       		.uleb128 0x24
  384 0015 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 10
 
 
  385 0016 0B       		.uleb128 0xb
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  439 004c 11       		.uleb128 0x11
  440 004d 01       		.uleb128 0x1
  441 004e 12       		.uleb128 0x12
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 11
 
 
  442 004f 06       		.uleb128 0x6
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  496 0089 00       		.byte	0
  497 008a 00       		.byte	0
  498 008b 0A       		.uleb128 0xa
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 12
 
 
  499 008c 05       		.uleb128 0x5
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  553 0035 10000000 		.4byte	.LFE4
  554 0039 0100     		.2byte	0x1
  555 003b 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 13
 
 
  556 003c 00000000 		.4byte	0
@@ -774,153 +774,153 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 1
  598      676E6564 
  598      20696E74 
  598      00
- 599              	.LASF19:
- 600 001b 53746174 		.ascii	"Status_Reg_Switches_WriteMask\000"
- 600      75735F52 
- 600      65675F53 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 14
+ 599              	.LASF26:
+ 600 001b 433A5C55 		.ascii	"C:\\Users\\austc\\Documents\\GitHub\\OrpheusElectro"
+ 600      73657273 
+ 600      5C617573 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 14
 
 
- 600      77697463 
- 600      6865735F 
- 601              	.LASF22:
- 602 0039 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 602      74657243 
- 602      72697469 
- 602      63616C53 
- 602      65637469 
- 603              	.LASF17:
- 604 0050 53746174 		.ascii	"Status_Reg_Switches_InterruptDisable\000"
- 604      75735F52 
- 604      65675F53 
- 604      77697463 
- 604      6865735F 
- 605              	.LASF12:
- 606 0075 75696E74 		.ascii	"uint8\000"
- 606      3800
- 607              	.LASF5:
- 608 007b 6C6F6E67 		.ascii	"long unsigned int\000"
- 608      20756E73 
- 608      69676E65 
- 608      6420696E 
- 608      7400
- 609              	.LASF7:
- 610 008d 6C6F6E67 		.ascii	"long long unsigned int\000"
- 610      206C6F6E 
- 610      6720756E 
- 610      7369676E 
- 610      65642069 
- 611              	.LASF20:
- 612 00a4 53746174 		.ascii	"Status_Reg_Switches_Read\000"
- 612      75735F52 
- 612      65675F53 
- 612      77697463 
- 612      6865735F 
- 613              	.LASF9:
- 614 00bd 666C6F61 		.ascii	"float\000"
- 614      7400
- 615              	.LASF16:
- 616 00c3 53746174 		.ascii	"Status_Reg_Switches_InterruptEnable\000"
- 616      75735F52 
- 616      65675F53 
- 616      77697463 
- 616      6865735F 
- 617              	.LASF25:
- 618 00e7 47656E65 		.ascii	"Generated_Source\\PSoC4\\Status_Reg_Switches.c\000"
- 618      72617465 
- 618      645F536F 
- 618      75726365 
- 618      5C50536F 
- 619              	.LASF11:
- 620 0114 63686172 		.ascii	"char\000"
- 620      00
- 621              	.LASF27:
- 622 0119 6D61736B 		.ascii	"mask\000"
- 622      00
- 623              	.LASF1:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 15
+ 600      74635C44 
+ 600      6F63756D 
+ 601 0049 6E696373 		.ascii	"nics\\Psoc Arm\\Dev Board.cydsn\000"
+ 601      5C50736F 
+ 601      63204172 
+ 601      6D5C4465 
+ 601      7620426F 
+ 602              	.LASF19:
+ 603 0067 53746174 		.ascii	"Status_Reg_Switches_WriteMask\000"
+ 603      75735F52 
+ 603      65675F53 
+ 603      77697463 
+ 603      6865735F 
+ 604              	.LASF22:
+ 605 0085 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 605      74657243 
+ 605      72697469 
+ 605      63616C53 
+ 605      65637469 
+ 606              	.LASF17:
+ 607 009c 53746174 		.ascii	"Status_Reg_Switches_InterruptDisable\000"
+ 607      75735F52 
+ 607      65675F53 
+ 607      77697463 
+ 607      6865735F 
+ 608              	.LASF12:
+ 609 00c1 75696E74 		.ascii	"uint8\000"
+ 609      3800
+ 610              	.LASF5:
+ 611 00c7 6C6F6E67 		.ascii	"long unsigned int\000"
+ 611      20756E73 
+ 611      69676E65 
+ 611      6420696E 
+ 611      7400
+ 612              	.LASF7:
+ 613 00d9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 613      206C6F6E 
+ 613      6720756E 
+ 613      7369676E 
+ 613      65642069 
+ 614              	.LASF20:
+ 615 00f0 53746174 		.ascii	"Status_Reg_Switches_Read\000"
+ 615      75735F52 
+ 615      65675F53 
+ 615      77697463 
+ 615      6865735F 
+ 616              	.LASF9:
+ 617 0109 666C6F61 		.ascii	"float\000"
+ 617      7400
+ 618              	.LASF16:
+ 619 010f 53746174 		.ascii	"Status_Reg_Switches_InterruptEnable\000"
+ 619      75735F52 
+ 619      65675F53 
+ 619      77697463 
+ 619      6865735F 
+ 620              	.LASF25:
+ 621 0133 47656E65 		.ascii	"Generated_Source\\PSoC4\\Status_Reg_Switches.c\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 15
 
 
- 624 011e 756E7369 		.ascii	"unsigned char\000"
- 624      676E6564 
- 624      20636861 
- 624      7200
- 625              	.LASF21:
- 626 012c 53746174 		.ascii	"Status_Reg_Switches_ReadMask\000"
- 626      75735F52 
- 626      65675F53 
- 626      77697463 
- 626      6865735F 
- 627              	.LASF4:
- 628 0149 6C6F6E67 		.ascii	"long int\000"
- 628      20696E74 
- 628      00
- 629              	.LASF10:
- 630 0152 646F7562 		.ascii	"double\000"
- 630      6C6500
- 631              	.LASF24:
- 632 0159 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 632      43313120 
- 632      352E342E 
- 632      31203230 
- 632      31363036 
- 633 018c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 633      20726576 
- 633      6973696F 
- 633      6E203233 
- 633      37373135 
- 634 01bf 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 634      66756E63 
- 634      74696F6E 
- 634      2D736563 
- 634      74696F6E 
- 635              	.LASF3:
- 636 01e7 73686F72 		.ascii	"short unsigned int\000"
- 636      7420756E 
- 636      7369676E 
- 636      65642069 
- 636      6E7400
- 637              	.LASF0:
- 638 01fa 7369676E 		.ascii	"signed char\000"
- 638      65642063 
- 638      68617200 
- 639              	.LASF26:
- 640 0206 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
- 640      73657273 
- 640      5C617573 
- 640      74635C4F 
- 640      6E654472 
- 641 0233 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\Dev Board.cydsn\000"
- 641      69637332 
- 641      3031382D 
- 641      31395C50 
- 641      736F6320 
+ 621      72617465 
+ 621      645F536F 
+ 621      75726365 
+ 621      5C50536F 
+ 622              	.LASF11:
+ 623 0160 63686172 		.ascii	"char\000"
+ 623      00
+ 624              	.LASF27:
+ 625 0165 6D61736B 		.ascii	"mask\000"
+ 625      00
+ 626              	.LASF1:
+ 627 016a 756E7369 		.ascii	"unsigned char\000"
+ 627      676E6564 
+ 627      20636861 
+ 627      7200
+ 628              	.LASF21:
+ 629 0178 53746174 		.ascii	"Status_Reg_Switches_ReadMask\000"
+ 629      75735F52 
+ 629      65675F53 
+ 629      77697463 
+ 629      6865735F 
+ 630              	.LASF4:
+ 631 0195 6C6F6E67 		.ascii	"long int\000"
+ 631      20696E74 
+ 631      00
+ 632              	.LASF10:
+ 633 019e 646F7562 		.ascii	"double\000"
+ 633      6C6500
+ 634              	.LASF24:
+ 635 01a5 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 635      43313120 
+ 635      352E342E 
+ 635      31203230 
+ 635      31363036 
+ 636 01d8 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 636      20726576 
+ 636      6973696F 
+ 636      6E203233 
+ 636      37373135 
+ 637 020b 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 637      66756E63 
+ 637      74696F6E 
+ 637      2D736563 
+ 637      74696F6E 
+ 638              	.LASF3:
+ 639 0233 73686F72 		.ascii	"short unsigned int\000"
+ 639      7420756E 
+ 639      7369676E 
+ 639      65642069 
+ 639      6E7400
+ 640              	.LASF0:
+ 641 0246 7369676E 		.ascii	"signed char\000"
+ 641      65642063 
+ 641      68617200 
  642              	.LASF23:
- 643 025b 43794578 		.ascii	"CyExitCriticalSection\000"
+ 643 0252 43794578 		.ascii	"CyExitCriticalSection\000"
  643      69744372 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccsbCHSX.s 			page 16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccXVtJBZ.s 			page 16
 
 
  643      69746963 
  643      616C5365 
  643      6374696F 
  644              	.LASF14:
- 645 0271 6C6F6E67 		.ascii	"long double\000"
+ 645 0268 6C6F6E67 		.ascii	"long double\000"
  645      20646F75 
  645      626C6500 
  646              	.LASF2:
- 647 027d 73686F72 		.ascii	"short int\000"
+ 647 0274 73686F72 		.ascii	"short int\000"
  647      7420696E 
  647      7400
  648              	.LASF13:
- 649 0287 72656738 		.ascii	"reg8\000"
+ 649 027e 72656738 		.ascii	"reg8\000"
  649      00
  650              	.LASF15:
- 651 028c 73697A65 		.ascii	"sizetype\000"
+ 651 0283 73697A65 		.ascii	"sizetype\000"
  651      74797065 
  651      00
  652              	.LASF18:
- 653 0295 696E7465 		.ascii	"interruptState\000"
+ 653 028c 696E7465 		.ascii	"interruptState\000"
  653      72727570 
  653      74537461 
  653      746500

@@ -6,7 +6,7 @@
 
 #Build Date:         Dec  5 2017 15:35:27
 
-#File Generated:     Feb 9 2019 12:36:44
+#File Generated:     Mar 28 2019 12:44:49
 
 #Purpose:            
 
@@ -55,7 +55,7 @@ Design Statistics after Packing
 Device Utilization Summary after Packing
     Macrocells                  :	29/64
     UDBS                        :	6/8
-    IOs                         :	19/99
+    IOs                         :	21/99
 
 
 D2088: Phase 3, elapsed time : 0.0 (sec)
@@ -76,7 +76,7 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 16
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.3 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.3 MHz
 Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
@@ -89,6 +89,8 @@ Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyWCO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: I2C_1_SCBCLK         | Frequency: N/A       | Target:   1.6 MHz
+Clock: I2C_1_SCBCLK(FFB)    | Frequency: N/A       | Target:   1.6 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
 
@@ -102,7 +104,7 @@ Phase 7
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 16
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.3 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.3 MHz
 Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
@@ -115,13 +117,15 @@ Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyWCO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: I2C_1_SCBCLK         | Frequency: N/A       | Target:   1.6 MHz
+Clock: I2C_1_SCBCLK(FFB)    | Frequency: N/A       | Target:   1.6 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
 
 ======================================================================
                      End of Clock Summary
 ######################################################################
-D2088: Phase 7, elapsed time : 0.3 (sec)
+D2088: Phase 7, elapsed time : 0.1 (sec)
 
 Final Design Statistics
     Number of Combinational MCs 	:	8
@@ -131,11 +135,11 @@ Final Design Statistics
     Number of Status            	:	4
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
-    Number of IOs       	:	19
+    Number of IOs       	:	21
 
 Device Utilization Summary
     Macrocells                  :	29/64
-    IOs                         :	19/99
+    IOs                         :	21/99
 
 
 
@@ -151,7 +155,7 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 16
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.3 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.3 MHz
 Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
@@ -164,6 +168,8 @@ Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyWCO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: I2C_1_SCBCLK         | Frequency: N/A       | Target:   1.6 MHz
+Clock: I2C_1_SCBCLK(FFB)    | Frequency: N/A       | Target:   1.6 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
 
@@ -184,7 +190,7 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 16
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.3 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.3 MHz
 Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
@@ -197,6 +203,8 @@ Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyWCO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: I2C_1_SCBCLK         | Frequency: N/A       | Target:   1.6 MHz
+Clock: I2C_1_SCBCLK(FFB)    | Frequency: N/A       | Target:   1.6 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
 
@@ -210,7 +218,7 @@ Phase 7
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 16
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.3 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.3 MHz
 Clock: Clock_1              | Frequency:  32.6 MHz | Target:   0.0 MHz
@@ -223,6 +231,8 @@ Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyWCO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: I2C_1_SCBCLK         | Frequency: N/A       | Target:   1.6 MHz
+Clock: I2C_1_SCBCLK(FFB)    | Frequency: N/A       | Target:   1.6 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
 
@@ -239,11 +249,11 @@ Final Design Statistics
     Number of Status            	:	4
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
-    Number of IOs       	:	19
+    Number of IOs       	:	21
 
 Device Utilization Summary
     Macrocells                  :	29/64
-    IOs                         :	19/99
+    IOs                         :	21/99
 
 
 
@@ -259,7 +269,7 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 16
 Clock: ADC_SAR_Seq_1_intClock | Frequency: N/A       | Target:   5.3 MHz
 Clock: ADC_SAR_Seq_1_intClock(FFB) | Frequency: N/A       | Target:   5.3 MHz
 Clock: Clock_1              | Frequency:  33.2 MHz | Target:   0.0 MHz
@@ -272,6 +282,8 @@ Clock: CyLFClk              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyRouted1            | Frequency: N/A       | Target:  48.0 MHz
 Clock: CySysClk             | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyWCO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: I2C_1_SCBCLK         | Frequency: N/A       | Target:   1.6 MHz
+Clock: I2C_1_SCBCLK(FFB)    | Frequency: N/A       | Target:   1.6 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK(FFB)     | Frequency: N/A       | Target:   1.4 MHz
 
@@ -284,5 +296,5 @@ D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 1.4 sec.
+I2076: Total run-time: 1.0 sec.
 

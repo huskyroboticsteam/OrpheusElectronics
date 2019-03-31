@@ -1,0 +1,19 @@
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Dev Board.cydsn\Dev Board.cyprj|4c1abacf-790f-4479-bc27-034f5feb429a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|9077773d-502f-4858-86a7-6f9f48271127
+C:\Users\austc\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|8e99caac-b558-4927-9095-ec66e6517236
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|afd73fc4-ab6b-4513-b54b-b2dfb75d445a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|1534b1e0-1404-42ed-ac61-233b28fc8620
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|deae8dcd-869f-4ad5-b6b4-753f88e3ceb3
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Basic_P4_Example01.cydsn\CAN_Basic_P4_Example01.cyprj|4e9fc63b-0044-421f-a1e2-e9f8570a744f
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Full_P4_Example01.cydsn\CAN_Full_P4_Example01.cyprj|73a7745a-f638-4f1b-b471-268b0de422ca
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Can Send test.cydsn\Can Send test.cyprj|ea0dcb6d-decd-4733-9ee3-5f3916ce29c3
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Basic_P4_unmodified.cydsn\CAN_Basic_P4_unmodified.cyprj|0a99188c-32ee-4f1e-aee4-fffd4b33220c
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\working CAN_Basic_P4_Original + uart debug.cydsn\working CAN_Basic_P4_Original + uart debug.cyprj|545dc484-5a42-45dd-8077-781e1b8242c3
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\CAN_Full_P4_Example02.cydsn\CAN_Full_P4_Example02.cyprj|8cb1b1c6-8de8-4c88-b605-25c0a6f24925
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Motor Board Rev2.cydsn\Motor Board Rev2.cyprj|c0df9fbb-841f-4eb6-9e91-52ca15dea502
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\I2C_Master_High_Level01.cydsn\I2C_Master_High_Level01.cyprj|fb67f3b8-dffa-4c6f-90c2-12ab02425667
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\I2C_Master_Low_Level01.cydsn\I2C_Master_Low_Level01.cyprj|423568bd-330b-4afe-b1c2-134eac3e8794
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Motor Board Rev1.cydsn\Motor Board Rev1.cyprj|e61fe2b9-da02-47c1-81d2-cb15397acd84
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\ADC test.cydsn\ADC test.cyprj|09dbac89-b07b-4e83-9f72-d038f7cee852
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|e230aa5a-fa4e-431e-a799-5df7df31fd12
+C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\OpAmp_PSoC4_Example01.cydsn\OpAmp_PSoC4_Example01.cyprj|3031bb81-6eb0-469e-b342-32d86f8b314f

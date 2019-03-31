@@ -18,11 +18,10 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 16
+Number of clocks: 17
 Clock: ADC_SAR_Seq_1_intClock       | N/A                   | Target: 5.33 MHz    | 
 Clock: ADC_SAR_Seq_1_intClock(FFB)  | N/A                   | Target: 5.33 MHz    | 
 Clock: ClockBlock/ff_div_18         | N/A                   | Target: 100.00 MHz  | 
-Clock: ClockBlock/ff_div_3          | N/A                   | Target: 100.00 MHz  | 
 Clock: Clock_1                      | Frequency: 34.55 MHz  | Target: 0.00 MHz    | 
 Clock: Clock_2                      | N/A                   | Target: 0.00 MHz    | 
 Clock: Clock_PWM                    | N/A                   | Target: 24.00 MHz   | 
@@ -33,6 +32,8 @@ Clock: CyLFClk                      | N/A                   | Target: 0.03 MHz  
 Clock: CyRouted1                    | N/A                   | Target: 48.00 MHz   | 
 Clock: CySysClk                     | N/A                   | Target: 48.00 MHz   | 
 Clock: CyWCO                        | N/A                   | Target: 0.03 MHz    | 
+Clock: I2C_1_SCBCLK                 | N/A                   | Target: 1.60 MHz    | 
+Clock: I2C_1_SCBCLK(FFB)            | N/A                   | Target: 1.60 MHz    | 
 Clock: UART_SCBCLK                  | N/A                   | Target: 1.37 MHz    | 
 Clock: UART_SCBCLK(FFB)             | N/A                   | Target: 1.37 MHz    | 
 

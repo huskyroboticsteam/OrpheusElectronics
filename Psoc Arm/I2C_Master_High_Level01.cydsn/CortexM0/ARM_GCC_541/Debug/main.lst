@@ -1,0 +1,1566 @@
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.WriteCommandPacket,"ax",%progbits
+  20              		.align	2
+  21              		.global	WriteCommandPacket
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	WriteCommandPacket, %function
+  25              	WriteCommandPacket:
+  26              	.LFB35:
+  27              		.file 1 "main.c"
+   1:main.c        **** /******************************************************************************
+   2:main.c        **** * File Name: main.c
+   3:main.c        **** *
+   4:main.c        **** * Version: 2.0
+   5:main.c        **** *
+   6:main.c        **** * Description: This example project demonstrates the basic operation of the I2C master (SCB 
+   7:main.c        **** * mode) component using high-level functions. The I2C master sends the command packets
+   8:main.c        **** * to the I2C slave to control the RGB LED color. The packet with a status is read back.
+   9:main.c        **** *
+  10:main.c        **** * Related Document: CE222306.pdf
+  11:main.c        **** *
+  12:main.c        **** * Hardware Dependency: CY8CKIT-042 PSoC 4 Pioneer Kit 
+  13:main.c        **** *
+  14:main.c        **** ******************************************************************************
+  15:main.c        **** * Copyright (2018), Cypress Semiconductor Corporation.
+  16:main.c        **** ******************************************************************************
+  17:main.c        **** * This software, including source code, documentation and related materials
+  18:main.c        **** * ("Software") is owned by Cypress Semiconductor Corporation (Cypress) and is
+  19:main.c        **** * protected by and subject to worldwide patent protection (United States and 
+  20:main.c        **** * foreign), United States copyright laws and international treaty provisions. 
+  21:main.c        **** * Cypress hereby grants to licensee a personal, non-exclusive, non-transferable
+  22:main.c        **** * license to copy, use, modify, create derivative works of, and compile the 
+  23:main.c        **** * Cypress source code and derivative works for the sole purpose of creating 
+  24:main.c        **** * custom software in support of licensee product, such licensee product to be
+  25:main.c        **** * used only in conjunction with Cypress's integrated circuit as specified in the
+  26:main.c        **** * applicable agreement. Any reproduction, modification, translation, compilation,
+  27:main.c        **** * or representation of this Software except as specified above is prohibited 
+  28:main.c        **** * without the express written permission of Cypress.
+  29:main.c        **** * 
+  30:main.c        **** * Disclaimer: THIS SOFTWARE IS PROVIDED AS-IS, WITH NO WARRANTY OF ANY KIND, 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 2
+
+
+  31:main.c        **** * EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT, IMPLIED 
+  32:main.c        **** * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  33:main.c        **** * Cypress reserves the right to make changes to the Software without notice. 
+  34:main.c        **** * Cypress does not assume any liability arising out of the application or use
+  35:main.c        **** * of Software or any product or circuit described in the Software. Cypress does
+  36:main.c        **** * not authorize its products for use as critical components in any products 
+  37:main.c        **** * where a malfunction or failure may reasonably be expected to result in 
+  38:main.c        **** * significant injury or death ("ACTIVE Risk Product"). By including Cypress's 
+  39:main.c        **** * product in a ACTIVE Risk Product, the manufacturer of such system or application
+  40:main.c        **** * assumes all risk of such use and in doing so indemnifies Cypress against all
+  41:main.c        **** * liability. Use of this Software may be limited by and subject to the applicable
+  42:main.c        **** * Cypress software license agreement.
+  43:main.c        **** *****************************************************************************/
+  44:main.c        **** 
+  45:main.c        **** #include <project.h>
+  46:main.c        **** 
+  47:main.c        **** /***************************************
+  48:main.c        **** *              Constants
+  49:main.c        **** ****************************************/
+  50:main.c        ****     
+  51:main.c        **** #define I2C_SLAVE_ADDR      (0x9u)
+  52:main.c        **** 
+  53:main.c        **** /* Buffer and packet size */
+  54:main.c        **** #define BUFFER_SIZE         (5u)
+  55:main.c        **** #define PACKET_SIZE         (BUFFER_SIZE)
+  56:main.c        **** #define RD_BUFFER_SIZE      (3u)
+  57:main.c        **** 
+  58:main.c        **** /* Packet positions */
+  59:main.c        **** #define PACKET_SOP_POS      (0u)
+  60:main.c        **** #define PACKET_RED_POS      (1u)
+  61:main.c        **** #define PACKET_GREEN_POS    (2u)
+  62:main.c        **** #define PACKET_BLUE_POS     (3u)
+  63:main.c        **** #define PACKET_EOP_POS      (4u)
+  64:main.c        **** #define RD_PACKET_SOP_POS   (0u)
+  65:main.c        **** #define RD_PACKET_STS_POS   (1u)
+  66:main.c        **** #define RD_PACKET_EOP_POS   (2u)
+  67:main.c        **** 
+  68:main.c        **** /* Start and end of packet markers */
+  69:main.c        **** #define PACKET_SOP          (0x01u)
+  70:main.c        **** #define PACKET_EOP          (0x17u)
+  71:main.c        **** 
+  72:main.c        **** /* Command statuses */
+  73:main.c        **** #define STS_CMD_DONE        (0x00u)
+  74:main.c        **** #define STS_CMD_FAIL        (0xFFu)
+  75:main.c        **** 
+  76:main.c        **** /* Transfer statuses */
+  77:main.c        **** #define TRANSFER_CMPLT      (0x00u)
+  78:main.c        **** #define TRANSFER_ERROR      (0xFFu)
+  79:main.c        **** 
+  80:main.c        **** /* List of supported commands */
+  81:main.c        **** #define COLOR_RED       (0u)
+  82:main.c        **** #define COLOR_GREEN     (1u)
+  83:main.c        **** #define COLOR_BLUE      (2u)
+  84:main.c        **** #define COLOR_CYAN      (3u)
+  85:main.c        **** #define COLOR_PURPLE    (4u)
+  86:main.c        **** #define COLOR_YELLOW    (5u)
+  87:main.c        **** #define COLOR_WHITE     (6u)
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 3
+
+
+  88:main.c        **** 
+  89:main.c        **** /* Time between LED color changes (ms) */
+  90:main.c        **** #define CMD_TO_CMD_DELAY    (500u)
+  91:main.c        **** 
+  92:main.c        **** /* Create the buffers for writing and reading */
+  93:main.c        **** uint8_t buffer[BUFFER_SIZE];
+  94:main.c        **** uint8_t rd_Buffer[RD_BUFFER_SIZE];
+  95:main.c        **** 
+  96:main.c        **** /********************************************************************************
+  97:main.c        **** * Function Name: CreateCommandPacketBuffer
+  98:main.c        **** *********************************************************************************
+  99:main.c        **** * This function initializes the buffer with data related to color.
+ 100:main.c        **** *  
+ 101:main.c        **** * Parameters: cmd
+ 102:main.c        **** *
+ 103:main.c        **** * Depending on this value packet is created for different colors and sent to slave.
+ 104:main.c        **** *   - COLOR_RED:    set red color of the LED.
+ 105:main.c        **** *   - COLOR_GREEN:  set green color of the LED.
+ 106:main.c        **** *   - COLOR_BLUE:   set blue color of the LED.
+ 107:main.c        **** *   - COLOR_CYAN:   set cyan color of the LED.
+ 108:main.c        **** *   - COLOR_PURPLE: set purple color of the LED.
+ 109:main.c        **** *   - COLOR_YELLOW: set yellow color of the LED.
+ 110:main.c        **** *   - COLOR_WHITE:  set white color of the LED.
+ 111:main.c        **** *
+ 112:main.c        **** *********************************************************************************/
+ 113:main.c        **** static void CreateCommandPacketBuffer(uint8_t cmd)
+ 114:main.c        **** { 
+ 115:main.c        ****     /* Initialize buffer with commands to be sent. */
+ 116:main.c        ****     buffer[PACKET_SOP_POS] = PACKET_SOP;
+ 117:main.c        ****     buffer[PACKET_EOP_POS] = PACKET_EOP;
+ 118:main.c        ****     
+ 119:main.c        ****     switch(cmd)
+ 120:main.c        ****     {
+ 121:main.c        ****         case COLOR_RED:
+ 122:main.c        ****             buffer[PACKET_RED_POS] =   0xFF;
+ 123:main.c        ****             buffer[PACKET_GREEN_POS] = 0x00;
+ 124:main.c        ****             buffer[PACKET_BLUE_POS] =  0x00;
+ 125:main.c        ****             break;
+ 126:main.c        ****         
+ 127:main.c        ****         case COLOR_GREEN:
+ 128:main.c        ****             buffer[PACKET_RED_POS] =   0x00;
+ 129:main.c        ****             buffer[PACKET_GREEN_POS] = 0xFF;
+ 130:main.c        ****             buffer[PACKET_BLUE_POS] =  0x00;
+ 131:main.c        ****             break;
+ 132:main.c        ****         
+ 133:main.c        ****         case COLOR_BLUE:
+ 134:main.c        ****             buffer[PACKET_RED_POS] =   0x00;
+ 135:main.c        ****             buffer[PACKET_GREEN_POS] = 0x00;
+ 136:main.c        ****             buffer[PACKET_BLUE_POS] =  0xFF;
+ 137:main.c        ****             break;
+ 138:main.c        ****         
+ 139:main.c        ****         case COLOR_CYAN:
+ 140:main.c        ****             buffer[PACKET_RED_POS] =   0x00;
+ 141:main.c        ****             buffer[PACKET_GREEN_POS] = 0x7F;
+ 142:main.c        ****             buffer[PACKET_BLUE_POS] =  0x7F;
+ 143:main.c        ****             break;
+ 144:main.c        ****         
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 4
+
+
+ 145:main.c        ****         case COLOR_PURPLE:
+ 146:main.c        ****             buffer[PACKET_RED_POS] =   0x7F;
+ 147:main.c        ****             buffer[PACKET_GREEN_POS] = 0x00;
+ 148:main.c        ****             buffer[PACKET_BLUE_POS] =  0x7F;
+ 149:main.c        ****             break;
+ 150:main.c        ****         
+ 151:main.c        ****         case COLOR_YELLOW:
+ 152:main.c        ****             buffer[PACKET_RED_POS] =   0x7F;
+ 153:main.c        ****             buffer[PACKET_GREEN_POS] = 0x7F;
+ 154:main.c        ****             buffer[PACKET_BLUE_POS] =  0x00;
+ 155:main.c        ****             break;
+ 156:main.c        ****         
+ 157:main.c        ****         case COLOR_WHITE:
+ 158:main.c        ****             buffer[PACKET_RED_POS] =   0xFF;
+ 159:main.c        ****             buffer[PACKET_GREEN_POS] = 0xFF;
+ 160:main.c        ****             buffer[PACKET_BLUE_POS] =  0xFF;
+ 161:main.c        ****             break;
+ 162:main.c        ****         
+ 163:main.c        ****         default:
+ 164:main.c        ****             break;  
+ 165:main.c        ****     } 
+ 166:main.c        **** }
+ 167:main.c        **** /********************************************************************************
+ 168:main.c        **** * Function Name: WriteCommandPacket()
+ 169:main.c        **** ******************************************************************************
+ 170:main.c        **** * Uses high level api to write to the 
+ 171:main.c        **** * slave device.
+ 172:main.c        **** *
+ 173:main.c        **** * Parameters: cmd
+ 174:main.c        **** * The command to be written to the slave device
+ 175:main.c        **** *
+ 176:main.c        **** * Return:
+ 177:main.c        **** * Status of the transfer. There are two statuses
+ 178:main.c        **** *  - TRANSFER_CMPLT: transfer completed successfully.
+ 179:main.c        **** *  - TRANSFER_ERROR: an error occurred durring transfer.
+ 180:main.c        **** *
+ 181:main.c        **** ********************************************************************************/
+ 182:main.c        **** uint32 WriteCommandPacket(uint8 cmd)
+ 183:main.c        **** {   
+  28              		.loc 1 183 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 10B5     		push	{r4, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  37              	.LVL1:
+ 184:main.c        ****     uint32 status = TRANSFER_ERROR;
+ 185:main.c        **** 
+ 186:main.c        ****     buffer[0u] = 0x10;
+  38              		.loc 1 186 0
+  39 0002 144C     		ldr	r4, .L7
+  40 0004 1023     		movs	r3, #16
+  41 0006 2370     		strb	r3, [r4]
+ 187:main.c        ****     buffer[1u] = 0x20;
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 5
+
+
+  42              		.loc 1 187 0
+  43 0008 1033     		adds	r3, r3, #16
+  44 000a 6370     		strb	r3, [r4, #1]
+ 188:main.c        ****     buffer[2u] = 0x30;
+  45              		.loc 1 188 0
+  46 000c 1033     		adds	r3, r3, #16
+  47 000e A370     		strb	r3, [r4, #2]
+ 189:main.c        ****     buffer[3u] = 0x40;
+  48              		.loc 1 189 0
+  49 0010 1033     		adds	r3, r3, #16
+  50 0012 E370     		strb	r3, [r4, #3]
+ 190:main.c        ****     buffer[4u] = 0x50;
+  51              		.loc 1 190 0
+  52 0014 1033     		adds	r3, r3, #16
+  53 0016 2371     		strb	r3, [r4, #4]
+ 191:main.c        ****     
+ 192:main.c        ****    // CreateCommandPacketBuffer(cmd);
+ 193:main.c        **** 
+ 194:main.c        ****     (void) mI2C_I2CMasterClearStatus();
+  54              		.loc 1 194 0
+  55 0018 FFF7FEFF 		bl	mI2C_I2CMasterClearStatus
+  56              	.LVL2:
+ 195:main.c        ****     
+ 196:main.c        ****     /* Start I2C write and check status */
+ 197:main.c        ****     if(mI2C_I2C_MSTR_NO_ERROR == mI2C_I2CMasterWriteBuf(I2C_SLAVE_ADDR,
+  57              		.loc 1 197 0
+  58 001c 0023     		movs	r3, #0
+  59 001e 0522     		movs	r2, #5
+  60 0020 2100     		movs	r1, r4
+  61 0022 0920     		movs	r0, #9
+  62 0024 FFF7FEFF 		bl	mI2C_I2CMasterWriteBuf
+  63              	.LVL3:
+  64 0028 0028     		cmp	r0, #0
+  65 002a 0DD1     		bne	.L4
+  66              	.L3:
+ 198:main.c        ****                                                         buffer, BUFFER_SIZE,
+ 199:main.c        ****                                                         mI2C_I2C_MODE_COMPLETE_XFER))
+ 200:main.c        ****     {
+ 201:main.c        ****         /* If I2C write started without errors, 
+ 202:main.c        ****          * wait until I2C Master completes write transfer */
+ 203:main.c        ****         while (0u == (mI2C_I2CMasterStatus() & mI2C_I2C_MSTAT_WR_CMPLT))
+  67              		.loc 1 203 0 discriminator 1
+  68 002c FFF7FEFF 		bl	mI2C_I2CMasterStatus
+  69              	.LVL4:
+  70 0030 8307     		lsls	r3, r0, #30
+  71 0032 FBD5     		bpl	.L3
+ 204:main.c        ****         {
+ 205:main.c        ****         }
+ 206:main.c        ****         
+ 207:main.c        ****         /* Report transfer status */
+ 208:main.c        ****         if (0u == (mI2C_I2CMasterStatus() & mI2C_I2C_MSTAT_ERR_XFER))
+  72              		.loc 1 208 0
+  73 0034 FFF7FEFF 		bl	mI2C_I2CMasterStatus
+  74              	.LVL5:
+  75 0038 8305     		lsls	r3, r0, #22
+  76 003a 07D4     		bmi	.L5
+ 209:main.c        ****         {
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 6
+
+
+ 210:main.c        ****             /* Check if all bytes were written */
+ 211:main.c        ****             if (mI2C_I2CMasterGetWriteBufSize() == BUFFER_SIZE)
+  77              		.loc 1 211 0
+  78 003c FFF7FEFF 		bl	mI2C_I2CMasterGetWriteBufSize
+  79              	.LVL6:
+  80 0040 0528     		cmp	r0, #5
+  81 0042 05D0     		beq	.L6
+ 184:main.c        **** 
+  82              		.loc 1 184 0
+  83 0044 FF20     		movs	r0, #255
+  84 0046 04E0     		b	.L2
+  85              	.L4:
+  86 0048 FF20     		movs	r0, #255
+  87 004a 02E0     		b	.L2
+  88              	.L5:
+  89 004c FF20     		movs	r0, #255
+  90 004e 00E0     		b	.L2
+  91              	.L6:
+ 212:main.c        ****             {
+ 213:main.c        ****                 status = TRANSFER_CMPLT;
+  92              		.loc 1 213 0
+  93 0050 0020     		movs	r0, #0
+  94              	.L2:
+  95              	.LVL7:
+ 214:main.c        ****             }
+ 215:main.c        ****         }
+ 216:main.c        ****     }
+ 217:main.c        **** 
+ 218:main.c        ****     return (status);
+ 219:main.c        **** }
+  96              		.loc 1 219 0
+  97              		@ sp needed
+  98 0052 10BD     		pop	{r4, pc}
+  99              	.L8:
+ 100              		.align	2
+ 101              	.L7:
+ 102 0054 00000000 		.word	buffer
+ 103              		.cfi_endproc
+ 104              	.LFE35:
+ 105              		.size	WriteCommandPacket, .-WriteCommandPacket
+ 106              		.section	.text.ReadStatusPacket,"ax",%progbits
+ 107              		.align	2
+ 108              		.global	ReadStatusPacket
+ 109              		.code	16
+ 110              		.thumb_func
+ 111              		.type	ReadStatusPacket, %function
+ 112              	ReadStatusPacket:
+ 113              	.LFB36:
+ 220:main.c        **** 
+ 221:main.c        **** /*******************************************************************************
+ 222:main.c        **** * Function Name: ReadStatusPacket
+ 223:main.c        **** ********************************************************************************
+ 224:main.c        **** * 
+ 225:main.c        **** * Summary:
+ 226:main.c        **** *  Master initiates the transfer to read status packet from the Slave.
+ 227:main.c        **** *  The status of the transfer is returned. Uses high level API I2CMasterStatus()
+ 228:main.c        **** *
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 7
+
+
+ 229:main.c        **** * Parameters:
+ 230:main.c        **** *  None
+ 231:main.c        **** *
+ 232:main.c        **** * Return:
+ 233:main.c        **** *  Status of the transfer. There are two statuses
+ 234:main.c        **** *  - TRANSFER_CMPLT: transfer completed successfully.
+ 235:main.c        **** *  - TRANSFER_ERROR: an error occurred durring transfer.
+ 236:main.c        **** *
+ 237:main.c        **** *******************************************************************************/
+ 238:main.c        **** uint32 ReadStatusPacket(void)
+ 239:main.c        **** {
+ 114              		.loc 1 239 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118 0000 10B5     		push	{r4, lr}
+ 119              		.cfi_def_cfa_offset 8
+ 120              		.cfi_offset 4, -8
+ 121              		.cfi_offset 14, -4
+ 122              	.LVL8:
+ 240:main.c        ****     uint32 status = TRANSFER_ERROR;
+ 241:main.c        ****     
+ 242:main.c        ****     (void) mI2C_I2CMasterClearStatus();
+ 123              		.loc 1 242 0
+ 124 0002 FFF7FEFF 		bl	mI2C_I2CMasterClearStatus
+ 125              	.LVL9:
+ 243:main.c        ****     
+ 244:main.c        ****     if(mI2C_I2C_MSTR_NO_ERROR ==  mI2C_I2CMasterReadBuf(I2C_SLAVE_ADDR,
+ 126              		.loc 1 244 0
+ 127 0006 0023     		movs	r3, #0
+ 128 0008 0322     		movs	r2, #3
+ 129 000a 1649     		ldr	r1, .L18
+ 130 000c 0920     		movs	r0, #9
+ 131 000e FFF7FEFF 		bl	mI2C_I2CMasterReadBuf
+ 132              	.LVL10:
+ 133 0012 0028     		cmp	r0, #0
+ 134 0014 19D1     		bne	.L12
+ 135              	.L11:
+ 245:main.c        ****                                                         rd_Buffer, RD_BUFFER_SIZE,
+ 246:main.c        ****                                                         mI2C_I2C_MODE_COMPLETE_XFER))
+ 247:main.c        ****     {
+ 248:main.c        ****         /* If I2C read started without errors, 
+ 249:main.c        ****         / wait until master complete read transfer */
+ 250:main.c        ****         while (0u == (mI2C_I2CMasterStatus() & mI2C_I2C_MSTAT_RD_CMPLT))
+ 136              		.loc 1 250 0 discriminator 1
+ 137 0016 FFF7FEFF 		bl	mI2C_I2CMasterStatus
+ 138              	.LVL11:
+ 139 001a C307     		lsls	r3, r0, #31
+ 140 001c FBD5     		bpl	.L11
+ 251:main.c        ****         { 
+ 252:main.c        ****         }
+ 253:main.c        ****         
+ 254:main.c        ****         /* Display transfer status */
+ 255:main.c        ****         if (0u == (mI2C_I2C_MSTAT_ERR_XFER & mI2C_I2CMasterStatus()))
+ 141              		.loc 1 255 0
+ 142 001e FFF7FEFF 		bl	mI2C_I2CMasterStatus
+ 143              	.LVL12:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 8
+
+
+ 144 0022 8305     		lsls	r3, r0, #22
+ 145 0024 13D4     		bmi	.L13
+ 256:main.c        ****         {
+ 257:main.c        ****             /* Check packet structure is correct */
+ 258:main.c        ****             if ((mI2C_I2CMasterGetReadBufSize() == RD_BUFFER_SIZE) &&
+ 146              		.loc 1 258 0
+ 147 0026 FFF7FEFF 		bl	mI2C_I2CMasterGetReadBufSize
+ 148              	.LVL13:
+ 149 002a 0328     		cmp	r0, #3
+ 150 002c 11D1     		bne	.L14
+ 259:main.c        ****                 (PACKET_SOP == rd_Buffer[RD_PACKET_SOP_POS]) &&
+ 151              		.loc 1 259 0 discriminator 1
+ 152 002e 0D4B     		ldr	r3, .L18
+ 153 0030 1B78     		ldrb	r3, [r3]
+ 258:main.c        ****                 (PACKET_SOP == rd_Buffer[RD_PACKET_SOP_POS]) &&
+ 154              		.loc 1 258 0 discriminator 1
+ 155 0032 012B     		cmp	r3, #1
+ 156 0034 0FD1     		bne	.L15
+ 260:main.c        ****                 (PACKET_EOP == rd_Buffer[RD_PACKET_EOP_POS]))
+ 157              		.loc 1 260 0
+ 158 0036 0B4B     		ldr	r3, .L18
+ 159 0038 9B78     		ldrb	r3, [r3, #2]
+ 259:main.c        ****                 (PACKET_SOP == rd_Buffer[RD_PACKET_SOP_POS]) &&
+ 160              		.loc 1 259 0
+ 161 003a 172B     		cmp	r3, #23
+ 162 003c 0DD1     		bne	.L16
+ 261:main.c        ****             {
+ 262:main.c        ****                 /* Check packet status */
+ 263:main.c        ****                 if (STS_CMD_DONE == rd_Buffer[RD_PACKET_STS_POS])
+ 163              		.loc 1 263 0
+ 164 003e 094B     		ldr	r3, .L18
+ 165 0040 5B78     		ldrb	r3, [r3, #1]
+ 166 0042 002B     		cmp	r3, #0
+ 167 0044 0BD0     		beq	.L17
+ 240:main.c        ****     
+ 168              		.loc 1 240 0
+ 169 0046 FC30     		adds	r0, r0, #252
+ 170 0048 0AE0     		b	.L10
+ 171              	.L12:
+ 172 004a FF20     		movs	r0, #255
+ 173 004c 08E0     		b	.L10
+ 174              	.L13:
+ 175 004e FF20     		movs	r0, #255
+ 176 0050 06E0     		b	.L10
+ 177              	.L14:
+ 178 0052 FF20     		movs	r0, #255
+ 179 0054 04E0     		b	.L10
+ 180              	.L15:
+ 181 0056 FF20     		movs	r0, #255
+ 182 0058 02E0     		b	.L10
+ 183              	.L16:
+ 184 005a FF20     		movs	r0, #255
+ 185 005c 00E0     		b	.L10
+ 186              	.L17:
+ 264:main.c        ****                 {
+ 265:main.c        ****                     status = TRANSFER_CMPLT;
+ 187              		.loc 1 265 0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 9
+
+
+ 188 005e 0020     		movs	r0, #0
+ 189              	.L10:
+ 190              	.LVL14:
+ 266:main.c        ****                 }
+ 267:main.c        ****             }
+ 268:main.c        ****         }
+ 269:main.c        ****     }
+ 270:main.c        **** 
+ 271:main.c        ****     return (status);
+ 272:main.c        **** }
+ 191              		.loc 1 272 0
+ 192              		@ sp needed
+ 193 0060 10BD     		pop	{r4, pc}
+ 194              	.L19:
+ 195 0062 C046     		.align	2
+ 196              	.L18:
+ 197 0064 00000000 		.word	rd_Buffer
+ 198              		.cfi_endproc
+ 199              	.LFE36:
+ 200              		.size	ReadStatusPacket, .-ReadStatusPacket
+ 201              		.section	.text.main,"ax",%progbits
+ 202              		.align	2
+ 203              		.global	main
+ 204              		.code	16
+ 205              		.thumb_func
+ 206              		.type	main, %function
+ 207              	main:
+ 208              	.LFB37:
+ 273:main.c        **** 
+ 274:main.c        **** /*******************************************************************************
+ 275:main.c        **** * Function Name: main
+ 276:main.c        **** ********************************************************************************
+ 277:main.c        **** * 
+ 278:main.c        **** * Main function performs the following actions:
+ 279:main.c        **** *   1. Initializes I2C Component.
+ 280:main.c        **** *   2. Writes a command packet to the slave.
+ 281:main.c        **** *   3. Reads back the status of the write from the slave.
+ 282:main.c        **** *   4. Iterates through each command and loops back when the maximum number 
+ 283:main.c        **** *      of commands is complete.
+ 284:main.c        **** *
+ 285:main.c        **** *******************************************************************************/
+ 286:main.c        **** int main()
+ 287:main.c        **** {
+ 209              		.loc 1 287 0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213 0000 10B5     		push	{r4, lr}
+ 214              		.cfi_def_cfa_offset 8
+ 215              		.cfi_offset 4, -8
+ 216              		.cfi_offset 14, -4
+ 217              	.LVL15:
+ 288:main.c        ****     uint8 command = COLOR_RED;
+ 289:main.c        ****     
+ 290:main.c        ****     CyGlobalIntEnable;
+ 218              		.loc 1 290 0
+ 219              		.syntax divided
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 10
+
+
+ 220              	@ 290 "main.c" 1
+ 221 0002 62B6     		CPSIE   i
+ 222              	@ 0 "" 2
+ 291:main.c        ****     
+ 292:main.c        ****     /* Start the I2C Master */
+ 293:main.c        ****     mI2C_Start();
+ 223              		.loc 1 293 0
+ 224              		.thumb
+ 225              		.syntax unified
+ 226 0004 FFF7FEFF 		bl	mI2C_Start
+ 227              	.LVL16:
+ 294:main.c        ****     
+ 295:main.c        ****     rd_Buffer[RD_PACKET_SOP_POS] = PACKET_SOP;
+ 228              		.loc 1 295 0
+ 229 0008 0C4B     		ldr	r3, .L24
+ 230 000a 0122     		movs	r2, #1
+ 231 000c 1A70     		strb	r2, [r3]
+ 296:main.c        ****     rd_Buffer[RD_PACKET_EOP_POS] = PACKET_EOP;
+ 232              		.loc 1 296 0
+ 233 000e 1632     		adds	r2, r2, #22
+ 234 0010 9A70     		strb	r2, [r3, #2]
+ 288:main.c        ****     
+ 235              		.loc 1 288 0
+ 236 0012 0024     		movs	r4, #0
+ 237              	.LVL17:
+ 238              	.L22:
+ 297:main.c        **** 
+ 298:main.c        ****     for(;;)
+ 299:main.c        ****     {   
+ 300:main.c        ****         
+ 301:main.c        ****         /* Send packet with command to the slave */
+ 302:main.c        ****         if (TRANSFER_CMPLT == WriteCommandPacket(command))
+ 239              		.loc 1 302 0
+ 240 0014 2000     		movs	r0, r4
+ 241 0016 FFF7FEFF 		bl	WriteCommandPacket
+ 242              	.LVL18:
+ 243 001a 0028     		cmp	r0, #0
+ 244 001c 08D1     		bne	.L21
+ 303:main.c        ****         {
+ 304:main.c        ****             /* Read response packet from the slave */
+ 305:main.c        ****             if (TRANSFER_CMPLT == ReadStatusPacket())
+ 245              		.loc 1 305 0
+ 246 001e FFF7FEFF 		bl	ReadStatusPacket
+ 247              	.LVL19:
+ 248 0022 0028     		cmp	r0, #0
+ 249 0024 04D1     		bne	.L21
+ 306:main.c        ****             {                
+ 307:main.c        ****                 /* Cycle through LED Colors */
+ 308:main.c        ****                 command++;
+ 250              		.loc 1 308 0
+ 251 0026 0134     		adds	r4, r4, #1
+ 252              	.LVL20:
+ 253 0028 E4B2     		uxtb	r4, r4
+ 254              	.LVL21:
+ 309:main.c        ****                 if (command > COLOR_WHITE)
+ 255              		.loc 1 309 0
+ 256 002a 062C     		cmp	r4, #6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 11
+
+
+ 257 002c 00D9     		bls	.L21
+ 310:main.c        ****                 {
+ 311:main.c        ****                     command = COLOR_RED;
+ 258              		.loc 1 311 0
+ 259 002e 0024     		movs	r4, #0
+ 260              	.LVL22:
+ 261              	.L21:
+ 312:main.c        ****                 }
+ 313:main.c        ****             }
+ 314:main.c        ****         }
+ 315:main.c        ****  
+ 316:main.c        ****         /* Delay before changing LED color */
+ 317:main.c        ****         CyDelay(500u); 
+ 262              		.loc 1 317 0
+ 263 0030 FA20     		movs	r0, #250
+ 264 0032 4000     		lsls	r0, r0, #1
+ 265 0034 FFF7FEFF 		bl	CyDelay
+ 266              	.LVL23:
+ 318:main.c        ****     }
+ 267              		.loc 1 318 0
+ 268 0038 ECE7     		b	.L22
+ 269              	.L25:
+ 270 003a C046     		.align	2
+ 271              	.L24:
+ 272 003c 00000000 		.word	rd_Buffer
+ 273              		.cfi_endproc
+ 274              	.LFE37:
+ 275              		.size	main, .-main
+ 276              		.comm	rd_Buffer,3,4
+ 277              		.comm	buffer,5,4
+ 278              		.text
+ 279              	.Letext0:
+ 280              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 281              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 282              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
+ 283              		.file 5 "Generated_Source\\PSoC4/mI2C_I2C.h"
+ 284              		.file 6 "Generated_Source\\PSoC4/mI2C.h"
+ 285              		.file 7 "Generated_Source\\PSoC4/CyLib.h"
+ 286              		.section	.debug_info,"",%progbits
+ 287              	.Ldebug_info0:
+ 288 0000 B9020000 		.4byte	0x2b9
+ 289 0004 0400     		.2byte	0x4
+ 290 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 291 000a 04       		.byte	0x4
+ 292 000b 01       		.uleb128 0x1
+ 293 000c 6C010000 		.4byte	.LASF34
+ 294 0010 0C       		.byte	0xc
+ 295 0011 1C020000 		.4byte	.LASF35
+ 296 0015 27000000 		.4byte	.LASF36
+ 297 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 298 001d 00000000 		.4byte	0
+ 299 0021 00000000 		.4byte	.Ldebug_line0
+ 300 0025 02       		.uleb128 0x2
+ 301 0026 01       		.byte	0x1
+ 302 0027 06       		.byte	0x6
+ 303 0028 81020000 		.4byte	.LASF0
+ 304 002c 03       		.uleb128 0x3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 12
+
+
+ 305 002d 00000000 		.4byte	.LASF9
+ 306 0031 02       		.byte	0x2
+ 307 0032 1D       		.byte	0x1d
+ 308 0033 37000000 		.4byte	0x37
+ 309 0037 02       		.uleb128 0x2
+ 310 0038 01       		.byte	0x1
+ 311 0039 08       		.byte	0x8
+ 312 003a A7000000 		.4byte	.LASF1
+ 313 003e 02       		.uleb128 0x2
+ 314 003f 02       		.byte	0x2
+ 315 0040 05       		.byte	0x5
+ 316 0041 3E020000 		.4byte	.LASF2
+ 317 0045 02       		.uleb128 0x2
+ 318 0046 02       		.byte	0x2
+ 319 0047 07       		.byte	0x7
+ 320 0048 14000000 		.4byte	.LASF3
+ 321 004c 02       		.uleb128 0x2
+ 322 004d 04       		.byte	0x4
+ 323 004e 05       		.byte	0x5
+ 324 004f 6C020000 		.4byte	.LASF4
+ 325 0053 02       		.uleb128 0x2
+ 326 0054 04       		.byte	0x4
+ 327 0055 07       		.byte	0x7
+ 328 0056 E2000000 		.4byte	.LASF5
+ 329 005a 02       		.uleb128 0x2
+ 330 005b 08       		.byte	0x8
+ 331 005c 05       		.byte	0x5
+ 332 005d 0E020000 		.4byte	.LASF6
+ 333 0061 02       		.uleb128 0x2
+ 334 0062 08       		.byte	0x8
+ 335 0063 07       		.byte	0x7
+ 336 0064 21010000 		.4byte	.LASF7
+ 337 0068 04       		.uleb128 0x4
+ 338 0069 04       		.byte	0x4
+ 339 006a 05       		.byte	0x5
+ 340 006b 696E7400 		.ascii	"int\000"
+ 341 006f 02       		.uleb128 0x2
+ 342 0070 04       		.byte	0x4
+ 343 0071 07       		.byte	0x7
+ 344 0072 14010000 		.4byte	.LASF8
+ 345 0076 03       		.uleb128 0x3
+ 346 0077 38010000 		.4byte	.LASF10
+ 347 007b 03       		.byte	0x3
+ 348 007c 18       		.byte	0x18
+ 349 007d 2C000000 		.4byte	0x2c
+ 350 0081 05       		.uleb128 0x5
+ 351 0082 F4000000 		.4byte	.LASF11
+ 352 0086 04       		.byte	0x4
+ 353 0087 E401     		.2byte	0x1e4
+ 354 0089 37000000 		.4byte	0x37
+ 355 008d 05       		.uleb128 0x5
+ 356 008e 06010000 		.4byte	.LASF12
+ 357 0092 04       		.byte	0x4
+ 358 0093 E501     		.2byte	0x1e5
+ 359 0095 45000000 		.4byte	0x45
+ 360 0099 05       		.uleb128 0x5
+ 361 009a 0D010000 		.4byte	.LASF13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 13
+
+
+ 362 009e 04       		.byte	0x4
+ 363 009f E601     		.2byte	0x1e6
+ 364 00a1 53000000 		.4byte	0x53
+ 365 00a5 02       		.uleb128 0x2
+ 366 00a6 04       		.byte	0x4
+ 367 00a7 04       		.byte	0x4
+ 368 00a8 A1000000 		.4byte	.LASF14
+ 369 00ac 02       		.uleb128 0x2
+ 370 00ad 08       		.byte	0x8
+ 371 00ae 04       		.byte	0x4
+ 372 00af FA000000 		.4byte	.LASF15
+ 373 00b3 02       		.uleb128 0x2
+ 374 00b4 01       		.byte	0x1
+ 375 00b5 08       		.byte	0x8
+ 376 00b6 23020000 		.4byte	.LASF16
+ 377 00ba 02       		.uleb128 0x2
+ 378 00bb 08       		.byte	0x8
+ 379 00bc 04       		.byte	0x4
+ 380 00bd 75020000 		.4byte	.LASF17
+ 381 00c1 02       		.uleb128 0x2
+ 382 00c2 04       		.byte	0x4
+ 383 00c3 07       		.byte	0x7
+ 384 00c4 05020000 		.4byte	.LASF18
+ 385 00c8 06       		.uleb128 0x6
+ 386 00c9 CF000000 		.4byte	.LASF19
+ 387 00cd 01       		.byte	0x1
+ 388 00ce B6       		.byte	0xb6
+ 389 00cf 99000000 		.4byte	0x99
+ 390 00d3 00000000 		.4byte	.LFB35
+ 391 00d7 58000000 		.4byte	.LFE35-.LFB35
+ 392 00db 01       		.uleb128 0x1
+ 393 00dc 9C       		.byte	0x9c
+ 394 00dd 47010000 		.4byte	0x147
+ 395 00e1 07       		.uleb128 0x7
+ 396 00e2 636D6400 		.ascii	"cmd\000"
+ 397 00e6 01       		.byte	0x1
+ 398 00e7 B6       		.byte	0xb6
+ 399 00e8 81000000 		.4byte	0x81
+ 400 00ec 00000000 		.4byte	.LLST0
+ 401 00f0 08       		.uleb128 0x8
+ 402 00f1 89000000 		.4byte	.LASF21
+ 403 00f5 01       		.byte	0x1
+ 404 00f6 B8       		.byte	0xb8
+ 405 00f7 99000000 		.4byte	0x99
+ 406 00fb 21000000 		.4byte	.LLST1
+ 407 00ff 09       		.uleb128 0x9
+ 408 0100 1C000000 		.4byte	.LVL2
+ 409 0104 5E020000 		.4byte	0x25e
+ 410 0108 0A       		.uleb128 0xa
+ 411 0109 28000000 		.4byte	.LVL3
+ 412 010d 6A020000 		.4byte	0x26a
+ 413 0111 2B010000 		.4byte	0x12b
+ 414 0115 0B       		.uleb128 0xb
+ 415 0116 01       		.uleb128 0x1
+ 416 0117 50       		.byte	0x50
+ 417 0118 01       		.uleb128 0x1
+ 418 0119 39       		.byte	0x39
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 14
+
+
+ 419 011a 0B       		.uleb128 0xb
+ 420 011b 01       		.uleb128 0x1
+ 421 011c 51       		.byte	0x51
+ 422 011d 02       		.uleb128 0x2
+ 423 011e 74       		.byte	0x74
+ 424 011f 00       		.sleb128 0
+ 425 0120 0B       		.uleb128 0xb
+ 426 0121 01       		.uleb128 0x1
+ 427 0122 52       		.byte	0x52
+ 428 0123 01       		.uleb128 0x1
+ 429 0124 35       		.byte	0x35
+ 430 0125 0B       		.uleb128 0xb
+ 431 0126 01       		.uleb128 0x1
+ 432 0127 53       		.byte	0x53
+ 433 0128 01       		.uleb128 0x1
+ 434 0129 30       		.byte	0x30
+ 435 012a 00       		.byte	0
+ 436 012b 09       		.uleb128 0x9
+ 437 012c 30000000 		.4byte	.LVL4
+ 438 0130 76020000 		.4byte	0x276
+ 439 0134 09       		.uleb128 0x9
+ 440 0135 38000000 		.4byte	.LVL5
+ 441 0139 76020000 		.4byte	0x276
+ 442 013d 09       		.uleb128 0x9
+ 443 013e 40000000 		.4byte	.LVL6
+ 444 0142 82020000 		.4byte	0x282
+ 445 0146 00       		.byte	0
+ 446 0147 06       		.uleb128 0x6
+ 447 0148 90000000 		.4byte	.LASF20
+ 448 014c 01       		.byte	0x1
+ 449 014d EE       		.byte	0xee
+ 450 014e 99000000 		.4byte	0x99
+ 451 0152 00000000 		.4byte	.LFB36
+ 452 0156 68000000 		.4byte	.LFE36-.LFB36
+ 453 015a 01       		.uleb128 0x1
+ 454 015b 9C       		.byte	0x9c
+ 455 015c BA010000 		.4byte	0x1ba
+ 456 0160 08       		.uleb128 0x8
+ 457 0161 89000000 		.4byte	.LASF21
+ 458 0165 01       		.byte	0x1
+ 459 0166 F0       		.byte	0xf0
+ 460 0167 99000000 		.4byte	0x99
+ 461 016b 41000000 		.4byte	.LLST2
+ 462 016f 09       		.uleb128 0x9
+ 463 0170 06000000 		.4byte	.LVL9
+ 464 0174 5E020000 		.4byte	0x25e
+ 465 0178 0A       		.uleb128 0xa
+ 466 0179 12000000 		.4byte	.LVL10
+ 467 017d 8E020000 		.4byte	0x28e
+ 468 0181 9E010000 		.4byte	0x19e
+ 469 0185 0B       		.uleb128 0xb
+ 470 0186 01       		.uleb128 0x1
+ 471 0187 50       		.byte	0x50
+ 472 0188 01       		.uleb128 0x1
+ 473 0189 39       		.byte	0x39
+ 474 018a 0B       		.uleb128 0xb
+ 475 018b 01       		.uleb128 0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 15
+
+
+ 476 018c 51       		.byte	0x51
+ 477 018d 05       		.uleb128 0x5
+ 478 018e 03       		.byte	0x3
+ 479 018f 00000000 		.4byte	rd_Buffer
+ 480 0193 0B       		.uleb128 0xb
+ 481 0194 01       		.uleb128 0x1
+ 482 0195 52       		.byte	0x52
+ 483 0196 01       		.uleb128 0x1
+ 484 0197 33       		.byte	0x33
+ 485 0198 0B       		.uleb128 0xb
+ 486 0199 01       		.uleb128 0x1
+ 487 019a 53       		.byte	0x53
+ 488 019b 01       		.uleb128 0x1
+ 489 019c 30       		.byte	0x30
+ 490 019d 00       		.byte	0
+ 491 019e 09       		.uleb128 0x9
+ 492 019f 1A000000 		.4byte	.LVL11
+ 493 01a3 76020000 		.4byte	0x276
+ 494 01a7 09       		.uleb128 0x9
+ 495 01a8 22000000 		.4byte	.LVL12
+ 496 01ac 76020000 		.4byte	0x276
+ 497 01b0 09       		.uleb128 0x9
+ 498 01b1 2A000000 		.4byte	.LVL13
+ 499 01b5 9A020000 		.4byte	0x29a
+ 500 01b9 00       		.byte	0
+ 501 01ba 0C       		.uleb128 0xc
+ 502 01bb 01010000 		.4byte	.LASF22
+ 503 01bf 01       		.byte	0x1
+ 504 01c0 1E01     		.2byte	0x11e
+ 505 01c2 68000000 		.4byte	0x68
+ 506 01c6 00000000 		.4byte	.LFB37
+ 507 01ca 40000000 		.4byte	.LFE37-.LFB37
+ 508 01ce 01       		.uleb128 0x1
+ 509 01cf 9C       		.byte	0x9c
+ 510 01d0 1C020000 		.4byte	0x21c
+ 511 01d4 0D       		.uleb128 0xd
+ 512 01d5 81000000 		.4byte	.LASF23
+ 513 01d9 01       		.byte	0x1
+ 514 01da 2001     		.2byte	0x120
+ 515 01dc 81000000 		.4byte	0x81
+ 516 01e0 61000000 		.4byte	.LLST3
+ 517 01e4 09       		.uleb128 0x9
+ 518 01e5 08000000 		.4byte	.LVL16
+ 519 01e9 A6020000 		.4byte	0x2a6
+ 520 01ed 0A       		.uleb128 0xa
+ 521 01ee 1A000000 		.4byte	.LVL18
+ 522 01f2 C8000000 		.4byte	0xc8
+ 523 01f6 01020000 		.4byte	0x201
+ 524 01fa 0B       		.uleb128 0xb
+ 525 01fb 01       		.uleb128 0x1
+ 526 01fc 50       		.byte	0x50
+ 527 01fd 02       		.uleb128 0x2
+ 528 01fe 74       		.byte	0x74
+ 529 01ff 00       		.sleb128 0
+ 530 0200 00       		.byte	0
+ 531 0201 09       		.uleb128 0x9
+ 532 0202 22000000 		.4byte	.LVL19
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 16
+
+
+ 533 0206 47010000 		.4byte	0x147
+ 534 020a 0E       		.uleb128 0xe
+ 535 020b 38000000 		.4byte	.LVL23
+ 536 020f B1020000 		.4byte	0x2b1
+ 537 0213 0B       		.uleb128 0xb
+ 538 0214 01       		.uleb128 0x1
+ 539 0215 50       		.byte	0x50
+ 540 0216 03       		.uleb128 0x3
+ 541 0217 0A       		.byte	0xa
+ 542 0218 F401     		.2byte	0x1f4
+ 543 021a 00       		.byte	0
+ 544 021b 00       		.byte	0
+ 545 021c 0F       		.uleb128 0xf
+ 546 021d 76000000 		.4byte	0x76
+ 547 0221 2C020000 		.4byte	0x22c
+ 548 0225 10       		.uleb128 0x10
+ 549 0226 C1000000 		.4byte	0xc1
+ 550 022a 04       		.byte	0x4
+ 551 022b 00       		.byte	0
+ 552 022c 11       		.uleb128 0x11
+ 553 022d 48020000 		.4byte	.LASF24
+ 554 0231 01       		.byte	0x1
+ 555 0232 5D       		.byte	0x5d
+ 556 0233 1C020000 		.4byte	0x21c
+ 557 0237 05       		.uleb128 0x5
+ 558 0238 03       		.byte	0x3
+ 559 0239 00000000 		.4byte	buffer
+ 560 023d 0F       		.uleb128 0xf
+ 561 023e 76000000 		.4byte	0x76
+ 562 0242 4D020000 		.4byte	0x24d
+ 563 0246 10       		.uleb128 0x10
+ 564 0247 C1000000 		.4byte	0xc1
+ 565 024b 02       		.byte	0x2
+ 566 024c 00       		.byte	0
+ 567 024d 11       		.uleb128 0x11
+ 568 024e 0A000000 		.4byte	.LASF25
+ 569 0252 01       		.byte	0x1
+ 570 0253 5E       		.byte	0x5e
+ 571 0254 3D020000 		.4byte	0x23d
+ 572 0258 05       		.uleb128 0x5
+ 573 0259 03       		.byte	0x3
+ 574 025a 00000000 		.4byte	rd_Buffer
+ 575 025e 12       		.uleb128 0x12
+ 576 025f B5000000 		.4byte	.LASF26
+ 577 0263 B5000000 		.4byte	.LASF26
+ 578 0267 05       		.byte	0x5
+ 579 0268 1001     		.2byte	0x110
+ 580 026a 12       		.uleb128 0x12
+ 581 026b 40010000 		.4byte	.LASF27
+ 582 026f 40010000 		.4byte	.LASF27
+ 583 0273 05       		.byte	0x5
+ 584 0274 1301     		.2byte	0x113
+ 585 0276 12       		.uleb128 0x12
+ 586 0277 57010000 		.4byte	.LASF28
+ 587 027b 57010000 		.4byte	.LASF28
+ 588 027f 05       		.byte	0x5
+ 589 0280 0F01     		.2byte	0x10f
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 17
+
+
+ 590 0282 12       		.uleb128 0x12
+ 591 0283 8D020000 		.4byte	.LASF29
+ 592 0287 8D020000 		.4byte	.LASF29
+ 593 028b 05       		.byte	0x5
+ 594 028c 1601     		.2byte	0x116
+ 595 028e 12       		.uleb128 0x12
+ 596 028f 28020000 		.4byte	.LASF30
+ 597 0293 28020000 		.4byte	.LASF30
+ 598 0297 05       		.byte	0x5
+ 599 0298 1401     		.2byte	0x114
+ 600 029a 12       		.uleb128 0x12
+ 601 029b 4F020000 		.4byte	.LASF31
+ 602 029f 4F020000 		.4byte	.LASF31
+ 603 02a3 05       		.byte	0x5
+ 604 02a4 1501     		.2byte	0x115
+ 605 02a6 13       		.uleb128 0x13
+ 606 02a7 FA010000 		.4byte	.LASF32
+ 607 02ab FA010000 		.4byte	.LASF32
+ 608 02af 06       		.byte	0x6
+ 609 02b0 72       		.byte	0x72
+ 610 02b1 13       		.uleb128 0x13
+ 611 02b2 AB020000 		.4byte	.LASF33
+ 612 02b6 AB020000 		.4byte	.LASF33
+ 613 02ba 07       		.byte	0x7
+ 614 02bb D9       		.byte	0xd9
+ 615 02bc 00       		.byte	0
+ 616              		.section	.debug_abbrev,"",%progbits
+ 617              	.Ldebug_abbrev0:
+ 618 0000 01       		.uleb128 0x1
+ 619 0001 11       		.uleb128 0x11
+ 620 0002 01       		.byte	0x1
+ 621 0003 25       		.uleb128 0x25
+ 622 0004 0E       		.uleb128 0xe
+ 623 0005 13       		.uleb128 0x13
+ 624 0006 0B       		.uleb128 0xb
+ 625 0007 03       		.uleb128 0x3
+ 626 0008 0E       		.uleb128 0xe
+ 627 0009 1B       		.uleb128 0x1b
+ 628 000a 0E       		.uleb128 0xe
+ 629 000b 55       		.uleb128 0x55
+ 630 000c 17       		.uleb128 0x17
+ 631 000d 11       		.uleb128 0x11
+ 632 000e 01       		.uleb128 0x1
+ 633 000f 10       		.uleb128 0x10
+ 634 0010 17       		.uleb128 0x17
+ 635 0011 00       		.byte	0
+ 636 0012 00       		.byte	0
+ 637 0013 02       		.uleb128 0x2
+ 638 0014 24       		.uleb128 0x24
+ 639 0015 00       		.byte	0
+ 640 0016 0B       		.uleb128 0xb
+ 641 0017 0B       		.uleb128 0xb
+ 642 0018 3E       		.uleb128 0x3e
+ 643 0019 0B       		.uleb128 0xb
+ 644 001a 03       		.uleb128 0x3
+ 645 001b 0E       		.uleb128 0xe
+ 646 001c 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 18
+
+
+ 647 001d 00       		.byte	0
+ 648 001e 03       		.uleb128 0x3
+ 649 001f 16       		.uleb128 0x16
+ 650 0020 00       		.byte	0
+ 651 0021 03       		.uleb128 0x3
+ 652 0022 0E       		.uleb128 0xe
+ 653 0023 3A       		.uleb128 0x3a
+ 654 0024 0B       		.uleb128 0xb
+ 655 0025 3B       		.uleb128 0x3b
+ 656 0026 0B       		.uleb128 0xb
+ 657 0027 49       		.uleb128 0x49
+ 658 0028 13       		.uleb128 0x13
+ 659 0029 00       		.byte	0
+ 660 002a 00       		.byte	0
+ 661 002b 04       		.uleb128 0x4
+ 662 002c 24       		.uleb128 0x24
+ 663 002d 00       		.byte	0
+ 664 002e 0B       		.uleb128 0xb
+ 665 002f 0B       		.uleb128 0xb
+ 666 0030 3E       		.uleb128 0x3e
+ 667 0031 0B       		.uleb128 0xb
+ 668 0032 03       		.uleb128 0x3
+ 669 0033 08       		.uleb128 0x8
+ 670 0034 00       		.byte	0
+ 671 0035 00       		.byte	0
+ 672 0036 05       		.uleb128 0x5
+ 673 0037 16       		.uleb128 0x16
+ 674 0038 00       		.byte	0
+ 675 0039 03       		.uleb128 0x3
+ 676 003a 0E       		.uleb128 0xe
+ 677 003b 3A       		.uleb128 0x3a
+ 678 003c 0B       		.uleb128 0xb
+ 679 003d 3B       		.uleb128 0x3b
+ 680 003e 05       		.uleb128 0x5
+ 681 003f 49       		.uleb128 0x49
+ 682 0040 13       		.uleb128 0x13
+ 683 0041 00       		.byte	0
+ 684 0042 00       		.byte	0
+ 685 0043 06       		.uleb128 0x6
+ 686 0044 2E       		.uleb128 0x2e
+ 687 0045 01       		.byte	0x1
+ 688 0046 3F       		.uleb128 0x3f
+ 689 0047 19       		.uleb128 0x19
+ 690 0048 03       		.uleb128 0x3
+ 691 0049 0E       		.uleb128 0xe
+ 692 004a 3A       		.uleb128 0x3a
+ 693 004b 0B       		.uleb128 0xb
+ 694 004c 3B       		.uleb128 0x3b
+ 695 004d 0B       		.uleb128 0xb
+ 696 004e 27       		.uleb128 0x27
+ 697 004f 19       		.uleb128 0x19
+ 698 0050 49       		.uleb128 0x49
+ 699 0051 13       		.uleb128 0x13
+ 700 0052 11       		.uleb128 0x11
+ 701 0053 01       		.uleb128 0x1
+ 702 0054 12       		.uleb128 0x12
+ 703 0055 06       		.uleb128 0x6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 19
+
+
+ 704 0056 40       		.uleb128 0x40
+ 705 0057 18       		.uleb128 0x18
+ 706 0058 9742     		.uleb128 0x2117
+ 707 005a 19       		.uleb128 0x19
+ 708 005b 01       		.uleb128 0x1
+ 709 005c 13       		.uleb128 0x13
+ 710 005d 00       		.byte	0
+ 711 005e 00       		.byte	0
+ 712 005f 07       		.uleb128 0x7
+ 713 0060 05       		.uleb128 0x5
+ 714 0061 00       		.byte	0
+ 715 0062 03       		.uleb128 0x3
+ 716 0063 08       		.uleb128 0x8
+ 717 0064 3A       		.uleb128 0x3a
+ 718 0065 0B       		.uleb128 0xb
+ 719 0066 3B       		.uleb128 0x3b
+ 720 0067 0B       		.uleb128 0xb
+ 721 0068 49       		.uleb128 0x49
+ 722 0069 13       		.uleb128 0x13
+ 723 006a 02       		.uleb128 0x2
+ 724 006b 17       		.uleb128 0x17
+ 725 006c 00       		.byte	0
+ 726 006d 00       		.byte	0
+ 727 006e 08       		.uleb128 0x8
+ 728 006f 34       		.uleb128 0x34
+ 729 0070 00       		.byte	0
+ 730 0071 03       		.uleb128 0x3
+ 731 0072 0E       		.uleb128 0xe
+ 732 0073 3A       		.uleb128 0x3a
+ 733 0074 0B       		.uleb128 0xb
+ 734 0075 3B       		.uleb128 0x3b
+ 735 0076 0B       		.uleb128 0xb
+ 736 0077 49       		.uleb128 0x49
+ 737 0078 13       		.uleb128 0x13
+ 738 0079 02       		.uleb128 0x2
+ 739 007a 17       		.uleb128 0x17
+ 740 007b 00       		.byte	0
+ 741 007c 00       		.byte	0
+ 742 007d 09       		.uleb128 0x9
+ 743 007e 898201   		.uleb128 0x4109
+ 744 0081 00       		.byte	0
+ 745 0082 11       		.uleb128 0x11
+ 746 0083 01       		.uleb128 0x1
+ 747 0084 31       		.uleb128 0x31
+ 748 0085 13       		.uleb128 0x13
+ 749 0086 00       		.byte	0
+ 750 0087 00       		.byte	0
+ 751 0088 0A       		.uleb128 0xa
+ 752 0089 898201   		.uleb128 0x4109
+ 753 008c 01       		.byte	0x1
+ 754 008d 11       		.uleb128 0x11
+ 755 008e 01       		.uleb128 0x1
+ 756 008f 31       		.uleb128 0x31
+ 757 0090 13       		.uleb128 0x13
+ 758 0091 01       		.uleb128 0x1
+ 759 0092 13       		.uleb128 0x13
+ 760 0093 00       		.byte	0
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 20
+
+
+ 761 0094 00       		.byte	0
+ 762 0095 0B       		.uleb128 0xb
+ 763 0096 8A8201   		.uleb128 0x410a
+ 764 0099 00       		.byte	0
+ 765 009a 02       		.uleb128 0x2
+ 766 009b 18       		.uleb128 0x18
+ 767 009c 9142     		.uleb128 0x2111
+ 768 009e 18       		.uleb128 0x18
+ 769 009f 00       		.byte	0
+ 770 00a0 00       		.byte	0
+ 771 00a1 0C       		.uleb128 0xc
+ 772 00a2 2E       		.uleb128 0x2e
+ 773 00a3 01       		.byte	0x1
+ 774 00a4 3F       		.uleb128 0x3f
+ 775 00a5 19       		.uleb128 0x19
+ 776 00a6 03       		.uleb128 0x3
+ 777 00a7 0E       		.uleb128 0xe
+ 778 00a8 3A       		.uleb128 0x3a
+ 779 00a9 0B       		.uleb128 0xb
+ 780 00aa 3B       		.uleb128 0x3b
+ 781 00ab 05       		.uleb128 0x5
+ 782 00ac 49       		.uleb128 0x49
+ 783 00ad 13       		.uleb128 0x13
+ 784 00ae 8701     		.uleb128 0x87
+ 785 00b0 19       		.uleb128 0x19
+ 786 00b1 11       		.uleb128 0x11
+ 787 00b2 01       		.uleb128 0x1
+ 788 00b3 12       		.uleb128 0x12
+ 789 00b4 06       		.uleb128 0x6
+ 790 00b5 40       		.uleb128 0x40
+ 791 00b6 18       		.uleb128 0x18
+ 792 00b7 9742     		.uleb128 0x2117
+ 793 00b9 19       		.uleb128 0x19
+ 794 00ba 01       		.uleb128 0x1
+ 795 00bb 13       		.uleb128 0x13
+ 796 00bc 00       		.byte	0
+ 797 00bd 00       		.byte	0
+ 798 00be 0D       		.uleb128 0xd
+ 799 00bf 34       		.uleb128 0x34
+ 800 00c0 00       		.byte	0
+ 801 00c1 03       		.uleb128 0x3
+ 802 00c2 0E       		.uleb128 0xe
+ 803 00c3 3A       		.uleb128 0x3a
+ 804 00c4 0B       		.uleb128 0xb
+ 805 00c5 3B       		.uleb128 0x3b
+ 806 00c6 05       		.uleb128 0x5
+ 807 00c7 49       		.uleb128 0x49
+ 808 00c8 13       		.uleb128 0x13
+ 809 00c9 02       		.uleb128 0x2
+ 810 00ca 17       		.uleb128 0x17
+ 811 00cb 00       		.byte	0
+ 812 00cc 00       		.byte	0
+ 813 00cd 0E       		.uleb128 0xe
+ 814 00ce 898201   		.uleb128 0x4109
+ 815 00d1 01       		.byte	0x1
+ 816 00d2 11       		.uleb128 0x11
+ 817 00d3 01       		.uleb128 0x1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 21
+
+
+ 818 00d4 31       		.uleb128 0x31
+ 819 00d5 13       		.uleb128 0x13
+ 820 00d6 00       		.byte	0
+ 821 00d7 00       		.byte	0
+ 822 00d8 0F       		.uleb128 0xf
+ 823 00d9 01       		.uleb128 0x1
+ 824 00da 01       		.byte	0x1
+ 825 00db 49       		.uleb128 0x49
+ 826 00dc 13       		.uleb128 0x13
+ 827 00dd 01       		.uleb128 0x1
+ 828 00de 13       		.uleb128 0x13
+ 829 00df 00       		.byte	0
+ 830 00e0 00       		.byte	0
+ 831 00e1 10       		.uleb128 0x10
+ 832 00e2 21       		.uleb128 0x21
+ 833 00e3 00       		.byte	0
+ 834 00e4 49       		.uleb128 0x49
+ 835 00e5 13       		.uleb128 0x13
+ 836 00e6 2F       		.uleb128 0x2f
+ 837 00e7 0B       		.uleb128 0xb
+ 838 00e8 00       		.byte	0
+ 839 00e9 00       		.byte	0
+ 840 00ea 11       		.uleb128 0x11
+ 841 00eb 34       		.uleb128 0x34
+ 842 00ec 00       		.byte	0
+ 843 00ed 03       		.uleb128 0x3
+ 844 00ee 0E       		.uleb128 0xe
+ 845 00ef 3A       		.uleb128 0x3a
+ 846 00f0 0B       		.uleb128 0xb
+ 847 00f1 3B       		.uleb128 0x3b
+ 848 00f2 0B       		.uleb128 0xb
+ 849 00f3 49       		.uleb128 0x49
+ 850 00f4 13       		.uleb128 0x13
+ 851 00f5 3F       		.uleb128 0x3f
+ 852 00f6 19       		.uleb128 0x19
+ 853 00f7 02       		.uleb128 0x2
+ 854 00f8 18       		.uleb128 0x18
+ 855 00f9 00       		.byte	0
+ 856 00fa 00       		.byte	0
+ 857 00fb 12       		.uleb128 0x12
+ 858 00fc 2E       		.uleb128 0x2e
+ 859 00fd 00       		.byte	0
+ 860 00fe 3F       		.uleb128 0x3f
+ 861 00ff 19       		.uleb128 0x19
+ 862 0100 3C       		.uleb128 0x3c
+ 863 0101 19       		.uleb128 0x19
+ 864 0102 6E       		.uleb128 0x6e
+ 865 0103 0E       		.uleb128 0xe
+ 866 0104 03       		.uleb128 0x3
+ 867 0105 0E       		.uleb128 0xe
+ 868 0106 3A       		.uleb128 0x3a
+ 869 0107 0B       		.uleb128 0xb
+ 870 0108 3B       		.uleb128 0x3b
+ 871 0109 05       		.uleb128 0x5
+ 872 010a 00       		.byte	0
+ 873 010b 00       		.byte	0
+ 874 010c 13       		.uleb128 0x13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 22
+
+
+ 875 010d 2E       		.uleb128 0x2e
+ 876 010e 00       		.byte	0
+ 877 010f 3F       		.uleb128 0x3f
+ 878 0110 19       		.uleb128 0x19
+ 879 0111 3C       		.uleb128 0x3c
+ 880 0112 19       		.uleb128 0x19
+ 881 0113 6E       		.uleb128 0x6e
+ 882 0114 0E       		.uleb128 0xe
+ 883 0115 03       		.uleb128 0x3
+ 884 0116 0E       		.uleb128 0xe
+ 885 0117 3A       		.uleb128 0x3a
+ 886 0118 0B       		.uleb128 0xb
+ 887 0119 3B       		.uleb128 0x3b
+ 888 011a 0B       		.uleb128 0xb
+ 889 011b 00       		.byte	0
+ 890 011c 00       		.byte	0
+ 891 011d 00       		.byte	0
+ 892              		.section	.debug_loc,"",%progbits
+ 893              	.Ldebug_loc0:
+ 894              	.LLST0:
+ 895 0000 00000000 		.4byte	.LVL0
+ 896 0004 1B000000 		.4byte	.LVL2-1
+ 897 0008 0100     		.2byte	0x1
+ 898 000a 50       		.byte	0x50
+ 899 000b 1B000000 		.4byte	.LVL2-1
+ 900 000f 58000000 		.4byte	.LFE35
+ 901 0013 0400     		.2byte	0x4
+ 902 0015 F3       		.byte	0xf3
+ 903 0016 01       		.uleb128 0x1
+ 904 0017 50       		.byte	0x50
+ 905 0018 9F       		.byte	0x9f
+ 906 0019 00000000 		.4byte	0
+ 907 001d 00000000 		.4byte	0
+ 908              	.LLST1:
+ 909 0021 02000000 		.4byte	.LVL1
+ 910 0025 52000000 		.4byte	.LVL7
+ 911 0029 0300     		.2byte	0x3
+ 912 002b 08       		.byte	0x8
+ 913 002c FF       		.byte	0xff
+ 914 002d 9F       		.byte	0x9f
+ 915 002e 52000000 		.4byte	.LVL7
+ 916 0032 58000000 		.4byte	.LFE35
+ 917 0036 0100     		.2byte	0x1
+ 918 0038 50       		.byte	0x50
+ 919 0039 00000000 		.4byte	0
+ 920 003d 00000000 		.4byte	0
+ 921              	.LLST2:
+ 922 0041 02000000 		.4byte	.LVL8
+ 923 0045 60000000 		.4byte	.LVL14
+ 924 0049 0300     		.2byte	0x3
+ 925 004b 08       		.byte	0x8
+ 926 004c FF       		.byte	0xff
+ 927 004d 9F       		.byte	0x9f
+ 928 004e 60000000 		.4byte	.LVL14
+ 929 0052 68000000 		.4byte	.LFE36
+ 930 0056 0100     		.2byte	0x1
+ 931 0058 50       		.byte	0x50
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 23
+
+
+ 932 0059 00000000 		.4byte	0
+ 933 005d 00000000 		.4byte	0
+ 934              	.LLST3:
+ 935 0061 02000000 		.4byte	.LVL15
+ 936 0065 14000000 		.4byte	.LVL17
+ 937 0069 0200     		.2byte	0x2
+ 938 006b 30       		.byte	0x30
+ 939 006c 9F       		.byte	0x9f
+ 940 006d 14000000 		.4byte	.LVL17
+ 941 0071 28000000 		.4byte	.LVL20
+ 942 0075 0100     		.2byte	0x1
+ 943 0077 54       		.byte	0x54
+ 944 0078 2A000000 		.4byte	.LVL21
+ 945 007c 40000000 		.4byte	.LFE37
+ 946 0080 0100     		.2byte	0x1
+ 947 0082 54       		.byte	0x54
+ 948 0083 00000000 		.4byte	0
+ 949 0087 00000000 		.4byte	0
+ 950              		.section	.debug_aranges,"",%progbits
+ 951 0000 2C000000 		.4byte	0x2c
+ 952 0004 0200     		.2byte	0x2
+ 953 0006 00000000 		.4byte	.Ldebug_info0
+ 954 000a 04       		.byte	0x4
+ 955 000b 00       		.byte	0
+ 956 000c 0000     		.2byte	0
+ 957 000e 0000     		.2byte	0
+ 958 0010 00000000 		.4byte	.LFB35
+ 959 0014 58000000 		.4byte	.LFE35-.LFB35
+ 960 0018 00000000 		.4byte	.LFB36
+ 961 001c 68000000 		.4byte	.LFE36-.LFB36
+ 962 0020 00000000 		.4byte	.LFB37
+ 963 0024 40000000 		.4byte	.LFE37-.LFB37
+ 964 0028 00000000 		.4byte	0
+ 965 002c 00000000 		.4byte	0
+ 966              		.section	.debug_ranges,"",%progbits
+ 967              	.Ldebug_ranges0:
+ 968 0000 00000000 		.4byte	.LFB35
+ 969 0004 58000000 		.4byte	.LFE35
+ 970 0008 00000000 		.4byte	.LFB36
+ 971 000c 68000000 		.4byte	.LFE36
+ 972 0010 00000000 		.4byte	.LFB37
+ 973 0014 40000000 		.4byte	.LFE37
+ 974 0018 00000000 		.4byte	0
+ 975 001c 00000000 		.4byte	0
+ 976              		.section	.debug_line,"",%progbits
+ 977              	.Ldebug_line0:
+ 978 0000 D9010000 		.section	.debug_str,"MS",%progbits,1
+ 978      02006101 
+ 978      00000201 
+ 978      FB0E0D00 
+ 978      01010101 
+ 979              	.LASF9:
+ 980 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 980      6E74385F 
+ 980      7400
+ 981              	.LASF25:
+ 982 000a 72645F42 		.ascii	"rd_Buffer\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 24
+
+
+ 982      75666665 
+ 982      7200
+ 983              	.LASF3:
+ 984 0014 73686F72 		.ascii	"short unsigned int\000"
+ 984      7420756E 
+ 984      7369676E 
+ 984      65642069 
+ 984      6E7400
+ 985              	.LASF36:
+ 986 0027 433A5C55 		.ascii	"C:\\Users\\austc\\Documents\\GitHub\\OrpheusElectro"
+ 986      73657273 
+ 986      5C617573 
+ 986      74635C44 
+ 986      6F63756D 
+ 987 0055 6E696373 		.ascii	"nics\\Psoc Arm\\I2C_Master_High_Level01.cydsn\000"
+ 987      5C50736F 
+ 987      63204172 
+ 987      6D5C4932 
+ 987      435F4D61 
+ 988              	.LASF23:
+ 989 0081 636F6D6D 		.ascii	"command\000"
+ 989      616E6400 
+ 990              	.LASF21:
+ 991 0089 73746174 		.ascii	"status\000"
+ 991      757300
+ 992              	.LASF20:
+ 993 0090 52656164 		.ascii	"ReadStatusPacket\000"
+ 993      53746174 
+ 993      75735061 
+ 993      636B6574 
+ 993      00
+ 994              	.LASF14:
+ 995 00a1 666C6F61 		.ascii	"float\000"
+ 995      7400
+ 996              	.LASF1:
+ 997 00a7 756E7369 		.ascii	"unsigned char\000"
+ 997      676E6564 
+ 997      20636861 
+ 997      7200
+ 998              	.LASF26:
+ 999 00b5 6D493243 		.ascii	"mI2C_I2CMasterClearStatus\000"
+ 999      5F493243 
+ 999      4D617374 
+ 999      6572436C 
+ 999      65617253 
+ 1000              	.LASF19:
+ 1001 00cf 57726974 		.ascii	"WriteCommandPacket\000"
+ 1001      65436F6D 
+ 1001      6D616E64 
+ 1001      5061636B 
+ 1001      657400
+ 1002              	.LASF5:
+ 1003 00e2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1003      20756E73 
+ 1003      69676E65 
+ 1003      6420696E 
+ 1003      7400
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 25
+
+
+ 1004              	.LASF11:
+ 1005 00f4 75696E74 		.ascii	"uint8\000"
+ 1005      3800
+ 1006              	.LASF15:
+ 1007 00fa 646F7562 		.ascii	"double\000"
+ 1007      6C6500
+ 1008              	.LASF22:
+ 1009 0101 6D61696E 		.ascii	"main\000"
+ 1009      00
+ 1010              	.LASF12:
+ 1011 0106 75696E74 		.ascii	"uint16\000"
+ 1011      313600
+ 1012              	.LASF13:
+ 1013 010d 75696E74 		.ascii	"uint32\000"
+ 1013      333200
+ 1014              	.LASF8:
+ 1015 0114 756E7369 		.ascii	"unsigned int\000"
+ 1015      676E6564 
+ 1015      20696E74 
+ 1015      00
+ 1016              	.LASF7:
+ 1017 0121 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1017      206C6F6E 
+ 1017      6720756E 
+ 1017      7369676E 
+ 1017      65642069 
+ 1018              	.LASF10:
+ 1019 0138 75696E74 		.ascii	"uint8_t\000"
+ 1019      385F7400 
+ 1020              	.LASF27:
+ 1021 0140 6D493243 		.ascii	"mI2C_I2CMasterWriteBuf\000"
+ 1021      5F493243 
+ 1021      4D617374 
+ 1021      65725772 
+ 1021      69746542 
+ 1022              	.LASF28:
+ 1023 0157 6D493243 		.ascii	"mI2C_I2CMasterStatus\000"
+ 1023      5F493243 
+ 1023      4D617374 
+ 1023      65725374 
+ 1023      61747573 
+ 1024              	.LASF34:
+ 1025 016c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1025      43313120 
+ 1025      352E342E 
+ 1025      31203230 
+ 1025      31363036 
+ 1026 019f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1026      20726576 
+ 1026      6973696F 
+ 1026      6E203233 
+ 1026      37373135 
+ 1027 01d2 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1027      66756E63 
+ 1027      74696F6E 
+ 1027      2D736563 
+ 1027      74696F6E 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 26
+
+
+ 1028              	.LASF32:
+ 1029 01fa 6D493243 		.ascii	"mI2C_Start\000"
+ 1029      5F537461 
+ 1029      727400
+ 1030              	.LASF18:
+ 1031 0205 73697A65 		.ascii	"sizetype\000"
+ 1031      74797065 
+ 1031      00
+ 1032              	.LASF6:
+ 1033 020e 6C6F6E67 		.ascii	"long long int\000"
+ 1033      206C6F6E 
+ 1033      6720696E 
+ 1033      7400
+ 1034              	.LASF35:
+ 1035 021c 6D61696E 		.ascii	"main.c\000"
+ 1035      2E6300
+ 1036              	.LASF16:
+ 1037 0223 63686172 		.ascii	"char\000"
+ 1037      00
+ 1038              	.LASF30:
+ 1039 0228 6D493243 		.ascii	"mI2C_I2CMasterReadBuf\000"
+ 1039      5F493243 
+ 1039      4D617374 
+ 1039      65725265 
+ 1039      61644275 
+ 1040              	.LASF2:
+ 1041 023e 73686F72 		.ascii	"short int\000"
+ 1041      7420696E 
+ 1041      7400
+ 1042              	.LASF24:
+ 1043 0248 62756666 		.ascii	"buffer\000"
+ 1043      657200
+ 1044              	.LASF31:
+ 1045 024f 6D493243 		.ascii	"mI2C_I2CMasterGetReadBufSize\000"
+ 1045      5F493243 
+ 1045      4D617374 
+ 1045      65724765 
+ 1045      74526561 
+ 1046              	.LASF4:
+ 1047 026c 6C6F6E67 		.ascii	"long int\000"
+ 1047      20696E74 
+ 1047      00
+ 1048              	.LASF17:
+ 1049 0275 6C6F6E67 		.ascii	"long double\000"
+ 1049      20646F75 
+ 1049      626C6500 
+ 1050              	.LASF0:
+ 1051 0281 7369676E 		.ascii	"signed char\000"
+ 1051      65642063 
+ 1051      68617200 
+ 1052              	.LASF29:
+ 1053 028d 6D493243 		.ascii	"mI2C_I2CMasterGetWriteBufSize\000"
+ 1053      5F493243 
+ 1053      4D617374 
+ 1053      65724765 
+ 1053      74577269 
+ 1054              	.LASF33:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvQQc8k.s 			page 27
+
+
+ 1055 02ab 43794465 		.ascii	"CyDelay\000"
+ 1055      6C617900 
+ 1056              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
