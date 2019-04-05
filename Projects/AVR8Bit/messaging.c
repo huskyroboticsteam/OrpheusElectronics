@@ -37,15 +37,17 @@ void handle_CAN_message(struct CAN_msg *m){
 			}
 			break;
 		case 0x04: //Set angle + velocity
-			param1 *= ticks_per_degree;
+			/*param1 *= ticks_per_degree;
 			param2 *= ticks_per_degree;
 			param1 /= 100;
 			param2 /= 100;
 			if(param1 > get_motor_max_position()){
 				send_CAN_error(CAN_ERROR_INVALID_ARGUMENT, m->data[0]);
-			}
-			set_target_position(param1);
-			set_target_velocity(param2);
+			}*/
+			//set_target_position(param1);
+			//set_target_velocity(param2);
+			set_target_position(64);
+			set_target_velocity(5);
 			break;
 		case 0x06: //Index
 			index_motor();
@@ -69,7 +71,8 @@ void handle_CAN_message(struct CAN_msg *m){
 			send_model_number(sender);
 			break;
 		case 0x16:
-			write_PWM(PE5, m->data[1] * 4);
+			//write_PWM(PE5, m->data[1] * 4);
+			set_servo_position(m->data[1]);
 			break;
 		case 0xFF: /*error*/
 			tprintf("Error %d\n", m->data[1]);
@@ -91,6 +94,7 @@ int send_CAN_message(uint8_t target, uint8_t length, void *buffer, uint8_t prior
 	m.flags = 0;
 	m.length = length;
 	memcpy(m.data, buffer, length);
+	//dump_CAN_message(m);
 	return CAN_send_msg(&m);
 }
 
@@ -135,7 +139,7 @@ void send_int16_packet(uint8_t target, uint8_t pn, uint16_t n, uint8_t priority)
   uint8_t priority: the priority of the message. True for high priority
 */
 void send_int32_packet(uint8_t target, uint8_t pn, uint32_t n, uint8_t priority){
-	uint8_t buf[4];
+	uint8_t buf[5];
 	buf[0] = pn;
 	buf[1] = (n & 0xFF000000) >> 24;
 	buf[2] = (n & 0x00FF0000) >> 16;
@@ -152,11 +156,7 @@ void send_CAN_error(uint8_t error, uint8_t param){
 /*Sends the encoder count over the CAN bus to the BBB*/
 void send_encoder_count(){
 	uint32_t count = get_encoder_ticks();
-	if(count < 65535){
-		send_int16_packet(BEAGLEBONE_ADDRESS, 0x14, count & 0xFFFF, 0);
-	} else {
-		send_int32_packet(BEAGLEBONE_ADDRESS, 0x14, count, 0);
-	}
+	send_int32_packet(BEAGLEBONE_ADDRESS, 0x14, count, 0);
 }
 
 /*Sends the voltage and current over the CAN bus to the BBB*/

@@ -21,6 +21,7 @@ int main(){
 	uint32_t mS;
 	DDRA = 0xF0;
 	PORTA = 0xF0;
+	DDRC = 1<<3; //Laser
 	setup_timers();
 	_delay_ms(100);
 	PORTA = 0;
@@ -39,17 +40,18 @@ int main(){
 	init_ADC();
 	wdt_enable(WDTO_2S);
 	init_motor();
-	set_motor_mode(MOTOR_MODE_PID);
+	//set_motor_mode(MOTOR_MODE_PID);
 	//enable_motor();
 	set_LED(3, 3);
 	//PORTE |= (1<<PE4);
-	set_Kp(0, 7);
-	set_Ki(0, 3);
+	set_Kp(0, 10);
+	set_Ki(0, 2);
 	set_Kd(0, 1);
 	delay_mS(500);
 	set_LED(0, 0);
 	set_LED(1, 0);
 	set_LED(3, 0);
+	//PORTC |= 1<<3; //Laser
 	while(1){
 		mS = get_mS();
 		if(!PID_due){ //Don't busy the processor if the PID is due to run
@@ -69,7 +71,7 @@ int main(){
 			if(get_motor_mode() & MOTOR_MODE_ENABLED){
 				set_LED(2, 3);
 				set_LED(1, 0);
-			} else {
+				} else {
 				set_LED(1, 3);
 				set_LED(2, 0);
 			}

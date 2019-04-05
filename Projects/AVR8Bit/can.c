@@ -16,18 +16,18 @@ ISR(CANIT_vect){
 	if((CANHPMOB & 0xF0) != 0xF0){ //Message io?
 		int mob = (CANHPMOB >> 4);
 		select_mob(mob);
-	    if(CANSTMOB & (1 << TXOK)){ //TX
+		if(CANSTMOB & (1 << TXOK)){ //TX
 			/*Reset the MOb*/
 			CANSTMOB &= 0;
 			CANCDMOB = 0;
 			enable_mob_interrupt(mob);
-		} else { //RX
+			} else { //RX
 			msgs_av++; //Increase count of messages
 			rxed_mobs[!!(mob & 8)] |= (1 << (mob & 7)); // Mark which MOb has a message
 			CANSTMOB &= 0; //Reset the MOb
 			disable_mob_interrupt(mob);
 		}
-	} else {
+		} else {
 		CANGIT |= 0; //Error interrupt - Handle these?
 	}
 	CANPAGE = canpage; //restore CAN page
@@ -70,7 +70,7 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 		if(i > txmobs){
 			CANCDMOB = (1 << CONMOB1); //Mark RX mobs
 			enable_mob_interrupt(i);
-		} else {
+			} else {
 			CANCDMOB = 0;
 		}
 	}
@@ -96,7 +96,7 @@ void select_mob(uint8_t mob){
 void disable_mob_interrupt(uint8_t mob){
 	if(mob < 8){
 		CANIE2 &= ~(1 << mob);
-	} else {
+		} else {
 		CANIE1 &= ~(1 << (mob - 8));
 	}
 }
@@ -105,7 +105,7 @@ void disable_mob_interrupt(uint8_t mob){
 void enable_mob_interrupt(uint8_t mob){
 	if(mob < 8){
 		CANIE2 |= (1 << mob);
-	} else {
+		} else {
 		CANIE1 |= (1 << (mob - 8));
 	}
 }
@@ -114,7 +114,7 @@ void enable_mob_interrupt(uint8_t mob){
 int mob_interrupt_enabled(uint8_t mob){
 	if(mob < 8){
 		return !!(CANIE2 & (1 << mob));
-	} else {
+		} else {
 		return !!(CANIE1 & (1 << (mob - 8)));
 	}
 }
@@ -123,7 +123,7 @@ int mob_interrupt_enabled(uint8_t mob){
 uint8_t mob_enabled(uint8_t mob){
 	if(mob < 8){
 		return !!(CANEN2 & (1 << mob));
-	} else {
+		} else {
 		return !!(CANEN1 & (1 << (mob - 8)));
 	}
 }
@@ -146,11 +146,12 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 		}
 	}
 	mob = i;
+	//tprintf("rx mob=%d\n", mob);
 	buf->length = CANCDMOB & 0x0F; //Length in the lower 8 bits
 	buf->id = (CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3);
 	if(CANIDT4 & (1<<RTRTAG)){ //Was this a Request To Transmit?
 		buf->flags |= CAN_RTR;
-	} else {
+		} else {
 		buf->flags &= ~CAN_RTR;
 	}
 	for(i = 0;i < buf->length;i++){
@@ -230,45 +231,45 @@ void CAN_set_RX_filter(uint16_t mask, uint16_t tag){
 	}
 }
 /*List of CAN status code names*/
-const char *canstmob_names[] = {"ACK ERR", "FORM ERR", "CRC ERR", "STF ERR", "BIT ERR", "RXOK", "TXOK", "DLCW"}; 
+const char *canstmob_names[] = {"ACK ERR", "FORM ERR", "CRC ERR", "STF ERR", "BIT ERR", "RXOK", "TXOK", "DLCW"};
 /*Dumps the state of the CAN controller (for debugging)*/
 void CAN_dump_state(){
 	int i,j;
 	for(i = 0;i < 15;i++){
 		select_mob(i);
 		uint32_t canstmob = CANSTMOB;
-		uint32_t cancdmob = CANCDMOB; 
+		uint32_t cancdmob = CANCDMOB;
 		tprintf("mob %d: (%c), I=%c, IDT=%d, IDM=%d, DLC=%d, CANST=0x%X", i, mob_enabled(i)? 'E': 'D', mob_interrupt_enabled(i)? 'E': 'D', (uint16_t)((CANIDT2 >> 5) | ((uint16_t)CANIDT1 << 3)), (uint16_t)((CANIDM2 >> 5) | ((uint16_t)CANIDM1 << 3)), (int)(cancdmob & 15), canstmob);
 		if(canstmob != 0){
 			tprintf("{");
-			for(j = 0;j < 8;j++){
-				if(canstmob & (1<<j)){
-					tprintf("%s ", canstmob_names[j]);
+				for(j = 0;j < 8;j++){
+					if(canstmob & (1<<j)){
+						tprintf("%s ", canstmob_names[j]);
+					}
 				}
-			}
 			tprintf("}");
 		}
 		tprintf(", CANCD=0x%X {", (long)cancdmob);
-		if(cancdmob & (1<<5)){
-			tprintf("RPLV ");
-		}
-		if(cancdmob & (1<<4)){
-			tprintf("2.0B ");
-		}
-		switch((cancdmob & 0xC0)>>6){
-			case 0:
+			if(cancdmob & (1<<5)){
+				tprintf("RPLV ");
+			}
+			if(cancdmob & (1<<4)){
+				tprintf("2.0B ");
+			}
+			switch((cancdmob & 0xC0)>>6){
+				case 0:
 				tprintf("DIS");
 				break;
-			case 1:
+				case 1:
 				tprintf("ENTX");
 				break;
-			case 2:
+				case 2:
 				tprintf("ENRX");
 				break;
-			case 3:
+				case 3:
 				tprintf("FBRX");
 				break;
-		}
+			}
 		tprintf("}\n");
 	}
 }
@@ -278,12 +279,12 @@ void dump_CAN_message(struct CAN_msg m){
 	tprintf("\n-CAN MESSAGE-\n");
 	tprintf("id=0x%X, flags=0x%X, length=%d\n", (long)m.id, (long)m.flags, m.length);
 	tprintf("HEX={");
-	for(i = 0;i < m.length;i++){
-		tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");
-	}
-	tprintf("}, ASCII={");
-	for(i = 0;i < m.length;i++){
-		tprintf("%c", (m.data[i] > 31 && m.data[i] < 128)?m.data[i]: '.');
-	}
+		for(i = 0;i < m.length;i++){
+			tprintf("%X%s", (long)m.data[i], i == m.length-1?"": " ");
+		}
+		tprintf("}, ASCII={");
+		for(i = 0;i < m.length;i++){
+			tprintf("%c", (m.data[i] > 31 && m.data[i] < 128)?m.data[i]: '.');
+		}
 	tprintf("}\n-END CAN MESSAGE-\n\n");
 }

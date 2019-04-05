@@ -124,7 +124,8 @@ void set_motor_power(int16_t power){
 			motor_power = 0;
 		}
 	}
-	tprintf("%X\n", limit_sw);
+	//tprintf("%X\n", limit_sw);
+	//tprintf("Setting motor power to %d\n", motor_power);
 	set_motor_power_raw(motor_power);
 }
 
@@ -265,10 +266,16 @@ void index_motor(){
 int16_t av;
 #endif
 //int last;
+int32_t last = 0;
 /*Executes one tick of the motor control system. Call this in a loop!*/
 void motor_control_tick(){
 	if(!(motor_mode & MOTOR_MODE_PID)){ //If the PID is disabled, simply unset the PID due flag
 		PID_due = 0;
+		int32_t t = get_encoder_ticks();
+		if(t != last){
+			tprintf("%l\n", t);
+			last = t;
+		}
 	}
 	if(check_motor_stall() || !(PINE & (1<<PE4))){ //Motor stall or fault pin asserted from motor driver
 		motor_power = 0;
@@ -376,7 +383,7 @@ void motor_control_tick(){
 		pid_runs++;
 		PID_due = 0; //We're done running the PID for now
 	}
-	set_motor_power_raw(motor_power);		
+	set_motor_power_raw(-motor_power);		
 }
 
 /*Enables the motor*/

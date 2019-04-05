@@ -27,7 +27,10 @@ ISR(TIMER0_OVF_vect){
 
 /*Returns the total number of encoder ticks since the last reset*/
 int32_t get_encoder_ticks(){
+	//return -19;
+	//return 0;
 	return encoder_ticks;
+	//return 255;
 }
 
 /*Sets the encoder counter to the specified value*/
