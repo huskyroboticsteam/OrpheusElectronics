@@ -14,8 +14,7 @@ void scheduler(void);
 void readEncoders(void *myEncoderDataPtr);
 void pwmControl(uint16_t pwmVal, uint8_t pin); // Compares the pwm values with the compare val
 // void pwmCalculator(void *myPwmDataPtr); // control calculator
-// void potRead(void *myPotDataPtr); // ??
-void comms(void *myCanDataPtr);
+// void comms(void *myCanDataPtr);
 // void limit_switch(void); // warning system
 void emergencyStop(void);
 void initTC3(void);

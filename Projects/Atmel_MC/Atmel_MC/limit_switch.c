@@ -3,7 +3,7 @@
  *
  *  Author: Akhil Avula
  */ 
-/*
+
 #include "top.h"
 
 void limit_switch(void) {
@@ -12,4 +12,3 @@ void limit_switch(void) {
 	//	Cause an interrupt
 	// }
 }
-*/

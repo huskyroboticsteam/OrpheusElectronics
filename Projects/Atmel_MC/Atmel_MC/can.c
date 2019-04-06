@@ -4,7 +4,7 @@
  *  Author: Akhil Avula
  */ 
 // http://ww1.microchip.com/downloads/en/AppNotes/Atmel-42464-SAMC21-CAN-BUS-Firmware_ApplicationNote_AT6493.pdf
-
+/*
 #include "top.h"
 
 #define CAN_MODULE CAN0#define CAN_TX_MUX_SETTING MUX_PA24G_CAN0_TX
@@ -14,7 +14,7 @@
 /*
 txd - pb10
 rxd = pb11
-*/
+
 void comms(void *myCanDataPtr) {
 	canData *canDataPtr = (canData*) myCanDataPtr;
 	uint32_t id_value;
@@ -69,3 +69,4 @@ static void rx(uint32_t id_value, uint8_t *data, canData canDataPtr)
 		data++;
 	}
 }
+*/

@@ -40,10 +40,10 @@ void init_motor() {
 	pid_target = 0;
 	pid_target_inc = 0;
 
-	pid_runs;
-	motor_power;
-	motor_max_current;
-	motor_mode;
+	pid_runs = 0;
+	motor_power = 0;
+	motor_max_current = 0;
+	motor_mode = 1;
 }
 
 void set_motor_power(void *myPwmDataPtr) {
@@ -65,8 +65,8 @@ void set_motor_power(void *myPwmDataPtr) {
 		}
 		pwmDataPtr->motorPower = -pwmDataPtr->motorPower; //PWM is always positive
 	} else {
-		if(!(DIRPIN & (1<<DIRPIN))){
-			DIRPIN |= (1<<DIRPIN); //Forward
+		if(!(DIRPIN & (1<<motor_dir))){
+			DIRPIN |= (1<<motor_dir); //Forward
 		}
 	}
 	pwmControl(pwmDataPtr->motorPower, PWMPIN);

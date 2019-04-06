@@ -30,17 +30,16 @@
 #include <asf.h>
 #include <top.h>
 
-pwmData myPWMData;
+pwmMotorData myPWMData;
 encoderData myEncoderData;
 canData myCANData;
-potData myPotData;
+// potData myPotData;
 
 TCB canTCB, emergencyStopTCB, encoderTCB, limit_switchTCB, motorTCB;
 TCB *head, *tail;
-TCB *TCBArray[] = {&canTCB, &emergencyStopTCB, &encoderTCB, &limit_switchTCB, &, NULL}
+TCB *TCBArray[] = {&canTCB, &emergencyStopTCB, &encoderTCB, &limit_switchTCB, &motorTCB, NULL};
 
-int main (void)
-{
+int main (void) {
 	system_init();
 	/* Insert application code here, after the board has been initialized. */
 	initialize();
@@ -67,9 +66,7 @@ void initialize(void) {
 	myEncoderData.encoderRaw[2] = 0;
 	
 	// myCANData; // tbd
-	
-	// myPotData; // tbd
-	
+		
 	// Initialize TCB's
 	canTCB.task = comms;
 	canTCB.dataPtr = &myCANData;
