@@ -1,8 +1,8 @@
--- Project:   Motor Board
--- Generated: 03/28/2019 12:12:34
+-- Project:   Motor Board Rev1
+-- Generated: 04/20/2019 14:22:50
 -- PSoC Creator  4.2
 
-ENTITY \Motor Board\ IS
+ENTITY \Motor Board Rev1\ IS
     PORT(
         Pin_Limit_1(0)_PAD : IN std_ulogic;
         Pin_Limit_2(0)_PAD : IN std_ulogic;
@@ -34,9 +34,9 @@ ENTITY \Motor Board\ IS
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 5e0;
-END \Motor Board\;
+END \Motor Board Rev1\;
 
-ARCHITECTURE __DEFAULT__ OF \Motor Board\ IS
+ARCHITECTURE __DEFAULT__ OF \Motor Board Rev1\ IS
     SIGNAL ClockBlock_ECO : bit;
     SIGNAL ClockBlock_ExtClk : bit;
     SIGNAL ClockBlock_HFClk : bit;

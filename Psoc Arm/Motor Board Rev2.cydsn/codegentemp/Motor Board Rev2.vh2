@@ -2,7 +2,7 @@
 --	Conversion of Motor Board Rev2.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sat Mar 30 21:10:57 2019
+--	Sat Mar 30 21:19:59 2019
 --
 
 USE cypress.cypress.all;

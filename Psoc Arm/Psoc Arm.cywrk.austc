@@ -9,52 +9,49 @@
 <CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
 <indicators>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="79" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
-</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
-<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="90" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="80" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="91" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="136" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="92" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="137" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="150" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="138" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="151" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="160" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="152" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="161" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="173" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="162" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="174" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="207" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="175" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="208" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="262" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="209" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="263" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="328" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="264" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="329" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
@@ -66,64 +63,67 @@
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="331" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="368" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="342" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="371" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="379" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="383" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="382" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="384" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="396" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="395" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="397" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="409" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="408" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="410" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="482" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="421" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="483" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="488" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="495" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="489" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="504" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="501" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="505" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="520" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="517" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="521" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="540" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
 <CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="31" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="67" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="68" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="70" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="71" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 <CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
-<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="78" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="79" DocumentName=".\Motor Board Rev1.cydsn\main.c" />
 </CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
 </indicators>
 </CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
@@ -136,7 +136,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Psoc Arm\Motor Board Rev2\Source Files\main.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Psoc Arm\Motor Board Rev1\TopDesign">
 <ExpandedNodeIds>
 <v>Psoc Arm</v>
 <v>Psoc Arm\ADC test\TopDesign</v>
@@ -239,6 +239,7 @@
 <v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example.pdf</v>
 <v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source</v>
 <v>Psoc Arm\CAN_Full_P4_Example02\Generated_Source\PSoC4</v>
+<v>Psoc Arm\DebouncerExample01\TopDesign</v>
 <v>Psoc Arm\Dev Board\TopDesign</v>
 <v>Psoc Arm\Dev Board\Dev Board.cydwr</v>
 <v>Psoc Arm\Dev Board\Dev Board.cydwr\Pins</v>
@@ -286,6 +287,7 @@
 <v>Psoc Arm\I2C_Master_Low_Level01\Source Files\main.c</v>
 <v>Psoc Arm\I2C_Master_Low_Level01\Generated_Source</v>
 <v>Psoc Arm\I2C_Master_Low_Level01\Generated_Source\PSoC4</v>
+<v>Psoc Arm\Motor Board Rev1</v>
 <v>Psoc Arm\Motor Board Rev1\TopDesign</v>
 <v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr</v>
 <v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\Pins</v>
@@ -366,7 +368,26 @@
 <v>Psoc Arm\I2C_Master_High_Level01</v>
 <v>Psoc Arm\I2C_Master_Low_Level01</v>
 <v>Psoc Arm\Motor Board Rev1</v>
-<v>Psoc Arm\Motor Board Rev2</v>
+<v>Psoc Arm\Motor Board Rev1\TopDesign</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\Pins</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\Analog</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\DMA</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\Clocks</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\Interrupts</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\System</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\Directives</v>
+<v>Psoc Arm\Motor Board Rev1\Motor Board Rev1.cydwr\Flash Security</v>
+<v>Psoc Arm\Motor Board Rev1\Header Files</v>
+<v>Psoc Arm\Motor Board Rev1\Header Files\cyapicallbacks.h</v>
+<v>Psoc Arm\Motor Board Rev1\Source Files</v>
+<v>Psoc Arm\Motor Board Rev1\Source Files\main.c</v>
+<v>Psoc Arm\Motor Board Rev1\Generated_Source</v>
+<v>Psoc Arm\Motor Board Rev1\Generated_Source\PSoC4</v>
+<v>Psoc Arm\Motor Board Rev1\Generated_Source\PSoC4\CAN</v>
+<v>Psoc Arm\Motor Board Rev1\Generated_Source\PSoC4\Can_addr</v>
+<v>Psoc Arm\Motor Board Rev1\Generated_Source\PSoC4\CAN_HFCLK</v>
+<v>Psoc Arm\Motor Board Rev1\Generated_Source\PSoC4\CAN_isr</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -493,6 +514,25 @@
 <v>Psoc Arm\CAN_Basic_P4_Example01\TopDesign\PSoC4\PSoC 4200L</v>
 <v>Psoc Arm\CAN_Basic_P4_Example01\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
 <v>Psoc Arm\CAN_Basic_P4_Example01\TopDesign\PSoC4\PSoC 4200M</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\TopDesign\TopDesign.cysch</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200L</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200M</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
+<v>Psoc Arm\CAN_Basic_P4_unmodified\TopDesign\TopDesign.cysch</v>
+<v>Psoc Arm\CAN_Full_P4_Example01</v>
+<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign</v>
+<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4</v>
+<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200L</v>
+<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200L\TopDesign.ctl</v>
+<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M</v>
+<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\PSoC4\PSoC 4200M\TopDesign.ctl</v>
+<v>Psoc Arm\CAN_Full_P4_Example01\TopDesign\TopDesign.cysch</v>
+<v>Psoc Arm\CAN_Full_P4_Example02</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -761,6 +801,32 @@
 <v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02.rpt</v>
 <v>Psoc Arm\CAN_Full_P4_Example02\CAN_Full_P4_Example02_timing.html</v>
 <v>Psoc Arm\DebouncerExample01</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\FiltSwInt.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_LCDPort.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_PM.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\SwClock.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\Listing Files\SwInt.lst</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\DebouncerExample01.elf</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\DebouncerExample01.hex</v>
+<v>Psoc Arm\DebouncerExample01\CortexM3\ARM_GCC_541\Debug\DebouncerExample01.map</v>
+<v>Psoc Arm\DebouncerExample01\DebouncerExample01.gpdsc</v>
 <v>Psoc Arm\Dev Board</v>
 <v>Psoc Arm\Dev Board\CortexM0</v>
 <v>Psoc Arm\Dev Board\CortexM0\ARM_GCC_541</v>
@@ -972,6 +1038,19 @@
 <v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip_4_PM.lst</v>
 <v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\fault.lst</v>
 <v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\fault_PM.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_BOOT.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_I2C.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_I2C_BOOT.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_I2C_INT.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_I2C_MASTER.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_PM.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_SCB_IRQ.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_SCBCLK.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_scl.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_scl_PM.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_sda.lst</v>
+<v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_1_sda_PM.lst</v>
 <v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_Limit_1.lst</v>
 <v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_period.lst</v>
 <v>Psoc Arm\Motor Board Rev1\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
@@ -1312,6 +1391,19 @@
 <v>Psoc Arm\CAN_Full_P4_Example02\cy_pins_v2_20</v>
 <v>Psoc Arm\CAN_Full_P4_Example02\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Psoc Arm\CAN_Full_P4_Example02\SCB_P4_v3_20.pdf</v>
+<v>Psoc Arm\DebouncerExample01\PSoC 5LP Architecture TRM</v>
+<v>Psoc Arm\DebouncerExample01\CY8C58LP Family Datasheet</v>
+<v>Psoc Arm\DebouncerExample01\System Reference Guides</v>
+<v>Psoc Arm\DebouncerExample01\System Reference Guides\cy_boot_v5_60</v>
+<v>Psoc Arm\DebouncerExample01\CharLCD_v2_20.pdf</v>
+<v>Psoc Arm\DebouncerExample01\cy_clock_v2_20.pdf</v>
+<v>Psoc Arm\DebouncerExample01\cy_isr_v1_70</v>
+<v>Psoc Arm\DebouncerExample01\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>Psoc Arm\DebouncerExample01\cy_pins_v2_20.pdf</v>
+<v>Psoc Arm\DebouncerExample01\Debouncer_v1_0.pdf</v>
+<v>Psoc Arm\DebouncerExample01\Gnd_v1_0.pdf</v>
+<v>Psoc Arm\DebouncerExample01\not_v1_0.pdf</v>
+<v>Psoc Arm\DebouncerExample01\SwitchSPST_v1_0.pdf</v>
 <v>Psoc Arm\Dev Board</v>
 <v>Psoc Arm\Dev Board\PSoC 4 Architecture TRM</v>
 <v>Psoc Arm\Dev Board\PSoC 4200L Family Datasheet</v>
@@ -1460,6 +1552,25 @@
 <v>Psoc Arm\ADC test\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Psoc Arm\ADC test\OpAmp_P4_v1_20.pdf</v>
 <v>Psoc Arm\ADC test\SCB_P4_v4_0.pdf</v>
+<v>Psoc Arm\ADC test\TCPWM_P4_v2_10.pdf</v>
+<v>Psoc Arm\Can Send test</v>
+<v>Psoc Arm\Can Send test\PSoC 4 Architecture TRM</v>
+<v>Psoc Arm\Can Send test\PSoC 4200L Family Datasheet</v>
+<v>Psoc Arm\Can Send test\System Reference Guides</v>
+<v>Psoc Arm\Can Send test\System Reference Guides\cy_boot_v5_70</v>
+<v>Psoc Arm\Can Send test\System Reference Guides\cy_dmac_v1_10</v>
+<v>Psoc Arm\Can Send test\System Reference Guides\cy_lfclk_v1_20</v>
+<v>Psoc Arm\Can Send test\CAN_v3_0.pdf</v>
+<v>Psoc Arm\Can Send test\cy_pins_v2_20</v>
+<v>Psoc Arm\Can Send test\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\PSoC 4 Architecture TRM</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\PSoC 4200L Family Datasheet</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides\cy_boot_v5_60</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides\cy_dmac_v1_10</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\System Reference Guides\cy_lfclk_v1_20</v>
+<v>Psoc Arm\CAN_Basic_P4_Example01\ADC_SAR_SEQ_P4_v2_50.pdf</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
@@ -1470,6 +1581,7 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\Motor Board Rev2.cydsn\Motor Board Rev2.cydwr" />
+<name v=".\Motor Board Rev1.cydsn\main.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -1477,7 +1589,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1874, 892" SelectedTabbedMdiWindow="65a2808c-7838-423a-a6c5-f3e50ff64fe6"><DocumentWindow Key="C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Motor Board Rev2.cydsn\Motor Board Rev2.cydwr" Guid="69df6e2c-19f6-42fb-a0a8-a1447cf4eb64" /><ToolWindow Key="Output Window Plugin:7305390e-eabe-4963-b21f-3a0f11b4b1d5:Output Window" Guid="65a2808c-7838-423a-a6c5-f3e50ff64fe6" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1232, 656" SelectedTabbedMdiWindow="6bcf1192-28fd-4260-9265-cbbab001317c"><ToolWindow Key="Output Window Plugin:7305390e-eabe-4963-b21f-3a0f11b4b1d5:Output Window" Guid="65a2808c-7838-423a-a6c5-f3e50ff64fe6" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="5b7b8485-d0ab-4e37-a0a7-90eeea460fea" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board Rev2.cydsn\Motor Board Rev2.cydwr" Guid="49912d97-e01a-441f-be63-66cd0f6f9c78" /><DocumentWindow Key="C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board Rev1.cydsn\main.c" Guid="6bcf1192-28fd-4260-9265-cbbab001317c" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

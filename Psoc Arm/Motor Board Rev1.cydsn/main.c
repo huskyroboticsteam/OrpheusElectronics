@@ -27,7 +27,7 @@ int CAN_TIMEOUT;
 CY_ISR_PROTO(ISR_CAN);
 
 //Uart variables
-volatile uint8 uart_debug = 2;
+volatile uint8 uart_debug = 1;
 #define TX_DATA_SIZE            (100u)
 #define PWM_PERIOD = 255;
 
@@ -38,11 +38,12 @@ int pwm_compare;
 uint8 invalidate = 0;
 
 //PID varaibles
+int8 flipEncoder = 1;
 int i = 0;
 int lastp = 0;
-int kp = 1;
-int ki = 1;
-int kd = 0;
+int kp = 50;
+int ki = 3;
+int kd = 10;
 double ratio;
 uint8 complete = 0;
 uint8 maxV = 0;
@@ -124,11 +125,11 @@ int main(void)
         if(!emergency) {
 
             //Tests if there are still drive packets that still need to be done
-            drive = !Can_rx_pwm.done | !Can_rx_angle.done;
+            //drive = !Can_rx_pwm.done | !Can_rx_angle.done;
             
             //Handles Can drive recieve packets
-            if (drive)
-            {           
+            //if (drive)
+            //{           
                 //Mode 0 packets
                 if(!Can_rx_pwm.done) {
                     if(mode == 0) {
@@ -154,13 +155,13 @@ int main(void)
                 }
                 
                 // Mode 1 packets
-                if(!Can_rx_angle.done){
+               // if(!Can_rx_angle.done){
                     if(mode == 1){
                         if(uart_debug) {
                             sprintf(txData, "B1: %d, B3: %d done %x\r\n",Can_rx_angle.b1, Can_rx_angle.b3, Can_rx_pwm.done);
                             UART_UartPutString(txData);
                         }
-                        Can_rx_angle.done = 1;
+                        //Can_rx_angle.done = 1;
                         complete = 0;
                         maxV = Can_rx_angle.b3;
                         i = 0;
@@ -174,13 +175,13 @@ int main(void)
                             UART_UartPutString(txData);
                         }
                     }
-                }
+                //}
                 
-                if(mode != 1 || mode != 0) {
+                if(mode != 1 && mode != 0) {
                     Can_rx_angle.done = 1;
                     Can_rx_pwm.done = 1;
                 }
-            }
+            //}
             
             //Tests if there are any errors
             error = !stall.done | !invalid_arg.done | !command_failed.done; 
@@ -287,10 +288,16 @@ void initialize_can_addr(void) {
         case 0b000: //Base rotation
             message_id = 0b10000;
             shift = 0;
+            ratio = 1;
             break;
         case 0b001: // shoulder
             message_id = 0b10001;
             shift = 1;
+            ratio = 1;
+            flipEncoder = -1;
+            kp = 50;
+            ki = 3;
+            kd = 10;
             break;
         case 0b010: // elbow
             message_id = 0b10010;
@@ -301,20 +308,24 @@ void initialize_can_addr(void) {
             message_id = 0b10011;
             disable_limit = 1;
             shift = 3;
+            ratio = 1;
             break;
         case 0b100: // diff wrist 1
             message_id = 0b10100;
             disable_limit = 1;
             shift = 4;
+            ratio = 1;
             break;
         case 0b101: // diff wrist 2
             message_id = 0b10101;
             disable_limit = 1;
             shift = 5;
+            ratio = 1;
             break;
         case 0b110: // hand
             message_id = 0b10110;
             shift = 6;
+            ratio = 1;
             break;
     }
     
@@ -453,6 +464,7 @@ inline void set_data(uint16 addr){
                 invalid_arg.param = 0x00;
                 invalid_arg.done = 0;
             }
+            complete = 1;
         } 
         //pwm
         else if(CAN_RX_DATA_BYTE1(addr) == 0x02) {
@@ -482,7 +494,7 @@ void set_Position(int degrees) {
         sprintf(txData, "complete: %d\r\n",complete);
         UART_UartPutString(txData);
     }
-    while(!complete) {
+    //while(!complete) {
         int PWM = position_PID(degrees_to_tick(degrees));
         if(uart_debug) {
             sprintf(txData, "PWM: %d\r\n",PWM);
@@ -495,7 +507,7 @@ void set_Position(int degrees) {
         } else {
             set_PWM(PWM);   
         }
-    }
+   // }
 }
 
 int degrees_to_tick(int degrees){
@@ -508,19 +520,26 @@ int degrees_to_tick(int degrees){
 }
 
 int position_PID(int target){
-    int16 current =  QuadDec_GetCounter();
+    int16 current =  QuadDec_GetCounter() * flipEncoder;
     int p = target - current;
-   /* if(p) {
-      complete =  1;
-    }*/
+    if(!p) {
+      //complete =  1;
+      return(0);
+    }
     i = i + p;
+    if ( i > 500) {
+        i = 500;   
+    }
+    if ( i < -500) {
+        i = -500;
+    }
     int d = p - lastp;
-    lastp = current;
+    lastp = p;
     if(uart_debug) {
         sprintf(txData, "p: %d, i: %d d %d current %d\r\n",p, i, d, current);
         UART_UartPutString(txData);
     }
-    return (p*kp + i*ki + d*kd);
+    return (p*kp/10 + i*ki/10 + d*kd/10);
 }
 
 /*

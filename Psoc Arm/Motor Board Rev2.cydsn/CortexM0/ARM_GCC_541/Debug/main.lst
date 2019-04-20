@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
   28:main.c        **** 
   29:main.c        **** //Uart variables
   30:main.c        **** volatile uint8 uart_debug = 2;
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 2
 
 
   31:main.c        **** #define TX_DATA_SIZE            (100u)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
   85:main.c        ****     }
   86:main.c        **** }
   87:main.c        **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 3
 
 
   88:main.c        **** CY_ISR(Pin_Limit_Handler){
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  142:main.c        ****                             set_PWM(-(int)Can_rx_pwm.b1);
  143:main.c        ****                         }
  144:main.c        ****                     } else {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 4
 
 
  145:main.c        ****                         command_failed.done = 0;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  199:main.c        ****                 }
  200:main.c        ****             }
  201:main.c        ****             
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 5
 
 
  202:main.c        ****             //Sends periodic data
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  256:main.c        ****     isr_period_StartEx(Period_Reset_Handler);
  257:main.c        ****     
  258:main.c        ****     if(uart_debug) {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 6
 
 
  259:main.c        ****         UART_Start();
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  313:main.c        ****         case 0b110: // hand
  314:main.c        ****             message_id = 0b10110;
  315:main.c        ****             shift = 6;
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 7
 
 
  316:main.c        ****             break;
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  370:main.c        ****     }
  371:main.c        **** }
  372:main.c        **** 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 8
 
 
  373:main.c        **** void CAN_Send_Telemetry(void) {
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
   39 0006 694B     		ldr	r3, .L19
   40 0008 1A60     		str	r2, [r3]
  416:main.c        ****     if(uart_debug) {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 9
 
 
   41              		.loc 1 416 0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  438:main.c        ****         /* Acknowledges receipt of new message */
  439:main.c        ****         CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_1);
  440:main.c        ****     }
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 10
 
 
  441:main.c        ****     
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  112 006e 120E     		lsrs	r2, r2, #24
  113 0070 022A     		cmp	r2, #2
  114 0072 0ED1     		bne	.L9
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 11
 
 
  457:main.c        ****             Can_rx_pwm.b1 = CAN_RX_DATA_BYTE2(addr);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  469:main.c        ****             Can_rx_angle.done = 0;
  157              		.loc 1 469 0
  158 00b2 0023     		movs	r3, #0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 12
 
 
  159 00b4 5371     		strb	r3, [r2, #5]
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  204 00f4 3748     		ldr	r0, .L19+40
  205 00f6 FFF7FEFF 		bl	UART_UartPutString
  206              	.LVL5:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 13
 
 
  207              	.L12:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  254 013a 0ED1     		bne	.L17
  457:main.c        ****             Can_rx_pwm.b2 = CAN_RX_DATA_BYTE3(addr);
  255              		.loc 1 457 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 14
 
 
  256 013c 9968     		ldr	r1, [r3, #8]
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  470:main.c        ****         } 
  300              		.loc 1 470 0
  301 017e 0122     		movs	r2, #1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 15
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 15
 
 
  302 0180 134B     		ldr	r3, .L19+36
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  353              		.global	emergency_halt
  354              		.code	16
  355              		.thumb_func
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 16
 
 
  356              		.type	emergency_halt, %function
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  404              	.LVL10:
  405 0006 0400     		movs	r4, r0
  406              	.LVL11:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 17
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 17
 
 
  245:main.c        ****     Timer_1_Start();
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  260:main.c        ****         UART_UartPutString(txData); 
  450              		.loc 1 260 0
  451 003e 094D     		ldr	r5, .L26+16
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 18
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 18
 
 
  452 0040 2200     		movs	r2, r4
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  502 0010 1860     		str	r0, [r3]
  335:main.c        **** 
  503              		.loc 1 335 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 19
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 19
 
 
  504              		@ sp needed
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  555 000c 42000000 		.word	.L37
  556 0010 50000000 		.word	.L38
  557 0014 5E000000 		.word	.L39
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 20
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 20
 
 
  558 0018 6C000000 		.word	.L40
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  601 0046 9A60     		str	r2, [r3, #8]
  300:main.c        ****             shift = 3;
  602              		.loc 1 300 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 21
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 21
 
 
  603 0048 123A     		subs	r2, r2, #18
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  645              		.loc 1 315 0
  646 0072 0626     		movs	r6, #6
  316:main.c        ****     }
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 22
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 22
 
 
  647              		.loc 1 316 0
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  692 00b2 2000     		movs	r0, r4
  693 00b4 FFF7FEFF 		bl	UART_UartPutString
  694              	.LVL44:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 23
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 23
 
 
  328:main.c        ****         UART_UartPutString(txData); 
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  745              		.cfi_def_cfa_offset 8
  746              		.cfi_offset 4, -8
  747              		.cfi_offset 14, -4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 24
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 24
 
 
  748 0002 0400     		movs	r4, r0
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  792 003e 03D5     		bpl	.L50
  348:main.c        ****             Pin_Direction_Write(1);
  793              		.loc 1 348 0 is_stmt 0 discriminator 1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 25
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 25
 
 
  794 0040 074B     		ldr	r3, .L51
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  843              		.cfi_offset 14, -4
   76:main.c        ****     if(uart_debug) {
  844              		.loc 1 76 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 26
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 26
 
 
  845 0002 FFF7FEFF 		bl	Timer_1_ReadStatusRegister
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  892              		.align	2
  893              		.global	Pin_Limit_Handler
  894              		.code	16
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 27
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 27
 
 
  895              		.thumb_func
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  943              		.align	2
  944              		.global	CAN_Send_Encoder
  945              		.code	16
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 28
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 28
 
 
  946              		.thumb_func
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  367:main.c        ****             QuadDec_GetCounter());
  991              		.loc 1 367 0
  992 002a 0A4B     		ldr	r3, .L64
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 29
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 29
 
 
  993 002c 1D78     		ldrb	r5, [r3]
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1042              		.cfi_def_cfa_offset 8
  1043              		.cfi_offset 4, -8
  1044              		.cfi_offset 14, -4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 30
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 30
 
 
  374:main.c        ****     data.byte[1u] = 0;
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1089 0040 00000000 		.word	.LANCHOR0
  1090 0044 00000000 		.word	txData
  1091 0048 28010000 		.word	.LC50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 31
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 31
 
 
  1092              		.cfi_endproc
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1137 0026 074C     		ldr	r4, .L72+12
  1138 0028 0749     		ldr	r1, .L72+16
  1139 002a 2000     		movs	r0, r4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 32
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 32
 
 
  1140 002c FFF7FEFF 		bl	sprintf
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  403:main.c        ****     data.byte[4u] = 0;
  1188              		.loc 1 403 0
  1189 000e 0022     		movs	r2, #0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 33
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 33
 
 
  1190 0010 DA70     		strb	r2, [r3, #3]
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1238              		.thumb_func
  1239              		.type	set_data, %function
  1240              	set_data:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 34
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 34
 
 
  1241              	.LFB48:
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1287 0038 1B0E     		lsrs	r3, r3, #24
  1288 003a 022B     		cmp	r3, #2
  1289 003c 0ED1     		bne	.L83
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 35
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 35
 
 
  457:main.c        ****             Can_rx_pwm.b2 = CAN_RX_DATA_BYTE3(addr);
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1333 007c 0022     		movs	r2, #0
  1334 007e 5A71     		strb	r2, [r3, #5]
  470:main.c        ****         } 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 36
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 36
 
 
  1335              		.loc 1 470 0
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  486:main.c        ****             sprintf(txData, "PWM: %d\r\n",PWM);
  487:main.c        ****             UART_UartPutString(txData);
  488:main.c        ****         }
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 37
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 37
 
 
  489:main.c        ****         if(PWM > maxV){
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1416 002e 3000     		movs	r0, r6
  1417 0030 FFF7FEFF 		bl	UART_UartPutString
  1418              	.LVL95:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 38
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 38
 
 
  1419              	.L88:
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  513:main.c        ****     }*/
  514:main.c        ****     i = i + p;
  1464              		.loc 1 514 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 39
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 39
 
 
  1465 000c 114A     		ldr	r2, .L93
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1511              	.LVL106:
  1512 0050 70BD     		pop	{r4, r5, r6, pc}
  1513              	.L94:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 40
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 40
 
 
  1514 0052 C046     		.align	2
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  484:main.c        ****         if(uart_debug) {
  1564              		.loc 1 484 0
  1565 0022 2800     		movs	r0, r5
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 41
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 41
 
 
  1566 0024 FFF7FEFF 		bl	degrees_to_tick
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1612              	.LVL119:
  1613              	.L97:
  1614              	.LBE10:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 42
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 42
 
 
  483:main.c        ****         int PWM = position_PID(degrees_to_tick(degrees));
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  101:main.c        ****     invalid_arg.code = 0x03;
  1663              		.loc 1 101 0
  1664 0012 9370     		strb	r3, [r2, #2]
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 43
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 43
 
 
  102:main.c        ****     invalid_arg.done = 1;
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1705              		.loc 1 122 0
  1706 0048 714B     		ldr	r3, .L124+32
  1707 004a 1B79     		ldrb	r3, [r3, #4]
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 44
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 44
 
 
  1708 004c 002B     		cmp	r3, #0
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1754 0096 5B4B     		ldr	r3, .L124+20
  1755 0098 0122     		movs	r2, #1
  1756 009a 5A71     		strb	r2, [r3, #5]
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 45
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 45
 
 
  138:main.c        ****                             set_PWM((int)Can_rx_pwm.b1);
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1802 00de 002B     		cmp	r3, #0
  1803 00e0 32D1     		bne	.L112
  156:main.c        ****                         if(uart_debug) {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 46
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 46
 
 
  1804              		.loc 1 156 0
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1849              		.loc 1 168 0
  1850 0126 334B     		ldr	r3, .L124+4
  1851 0128 0021     		movs	r1, #0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 47
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 47
 
 
  1852 012a 9970     		strb	r1, [r3, #2]
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1898 0170 01D1     		bne	.L123
  1899 0172 002A     		cmp	r2, #0
  1900 0174 1ED0     		beq	.L115
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 48
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 48
 
 
  1901              	.L123:
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1945              		.loc 1 203 0
  1946 01b4 174B     		ldr	r3, .L124+36
  1947 01b6 9B7B     		ldrb	r3, [r3, #14]
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 49
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 49
 
 
  1948 01b8 002B     		cmp	r3, #0
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  1995 020c 00000000 		.word	pwm_compare
  1996 0210 00000000 		.word	.LANCHOR1
  1997 0214 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 50
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 50
 
 
  1998 0218 00000000 		.word	txData
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2052              		.type	CAN_RX_MAILBOX_0, %object
  2053              		.size	CAN_RX_MAILBOX_0, 2
  2054              	CAN_RX_MAILBOX_0:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 51
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 51
 
 
  2055 0008 0700     		.short	7
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2092      696E673A 
  2092      20202578 
  2093 006f 00       		.space	1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 52
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 52
 
 
  2094              	.LC28:
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2116              	.LC72:
  2117 01a4 64656772 		.ascii	"degree: %d ticks: %d\015\012\000"
  2117      65653A20 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 53
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 53
 
 
  2117      25642074 
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2141      612E2E2E 
  2141      200D0A00 
  2142              		.bss
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 54
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 54
 
 
  2143              		.align	2
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2197              		.size	mailbox, 4
  2198              	mailbox:
  2199 0020 00000000 		.space	4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 55
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 55
 
 
  2200              		.text
@@ -3265,48 +3265,48 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2221 0006 00000000 		.4byte	.Ldebug_abbrev0
  2222 000a 04       		.byte	0x4
  2223 000b 01       		.uleb128 0x1
- 2224 000c 0F010000 		.4byte	.LASF115
+ 2224 000c 6B010000 		.4byte	.LASF115
  2225 0010 0C       		.byte	0xc
- 2226 0011 00000000 		.4byte	.LASF116
- 2227 0015 AE050000 		.4byte	.LASF117
+ 2226 0011 5C000000 		.4byte	.LASF116
+ 2227 0015 00000000 		.4byte	.LASF117
  2228 0019 00000000 		.4byte	.Ldebug_ranges0+0
  2229 001d 00000000 		.4byte	0
  2230 0021 00000000 		.4byte	.Ldebug_line0
  2231 0025 02       		.uleb128 0x2
  2232 0026 01       		.byte	0x1
  2233 0027 06       		.byte	0x6
- 2234 0028 83050000 		.4byte	.LASF0
+ 2234 0028 DF050000 		.4byte	.LASF0
  2235 002c 02       		.uleb128 0x2
  2236 002d 01       		.byte	0x1
  2237 002e 08       		.byte	0x8
- 2238 002f 3D050000 		.4byte	.LASF1
+ 2238 002f 99050000 		.4byte	.LASF1
  2239 0033 02       		.uleb128 0x2
  2240 0034 02       		.byte	0x2
  2241 0035 05       		.byte	0x5
- 2242 0036 4E040000 		.4byte	.LASF2
+ 2242 0036 AA040000 		.4byte	.LASF2
  2243 003a 02       		.uleb128 0x2
  2244 003b 02       		.byte	0x2
  2245 003c 07       		.byte	0x7
- 2246 003d 8F050000 		.4byte	.LASF3
+ 2246 003d EB050000 		.4byte	.LASF3
  2247 0041 02       		.uleb128 0x2
  2248 0042 04       		.byte	0x4
  2249 0043 05       		.byte	0x5
- 2250 0044 5E040000 		.4byte	.LASF4
+ 2250 0044 BA040000 		.4byte	.LASF4
  2251 0048 02       		.uleb128 0x2
  2252 0049 04       		.byte	0x4
  2253 004a 07       		.byte	0x7
- 2254 004b 06050000 		.4byte	.LASF5
+ 2254 004b 62050000 		.4byte	.LASF5
  2255 004f 02       		.uleb128 0x2
  2256 0050 08       		.byte	0x8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 56
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 56
 
 
  2257 0051 05       		.byte	0x5
- 2258 0052 25030000 		.4byte	.LASF6
+ 2258 0052 81030000 		.4byte	.LASF6
  2259 0056 02       		.uleb128 0x2
  2260 0057 08       		.byte	0x8
  2261 0058 07       		.byte	0x7
- 2262 0059 C5000000 		.4byte	.LASF7
+ 2262 0059 21010000 		.4byte	.LASF7
  2263 005d 03       		.uleb128 0x3
  2264 005e 04       		.byte	0x4
  2265 005f 05       		.byte	0x5
@@ -3314,56 +3314,56 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2267 0064 02       		.uleb128 0x2
  2268 0065 04       		.byte	0x4
  2269 0066 07       		.byte	0x7
- 2270 0067 5F000000 		.4byte	.LASF8
+ 2270 0067 BB000000 		.4byte	.LASF8
  2271 006b 04       		.uleb128 0x4
- 2272 006c 09060000 		.4byte	.LASF9
+ 2272 006c 12060000 		.4byte	.LASF9
  2273 0070 02       		.byte	0x2
  2274 0071 E401     		.2byte	0x1e4
  2275 0073 2C000000 		.4byte	0x2c
  2276 0077 04       		.uleb128 0x4
- 2277 0078 C1020000 		.4byte	.LASF10
+ 2277 0078 1D030000 		.4byte	.LASF10
  2278 007c 02       		.byte	0x2
  2279 007d E501     		.2byte	0x1e5
  2280 007f 3A000000 		.4byte	0x3a
  2281 0083 04       		.uleb128 0x4
- 2282 0084 90030000 		.4byte	.LASF11
+ 2282 0084 EC030000 		.4byte	.LASF11
  2283 0088 02       		.byte	0x2
  2284 0089 E601     		.2byte	0x1e6
  2285 008b 48000000 		.4byte	0x48
  2286 008f 04       		.uleb128 0x4
- 2287 0090 80000000 		.4byte	.LASF12
+ 2287 0090 DC000000 		.4byte	.LASF12
  2288 0094 02       		.byte	0x2
  2289 0095 E801     		.2byte	0x1e8
  2290 0097 33000000 		.4byte	0x33
  2291 009b 02       		.uleb128 0x2
  2292 009c 04       		.byte	0x4
  2293 009d 04       		.byte	0x4
- 2294 009e B9000000 		.4byte	.LASF13
+ 2294 009e 15010000 		.4byte	.LASF13
  2295 00a2 02       		.uleb128 0x2
  2296 00a3 08       		.byte	0x8
  2297 00a4 04       		.byte	0x4
- 2298 00a5 0F060000 		.4byte	.LASF14
+ 2298 00a5 18060000 		.4byte	.LASF14
  2299 00a9 04       		.uleb128 0x4
- 2300 00aa F1020000 		.4byte	.LASF15
+ 2300 00aa 4D030000 		.4byte	.LASF15
  2301 00ae 02       		.byte	0x2
  2302 00af F501     		.2byte	0x1f5
  2303 00b1 B5000000 		.4byte	0xb5
  2304 00b5 02       		.uleb128 0x2
  2305 00b6 01       		.byte	0x1
  2306 00b7 08       		.byte	0x8
- 2307 00b8 82020000 		.4byte	.LASF16
+ 2307 00b8 DE020000 		.4byte	.LASF16
  2308 00bc 04       		.uleb128 0x4
- 2309 00bd 86000000 		.4byte	.LASF17
+ 2309 00bd E2000000 		.4byte	.LASF17
  2310 00c1 02       		.byte	0x2
  2311 00c2 8E02     		.2byte	0x28e
  2312 00c4 C8000000 		.4byte	0xc8
  2313 00c8 05       		.uleb128 0x5
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 57
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 57
 
 
  2314 00c9 6B000000 		.4byte	0x6b
  2315 00cd 04       		.uleb128 0x4
- 2316 00ce DC030000 		.4byte	.LASF18
+ 2316 00ce 38040000 		.4byte	.LASF18
  2317 00d2 02       		.byte	0x2
  2318 00d3 9002     		.2byte	0x290
  2319 00d5 D9000000 		.4byte	0xd9
@@ -3372,13 +3372,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2322 00de 02       		.uleb128 0x2
  2323 00df 08       		.byte	0x8
  2324 00e0 04       		.byte	0x4
- 2325 00e1 C0030000 		.4byte	.LASF19
+ 2325 00e1 1C040000 		.4byte	.LASF19
  2326 00e5 02       		.uleb128 0x2
  2327 00e6 04       		.byte	0x4
  2328 00e7 07       		.byte	0x7
- 2329 00e8 FD040000 		.4byte	.LASF20
+ 2329 00e8 59050000 		.4byte	.LASF20
  2330 00ec 06       		.uleb128 0x6
- 2331 00ed F5000000 		.4byte	.LASF22
+ 2331 00ed 51010000 		.4byte	.LASF22
  2332 00f1 06       		.byte	0x6
  2333 00f2 03       		.byte	0x3
  2334 00f3 14       		.byte	0x14
@@ -3414,35 +3414,35 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2364 012a 6B000000 		.4byte	0x6b
  2365 012e 04       		.byte	0x4
  2366 012f 08       		.uleb128 0x8
- 2367 0130 A1030000 		.4byte	.LASF21
+ 2367 0130 FD030000 		.4byte	.LASF21
  2368 0134 03       		.byte	0x3
  2369 0135 16       		.byte	0x16
  2370 0136 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 58
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 58
 
 
  2371 013a 05       		.byte	0x5
  2372 013b 00       		.byte	0
  2373 013c 06       		.uleb128 0x6
- 2374 013d 09010000 		.4byte	.LASF23
+ 2374 013d 65010000 		.4byte	.LASF23
  2375 0141 03       		.byte	0x3
  2376 0142 03       		.byte	0x3
  2377 0143 18       		.byte	0x18
  2378 0144 6D010000 		.4byte	0x16d
  2379 0148 08       		.uleb128 0x8
- 2380 0149 09020000 		.4byte	.LASF24
+ 2380 0149 65020000 		.4byte	.LASF24
  2381 014d 03       		.byte	0x3
  2382 014e 1A       		.byte	0x1a
  2383 014f 6B000000 		.4byte	0x6b
  2384 0153 00       		.byte	0
  2385 0154 08       		.uleb128 0x8
- 2386 0155 67030000 		.4byte	.LASF25
+ 2386 0155 C3030000 		.4byte	.LASF25
  2387 0159 03       		.byte	0x3
  2388 015a 1A       		.byte	0x1a
  2389 015b 6B000000 		.4byte	0x6b
  2390 015f 01       		.byte	0x1
  2391 0160 08       		.uleb128 0x8
- 2392 0161 A1030000 		.4byte	.LASF21
+ 2392 0161 FD030000 		.4byte	.LASF21
  2393 0165 03       		.byte	0x3
  2394 0166 1A       		.byte	0x1a
  2395 0167 6B000000 		.4byte	0x6b
@@ -3454,7 +3454,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2401 0170 6F       		.byte	0x6f
  2402 0171 82010000 		.4byte	0x182
  2403 0175 08       		.uleb128 0x8
- 2404 0176 33050000 		.4byte	.LASF26
+ 2404 0176 8F050000 		.4byte	.LASF26
  2405 017a 04       		.byte	0x4
  2406 017b 71       		.byte	0x71
  2407 017c 82010000 		.4byte	0x182
@@ -3468,7 +3468,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2415 0190 07       		.byte	0x7
  2416 0191 00       		.byte	0
  2417 0192 0C       		.uleb128 0xc
- 2418 0193 87020000 		.4byte	.LASF27
+ 2418 0193 E3020000 		.4byte	.LASF27
  2419 0197 04       		.byte	0x4
  2420 0198 72       		.byte	0x72
  2421 0199 6D010000 		.4byte	0x16d
@@ -3478,10 +3478,10 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2425 01a0 75       		.byte	0x75
  2426 01a1 B2010000 		.4byte	0x1b2
  2427 01a5 08       		.uleb128 0x8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 59
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 59
 
 
- 2428 01a6 33050000 		.4byte	.LASF26
+ 2428 01a6 8F050000 		.4byte	.LASF26
  2429 01aa 04       		.byte	0x4
  2430 01ab 77       		.byte	0x77
  2431 01ac C2010000 		.4byte	0x1c2
@@ -3497,7 +3497,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2441 01c2 05       		.uleb128 0x5
  2442 01c3 B2010000 		.4byte	0x1b2
  2443 01c7 0C       		.uleb128 0xc
- 2444 01c8 79030000 		.4byte	.LASF28
+ 2444 01c8 D5030000 		.4byte	.LASF28
  2445 01cc 04       		.byte	0x4
  2446 01cd 78       		.byte	0x78
  2447 01ce 9D010000 		.4byte	0x19d
@@ -3507,7 +3507,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2451 01d5 7B       		.byte	0x7b
  2452 01d6 E7010000 		.4byte	0x1e7
  2453 01da 08       		.uleb128 0x8
- 2454 01db 33050000 		.4byte	.LASF26
+ 2454 01db 8F050000 		.4byte	.LASF26
  2455 01df 04       		.byte	0x4
  2456 01e0 7D       		.byte	0x7d
  2457 01e1 F7010000 		.4byte	0x1f7
@@ -3523,7 +3523,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2467 01f7 05       		.uleb128 0x5
  2468 01f8 E7010000 		.4byte	0x1e7
  2469 01fc 0C       		.uleb128 0xc
- 2470 01fd 18050000 		.4byte	.LASF29
+ 2470 01fd 74050000 		.4byte	.LASF29
  2471 0201 04       		.byte	0x4
  2472 0202 7E       		.byte	0x7e
  2473 0203 D2010000 		.4byte	0x1d2
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2482 0214 83       		.byte	0x83
  2483 0215 83000000 		.4byte	0x83
  2484 0219 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 60
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 60
 
 
  2485 021a 07       		.uleb128 0x7
@@ -3582,7 +3582,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2523 0264 04       		.byte	0x4
  2524 0265 92010000 		.4byte	0x192
  2525 0269 0C       		.uleb128 0xc
- 2526 026a A6000000 		.4byte	.LASF30
+ 2526 026a 02010000 		.4byte	.LASF30
  2527 026e 04       		.byte	0x4
  2528 026f 8C       		.byte	0x8c
  2529 0270 07020000 		.4byte	0x207
@@ -3592,73 +3592,73 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2533 0277 A0       		.byte	0xa0
  2534 0278 D1020000 		.4byte	0x2d1
  2535 027c 08       		.uleb128 0x8
- 2536 027d 65050000 		.4byte	.LASF31
+ 2536 027d C1050000 		.4byte	.LASF31
  2537 0281 04       		.byte	0x4
  2538 0282 A2       		.byte	0xa2
  2539 0283 FC010000 		.4byte	0x1fc
  2540 0287 00       		.byte	0
  2541 0288 08       		.uleb128 0x8
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 61
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 61
 
 
- 2542 0289 38050000 		.4byte	.LASF32
+ 2542 0289 94050000 		.4byte	.LASF32
  2543 028d 04       		.byte	0x4
  2544 028e A3       		.byte	0xa3
  2545 028f FC010000 		.4byte	0x1fc
  2546 0293 04       		.byte	0x4
  2547 0294 08       		.uleb128 0x8
- 2548 0295 60030000 		.4byte	.LASF33
+ 2548 0295 BC030000 		.4byte	.LASF33
  2549 0299 04       		.byte	0x4
  2550 029a A4       		.byte	0xa4
  2551 029b C7010000 		.4byte	0x1c7
  2552 029f 08       		.byte	0x8
  2553 02a0 08       		.uleb128 0x8
- 2554 02a1 6C000000 		.4byte	.LASF34
+ 2554 02a1 C8000000 		.4byte	.LASF34
  2555 02a5 04       		.byte	0x4
  2556 02a6 A5       		.byte	0xa5
  2557 02a7 FC010000 		.4byte	0x1fc
  2558 02ab 10       		.byte	0x10
  2559 02ac 08       		.uleb128 0x8
- 2560 02ad 9A020000 		.4byte	.LASF35
+ 2560 02ad F6020000 		.4byte	.LASF35
  2561 02b1 04       		.byte	0x4
  2562 02b2 A6       		.byte	0xa6
  2563 02b3 FC010000 		.4byte	0x1fc
  2564 02b7 14       		.byte	0x14
  2565 02b8 08       		.uleb128 0x8
- 2566 02b9 AF020000 		.4byte	.LASF36
+ 2566 02b9 0B030000 		.4byte	.LASF36
  2567 02bd 04       		.byte	0x4
  2568 02be A7       		.byte	0xa7
  2569 02bf FC010000 		.4byte	0x1fc
  2570 02c3 18       		.byte	0x18
  2571 02c4 08       		.uleb128 0x8
- 2572 02c5 F7020000 		.4byte	.LASF37
+ 2572 02c5 53030000 		.4byte	.LASF37
  2573 02c9 04       		.byte	0x4
  2574 02ca A8       		.byte	0xa8
  2575 02cb FC010000 		.4byte	0x1fc
  2576 02cf 1C       		.byte	0x1c
  2577 02d0 00       		.byte	0
  2578 02d1 0C       		.uleb128 0xc
- 2579 02d2 C4010000 		.4byte	.LASF38
+ 2579 02d2 20020000 		.4byte	.LASF38
  2580 02d6 04       		.byte	0x4
  2581 02d7 A9       		.byte	0xa9
  2582 02d8 74020000 		.4byte	0x274
  2583 02dc 0E       		.uleb128 0xe
- 2584 02dd 33030000 		.4byte	.LASF118
+ 2584 02dd 8F030000 		.4byte	.LASF118
  2585 02e1 01       		.byte	0x1
  2586 02e2 BC01     		.2byte	0x1bc
  2587 02e4 03       		.byte	0x3
  2588 02e5 F6020000 		.4byte	0x2f6
  2589 02e9 0F       		.uleb128 0xf
- 2590 02ea 6B050000 		.4byte	.LASF119
+ 2590 02ea C7050000 		.4byte	.LASF119
  2591 02ee 01       		.byte	0x1
  2592 02ef BC01     		.2byte	0x1bc
  2593 02f1 77000000 		.4byte	0x77
  2594 02f5 00       		.byte	0
  2595 02f6 10       		.uleb128 0x10
- 2596 02f7 01040000 		.4byte	.LASF39
+ 2596 02f7 5D040000 		.4byte	.LASF39
  2597 02fb 01       		.byte	0x1
  2598 02fc 9C01     		.2byte	0x19c
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 62
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 62
 
 
  2599 02fe 00000000 		.4byte	.LFB47
@@ -3718,14 +3718,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2653 0381 50       		.byte	0x50
  2654 0382 05       		.uleb128 0x5
  2655 0383 03       		.byte	0x3
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 63
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 63
 
 
  2656 0384 24000000 		.4byte	.LC9
  2657 0388 00       		.byte	0
  2658 0389 00       		.byte	0
  2659 038a 16       		.uleb128 0x16
- 2660 038b 16030000 		.4byte	.LASF40
+ 2660 038b 72030000 		.4byte	.LASF40
  2661 038f 01       		.byte	0x1
  2662 0390 EC       		.byte	0xec
  2663 0391 00000000 		.4byte	.LFB38
@@ -3738,7 +3738,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2670 03a4 6E0E0000 		.4byte	0xe6e
  2671 03a8 00       		.byte	0
  2672 03a9 16       		.uleb128 0x16
- 2673 03aa AF010000 		.4byte	.LASF41
+ 2673 03aa 0B020000 		.4byte	.LASF41
  2674 03ae 01       		.byte	0x1
  2675 03af F3       		.byte	0xf3
  2676 03b0 00000000 		.4byte	.LFB39
@@ -3747,7 +3747,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2679 03b9 9C       		.byte	0x9c
  2680 03ba 8A040000 		.4byte	0x48a
  2681 03be 18       		.uleb128 0x18
- 2682 03bf 4F020000 		.4byte	.LASF44
+ 2682 03bf AB020000 		.4byte	.LASF44
  2683 03c3 01       		.byte	0x1
  2684 03c4 F4       		.byte	0xf4
  2685 03c5 5D000000 		.4byte	0x5d
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2710 0411 01       		.uleb128 0x1
  2711 0412 50       		.byte	0x50
  2712 0413 01       		.uleb128 0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 64
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 64
 
 
  2713 0414 4D       		.byte	0x4d
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2767 0477 00       		.sleb128 0
  2768 0478 00       		.byte	0
  2769 0479 15       		.uleb128 0x15
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 65
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 65
 
 
  2770 047a 50000000 		.4byte	.LVL22
@@ -3852,7 +3852,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2778 0488 00       		.byte	0
  2779 0489 00       		.byte	0
  2780 048a 10       		.uleb128 0x10
- 2781 048b 1E000000 		.4byte	.LASF42
+ 2781 048b 7A000000 		.4byte	.LASF42
  2782 048f 01       		.byte	0x1
  2783 0490 4D01     		.2byte	0x14d
  2784 0492 00000000 		.4byte	.LFB41
@@ -3861,14 +3861,14 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2787 049b 9C       		.byte	0x9c
  2788 049c B1040000 		.4byte	0x4b1
  2789 04a0 19       		.uleb128 0x19
- 2790 04a1 A5040000 		.4byte	.LASF48
+ 2790 04a1 01050000 		.4byte	.LASF48
  2791 04a5 01       		.byte	0x1
  2792 04a6 4D01     		.2byte	0x14d
  2793 04a8 83000000 		.4byte	0x83
  2794 04ac 62000000 		.4byte	.LLST3
  2795 04b0 00       		.byte	0
  2796 04b1 10       		.uleb128 0x10
- 2797 04b2 A6030000 		.4byte	.LASF43
+ 2797 04b2 02040000 		.4byte	.LASF43
  2798 04b6 01       		.byte	0x1
  2799 04b7 1901     		.2byte	0x119
  2800 04b9 00000000 		.4byte	.LFB40
@@ -3877,13 +3877,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2803 04c2 9C       		.byte	0x9c
  2804 04c3 77050000 		.4byte	0x577
  2805 04c7 1A       		.uleb128 0x1a
- 2806 04c8 B1000000 		.4byte	.LASF45
+ 2806 04c8 0D010000 		.4byte	.LASF45
  2807 04cc 01       		.byte	0x1
  2808 04cd 1A01     		.2byte	0x11a
  2809 04cf 6B000000 		.4byte	0x6b
  2810 04d3 83000000 		.4byte	.LLST4
  2811 04d7 1A       		.uleb128 0x1a
- 2812 04d8 BF000000 		.4byte	.LASF46
+ 2812 04d8 1B010000 		.4byte	.LASF46
  2813 04dc 01       		.byte	0x1
  2814 04dd 1B01     		.2byte	0x11b
  2815 04df 6B000000 		.4byte	0x6b
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2824 04fa 9C000000 		.4byte	.LVL42
  2825 04fe 8A040000 		.4byte	0x48a
  2826 0502 0C050000 		.4byte	0x50c
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 66
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 66
 
 
  2827 0506 14       		.uleb128 0x14
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2881 055a 03       		.byte	0x3
  2882 055b 70000000 		.4byte	.LC28
  2883 055f 14       		.uleb128 0x14
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 67
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 67
 
 
  2884 0560 01       		.uleb128 0x1
@@ -3979,7 +3979,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2899 0575 00       		.byte	0
  2900 0576 00       		.byte	0
  2901 0577 10       		.uleb128 0x10
- 2902 0578 CC030000 		.4byte	.LASF47
+ 2902 0578 28040000 		.4byte	.LASF47
  2903 057c 01       		.byte	0x1
  2904 057d 5201     		.2byte	0x152
  2905 057f 00000000 		.4byte	.LFB42
@@ -3988,13 +3988,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2908 0588 9C       		.byte	0x9c
  2909 0589 15060000 		.4byte	0x615
  2910 058d 19       		.uleb128 0x19
- 2911 058e 88030000 		.4byte	.LASF49
+ 2911 058e E4030000 		.4byte	.LASF49
  2912 0592 01       		.byte	0x1
  2913 0593 5201     		.2byte	0x152
  2914 0595 5D000000 		.4byte	0x5d
  2915 0599 45010000 		.4byte	.LLST6
  2916 059d 1A       		.uleb128 0x1a
- 2917 059e EA020000 		.4byte	.LASF50
+ 2917 059e 46030000 		.4byte	.LASF50
  2918 05a2 01       		.byte	0x1
  2919 05a3 5501     		.2byte	0x155
  2920 05a5 6B000000 		.4byte	0x6b
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2938 05d2 DE050000 		.4byte	0x5de
  2939 05d6 14       		.uleb128 0x14
  2940 05d7 01       		.uleb128 0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 68
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 68
 
 
  2941 05d8 50       		.byte	0x50
@@ -4059,7 +4059,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2976 0613 00       		.byte	0
  2977 0614 00       		.byte	0
  2978 0615 16       		.uleb128 0x16
- 2979 0616 6D020000 		.4byte	.LASF51
+ 2979 0616 C9020000 		.4byte	.LASF51
  2980 061a 01       		.byte	0x1
  2981 061b 4B       		.byte	0x4b
  2982 061c 00000000 		.4byte	.LFB35
@@ -4068,7 +4068,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2985 0625 9C       		.byte	0x9c
  2986 0626 72060000 		.4byte	0x672
  2987 062a 18       		.uleb128 0x18
- 2988 062b 20060000 		.4byte	.LASF52
+ 2988 062b 29060000 		.4byte	.LASF52
  2989 062f 01       		.byte	0x1
  2990 0630 4C       		.byte	0x4c
  2991 0631 5D000000 		.4byte	0x5d
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  2995 063e 210F0000 		.4byte	0xf21
  2996 0642 13       		.uleb128 0x13
  2997 0643 18000000 		.4byte	.LVL64
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 69
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 69
 
 
  2998 0647 E90E0000 		.4byte	0xee9
@@ -4107,7 +4107,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3021 0670 00       		.byte	0
  3022 0671 00       		.byte	0
  3023 0672 16       		.uleb128 0x16
- 3024 0673 E2030000 		.4byte	.LASF53
+ 3024 0673 3E040000 		.4byte	.LASF53
  3025 0677 01       		.byte	0x1
  3026 0678 58       		.byte	0x58
  3027 0679 00000000 		.4byte	.LFB36
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3052 06a7 4A       		.byte	0x4a
  3053 06a8 00       		.byte	0
  3054 06a9 13       		.uleb128 0x13
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 70
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 70
 
 
  3055 06aa 1C000000 		.4byte	.LVL67
@@ -4156,7 +4156,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3067 06c2 77050000 		.4byte	0x577
  3068 06c6 00       		.byte	0
  3069 06c7 10       		.uleb128 0x10
- 3070 06c8 D9010000 		.4byte	.LASF54
+ 3070 06c8 35020000 		.4byte	.LASF54
  3071 06cc 01       		.byte	0x1
  3072 06cd 6501     		.2byte	0x165
  3073 06cf 00000000 		.4byte	.LFB43
@@ -4165,7 +4165,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3076 06d8 9C       		.byte	0x9c
  3077 06d9 57070000 		.4byte	0x757
  3078 06dd 1A       		.uleb128 0x1a
- 3079 06de 49020000 		.4byte	.LASF55
+ 3079 06de A5020000 		.4byte	.LASF55
  3080 06e2 01       		.byte	0x1
  3081 06e3 6601     		.2byte	0x166
  3082 06e5 8F000000 		.4byte	0x8f
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3109 0727 74       		.byte	0x74
  3110 0728 00       		.sleb128 0
  3111 0729 14       		.uleb128 0x14
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 71
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 71
 
 
  3112 072a 01       		.uleb128 0x1
@@ -4238,7 +4238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3146 0755 00       		.byte	0
  3147 0756 00       		.byte	0
  3148 0757 10       		.uleb128 0x10
- 3149 0758 4C000000 		.4byte	.LASF56
+ 3149 0758 A8000000 		.4byte	.LASF56
  3150 075c 01       		.byte	0x1
  3151 075d 7501     		.2byte	0x175
  3152 075f 00000000 		.4byte	.LFB44
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3166 077f 00000000 		.4byte	message
  3167 0783 00       		.byte	0
  3168 0784 13       		.uleb128 0x13
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 72
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 72
 
 
  3169 0785 30000000 		.4byte	.LVL76
@@ -4289,7 +4289,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3194 07b0 00       		.byte	0
  3195 07b1 00       		.byte	0
  3196 07b2 10       		.uleb128 0x10
- 3197 07b3 96040000 		.4byte	.LASF57
+ 3197 07b3 F2040000 		.4byte	.LASF57
  3198 07b7 01       		.byte	0x1
  3199 07b8 8201     		.2byte	0x182
  3200 07ba 00000000 		.4byte	.LFB45
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3223 07ef 02       		.uleb128 0x2
  3224 07f0 74       		.byte	0x74
  3225 07f1 00       		.sleb128 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 73
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 73
 
 
  3226 07f2 14       		.uleb128 0x14
@@ -4340,7 +4340,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3242 080b 00       		.byte	0
  3243 080c 00       		.byte	0
  3244 080d 10       		.uleb128 0x10
- 3245 080e A0020000 		.4byte	.LASF58
+ 3245 080e FC020000 		.4byte	.LASF58
  3246 0812 01       		.byte	0x1
  3247 0813 8F01     		.2byte	0x18f
  3248 0815 00000000 		.4byte	.LFB46
@@ -4349,13 +4349,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3251 081e 9C       		.byte	0x9c
  3252 081f 88080000 		.4byte	0x888
  3253 0823 19       		.uleb128 0x19
- 3254 0824 09020000 		.4byte	.LASF24
+ 3254 0824 65020000 		.4byte	.LASF24
  3255 0828 01       		.byte	0x1
  3256 0829 8F01     		.2byte	0x18f
  3257 082b 6B000000 		.4byte	0x6b
  3258 082f CB010000 		.4byte	.LLST10
  3259 0833 19       		.uleb128 0x19
- 3260 0834 67030000 		.4byte	.LASF25
+ 3260 0834 C3030000 		.4byte	.LASF25
  3261 0838 01       		.byte	0x1
  3262 0839 8F01     		.2byte	0x18f
  3263 083b 6B000000 		.4byte	0x6b
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3280 0867 14       		.uleb128 0x14
  3281 0868 01       		.uleb128 0x1
  3282 0869 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 74
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 74
 
 
  3283 086a 02       		.uleb128 0x2
@@ -4414,7 +4414,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3313 08a0 19020000 		.4byte	.LLST12
  3314 08a4 00       		.byte	0
  3315 08a5 1C       		.uleb128 0x1c
- 3316 08a6 8B000000 		.4byte	.LASF60
+ 3316 08a6 E7000000 		.4byte	.LASF60
  3317 08aa 01       		.byte	0x1
  3318 08ab F301     		.2byte	0x1f3
  3319 08ad 5D000000 		.4byte	0x5d
@@ -4424,13 +4424,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3323 08ba 9C       		.byte	0x9c
  3324 08bb 19090000 		.4byte	0x919
  3325 08bf 19       		.uleb128 0x19
- 3326 08c0 29000000 		.4byte	.LASF59
+ 3326 08c0 85000000 		.4byte	.LASF59
  3327 08c4 01       		.byte	0x1
  3328 08c5 F301     		.2byte	0x1f3
  3329 08c7 5D000000 		.4byte	0x5d
  3330 08cb 3A020000 		.4byte	.LLST13
  3331 08cf 1A       		.uleb128 0x1a
- 3332 08d0 49020000 		.4byte	.LASF55
+ 3332 08d0 A5020000 		.4byte	.LASF55
  3333 08d4 01       		.byte	0x1
  3334 08d5 F401     		.2byte	0x1f4
  3335 08d7 5D000000 		.4byte	0x5d
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3337 08df 13       		.uleb128 0x13
  3338 08e0 2E000000 		.4byte	.LVL94
  3339 08e4 E90E0000 		.4byte	0xee9
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 75
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 75
 
 
  3340 08e8 08090000 		.4byte	0x908
@@ -4479,7 +4479,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3375 0917 00       		.byte	0
  3376 0918 00       		.byte	0
  3377 0919 1D       		.uleb128 0x1d
- 3378 091a F4030000 		.4byte	.LASF61
+ 3378 091a 50040000 		.4byte	.LASF61
  3379 091e 01       		.byte	0x1
  3380 091f FC01     		.2byte	0x1fc
  3381 0921 5D000000 		.4byte	0x5d
@@ -4489,16 +4489,16 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3385 092e 9C       		.byte	0x9c
  3386 092f B3090000 		.4byte	0x9b3
  3387 0933 19       		.uleb128 0x19
- 3388 0934 A8010000 		.4byte	.LASF62
+ 3388 0934 04020000 		.4byte	.LASF62
  3389 0938 01       		.byte	0x1
  3390 0939 FC01     		.2byte	0x1fc
  3391 093b 5D000000 		.4byte	0x5d
  3392 093f 9A020000 		.4byte	.LLST15
  3393 0943 1A       		.uleb128 0x1a
- 3394 0944 01060000 		.4byte	.LASF63
+ 3394 0944 0A060000 		.4byte	.LASF63
  3395 0948 01       		.byte	0x1
  3396 0949 FD01     		.2byte	0x1fd
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 76
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 76
 
 
  3397 094b 8F000000 		.4byte	0x8f
@@ -4558,12 +4558,12 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3451 09af 76       		.byte	0x76
  3452 09b0 00       		.sleb128 0
  3453 09b1 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 77
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 77
 
 
  3454 09b2 00       		.byte	0
  3455 09b3 10       		.uleb128 0x10
- 3456 09b4 89040000 		.4byte	.LASF64
+ 3456 09b4 E5040000 		.4byte	.LASF64
  3457 09b8 01       		.byte	0x1
  3458 09b9 DE01     		.2byte	0x1de
  3459 09bb 00000000 		.4byte	.LFB49
@@ -4572,7 +4572,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3462 09c4 9C       		.byte	0x9c
  3463 09c5 9B0A0000 		.4byte	0xa9b
  3464 09c9 19       		.uleb128 0x19
- 3465 09ca 29000000 		.4byte	.LASF59
+ 3465 09ca 85000000 		.4byte	.LASF59
  3466 09ce 01       		.byte	0x1
  3467 09cf DE01     		.2byte	0x1de
  3468 09d1 5D000000 		.4byte	0x5d
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3508 0a2a 03       		.byte	0x3
  3509 0a2b EC010000 		.4byte	.LC85
  3510 0a2f 14       		.uleb128 0x14
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 78
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 78
 
 
  3511 0a30 01       		.uleb128 0x1
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3565 0a93 14       		.uleb128 0x14
  3566 0a94 01       		.uleb128 0x1
  3567 0a95 50       		.byte	0x50
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 79
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 79
 
 
  3568 0a96 02       		.uleb128 0x2
@@ -4687,7 +4687,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3571 0a99 00       		.byte	0
  3572 0a9a 00       		.byte	0
  3573 0a9b 20       		.uleb128 0x20
- 3574 0a9c A9050000 		.4byte	.LASF120
+ 3574 0a9c 05060000 		.4byte	.LASF120
  3575 0aa0 01       		.byte	0x1
  3576 0aa1 60       		.byte	0x60
  3577 0aa2 5D000000 		.4byte	0x5d
@@ -4697,7 +4697,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3581 0aaf 9C       		.byte	0x9c
  3582 0ab0 260C0000 		.4byte	0xc26
  3583 0ab4 18       		.uleb128 0x18
- 3584 0ab5 9B000000 		.4byte	.LASF65
+ 3584 0ab5 F7000000 		.4byte	.LASF65
  3585 0ab9 01       		.byte	0x1
  3586 0aba 68       		.byte	0x68
  3587 0abb 6B000000 		.4byte	0x6b
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3622 0b07 14       		.uleb128 0x14
  3623 0b08 01       		.uleb128 0x1
  3624 0b09 51       		.byte	0x51
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 80
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 80
 
 
  3625 0b0a 05       		.uleb128 0x5
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3679 0b76 01       		.uleb128 0x1
  3680 0b77 50       		.byte	0x50
  3681 0b78 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 81
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 81
 
 
  3682 0b79 74       		.byte	0x74
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3736 0bdc 17       		.uleb128 0x17
  3737 0bdd 9A010000 		.4byte	.LVL137
  3738 0be1 0D080000 		.4byte	0x80d
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 82
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 82
 
 
  3739 0be5 17       		.uleb128 0x17
@@ -4894,7 +4894,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3769 0c21 B2070000 		.4byte	0x7b2
  3770 0c25 00       		.byte	0
  3771 0c26 22       		.uleb128 0x22
- 3772 0c27 CB040000 		.4byte	.LASF66
+ 3772 0c27 27050000 		.4byte	.LASF66
  3773 0c2b 01       		.byte	0x1
  3774 0c2c 11       		.byte	0x11
  3775 0c2d 83000000 		.4byte	0x83
@@ -4902,7 +4902,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3777 0c32 03       		.byte	0x3
  3778 0c33 00000000 		.4byte	message_id
  3779 0c37 22       		.uleb128 0x22
- 3780 0c38 07000000 		.4byte	.LASF67
+ 3780 0c38 63000000 		.4byte	.LASF67
  3781 0c3c 01       		.byte	0x1
  3782 0c3d 15       		.byte	0x15
  3783 0c3e 77000000 		.4byte	0x77
@@ -4910,7 +4910,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3785 0c43 03       		.byte	0x3
  3786 0c44 00000000 		.4byte	CAN_RX_MAILBOX_1_SHIFT
  3787 0c48 22       		.uleb128 0x22
- 3788 0c49 09040000 		.4byte	.LASF68
+ 3788 0c49 65040000 		.4byte	.LASF68
  3789 0c4d 01       		.byte	0x1
  3790 0c4e 16       		.byte	0x16
  3791 0c4f 83000000 		.4byte	0x83
@@ -4918,10 +4918,10 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3793 0c54 03       		.byte	0x3
  3794 0c55 00000000 		.4byte	CAN_RX_MAILBOX_0_SHIFT
  3795 0c59 22       		.uleb128 0x22
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 83
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 83
 
 
- 3796 0c5a 3D040000 		.4byte	.LASF69
+ 3796 0c5a 99040000 		.4byte	.LASF69
  3797 0c5e 01       		.byte	0x1
  3798 0c5f 17       		.byte	0x17
  3799 0c60 77000000 		.4byte	0x77
@@ -4929,7 +4929,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3801 0c65 03       		.byte	0x3
  3802 0c66 00000000 		.4byte	CAN_RX_MAILBOX_1
  3803 0c6a 22       		.uleb128 0x22
- 3804 0c6b 2C040000 		.4byte	.LASF70
+ 3804 0c6b 88040000 		.4byte	.LASF70
  3805 0c6f 01       		.byte	0x1
  3806 0c70 18       		.byte	0x18
  3807 0c71 77000000 		.4byte	0x77
@@ -4937,7 +4937,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3809 0c76 03       		.byte	0x3
  3810 0c77 00000000 		.4byte	CAN_RX_MAILBOX_0
  3811 0c7b 22       		.uleb128 0x22
- 3812 0c7c 6D030000 		.4byte	.LASF71
+ 3812 0c7c C9030000 		.4byte	.LASF71
  3813 0c80 01       		.byte	0x1
  3814 0c81 19       		.byte	0x19
  3815 0c82 5D000000 		.4byte	0x5d
@@ -4945,7 +4945,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3817 0c87 03       		.byte	0x3
  3818 0c88 00000000 		.4byte	CAN_TIMEOUT
  3819 0c8c 22       		.uleb128 0x22
- 3820 0c8d B6020000 		.4byte	.LASF72
+ 3820 0c8d 12030000 		.4byte	.LASF72
  3821 0c91 01       		.byte	0x1
  3822 0c92 1E       		.byte	0x1e
  3823 0c93 C8000000 		.4byte	0xc8
@@ -4953,7 +4953,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3825 0c98 03       		.byte	0x3
  3826 0c99 00000000 		.4byte	uart_debug
  3827 0c9d 22       		.uleb128 0x22
- 3828 0c9e 5A050000 		.4byte	.LASF73
+ 3828 0c9e B6050000 		.4byte	.LASF73
  3829 0ca2 01       		.byte	0x1
  3830 0ca3 24       		.byte	0x24
  3831 0ca4 5D000000 		.4byte	0x5d
@@ -4961,7 +4961,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3833 0ca9 03       		.byte	0x3
  3834 0caa 00000000 		.4byte	GEAR_RATIO
  3835 0cae 22       		.uleb128 0x22
- 3836 0caf FE020000 		.4byte	.LASF74
+ 3836 0caf 5A030000 		.4byte	.LASF74
  3837 0cb3 01       		.byte	0x1
  3838 0cb4 25       		.byte	0x25
  3839 0cb5 5D000000 		.4byte	0x5d
@@ -4969,7 +4969,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3841 0cba 03       		.byte	0x3
  3842 0cbb 00000000 		.4byte	pwm_compare
  3843 0cbf 22       		.uleb128 0x22
- 3844 0cc0 9D010000 		.4byte	.LASF75
+ 3844 0cc0 F9010000 		.4byte	.LASF75
  3845 0cc4 01       		.byte	0x1
  3846 0cc5 26       		.byte	0x26
  3847 0cc6 6B000000 		.4byte	0x6b
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3850 0ccc 00000000 		.4byte	invalidate
  3851 0cd0 23       		.uleb128 0x23
  3852 0cd1 6900     		.ascii	"i\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 84
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 84
 
 
  3853 0cd3 01       		.byte	0x1
@@ -4988,7 +4988,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3857 0cda 03       		.byte	0x3
  3858 0cdb 00000000 		.4byte	i
  3859 0cdf 22       		.uleb128 0x22
- 3860 0ce0 BA030000 		.4byte	.LASF76
+ 3860 0ce0 16040000 		.4byte	.LASF76
  3861 0ce4 01       		.byte	0x1
  3862 0ce5 2A       		.byte	0x2a
  3863 0ce6 5D000000 		.4byte	0x5d
@@ -5020,7 +5020,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3889 0d1b 03       		.byte	0x3
  3890 0d1c 00000000 		.4byte	kd
  3891 0d20 22       		.uleb128 0x22
- 3892 0d21 58040000 		.4byte	.LASF77
+ 3892 0d21 B4040000 		.4byte	.LASF77
  3893 0d25 01       		.byte	0x1
  3894 0d26 2E       		.byte	0x2e
  3895 0d27 A2000000 		.4byte	0xa2
@@ -5028,7 +5028,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3897 0d2c 03       		.byte	0x3
  3898 0d2d 00000000 		.4byte	ratio
  3899 0d31 22       		.uleb128 0x22
- 3900 0d32 0E020000 		.4byte	.LASF78
+ 3900 0d32 6A020000 		.4byte	.LASF78
  3901 0d36 01       		.byte	0x1
  3902 0d37 2F       		.byte	0x2f
  3903 0d38 6B000000 		.4byte	0x6b
@@ -5036,9 +5036,9 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3905 0d3d 03       		.byte	0x3
  3906 0d3e 00000000 		.4byte	complete
  3907 0d42 22       		.uleb128 0x22
- 3908 0d43 70050000 		.4byte	.LASF79
+ 3908 0d43 CC050000 		.4byte	.LASF79
  3909 0d47 01       		.byte	0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 85
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 85
 
 
  3910 0d48 30       		.byte	0x30
@@ -5047,7 +5047,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3913 0d4e 03       		.byte	0x3
  3914 0d4f 00000000 		.4byte	maxV
  3915 0d53 22       		.uleb128 0x22
- 3916 0d54 A1000000 		.4byte	.LASF80
+ 3916 0d54 FD000000 		.4byte	.LASF80
  3917 0d58 01       		.byte	0x1
  3918 0d59 33       		.byte	0x33
  3919 0d5a 6B000000 		.4byte	0x6b
@@ -5055,7 +5055,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3921 0d5f 03       		.byte	0x3
  3922 0d60 00000000 		.4byte	mode
  3923 0d64 22       		.uleb128 0x22
- 3924 0d65 BA010000 		.4byte	.LASF81
+ 3924 0d65 16020000 		.4byte	.LASF81
  3925 0d69 01       		.byte	0x1
  3926 0d6a 36       		.byte	0x36
  3927 0d6b 6B000000 		.4byte	0x6b
@@ -5063,7 +5063,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3929 0d70 03       		.byte	0x3
  3930 0d71 00000000 		.4byte	send_data
  3931 0d75 22       		.uleb128 0x22
- 3932 0d76 97030000 		.4byte	.LASF82
+ 3932 0d76 F3030000 		.4byte	.LASF82
  3933 0d7a 01       		.byte	0x1
  3934 0d7b 37       		.byte	0x37
  3935 0d7c 6B000000 		.4byte	0x6b
@@ -5071,7 +5071,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3937 0d81 03       		.byte	0x3
  3938 0d82 00000000 		.4byte	model_req
  3939 0d86 22       		.uleb128 0x22
- 3940 0d87 72000000 		.4byte	.LASF83
+ 3940 0d87 CE000000 		.4byte	.LASF83
  3941 0d8b 01       		.byte	0x1
  3942 0d8c 38       		.byte	0x38
  3943 0d8d 6B000000 		.4byte	0x6b
@@ -5079,7 +5079,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3945 0d92 03       		.byte	0x3
  3946 0d93 00000000 		.4byte	disable_limit
  3947 0d97 22       		.uleb128 0x22
- 3948 0d98 FE000000 		.4byte	.LASF84
+ 3948 0d98 5A010000 		.4byte	.LASF84
  3949 0d9c 01       		.byte	0x1
  3950 0d9d 3B       		.byte	0x3b
  3951 0d9e EC000000 		.4byte	0xec
@@ -5087,7 +5087,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3953 0da3 03       		.byte	0x3
  3954 0da4 00000000 		.4byte	Can_rx_pwm
  3955 0da8 22       		.uleb128 0x22
- 3956 0da9 D6040000 		.4byte	.LASF85
+ 3956 0da9 32050000 		.4byte	.LASF85
  3957 0dad 01       		.byte	0x1
  3958 0dae 3B       		.byte	0x3b
  3959 0daf EC000000 		.4byte	0xec
@@ -5095,10 +5095,10 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3961 0db4 03       		.byte	0x3
  3962 0db5 00000000 		.4byte	Can_rx_angle
  3963 0db9 22       		.uleb128 0x22
- 3964 0dba EA010000 		.4byte	.LASF86
+ 3964 0dba 46020000 		.4byte	.LASF86
  3965 0dbe 01       		.byte	0x1
  3966 0dbf 3C       		.byte	0x3c
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 86
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 86
 
 
  3967 0dc0 3C010000 		.4byte	0x13c
@@ -5106,7 +5106,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3969 0dc5 03       		.byte	0x3
  3970 0dc6 00000000 		.4byte	stall
  3971 0dca 22       		.uleb128 0x22
- 3972 0dcb E3040000 		.4byte	.LASF87
+ 3972 0dcb 3F050000 		.4byte	.LASF87
  3973 0dcf 01       		.byte	0x1
  3974 0dd0 3D       		.byte	0x3d
  3975 0dd1 3C010000 		.4byte	0x13c
@@ -5114,7 +5114,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3977 0dd6 03       		.byte	0x3
  3978 0dd7 00000000 		.4byte	command_failed
  3979 0ddb 22       		.uleb128 0x22
- 3980 0ddc 20040000 		.4byte	.LASF88
+ 3980 0ddc 7C040000 		.4byte	.LASF88
  3981 0de0 01       		.byte	0x1
  3982 0de1 3E       		.byte	0x3e
  3983 0de2 3C010000 		.4byte	0x13c
@@ -5122,7 +5122,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3985 0de7 03       		.byte	0x3
  3986 0de8 00000000 		.4byte	invalid_arg
  3987 0dec 22       		.uleb128 0x22
- 3988 0ded 3A060000 		.4byte	.LASF89
+ 3988 0ded 43060000 		.4byte	.LASF89
  3989 0df1 01       		.byte	0x1
  3990 0df2 41       		.byte	0x41
  3991 0df3 5D000000 		.4byte	0x5d
@@ -5130,7 +5130,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  3993 0df8 03       		.byte	0x3
  3994 0df9 00000000 		.4byte	mailbox
  3995 0dfd 22       		.uleb128 0x22
- 3996 0dfe C1040000 		.4byte	.LASF90
+ 3996 0dfe 1D050000 		.4byte	.LASF90
  3997 0e02 01       		.byte	0x1
  3998 0e03 42       		.byte	0x42
  3999 0e04 6B000000 		.4byte	0x6b
@@ -5145,7 +5145,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4008 0e1c 63       		.byte	0x63
  4009 0e1d 00       		.byte	0
  4010 0e1e 22       		.uleb128 0x22
- 4011 0e1f D2010000 		.4byte	.LASF91
+ 4011 0e1f 2E020000 		.4byte	.LASF91
  4012 0e23 01       		.byte	0x1
  4013 0e24 43       		.byte	0x43
  4014 0e25 0E0E0000 		.4byte	0xe0e
@@ -5153,18 +5153,18 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4016 0e2a 03       		.byte	0x3
  4017 0e2b 00000000 		.4byte	txData
  4018 0e2f 22       		.uleb128 0x22
- 4019 0e30 C8020000 		.4byte	.LASF92
+ 4019 0e30 24030000 		.4byte	.LASF92
  4020 0e34 01       		.byte	0x1
  4021 0e35 45       		.byte	0x45
  4022 0e36 92010000 		.4byte	0x192
  4023 0e3a 05       		.uleb128 0x5
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 87
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 87
 
 
  4024 0e3b 03       		.byte	0x3
  4025 0e3c 00000000 		.4byte	data
  4026 0e40 22       		.uleb128 0x22
- 4027 0e41 31000000 		.4byte	.LASF93
+ 4027 0e41 8D000000 		.4byte	.LASF93
  4028 0e45 01       		.byte	0x1
  4029 0e46 46       		.byte	0x46
  4030 0e47 69020000 		.4byte	0x269
@@ -5172,7 +5172,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4032 0e4c 03       		.byte	0x3
  4033 0e4d 00000000 		.4byte	message
  4034 0e51 22       		.uleb128 0x22
- 4035 0e52 F0010000 		.4byte	.LASF94
+ 4035 0e52 4C020000 		.4byte	.LASF94
  4036 0e56 01       		.byte	0x1
  4037 0e57 48       		.byte	0x48
  4038 0e58 C8000000 		.4byte	0xc8
@@ -5180,112 +5180,112 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4040 0e5d 03       		.byte	0x3
  4041 0e5e 00000000 		.4byte	drive
  4042 0e62 24       		.uleb128 0x24
- 4043 0e63 AE040000 		.4byte	.LASF95
- 4044 0e67 AE040000 		.4byte	.LASF95
+ 4043 0e63 0A050000 		.4byte	.LASF95
+ 4044 0e67 0A050000 		.4byte	.LASF95
  4045 0e6b 05       		.byte	0x5
  4046 0e6c 2A03     		.2byte	0x32a
  4047 0e6e 24       		.uleb128 0x24
- 4048 0e6f 4B050000 		.4byte	.LASF96
- 4049 0e73 4B050000 		.4byte	.LASF96
+ 4048 0e6f A7050000 		.4byte	.LASF96
+ 4049 0e73 A7050000 		.4byte	.LASF96
  4050 0e77 06       		.byte	0x6
  4051 0e78 3301     		.2byte	0x133
  4052 0e7a 25       		.uleb128 0x25
- 4053 0e7b 16060000 		.4byte	.LASF97
- 4054 0e7f 16060000 		.4byte	.LASF97
+ 4053 0e7b 1F060000 		.4byte	.LASF97
+ 4054 0e7f 1F060000 		.4byte	.LASF97
  4055 0e83 04       		.byte	0x4
  4056 0e84 C5       		.byte	0xc5
  4057 0e85 25       		.uleb128 0x25
- 4058 0e86 3C030000 		.4byte	.LASF98
- 4059 0e8a 3C030000 		.4byte	.LASF98
+ 4058 0e86 98030000 		.4byte	.LASF98
+ 4059 0e8a 98030000 		.4byte	.LASF98
  4060 0e8e 07       		.byte	0x7
  4061 0e8f 31       		.byte	0x31
  4062 0e90 25       		.uleb128 0x25
- 4063 0e91 75050000 		.4byte	.LASF99
- 4064 0e95 75050000 		.4byte	.LASF99
+ 4063 0e91 D1050000 		.4byte	.LASF99
+ 4064 0e95 D1050000 		.4byte	.LASF99
  4065 0e99 08       		.byte	0x8
  4066 0e9a 5A       		.byte	0x5a
  4067 0e9b 25       		.uleb128 0x25
- 4068 0e9c CD020000 		.4byte	.LASF100
- 4069 0ea0 CD020000 		.4byte	.LASF100
+ 4068 0e9c 29030000 		.4byte	.LASF100
+ 4069 0ea0 29030000 		.4byte	.LASF100
  4070 0ea4 09       		.byte	0x9
  4071 0ea5 48       		.byte	0x48
  4072 0ea6 24       		.uleb128 0x24
- 4073 0ea7 23050000 		.4byte	.LASF101
- 4074 0eab 23050000 		.4byte	.LASF101
+ 4073 0ea7 7F050000 		.4byte	.LASF101
+ 4074 0eab 7F050000 		.4byte	.LASF101
  4075 0eaf 06       		.byte	0x6
  4076 0eb0 3201     		.2byte	0x132
  4077 0eb2 25       		.uleb128 0x25
- 4078 0eb3 75040000 		.4byte	.LASF102
- 4079 0eb7 75040000 		.4byte	.LASF102
+ 4078 0eb3 D1040000 		.4byte	.LASF102
+ 4079 0eb7 D1040000 		.4byte	.LASF102
  4080 0ebb 04       		.byte	0x4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 88
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 88
 
 
  4081 0ebc C8       		.byte	0xc8
  4082 0ebd 25       		.uleb128 0x25
- 4083 0ebe DB020000 		.4byte	.LASF103
- 4084 0ec2 DB020000 		.4byte	.LASF103
+ 4083 0ebe 37030000 		.4byte	.LASF103
+ 4084 0ec2 37030000 		.4byte	.LASF103
  4085 0ec6 0A       		.byte	0xa
  4086 0ec7 BD       		.byte	0xbd
  4087 0ec8 25       		.uleb128 0x25
- 4088 0ec9 26060000 		.4byte	.LASF104
- 4089 0ecd 26060000 		.4byte	.LASF104
+ 4088 0ec9 2F060000 		.4byte	.LASF104
+ 4089 0ecd 2F060000 		.4byte	.LASF104
  4090 0ed1 0B       		.byte	0xb
  4091 0ed2 18       		.byte	0x18
  4092 0ed3 25       		.uleb128 0x25
- 4093 0ed4 39000000 		.4byte	.LASF105
- 4094 0ed8 39000000 		.4byte	.LASF105
+ 4093 0ed4 95000000 		.4byte	.LASF105
+ 4094 0ed8 95000000 		.4byte	.LASF105
  4095 0edc 0C       		.byte	0xc
  4096 0edd 18       		.byte	0x18
  4097 0ede 25       		.uleb128 0x25
- 4098 0edf F2040000 		.4byte	.LASF106
- 4099 0ee3 F2040000 		.4byte	.LASF106
+ 4098 0edf 4E050000 		.4byte	.LASF106
+ 4099 0ee3 4E050000 		.4byte	.LASF106
  4100 0ee7 0D       		.byte	0xd
  4101 0ee8 72       		.byte	0x72
  4102 0ee9 25       		.uleb128 0x25
- 4103 0eea D4030000 		.4byte	.LASF107
- 4104 0eee D4030000 		.4byte	.LASF107
+ 4103 0eea 30040000 		.4byte	.LASF107
+ 4104 0eee 30040000 		.4byte	.LASF107
  4105 0ef2 0E       		.byte	0xe
  4106 0ef3 E7       		.byte	0xe7
  4107 0ef4 25       		.uleb128 0x25
- 4108 0ef5 67040000 		.4byte	.LASF108
- 4109 0ef9 67040000 		.4byte	.LASF108
+ 4108 0ef5 C3040000 		.4byte	.LASF108
+ 4109 0ef9 C3040000 		.4byte	.LASF108
  4110 0efd 0F       		.byte	0xf
  4111 0efe 30       		.byte	0x30
  4112 0eff 25       		.uleb128 0x25
- 4113 0f00 DC000000 		.4byte	.LASF109
- 4114 0f04 DC000000 		.4byte	.LASF109
+ 4113 0f00 38010000 		.4byte	.LASF109
+ 4114 0f04 38010000 		.4byte	.LASF109
  4115 0f08 07       		.byte	0x7
  4116 0f09 30       		.byte	0x30
  4117 0f0a 25       		.uleb128 0x25
- 4118 0f0b 59020000 		.4byte	.LASF110
- 4119 0f0f 59020000 		.4byte	.LASF110
+ 4118 0f0b B5020000 		.4byte	.LASF110
+ 4119 0f0f B5020000 		.4byte	.LASF110
  4120 0f13 10       		.byte	0x10
  4121 0f14 33       		.byte	0x33
  4122 0f15 24       		.uleb128 0x24
- 4123 0f16 32020000 		.4byte	.LASF111
- 4124 0f1a 32020000 		.4byte	.LASF111
+ 4123 0f16 8E020000 		.4byte	.LASF111
+ 4124 0f1a 8E020000 		.4byte	.LASF111
  4125 0f1e 06       		.byte	0x6
  4126 0f1f 5501     		.2byte	0x155
  4127 0f21 25       		.uleb128 0x25
- 4128 0f22 17020000 		.4byte	.LASF112
- 4129 0f26 17020000 		.4byte	.LASF112
+ 4128 0f22 73020000 		.4byte	.LASF112
+ 4129 0f26 73020000 		.4byte	.LASF112
  4130 0f2a 08       		.byte	0x8
  4131 0f2b 5E       		.byte	0x5e
  4132 0f2c 26       		.uleb128 0x26
- 4133 0f2d A2050000 		.4byte	.LASF121
- 4134 0f31 A2050000 		.4byte	.LASF121
+ 4133 0f2d FE050000 		.4byte	.LASF121
+ 4134 0f31 FE050000 		.4byte	.LASF121
  4135 0f35 25       		.uleb128 0x25
- 4136 0f36 F6010000 		.4byte	.LASF113
- 4137 0f3a F6010000 		.4byte	.LASF113
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 89
+ 4136 0f36 52020000 		.4byte	.LASF113
+ 4137 0f3a 52020000 		.4byte	.LASF113
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 89
 
 
  4138 0f3e 09       		.byte	0x9
  4139 0f3f 4E       		.byte	0x4e
  4140 0f40 24       		.uleb128 0x24
- 4141 0f41 0A030000 		.4byte	.LASF114
- 4142 0f45 0A030000 		.4byte	.LASF114
+ 4141 0f41 66030000 		.4byte	.LASF114
+ 4142 0f45 66030000 		.4byte	.LASF114
  4143 0f49 04       		.byte	0x4
  4144 0f4a 1801     		.2byte	0x118
  4145 0f4c 00       		.byte	0
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4192 002c 03       		.uleb128 0x3
  4193 002d 0E       		.uleb128 0xe
  4194 002e 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 90
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 90
 
 
  4195 002f 0B       		.uleb128 0xb
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4249 0065 13       		.uleb128 0x13
  4250 0066 38       		.uleb128 0x38
  4251 0067 0B       		.uleb128 0xb
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 91
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 91
 
 
  4252 0068 00       		.byte	0
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4306 009e 00       		.byte	0
  4307 009f 0E       		.uleb128 0xe
  4308 00a0 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 92
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 92
 
 
  4309 00a1 01       		.byte	0x1
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4363 00d8 00       		.byte	0
  4364 00d9 11       		.uleb128 0x11
  4365 00da 1D       		.uleb128 0x1d
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 93
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 93
 
 
  4366 00db 01       		.byte	0x1
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4420 0118 2E       		.uleb128 0x2e
  4421 0119 01       		.byte	0x1
  4422 011a 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 94
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 94
 
 
  4423 011b 19       		.uleb128 0x19
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4477 0154 49       		.uleb128 0x49
  4478 0155 13       		.uleb128 0x13
  4479 0156 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 95
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 95
 
 
  4480 0157 17       		.uleb128 0x17
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4534 018e 40       		.uleb128 0x40
  4535 018f 18       		.uleb128 0x18
  4536 0190 9642     		.uleb128 0x2116
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 96
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 96
 
 
  4537 0192 19       		.uleb128 0x19
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4591 01c9 01       		.uleb128 0x1
  4592 01ca 13       		.uleb128 0x13
  4593 01cb 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 97
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 97
 
 
  4594 01cc 00       		.byte	0
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4648 0204 49       		.uleb128 0x49
  4649 0205 13       		.uleb128 0x13
  4650 0206 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 98
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 98
 
 
  4651 0207 19       		.uleb128 0x19
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4705 023d 00       		.byte	0
  4706 023e 00       		.byte	0
  4707 023f 26       		.uleb128 0x26
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 99
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 99
 
 
  4708 0240 2E       		.uleb128 0x2e
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4762 006c 50       		.byte	0x50
  4763 006d 02000000 		.4byte	.LVL25
  4764 0071 1C000000 		.4byte	.LFE41
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 100
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 100
 
 
  4765 0075 0400     		.2byte	0x4
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4819 00f5 9F       		.byte	0x9f
  4820 00f6 5E000000 		.4byte	.LVL36
  4821 00fa 68000000 		.4byte	.LVL37
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 101
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 101
 
 
  4822 00fe 0200     		.2byte	0x2
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4876 0184 0100     		.2byte	0x1
  4877 0186 50       		.byte	0x50
  4878 0187 56000000 		.4byte	.LVL58
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 102
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 102
 
 
  4879 018b 58000000 		.4byte	.LVL59
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4933 0211 00000000 		.4byte	0
  4934 0215 00000000 		.4byte	0
  4935              	.LLST12:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 103
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 103
 
 
  4936 0219 00000000 		.4byte	.LVL86
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  4990 02a4 50       		.byte	0x50
  4991 02a5 09000000 		.4byte	.LVL99-1
  4992 02a9 0C000000 		.4byte	.LVL100
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 104
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 104
 
 
  4993 02ad 0100     		.2byte	0x1
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  5047 0335 50       		.byte	0x50
  5048 0336 3E000000 		.4byte	.LVL114
  5049 033a 41000000 		.4byte	.LVL115-1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 105
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 105
 
 
  5050 033e 0100     		.2byte	0x1
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  5104 0078 00000000 		.4byte	.LFB50
  5105 007c 48000000 		.4byte	.LFE50-.LFB50
  5106 0080 00000000 		.4byte	.LFB51
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 106
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 106
 
 
  5107 0084 64000000 		.4byte	.LFE51-.LFB51
@@ -6353,558 +6353,558 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 1
  5154      00000201 
  5154      FB0E0D00 
  5154      01010101 
- 5155              	.LASF116:
- 5156 0000 6D61696E 		.ascii	"main.c\000"
- 5156      2E6300
- 5157              	.LASF67:
- 5158 0007 43414E5F 		.ascii	"CAN_RX_MAILBOX_1_SHIFT\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 107
+ 5155              	.LASF117:
+ 5156 0000 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
+ 5156      73657273 
+ 5156      5C617573 
+ 5156      74635C4F 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 107
 
 
- 5158      52585F4D 
- 5158      41494C42 
- 5158      4F585F31 
- 5158      5F534849 
- 5159              	.LASF42:
- 5160 001e 7365745F 		.ascii	"set_CAN_ID\000"
- 5160      43414E5F 
- 5160      494400
- 5161              	.LASF59:
- 5162 0029 64656772 		.ascii	"degrees\000"
- 5162      65657300 
- 5163              	.LASF93:
- 5164 0031 6D657373 		.ascii	"message\000"
- 5164      61676500 
- 5165              	.LASF105:
- 5166 0039 6973725F 		.ascii	"isr_period_StartEx\000"
- 5166      70657269 
- 5166      6F645F53 
- 5166      74617274 
- 5166      457800
- 5167              	.LASF56:
- 5168 004c 43414E5F 		.ascii	"CAN_Send_Telemetry\000"
- 5168      53656E64 
- 5168      5F54656C 
- 5168      656D6574 
- 5168      727900
- 5169              	.LASF8:
- 5170 005f 756E7369 		.ascii	"unsigned int\000"
- 5170      676E6564 
- 5170      20696E74 
- 5170      00
- 5171              	.LASF34:
- 5172 006c 7278616D 		.ascii	"rxamr\000"
- 5172      7200
- 5173              	.LASF83:
- 5174 0072 64697361 		.ascii	"disable_limit\000"
- 5174      626C655F 
- 5174      6C696D69 
- 5174      7400
- 5175              	.LASF12:
- 5176 0080 696E7431 		.ascii	"int16\000"
- 5176      3600
- 5177              	.LASF17:
- 5178 0086 72656738 		.ascii	"reg8\000"
- 5178      00
- 5179              	.LASF60:
- 5180 008b 64656772 		.ascii	"degrees_to_tick\000"
- 5180      6565735F 
- 5180      746F5F74 
- 5180      69636B00 
- 5181              	.LASF65:
- 5182 009b 6572726F 		.ascii	"error\000"
- 5182      7200
- 5183              	.LASF80:
- 5184 00a1 6D6F6465 		.ascii	"mode\000"
- 5184      00
- 5185              	.LASF30:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 108
+ 5156      6E654472 
+ 5157 002d 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\Motor Board Rev2.cydsn\000"
+ 5157      69637332 
+ 5157      3031382D 
+ 5157      31395C50 
+ 5157      736F6320 
+ 5158              	.LASF116:
+ 5159 005c 6D61696E 		.ascii	"main.c\000"
+ 5159      2E6300
+ 5160              	.LASF67:
+ 5161 0063 43414E5F 		.ascii	"CAN_RX_MAILBOX_1_SHIFT\000"
+ 5161      52585F4D 
+ 5161      41494C42 
+ 5161      4F585F31 
+ 5161      5F534849 
+ 5162              	.LASF42:
+ 5163 007a 7365745F 		.ascii	"set_CAN_ID\000"
+ 5163      43414E5F 
+ 5163      494400
+ 5164              	.LASF59:
+ 5165 0085 64656772 		.ascii	"degrees\000"
+ 5165      65657300 
+ 5166              	.LASF93:
+ 5167 008d 6D657373 		.ascii	"message\000"
+ 5167      61676500 
+ 5168              	.LASF105:
+ 5169 0095 6973725F 		.ascii	"isr_period_StartEx\000"
+ 5169      70657269 
+ 5169      6F645F53 
+ 5169      74617274 
+ 5169      457800
+ 5170              	.LASF56:
+ 5171 00a8 43414E5F 		.ascii	"CAN_Send_Telemetry\000"
+ 5171      53656E64 
+ 5171      5F54656C 
+ 5171      656D6574 
+ 5171      727900
+ 5172              	.LASF8:
+ 5173 00bb 756E7369 		.ascii	"unsigned int\000"
+ 5173      676E6564 
+ 5173      20696E74 
+ 5173      00
+ 5174              	.LASF34:
+ 5175 00c8 7278616D 		.ascii	"rxamr\000"
+ 5175      7200
+ 5176              	.LASF83:
+ 5177 00ce 64697361 		.ascii	"disable_limit\000"
+ 5177      626C655F 
+ 5177      6C696D69 
+ 5177      7400
+ 5178              	.LASF12:
+ 5179 00dc 696E7431 		.ascii	"int16\000"
+ 5179      3600
+ 5180              	.LASF17:
+ 5181 00e2 72656738 		.ascii	"reg8\000"
+ 5181      00
+ 5182              	.LASF60:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 108
 
 
- 5186 00a6 43414E5F 		.ascii	"CAN_TX_MSG\000"
- 5186      54585F4D 
- 5186      534700
- 5187              	.LASF45:
- 5188 00b1 73657474 		.ascii	"setting\000"
- 5188      696E6700 
- 5189              	.LASF13:
- 5190 00b9 666C6F61 		.ascii	"float\000"
- 5190      7400
- 5191              	.LASF46:
- 5192 00bf 73686966 		.ascii	"shift\000"
- 5192      7400
- 5193              	.LASF7:
- 5194 00c5 6C6F6E67 		.ascii	"long long unsigned int\000"
- 5194      206C6F6E 
- 5194      6720756E 
- 5194      7369676E 
- 5194      65642069 
- 5195              	.LASF109:
- 5196 00dc 53746174 		.ascii	"Status_Reg_Switches_Read\000"
- 5196      75735F52 
- 5196      65675F53 
- 5196      77697463 
- 5196      6865735F 
- 5197              	.LASF22:
- 5198 00f5 43616E5F 		.ascii	"Can_data\000"
- 5198      64617461 
- 5198      00
- 5199              	.LASF84:
- 5200 00fe 43616E5F 		.ascii	"Can_rx_pwm\000"
- 5200      72785F70 
- 5200      776D00
- 5201              	.LASF23:
- 5202 0109 4572726F 		.ascii	"Error\000"
- 5202      7200
- 5203              	.LASF115:
- 5204 010f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 5204      43313120 
- 5204      352E342E 
- 5204      31203230 
- 5204      31363036 
- 5205 0142 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 5205      20726576 
- 5205      6973696F 
- 5205      6E203233 
- 5205      37373135 
- 5206 0175 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 5206      66756E63 
- 5206      74696F6E 
- 5206      2D736563 
- 5206      74696F6E 
- 5207              	.LASF75:
- 5208 019d 696E7661 		.ascii	"invalidate\000"
- 5208      6C696461 
- 5208      746500
- 5209              	.LASF62:
- 5210 01a8 74617267 		.ascii	"target\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 109
+ 5183 00e7 64656772 		.ascii	"degrees_to_tick\000"
+ 5183      6565735F 
+ 5183      746F5F74 
+ 5183      69636B00 
+ 5184              	.LASF65:
+ 5185 00f7 6572726F 		.ascii	"error\000"
+ 5185      7200
+ 5186              	.LASF80:
+ 5187 00fd 6D6F6465 		.ascii	"mode\000"
+ 5187      00
+ 5188              	.LASF30:
+ 5189 0102 43414E5F 		.ascii	"CAN_TX_MSG\000"
+ 5189      54585F4D 
+ 5189      534700
+ 5190              	.LASF45:
+ 5191 010d 73657474 		.ascii	"setting\000"
+ 5191      696E6700 
+ 5192              	.LASF13:
+ 5193 0115 666C6F61 		.ascii	"float\000"
+ 5193      7400
+ 5194              	.LASF46:
+ 5195 011b 73686966 		.ascii	"shift\000"
+ 5195      7400
+ 5196              	.LASF7:
+ 5197 0121 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 5197      206C6F6E 
+ 5197      6720756E 
+ 5197      7369676E 
+ 5197      65642069 
+ 5198              	.LASF109:
+ 5199 0138 53746174 		.ascii	"Status_Reg_Switches_Read\000"
+ 5199      75735F52 
+ 5199      65675F53 
+ 5199      77697463 
+ 5199      6865735F 
+ 5200              	.LASF22:
+ 5201 0151 43616E5F 		.ascii	"Can_data\000"
+ 5201      64617461 
+ 5201      00
+ 5202              	.LASF84:
+ 5203 015a 43616E5F 		.ascii	"Can_rx_pwm\000"
+ 5203      72785F70 
+ 5203      776D00
+ 5204              	.LASF23:
+ 5205 0165 4572726F 		.ascii	"Error\000"
+ 5205      7200
+ 5206              	.LASF115:
+ 5207 016b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 5207      43313120 
+ 5207      352E342E 
+ 5207      31203230 
+ 5207      31363036 
+ 5208 019e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 5208      20726576 
+ 5208      6973696F 
+ 5208      6E203233 
+ 5208      37373135 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 109
 
 
- 5210      657400
- 5211              	.LASF41:
- 5212 01af 696E6974 		.ascii	"initialize\000"
- 5212      69616C69 
- 5212      7A6500
- 5213              	.LASF81:
- 5214 01ba 73656E64 		.ascii	"send_data\000"
- 5214      5F646174 
- 5214      6100
- 5215              	.LASF38:
- 5216 01c4 43414E5F 		.ascii	"CAN_RX_STRUCT\000"
- 5216      52585F53 
- 5216      54525543 
- 5216      5400
- 5217              	.LASF91:
- 5218 01d2 74784461 		.ascii	"txData\000"
- 5218      746100
- 5219              	.LASF54:
- 5220 01d9 43414E5F 		.ascii	"CAN_Send_Encoder\000"
- 5220      53656E64 
- 5220      5F456E63 
- 5220      6F646572 
- 5220      00
- 5221              	.LASF86:
- 5222 01ea 7374616C 		.ascii	"stall\000"
- 5222      6C00
- 5223              	.LASF94:
- 5224 01f0 64726976 		.ascii	"drive\000"
- 5224      6500
- 5225              	.LASF113:
- 5226 01f6 51756164 		.ascii	"QuadDec_GetCounter\000"
- 5226      4465635F 
- 5226      47657443 
- 5226      6F756E74 
- 5226      657200
- 5227              	.LASF24:
- 5228 0209 636F6465 		.ascii	"code\000"
- 5228      00
- 5229              	.LASF78:
- 5230 020e 636F6D70 		.ascii	"complete\000"
- 5230      6C657465 
- 5230      00
- 5231              	.LASF112:
- 5232 0217 54696D65 		.ascii	"Timer_1_ReadStatusRegister\000"
- 5232      725F315F 
- 5232      52656164 
- 5232      53746174 
- 5232      75735265 
- 5233              	.LASF111:
- 5234 0232 50574D5F 		.ascii	"PWM_Motor_WriteCompare\000"
- 5234      4D6F746F 
- 5234      725F5772 
- 5234      69746543 
- 5234      6F6D7061 
- 5235              	.LASF55:
- 5236 0249 7469636B 		.ascii	"ticks\000"
- 5236      7300
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 110
+ 5209 01d1 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 5209      66756E63 
+ 5209      74696F6E 
+ 5209      2D736563 
+ 5209      74696F6E 
+ 5210              	.LASF75:
+ 5211 01f9 696E7661 		.ascii	"invalidate\000"
+ 5211      6C696461 
+ 5211      746500
+ 5212              	.LASF62:
+ 5213 0204 74617267 		.ascii	"target\000"
+ 5213      657400
+ 5214              	.LASF41:
+ 5215 020b 696E6974 		.ascii	"initialize\000"
+ 5215      69616C69 
+ 5215      7A6500
+ 5216              	.LASF81:
+ 5217 0216 73656E64 		.ascii	"send_data\000"
+ 5217      5F646174 
+ 5217      6100
+ 5218              	.LASF38:
+ 5219 0220 43414E5F 		.ascii	"CAN_RX_STRUCT\000"
+ 5219      52585F53 
+ 5219      54525543 
+ 5219      5400
+ 5220              	.LASF91:
+ 5221 022e 74784461 		.ascii	"txData\000"
+ 5221      746100
+ 5222              	.LASF54:
+ 5223 0235 43414E5F 		.ascii	"CAN_Send_Encoder\000"
+ 5223      53656E64 
+ 5223      5F456E63 
+ 5223      6F646572 
+ 5223      00
+ 5224              	.LASF86:
+ 5225 0246 7374616C 		.ascii	"stall\000"
+ 5225      6C00
+ 5226              	.LASF94:
+ 5227 024c 64726976 		.ascii	"drive\000"
+ 5227      6500
+ 5228              	.LASF113:
+ 5229 0252 51756164 		.ascii	"QuadDec_GetCounter\000"
+ 5229      4465635F 
+ 5229      47657443 
+ 5229      6F756E74 
+ 5229      657200
+ 5230              	.LASF24:
+ 5231 0265 636F6465 		.ascii	"code\000"
+ 5231      00
+ 5232              	.LASF78:
+ 5233 026a 636F6D70 		.ascii	"complete\000"
+ 5233      6C657465 
+ 5233      00
+ 5234              	.LASF112:
+ 5235 0273 54696D65 		.ascii	"Timer_1_ReadStatusRegister\000"
+ 5235      725F315F 
+ 5235      52656164 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 110
 
 
- 5237              	.LASF44:
- 5238 024f 63616E5F 		.ascii	"can_start\000"
- 5238      73746172 
- 5238      7400
- 5239              	.LASF110:
- 5240 0259 50696E5F 		.ascii	"Pin_Direction_Write\000"
- 5240      44697265 
- 5240      6374696F 
- 5240      6E5F5772 
- 5240      69746500 
- 5241              	.LASF51:
- 5242 026d 50657269 		.ascii	"Period_Reset_Handler\000"
- 5242      6F645F52 
- 5242      65736574 
- 5242      5F48616E 
- 5242      646C6572 
- 5243              	.LASF16:
- 5244 0282 63686172 		.ascii	"char\000"
- 5244      00
- 5245              	.LASF27:
- 5246 0287 43414E5F 		.ascii	"CAN_DATA_BYTES_MSG\000"
- 5246      44415441 
- 5246      5F425954 
- 5246      45535F4D 
- 5246      534700
- 5247              	.LASF35:
- 5248 029a 72786163 		.ascii	"rxacr\000"
- 5248      7200
- 5249              	.LASF58:
- 5250 02a0 43414E5F 		.ascii	"CAN_Send_Error\000"
- 5250      53656E64 
- 5250      5F457272 
- 5250      6F7200
- 5251              	.LASF36:
- 5252 02af 7278616D 		.ascii	"rxamrd\000"
- 5252      726400
- 5253              	.LASF72:
- 5254 02b6 75617274 		.ascii	"uart_debug\000"
- 5254      5F646562 
- 5254      756700
- 5255              	.LASF10:
- 5256 02c1 75696E74 		.ascii	"uint16\000"
- 5256      313600
- 5257              	.LASF92:
- 5258 02c8 64617461 		.ascii	"data\000"
- 5258      00
- 5259              	.LASF100:
- 5260 02cd 51756164 		.ascii	"QuadDec_Start\000"
- 5260      4465635F 
- 5260      53746172 
- 5260      7400
- 5261              	.LASF103:
- 5262 02db 4379496E 		.ascii	"CyIntSetVector\000"
- 5262      74536574 
- 5262      56656374 
- 5262      6F7200
- 5263              	.LASF50:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 111
+ 5235      53746174 
+ 5235      75735265 
+ 5236              	.LASF111:
+ 5237 028e 50574D5F 		.ascii	"PWM_Motor_WriteCompare\000"
+ 5237      4D6F746F 
+ 5237      725F5772 
+ 5237      69746543 
+ 5237      6F6D7061 
+ 5238              	.LASF55:
+ 5239 02a5 7469636B 		.ascii	"ticks\000"
+ 5239      7300
+ 5240              	.LASF44:
+ 5241 02ab 63616E5F 		.ascii	"can_start\000"
+ 5241      73746172 
+ 5241      7400
+ 5242              	.LASF110:
+ 5243 02b5 50696E5F 		.ascii	"Pin_Direction_Write\000"
+ 5243      44697265 
+ 5243      6374696F 
+ 5243      6E5F5772 
+ 5243      69746500 
+ 5244              	.LASF51:
+ 5245 02c9 50657269 		.ascii	"Period_Reset_Handler\000"
+ 5245      6F645F52 
+ 5245      65736574 
+ 5245      5F48616E 
+ 5245      646C6572 
+ 5246              	.LASF16:
+ 5247 02de 63686172 		.ascii	"char\000"
+ 5247      00
+ 5248              	.LASF27:
+ 5249 02e3 43414E5F 		.ascii	"CAN_DATA_BYTES_MSG\000"
+ 5249      44415441 
+ 5249      5F425954 
+ 5249      45535F4D 
+ 5249      534700
+ 5250              	.LASF35:
+ 5251 02f6 72786163 		.ascii	"rxacr\000"
+ 5251      7200
+ 5252              	.LASF58:
+ 5253 02fc 43414E5F 		.ascii	"CAN_Send_Error\000"
+ 5253      53656E64 
+ 5253      5F457272 
+ 5253      6F7200
+ 5254              	.LASF36:
+ 5255 030b 7278616D 		.ascii	"rxamrd\000"
+ 5255      726400
+ 5256              	.LASF72:
+ 5257 0312 75617274 		.ascii	"uart_debug\000"
+ 5257      5F646562 
+ 5257      756700
+ 5258              	.LASF10:
+ 5259 031d 75696E74 		.ascii	"uint16\000"
+ 5259      313600
+ 5260              	.LASF92:
+ 5261 0324 64617461 		.ascii	"data\000"
+ 5261      00
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 111
 
 
- 5264 02ea 73746174 		.ascii	"status\000"
- 5264      757300
- 5265              	.LASF15:
- 5266 02f1 63686172 		.ascii	"char8\000"
- 5266      3800
- 5267              	.LASF37:
- 5268 02f7 72786163 		.ascii	"rxacrd\000"
- 5268      726400
- 5269              	.LASF74:
- 5270 02fe 70776D5F 		.ascii	"pwm_compare\000"
- 5270      636F6D70 
- 5270      61726500 
- 5271              	.LASF114:
- 5272 030a 43414E5F 		.ascii	"CAN_SendMsg\000"
- 5272      53656E64 
- 5272      4D736700 
- 5273              	.LASF40:
- 5274 0316 656D6572 		.ascii	"emergency_halt\000"
- 5274      67656E63 
- 5274      795F6861 
- 5274      6C7400
- 5275              	.LASF6:
- 5276 0325 6C6F6E67 		.ascii	"long long int\000"
- 5276      206C6F6E 
- 5276      6720696E 
- 5276      7400
- 5277              	.LASF118:
- 5278 0333 7365745F 		.ascii	"set_data\000"
- 5278      64617461 
- 5278      00
- 5279              	.LASF98:
- 5280 033c 53746174 		.ascii	"Status_Reg_Switches_InterruptEnable\000"
- 5280      75735F52 
- 5280      65675F53 
- 5280      77697463 
- 5280      6865735F 
- 5281              	.LASF33:
- 5282 0360 72786461 		.ascii	"rxdata\000"
- 5282      746100
- 5283              	.LASF25:
- 5284 0367 70617261 		.ascii	"param\000"
- 5284      6D00
- 5285              	.LASF71:
- 5286 036d 43414E5F 		.ascii	"CAN_TIMEOUT\000"
- 5286      54494D45 
- 5286      4F555400 
- 5287              	.LASF28:
- 5288 0379 43414E5F 		.ascii	"CAN_DATA_BYTES\000"
- 5288      44415441 
- 5288      5F425954 
- 5288      455300
- 5289              	.LASF49:
- 5290 0388 636F6D70 		.ascii	"compare\000"
- 5290      61726500 
- 5291              	.LASF11:
- 5292 0390 75696E74 		.ascii	"uint32\000"
- 5292      333200
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 112
+ 5262              	.LASF100:
+ 5263 0329 51756164 		.ascii	"QuadDec_Start\000"
+ 5263      4465635F 
+ 5263      53746172 
+ 5263      7400
+ 5264              	.LASF103:
+ 5265 0337 4379496E 		.ascii	"CyIntSetVector\000"
+ 5265      74536574 
+ 5265      56656374 
+ 5265      6F7200
+ 5266              	.LASF50:
+ 5267 0346 73746174 		.ascii	"status\000"
+ 5267      757300
+ 5268              	.LASF15:
+ 5269 034d 63686172 		.ascii	"char8\000"
+ 5269      3800
+ 5270              	.LASF37:
+ 5271 0353 72786163 		.ascii	"rxacrd\000"
+ 5271      726400
+ 5272              	.LASF74:
+ 5273 035a 70776D5F 		.ascii	"pwm_compare\000"
+ 5273      636F6D70 
+ 5273      61726500 
+ 5274              	.LASF114:
+ 5275 0366 43414E5F 		.ascii	"CAN_SendMsg\000"
+ 5275      53656E64 
+ 5275      4D736700 
+ 5276              	.LASF40:
+ 5277 0372 656D6572 		.ascii	"emergency_halt\000"
+ 5277      67656E63 
+ 5277      795F6861 
+ 5277      6C7400
+ 5278              	.LASF6:
+ 5279 0381 6C6F6E67 		.ascii	"long long int\000"
+ 5279      206C6F6E 
+ 5279      6720696E 
+ 5279      7400
+ 5280              	.LASF118:
+ 5281 038f 7365745F 		.ascii	"set_data\000"
+ 5281      64617461 
+ 5281      00
+ 5282              	.LASF98:
+ 5283 0398 53746174 		.ascii	"Status_Reg_Switches_InterruptEnable\000"
+ 5283      75735F52 
+ 5283      65675F53 
+ 5283      77697463 
+ 5283      6865735F 
+ 5284              	.LASF33:
+ 5285 03bc 72786461 		.ascii	"rxdata\000"
+ 5285      746100
+ 5286              	.LASF25:
+ 5287 03c3 70617261 		.ascii	"param\000"
+ 5287      6D00
+ 5288              	.LASF71:
+ 5289 03c9 43414E5F 		.ascii	"CAN_TIMEOUT\000"
+ 5289      54494D45 
+ 5289      4F555400 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 112
 
 
- 5293              	.LASF82:
- 5294 0397 6D6F6465 		.ascii	"model_req\000"
- 5294      6C5F7265 
- 5294      7100
- 5295              	.LASF21:
- 5296 03a1 646F6E65 		.ascii	"done\000"
- 5296      00
- 5297              	.LASF43:
- 5298 03a6 696E6974 		.ascii	"initialize_can_addr\000"
- 5298      69616C69 
- 5298      7A655F63 
- 5298      616E5F61 
- 5298      64647200 
- 5299              	.LASF76:
- 5300 03ba 6C617374 		.ascii	"lastp\000"
- 5300      7000
- 5301              	.LASF19:
- 5302 03c0 6C6F6E67 		.ascii	"long double\000"
- 5302      20646F75 
- 5302      626C6500 
- 5303              	.LASF47:
- 5304 03cc 7365745F 		.ascii	"set_PWM\000"
- 5304      50574D00 
- 5305              	.LASF107:
- 5306 03d4 73707269 		.ascii	"sprintf\000"
- 5306      6E746600 
- 5307              	.LASF18:
- 5308 03dc 72656733 		.ascii	"reg32\000"
- 5308      3200
- 5309              	.LASF53:
- 5310 03e2 50696E5F 		.ascii	"Pin_Limit_Handler\000"
- 5310      4C696D69 
- 5310      745F4861 
- 5310      6E646C65 
- 5310      7200
- 5311              	.LASF61:
- 5312 03f4 706F7369 		.ascii	"position_PID\000"
- 5312      74696F6E 
- 5312      5F504944 
- 5312      00
- 5313              	.LASF39:
- 5314 0401 4953525F 		.ascii	"ISR_CAN\000"
- 5314      43414E00 
- 5315              	.LASF68:
- 5316 0409 43414E5F 		.ascii	"CAN_RX_MAILBOX_0_SHIFT\000"
- 5316      52585F4D 
- 5316      41494C42 
- 5316      4F585F30 
- 5316      5F534849 
- 5317              	.LASF88:
- 5318 0420 696E7661 		.ascii	"invalid_arg\000"
- 5318      6C69645F 
- 5318      61726700 
- 5319              	.LASF70:
- 5320 042c 43414E5F 		.ascii	"CAN_RX_MAILBOX_0\000"
- 5320      52585F4D 
- 5320      41494C42 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 113
+ 5290              	.LASF28:
+ 5291 03d5 43414E5F 		.ascii	"CAN_DATA_BYTES\000"
+ 5291      44415441 
+ 5291      5F425954 
+ 5291      455300
+ 5292              	.LASF49:
+ 5293 03e4 636F6D70 		.ascii	"compare\000"
+ 5293      61726500 
+ 5294              	.LASF11:
+ 5295 03ec 75696E74 		.ascii	"uint32\000"
+ 5295      333200
+ 5296              	.LASF82:
+ 5297 03f3 6D6F6465 		.ascii	"model_req\000"
+ 5297      6C5F7265 
+ 5297      7100
+ 5298              	.LASF21:
+ 5299 03fd 646F6E65 		.ascii	"done\000"
+ 5299      00
+ 5300              	.LASF43:
+ 5301 0402 696E6974 		.ascii	"initialize_can_addr\000"
+ 5301      69616C69 
+ 5301      7A655F63 
+ 5301      616E5F61 
+ 5301      64647200 
+ 5302              	.LASF76:
+ 5303 0416 6C617374 		.ascii	"lastp\000"
+ 5303      7000
+ 5304              	.LASF19:
+ 5305 041c 6C6F6E67 		.ascii	"long double\000"
+ 5305      20646F75 
+ 5305      626C6500 
+ 5306              	.LASF47:
+ 5307 0428 7365745F 		.ascii	"set_PWM\000"
+ 5307      50574D00 
+ 5308              	.LASF107:
+ 5309 0430 73707269 		.ascii	"sprintf\000"
+ 5309      6E746600 
+ 5310              	.LASF18:
+ 5311 0438 72656733 		.ascii	"reg32\000"
+ 5311      3200
+ 5312              	.LASF53:
+ 5313 043e 50696E5F 		.ascii	"Pin_Limit_Handler\000"
+ 5313      4C696D69 
+ 5313      745F4861 
+ 5313      6E646C65 
+ 5313      7200
+ 5314              	.LASF61:
+ 5315 0450 706F7369 		.ascii	"position_PID\000"
+ 5315      74696F6E 
+ 5315      5F504944 
+ 5315      00
+ 5316              	.LASF39:
+ 5317 045d 4953525F 		.ascii	"ISR_CAN\000"
+ 5317      43414E00 
+ 5318              	.LASF68:
+ 5319 0465 43414E5F 		.ascii	"CAN_RX_MAILBOX_0_SHIFT\000"
+ 5319      52585F4D 
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 113
 
 
- 5320      4F585F30 
- 5320      00
- 5321              	.LASF69:
- 5322 043d 43414E5F 		.ascii	"CAN_RX_MAILBOX_1\000"
- 5322      52585F4D 
- 5322      41494C42 
- 5322      4F585F31 
- 5322      00
- 5323              	.LASF2:
- 5324 044e 73686F72 		.ascii	"short int\000"
- 5324      7420696E 
- 5324      7400
- 5325              	.LASF77:
- 5326 0458 72617469 		.ascii	"ratio\000"
- 5326      6F00
- 5327              	.LASF4:
- 5328 045e 6C6F6E67 		.ascii	"long int\000"
- 5328      20696E74 
- 5328      00
- 5329              	.LASF108:
- 5330 0467 43616E5F 		.ascii	"Can_addr_Read\000"
- 5330      61646472 
- 5330      5F526561 
- 5330      6400
- 5331              	.LASF102:
- 5332 0475 43414E5F 		.ascii	"CAN_GlobalIntEnable\000"
- 5332      476C6F62 
- 5332      616C496E 
- 5332      74456E61 
- 5332      626C6500 
- 5333              	.LASF64:
- 5334 0489 7365745F 		.ascii	"set_Position\000"
- 5334      506F7369 
- 5334      74696F6E 
- 5334      00
- 5335              	.LASF57:
- 5336 0496 43414E5F 		.ascii	"CAN_Send_Model\000"
- 5336      53656E64 
- 5336      5F4D6F64 
- 5336      656C00
- 5337              	.LASF48:
- 5338 04a5 7072696F 		.ascii	"priority\000"
- 5338      72697479 
- 5338      00
- 5339              	.LASF95:
- 5340 04ae 55415254 		.ascii	"UART_UartPutString\000"
- 5340      5F556172 
- 5340      74507574 
- 5340      53747269 
- 5340      6E6700
- 5341              	.LASF90:
- 5342 04c1 656D6572 		.ascii	"emergency\000"
- 5342      67656E63 
- 5342      7900
- 5343              	.LASF66:
- 5344 04cb 6D657373 		.ascii	"message_id\000"
- 5344      6167655F 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 114
+ 5319      41494C42 
+ 5319      4F585F30 
+ 5319      5F534849 
+ 5320              	.LASF88:
+ 5321 047c 696E7661 		.ascii	"invalid_arg\000"
+ 5321      6C69645F 
+ 5321      61726700 
+ 5322              	.LASF70:
+ 5323 0488 43414E5F 		.ascii	"CAN_RX_MAILBOX_0\000"
+ 5323      52585F4D 
+ 5323      41494C42 
+ 5323      4F585F30 
+ 5323      00
+ 5324              	.LASF69:
+ 5325 0499 43414E5F 		.ascii	"CAN_RX_MAILBOX_1\000"
+ 5325      52585F4D 
+ 5325      41494C42 
+ 5325      4F585F31 
+ 5325      00
+ 5326              	.LASF2:
+ 5327 04aa 73686F72 		.ascii	"short int\000"
+ 5327      7420696E 
+ 5327      7400
+ 5328              	.LASF77:
+ 5329 04b4 72617469 		.ascii	"ratio\000"
+ 5329      6F00
+ 5330              	.LASF4:
+ 5331 04ba 6C6F6E67 		.ascii	"long int\000"
+ 5331      20696E74 
+ 5331      00
+ 5332              	.LASF108:
+ 5333 04c3 43616E5F 		.ascii	"Can_addr_Read\000"
+ 5333      61646472 
+ 5333      5F526561 
+ 5333      6400
+ 5334              	.LASF102:
+ 5335 04d1 43414E5F 		.ascii	"CAN_GlobalIntEnable\000"
+ 5335      476C6F62 
+ 5335      616C496E 
+ 5335      74456E61 
+ 5335      626C6500 
+ 5336              	.LASF64:
+ 5337 04e5 7365745F 		.ascii	"set_Position\000"
+ 5337      506F7369 
+ 5337      74696F6E 
+ 5337      00
+ 5338              	.LASF57:
+ 5339 04f2 43414E5F 		.ascii	"CAN_Send_Model\000"
+ 5339      53656E64 
+ 5339      5F4D6F64 
+ 5339      656C00
+ 5340              	.LASF48:
+ 5341 0501 7072696F 		.ascii	"priority\000"
+ 5341      72697479 
+ 5341      00
+ 5342              	.LASF95:
+ 5343 050a 55415254 		.ascii	"UART_UartPutString\000"
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 114
 
 
- 5344      696400
- 5345              	.LASF85:
- 5346 04d6 43616E5F 		.ascii	"Can_rx_angle\000"
- 5346      72785F61 
- 5346      6E676C65 
- 5346      00
- 5347              	.LASF87:
- 5348 04e3 636F6D6D 		.ascii	"command_failed\000"
- 5348      616E645F 
- 5348      6661696C 
- 5348      656400
- 5349              	.LASF106:
- 5350 04f2 55415254 		.ascii	"UART_Start\000"
- 5350      5F537461 
- 5350      727400
- 5351              	.LASF20:
- 5352 04fd 73697A65 		.ascii	"sizetype\000"
- 5352      74797065 
- 5352      00
- 5353              	.LASF5:
- 5354 0506 6C6F6E67 		.ascii	"long unsigned int\000"
- 5354      20756E73 
- 5354      69676E65 
- 5354      6420696E 
- 5354      7400
- 5355              	.LASF29:
- 5356 0518 43414E5F 		.ascii	"CAN_REG_32\000"
- 5356      5245475F 
- 5356      333200
- 5357              	.LASF101:
- 5358 0523 50574D5F 		.ascii	"PWM_Motor_Start\000"
- 5358      4D6F746F 
- 5358      725F5374 
- 5358      61727400 
- 5359              	.LASF26:
- 5360 0533 62797465 		.ascii	"byte\000"
- 5360      00
- 5361              	.LASF32:
- 5362 0538 72786964 		.ascii	"rxid\000"
- 5362      00
- 5363              	.LASF1:
- 5364 053d 756E7369 		.ascii	"unsigned char\000"
- 5364      676E6564 
- 5364      20636861 
- 5364      7200
- 5365              	.LASF96:
- 5366 054b 50574D5F 		.ascii	"PWM_Motor_Stop\000"
- 5366      4D6F746F 
- 5366      725F5374 
- 5366      6F7000
- 5367              	.LASF73:
- 5368 055a 47454152 		.ascii	"GEAR_RATIO\000"
- 5368      5F524154 
- 5368      494F00
- 5369              	.LASF31:
- 5370 0565 7278636D 		.ascii	"rxcmd\000"
- 5370      6400
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 115
+ 5343      5F556172 
+ 5343      74507574 
+ 5343      53747269 
+ 5343      6E6700
+ 5344              	.LASF90:
+ 5345 051d 656D6572 		.ascii	"emergency\000"
+ 5345      67656E63 
+ 5345      7900
+ 5346              	.LASF66:
+ 5347 0527 6D657373 		.ascii	"message_id\000"
+ 5347      6167655F 
+ 5347      696400
+ 5348              	.LASF85:
+ 5349 0532 43616E5F 		.ascii	"Can_rx_angle\000"
+ 5349      72785F61 
+ 5349      6E676C65 
+ 5349      00
+ 5350              	.LASF87:
+ 5351 053f 636F6D6D 		.ascii	"command_failed\000"
+ 5351      616E645F 
+ 5351      6661696C 
+ 5351      656400
+ 5352              	.LASF106:
+ 5353 054e 55415254 		.ascii	"UART_Start\000"
+ 5353      5F537461 
+ 5353      727400
+ 5354              	.LASF20:
+ 5355 0559 73697A65 		.ascii	"sizetype\000"
+ 5355      74797065 
+ 5355      00
+ 5356              	.LASF5:
+ 5357 0562 6C6F6E67 		.ascii	"long unsigned int\000"
+ 5357      20756E73 
+ 5357      69676E65 
+ 5357      6420696E 
+ 5357      7400
+ 5358              	.LASF29:
+ 5359 0574 43414E5F 		.ascii	"CAN_REG_32\000"
+ 5359      5245475F 
+ 5359      333200
+ 5360              	.LASF101:
+ 5361 057f 50574D5F 		.ascii	"PWM_Motor_Start\000"
+ 5361      4D6F746F 
+ 5361      725F5374 
+ 5361      61727400 
+ 5362              	.LASF26:
+ 5363 058f 62797465 		.ascii	"byte\000"
+ 5363      00
+ 5364              	.LASF32:
+ 5365 0594 72786964 		.ascii	"rxid\000"
+ 5365      00
+ 5366              	.LASF1:
+ 5367 0599 756E7369 		.ascii	"unsigned char\000"
+ 5367      676E6564 
+ 5367      20636861 
+ 5367      7200
+ 5368              	.LASF96:
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 115
 
 
- 5371              	.LASF119:
- 5372 056b 61646472 		.ascii	"addr\000"
- 5372      00
- 5373              	.LASF79:
- 5374 0570 6D617856 		.ascii	"maxV\000"
- 5374      00
- 5375              	.LASF99:
- 5376 0575 54696D65 		.ascii	"Timer_1_Start\000"
- 5376      725F315F 
- 5376      53746172 
- 5376      7400
- 5377              	.LASF0:
- 5378 0583 7369676E 		.ascii	"signed char\000"
- 5378      65642063 
- 5378      68617200 
- 5379              	.LASF3:
- 5380 058f 73686F72 		.ascii	"short unsigned int\000"
- 5380      7420756E 
- 5380      7369676E 
- 5380      65642069 
- 5380      6E7400
- 5381              	.LASF121:
- 5382 05a2 6D656D63 		.ascii	"memcpy\000"
- 5382      707900
- 5383              	.LASF120:
- 5384 05a9 6D61696E 		.ascii	"main\000"
- 5384      00
- 5385              	.LASF117:
- 5386 05ae 433A5C55 		.ascii	"C:\\Users\\austc\\Documents\\GitHub\\OrpheusElectro"
- 5386      73657273 
- 5386      5C617573 
- 5386      74635C44 
- 5386      6F63756D 
- 5387 05dc 6E696373 		.ascii	"nics\\Psoc Arm\\Motor Board Rev2.cydsn\000"
- 5387      5C50736F 
- 5387      63204172 
- 5387      6D5C4D6F 
- 5387      746F7220 
+ 5369 05a7 50574D5F 		.ascii	"PWM_Motor_Stop\000"
+ 5369      4D6F746F 
+ 5369      725F5374 
+ 5369      6F7000
+ 5370              	.LASF73:
+ 5371 05b6 47454152 		.ascii	"GEAR_RATIO\000"
+ 5371      5F524154 
+ 5371      494F00
+ 5372              	.LASF31:
+ 5373 05c1 7278636D 		.ascii	"rxcmd\000"
+ 5373      6400
+ 5374              	.LASF119:
+ 5375 05c7 61646472 		.ascii	"addr\000"
+ 5375      00
+ 5376              	.LASF79:
+ 5377 05cc 6D617856 		.ascii	"maxV\000"
+ 5377      00
+ 5378              	.LASF99:
+ 5379 05d1 54696D65 		.ascii	"Timer_1_Start\000"
+ 5379      725F315F 
+ 5379      53746172 
+ 5379      7400
+ 5380              	.LASF0:
+ 5381 05df 7369676E 		.ascii	"signed char\000"
+ 5381      65642063 
+ 5381      68617200 
+ 5382              	.LASF3:
+ 5383 05eb 73686F72 		.ascii	"short unsigned int\000"
+ 5383      7420756E 
+ 5383      7369676E 
+ 5383      65642069 
+ 5383      6E7400
+ 5384              	.LASF121:
+ 5385 05fe 6D656D63 		.ascii	"memcpy\000"
+ 5385      707900
+ 5386              	.LASF120:
+ 5387 0605 6D61696E 		.ascii	"main\000"
+ 5387      00
  5388              	.LASF63:
- 5389 0601 63757272 		.ascii	"current\000"
+ 5389 060a 63757272 		.ascii	"current\000"
  5389      656E7400 
  5390              	.LASF9:
- 5391 0609 75696E74 		.ascii	"uint8\000"
+ 5391 0612 75696E74 		.ascii	"uint8\000"
  5391      3800
  5392              	.LASF14:
- 5393 060f 646F7562 		.ascii	"double\000"
+ 5393 0618 646F7562 		.ascii	"double\000"
  5393      6C6500
  5394              	.LASF97:
- 5395 0616 43414E5F 		.ascii	"CAN_Start\000"
+ 5395 061f 43414E5F 		.ascii	"CAN_Start\000"
  5395      53746172 
  5395      7400
  5396              	.LASF52:
- 5397 0620 74696D65 		.ascii	"timer\000"
+ 5397 0629 74696D65 		.ascii	"timer\000"
  5397      7200
  5398              	.LASF104:
- 5399 0626 6973725F 		.ascii	"isr_Limit_1_StartEx\000"
+ 5399 062f 6973725F 		.ascii	"isr_Limit_1_StartEx\000"
  5399      4C696D69 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\cc6JHytY.s 			page 116
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPDHU8c.s 			page 116
 
 
  5399      745F315F 
  5399      53746172 
  5399      74457800 
  5400              	.LASF89:
- 5401 063a 6D61696C 		.ascii	"mailbox\000"
+ 5401 0643 6D61696C 		.ascii	"mailbox\000"
  5401      626F7800 
  5402              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

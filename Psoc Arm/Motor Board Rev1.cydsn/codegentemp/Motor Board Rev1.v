@@ -1,6 +1,6 @@
 // ======================================================================
-// Motor Board.v generated from TopDesign.cysch
-// 03/28/2019 at 12:12
+// Motor Board Rev1.v generated from TopDesign.cysch
+// 04/20/2019 at 14:22
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2012,7 +2012,7 @@ module top ;
 		  .divisor(2),
 		  .period("0"),
 		  .is_direct(0),
-		  .is_digital(1))
+		  .is_digital(0))
 		Clock_1
 		 (.clock_out(Net_142));
 
@@ -2214,7 +2214,7 @@ module top ;
 		  .divisor(0),
 		  .period("10000000000000"),
 		  .is_direct(0),
-		  .is_digital(1))
+		  .is_digital(0))
 		Clock_2
 		 (.clock_out(Net_1156));
 
@@ -2730,7 +2730,7 @@ module top ;
 		  .divisor(2),
 		  .period("0"),
 		  .is_direct(0),
-		  .is_digital(1))
+		  .is_digital(0))
 		timer_clock
 		 (.clock_out(Net_1314));
 

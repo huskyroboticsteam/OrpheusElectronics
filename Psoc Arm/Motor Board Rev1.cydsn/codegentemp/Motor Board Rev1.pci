@@ -1,5 +1,5 @@
-# Motor Board
-# 2019-03-28 19:12:34Z
+# Motor Board Rev1
+# 2019-04-20 21:22:50Z
 
 # IO_6@[IOP=(0)][IoId=(6)] is reserved: ExtClkEnabled
 dont_use_io iocell 0 6

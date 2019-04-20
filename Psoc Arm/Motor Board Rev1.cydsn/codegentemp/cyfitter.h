@@ -1757,7 +1757,7 @@
 #define Status_Reg_Switches_sts_intr_sts_reg__STATUS_REG CYREG_UDB_W8_ST7
 
 /* Miscellaneous */
-#define CY_PROJECT_NAME "Motor Board"
+#define CY_PROJECT_NAME "Motor Board Rev1"
 #define CY_VERSION "PSoC Creator  4.2"
 #define CYDEV_BANDGAP_VOLTAGE 1.024
 #define CYDEV_BCLK__HFCLK__HZ 40000000U

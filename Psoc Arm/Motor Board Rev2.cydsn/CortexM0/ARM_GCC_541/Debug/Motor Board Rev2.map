@@ -1546,7 +1546,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x794d
+.debug_info     0x00000000     0x7956
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xf4d .\CortexM0\ARM_GCC_541\Debug\main.o
  .debug_info    0x00000f4d      0x406 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
@@ -1568,10 +1568,10 @@ END GROUP
  .debug_info    0x000069e5      0x17f .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Can_addr.o)
  .debug_info    0x00006b64      0x386 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Timer_1.o)
  .debug_info    0x00006eea      0x305 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(isr_period.o)
- .debug_info    0x000071ef       0xa1 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyBootAsmGnu.o)
- .debug_info    0x00007290      0x352 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyFlash.o)
- .debug_info    0x000075e2      0x14b .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(cyutils.o)
- .debug_info    0x0000772d      0x220 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART_SPI_UART.o)
+ .debug_info    0x000071ef       0xaa .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyBootAsmGnu.o)
+ .debug_info    0x00007299      0x352 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyFlash.o)
+ .debug_info    0x000075eb      0x14b .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(cyutils.o)
+ .debug_info    0x00007736      0x220 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART_SPI_UART.o)
 
 .debug_abbrev   0x00000000     0x1e4a
  *(.debug_abbrev)
@@ -1674,54 +1674,54 @@ END GROUP
  .debug_frame   0x00002494       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-nano-msizer.o)
  .debug_frame   0x000024b4       0x48 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m\libg_nano.a(lib_a-reent.o)
 
-.debug_str      0x00000000     0x2eab
+.debug_str      0x00000000     0x2eb4
  *(.debug_str)
- .debug_str     0x00000000      0x5d5 .\CortexM0\ARM_GCC_541\Debug\main.o
-                                0x642 (size before relaxing)
- .debug_str     0x000005d5      0x131 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
-                                0x30e (size before relaxing)
- .debug_str     0x00000706       0x63 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
-                                0x1d9 (size before relaxing)
- .debug_str     0x00000769      0x134 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
-                                0x312 (size before relaxing)
- .debug_str     0x0000089d      0x913 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyLib.o)
-                                0xb4f (size before relaxing)
- .debug_str     0x000011b0      0x6d9 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyLFClk.o)
-                                0x92e (size before relaxing)
- .debug_str     0x00001889      0x450 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(PWM_Motor.o)
-                                0x66a (size before relaxing)
- .debug_str     0x00001cd9       0xcf .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Pin_Direction.o)
-                                0x27f (size before relaxing)
- .debug_str     0x00001da8      0x135 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(isr_Limit_1.o)
-                                0x34f (size before relaxing)
- .debug_str     0x00001edd      0x114 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(QuadDec.o)
-                                0x32e (size before relaxing)
- .debug_str     0x00001ff1      0x1cb .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(QuadDec_Cnt16.o)
-                                0x401 (size before relaxing)
- .debug_str     0x000021bc       0x8d .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Status_Reg_Switches.o)
-                                0x2a2 (size before relaxing)
- .debug_str     0x00002249      0x2d9 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CAN.o)
-                                0x547 (size before relaxing)
- .debug_str     0x00002522       0x29 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CAN_INT.o)
-                                0x1b5 (size before relaxing)
- .debug_str     0x0000254b      0x1df .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CAN_TX_RX_func.o)
-                                0x454 (size before relaxing)
- .debug_str     0x0000272a       0xf7 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART.o)
-                                0x2a8 (size before relaxing)
- .debug_str     0x00002821      0x1d2 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART_UART.o)
-                                0x3d9 (size before relaxing)
- .debug_str     0x000029f3       0x7a .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Can_addr.o)
-                                0x260 (size before relaxing)
- .debug_str     0x00002a6d      0x175 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Timer_1.o)
-                                0x386 (size before relaxing)
- .debug_str     0x00002be2      0x119 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(isr_period.o)
-                                0x341 (size before relaxing)
- .debug_str     0x00002cfb       0xab .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyFlash.o)
-                                0x2c1 (size before relaxing)
- .debug_str     0x00002da6       0x29 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(cyutils.o)
-                                0x1ce (size before relaxing)
- .debug_str     0x00002dcf       0xdc .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART_SPI_UART.o)
-                                0x2df (size before relaxing)
+ .debug_str     0x00000000      0x5de .\CortexM0\ARM_GCC_541\Debug\main.o
+                                0x64b (size before relaxing)
+ .debug_str     0x000005de      0x131 .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o
+                                0x317 (size before relaxing)
+ .debug_str     0x0000070f       0x63 .\CortexM0\ARM_GCC_541\Debug\cymetadata.o
+                                0x1e2 (size before relaxing)
+ .debug_str     0x00000772      0x134 .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o
+                                0x31b (size before relaxing)
+ .debug_str     0x000008a6      0x913 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyLib.o)
+                                0xb58 (size before relaxing)
+ .debug_str     0x000011b9      0x6d9 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyLFClk.o)
+                                0x937 (size before relaxing)
+ .debug_str     0x00001892      0x450 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(PWM_Motor.o)
+                                0x673 (size before relaxing)
+ .debug_str     0x00001ce2       0xcf .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Pin_Direction.o)
+                                0x288 (size before relaxing)
+ .debug_str     0x00001db1      0x135 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(isr_Limit_1.o)
+                                0x358 (size before relaxing)
+ .debug_str     0x00001ee6      0x114 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(QuadDec.o)
+                                0x337 (size before relaxing)
+ .debug_str     0x00001ffa      0x1cb .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(QuadDec_Cnt16.o)
+                                0x40a (size before relaxing)
+ .debug_str     0x000021c5       0x8d .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Status_Reg_Switches.o)
+                                0x2ab (size before relaxing)
+ .debug_str     0x00002252      0x2d9 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CAN.o)
+                                0x550 (size before relaxing)
+ .debug_str     0x0000252b       0x29 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CAN_INT.o)
+                                0x1be (size before relaxing)
+ .debug_str     0x00002554      0x1df .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CAN_TX_RX_func.o)
+                                0x45d (size before relaxing)
+ .debug_str     0x00002733       0xf7 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART.o)
+                                0x2b1 (size before relaxing)
+ .debug_str     0x0000282a      0x1d2 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART_UART.o)
+                                0x3e2 (size before relaxing)
+ .debug_str     0x000029fc       0x7a .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Can_addr.o)
+                                0x269 (size before relaxing)
+ .debug_str     0x00002a76      0x175 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(Timer_1.o)
+                                0x38f (size before relaxing)
+ .debug_str     0x00002beb      0x119 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(isr_period.o)
+                                0x34a (size before relaxing)
+ .debug_str     0x00002d04       0xab .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(CyFlash.o)
+                                0x2ca (size before relaxing)
+ .debug_str     0x00002daf       0x29 .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(cyutils.o)
+                                0x1d7 (size before relaxing)
+ .debug_str     0x00002dd8       0xdc .\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.a(UART_SPI_UART.o)
+                                0x2e8 (size before relaxing)
 
 .debug_loc      0x00000000     0x4599
  *(.debug_loc)
@@ -1930,4 +1930,4 @@ END GROUP
 
 /DISCARD/
  *(.note.GNU-stack)
-OUTPUT(C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Motor Board Rev2.cydsn\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.elf elf32-littlearm)
+OUTPUT(C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board Rev2.cydsn\CortexM0\ARM_GCC_541\Debug\Motor Board Rev2.elf elf32-littlearm)

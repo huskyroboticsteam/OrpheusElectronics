@@ -1,8 +1,8 @@
--- Project:   Motor Board
--- Generated: 03/28/2019 12:12:35
+-- Project:   C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board Rev1.cydsn\Motor Board Rev1.cyprj
+-- Generated: 04/20/2019 14:22:54
 -- PSoC Creator  4.2
 
-ENTITY \Motor Board\ IS
+ENTITY \Motor Board Rev1\ IS
     PORT(
         Pin_Limit_1(0)_PAD : IN std_ulogic;
         Pin_Limit_2(0)_PAD : IN std_ulogic;
@@ -34,9 +34,9 @@ ENTITY \Motor Board\ IS
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 5e0;
-END \Motor Board\;
+END \Motor Board Rev1\;
 
-ARCHITECTURE __DEFAULT__ OF \Motor Board\ IS
+ARCHITECTURE __DEFAULT__ OF \Motor Board Rev1\ IS
     SIGNAL ClockBlock_ECO : bit;
     SIGNAL ClockBlock_ExtClk : bit;
     SIGNAL ClockBlock_HFClk : bit;
@@ -784,12 +784,22 @@ BEGIN
 
     ClockGenBlock:m0s8clockgenblockcell
         PORT MAP(
-            gen_clk_out_0 => Net_142_digital,
-            gen_clk_in_0 => dclk_to_genclk,
-            gen_clk_out_1 => Net_1314_digital,
-            gen_clk_in_1 => dclk_to_genclk_1,
+            gen_clk_out_0 => open,
+            gen_clk_in_0 => open,
+            gen_clk_out_1 => Net_142_digital,
+            gen_clk_in_1 => dclk_to_genclk,
             gen_clk_out_2 => Net_1156_digital,
-            gen_clk_in_2 => dclk_to_genclk_2);
+            gen_clk_in_2 => dclk_to_genclk_2,
+            gen_clk_in_3 => dclk_to_genclk_1,
+            gen_clk_out_3 => Net_1314_digital,
+            gen_clk_in_4 => open,
+            gen_clk_out_4 => open,
+            gen_clk_in_5 => open,
+            gen_clk_out_5 => open,
+            gen_clk_in_6 => open,
+            gen_clk_out_6 => open,
+            gen_clk_in_7 => open,
+            gen_clk_out_7 => open);
 
     ClockBlock:m0s8clockblockcell
         PORT MAP(
@@ -804,12 +814,13 @@ BEGIN
             lfclk => ClockBlock_LFClk,
             wco => ClockBlock_WCO,
             dsi_in_0 => ClockBlock_Routed1,
-            udb_div_0 => dclk_to_genclk,
-            udb_div_1 => dclk_to_genclk_1,
+            udb_div_0 => open,
+            udb_div_1 => dclk_to_genclk,
             ff_div_11 => Net_32_ff11,
             ff_div_2 => \I2C_1:Net_847_ff2\,
             ff_div_3 => \UART:Net_847_ff3\,
-            udb_div_2 => dclk_to_genclk_2);
+            udb_div_2 => dclk_to_genclk_2,
+            udb_div_3 => dclk_to_genclk_1);
 
     Pin_Limit_1:logicalport
         GENERIC MAP(

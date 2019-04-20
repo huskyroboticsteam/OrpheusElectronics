@@ -1,4 +1,4 @@
-C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Motor Board Rev2.cydsn\TopDesign\TopDesign.cysch
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board Rev2.cydsn\TopDesign\TopDesign.cysch
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.cysym
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.pdf
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.cystate
@@ -388,7 +388,7 @@ C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyComp
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\OpAmp_P4_v1_20\PSoC4\API\OpAmp_P4_PM.c
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_psoc4_abuf_v1_0\cy_psoc4_abuf_v1_0.cysym
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_psoc4_abuf_v1_0\PSoC4\cy_psoc4_abuf_v1_0.cyprimitive
-C:\Users\austc\Documents\GitHub\OrpheusElectronics\Psoc Arm\Motor Board Rev2.cydsn\Motor Board Rev2.cydwr
+C:\Users\austc\OneDrive\Documents\GitHub\Electronics2018-19\Psoc Arm\Motor Board Rev2.cydsn\Motor Board Rev2.cydwr
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC4\API\cm0gcc.ld
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC4\API\Cm0RealView.scat
 C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC4\API\Cm0Start.c

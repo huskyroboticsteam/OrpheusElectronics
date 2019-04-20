@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
   28:Generated_Source\PSoC4/PWM_Servo_PM.c **** * Summary:
   29:Generated_Source\PSoC4/PWM_Servo_PM.c **** *  All configuration registers are retention. Nothing to save here.
   30:Generated_Source\PSoC4/PWM_Servo_PM.c **** *
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 2
 
 
   31:Generated_Source\PSoC4/PWM_Servo_PM.c **** * Parameters:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
   53              		.cfi_offset 4, -8
   54              		.cfi_offset 14, -4
   60:Generated_Source\PSoC4/PWM_Servo_PM.c ****     if(0u != (PWM_Servo_BLOCK_CONTROL_REG & PWM_Servo_MASK))
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 3
 
 
   55              		.loc 1 60 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
   77:Generated_Source\PSoC4/PWM_Servo_PM.c **** *
   78:Generated_Source\PSoC4/PWM_Servo_PM.c **** * Summary:
   79:Generated_Source\PSoC4/PWM_Servo_PM.c **** *  All configuration registers are retention. Nothing to restore here.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 4
 
 
   80:Generated_Source\PSoC4/PWM_Servo_PM.c **** *
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  117              		.cfi_def_cfa_offset 8
  118              		.cfi_offset 4, -8
  119              		.cfi_offset 14, -4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 5
 
 
  110:Generated_Source\PSoC4/PWM_Servo_PM.c ****     PWM_Servo_RestoreConfig();
@@ -285,20 +285,20 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  154 0006 00000000 		.4byte	.Ldebug_abbrev0
  155 000a 04       		.byte	0x4
  156 000b 01       		.uleb128 0x1
- 157 000c 56010000 		.4byte	.LASF24
+ 157 000c 03010000 		.4byte	.LASF24
  158 0010 0C       		.byte	0xc
- 159 0011 42020000 		.4byte	.LASF25
- 160 0015 FD000000 		.4byte	.LASF26
+ 159 0011 4B020000 		.4byte	.LASF25
+ 160 0015 E6010000 		.4byte	.LASF26
  161 0019 00000000 		.4byte	.Ldebug_ranges0+0
  162 001d 00000000 		.4byte	0
  163 0021 00000000 		.4byte	.Ldebug_line0
  164 0025 02       		.uleb128 0x2
  165 0026 01       		.byte	0x1
  166 0027 06       		.byte	0x6
- 167 0028 F7010000 		.4byte	.LASF0
+ 167 0028 A4010000 		.4byte	.LASF0
  168 002c 02       		.uleb128 0x2
  169 002d 01       		.byte	0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 6
 
 
  170 002e 08       		.byte	0x8
@@ -306,11 +306,11 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  172 0033 02       		.uleb128 0x2
  173 0034 02       		.byte	0x2
  174 0035 05       		.byte	0x5
- 175 0036 2F020000 		.4byte	.LASF2
+ 175 0036 DC010000 		.4byte	.LASF2
  176 003a 02       		.uleb128 0x2
  177 003b 02       		.byte	0x2
  178 003c 07       		.byte	0x7
- 179 003d E4010000 		.4byte	.LASF3
+ 179 003d 91010000 		.4byte	.LASF3
  180 0041 02       		.uleb128 0x2
  181 0042 04       		.byte	0x4
  182 0043 05       		.byte	0x5
@@ -358,10 +358,10 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  224 0093 08       		.byte	0x8
  225 0094 AA000000 		.4byte	.LASF13
  226 0098 04       		.uleb128 0x4
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 7
 
 
- 227 0099 50010000 		.4byte	.LASF14
+ 227 0099 FD000000 		.4byte	.LASF14
  228 009d 02       		.byte	0x2
  229 009e 9002     		.2byte	0x290
  230 00a0 A4000000 		.4byte	0xa4
@@ -370,11 +370,11 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  233 00a9 02       		.uleb128 0x2
  234 00aa 08       		.byte	0x8
  235 00ab 04       		.byte	0x4
- 236 00ac 03020000 		.4byte	.LASF15
+ 236 00ac B0010000 		.4byte	.LASF15
  237 00b0 02       		.uleb128 0x2
  238 00b1 04       		.byte	0x4
  239 00b2 07       		.byte	0x7
- 240 00b3 39020000 		.4byte	.LASF16
+ 240 00b3 42020000 		.4byte	.LASF16
  241 00b7 06       		.uleb128 0x6
  242 00b8 01       		.byte	0x1
  243 00b9 03       		.byte	0x3
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  281 010c 01       		.byte	0x1
  282 010d 58       		.byte	0x58
  283 010e 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 8
 
 
  284 0112 02000000 		.4byte	.LFE3-.LFB3
@@ -446,13 +446,13 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  306 0143 03       		.byte	0x3
  307 0144 00000000 		.4byte	PWM_Servo_backup
  308 0148 0D       		.uleb128 0xd
- 309 0149 0F020000 		.4byte	.LASF22
- 310 014d 0F020000 		.4byte	.LASF22
+ 309 0149 BC010000 		.4byte	.LASF22
+ 310 014d BC010000 		.4byte	.LASF22
  311 0151 03       		.byte	0x3
  312 0152 3301     		.2byte	0x133
  313 0154 0D       		.uleb128 0xd
- 314 0155 1E020000 		.4byte	.LASF23
- 315 0159 1E020000 		.4byte	.LASF23
+ 314 0155 CB010000 		.4byte	.LASF23
+ 315 0159 CB010000 		.4byte	.LASF23
  316 015d 03       		.byte	0x3
  317 015e 3101     		.2byte	0x131
  318 0160 00       		.byte	0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  338 0011 00       		.byte	0
  339 0012 00       		.byte	0
  340 0013 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 9
 
 
  341 0014 24       		.uleb128 0x24
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  395 004a 07       		.uleb128 0x7
  396 004b 0D       		.uleb128 0xd
  397 004c 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 10
 
 
  398 004d 03       		.uleb128 0x3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  452 0084 0E       		.uleb128 0xe
  453 0085 3A       		.uleb128 0x3a
  454 0086 0B       		.uleb128 0xb
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 11
 
 
  455 0087 3B       		.uleb128 0x3b
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  509 00c0 05       		.uleb128 0x5
  510 00c1 00       		.byte	0
  511 00c2 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 12
 
 
  512 00c3 00       		.byte	0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  553      00
  554              	.LASF28:
  555 002e 50574D5F 		.ascii	"PWM_Servo_backup\000"
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 13
 
 
  555      53657276 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  577      6F5F4241 
  577      434B5550 
  577      5F535452 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 14
 
 
  578              	.LASF18:
@@ -790,74 +790,74 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 1
  580              	.LASF12:
  581 00f6 646F7562 		.ascii	"double\000"
  581      6C6500
- 582              	.LASF26:
- 583 00fd 433A5C55 		.ascii	"C:\\Users\\austc\\Documents\\GitHub\\OrpheusElectro"
- 583      73657273 
- 583      5C617573 
- 583      74635C44 
- 583      6F63756D 
- 584 012b 6E696373 		.ascii	"nics\\Psoc Arm\\Motor Board Rev2.cydsn\000"
- 584      5C50736F 
- 584      63204172 
- 584      6D5C4D6F 
- 584      746F7220 
- 585              	.LASF14:
- 586 0150 72656733 		.ascii	"reg32\000"
- 586      3200
- 587              	.LASF24:
- 588 0156 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 588      43313120 
- 588      352E342E 
- 588      31203230 
- 588      31363036 
- 589 0189 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 589      20726576 
- 589      6973696F 
- 589      6E203233 
- 589      37373135 
- 590 01bc 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 590      66756E63 
- 590      74696F6E 
- 590      2D736563 
- 590      74696F6E 
- 591              	.LASF3:
- 592 01e4 73686F72 		.ascii	"short unsigned int\000"
- 592      7420756E 
- 592      7369676E 
- 592      65642069 
- 592      6E7400
- 593              	.LASF0:
- 594 01f7 7369676E 		.ascii	"signed char\000"
- 594      65642063 
- 594      68617200 
- 595              	.LASF15:
- 596 0203 6C6F6E67 		.ascii	"long double\000"
- 596      20646F75 
- 596      626C6500 
- 597              	.LASF22:
- 598 020f 50574D5F 		.ascii	"PWM_Servo_Stop\000"
- 598      53657276 
- 598      6F5F5374 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccBpEFbe.s 			page 15
+ 582              	.LASF14:
+ 583 00fd 72656733 		.ascii	"reg32\000"
+ 583      3200
+ 584              	.LASF24:
+ 585 0103 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 585      43313120 
+ 585      352E342E 
+ 585      31203230 
+ 585      31363036 
+ 586 0136 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 586      20726576 
+ 586      6973696F 
+ 586      6E203233 
+ 586      37373135 
+ 587 0169 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 587      66756E63 
+ 587      74696F6E 
+ 587      2D736563 
+ 587      74696F6E 
+ 588              	.LASF3:
+ 589 0191 73686F72 		.ascii	"short unsigned int\000"
+ 589      7420756E 
+ 589      7369676E 
+ 589      65642069 
+ 589      6E7400
+ 590              	.LASF0:
+ 591 01a4 7369676E 		.ascii	"signed char\000"
+ 591      65642063 
+ 591      68617200 
+ 592              	.LASF15:
+ 593 01b0 6C6F6E67 		.ascii	"long double\000"
+ 593      20646F75 
+ 593      626C6500 
+ 594              	.LASF22:
+ 595 01bc 50574D5F 		.ascii	"PWM_Servo_Stop\000"
+ 595      53657276 
+ 595      6F5F5374 
+ 595      6F7000
+ 596              	.LASF23:
+ 597 01cb 50574D5F 		.ascii	"PWM_Servo_Enable\000"
+ 597      53657276 
+ 597      6F5F456E 
+ 597      61626C65 
+ 597      00
+ 598              	.LASF2:
+ 599 01dc 73686F72 		.ascii	"short int\000"
+ 599      7420696E 
+ 599      7400
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccG1AMDO.s 			page 15
 
 
- 598      6F7000
- 599              	.LASF23:
- 600 021e 50574D5F 		.ascii	"PWM_Servo_Enable\000"
- 600      53657276 
- 600      6F5F456E 
- 600      61626C65 
- 600      00
- 601              	.LASF2:
- 602 022f 73686F72 		.ascii	"short int\000"
- 602      7420696E 
- 602      7400
+ 600              	.LASF26:
+ 601 01e6 433A5C55 		.ascii	"C:\\Users\\austc\\OneDrive\\Documents\\GitHub\\Elec"
+ 601      73657273 
+ 601      5C617573 
+ 601      74635C4F 
+ 601      6E654472 
+ 602 0213 74726F6E 		.ascii	"tronics2018-19\\Psoc Arm\\Motor Board Rev2.cydsn\000"
+ 602      69637332 
+ 602      3031382D 
+ 602      31395C50 
+ 602      736F6320 
  603              	.LASF16:
- 604 0239 73697A65 		.ascii	"sizetype\000"
+ 604 0242 73697A65 		.ascii	"sizetype\000"
  604      74797065 
  604      00
  605              	.LASF25:
- 606 0242 47656E65 		.ascii	"Generated_Source\\PSoC4\\PWM_Servo_PM.c\000"
+ 606 024b 47656E65 		.ascii	"Generated_Source\\PSoC4\\PWM_Servo_PM.c\000"
  606      72617465 
  606      645F536F 
  606      75726365 

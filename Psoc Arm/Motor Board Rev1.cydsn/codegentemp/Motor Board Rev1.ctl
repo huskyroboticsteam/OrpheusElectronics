@@ -1,6 +1,6 @@
 -- ======================================================================
--- Motor Board.ctl generated from Motor Board
--- 03/28/2019 at 12:12
+-- Motor Board Rev1.ctl generated from Motor Board Rev1
+-- 04/20/2019 at 14:22
 -- This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 -- ======================================================================
 
