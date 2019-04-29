@@ -51,6 +51,7 @@ int main(){
 	set_LED(0, 0);
 	set_LED(1, 0);
 	set_LED(3, 0);
+	long last = 0;
 	//PORTC |= 1<<3; //Laser
 	while(1){
 		mS = get_mS();
@@ -75,6 +76,10 @@ int main(){
 				set_LED(1, 3);
 				set_LED(2, 0);
 			}
+			//if(get_encoder_ticks() != last){
+			//	tprintf("%d\n", get_encoder_ticks());
+			//	last = get_encoder_ticks();
+			//}
 		}
 		motor_control_tick();
 		wdt_reset();

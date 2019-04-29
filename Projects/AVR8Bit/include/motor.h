@@ -1,7 +1,7 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#include "config.h"
+#include <config.h>
 
 #define MOTOR_MODE_INDEX 4
 #define MOTOR_MODE_PID 2

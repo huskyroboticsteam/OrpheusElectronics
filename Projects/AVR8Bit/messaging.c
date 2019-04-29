@@ -15,15 +15,18 @@ unsigned int ticks_per_degree = 1;
 void handle_CAN_message(struct CAN_msg *m){
 	uint8_t sender = (m->id & 0x3E0) >> 5;
 	uint16_t param1, param2;
-	param1 = (m->data[1] << 8) | m->data[2];
-	param2 = (m->data[3] << 8) | m->data[4];
-	tprintf("sender=%X, command=%X\n", (uint32_t)sender, (uint32_t)m->data[0]);
+	//param1 = (m->data[1] << 8) | m->data[2];
+	//param2 = (m->data[3] << 8) | m->data[4];
+	param1 = (m->data[2] << 8) | m->data[1];
+	param2 = (m->data[4] << 8) | m->data[3];
+	//tprintf("sender=%X, command=%X\n", (uint32_t)sender, (uint32_t)m->data[0]);
 	switch(m->data[0]){
 		case 0x00: //Set Mode
 			if(m->data[1]){
 				set_motor_mode(get_motor_mode() | MOTOR_MODE_PID);
 			} else {
 				set_motor_mode(get_motor_mode() & ~MOTOR_MODE_PID);
+				set_target_position(get_encoder_ticks());
 			}
 			enable_motor();
 			break;
@@ -44,10 +47,10 @@ void handle_CAN_message(struct CAN_msg *m){
 			if(param1 > get_motor_max_position()){
 				send_CAN_error(CAN_ERROR_INVALID_ARGUMENT, m->data[0]);
 			}*/
-			//set_target_position(param1);
-			//set_target_velocity(param2);
-			set_target_position(64);
-			set_target_velocity(5);
+			set_target_position(param1);
+			set_target_velocity(param2);
+			//set_target_position(64);
+			//set_target_velocity(125);
 			break;
 		case 0x06: //Index
 			index_motor();

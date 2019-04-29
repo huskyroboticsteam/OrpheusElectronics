@@ -21,7 +21,7 @@
 #define DEFAULT_Ki_1 20  //Default Ki for position PID
 #define DEFAULT_Kd_1 100 //Default Kd for position PID
 
-#define DUAL_PID //Define to use dual PID mode. Otherwise uses single PID mode
+//#define DUAL_PID //Define to use dual PID mode. Otherwise uses single PID mode
 
 #define DEFAULT_Kp_2 1 //Default Kp for velocity PID
 #define DEFAULT_Ki_2 1 //Default Ki for velocity PID
