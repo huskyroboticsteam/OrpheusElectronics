@@ -4,6 +4,7 @@
 #include "can.h"
 #include "motor.h"
 #include "encoder.h"
+#include "servo.h"
 #include "adc.h"
 #include "usart.h"
 #include "messaging.h"
@@ -14,7 +15,7 @@ unsigned int ticks_per_degree = 1;
 /*Handle a recieved CAN message*/
 void handle_CAN_message(struct CAN_msg *m){
 	uint8_t sender = (m->id & 0x3E0) >> 5;
-	uint16_t param1, param2;
+	int16_t param1, param2;
 	//param1 = (m->data[1] << 8) | m->data[2];
 	//param2 = (m->data[3] << 8) | m->data[4];
 	param1 = (m->data[2] << 8) | m->data[1];
@@ -24,9 +25,9 @@ void handle_CAN_message(struct CAN_msg *m){
 		case 0x00: //Set Mode
 			if(m->data[1]){
 				set_motor_mode(get_motor_mode() | MOTOR_MODE_PID);
+				set_target_position(get_encoder_ticks());
 			} else {
 				set_motor_mode(get_motor_mode() & ~MOTOR_MODE_PID);
-				set_target_position(get_encoder_ticks());
 			}
 			enable_motor();
 			break;

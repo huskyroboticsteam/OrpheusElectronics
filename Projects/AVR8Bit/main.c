@@ -16,6 +16,12 @@
 #include "util.h"
 #include "usart.h"
 
+//#define DEFAULT_Kp_1 140 //Default Kp for position PID
+//#define DEFAULT_Ki_1 20  //Default Ki for position PID
+//#define DEFAULT_Kd_1 100 //Default Kd for position PID
+
+void set_motor_reverse(uint8_t r);
+
 int main(){
 	struct CAN_msg m;
 	uint32_t mS;
@@ -40,13 +46,16 @@ int main(){
 	init_ADC();
 	wdt_enable(WDTO_2S);
 	init_motor();
+	if(my_address == 0x12){
+		set_motor_reverse(1);
+	}
 	//set_motor_mode(MOTOR_MODE_PID);
 	//enable_motor();
 	set_LED(3, 3);
 	//PORTE |= (1<<PE4);
-	set_Kp(0, 10);
-	set_Ki(0, 2);
-	set_Kd(0, 1);
+	set_Kp(120, 0);
+	set_Ki(20, 0);
+	set_Kd(170, 0);
 	delay_mS(500);
 	set_LED(0, 0);
 	set_LED(1, 0);

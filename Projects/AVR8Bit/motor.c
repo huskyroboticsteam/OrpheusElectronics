@@ -29,6 +29,8 @@ uint8_t slow; //"Slow" mode (less than 5 encoder ticks per 20mS)
 #endif
 uint16_t pid_runs; //The number of times the PID has run
 int16_t motor_power;
+uint8_t reverse = 0;
+uint32_t last_set;
 
 uint16_t motor_max_current;
 
@@ -108,10 +110,12 @@ void set_motor_power_raw(int16_t power){
   int16_t power: the motor power to set -1023 to +1023
   Negative values reverse the motor*/
 void set_motor_power(int16_t power){
+	last_set = get_mS();
 	if(!(motor_mode & MOTOR_MODE_ENABLED)){
 		set_motor_power_raw(0);
 		return;
 	}
+	if(reverse) power = -power;
 	motor_power = power;
 	uint8_t limit_sw = get_motor_limit_switch_state();
 	if(limit_sw & 1){
@@ -128,6 +132,7 @@ void set_motor_power(int16_t power){
 	//tprintf("Setting motor power to %d\n", motor_power);
 	set_motor_power_raw(motor_power);
 }
+
 
 /*Sets Kp for both PID loops. Value unchanged if a parameter is 0
 Parameters:
@@ -223,7 +228,10 @@ void set_motor_current_limit(uint16_t current){
 void set_target_position(int32_t position){
 	//if(position < 0 || position > motor_max_pos) return; //Disallow setting motor to position outside the encoder range
 	tprintf("setting target p to %l\n", position);
-	if(position < 0) return;
+	//if(position < 0) return;
+	if(int_abs(motor_target_pos - position) > 100){
+		pos_i = 0;
+	}
 	motor_target_pos = position;
 }
 
@@ -278,6 +286,10 @@ void motor_control_tick(){
 		if(t != last){
 			tprintf("%l\n", t);
 			last = t;
+		}
+		if(get_mS() - last_set > 1000){
+//			set_motor_power(0);
+			motor_power = 0;
 		}
 	}
 	if(check_motor_stall() || !(PINE & (1<<PE4))){ //Motor stall or fault pin asserted from motor driver
@@ -338,23 +350,28 @@ void motor_control_tick(){
 		int32_t errorp = pos - pid_target; //P
 		int32_t dp = errorp - last_pos_err; //D
 		last_pos_err = errorp;
-		if(errorp < -4 || errorp > 4) //Ignore small steady state errors
+		if(int_abs(errorp) > 4) //Ignore small steady state errors
 			pos_i += errorp; //I
-		if(pos_i > 768) pos_i = 768; /*Constrain integral to avoid integral wind-up*/
-		if(pos_i < -768) pos_i = -768;
-		int32_t mpp = (errorp*Kp)/20 + (pos_i*Ki)/20 + (dp*Kd)/20;
-		if(mpp > 256) mpp = 256; /*Clamp the motor power to the accepted range of -1023 to +1023*/
-		if(mpp < -256) mpp = -256;		
-		motor_power = mpp; //Set the motor power to the output
-		#ifdef DUAL_PID
-		if(int_abs(errorp) > 100){ //If there is a large error, let the velocity PID take over
-			motor_power = mvp;
+		if(int_abs(pos - motor_target_pos) < 4){
+			motor_power = 0;
+		} else {
+			if(pos_i > 768) pos_i = 768; /*Constrain integral to avoid integral wind-up*/
+			if(pos_i < -768) pos_i = -768;
+			int32_t mpp = (errorp*Kp)/20 + (pos_i*Ki)/20 + (dp*Kd)/20;
+			if(mpp > 384) mpp = 384; /*Clamp the motor power to the accepted range of -1023 to +1023*/
+			if(mpp < -384) mpp = -384;		
+			motor_power = mpp; //Set the motor power to the output
+			#ifdef DUAL_PID
+			if(int_abs(errorp) > 100){ //If there is a large error, let the velocity PID take over
+				motor_power = mvp;
+			}
+			#endif
 		}
-		#endif
 		#ifdef DEBUG
 		av = (av*9)/10 + get_motor_velocity()/10;
-		tprintf("%l %l %l %d %d %d %d %d\n", (int32_t)motor_target_pos, (int32_t)pid_target, (int32_t)pos, (int16_t)errorp, (int16_t)dp, (int16_t)pos_i, (int16_t)motor_power, av);
+		//tprintf("%l %l %l %d %d %d %d %d\n", (int32_t)motor_target_pos, (int32_t)pid_target, (int32_t)pos, (int16_t)errorp, (int16_t)dp, (int16_t)pos_i, (int16_t)motor_power, av);
 		//tprintf("%d %d %d %d\n", (int16_t)pid_target, (int16_t)pos, (int16_t)av, (int16_t)motor_power);
+		tprintf("%d %d\n", (int16_t)pos, motor_power);
 		//last_mS = get_mS();
 		#endif
 		pid_runs++;
@@ -362,7 +379,7 @@ void motor_control_tick(){
 	}
 	uint8_t limit_sw = get_motor_limit_switch_state();
 	if(limit_sw & 1){
-		reset_encoder();
+//		reset_encoder();
 		if(motor_mode & MOTOR_MODE_INDEX) /*We're in index mode and hit the loewr limit*/
 			motor_mode &= ~MOTOR_MODE_INDEX; //we hit the limit switch. leave indexing mode
 			//motor_target_pos = 262144; //Now try to find the upper limit
@@ -374,6 +391,7 @@ void motor_control_tick(){
 		}
 	}
 	if(limit_sw & 2){
+		reset_encoder();
 		//motor_max_pos = get_encoder_ticks();
 	/*	if(motor_target_pos > motor_max_pos){
 			motor_target_pos = motor_max_pos;
@@ -420,4 +438,8 @@ uint8_t get_motor_limit_switch_state(){
 /*Gets the motor maximum position*/
 uint32_t get_motor_max_position(){
 	return motor_max_pos;
+}
+
+void set_motor_reverse(uint8_t r){
+	reverse = r;
 }
