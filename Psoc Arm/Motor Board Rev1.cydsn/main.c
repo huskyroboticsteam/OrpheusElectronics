@@ -27,7 +27,7 @@ int CAN_TIMEOUT;
 CY_ISR_PROTO(ISR_CAN);
 
 //Uart variables
-volatile uint8 uart_debug = 1;
+volatile uint8 uart_debug = 2;
 #define TX_DATA_SIZE            (100u)
 #define PWM_PERIOD = 255;
 
@@ -39,11 +39,12 @@ uint8 invalidate = 0;
 
 //PID varaibles
 int8 flipEncoder = 1;
+int16 final_angle;
 int i = 0;
 int lastp = 0;
-int kp = 50;
-int ki = 3;
-int kd = 10;
+int kp;
+int ki;
+int kd;
 double ratio;
 uint8 complete = 0;
 uint8 maxV = 0;
@@ -92,10 +93,11 @@ CY_ISR(Pin_Limit_Handler){
         UART_UartPutString(txData);
     }
     set_PWM(pwm_compare);
+    QuadDec_SetCounter(0);
 }
 
 int main(void)
-{
+{ 
     stall.code = 0x01;
     stall.done = 1;
     command_failed.code = 0x02;
@@ -165,7 +167,11 @@ int main(void)
                         complete = 0;
                         maxV = Can_rx_angle.b3;
                         i = 0;
-                        set_Position(Can_rx_angle.b1);
+                        
+                       // final_angle = final_angle | (int16)Can_rx_angle.b2 << 8;
+                       // final_angle = final_angle | (int16)Can_rx_angle.b1;
+                        final_angle = ((uint16_t)Can_rx_angle.b2) << 8 | Can_rx_angle.b1;
+                        set_Position(final_angle);
                     }
                     else {
                         command_failed.done = 0;
@@ -309,18 +315,26 @@ void initialize_can_addr(void) {
             disable_limit = 1;
             shift = 3;
             ratio = 1;
+
             break;
         case 0b100: // diff wrist 1
             message_id = 0b10100;
             disable_limit = 1;
             shift = 4;
             ratio = 1;
+            kp = 20;
+            ki = 30;
+            kd = 10;
+            flipEncoder = -1;
             break;
         case 0b101: // diff wrist 2
             message_id = 0b10101;
             disable_limit = 1;
             shift = 5;
             ratio = 1;
+            kp = 20;
+            ki = 30;
+            kd = 10;
             break;
         case 0b110: // hand
             message_id = 0b10110;
@@ -489,7 +503,7 @@ inline void set_data(uint16 addr){
         }
 }
 
-void set_Position(int degrees) {
+void set_Position(int16 degrees) {
     if(uart_debug) {
         sprintf(txData, "complete: %d\r\n",complete);
         UART_UartPutString(txData);
@@ -510,7 +524,7 @@ void set_Position(int degrees) {
    // }
 }
 
-int degrees_to_tick(int degrees){
+int degrees_to_tick(int16 degrees){
     int ticks = (int)((double)degrees * ratio);
     if(uart_debug) {
         sprintf(txData, "degree: %d ticks: %d\r\n", degrees, ticks);
