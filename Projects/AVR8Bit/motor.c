@@ -182,14 +182,17 @@ void set_Kd(uint16_t d1, uint16_t d2){
 	#endif
 }
 
+int16_t avg;
+
 /*Returns the motor current in milliamps*/
-uint16_t get_motor_current(){
+int16_t get_motor_current(){
 	internalAREF(); //Use the 2.56V internal VRef for more precision
-	//set_motor_power_raw(1023);
-	uint32_t val = read_ADC(MOTOR_CS);
-	//set_motor_power_raw(motor_power);
-	//ADMUX &= 0xC0;
-	//delay_mS(5);
+	#ifdef REV_2
+	int16_t val = read_ADC(3) - 511;
+	val = val * 34;
+	avg = avg / 2 + val / 2;
+	#else
+	int16_t val = read_ADC(MOTOR_CS);
 	//2.5 mV/unit. 8 Units/Amp
 	if(val < 20){
 		val = 0;
@@ -198,8 +201,8 @@ uint16_t get_motor_current(){
 	//	val <<= 7; //Multiply by 128
 		val <<= 6;
 	}
-	//current = (current*9)/10 + val/10;
-	return val;//current;
+	#endif
+	return avg;
 }
 
 /*Returns true if the motor is stalled*/
@@ -432,6 +435,9 @@ uint8_t get_motor_mode(){
 /*Gets the state of the limit switches*/
 uint8_t get_motor_limit_switch_state(){
 	//return ((~PIND) & 0x03); //Get GPIO data
+	#ifdef REV_2
+	return ((~PIND & 6) >> 1);
+	#endif
 	return (~PIND & 2) | ((~PINC & 2) >> 1);
 }
 

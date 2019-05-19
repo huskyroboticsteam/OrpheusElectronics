@@ -11,7 +11,7 @@ void init_motor();
 //uint8_t PID_due();
 void set_motor_power(int16_t power);
 void set_motor_power_raw(int16_t power);
-uint16_t get_motor_current();
+int16_t get_motor_current();
 void set_motor_current_limit(uint16_t current);
 uint8_t check_motor_stall();
 void enable_motor();

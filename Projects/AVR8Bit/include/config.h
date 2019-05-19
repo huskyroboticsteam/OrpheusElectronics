@@ -37,3 +37,5 @@
 #define CAN_ERROR_INVALID_ARGUMENT 3
 
 #define DEBUG
+
+#define REV_2

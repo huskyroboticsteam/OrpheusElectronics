@@ -38,7 +38,7 @@ void set_encoder_ticks(int32_t ticks){
 	encoder_ticks = ticks;
 }
 
-/*Initalizes the encoder with A on PE6 and B on PE7*/
+/*Initializes the encoder with A on PE6 and B on PE7*/
 void init_encoder(){
 	EIMSK &= 0x3F; //Disable pin change interrupts
 	DDRE &= 0x3F; //Set PE6, PE7 as inputs

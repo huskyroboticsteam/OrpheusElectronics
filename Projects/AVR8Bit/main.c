@@ -22,12 +22,25 @@
 
 void set_motor_reverse(uint8_t r);
 
+
+/*int main(){
+	DDRB = 1<<PB6;
+	PORTB = 1<<PB6;
+	//setup_timers();
+	//DDRC = 1;
+	//PORTC = 1;
+	while(1);
+}*/
+
+//#if 0
 int main(){
 	struct CAN_msg m;
 	uint32_t mS;
 	DDRA = 0xF0;
 	PORTA = 0xF0;
-	DDRC = 1<<3; //Laser
+	//DDRC = 1<<3; //Laser
+	//DDRC = 2;
+	//PORTC = 0;
 	setup_timers();
 	_delay_ms(100);
 	PORTA = 0;
@@ -44,7 +57,7 @@ int main(){
 	set_LED(2, 3);
 	init_encoder();
 	init_ADC();
-	wdt_enable(WDTO_2S);
+	//wdt_enable(WDTO_2S);
 	init_motor();
 	if(my_address == 0x12){
 		set_motor_reverse(1);
@@ -61,7 +74,13 @@ int main(){
 	set_LED(1, 0);
 	set_LED(3, 0);
 	long last = 0;
+	if(my_address == 0x16){
+		init_servo();
+		set_servo_position(0);
+	}
 	//PORTC |= 1<<3; //Laser
+	//set_motor_mode(MOTOR_MODE_ENABLED);
+	int d = 10, inc = 1;
 	while(1){
 		mS = get_mS();
 		if(!PID_due){ //Don't busy the processor if the PID is due to run
@@ -89,8 +108,14 @@ int main(){
 			//	tprintf("%d\n", get_encoder_ticks());
 			//	last = get_encoder_ticks();
 			//}
+			if(mS % 100 == 0)
+				tprintf("%dmV %dmA\n", get_voltage(), get_motor_current());
 		}
+		//if(mS % 100 == 0)
+//			tprintf("%dmV %dmA\n", get_voltage(), get_motor_current());
+		//set_motor_power_raw(300);
 		motor_control_tick();
 		wdt_reset();
 	}
 }
+//#endif

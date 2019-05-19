@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include "config.h"
 #include "usart.h"
 #include "util.h"
 
@@ -43,6 +44,9 @@ uint16_t count: The timer count
 void inline update_LEDS(uint16_t count){
 	int i;
 	uint8_t v;
+	#ifdef REV_2
+	count /= 2;
+	#endif
 	if(!LED_states){
 		PORTA = 0;
 		return;

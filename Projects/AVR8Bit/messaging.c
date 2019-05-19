@@ -74,9 +74,16 @@ void handle_CAN_message(struct CAN_msg *m){
 		case 0x10: //Model request
 			send_model_number(sender);
 			break;
-		case 0x16:
-			//write_PWM(PE5, m->data[1] * 4);
+		case 0x22:
 			set_servo_position(m->data[1]);
+			break;
+		case 0x24:
+			if(m->data[1]){
+				DDRC |= 2;
+				PORTC &= ~2;
+			} else {
+				DDRC &= ~2;
+			}
 			break;
 		case 0xFF: /*error*/
 			tprintf("Error %d\n", m->data[1]);
