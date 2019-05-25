@@ -13,6 +13,13 @@
 #include "cyapicallbacks.h"
 #include <stdio.h>
 
+//#define REV2
+#define LED_ON   (0u)
+#define LED_OFF  (1u)
+
+//LED
+uint8 time_LED = 0;
+
 //CAN variables
 uint32 message_id = 0;
 #define MESSAGE_IDE             (0u)    /* Standard message */
@@ -27,7 +34,7 @@ int CAN_TIMEOUT;
 CY_ISR_PROTO(ISR_CAN);
 
 //Uart variables
-volatile uint8 uart_debug = 2;
+volatile uint8 uart_debug = 1;
 #define TX_DATA_SIZE            (100u)
 #define PWM_PERIOD = 255;
 
@@ -82,23 +89,34 @@ CY_ISR(Period_Reset_Handler) {
     }
     send_data = 1;
     invalidate++;
+    time_LED++;
     if(invalidate >= 20){
         set_PWM(0);   
         Can_rx_pwm.done = 1;
     }
+    
+    #ifdef REV2
+        if(time_LED >= 10){
+            Test_LED_Write(LED_OFF);
+        }
+    #endif
 }
-
+  
 CY_ISR(Pin_Limit_Handler){
     if(uart_debug) {
         sprintf(txData,"Limit interupt triggerd\r\n");
         UART_UartPutString(txData);
     }
-    set_PWM(0);
+    set_PWM(pwm_compare);
     QuadDec_SetCounter(0);
 }
 
 int main(void)
 { 
+    #ifdef REV2
+        Test_LED_Write(LED_ON);
+        Error_Write(LED_ON);
+    #endif
     stall.code = 0x01;
     stall.done = 1;
     command_failed.code = 0x02;
@@ -113,17 +131,23 @@ int main(void)
     message.msg = &data;
     message.rtr = MESSAGE_RTR;
     
-    Can_rx_pwm.done = 1;
-    Can_rx_angle.done = 1;
-    
-    Pin_Test_Write(0);
-    
+    #ifdef REV2
+        Test_LED_Write(0);
+        Error_Write(0);
+    #endif
 
     initialize();
     initialize_can_addr();
     int up = 0;
+    int test = 0;
     pwm_compare = 0;
     set_PWM(0);
+    
+    #ifdef REV2
+        Test_LED_Write(LED_OFF);
+        Error_Write(LED_OFF);
+    #endif
+    
     for(;;)
     {
         if(!emergency) {
@@ -226,18 +250,18 @@ int main(void)
                 model_req = 0;
             }
             //PWM test code
-           /* CyDelay(100);
+            /*CyDelay(100);
             if(up){
-                pwm_compare += 10;
+                test += 10;
             } else {
-                pwm_compare -= 10;   
+                test -= 10;   
             }
-            if(pwm_compare > 255) {
+            if(test > 255) {
                 up = 0;   
-            } else if (pwm_compare < -255) {
+            } else if (test < -255) {
                 up = 1;
             }
-            set_PWM(pwm_compare);
+            set_PWM(test);
             */
 
         }
@@ -252,6 +276,7 @@ void emergency_halt(void) {
 }
 
 void initialize(void) {
+    
     int can_start = CAN_Start();
     Status_Reg_Switches_InterruptEnable();
     Timer_1_Start();
@@ -301,7 +326,7 @@ void initialize_can_addr(void) {
         case 0b001: // shoulder
             message_id = 0b10001;
             shift = 1;
-            ratio = 1;
+            ratio = 14.45; 
            // flipEncoder = -1;
             kp = 50;
             ki = 3;
@@ -356,6 +381,8 @@ void initialize_can_addr(void) {
         UART_UartPutString(txData); 
         sprintf(txData, "Can shift: %d   P0Mailbox: %d P1Mailbox %d\r\n",shift, CAN_RX_MAILBOX_0, CAN_RX_MAILBOX_1);
         UART_UartPutString(txData); 
+        sprintf(txData, "disable_limit: %d\r\n",disable_limit);
+        UART_UartPutString(txData); 
     }
 }
 
@@ -365,21 +392,23 @@ void set_CAN_ID(uint32 priority) {
 
     // takes between -255 and 255
 void set_PWM(int compare) {
+    pwm_compare = compare;
+     if(uart_debug) {
+        sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
+        UART_UartPutString(txData); 
+    }
     invalidate = 0;
     if (compare < -255 || compare > 255) { return; }
     uint8 status = Status_Reg_Switches_Read();
-    if (compare < 0 ) {
-        if(!(status & 0b01) || disable_limit){
-            Pin_Direction_Write(0);
-            PWM_Motor_WriteCompare(-compare);
-        }
-    } else if (compare > 0 ){
-        if(!(status & 0b10) || disable_limit) {
-            Pin_Direction_Write(1);
-            PWM_Motor_WriteCompare(compare);
-        }
+    if (compare < 0 && (!(status & 0b01) || disable_limit) ) {
+        Pin_Direction_Write(0);
+        PWM_Motor_WriteCompare(-compare);
+    } else if (compare > 0 && (!(status & 0b10) || disable_limit) ){
+        Pin_Direction_Write(1);
+        PWM_Motor_WriteCompare(compare);
     } else {
-        PWM_Motor_WriteCompare(0);   
+        PWM_Motor_WriteCompare(0);
+        
     }
 }
 
@@ -451,8 +480,11 @@ CY_ISR(ISR_CAN)
         if(uart_debug){
             UART_UartPutString("P0 recieved\n");    
         }
+        #ifdef REV2
+        time_LED = 0;
+        Test_LED_Write(LED_ON);
+        #endif
         set_data(CAN_RX_MAILBOX_0);
-
         /* Acknowledges receipt of new message */
         CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_0);
     }
@@ -462,8 +494,11 @@ CY_ISR(ISR_CAN)
         if(uart_debug){
             UART_UartPutString("P1 recieved\n\n");    
         }
+        #ifdef REV2
+        time_LED = 0;
+        Test_LED_Write(LED_ON);
+        #endif
         set_data(CAN_RX_MAILBOX_1);
-        
         /* Acknowledges receipt of new message */
         CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_1);
     }

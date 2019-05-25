@@ -131,13 +131,15 @@ int main(void)
     message.msg = &data;
     message.rtr = MESSAGE_RTR;
     
-    
-    Test_LED_Write(0);
-    Error_Write(0);
+    #ifdef REV2
+        Test_LED_Write(0);
+        Error_Write(0);
+    #endif
 
     initialize();
     initialize_can_addr();
     int up = 0;
+    int test = 0;
     pwm_compare = 0;
     set_PWM(0);
     
@@ -248,19 +250,19 @@ int main(void)
                 model_req = 0;
             }
             //PWM test code
-           /* CyDelay(100);
+            /*CyDelay(100);
             if(up){
-                pwm_compare += 10;
+                test += 10;
             } else {
-                pwm_compare -= 10;   
+                test -= 10;   
             }
-            if(pwm_compare > 255) {
+            if(test > 255) {
                 up = 0;   
-            } else if (pwm_compare < -255) {
+            } else if (test < -255) {
                 up = 1;
             }
-            set_PWM(pwm_compare);*/
-            
+            set_PWM(test);
+            */
 
         }
     }
@@ -324,7 +326,7 @@ void initialize_can_addr(void) {
         case 0b001: // shoulder
             message_id = 0b10001;
             shift = 1;
-            ratio = 39.6;
+            ratio = 14.45;
            // flipEncoder = -1;
             kp = 50;
             ki = 3;
@@ -379,6 +381,8 @@ void initialize_can_addr(void) {
         UART_UartPutString(txData); 
         sprintf(txData, "Can shift: %d   P0Mailbox: %d P1Mailbox %d\r\n",shift, CAN_RX_MAILBOX_0, CAN_RX_MAILBOX_1);
         UART_UartPutString(txData); 
+        sprintf(txData, "disable_limit: %d\r\n",disable_limit);
+        UART_UartPutString(txData); 
     }
 }
 
@@ -388,9 +392,12 @@ void set_CAN_ID(uint32 priority) {
 
     // takes between -255 and 255
 void set_PWM(int compare) {
+    #ifdef REV2
+    compare = -compare;
+    #endif
     pwm_compare = compare;
-    if(uart_debug) {
-        sprintf(txData, "PWM:%d\r\n",compare);
+     if(uart_debug) {
+        sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
         UART_UartPutString(txData); 
     }
     invalidate = 0;
@@ -479,8 +486,8 @@ CY_ISR(ISR_CAN)
         #ifdef REV2
         time_LED = 0;
         Test_LED_Write(LED_ON);
-        set_data(CAN_RX_MAILBOX_0);
         #endif
+        set_data(CAN_RX_MAILBOX_0);
         /* Acknowledges receipt of new message */
         CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_0);
     }
@@ -493,8 +500,8 @@ CY_ISR(ISR_CAN)
         #ifdef REV2
         time_LED = 0;
         Test_LED_Write(LED_ON);
-        set_data(CAN_RX_MAILBOX_1);
         #endif
+        set_data(CAN_RX_MAILBOX_1);
         /* Acknowledges receipt of new message */
         CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_1);
     }
