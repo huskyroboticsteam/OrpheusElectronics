@@ -1,3 +1,6 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
 #define F_CPU 16000000L
 
 #define VS_PIN 1
@@ -36,6 +39,13 @@
 #define CAN_ERROR_COMMAN_FAILED 2
 #define CAN_ERROR_INVALID_ARGUMENT 3
 
-#define DEBUG
+#ifndef DEBUG
 
+#define DEBUG //Debug flag
+
+#endif
+
+//Define REV_2 to use Revision 2 firmware
 #define REV_2
+
+#endif

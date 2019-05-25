@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include <string.h>
+#include "config.h"
 #include "can.h"
 #include "motor.h"
 #include "encoder.h"
@@ -9,8 +10,8 @@
 #include "usart.h"
 #include "messaging.h"
 #include "pwm.h"
-
-unsigned int ticks_per_degree = 1;
+#include "util.h"
+#include "timers.h"
 
 /*Handle a recieved CAN message*/
 void handle_CAN_message(struct CAN_msg *m){
@@ -41,17 +42,13 @@ void handle_CAN_message(struct CAN_msg *m){
 			}
 			break;
 		case 0x04: //Set angle + velocity
-			/*param1 *= ticks_per_degree;
-			param2 *= ticks_per_degree;
-			param1 /= 100;
-			param2 /= 100;
-			if(param1 > get_motor_max_position()){
+			param1 = tendeg_to_ticks(param1);
+			param2 = tendeg_to_ticks(param2);
+			/*if(param1 > get_motor_max_position()){
 				send_CAN_error(CAN_ERROR_INVALID_ARGUMENT, m->data[0]);
 			}*/
 			set_target_position(param1);
 			set_target_velocity(param2);
-			//set_target_position(64);
-			//set_target_velocity(125);
 			break;
 		case 0x06: //Index
 			index_motor();
@@ -69,7 +66,7 @@ void handle_CAN_message(struct CAN_msg *m){
 			set_Kd(m->data[1] | m->data[2]<<8, m->data[3] | m->data[4]<<8);
 			break;
 		case 0x0F: //Set ticks per degree
-			ticks_per_degree = param1;
+			set_ticks_per_10degrees(param1);
 			break;
 		case 0x10: //Model request
 			send_model_number(sender);
@@ -87,6 +84,12 @@ void handle_CAN_message(struct CAN_msg *m){
 			break;
 		case 0xFF: /*error*/
 			tprintf("Error %d\n", m->data[1]);
+			break;
+		default:
+			tprintf("Unknown CAN code %d\n", m->data[0]);
+			set_LED(0, 2);
+			update_LEDS(get_mS()/40);
+			set_LED(0, 0);
 			break;
 	}
 }

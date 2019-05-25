@@ -30,5 +30,6 @@ void index_motor();
 void motor_control_tick();
 uint8_t get_motor_limit_switch_state();
 uint32_t get_motor_max_position();
+void set_motor_reverse(uint8_t r);
 
 #endif

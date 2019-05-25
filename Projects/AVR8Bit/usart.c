@@ -7,8 +7,9 @@
 #include "usart.h"
 #include "util.h"
 
-volatile char usart_TX_buf[USART_TX_BUF_SZ], txbp, txend;
-volatile char usart_RX_buf[USART_RX_BUF_SZ], rxbp;
+volatile char usart_TX_buf[USART_TX_BUF_SZ];
+volatile char usart_RX_buf[USART_RX_BUF_SZ];
+volatile uint8_t txbp, txend, rxbp;
 
 ISR(USART1_RX_vect){
 	if(rxbp > USART_RX_BUF_SZ){

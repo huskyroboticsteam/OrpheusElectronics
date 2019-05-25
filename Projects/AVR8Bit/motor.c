@@ -188,7 +188,7 @@ int16_t avg;
 int16_t get_motor_current(){
 	internalAREF(); //Use the 2.56V internal VRef for more precision
 	#ifdef REV_2
-	int16_t val = read_ADC(3) - 511;
+	int16_t val = read_ADC(0) - 511;
 	val = val * 34;
 	avg = avg / 2 + val / 2;
 	#else

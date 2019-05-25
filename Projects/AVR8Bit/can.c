@@ -42,12 +42,10 @@ uint8_t mode: The mode to operate the CAN controller in
 void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 	CANGCON |= (1<<SWRES);
 	delay_mS(100); //Needed for unknown reason?!
-	//tprintf("RATE=%X,%X,%X\n", (uint32_t)(rate & 0xFF0000L)>>16, (uint32_t)(rate & 0x00FF00L)>>8, (uint32_t)(rate & 0xFF));
 	CANBT1 = (uint32_t)(rate & 0xFF0000L) >> 16;
 	CANBT2 = (uint32_t)(rate & 0x00FF00L) >> 8;
 	CANBT3 = (uint32_t)(rate & 0x0000FFL);
-	//0x26, 0x04, 0x13
-	CANGIE = (1 << CANIT) | /*(1 << ENERR) | (1 <<ENERG) |*/ (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
+	CANGIE = (1 << CANIT) | (1 << ENRX) | (1 << ENTX); //Enable CAN interrupts
 	CANTCON = 255; //Set the can timer to run at 1/2048th of F_CPU
 	rxed_mobs[0] = rxed_mobs[1] = 0;
 	uint8_t i;
@@ -57,12 +55,8 @@ void init_CAN(uint32_t rate, uint8_t txmobs, uint8_t mode){
 		CANSTMOB &= 0;
 		CANIDM4 = 0;
 		CANIDM3 = 0;
-		//CANIDM2 = 0;
-		//CANIDM1 = 0;
 		CANIDT4 = 0;
 		CANIDT3 = 0;
-		//CANIDT2 = 0;
-		//CANIDT1 = 0;
 		CANIDT2 = ((RX_tag & 7) << 5);
 		CANIDT1 = ((RX_tag & 0x7F8) >> 3);
 		CANIDM2 = ((RX_mask & 7) << 5);
@@ -157,7 +151,7 @@ uint8_t CAN_get_msg(struct CAN_msg *buf){
 	for(i = 0;i < buf->length;i++){
 		buf->data[i] = CANMSG; //Get the data from the MOb and copy it into the buffer
 	}
-	//Atomically deincrement the number of messages available
+	//Atomically decrement the number of messages available
 	cli();
 	msgs_av--;
 	sei();

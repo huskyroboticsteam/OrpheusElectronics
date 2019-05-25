@@ -4,6 +4,7 @@
 #include "util.h"
 
 uint8_t LED_states;
+uint16_t ticks_per_degree_x10 = 100;
 
 int32_t min(int32_t a, int32_t b){
 	return (a < b)? a:b;
@@ -75,4 +76,22 @@ void read_string(char *buffer, char until){
 		buffer[i++] = c;
 	}
 	buffer[i-1] = 0;
+}
+
+/*Converts tenths of degrees (degrees * 10) to encoder ticks
+Parameters:
+int16_t d: the number of degrees * 10
+Returns:
+the number of encoder ticks
+*/
+int16_t tendeg_to_ticks(int16_t d){
+	return ((int32_t)d * (int32_t)ticks_per_degree_x10) / 100L;
+}
+
+/*Sets a new ratio of ticks to degrees.
+Parameters:
+uint16_t tpd: the number of encoder ticks in 10 degrees of rotation
+*/
+void set_ticks_per_10degrees(uint16_t tpd){
+	ticks_per_degree_x10 = tpd;
 }

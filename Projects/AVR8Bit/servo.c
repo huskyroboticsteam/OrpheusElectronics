@@ -13,7 +13,7 @@ void init_servo(){
 }
 
 void set_servo_position(int degrees){
-	if(degrees > 179) return;
+	if(degrees > 179) degrees = 179;
 	if(degrees < 1) degrees = 1;
 	OCR1B = 250 + degrees + degrees / 3;
 }

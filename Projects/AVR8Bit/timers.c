@@ -52,7 +52,6 @@ void setup_timers(){
 	TCCR1A = (1<<WGM11) | (1<<WGM10);
 	OCR1A = 10000; //Count to 10000 before resetting
 	#endif
-	
 	TCNT1 = 0;
 	TIMSK1 = (1 << TOIE1); //Enable interrupt on match
 	

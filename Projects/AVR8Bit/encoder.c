@@ -20,7 +20,7 @@ volatile uint16_t lastA, lastB;
 ISR(TIMER0_OVF_vect){
 	gate_control++;
 	if(gate_control == gate_control_top){
-		raw_velocity = raw_velocity = vticks;
+		raw_velocity = vticks;
 		vticks = gate_control = 0;
 	}
 }
