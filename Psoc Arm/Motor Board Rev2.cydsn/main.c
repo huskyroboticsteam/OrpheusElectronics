@@ -248,7 +248,7 @@ int main(void)
                 model_req = 0;
             }
             //PWM test code
-            CyDelay(100);
+           /* CyDelay(100);
             if(up){
                 pwm_compare += 10;
             } else {
@@ -259,7 +259,7 @@ int main(void)
             } else if (pwm_compare < -255) {
                 up = 1;
             }
-            set_PWM(pwm_compare);
+            set_PWM(pwm_compare);*/
             
 
         }
