@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
   28:Generated_Source\PSoC4/Opamp_1.c **** *  Initializes or restores the component according to the customizer Configure 
   29:Generated_Source\PSoC4/Opamp_1.c **** *  dialog settings. It is not necessary to call Init() because the Start() API 
   30:Generated_Source\PSoC4/Opamp_1.c **** *  calls this function and is the preferred method to begin the component operation.
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 2
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 2
 
 
   31:Generated_Source\PSoC4/Opamp_1.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
   67              		.thumb_func
   68              		.type	Opamp_1_Enable, %function
   69              	Opamp_1_Enable:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 3
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 3
 
 
   70              	.LFB1:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  101              		.thumb_func
  102              		.type	Opamp_1_Start, %function
  103              	Opamp_1_Start:
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 4
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 4
 
 
  104              	.LFB2:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  127 0014 FFF7FEFF 		bl	Opamp_1_Enable
  128              	.LVL1:
  100:Generated_Source\PSoC4/Opamp_1.c **** }
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 5
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 5
 
 
  129              		.loc 1 100 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  162              		.align	2
  163              	.L12:
  164 000c 04003040 		.word	1076887556
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 6
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 6
 
 
  165 0010 FCF7FFFF 		.word	-2052
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  147:Generated_Source\PSoC4/Opamp_1.c ****            (uint32)~Opamp_1_OA_PWR_MODE_MASK;
  148:Generated_Source\PSoC4/Opamp_1.c ****     Opamp_1_OA_RES_CTRL_REG = tmp | Opamp_1_internalPower;
  194              		.loc 1 148 0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 7
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 7
 
 
  195 000e 1843     		orrs	r0, r3
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  223 0000 0028     		cmp	r0, #0
  224 0002 06D0     		beq	.L18
  175:Generated_Source\PSoC4/Opamp_1.c ****     {
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 8
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 8
 
 
  176:Generated_Source\PSoC4/Opamp_1.c ****         Opamp_1_OA_RES_CTRL |= Opamp_1_OA_PUMP_EN;    
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  272 000a 04       		.byte	0x4
  273 000b 01       		.uleb128 0x1
  274 000c 2B010000 		.4byte	.LASF24
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 9
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 9
 
 
  275 0010 0C       		.byte	0xc
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  329 007d E601     		.2byte	0x1e6
  330 007f 48000000 		.4byte	0x48
  331 0083 02       		.uleb128 0x2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 10
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 10
 
 
  332 0084 04       		.byte	0x4
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  386 00fa 00000000 		.4byte	.LFB3
  387 00fe 14000000 		.4byte	.LFE3-.LFB3
  388 0102 01       		.uleb128 0x1
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 11
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 11
 
 
  389 0103 9C       		.byte	0x9c
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  443 0175 05       		.uleb128 0x5
  444 0176 03       		.byte	0x3
  445 0177 00000000 		.4byte	Opamp_1_initVar
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 12
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 12
 
 
  446 017b 00       		.byte	0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  500 0033 13       		.uleb128 0x13
  501 0034 00       		.byte	0
  502 0035 00       		.byte	0
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 13
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 13
 
 
  503 0036 05       		.uleb128 0x5
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  557 006e 00       		.byte	0
  558 006f 08       		.uleb128 0x8
  559 0070 898201   		.uleb128 0x4109
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 14
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 14
 
 
  560 0073 00       		.byte	0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  614 00a9 00       		.byte	0
  615 00aa 03       		.uleb128 0x3
  616 00ab 0E       		.uleb128 0xe
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 15
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 15
 
 
  617 00ac 3A       		.uleb128 0x3a
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  671 0018 00000000 		.4byte	.LFB1
  672 001c 1C000000 		.4byte	.LFE1-.LFB1
  673 0020 00000000 		.4byte	.LFB2
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 16
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 16
 
 
  674 0024 20000000 		.4byte	.LFE2-.LFB2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  711              	.LASF15:
  712 0076 4F70616D 		.ascii	"Opamp_1_Init\000"
  712      705F315F 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 17
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 17
 
 
  712      496E6974 
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  736 011a 4F70616D 		.ascii	"Opamp_1_SetPower\000"
  736      705F315F 
  736      53657450 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 18
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 18
 
 
  736      6F776572 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 1
  757              	.LASF0:
  758 0227 7369676E 		.ascii	"signed char\000"
  758      65642063 
-ARM GAS  C:\Users\austc\AppData\Local\Temp\ccPKVkM5.s 			page 19
+ARM GAS  C:\Users\austc\AppData\Local\Temp\ccvaYa8U.s 			page 19
 
 
  758      68617200 

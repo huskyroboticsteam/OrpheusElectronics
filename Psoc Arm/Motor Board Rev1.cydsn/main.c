@@ -84,6 +84,7 @@ CY_ISR(Period_Reset_Handler) {
     invalidate++;
     if(invalidate >= 20){
         set_PWM(0);   
+        Can_rx_pwm.done = 1;
     }
 }
 
@@ -92,7 +93,7 @@ CY_ISR(Pin_Limit_Handler){
         sprintf(txData,"Limit interupt triggerd\r\n");
         UART_UartPutString(txData);
     }
-    set_PWM(pwm_compare);
+    set_PWM(0);
     QuadDec_SetCounter(0);
 }
 
@@ -116,6 +117,7 @@ int main(void)
     Can_rx_angle.done = 1;
     
     Pin_Test_Write(0);
+    
 
     initialize();
     initialize_can_addr();
@@ -173,7 +175,7 @@ int main(void)
                         final_angle = ((uint16_t)Can_rx_angle.b2) << 8 | Can_rx_angle.b1;
                         set_Position(final_angle);
                     }
-                    else {
+                    else if(!Can_rx_pwm.done) {
                         command_failed.done = 0;
                         command_failed.param = 0x04;
                         if(uart_debug) {
@@ -300,7 +302,7 @@ void initialize_can_addr(void) {
             message_id = 0b10001;
             shift = 1;
             ratio = 1;
-            flipEncoder = -1;
+           // flipEncoder = -1;
             kp = 50;
             ki = 3;
             kd = 10;

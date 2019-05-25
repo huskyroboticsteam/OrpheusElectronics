@@ -13,6 +13,13 @@
 #include "cyapicallbacks.h"
 #include <stdio.h>
 
+#define REV2
+#define LED_ON   (0u)
+#define LED_OFF  (1u)
+
+//LED
+uint8 time_LED = 0;
+
 //CAN variables
 uint32 message_id = 0;
 #define MESSAGE_IDE             (0u)    /* Standard message */
@@ -27,7 +34,7 @@ int CAN_TIMEOUT;
 CY_ISR_PROTO(ISR_CAN);
 
 //Uart variables
-volatile uint8 uart_debug = 2;
+volatile uint8 uart_debug = 1;
 #define TX_DATA_SIZE            (100u)
 #define PWM_PERIOD = 255;
 
@@ -38,11 +45,13 @@ int pwm_compare;
 uint8 invalidate = 0;
 
 //PID varaibles
+int8 flipEncoder = 1;
+int16 final_angle;
 int i = 0;
 int lastp = 0;
-int kp = 1;
-int ki = 1;
-int kd = 0;
+int kp;
+int ki;
+int kd;
 double ratio;
 uint8 complete = 0;
 uint8 maxV = 0;
@@ -80,21 +89,34 @@ CY_ISR(Period_Reset_Handler) {
     }
     send_data = 1;
     invalidate++;
+    time_LED++;
     if(invalidate >= 20){
         set_PWM(0);   
+        Can_rx_pwm.done = 1;
     }
+    
+    #ifdef REV2
+        if(time_LED >= 10){
+            Test_LED_Write(LED_OFF);
+        }
+    #endif
 }
-
+  
 CY_ISR(Pin_Limit_Handler){
     if(uart_debug) {
         sprintf(txData,"Limit interupt triggerd\r\n");
         UART_UartPutString(txData);
     }
     set_PWM(pwm_compare);
+    QuadDec_SetCounter(0);
 }
 
 int main(void)
-{
+{ 
+    #ifdef REV2
+        Test_LED_Write(LED_ON);
+        Error_Write(LED_ON);
+    #endif
     stall.code = 0x01;
     stall.done = 1;
     command_failed.code = 0x02;
@@ -109,24 +131,31 @@ int main(void)
     message.msg = &data;
     message.rtr = MESSAGE_RTR;
     
-    Can_rx_pwm.done = 1;
-    Can_rx_angle.done = 1;
+    
+    Test_LED_Write(0);
+    Error_Write(0);
 
     initialize();
     initialize_can_addr();
     int up = 0;
     pwm_compare = 0;
     set_PWM(0);
+    
+    #ifdef REV2
+        Test_LED_Write(LED_OFF);
+        Error_Write(LED_OFF);
+    #endif
+    
     for(;;)
     {
         if(!emergency) {
 
             //Tests if there are still drive packets that still need to be done
-            drive = !Can_rx_pwm.done | !Can_rx_angle.done;
+            //drive = !Can_rx_pwm.done | !Can_rx_angle.done;
             
             //Handles Can drive recieve packets
-            if (drive)
-            {           
+            //if (drive)
+            //{           
                 //Mode 0 packets
                 if(!Can_rx_pwm.done) {
                     if(mode == 0) {
@@ -152,19 +181,23 @@ int main(void)
                 }
                 
                 // Mode 1 packets
-                if(!Can_rx_angle.done){
+               // if(!Can_rx_angle.done){
                     if(mode == 1){
                         if(uart_debug) {
                             sprintf(txData, "B1: %d, B3: %d done %x\r\n",Can_rx_angle.b1, Can_rx_angle.b3, Can_rx_pwm.done);
                             UART_UartPutString(txData);
                         }
-                        Can_rx_angle.done = 1;
+                        //Can_rx_angle.done = 1;
                         complete = 0;
                         maxV = Can_rx_angle.b3;
                         i = 0;
-                        set_Position(Can_rx_angle.b1);
+                        
+                       // final_angle = final_angle | (int16)Can_rx_angle.b2 << 8;
+                       // final_angle = final_angle | (int16)Can_rx_angle.b1;
+                        final_angle = ((uint16_t)Can_rx_angle.b2) << 8 | Can_rx_angle.b1;
+                        set_Position(final_angle);
                     }
-                    else {
+                    else if(!Can_rx_pwm.done) {
                         command_failed.done = 0;
                         command_failed.param = 0x04;
                         if(uart_debug) {
@@ -172,13 +205,13 @@ int main(void)
                             UART_UartPutString(txData);
                         }
                     }
-                }
+                //}
                 
-                if(mode != 1 || mode != 0) {
+                if(mode != 1 && mode != 0) {
                     Can_rx_angle.done = 1;
                     Can_rx_pwm.done = 1;
                 }
-            }
+            //}
             
             //Tests if there are any errors
             error = !stall.done | !invalid_arg.done | !command_failed.done; 
@@ -215,7 +248,7 @@ int main(void)
                 model_req = 0;
             }
             //PWM test code
-           /* CyDelay(100);
+            CyDelay(100);
             if(up){
                 pwm_compare += 10;
             } else {
@@ -227,7 +260,7 @@ int main(void)
                 up = 1;
             }
             set_PWM(pwm_compare);
-            */
+            
 
         }
     }
@@ -241,6 +274,7 @@ void emergency_halt(void) {
 }
 
 void initialize(void) {
+    
     int can_start = CAN_Start();
     Status_Reg_Switches_InterruptEnable();
     Timer_1_Start();
@@ -285,10 +319,16 @@ void initialize_can_addr(void) {
         case 0b000: //Base rotation
             message_id = 0b10000;
             shift = 0;
+            ratio = 1;
             break;
         case 0b001: // shoulder
             message_id = 0b10001;
             shift = 1;
+            ratio = 39.6;
+           // flipEncoder = -1;
+            kp = 50;
+            ki = 3;
+            kd = 10;
             break;
         case 0b010: // elbow
             message_id = 0b10010;
@@ -299,20 +339,32 @@ void initialize_can_addr(void) {
             message_id = 0b10011;
             disable_limit = 1;
             shift = 3;
+            ratio = 1;
+
             break;
         case 0b100: // diff wrist 1
             message_id = 0b10100;
             disable_limit = 1;
             shift = 4;
+            ratio = 1;
+            kp = 20;
+            ki = 30;
+            kd = 10;
+            flipEncoder = -1;
             break;
         case 0b101: // diff wrist 2
             message_id = 0b10101;
             disable_limit = 1;
             shift = 5;
+            ratio = 1;
+            kp = 20;
+            ki = 30;
+            kd = 10;
             break;
         case 0b110: // hand
             message_id = 0b10110;
             shift = 6;
+            ratio = 1;
             break;
     }
     
@@ -336,21 +388,23 @@ void set_CAN_ID(uint32 priority) {
 
     // takes between -255 and 255
 void set_PWM(int compare) {
+    pwm_compare = compare;
+    if(uart_debug) {
+        sprintf(txData, "PWM:%d\r\n",compare);
+        UART_UartPutString(txData); 
+    }
     invalidate = 0;
     if (compare < -255 || compare > 255) { return; }
     uint8 status = Status_Reg_Switches_Read();
-    if (compare < 0 ) {
-        if(!(status & 0b01) || disable_limit){
-            Pin_Direction_Write(0);
-            PWM_Motor_WriteCompare(-compare);
-        }
-    } else if (compare > 0 ){
-        if(!(status & 0b10) || disable_limit) {
-            Pin_Direction_Write(1);
-            PWM_Motor_WriteCompare(compare);
-        }
+    if (compare < 0 && (!(status & 0b01) || disable_limit) ) {
+        Pin_Direction_Write(0);
+        PWM_Motor_WriteCompare(-compare);
+    } else if (compare > 0 && (!(status & 0b10) || disable_limit) ){
+        Pin_Direction_Write(1);
+        PWM_Motor_WriteCompare(compare);
     } else {
-        PWM_Motor_WriteCompare(0);   
+        PWM_Motor_WriteCompare(0);
+        
     }
 }
 
@@ -422,8 +476,11 @@ CY_ISR(ISR_CAN)
         if(uart_debug){
             UART_UartPutString("P0 recieved\n");    
         }
+        #ifdef REV2
+        time_LED = 0;
+        Test_LED_Write(LED_ON);
         set_data(CAN_RX_MAILBOX_0);
-
+        #endif
         /* Acknowledges receipt of new message */
         CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_0);
     }
@@ -433,8 +490,11 @@ CY_ISR(ISR_CAN)
         if(uart_debug){
             UART_UartPutString("P1 recieved\n\n");    
         }
+        #ifdef REV2
+        time_LED = 0;
+        Test_LED_Write(LED_ON);
         set_data(CAN_RX_MAILBOX_1);
-        
+        #endif
         /* Acknowledges receipt of new message */
         CAN_RX_ACK_MESSAGE(CAN_RX_MAILBOX_1);
     }
@@ -451,6 +511,7 @@ inline void set_data(uint16 addr){
                 invalid_arg.param = 0x00;
                 invalid_arg.done = 0;
             }
+            complete = 1;
         } 
         //pwm
         else if(CAN_RX_DATA_BYTE1(addr) == 0x02) {
@@ -475,12 +536,12 @@ inline void set_data(uint16 addr){
         }
 }
 
-void set_Position(int degrees) {
+void set_Position(int16 degrees) {
     if(uart_debug) {
         sprintf(txData, "complete: %d\r\n",complete);
         UART_UartPutString(txData);
     }
-    while(!complete) {
+    //while(!complete) {
         int PWM = position_PID(degrees_to_tick(degrees));
         if(uart_debug) {
             sprintf(txData, "PWM: %d\r\n",PWM);
@@ -493,10 +554,10 @@ void set_Position(int degrees) {
         } else {
             set_PWM(PWM);   
         }
-    }
+   // }
 }
 
-int degrees_to_tick(int degrees){
+int degrees_to_tick(int16 degrees){
     int ticks = (int)((double)degrees * ratio);
     if(uart_debug) {
         sprintf(txData, "degree: %d ticks: %d\r\n", degrees, ticks);
@@ -506,19 +567,26 @@ int degrees_to_tick(int degrees){
 }
 
 int position_PID(int target){
-    int16 current =  QuadDec_GetCounter();
+    int16 current =  QuadDec_GetCounter() * flipEncoder;
     int p = target - current;
-   /* if(p) {
-      complete =  1;
-    }*/
+    if(!p) {
+      //complete =  1;
+      return(0);
+    }
     i = i + p;
+    if ( i > 500) {
+        i = 500;   
+    }
+    if ( i < -500) {
+        i = -500;
+    }
     int d = p - lastp;
-    lastp = current;
+    lastp = p;
     if(uart_debug) {
         sprintf(txData, "p: %d, i: %d d %d current %d\r\n",p, i, d, current);
         UART_UartPutString(txData);
     }
-    return (p*kp + i*ki + d*kd);
+    return (p*kp/10 + i*ki/10 + d*kd/10);
 }
 
 /*

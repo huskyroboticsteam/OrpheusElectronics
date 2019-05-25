@@ -2,7 +2,7 @@
 --	Conversion of Motor Board Rev1.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu May 02 20:04:22 2019
+--	Wed May 22 19:09:26 2019
 --
 
 USE cypress.cypress.all;
@@ -1580,7 +1580,7 @@ Clock_1:cy_clock_v1_0
 		divisor=>2,
 		period=>"0",
 		is_direct=>'0',
-		is_digital=>'1')
+		is_digital=>'0')
 	PORT MAP(clock_out=>Net_142,
 		dig_domain_out=>open);
 Spare1:cy_psoc3_pins_v1_10
@@ -1744,7 +1744,7 @@ Clock_2:cy_clock_v1_0
 		divisor=>0,
 		period=>"10000000000000",
 		is_direct=>'0',
-		is_digital=>'1')
+		is_digital=>'0')
 	PORT MAP(clock_out=>Net_1156,
 		dig_domain_out=>open);
 RX_1:cy_psoc3_pins_v1_10
@@ -2372,7 +2372,7 @@ timer_clock:cy_clock_v1_0
 		divisor=>2,
 		period=>"0",
 		is_direct=>'0',
-		is_digital=>'1')
+		is_digital=>'0')
 	PORT MAP(clock_out=>Net_1314,
 		dig_domain_out=>open);
 \Timer_1:TimerUDB:clock_enable_block\:cy_psoc3_udb_clock_enable_v1_0
