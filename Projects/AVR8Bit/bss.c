@@ -61,12 +61,13 @@ void do_board_specific_setup(uint8_t addr){
 		#ifdef REV_2
 		if(rev != 2){
 			tprintf("***WARNING*** Rev. 2 firmware on Rev. 1 board\n");
+			set_LED(0, 3);
+			delay_mS(1000);
 		}
-		set_LED(0, 3);
-		delay_mS(1000);
 		#else
 		if(rev == 1){
 			tprintf("***WARNING*** Rev. 1 firmware on Rev. 2 board\n")
+			set_LED(0, 3);
 			delay_mS(1000);
 		}
 		#endif

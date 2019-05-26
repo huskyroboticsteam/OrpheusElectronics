@@ -23,14 +23,11 @@
 //#define DEFAULT_Kd_1 100 //Default Kd for position PID
 
 /*int main(){
-	DDRE = 1<<PB3;
-	PORTE = 1<<PB3;
-	//setup_timers();
-	//DDRC = 1;
-	//PORTC = 1;
+	DDRC |= 2;
+	PORTC &= ~2;
 	while(1);
-}
-*/
+}*/
+
 //#if 0
 int main(){
 	struct CAN_msg m;

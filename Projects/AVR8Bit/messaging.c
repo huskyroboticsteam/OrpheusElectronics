@@ -42,8 +42,8 @@ void handle_CAN_message(struct CAN_msg *m){
 			}
 			break;
 		case 0x04: //Set angle + velocity
-			param1 = tendeg_to_ticks(param1);
-			param2 = tendeg_to_ticks(param2);
+			param1 = deg_to_ticks(param1);
+			param2 = deg_to_ticks(param2);
 			/*if(param1 > get_motor_max_position()){
 				send_CAN_error(CAN_ERROR_INVALID_ARGUMENT, m->data[0]);
 			}*/

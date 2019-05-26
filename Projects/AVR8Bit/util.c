@@ -88,6 +88,16 @@ int16_t tendeg_to_ticks(int16_t d){
 	return ((int32_t)d * (int32_t)ticks_per_degree_x10) / 100L;
 }
 
+/*Converts degrees to encoder ticks
+Parameters:
+int16_t d: the number of degrees
+Returns:
+the number of encoder ticks
+*/
+int16_t deg_to_ticks(int16_t d){
+	return ((int32_t)d * (int32_t)ticks_per_degree_x10) / 10L;
+}
+
 /*Sets a new ratio of ticks to degrees.
 Parameters:
 uint16_t tpd: the number of encoder ticks in 10 degrees of rotation

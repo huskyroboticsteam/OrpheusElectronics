@@ -20,6 +20,8 @@
 #define DEFAULT_MOTOR_CURRENT_LIMIT 5000 //5A
 #define DEFAULT_MOTOR_VELOCITY 250 //250 ticks/sec
 
+#define MOTOR_SET_TIMEOUT 1250 //number of milliseconds until motor is automatically disabled after the last motor set
+
 #define DEFAULT_Kp_1 140 //Default Kp for position PID
 #define DEFAULT_Ki_1 20  //Default Ki for position PID
 #define DEFAULT_Kd_1 100 //Default Kd for position PID

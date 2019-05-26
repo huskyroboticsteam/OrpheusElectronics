@@ -290,7 +290,7 @@ void motor_control_tick(){
 			tprintf("%l\n", t);
 			last = t;
 		}
-		if(get_mS() - last_set > 1000){
+		if(get_mS() - last_set > MOTOR_SET_TIMEOUT){
 //			set_motor_power(0);
 			motor_power = 0;
 		}
