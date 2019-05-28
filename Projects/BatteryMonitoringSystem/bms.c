@@ -1,10 +1,9 @@
 #include <stdint.h>
 #include "bms.h"
 
-#define VOLT_FACTOR 1.0 // !! CHANGE
-#define CURR_FACTOR 1.0 // !! CHANGE
-#define T_AD 32.0/_XTAL_FREQ
-#define ADC_RES (5.0/1023.0) // 5 V / 1024 (10 bit)
+#define R_2     180     // Replace with actual resistance (in kOhms)
+#define R_6     33      // Replace with actual resistance (in kOhms) 
+#define R_SENSE 0.001   // Replace with actual resistance (in Ohms)
 
 // Initialize pins used for ADC current and voltage measurement
 void bms_begin(void)
@@ -27,46 +26,56 @@ void bms_begin(void)
     ADCON1bits.VCFG0 = 0;       // V_DD reference
 }
 
-// bms_get_data: returns bms_data
-// TODO: implement checks
-bms_data bms_get_data(void)
+void bms_get_data(bms_data *data)
 {
-    // Voltage
-    ADCON0bits.CHS3 = 1;    // Select RB1/AN10 as ADC input channel
-    ADCON0bits.CHS2 = 0;    
-    ADCON0bits.CHS1 = 1;    
-    ADCON0bits.CHS0 = 0;    
-    ADCON0bits.ADON = 1;    // Enable ADC
-    ADCON0bits.GO_DONE = 1;
-    while(GO_DONE == 1) {
-        ;                   // Wait until GO_DONE bit is set to 1
-    }
-    uint8_t volt = ADRESL + (ADRESH * 256);
-    ADCON0bits.GO_DONE = 0;
-    // ADCON0bits.ADON = 0;
+    uint16_t adc_v, adc_c;
 
-    // Current
-    ADCON0bits.CHS3 = 0;    // Select RA3/AN3 as ADC input channel
-    ADCON0bits.CHS2 = 0;
-    ADCON0bits.CHS1 = 1;
-    ADCON0bits.CHS0 = 1;
-    //ADCON0bits.ADON = 1;    // Enable ADC
-    ADCON0bits.GO_DONE = 1;
-    while(GO_DONE == 1) {
-        ;
-    }
-    uint8_t curr = ADRESL + (ADRESH * 256);
-    ADCON0bits.GO_DONE = 0;
-    ADCON0bits.ADON = 0;
-    return bms_convert_data(volt, curr);
+    adc_get_data(adc_v, 0xA);           // Store voltage ADC data
+
+    adc_get_data(adc_c, 0x3);           // Store current ADC data
+    
+    *data = bms_convert_data(adc_v, adc_c);
 }
 
-// bms_data: convert the data into SI units so that it can be
-// understood.
-bms_data bms_convert_data(uint8_t volt, uint8_t curr)
+void adc_get_data(uint16_t *data, uint8_t adc_channel)
 {
+    ADCON0bits.CHS = adc_channel;       // Select channel
+    ADCON0bits.ADON = 1;                // Enable ADC
+    ADCON0bits.GO_DONE = 1;             // Start ADC
+    while(ADCON0bits.GO_DONE == 1)      // Wait for ADC to complete
+        ;
+    *data = ADRESL + (ADRESH * 256);    // raw 10 bit ADC data
+}
+
+bms_data bms_convert_data(uint16_t adc_v, uint16_t adc_c)
+{ 
     bms_data result;
-    result.voltage = volt * VOLT_FACTOR;
-    result.current = curr * CURR_FACTOR;
+
+    // Voltage conversion:
+    //      10 bit ADC resolution: 5.0 V / 1023
+    //      Expected readings:
+    //          V_33k = (V_in*33k)/(33k+180k),
+    //          where V_in is between 0 and 32 V.
+    //
+    //      Convert from ADC int to float:
+    //          V = (x * 5 / 1023)*((33k+180k)/33k);
+
+    result.voltage = (R_2+R_6)*(adc_v*5)/(1023*R_6);
+
+    // Current conversion:
+    //      10 bit ADC resolution: 5.0 V / 1023
+    //      Expected readings:
+    //          I_0.001 = V_0.001 / 0.001
+    //
+    //          Current Sense amplifier gain: 20 V/V
+    //          V_measured = 20 * V_0.001
+    //
+    //      Convert from ADC int to float:
+    //          V_measured = x * 5 / 1023
+    //          V_0.001 = V_measured / 20
+    //          so I = (x * 5)/(1023*20*0.001)
+    
+    result.current = (adc_c * 5)/(1023*20*R_SENSE);
+
     return result;
 }
