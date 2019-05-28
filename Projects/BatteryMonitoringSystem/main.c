@@ -57,6 +57,13 @@
 #include "bms.h"
 #include "comm.h"
 
+#define POLLTIME 200 // Polls every 200 ms.
+
+void interrupt isr(void);
+
+bms_data batt_data;
+uint8_t polltick = 0;
+
 void main(void)
 {
     // Configure Ports/Pins
@@ -73,13 +80,39 @@ void main(void)
     // Configure ADC
     bms_begin();
 
+    // Configure Timer and Interrupts
+    TMR0 = 0;
+    OPTION_REGbits.T0CS = 0;        // Internal instruction cycle clock (F_OSC/4)
+    OPTION_REGbits.PSA = 0;         // Prescaler assigned to Timer0 module.
+    OPTION_REGbits.PS = 0x3;        // 1:16 prescale value
+
+    INTCONbits.T0IE = 1;            // Enable Timer0 Overfow Interrupt
+    INTCONbits.T0IF = 0;            // Clear Timer0 Overflow Interrupt
+    ei();                           // Enable Global Interrupt
+    INTCONbits.PEIE = 1;            // Enable Peripheral Interrupt
+
     // Configure SPI
     spi_begin();
 
     // Configure CAN
     // can_begin();
-
+    
     for(;;)     // Main loop
     {
+        if(polltick >= POLLTIME) {  // After approximately 200 ms,
+            bms_get_data(batt_data);// get BMS data
+        }
     }
+}
+
+void interrupt isr(void)
+{
+    INTCONbits.GIEH = 0;            // Clear global interrupt
+
+    if(INTCONbits.T0IF) {           // If Timer0 register overflows
+        polltick++;                 // Count the number of overflows ~ every 1024 us.
+        INTCONbits.TMIF = 0;        // Clear overflow interrupt
+    }
+
+    INTCONbits.GIEH = 1;            // Enable Global Interrupt
 }
