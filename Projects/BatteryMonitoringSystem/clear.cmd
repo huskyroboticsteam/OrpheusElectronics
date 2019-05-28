@@ -1,1 +1,1 @@
-rm ".\output\*"
+DEL \F \Q ".\output\*"
