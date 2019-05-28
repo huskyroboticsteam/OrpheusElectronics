@@ -2,7 +2,6 @@
 *                                                                       *
 *   Filename:      main.c                                               *
 *   Date:          5/27/19                                              *
-*   File Version:  0.1                                                  *
 *                                                                       *
 *   Author:        Hansem Ro                                            *
 *                                                                       *
