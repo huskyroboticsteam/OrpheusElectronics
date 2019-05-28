@@ -61,7 +61,7 @@
 
 void interrupt isr(void);
 
-bms_data batt_data;
+bms_data batt_data, *p_data;
 uint8_t polltick = 0;
 
 void main(void)
@@ -100,19 +100,20 @@ void main(void)
     for(;;)     // Main loop
     {
         if(polltick >= POLLTIME) {  // After approximately 200 ms,
-            bms_get_data(batt_data);// get BMS data
+            p_data = &batt_data;
+            bms_get_data(p_data);// get BMS data
         }
     }
 }
 
 void interrupt isr(void)
 {
-    INTCONbits.GIEH = 0;            // Clear global interrupt
+    INTCONbits.GIE = 0;            // Clear global interrupt
 
     if(INTCONbits.T0IF) {           // If Timer0 register overflows
         polltick++;                 // Count the number of overflows ~ every 1024 us.
-        INTCONbits.TMIF = 0;        // Clear overflow interrupt
+        INTCONbits.T0IF = 0;        // Clear overflow interrupt
     }
 
-    INTCONbits.GIEH = 1;            // Enable Global Interrupt
+    INTCONbits.GIE = 1;            // Enable Global Interrupt
 }

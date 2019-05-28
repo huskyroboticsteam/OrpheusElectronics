@@ -30,9 +30,9 @@ void bms_get_data(bms_data *data)
 {
     uint16_t adc_v, adc_c;
 
-    adc_get_data(adc_v, 0xA);           // Store voltage ADC data
+    adc_get_data(&adc_v, 0xA);           // Store voltage ADC data
 
-    adc_get_data(adc_c, 0x3);           // Store current ADC data
+    adc_get_data(&adc_c, 0x3);           // Store current ADC data
     
     *data = bms_convert_data(adc_v, adc_c);
 }
@@ -40,9 +40,9 @@ void bms_get_data(bms_data *data)
 void adc_get_data(uint16_t *data, uint8_t adc_channel)
 {
     ADCON0bits.CHS = adc_channel;       // Select channel
-    ADCON0bits.ADON = 1;                // Enable ADC
-    ADCON0bits.GO_DONE = 1;             // Start ADC
-    while(ADCON0bits.GO_DONE == 1)      // Wait for ADC to complete
+    ADCON0bits.ADON = 0b01;                // Enable ADC
+    ADCON0bits.GO_DONE = 0b1;             // Start ADC
+    while(ADCON0bits.GO_DONE)      // Wait for ADC to complete
         ;
     *data = ADRESL + (ADRESH * 256);    // raw 10 bit ADC data
 }

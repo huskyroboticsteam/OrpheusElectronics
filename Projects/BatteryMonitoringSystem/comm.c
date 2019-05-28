@@ -23,10 +23,10 @@ void spi_write(char dat)
     SSPBUF = dat;
 }
 
-// spi_read: return 8 bit data iff BF is true
+// spi_read: return 8 bit data
 char spi_read(void)
 {
-    if(BF){                 // If Buffer Fill Status bit is full (receive completed)
-        return SSPBUF;      // ... get data from register
-    }
+    while(!BF)          // Wait for Buffer Fill register
+        ;
+    return SSPBUF;      // Get data from register
 }
