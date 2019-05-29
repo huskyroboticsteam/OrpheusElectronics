@@ -11,10 +11,7 @@ void spi_begin(void)
     SSPCONbits.CKP = 0;     // Idle state for clock is a low level
     SSPCONbits.SSPEN = 1;   // Enables serial port and configures SCK< DO, SDI,
                             // and SS as the source of the serial port pins.
-    SSPCONbits.SSPM3 = 0;   // SSPM: 0000 SPI Master mode, clock = F_OSC/4
-    SSPCONbits.SSPM2 = 0;
-    SSPCONbits.SSPM1 = 0;
-    SSPCONbits.SSPM0 = 0;
+    SSPCONbits.SSPM = 0;    // SPI Master mode, clock = F_OSC/4
 }
 
 // spi_write: writes 8 bit data to register SSPBUF at file register 13h

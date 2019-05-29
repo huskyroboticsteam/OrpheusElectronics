@@ -18,14 +18,16 @@ void bms_begin(void)
 
     // Other configuration
     ADCON0 = 0;
-    ADCON0bits.ADCS1 = 1;       // ADCS - 10: A/D Conversion Clock 
-    ADCON0bits.ADCS0 = 0;       //      F_OSC/32
+    ADCON0bits.ADCS = 0x2;       // A/D Conversion Clock: F_OSC/32
     ADCON1 = 0;
     ADCON1bits.ADFM = 1;        // AD Conversion Result Format: right justified
     ADCON1bits.VCFG1 = 0;       // V_SS reference
     ADCON1bits.VCFG0 = 0;       // V_DD reference
 }
 
+// bms_get_data: Update pointed bms_data structure with voltage and current
+// measurements, which are converted automatically. Make sure to measure and
+// redefine R_6, R_2, R_SENSE with the actual measurements.
 void bms_get_data(bms_data *data)
 {
     uint16_t adc_v, adc_c;
@@ -37,16 +39,21 @@ void bms_get_data(bms_data *data)
     *data = bms_convert_data(adc_v, adc_c);
 }
 
+// adc_get_data: Get adc data at the given channel. In this case, it will
+// either be 0xA for voltage sense resistor at RB1 or 0x3 for current sense
+// amplifier at RA3.
 void adc_get_data(uint16_t *data, uint8_t adc_channel)
 {
     ADCON0bits.CHS = adc_channel;       // Select channel
     ADCON0bits.ADON = 1;                // Enable ADC
     ADCON0bits.GO_DONE = 1;             // Start ADC
-    while(ADCON0bits.GO_DONE)      // Wait for ADC to complete
+    while(ADCON0bits.GO_DONE)           // Wait for ADC to complete
         ;
     *data = ADRESL + (ADRESH * 256);    // raw 10 bit ADC data
 }
 
+// bms_convert_data: Convert 10 bit ADC values for voltage and current
+// into float and in units of volts and amperes, respectively.
 bms_data bms_convert_data(uint16_t adc_v, uint16_t adc_c)
 { 
     bms_data result;
@@ -60,7 +67,7 @@ bms_data bms_convert_data(uint16_t adc_v, uint16_t adc_c)
     //      Convert from ADC int to float:
     //          V = (x * 5 / 1023)*((33k+180k)/33k);
 
-    result.voltage = (R_2+R_6)*(adc_v*5)/(1023*R_6);
+    result.voltage = (R_2+R_6)*(adc_v*5)/(1023*R_6); 
 
     // Current conversion:
     //      10 bit ADC resolution: 5.0 V / 1023
